@@ -266,10 +266,12 @@ const Project = ({match, history}) => {
                          alltasks={sprint.tasks.length} index={i+1}sprintname={sprint.name} dateOpen={sprint.dateOpen}></SprintDescription>
                        )
                      })}
-                     <button
+                     <Button
                      className={style.special__button}
                       onClick={createSprint}
                       style={{
+                        color:'black',
+                        backgroundColor:'white',
                         fontSize:'20px',
                         fontFamily:'SuisseIntlSemibold',
                       display: `${
@@ -282,7 +284,7 @@ const Project = ({match, history}) => {
                   >
                     {" "}
                     {user.permission === "user" ? "" : "Создать спринт"}
-                  </button>
+                  </Button>
                    </div>
                   )}
                   
@@ -399,6 +401,7 @@ const Project = ({match, history}) => {
                     <Button
                       onClick={hadleTeam}
                       style={{
+                       
                         display: `${project.status ? "none" : "block"}`,
                       }}
                     >
@@ -413,6 +416,7 @@ const Project = ({match, history}) => {
                         <Bold
                           onClick={hadleTeam}
                           style={{
+                            
                             fontSize: '16px',
                             left:'auto',
                             right:'60px',
@@ -432,6 +436,8 @@ const Project = ({match, history}) => {
                           fontSize={'20px'}
                           onClick={hadleTeam}
                           style={{
+                            width: '442px',
+                            height: '202px',
                             backgroundColor:'white',
                             color:'black',
                             display: `${project.status ? "none" : "block"}`,
