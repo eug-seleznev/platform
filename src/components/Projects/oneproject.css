@@ -1,0 +1,37 @@
+.project__grid{
+	display: grid;
+	grid-template-columns: 1fr;
+	row-gap: 100px;
+	margin-left: 0px;
+}
+
+.one__proj__main {
+	width: 80vw;
+	margin-left:150px;
+	text-align: left;
+}
+.team__part {
+	display: flex;
+	justify-content: space-between;
+	margin-left: 0px;
+	margin-top: 30px;
+	text-align: left;
+}
+.team__name {
+	display: flex;
+	justify-content: space-between;
+	margin-left: 0px;
+	margin-top: 30px;
+	text-align: left;
+	font-size: 24px;
+	font-weight: bold;
+}
+.team__desc {
+	margin-left: 30px;
+}
+.tr {
+	width: 40vw;
+}
+.sprint__descr__cont {
+	display: flex;
+}

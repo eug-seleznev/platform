@@ -1,0 +1,36 @@
+.main {
+	position: fixed;
+	top:0;
+	left:0;
+	width:110px;
+	color: black;
+	background-color: white;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+
+}
+.nav-link {
+	color: white;
+	width: 110px;
+	text-decoration: none;
+	font-size: 24px;
+	text-align: left;
+	margin-top: 30px;
+	
+}
+.nav-link img {
+	height: 30px;
+	width: 30px;
+	margin-left: 40px;
+	margin-right: auto;
+}
+.admin {
+	position: fixed;
+	left: auto;
+	right: 150px;
+	top:20px;
+}
+.imgimg{
+	
+}

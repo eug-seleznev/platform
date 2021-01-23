@@ -1,0 +1,98 @@
+.main__container{
+
+    display: grid;
+    grid-template-areas: 
+    'profile news'
+    'projects projects'
+    'tasks .'
+    ;
+    grid-template-rows: min-content min-content min-content;
+    grid-template-columns:2fr 1fr;
+    column-gap: 2vw;
+    row-gap: 40px;
+    text-align: left;
+}
+    .main__profile{
+        grid-area: profile; 
+
+    }
+    .main__projects{
+        grid-area: projects;
+    }
+            .main__profile__logo{
+                object-fit: cover;
+                grid-area: logo;
+                height: 80px;
+                width: 80px;
+                background-color: black;
+            }
+            .main__profile__name{
+                grid-area: name;
+                font-size: 30px;
+            }
+            .main__profile__position{
+                grid-area: position;
+                font-size: 30px;
+
+            }
+  
+    .main__tasks{
+        grid-area: tasks;
+        background-color: white;
+        padding: 15px;
+        
+
+    }
+
+    .main__news{
+        grid-area: news;
+     
+       
+    
+       
+    }
+       
+.opened__news{
+    position: absolute;
+    width: 70vw;
+    min-height: 60vh;
+    max-height: min-content ;
+    left: 15vw;
+    
+    top: 15vh;
+    padding: 50px;
+   
+
+
+    background-color: white;
+    
+
+    display: grid;
+    grid-template-areas: 
+    'title close'
+    'subtitle close'
+    'texts texts'
+    
+    ;
+    grid-template-columns: 1fr max-content;
+    column-gap: 40px;
+    grid-template-rows: max-content max-content 1fr ;
+    row-gap: 40px;
+}
+        .open__title{
+            grid-area: title;
+        }
+        .open__subtitle{
+            grid-area: subtitle;
+        }
+        .open__text{
+            grid-area: texts;
+        }
+        .open__close{
+            grid-area: close;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .update{
+            grid-area: update;
+        }
