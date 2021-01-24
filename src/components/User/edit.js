@@ -17,15 +17,17 @@ const Edit = ({match, history}) => {
     const dispatch = useDispatch();
     const [formData, setFormData ] = useState({
         
-        name: user.name, 
-        position: user.position,  
-        email: user.email, 
+		name: user.name ? user.name : '',
+		lastname: user.lastname ? user.lastname : '',  
+		position: user.position ? user.position : '',
+		division: user.division ? user.division : '',  
+        email: user.email ? user.email : '', 
 
       
       });
      const [text, setText] = useState ('') 
 
-      const {name, position, email} = formData;
+      const {name,lastname, position, division, email } = formData;
 
       const  [file, setFile] = useState(null) 
 
@@ -87,7 +89,7 @@ const Edit = ({match, history}) => {
 			  <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
 		  <LogForm  onSubmit={onSubmit}>
 
-		<p>Сменить имя</p>
+		<p>Имя</p>
 		  <Input 
 			  	type='text'
 			 	placeholder={user.name}
@@ -95,6 +97,25 @@ const Edit = ({match, history}) => {
 				value={name}
 			  	onChange={e => onChange(e)}
 			></Input>
+
+
+<p>Фамилия</p>
+		  <Input 
+			  	type='text'
+			 	placeholder={user.lastname}
+				name="lastname"
+				value={lastname}
+			  	onChange={e => onChange(e)}
+			></Input>
+<p>Отдел</p>
+		  <Input 
+			  	type='text'
+			 	placeholder={division}
+				name="division"
+				value={division}
+			  	onChange={e => onChange(e)}
+			></Input>
+
 			<p>Сменить должность</p>
  		<Input 
 			  type='text'

@@ -1,4 +1,4 @@
-import { innerBackend } from "../../components/utils/axios";
+import { innerBackend, instance } from "../../components/utils/axios";
 import { ADD_SPRINT, ADD_TASKS, ALL_PROJECTS, ALL_SPRINT,ADD_SPRINT_TO_CHOSEN, CREATE_FAIL, DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT, GET_SPRINT, JOIN_TEAM, PROJECT_ID, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT } from "../types";
 
 
@@ -32,13 +32,13 @@ export const newProject = (formData) => async dispatch  => {
 export const allProjects = () => async dispatch  => {
     
     try {
-
-        const res = await innerBackend.get('/projects')
+        console.log('hello projects')
+        const res = await instance.get('/projects')
         dispatch({
             type: ALL_PROJECTS,
             payload: res.data
         })
-
+        console.log(res, 'hello res')
         }
       catch (err) {
         const errors = err.response.data.errors;
