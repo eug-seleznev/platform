@@ -14,6 +14,7 @@ import { Container, Card,} from "../../Styles/common";
 import { Bold, H1, H3, Light} from '../../Styles/typography'
 import SprintDescription from './components/SprintDescrForOneProj'
 import ProjTeam from './components/ProjTeam'
+import ModalWindow from "./components/ModalWindow";
 
 
 
@@ -37,8 +38,8 @@ const Project = ({match, history}) => {
     const [calendLoader, setCalendLoader] = useState (false)
     const [pr, setpr] = useState (false)
     // const project = useSelector(state => state.projects.project.team)
-
-    
+  const [modal, setModal] = useState (false)
+  const [sprintId, setSprintId] = useState ('')
     // эт массивы для календаря
     let months = ['янв','фев',"март","апр","май","июнь","июль","авг","сен","окт","ноя","дек"]
     const[conditionalWeeks] =useState([]) 
@@ -196,18 +197,22 @@ const Project = ({match, history}) => {
         // console.log (sprint)
     }, [loaded])
     
-    useEffect(() => {
+   
       
-        if(reload){
-            return history.push(`${id}/${sprint.id}`)
-        }
-    }, [reload])
+     const openMod = () => {
+          setModal(true)
+         
+     }
+          
+            // return history.push(`${id}/${sprint.id}`)
+    
+    
 
-     const createSprint = () => {
+    //  const createSprint = () => {
         
-        dispatch(addSprint(project.crypt))
+    //     dispatch(addSprint(project.crypt))
 
-    }
+    // }
     const handleEnd = () => {
         
         dispatch(finishProject(id))
@@ -218,6 +223,9 @@ const Project = ({match, history}) => {
         dispatch(deleteProject(id))
         return history.push(`./`)
 
+    }
+    const offWindow =()=>{
+      setModal(false)
     }
     const hadleTeam = () => {
         // console.log (project.team)
@@ -243,6 +251,17 @@ const Project = ({match, history}) => {
               <>
            
                   <div className={style.title}>
+                    <ModalWindow
+                      status={modal} 
+                      bigTitle={'Создание нового спринта'}
+                      smallTitles={['Описание спринта','Продолжительность']}
+                      customElements={'CreateSprint'}
+                      buttonTitle={'Сохранить'}
+                      sprintId={sprintId}
+                      offWindow={offWindow}
+                    >
+
+                    </ModalWindow>
                     <H1 size='24' >{project.title}</H1>
                     <Bold size='16'>
                       <div className={style.title__small}>
@@ -257,7 +276,25 @@ const Project = ({match, history}) => {
                 <div>
                   
                   {sprints.length == 0 ? (
-                    <p>Спринтов нет</p>
+                     <Button
+                     className={style.special__button}
+                      onClick={openMod}
+                      style={{
+                        color:'black',
+                        backgroundColor:'white',
+                        fontSize:'20px',
+                        fontFamily:'SuisseIntlSemibold',
+                      display: `${
+                        
+                        user.permission === "user" || project.status
+                          ? "none"
+                          : "block"
+                      }`,
+                    }}
+                  >
+                    {" "}
+                    {user.permission === "user" ? "" : "Создать спринт"}
+                  </Button>
                   ) : (
                    <div className={style.sprintdescr__cont}>
                      {sprints.filter((sprint)=> !sprint.status).map ((sprint, i) => {
@@ -268,7 +305,7 @@ const Project = ({match, history}) => {
                      })}
                      <Button
                      className={style.special__button}
-                      onClick={createSprint}
+                      onClick={openMod}
                       style={{
                         color:'black',
                         backgroundColor:'white',

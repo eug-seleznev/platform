@@ -14,6 +14,25 @@ background-color: #ECECEC;
 `
 
 
+export const ModalContainer = styled.div`
+z-index:99;
+left:0;
+top:0;
+position: fixed;
+width: 100vw;
+height: 100vh;
+background-color: rgba(0,0,0, 0.5)
+
+`
+export const ModalWind = styled.div`
+padding: 60px;
+margin-top: 15vh;
+width: 60vw;
+margin-left:15vw;
+height: 60vh;
+background-color: white
+
+`
 
 
 

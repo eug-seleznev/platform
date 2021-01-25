@@ -81,7 +81,7 @@ export const getProject = (id) => async dispatch  => {
 
 export const addSprint = (id) => async dispatch  => {
     try {
-        console.log(id, 'id');
+        console.log(id, 'spriiiint');
 
         const res = await innerBackend.post(`/projects/sprints/new/${id}`)
         dispatch({
@@ -177,12 +177,12 @@ export const getSprint = (id) => async dispatch  => {
 
 
 
-export const addTasks = ({tasks, id}) => async dispatch  => {
-    console.log(tasks, 'id')
-
+export const addTasks = ({tasks, sprintId}) => async dispatch  => {
+    console.log(tasks, sprintId, 'retuuuuuuuuuuuurd')
+    
     try {
         // console.log(tasks, 'tasks', id, 'id')
-        const res = await innerBackend.post(`/projects/sprints/addtask/${id}`, tasks)
+        const res = await innerBackend.post(`/projects/sprints/addtask/${sprintId}`, tasks)
         dispatch({
             type: ADD_TASKS,
             payload: res.data

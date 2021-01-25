@@ -31,6 +31,7 @@ padding: 0;
 font-family: SuisseIntlUltralight;
 font-size: ${props => props.size}px;
 color: ${props => props.color || 'black'};
+
 `
 
 // not in use///////////////////
