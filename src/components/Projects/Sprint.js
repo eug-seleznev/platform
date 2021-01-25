@@ -1,13 +1,14 @@
 import { useEffect, useState, useRef} from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { addInfoSprint, addTasks, finishSprint, finishTask, getSprint, } from "../../redux/actions/projects";
+import { addInfoSprint, addTasks, finishSprint, finishTask, getSprint } from "../../redux/actions/projects";
 import { addToChosen } from '../../redux/actions/auth'
 import { useForm, FormProvider, useFormContext, useFieldArray, Controller } from "react-hook-form";
 import './sprint.css'
-import {Button} from '../../Styles/buttons'
+import style from '../../Styles/modules/components/Project/oneproj.module.css'
+import {Button, CancelButton} from '../../Styles/buttons'
 import { Table, Td, Tr } from "../../Styles/tables";
 import { Container, Card, } from "../../Styles/common";
-import { H1, H3} from '../../Styles/typography'
+import { H1, H3, Light, Regular,Bold} from '../../Styles/typography'
 
 const Sprint = ({match, history}) => {
   const dispatch = useDispatch();
@@ -19,22 +20,20 @@ const Sprint = ({match, history}) => {
     const loading = useSelector(state => state.projects.sprintLoad)
     const msg = useSelector(state => state.projects.msg)
     const user = useSelector(state => state.auth.user)
-
-  const [formData, setFormData] = useState(
-    {
-        description: ``, 
-        date: 0,  
-         
-    }
-  )
-  const {description, date} = formData;
+    const [newFields, setNewFields]= useState(false)
+    const [actualClose, setActualClose] = useState (0)
+    const [close, setClose] = useState ('??')
+    const [diff, setDiff] = useState (0)
+    const [loaded, setLoaded] = useState (0)
+    const [dateOpenIn, setDateOpenIn] = useState (0)
+    const [duration, setDuration] = useState (7)
     const { register, control, handleSubmit, reset, watch } = useForm({
         defaultValues: {
-            tasks: [{ taskTitle: "задача", workVolume: "5", taskState: false }],
-            info: [{ date:`0`, description:'Без описания'}]
+            tasks: [{ taskTitle: "задача", workVolume: "5", taskState: false }]
+            
           }
     });
-
+    
     const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
       control, // control props comes from useForm (optional: if you are using FormContext)
       name: "tasks", // unique name for your Field Array
@@ -42,8 +41,46 @@ const Sprint = ({match, history}) => {
     
     
 
-
-
+  useEffect(()=>{
+    console.log(duration)
+  },[duration])
+	useEffect (()=> {
+   
+    if(loading){
+      console.log (sprint)
+      setDateOpenIn (sprint.dateOpen)
+      if (sprint.dateClosePlan!=null&&sprint.dateClosePlan!=undefined) {
+			let d2 = new Date (sprint.dateClosePlan.slice(0, 10).replace(/-/g, "/"))
+			
+			setActualClose (d2)
+		}
+		else if(sprint.dateClosePlan==null||sprint.dateClosePlan==undefined) {
+			let noData = new Date (sprint.dateOpen.slice(0, 10).replace(/-/g, "/"))
+			setActualClose (noData)
+		}	
+    }
+		
+	},[loading])
+  useEffect (()=> {
+     
+    if (actualClose!=0){
+      let d0 = new Date (sprint.dateOpen.slice(0, 10).replace(/-/g, "/"))
+      let d1 = new Date ()
+      console.log(actualClose, d1)
+      setDiff (Math.abs(actualClose-d1)/86400000)
+      setDuration (Math.abs(actualClose-d0)/86400000)
+      if (sprint.dateClosePlan != null) {
+        setClose(sprint.dateClosePlan.slice(5,10).replace(/-/g, "."))
+      }
+      else if (sprint.dateClosePlan == null) {
+        setClose('??')
+      } 
+        setLoaded (true)
+      
+    }
+    
+  
+},[dateOpenIn])
     //submit for new tasks array;
     const onSubmit = (data) =>{
             let tasks = data;
@@ -57,19 +94,12 @@ const Sprint = ({match, history}) => {
     }
     const onEnter = e => {
       e.preventDefault();
-      console.log(formData)
-      dispatch(addInfoSprint(id, formData))
-
-      console.log (sprint)
+   
       setTimeout(() => {
         return history.replace(`${back.slice(0,14)}`);
 }, 200);
     }
-    const onChange2 = e => {
-      e.preventDefault(); 
-      console.log (e.target.value)
-      setFormData({ ...formData, [e.target.name]: e.target.value });
-   }
+   
     useEffect(() => {
         
             dispatch(getSprint(id))    
@@ -92,7 +122,9 @@ const Sprint = ({match, history}) => {
         dispatch(finishTask({taskid, id}))
        
     }
-
+    const createField =()=>{
+      setNewFields(true)
+    }
 
    const handleSprint = (e) => {
       
@@ -116,31 +148,30 @@ const Sprint = ({match, history}) => {
     return (
         <div>
            {!loading ? <p> loading...</p> : (
-           <div className='sprint__grid'> 
-          <Card style={{height:'fit-content', paddingBottom:'20px'}} >
-            
-               
+             <div>
+               <div className={style.title} >
+             
+                    <Bold size='24' >Спринт {sprint.dateOpen.slice(5,10).replace(/-/g, ".")+'-'+
+                      close}
+                      </Bold>
                     
-                                  <H1>{sprint.status?'Выполненные задачи:':'Текущие задачи:'}</H1> 
-
-                        {taskArr.tasks.map((task, ind) => {
-                            return (
-                              
-                                <div key={ind} >
-                                  
-                                    <form >
-                                      <div className="sprint__tasks">
-                                      
-                                          <p className="sprint__row">{ind+1}.  {task.taskTitle!==''?task.taskTitle:'Без названия'}</p>
-                                          <label style={{display:`${sprint.status?'none':'block'}`}}></label>
-                                          <input style={{display:`${sprint.status?'none':'block'}`}} type="checkbox" id="vehicle1" name="vehicle1" defaultChecked={task.taskStatus} value={task._id} onChange={onChange}/>
-
-                                       </div>
-                                    </form>
-                                    
-                                </div>
-                                 )
-                        })}
+                  </div>
+                  
+                  <Light className={style.title__small} style={{marginBottom:'70px'}} size='16'>
+                    {!loaded?<div>...</div>:<div className={style.title__deadline}>Дней до дедлайна: {diff.toString().slice(0,1)}</div>}
+                    
+                    <div className={style.title__deadline}></div>
+                  </Light>
+           <div style={{display:'flex', justifyContent:'space-between'}} > 
+          <Card style={{height:'fit-content',width:'30vw', paddingBottom:'20px'}} >
+            <Regular size='30' style={{marginBottom:'10px'}}>Текущие задачи</Regular> 
+            <Light style={{paddingBottom:'30px',borderBottom:'1px solid black', marginBottom:'40px'}}>{sprint.description}</Light>
+            <div style={{display:'flex',justifyContent:'flex-end'}}>
+              <Light>Продолжительность:   </Light> 
+              <Regular >{duration==7?'1 неделя':duration==14?'2 недели':'??'}</Regular>
+            </div>
+              
+                        
 {/* 
                         {sprint.status && <div>
                             <H1>невыполненные задачи</H1>
@@ -166,75 +197,91 @@ const Sprint = ({match, history}) => {
                         
                    
              
-                <Button onClick={()=>handleBack()} style={{marginTop: '20px'}}>Вернуться к проекту</Button>
+                
                 <Button onClick={handleSprint} style={{display:`${sprint.status?'block':'none'}`,marginTop: '20px'}}> Восстановить спринт</Button>
             </Card>
             {/* addInfoSprint */}
 
-<Card style={{opacity: `${sprint.status?0: 1}`,pointerEvents: `${sprint.status?'none': 'auto'}`,textAlign: 'right', height:'fit-content', paddingBottom:'20px'}}>
+<Card style={{opacity: `${sprint.status?0: 1}`,pointerEvents: `${sprint.status?'none': 'auto'}`,textAlign: 'right',width:'40vw', height:'fit-content', paddingBottom:'20px'}}>
 
-<form onSubmit={(e)=>onEnter(e)}>
-    <input 
 
-      type='text'
-      name="description"
-      value={description}
-      placeholder="Описание спринта"
-      onChange={e => onChange2(e)}>
-        
-    </input>
-    <div>Предпологаемая дата завершения</div>
-    <input 
-     value={date}
-      name="date"
-       onChange={e => onChange2(e)}
-      type="date">
-    </input>
-    <Button type="submit">Сохранить</Button>
-</form>
-<H1> Добавить задачи </H1>
+<Regular size={30} style={{textAlign: 'left',width:'100%', marginBottom:'20px'}}> Задачи </Regular>
+{taskArr.tasks.map((task, ind) => {
+                            return (
+                              
+                                <div key={ind} >
+                                  
+                                    <form >
+                                      <div style={{display:'flex',}}>
+                                          <label style={{display:`${sprint.status?'none':'block'}`}}></label>
+                                          <input style={{display:`${sprint.status?'none':'block'}`}} type="checkbox" id="vehicle1" name="vehicle1" defaultChecked={task.taskStatus} value={task._id} onChange={onChange}/>
+                                          <Light style={{textAlign:'left', marginLeft:'10px'}}>{ind+1}.  {task.taskTitle!==''?task.taskTitle:'Без названия'}</Light>
+                                         
+
+                                       </div>
+                                    </form>
+                                    
+                                </div>
+                                 )
+                        })}
     <form onSubmit={handleSubmit(onSubmit)}>
       <ul style={{ listStyleType: 'none'}}>
-
+      <div style={{display:`${newFields?'block':'none'}`}}>
         {fields.map((item, index) => (
           <li key={item.id} style= {{display:'flex'}}>
             <input
-            style={{width:'125px',height: '20px'}}
+            style={{width:'35vw',height: '20px'}}
               name={`tasks[${index}].taskTitle`}
               ref={register()}
               placeholder="Название задачи" // make sure to set up defaultValue
             />
-          <input
-          type="number"
         
-              name={`tasks[${index}].workVolume`}
-              ref={register()}
-              style={{width:'125px',height: '20px'}}
-              placeholder="Объем в часах" 
-            />
             
-            <Button type="button" style={{display: `${fields.length===1?'none':'block'}`, marginTop: '10px', marginBottom: '10px',marginLeft:'auto', marginRight:'0'}} onClick={() => remove(index)}>Удалить</Button>
+            <Button type="button" style={{display: `${fields.length<=1?'none':'block'}`,color:'#3F496C',
+                backgroundColor:'white',
+                marginRight:'50px', border:'none', marginLeft:'auto', marginRight:'0'}} onClick={() => remove(index)}>Удалить</Button>
           </li>
-        ))}
+        ))}</div>
       </ul>
-      
-      <Button
-        type="button"
-        onClick={() => append({ firstName: "appendBill", lastName: "appendLuo" })}
-      >
-        Добавить
+      <CancelButton
+                  fontSize={'16px'}
+                  style={{
+                          display:`${!newFields?'block':'none'}`,
+                          color:'#3F496C',
+                          backgroundColor:'white',
+                          border:'none'}}
+                  onClick={createField}
+                >
+        Добавить задачу
+      </CancelButton>
+      <div style={{display:`${newFields?'block':'none'}`}}>
+                <Button
+                fontSize={'16px'}
+                  type="button"
+                  style={{
+                          color:'#3F496C',
+                          backgroundColor:'white',
+                          marginRight:'50px', border:'none'}}
+                  onClick={() => append({ firstName: "appendBill", lastName: "appendLuo" })}
+                >
+        Добавить задачу
       </Button>
-      <Button type="submit">Сохранить</Button>
-    </form>
-
-            <br>
-            </br>
-            <Button onClick={handleSprint}>Завершить спринт</Button>
-            <br></br> <br></br>
-            <Button onClick={chosenSprint}>Добавить спринт в избранное</Button>
+                <Button 
+                fontSize={'16px'}
+                style={{
+                          color:'#3F496C',
+                          backgroundColor:'white',
+                          border:'none'
+                }} type="submit">Сохранить задачи</Button>
+        </div>
+    </form><Button fontSize={'16px'} onClick={()=>handleBack()} style={{marginTop:'70px'}}grey>Вернуться к проекту</Button>
+            <Button fontSize={'16px'} style={{marginLeft:'50px'}} onClick={chosenSprint}>Добавить спринт в избранное</Button>
+            <Button fontSize={'16px'} style={{marginLeft:'50px'}} onClick={handleSprint}>Завершить спринт</Button>
+    
+            
     </Card>
             </div>
-               )}
+            </div>)}
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import { Button } from "../../../Styles/buttons"
+import { Button,CancelButton } from "../../../Styles/buttons"
 import { Thin } from "../../../Styles/typography"
 import{	useState, useEffect} from 'react'
 import { useForm, useFieldArray } from "react-hook-form";
@@ -25,10 +25,11 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 	const [formData, setFormData] = useState(
 		{
 			description: ``, 
-			date: 0,  
+			date: '',  
 			 
 		}
 	  )
+	  
 	  const [sprintData,setSprintData] = useState (0)
 	  const [enterWin,setEnterWin] =useState (false)
 	  const {description, date} = formData;
@@ -48,10 +49,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 		let editedDD = dd> 31 ? '0' + ddDiff : dd >31&& ddDiff>10? ddDiff: dd
 		let editedMM = dd> 31 && mm>=9?mmDiff: dd > 31 && mm<9 ? '0'+mmDiff : dd> 31 && mm===12?'01':mm
 		let editedYY = dd> 31 && mm===12?yyyy+1:yyyy
-		
-		
-		
-		setFormData({ ...formData, [e.target.name]:  e.target.value=='нет'?0:editedYY +'-'+editedMM+'-'+editedDD})
+		setFormData({ ...formData, [e.target.name]:  e.target.value=='нет'?'':editedYY +'-'+editedMM+'-'+editedDD})
 		
 	 }
 	  useEffect(()=>{
@@ -73,6 +71,9 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 				}, 500);
 				
 
+		}
+		const cancel =()=>{
+			offWindow()
 		}
 	useEffect(()=>{
 		if(reload){
@@ -157,8 +158,8 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 					</div>
 					
 					<div className={style.buttons}>
-						<Button padd={'55px'} grey onClick={offWindow}>Отмена</Button>
-						<Button type="submit" padd={'55px'}>{buttonTitle}</Button>
+						<CancelButton padd={'55px'} fontSize={'16px'} grey onClick={cancel}>Отмена</CancelButton>
+						<Button type="submit"fontSize={'16px'} padd={'55px'}>{buttonTitle}</Button>
 					</div>
 			
 			</form>

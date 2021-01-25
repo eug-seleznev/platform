@@ -266,9 +266,7 @@ useEffect(() => {
               <p> loading...</p>
             ) : (
               <>
-           
-                  <div className={style.title}>
-                    <ModalWindow
+           <ModalWindow
                       status={modal} 
                       bigTitle={'Создание нового спринта'}
                       smallTitles={['Описание спринта','Продолжительность']}
@@ -279,6 +277,8 @@ useEffect(() => {
                     >
 
                     </ModalWindow>
+                  <div className={style.title}>
+                    
                     <H1 size='24' >{project.title}</H1>
                     <Bold size='16'>
                       <div className={style.title__small}>
@@ -289,7 +289,10 @@ useEffect(() => {
                       </Bold>
                   </div>
                   
-                  <Light className={style.title__small} size='16'><div className={style.title__deadline}>Дней до дедлайна: ?</div> <div className={style.title__deadline}>Стадия: {project.stage}</div></Light>
+                  <Light className={style.title__small} size='16'>
+                    <div className={style.title__deadline}>Дней до дедлайна: ?</div> 
+                    <div className={style.title__deadline}>Стадия: {project.stage}</div>
+                  </Light>
                 <div>
                   
                   {sprints.length == 0 ? (

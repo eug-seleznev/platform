@@ -27,7 +27,32 @@ export const Button =  styled.button`
 
 
 `
+export const CancelButton =  styled.div`
+  display: inline-block;
+  border: 0.4px solid #B7B7B7;
+  border-radius: 13px;
+  font-size:${props => props.fontSize};
+  font-family: SuisseIntlSemibold;
+  
+  padding-left: ${props => props.padd};
+  padding-right: ${props => props.padd};
+  padding-top: 11px;
+  padding-bottom: 9px;
+ 
+  outline: none;
+  text-decoration: none;
+  color: white;
+  background-color: ${props => props.grey ? "grey" : "#3F496C"};
+  ;
 
+  &:hover{
+  // text-decoration: underline;
+  background-color: black;
+
+}
+
+
+`
 export const ButtonText =  styled.button`
   display: inline-block;
   border: none;
