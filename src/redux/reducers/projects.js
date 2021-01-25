@@ -15,6 +15,7 @@ const initialState = {
     tasksLoad: false,
     error: '',
     reload: false,
+    trick: false,
     sprintLoad: false
     
 }
@@ -35,6 +36,8 @@ export default function(state = initialState, action) {
                     loadProject: false,
                     sprint_load: false,
                     sprintLoad: false,
+                    sprints: [],
+                    trick: false,
 
                     error: ''
                 }
@@ -87,6 +90,7 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     sprints: payload,
+                    trick: true,
                     loadSprints: true,
                     sprintLoad: false,
                     sprint: null,

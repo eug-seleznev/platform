@@ -17,7 +17,10 @@ import ProjTeam from './components/ProjTeam'
 import ModalWindow from "./components/ModalWindow";
 
 
+// const sprintDays = [];
 
+let months = ['янв','фев',"март","апр","май","июнь","июль","авг","сен","окт","ноя","дек"]
+let count = [1,2,3,4]
 
 
 const Project = ({match, history}) => {
@@ -34,18 +37,20 @@ const Project = ({match, history}) => {
     const users = useSelector(state => state.users.users)
     const project = useSelector(state => state.projects.project)
     const sprints = useSelector(state => state.projects.sprints)
+    const trick = useSelector(state => state.projects.trick)
+
     const descr = useSelector(state => state.projects.sprints.description)
-    const [calendLoader, setCalendLoader] = useState (false)
+    const [sprintDays, setSprintDays] = useState([]);
+    const [calendLoader, setCalendLoader] = useState (false);
+    const [paint, setPaint] = useState(false);
     const [pr, setpr] = useState (false)
     // const project = useSelector(state => state.projects.project.team)
   const [modal, setModal] = useState (false)
   const [sprintId, setSprintId] = useState ('')
     // эт массивы для календаря
-    let months = ['янв','фев',"март","апр","май","июнь","июль","авг","сен","окт","ноя","дек"]
     const[conditionalWeeks] =useState([]) 
-    const[sprintDays] = useState ([])
-    const[sprintPaint] = useState ([])
-    let count = [1,2,3,4]
+    const[sprintPaint, setPaintSprint] = useState ([])
+
 
 
     useEffect(() => {
@@ -57,46 +62,59 @@ const Project = ({match, history}) => {
    
     useEffect(() => {
     
-    if (sprintsLoad){
-      if(project.crypt!=id) {
-        dispatch(getProject(id));
-      }
+    if (loaded && sprintsLoad && trick){
+     
+    
       console.log('stage2')
-      let calendCheck = () => new Promise(function(resolve) {
+      const Calendar = () => {return new Promise((resolve, reject) =>  {
         
         //  Вот это все короче собирает инфу с бекенда, 
         // режет в нужный мне формат и пушит в массив
         // с отрисовкой пока беда работает ток на f5
 
-         resolve(sprints.filter((sprint)=>sprint.dateClosePlan!=null).map ((body, i) => {
+         sprints.filter((sprint)=>sprint.dateClosePlan!=null).map ((body, i) => {
           let month = body.dateClosePlan.slice(5,7)
           let day = body.dateClosePlan.slice(8,10)
           let sprintStatusDone = body.tasks.length - body.tasks.filter((task) => !task.taskStatus).length
           let sprintStatusFull = body.tasks.length
           let monthInt = Number(month)
           let dayInt = Number(day)
-          sprintDays.push([dayInt,monthInt,sprintStatusDone,sprintStatusFull])  
-         }))
+          setSprintDays(state => [...state, [dayInt,monthInt,sprintStatusDone,sprintStatusFull]])
+         })
+
+         
+         setCalendLoader(true)
+         resolve()
          
       
-      } )
+      })}
 
-      calendCheck().then(() => 
-      console.log('stage3'),
-      setTimeout(()=>{
-          setCalendLoader(true)
-      },300)
-      
-      )
+      Calendar().then(() =>   setCalendLoader(true)
+      )  
+    }
+    
 
-}}, [sprintsLoad])
+}, [sprintsLoad, loaded, trick])
         
-         useEffect (()=>{
-         
-            if(calendLoader===true){
-              console.log('stage4')
+
+
+
+useEffect(() => {
+  console.log(sprintDays, 'new sprintDay')
+  console.log(calendLoader, 'CALENDAR LOADER TIME HERE')
+}, [calendLoader])
+
+useEffect(() => {
+  console.log(sprintPaint, 'my sprint paint here')
+}, [sprintPaint])
+
+
+    useEffect (()=>{  
+
+            if(calendLoader){
+              console.log('STAGE 4')
               setpr(false)
-              let mapheck = new Promise(function(resolve) {
+              const MapCheck = () =>  new Promise((resolve, reject) => {
                 console.log('stage5')
          // вот это цикл для подсчета нужного количества квадратов в календаре и пуша в каждый
          // инфы о месяцах
@@ -120,74 +138,73 @@ const Project = ({match, history}) => {
                         i%4==3?4:
                         i%4==4?0:1])}}
               }
-                resolve()
+
+
+               resolve()
+                
                 
              
-             } )
-              mapheck.then(
-                console.log('stage6'),
-                conditionalWeeks.map ((body, i) => {
+             })
+
+
+              MapCheck().then(() =>{
+              let sprintArray = [];
+             
+              conditionalWeeks.map ((body, i) => {
                   console.log('stage7')
-                  setTimeout(()=>{
+                 
                     let int = 0
                     //фильтры мапы для показа понедельно квадратиков в нужных местах
                     // инт отвечает за статус/цвет по умолчанию 0=серый
                      sprintDays.filter((sprintday)=>Math.trunc(sprintday[0]/7.75)+1===body[2])
                      .filter((sprintday)=>sprintday[1]===body[1]).filter((sprintday)=>sprintday[2]<sprintday[3]/ 100 * 50)
                      .map (() => {
-                       console.log(body)
                        int = 1
                          })
+
                      sprintDays.filter((sprintday)=>Math.trunc(sprintday[0]/7.75)+1===body[2])
                      .filter((sprintday)=>sprintday[1]===body[1])
                      .filter((sprintday)=>sprintday[2]>=sprintday[3]/ 100 * 50).map (() => { 
                          int = 2
-                         console.log(body)
                          })
+
+
                      sprintDays.filter((sprintday)=>Math.trunc(sprintday[0]/7.75)+1===body[2])
                        .filter((sprintday)=>sprintday[1]===body[1]).filter((sprintday)=>sprintday[2]===sprintday[3])
                        .map (() => {
                          int = 3
-                         console.log(body)
                            })
-                       setTimeout(()=>{
-                         sprintPaint.push ([body[0],body[1],body[2],int])  
-                         setTimeout(()=>{
-                           console.log('stage8')
-                           setpr(true)
+
+                      
+                        sprintArray.push ([body[0],body[1],body[2],int])  
+                         
+                        setpr(true)
                            
-                         },300)
-                       },500)                                                          
-                },300)
+                 
+                      
+                                                          
+          
                  
                         
                         
                         
-               }) 
+               })
+               
+                setPaintSprint(sprintArray)
+
+                setTimeout(() => {
+                  setPaint(true)
+
+                }, 50)
+                console.log('stage 8')
+              
+              } 
               )
             }
          },[calendLoader])
        
     
- 
-       
 
-    // useEffect (()=>{
-      
-    //   if(sprintsLoad) {
-    //     console.log ('hi', sprints)
-    //     setTimeout (()=> {
-    //       sprints.map ((body, index)=> {
-    //                  return ( 
-    //                    setDateStore ({ ...dateStore, [dateStore.month+index]: sprints.dateClosePlan }),
-    //                    console.log (dateStore)
-    //                  )
-                      
-    //         })
-    //     },4500)
-         
-    //   }
-    // },[sprintsLoad])
     useEffect(() => {
         if(loaded){
             dispatch(allSprints(project.crypt))
@@ -331,7 +348,7 @@ const Project = ({match, history}) => {
                 </div>
                 <div className={style.border__calend}></div>
                 
-                {!calendLoader?<div>loading...</div>:(
+                {!paint?<div>loading...</div>:(
                   //календарь со спринтами
                   <> 
 
@@ -426,7 +443,6 @@ const Project = ({match, history}) => {
                 
             <div className={style.sprintdescr__cont}>
                     {project.team.map((user, i) => {
-                      console.log(user)
                       return (
                         <ProjTeam userName={user.name} userAvatar={user.avatar} userPos={user.position}></ProjTeam>
                       );
