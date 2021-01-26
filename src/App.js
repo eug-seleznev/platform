@@ -37,6 +37,7 @@ import MyProjects from './components/Projects/My';
 import News from './components/Superadmin/newsAdm';
 import { innerBackend, setAuthToken } from './components/utils/axios';
 import { Container } from '../src/Styles/common'
+import Viewer from './components/models';
 
 
 
@@ -98,56 +99,48 @@ const App = () => {
 
   return (
     <div className="App">
-      {!auth ? <Auth /> : (
-      <Router history={history}> 
-        
-        <Layout dimensions={dimensions}/> 
-        <Switch>
-        <Container dimensions={dimensions}>
-          {/* main */}
-          <Route exact path="/" component={ Main } />
-          
+      {!auth ? (
+        <Auth />
+      ) : (
+        <Router history={history}>
+          <Layout dimensions={dimensions} />
+          <Switch>
+            <Container dimensions={dimensions}>
+              {/* main */}
+              <Route exact path="/" component={Main} />
 
-          
-          {/* сисадминошная */}
-          <Route exact path="/help" component={ Admin } />
-          <Route exact path="/tickets" component={ Dashboard } />
-          <Route exact path="/tickets/:id" component={Ticket} />
+              {/* сисадминошная */}
+              <Route exact path="/help" component={Admin} />
+              <Route exact path="/tickets" component={Dashboard} />
+              <Route exact path="/tickets/:id" component={Ticket} />
 
+              <Route exact path="/db" component={DataBase} />
+              <Route exact path="/office" component={Office} />
+              {/* projects */}
+              <Route exact path="/projects" component={Projects} />
+              <Route exact path="/projects/my" component={MyProjects} />
 
+              <Route exact path="/projects/:id" component={Project} />
+              <Route exact path="/projects/:id/:id" component={Sprint} />
+              <Route exact path="/admin/editproj" component={ProjectsEdit} />
+              <Route exact path="/admin/editproj/:id" component={OneProjEdit} />
+              <Route exact path="/new" component={ProjectNew} />
 
-          <Route exact path="/db" component={ DataBase } />
-          <Route exact path="/office" component={ Office } />
-          {/* projects */}
-          <Route exact path="/projects" component={ Projects } />
-          <Route exact path="/projects/my" component={ MyProjects } />
+              {/* users */}
+              <Route exact path="/users" component={Users} />
+              <Route exact path="/users/me" component={MyProfile} />
+              <Route exact path="/users/:id" component={Employe} />
+              <Route exact path="/edit" component={Edit} />
+              {/*adminka */}
+              <Route exact path="/admin" component={Superadmin} />
+              <Route exact path="/admin/permissions" component={Permissions} />
+              <Route exact path="/admin/news" component={News} />
 
-          <Route exact path="/projects/:id" component={ Project } />
-          <Route exact path="/projects/:id/:id" component={ Sprint } />
-          <Route exact path="/admin/editproj" component={ ProjectsEdit } />
-          <Route exact path="/admin/editproj/:id" component={ OneProjEdit } />
-          <Route exact path="/new" component={ ProjectNew } /> 
-
-          {/* users */}
-          <Route exact path="/users" component={ Users } /> 
-          <Route exact path="/users/me" component={ MyProfile } />
-          <Route exact path="/users/:id" component={ Employe } />
-          <Route exact path="/edit"component={ Edit } />
-          {/*adminka */}
-          <Route exact path="/admin" component={ Superadmin } /> 
-          <Route exact path="/admin/permissions" component={ Permissions } />
-          <Route exact path="/admin/news" component={ News } />
-          
-
-        </Container>
-        </Switch>
-     
-
-
-        
-        </Router> )
-    }
-      
+              <Route exact path="/viewer" component={Viewer} />
+            </Container>
+          </Switch>
+        </Router>
+      )}
     </div>
   );
 }
