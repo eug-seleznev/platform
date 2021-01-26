@@ -1,0 +1,40 @@
+.small__title {
+	margin-top:10px;
+	margin-bottom: 5px;
+}
+.small__title2 {
+	margin-top:30px;
+	margin-bottom: 5px;
+}
+.form {
+	display: flex;
+	flex-direction: column;
+	
+}
+.cont {
+	height: 47vh;
+	justify-content: space-between;
+}
+.form input{
+	width:100%;
+	
+	border-radius: 5px;
+	height: 30px;
+}
+.form textarea{
+	width:100%;
+	
+	border-radius: 5px;
+	
+}
+.row {
+	display: flex;
+	justify-content: space-between;
+}
+.input__big {
+	height: 70px;
+}
+.select {
+	width: 100%;
+	height: 30px;
+}

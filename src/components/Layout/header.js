@@ -9,7 +9,7 @@ import Menu from './Menu'
 import MenuMobile from './menuMobile'
 
 
-const HeaderL = ({dimensions}) => {
+const HeaderL = ({dimensions, createProj, createNews, createTicket}) => {
     const loaded = useSelector(state => state.auth.loaded)
     const user = useSelector(state => state.auth.user)
     const [open, setOpen] = useState({
@@ -53,7 +53,7 @@ const HeaderL = ({dimensions}) => {
 
         </Header>
 )}
-        <Menu closeAll={()=>allFalse()} mobile={mobile} state={open}/>
+        <Menu createTicket={createTicket} createNews={createNews} createProj={createProj} closeAll={()=>allFalse()} mobile={mobile} state={open}/>
         <MenuMobile open={open.mobile} closeAll={()=>allFalse()} />
 
           </>

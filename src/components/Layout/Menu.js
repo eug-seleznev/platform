@@ -1,12 +1,12 @@
 import {useSelector} from 'react-redux'
-import {MenuHead, StyledLink} from '../../Styles/layout'
+import {MenuHead, StyledLink,StyledIn} from '../../Styles/layout'
 import {ButtonText} from '../../Styles/buttons'
 import {CSSTransition} from 'react-transition-group'
 import styles from '../../Styles/modules/components/headerMenu.module.css'
 
 
 
-const Menu = ({closeAll, state}) => {
+const Menu = ({closeAll, state, createProj, createTicket,createNews}) => {
 
 
 const exit = () => {
@@ -37,17 +37,17 @@ const exit = () => {
                          
                    </div>
 
-                    <StyledLink className='menu__nav' to='/help'>
+                    <StyledIn onClick={createTicket} className='menu__nav' to='/help'>
                         Проблемы с компом
-                    </StyledLink>
+                    </StyledIn>
 
-                    <StyledLink className='menu__nav' to='/admin/news'>
+                    <StyledIn onClick={createNews} className='menu__nav' to='/admin/news'>
                         Добавить новость
-                    </StyledLink>
+                    </StyledIn>
 
-                    <StyledLink className='menu__nav' to='/new'>
+                    <StyledIn onClick={createProj}>
                         Создать проект
-                    </StyledLink>
+                    </StyledIn>
 
             
         </MenuHead>
