@@ -13,6 +13,7 @@ import { H1, H3, Light, Regular,Bold} from '../../Styles/typography'
 const Sprint = ({match, history}) => {
   const dispatch = useDispatch();
     let {id} = match.params;
+    
     let back = match.url;
     const sprint = useSelector(state => state.projects.sprint)
     const taskArr = useSelector(state => state.projects.sprint)
@@ -27,6 +28,7 @@ const Sprint = ({match, history}) => {
     const [loaded, setLoaded] = useState (0)
     const [dateOpenIn, setDateOpenIn] = useState (0)
     const [duration, setDuration] = useState (7)
+    const [sprintId,setSprintId] = useState (0)
     const { register, control, handleSubmit, reset, watch } = useForm({
         defaultValues: {
             tasks: [{ taskTitle: "задача", workVolume: "5", taskState: false }]
@@ -45,7 +47,8 @@ const Sprint = ({match, history}) => {
     console.log(duration)
   },[duration])
 	useEffect (()=> {
-   
+    setSprintId(match.params.id)
+    console.log(sprintId, match.params.id)
     if(loading){
       console.log (sprint)
       setDateOpenIn (sprint.dateOpen)
@@ -84,7 +87,7 @@ const Sprint = ({match, history}) => {
     //submit for new tasks array;
     const onSubmit = (data) =>{
             let tasks = data;
-            dispatch(addTasks({tasks, id }))
+            dispatch(addTasks({tasks, sprintId }))
            
             setTimeout(() => {
               return history.push(`${back.slice(0,14)}`);
@@ -149,27 +152,23 @@ const Sprint = ({match, history}) => {
         <div>
            {!loading ? <p> loading...</p> : (
              <div>
-               <div className={style.title} >
-             
-                    <Bold size='24' >Спринт {sprint.dateOpen.slice(5,10).replace(/-/g, ".")+'-'+
-                      close}
-                      </Bold>
-                    
-                  </div>
-                  
-                  <Light className={style.title__small} style={{marginBottom:'70px'}} size='16'>
-                    {!loaded?<div>...</div>:<div className={style.title__deadline}>Дней до дедлайна: {diff.toString().slice(0,1)}</div>}
-                    
-                    <div className={style.title__deadline}></div>
-                  </Light>
+              <div className={style.title} >
+                <Bold size='24' >Спринт {sprint.dateOpen.slice(5,10).replace(/-/g, ".")+'-'+
+                  close}
+                </Bold>  
+              </div>
+            <Light className={style.title__small} style={{marginBottom:'70px'}} size='16'>
+              {!loaded?<div>...</div>:<div className={style.title__deadline}>Дней до дедлайна: {diff.toString().slice(0,1)}</div>}
+              <div className={style.title__deadline}></div>
+            </Light>
            <div style={{display:'flex', justifyContent:'space-between'}} > 
-          <Card style={{height:'fit-content',width:'30vw', paddingBottom:'20px'}} >
-            <Regular size='30' style={{marginBottom:'10px'}}>Текущие задачи</Regular> 
-            <Light style={{paddingBottom:'30px',borderBottom:'1px solid black', marginBottom:'40px'}}>{sprint.description}</Light>
-            <div style={{display:'flex',justifyContent:'flex-end'}}>
-              <Light>Продолжительность:   </Light> 
-              <Regular >{duration==7?'1 неделя':duration==14?'2 недели':'??'}</Regular>
-            </div>
+            <Card style={{height:'fit-content',width:'30vw', paddingBottom:'20px'}} >
+              <Regular size='30' style={{marginBottom:'10px'}}>Текущие задачи</Regular> 
+              <Light style={{paddingBottom:'30px',borderBottom:'1px solid black', marginBottom:'40px'}}>{sprint.description}</Light>
+              <div style={{display:'flex',justifyContent:'flex-end'}}>
+                <Light>Продолжительность:   </Light> 
+                <Regular >{duration==7?'1 неделя':duration==14?'2 недели':'??'}</Regular>
+              </div>
               
                         
 {/* 
@@ -193,95 +192,84 @@ const Sprint = ({match, history}) => {
                                 </div>
                                  )
                         })}
-                          </div>} */}
-                        
-                   
-             
-                
+                          </div>} */}  
                 <Button onClick={handleSprint} style={{display:`${sprint.status?'block':'none'}`,marginTop: '20px'}}> Восстановить спринт</Button>
             </Card>
             {/* addInfoSprint */}
 
-<Card style={{opacity: `${sprint.status?0: 1}`,pointerEvents: `${sprint.status?'none': 'auto'}`,textAlign: 'right',width:'40vw', height:'fit-content', paddingBottom:'20px'}}>
-
-
-<Regular size={30} style={{textAlign: 'left',width:'100%', marginBottom:'20px'}}> Задачи </Regular>
-{taskArr.tasks.map((task, ind) => {
-                            return (
-                              
-                                <div key={ind} >
-                                  
-                                    <form >
-                                      <div style={{display:'flex',}}>
-                                          <label style={{display:`${sprint.status?'none':'block'}`}}></label>
-                                          <input style={{display:`${sprint.status?'none':'block'}`}} type="checkbox" id="vehicle1" name="vehicle1" defaultChecked={task.taskStatus} value={task._id} onChange={onChange}/>
-                                          <Light style={{textAlign:'left', marginLeft:'10px'}}>{ind+1}.  {task.taskTitle!==''?task.taskTitle:'Без названия'}</Light>
-                                         
-
-                                       </div>
-                                    </form>
-                                    
-                                </div>
-                                 )
-                        })}
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <ul style={{ listStyleType: 'none'}}>
-      <div style={{display:`${newFields?'block':'none'}`}}>
-        {fields.map((item, index) => (
-          <li key={item.id} style= {{display:'flex'}}>
-            <input
-            style={{width:'35vw',height: '20px'}}
-              name={`tasks[${index}].taskTitle`}
-              ref={register()}
-              placeholder="Название задачи" // make sure to set up defaultValue
-            />
-        
-            
-            <Button type="button" style={{display: `${fields.length<=1?'none':'block'}`,color:'#3F496C',
-                backgroundColor:'white',
-                marginRight:'50px', border:'none', marginLeft:'auto', marginRight:'0'}} onClick={() => remove(index)}>Удалить</Button>
-          </li>
-        ))}</div>
-      </ul>
-      <CancelButton
-                  fontSize={'16px'}
-                  style={{
-                          display:`${!newFields?'block':'none'}`,
-                          color:'#3F496C',
-                          backgroundColor:'white',
-                          border:'none'}}
-                  onClick={createField}
-                >
-        Добавить задачу
-      </CancelButton>
-      <div style={{display:`${newFields?'block':'none'}`}}>
-                <Button
-                fontSize={'16px'}
-                  type="button"
-                  style={{
-                          color:'#3F496C',
-                          backgroundColor:'white',
-                          marginRight:'50px', border:'none'}}
-                  onClick={() => append({ firstName: "appendBill", lastName: "appendLuo" })}
-                >
-        Добавить задачу
-      </Button>
-                <Button 
-                fontSize={'16px'}
-                style={{
-                          color:'#3F496C',
-                          backgroundColor:'white',
-                          border:'none'
-                }} type="submit">Сохранить задачи</Button>
-        </div>
-    </form><Button fontSize={'16px'} onClick={()=>handleBack()} style={{marginTop:'70px'}}grey>Вернуться к проекту</Button>
-            <Button fontSize={'16px'} style={{marginLeft:'50px'}} onClick={chosenSprint}>Добавить спринт в избранное</Button>
-            <Button fontSize={'16px'} style={{marginLeft:'50px'}} onClick={handleSprint}>Завершить спринт</Button>
-    
-            
-    </Card>
+            <Card style={{opacity: `${sprint.status?0: 1}`,pointerEvents: `${sprint.status?'none': 'auto'}`,textAlign: 'right',width:'40vw', height:'fit-content', paddingBottom:'20px'}}>
+            <Regular size={30} style={{textAlign: 'left',width:'100%', marginBottom:'20px'}}> Задачи </Regular>
+            {taskArr.tasks.map((task, ind) => {
+               return (
+                      <div key={ind} >
+                        <form>
+                          <div style={{display:'flex'}}>
+                            <label style={{display:`${sprint.status?'none':'block'}`}}></label>
+                            <input style={{display:`${sprint.status?'none':'block'}`}} type="checkbox" id="vehicle1" name="vehicle1" defaultChecked={task.taskStatus} value={task._id} onChange={onChange}/>
+                            <Light style={{textAlign:'left', marginLeft:'10px',textDecoration:`${task.taskStatus?'line-through':'none'}`}}>{ind+1}.  {task.taskTitle!==''?task.taskTitle:'Без названия'}</Light>
+                          </div>
+                        </form>
+                      </div>
+                      )
+              })}
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <ul style={{ listStyleType: 'none'}}>
+                  <div style={{display:`${newFields?'block':'none'}`}}>
+                    {fields.map((item, index) => (
+                      <li key={item.id} style= {{display:'flex'}}>
+                        <input
+                        style={{width:'35vw',height: '20px'}}
+                          name={`tasks[${index}].taskTitle`}
+                          ref={register()}
+                          placeholder="Название задачи" // make sure to set up defaultValue
+                        />
+                    
+                        
+                        <Button type="button" style={{display: `${fields.length<=1?'none':'block'}`,color:'#3F496C',
+                            backgroundColor:'white',
+                            marginRight:'50px', border:'none', marginLeft:'auto', marginRight:'0'}} onClick={() => remove(index)}>Удалить</Button>
+                      </li>
+                    ))}</div>
+                  </ul>
+                  <CancelButton
+                      fontSize={'16px'}
+                      style={{
+                              display:`${!newFields?'block':'none'}`,
+                              color:'#3F496C',
+                              backgroundColor:'white',
+                              border:'none'}}
+                      onClick={createField}>
+                    Добавить задачу
+                  </CancelButton>
+                  <div style={{display:`${newFields?'block':'none'}`}}>
+                    <Button
+                    fontSize={'16px'}
+                      type="button"
+                      style={{
+                              color:'#3F496C',
+                              backgroundColor:'white',
+                              border:'none'}}
+                      onClick={() => append({ firstName: "appendBill", lastName: "appendLuo" })}>
+                      Добавить задачу
+                    </Button>
+                    <Button 
+                    fontSize={'16px'}
+                    style={{  marginLeft:'50px',
+                              color:'#3F496C',
+                              backgroundColor:'white',
+                              border:'none'
+                    }} type="submit">Сохранить задачи
+                    </Button>
+                  </div>
+                </form>
+                <Button fontSize={'16px'} onClick={()=>handleBack()} style={{marginTop:'70px', marginBottom:'10px'}}grey>Вернуться к проекту</Button>
+                <Button fontSize={'16px'} style={{marginLeft:'50px', marginBottom:'10px'}} onClick={chosenSprint}>Добавить спринт в избранное</Button>
+                <Button fontSize={'16px'} style={{marginLeft:'50px', marginBottom:'10px'}} onClick={handleSprint}>Завершить спринт</Button>
+                
+                        
+              </Card>
             </div>
-            </div>)}
+          </div>)}
         </div>
     )
 }

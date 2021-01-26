@@ -8,7 +8,7 @@ import { Thin, Bold, Light,Regular } from "../../../Styles/typography"
 export const url = process.env.REACT_APP_IP;
 
 
-const ProjTeam = ({userName,userPos,userAvatar}) => {
+const ProjTeam = ({userName,userPos,userAvatar,userId,histProp}) => {
 	
 	return (
 	<>
@@ -25,7 +25,11 @@ const ProjTeam = ({userName,userPos,userAvatar}) => {
 						
 					</div>
 					<div className={style.button_cont}>
-						<Button className={style.button} fontSize={'16px'} padd={'60px'}>Профиль</Button>
+						<Button className={style.button} 
+							fontSize={'16px'} 
+							padd={'60px'}
+                          	title="Профиль сотрудника"
+                         	 onClick={() => histProp.push(`/users/${userId}`)}>Профиль</Button>
 					</div>
 					
 				</Card>
