@@ -1,0 +1,55 @@
+.form {
+	display: flex;
+	flex-direction: column;
+
+	justify-content: space-between;
+	width: 100%;
+	height: 55vh;
+}
+.form__inside {
+	flex-direction: column;
+	justify-content: space-between;
+}
+.row {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 30px;
+}
+.small__title {
+	margin-top: 40px;
+	margin-bottom:5px;
+}
+.input__long{
+	width:100%
+}
+.title {
+	margin-bottom: 5px;
+}
+.form input{
+	width:100%;
+	border: 0.6px solid #717171;
+	border-radius: 5px;
+	height: 30px;
+}
+.form textarea{
+	width:100%;
+	border: 0.6px solid #717171;
+	border-radius: 5px;
+	height: 70px;
+}					
+					
+
+.input__mid{
+	width:35%
+}
+.input__short{
+	width:13%
+}
+.buttons {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: auto;
+	
+} 

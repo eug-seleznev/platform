@@ -447,7 +447,7 @@ useEffect(() => {
             <div className={style.sprintdescr__cont}>
                     {project.team.map((user, i) => {
                       return (
-                        <ProjTeam userName={user.name} userAvatar={user.avatar} userPos={user.position}></ProjTeam>
+                        <ProjTeam  histProp={history} userId={user._id} userName={user.name} userAvatar={user.avatar} userPos={user.position}></ProjTeam>
                       );
                     })}
                    
@@ -488,7 +488,6 @@ useEffect(() => {
                     } else if (project.team.length - 1 == ind) {
                       return (
                         <Button
-                        
                           fontSize={'20px'}
                           onClick={hadleTeam}
                           style={{

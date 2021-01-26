@@ -103,7 +103,7 @@ const App = () => {
         <Auth />
       ) : (
         <Router history={history}>
-          <Layout dimensions={dimensions} />
+          <Layout dimensions={dimensions} histCurrent={history} />
           <Switch>
             <Container dimensions={dimensions}>
               {/* main */}
@@ -124,7 +124,7 @@ const App = () => {
               <Route exact path="/projects/:id/:id" component={Sprint} />
               <Route exact path="/admin/editproj" component={ProjectsEdit} />
               <Route exact path="/admin/editproj/:id" component={OneProjEdit} />
-              <Route exact path="/new" component={ProjectNew} />
+              {/* <Route exact path="/new" component={ ProjectNew } />  */}
 
               {/* users */}
               <Route exact path="/users" component={Users} />
@@ -136,6 +136,7 @@ const App = () => {
               <Route exact path="/admin/permissions" component={Permissions} />
               <Route exact path="/admin/news" component={News} />
 
+              
               <Route exact path="/viewer" component={Viewer} />
             </Container>
           </Switch>

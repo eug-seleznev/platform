@@ -102,18 +102,29 @@ text-decoration: none;
 `
 
 
+export const StyledIn = styled.div`
 
+margin-top: 10px;
+cursor: pointer;
+font-family: SuisseIntlLight;
+font-size: 16px;
+
+&:hover{
+    text-decoration:underline;
+   
+}
+`
 
 export const StyledLink = styled(NavLink)`
 display:block;
 font-size: 25px;
 text-decoration:none;
 margin: 0;
-margin-top: 10px;
-cursor: pointer;
 color: black;
 text-align:left;
 z-index:999;
+margin-top: 10px;
+cursor: pointer;
 font-family: SuisseIntlLight;
 font-size: 16px;
 

@@ -15,7 +15,7 @@ background-color: #ECECEC;
 
 
 export const ModalContainer = styled.div`
-z-index:99;
+z-index:10000;
 left:0;
 top:0;
 position: fixed;
@@ -29,7 +29,7 @@ padding: 60px;
 margin-top: 15vh;
 width: 60vw;
 margin-left:15vw;
-height: 60vh;
+height: 55vh;
 background-color: white
 
 `

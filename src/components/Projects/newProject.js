@@ -2,13 +2,13 @@ import  {useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { newProject } from '../../redux/actions/projects';
 import { newTicket } from '../../redux/actions/tikets';
-import './projects.css'
+import style from '../../Styles/modules/components/Project/createPr.module.css'
 
 import {Container, Card, Title,} from '../../Styles/common'
-import { Button } from '../../Styles/buttons';
-import { H1, H3} from '../../Styles/typography'
+import { Button, CancelButton } from '../../Styles/buttons';
+import { Bold, H1, H3, Light, Regular, Thin} from '../../Styles/typography'
 
-const ProjectNew = ({history}) => {
+const ProjectNew = ({histCurrent,closeWindow}) => {
     const dispatch = useDispatch();
 
     const [formData, setFormData ] = useState({
@@ -20,14 +20,14 @@ const ProjectNew = ({history}) => {
         stage: '',
         dateFinish: '',
         customer: '',
-
+        about: '',
 
       
       });
    
 
 
-      const { title, dateStart, dateFinish, city, type, stage, customer, area} = formData;
+      const { title, dateStart, dateFinish, city, type, stage, customer, about} = formData;
 
   
     const onChange = e => {
@@ -39,14 +39,25 @@ const ProjectNew = ({history}) => {
 
      const Redirect = () => {
      
-             return history.push(`/projects`)
+             return histCurrent.push(`/projects`)
          
      }
 
      const onSubmit = async e => {
         e.preventDefault();
         dispatch(newProject(formData))
-        setTimeout(() => Redirect(),100) 
+        setTimeout(() => setFormData({
+          title: '',   
+          dateStart: '', 
+          city: '',  
+          type: '',
+          stage: '',
+          dateFinish: '',
+          customer: '',
+          about: '',
+        }),50) 
+        closeWindow()
+        // setTimeout(() => Redirect(),100) 
         
             // register({ name, email, password});
     
@@ -55,70 +66,104 @@ const ProjectNew = ({history}) => {
 
     return (
       <div>
-        <Card>
-          <H1>
-       
-            Тут можно создать новый проект
-           
-          </H1>
-          <form className="form" onSubmit={onSubmit}>
-            <input
-              type="text"
-              placeholder="Название проекта"
-              name="title"
-              value={title}
-              onChange={(e) => onChange(e)}
-            />
+          <form className={style.form} onSubmit={onSubmit}>
+            <div>
+              <div className={style.row}>
+                <div className={style.input__long}>
+                <Thin className={style.title}>Название</Thin>
+                <input
+                  className={style.input__long}
+                  type="text"
+                  name="title"
+                  value={title}
+                  onChange={(e) => onChange(e)}
+                />
+                </div>
+              </div>
+              <div className={style.row}>
+                <div className={style.input__mid}>
+                  <Thin className={style.title}>Город</Thin>
+                  <input
+                  
+                    type="text"
+                    name="city"
+                    value={city}
+                    onChange={(e) => onChange(e)}
+                  />
+                </div>
+                <div className={style.input__short}>
+                  <Thin className={style.title}>Начало</Thin>
+                  <input
+                    type="date"
+                    name="dateStart"
+                    value={dateStart}
+                    onChange={(e) => onChange(e)}
+                  />
+                </div>
+                <div className={style.input__short}>
+                  <Thin className={style.title}>Дедлайн</Thin>
+                  <input
+                    type="date"
+                    name="dateFinish"
+                    value={dateFinish}
+                    onChange={(e) => onChange(e)}
+                  />
+                </div>
+              
+              </div>
+              <div className={style.row}>
+                <div className={style.input__mid}>
+                  <Thin className={style.title}>Тип проекта</Thin>
+                  <input
+                    type="text"
+                    name="type"
+                    value={type}
+                    onChange={(e) => onChange(e)}
+                  />
+                </div>
+                <div className={style.input__short}>
+                  <Thin className={style.title}>Стадия</Thin>
+                  <input
+                    type="text"
+                    name="stage"
+                    value={stage}
+                    onChange={(e) => onChange(e)}
+                  />
+                </div>
+                <div className={style.input__mid}>
+                  <Thin className={style.title}>Заказчик</Thin>
+                  <input
+                    type="text"
+                    name="customer"
+                    value={customer}
+                    onChange={(e) => onChange(e)}
+                  />
+                </div>
+                
+              </div>
+              <div className={style.row}>
+                <div className={style.input__long}>
+                  <Thin className={style.title}>Описание</Thin>
+                  <input
+                    className={style.input__long}
+                    style={{height:'85px'}}
+                      type="text"
+                      name="about"
+                      value={about}
+                      onChange={(e) => onChange(e)}
+                    />
+                </div>
+              </div>
+              </div>
+              <div className={style.buttons}>
+                <CancelButton grey padd={'70px'} onClick={closeWindow}> Отмена</CancelButton>
+                <Button fontSize={'16px'} padd={'20px'} type="submit"> Создать новый проект</Button>
+              </div>
 
-            <input
-              type="date"
-              placeholder="date"
-              name="dateStart"
-              value={dateStart}
-              onChange={(e) => onChange(e)}
-            />
-
-            <input
-              type="date"
-              placeholder="date"
-              name="dateFinish"
-              value={dateFinish}
-              onChange={(e) => onChange(e)}
-            />
-
-            <input
-              type="text"
-              placeholder="Город"
-              name="city"
-              value={city}
-              onChange={(e) => onChange(e)}
-            />
-
-            <input
-              type="text"
-              placeholder="Тип проекта"
-              name="type"
-              value={type}
-              onChange={(e) => onChange(e)}
-            />
-            <input
-              type="text"
-              placeholder="Фаза"
-              name="stage"
-              value={stage}
-              onChange={(e) => onChange(e)}
-            />
-            <input
-              type="text"
-              placeholder="Заказчик"
-              name="customer"
-              value={customer}
-              onChange={(e) => onChange(e)}
-            />
-
-            <Button type="submit"> Создать новый проект</Button>
+     
+            
           </form>
-        </Card>
+       
       </div>
     );
 }
