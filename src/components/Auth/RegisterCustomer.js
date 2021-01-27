@@ -1,12 +1,13 @@
-
+import styles from '../../Styles/modules/login/client.module.css'
+import {Bold} from '../../Styles/typography'
 
 
 
 
 const AuthCustomer = () => {
     return (
-        <div>
-            <p> development</p>
+        <div className={styles.clientContainer}>
+            <Bold size='30'> Development</Bold>
         </div>
     )
 }

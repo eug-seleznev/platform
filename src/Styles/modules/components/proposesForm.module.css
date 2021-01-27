@@ -1,0 +1,23 @@
+.formContainer{
+
+    display: grid;
+    grid-template-areas:
+    'title btn'
+    'texts texts'
+    ;
+    grid-template-columns: 8fr minmax(max-content, 1fr);
+    grid-template-rows: 1fr 3fr;
+    column-gap: 20px;
+    row-gap: 10px;
+}
+.title{
+    grid-area: title;
+}
+.texts{
+    grid-area: texts;
+
+}
+.createBtn{
+    grid-area: btn;
+
+}

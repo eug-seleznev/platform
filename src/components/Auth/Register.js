@@ -1,8 +1,11 @@
+import styles from '../../Styles/modules/login/register.module.css'
+
 import  {useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { register } from '../../redux/actions/auth';
 import {Input, LogForm} from '../../Styles/Forms'
-import {Button} from '../../Styles/buttons'
+import {LoginButton} from '../../Styles/buttons'
+import {Bold} from '../../Styles/typography'
 
 const Auth = () => {
 const dispatch = useDispatch();
@@ -31,9 +34,12 @@ const dispatch = useDispatch();
         }
 
     return (
-        <div style={{display: 'flex', justifyContent:'center'}}>
-            <LogForm onSubmit={onSubmit}>
+        
+            <form onSubmit={onSubmit} className={styles.registerForm}>
+            <Bold size='24' className={styles.title}>Регистрация</Bold>
+
             <Input 
+                className={styles.email}
                 type='email'
                 placeholder='email'
                 name='email'
@@ -41,16 +47,17 @@ const dispatch = useDispatch();
                 onChange={e => onChange(e)}/>
 
            <Input 
+                className={styles.rocket}
                 type='text'
                 placeholder='rocketname'
                 name='rocketname'
                 value={rocketname}
                 onChange={e => onChange(e)}/>
 
-            <Button style={{width:'20vw'}} type="submit"> Зарегистрироваться</Button>
+            <LoginButton color='white' bgColor='#3F496C' className={styles.button} type="submit"> Зарегистрироваться</LoginButton>
 
-            </LogForm>
-        </div>
+            </form>
+       
     )
 }
 

@@ -1,0 +1,33 @@
+.loginForm{
+    display: grid;
+    grid-template-areas:
+    'title title'
+    'mail mail'
+    'password password'
+    'forgot button'
+    ;
+    row-gap: 24px;
+}
+.title{
+    grid-area: title;
+}
+.email{
+    grid-area: mail;
+    margin-bottom: 0px;
+    filter: none;
+    border: 1px solid black;
+
+}
+.password{
+    grid-area: password;
+    margin-bottom: 10px;
+}
+.forgot{
+    grid-area: forgot;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.button{
+    grid-area: button;
+    margin-left: auto;
+}

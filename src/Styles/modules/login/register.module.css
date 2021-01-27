@@ -1,0 +1,29 @@
+.registerForm{
+    display: grid;
+    grid-template-areas:
+    'title title'
+    'mail mail'
+    'rocket rocket'
+    '. button'
+    ;
+    row-gap: 24px;
+}
+.title{
+    grid-area: title;
+}
+.email{
+    grid-area: mail;
+    margin-bottom: 0px;
+    filter: none;
+    border: 1px solid black;
+
+}
+.rocket{
+    grid-area: rocket;
+    margin-bottom: 10px;
+}
+
+.button{
+    grid-area: button;
+    margin-left: auto;
+}
