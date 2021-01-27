@@ -1,31 +1,49 @@
+import styles from '../../Styles/modules/login/logScreen.module.css'
 import { useState } from "react"
 import Login from './Login'
 import Register from './Register'
 import RegisterCustomer from './RegisterCustomer'
-import {SmallContainer, Card} from '../../Styles/common'
+import { Card, Container} from '../../Styles/common'
 import {LoginButton} from '../../Styles/buttons'
+import {Bold, Regular, Light} from '../../Styles/typography'
 
 
 
 const Auth = () => {
     const [page, setPage] = useState(0)
     return (
-        <SmallContainer >
-            <Card>
-                <div style={{width:'100%', borderBottom:'2px solid black', display:'flex', justifyContent:'space-between'}}>
-                    <LoginButton style={{fontWeight:`${page===0?'bold':'normal'}`}} onClick={(() => setPage(0))}>Логин</LoginButton>
-                    <LoginButton style={{fontWeight:`${page===1?'bold':'normal'}`}} onClick={(() => setPage(1))}>Регистрация </LoginButton>
-                    <LoginButton style={{fontWeight:`${page===2?'bold':'normal'}`}} onClick={(() => setPage(2))}>Регистрация (клиент)</LoginButton>
-                </div>
+        <div className={styles.margins}>
+        <div className={styles.container}>
+            <div className={styles.buro}>
+                <Bold size='30' color='white'>BURO82</Bold>
+            </div>
 
-                <div>
+            <div className={styles.buroContentBG} style={{backgroundImage: 'url(/loginBG.png)'}}> 
+                <div className={styles.buroContent}>
+                    <Regular size='30' color='white' className={styles.buroTitile}>Платформа для ведения <br/> архитектурно-строительных проектов</Regular>
+                    <Light size='16' color='white' className={styles.buroText}>Вся информация о проекте в единой информационной среде.</Light>
+                    {/* <LoginButton style={{fontWeight:`${page===0?'bold':'normal'}`}} onClick={(() => setPage(0))}>Логин</LoginButton> */}
+                    <div className={styles.btnCont}>
+                        <LoginButton color='#3F496C' bgColor='white'  className={styles.register} onClick={(() => page==0? setPage(1) : setPage(0))}>{page==0?'Регистрация':'Логин'}</LoginButton>
+                        <LoginButton color='white' bgColor='transparent' className={styles.client} onClick={(() => setPage(2))}>Я клиент</LoginButton>
+                    </div>
+                    
+                </div>                    
+            </div>
+
+            <div className={styles.platform}>
+                <Bold size='30'>PLATFORM</Bold>
+            </div>
+                
+
+            <div  className={styles.forms}>
                 {page ==0 && <Login/>}
                 {page ==1 && <Register />}
                 {page ==2 && <RegisterCustomer />}
-
-                </div>
-            </Card>
-        </SmallContainer>
+            </div>
+            
+        </div>
+        </div>
     )
 }
 

@@ -83,10 +83,31 @@ export const ButtonText =  styled.button`
 
 export const LoginButton =  styled.button` 
   outline: none;
-  display: inline-block;
-  border-radius: 0px;
-  padding: 10px ;
-  border: 0px solid black;
-  background-color: white;
+
+  display: grid;
+  grid-template-columns: minmax(170px, max-content);
+  border: 1px solid white;
+  border-radius: 13px;
+  font-size: 16px;
+  font-family: SuisseIntlSemibold;
+  
+  
+  
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 20px;
+  padding-right: 20px;
+ 
+  outline: none;
+  text-decoration: none;
+  color: ${props => props.color};
+  background-color: ${props => props.bgColor};
+  ;
+
+  &:hover{
+  // text-decoration: underline;
+  background-color: black;
+
+}
 
 `

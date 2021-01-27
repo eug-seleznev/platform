@@ -1,84 +1,51 @@
+import styles from '../../Styles/modules/office/office.module.css'
 import { useState, useEffect} from 'react'
 import { useDispatch, useSelector} from 'react-redux'
 import { newPropose, likedProposes, dateProposes, likePropose, deletePropose} from '../../redux/actions/office'
+import {Card} from '../../Styles/common'
+import { Bold, Light, Thin, Regular} from '../../Styles/typography'
+import {Button } from '../../Styles/buttons'
+import  ProposeCard  from './proposesCard'
+import  ProposeForm  from './proposeForm'
 
 
 const Office = () => {
 
-const dispatch = useDispatch()
-const office = useSelector(state => state.office)
-// const dated = useSelector(state => state.office.dateProposes)
-
-    const [formData, setFormData ] = useState({
-        
-        title: '',   
-        text: '',  
-      
-      });
-      const { title, text,} = formData;
-
-
-const onChange = e => {
-
-    e.preventDefault(); 
-
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-}
-
-
-const onSubmit = (e) => {
-    e.preventDefault();
-
-    dispatch(newPropose(formData))
-
-    setTimeout(() => {
-        dispatch(dateProposes())
-        dispatch(likedProposes())
-    }, 100);  
-    setFormData({
-        title:'',subtitle:'',text:''
-    })
-}
-
 useEffect(()=>{
-    dispatch(likedProposes())
-    console.log('liked',office)
-    // console.log('dated',dated)
+        dispatch(likedProposes())
+        dispatch(dateProposes())
+        console.log('liked',liked)
+        console.log('dated',dated)
 },[])
 
-    return (
-        <div> <h1> Офис</h1>
-        
-        
-        <form className='form news__form' onSubmit={onSubmit}>
-           
-            <input 
-                className='news__title'
-                type='text'
-                placeholder='Заголовок'
-                name='title'
-                value={title}
-                onChange={e => onChange(e)}/>
-
-   
+const dispatch = useDispatch()
+const liked = useSelector(state => state.office.likedProposes)
+const dated = useSelector(state => state.office.dateProposes)
     
-
-            <textarea 
-                className='news__texts'
-                
-                placeholder='Текст'
-                name='text'
-                value={text}
-                onChange={e => onChange(e)}/>
-            
+    const [show, setShow] = useState(dated)
 
 
 
-            <button className='news__submit'  type="submit">Создать новость</button>
 
-            </form>
 
-            <button onClick={()=>console.log(office, 'liked')}>console log proposes</button>
+    return (
+        <div> 
+            <h1> Офис</h1>
+        
+            <ProposeForm />
+      
+
+            <Button onClick={()=>console.log(liked, 'liked', dated, 'dated')}>console log proposes</Button>
+            <Button onClick={()=>setShow(show==dated? liked : dated)}>liked</Button>
+
+            <div className={styles.cardsContainer}>
+                {show!=null && show.map((el, i)=>{
+                    return(
+                        
+                            <ProposeCard cardContent={el} />
+                    )
+                })}
+            </div>
 
         </div>
     )

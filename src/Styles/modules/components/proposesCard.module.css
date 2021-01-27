@@ -1,0 +1,39 @@
+.cardContainer{
+    display: grid;
+    grid-template-areas:
+    '. date delete'
+    'title . .'
+    'texts likes likeB'
+    'filters . .'
+    ;
+    grid-template-columns: 1fr max-content max-content;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+.title{
+    grid-area: title;
+}
+.text{
+    grid-area: texts;
+
+}
+.date{
+    grid-area: date;
+
+}
+.likes{
+    grid-area: likes;
+    text-align: right;
+
+}
+.likeBtn{
+    grid-area: likeB;
+
+}
+.deleteBtn{
+    grid-area: delete;
+
+}
+.filters{
+    grid-area: filters;
+}

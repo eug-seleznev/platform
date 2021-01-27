@@ -1,0 +1,68 @@
+
+
+
+.container{
+    width: 95%;
+    margin: 200px;
+    
+    overflow: hidden;
+    border: 1px solid #707070;
+    border-radius: 15px;
+    
+
+    
+    display: grid;
+    grid-template-areas:
+    'buro platform'
+    'buroCont forms'
+    ;
+    grid-template-rows: max-content 420px;
+    grid-template-columns: 55fr 45fr;
+}
+.buro{
+    grid-area: buro;
+    background-color: rgba(63, 73, 108, 0.7);
+    padding: 35px;
+    border-bottom: 1px solid white;
+
+}
+.platform{
+    grid-area: platform;
+    text-align: right;
+    background-color: white;
+    padding: 35px;
+    border-bottom: 1px solid black;
+
+}
+.buroContentBG{
+    grid-area: buroCont;
+    overflow: hidden;
+}
+    .buroContent{
+    background-color: rgba(63, 73, 108, 0.7);
+    width: 100%;
+    height: 100%;
+    padding: 35px;
+
+    }
+        .buroTitile{
+            margin-bottom: 18px;
+        }
+        .buroText{
+            margin-bottom: 30px;
+        }
+        .btnCont{
+            display: flex;
+        }
+                .register{
+                    margin-right: 35px;
+                }
+                .client{
+
+                }
+.forms{
+    grid-area: forms;
+   background-color: white;
+    padding: 75px;
+
+}
