@@ -13,7 +13,6 @@ background-color: #ECECEC;
 
 `
 
-
 export const ModalContainer = styled.div`
 z-index:10000;
 left:0;
@@ -30,8 +29,13 @@ margin-top: 15vh;
 width: 60vw;
 margin-left:15vw;
 height: 55vh;
-background-color: white
-
+background-color: white;
+@media(max-width:700px) {
+    margin-top: 0vh;
+    height:100vh;
+    margin-left:0;
+    width: 85vw;    
+}
 `
 
 
@@ -44,6 +48,7 @@ padding-left:25px;
 border: 1px solid #CECECE;
 border-radius: 15px;
 `
+
 
 
 

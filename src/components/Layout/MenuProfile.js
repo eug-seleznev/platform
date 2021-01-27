@@ -16,7 +16,7 @@ const MenuProfile = () => {
 
 
             <StyledLink
-              to='/projects/my'
+              to='/myprojects'
                >Мои проекты</StyledLink>
             
 
