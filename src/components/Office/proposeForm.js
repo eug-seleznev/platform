@@ -2,10 +2,13 @@ import styles from '../../Styles/modules/components/proposesForm.module.css'
 import { useState} from 'react'
 import { useDispatch} from 'react-redux'
 import { newPropose, likedProposes, dateProposes} from '../../redux/actions/office'
+import {Regular} from '../../Styles/typography'
+import { Button } from '../../Styles/buttons'
+import { Card } from '../../Styles/common'
 
 
 
-const ProposeForm = () => {
+const ProposeForm = ({closeForm}) => {
 
 const dispatch = useDispatch()
 
@@ -28,12 +31,12 @@ const onChange = e => {
 
 const onSubmit = (e) => {
     e.preventDefault();
-
     dispatch(newPropose(formData))
 
     setTimeout(() => {
         dispatch(dateProposes())
         dispatch(likedProposes())
+        closeForm()
     }, 100);  
     setFormData({
         title:'',subtitle:'',text:''
@@ -44,8 +47,9 @@ const onSubmit = (e) => {
     return (
      
           
-       
+       <Card>
         <form className={styles.formContainer} onSubmit={onSubmit}>
+            <Regular size='30'>Предложение</Regular>
            
             <input 
                 className={styles.title}
@@ -69,10 +73,10 @@ const onSubmit = (e) => {
 
 
 
-            <button className={styles.createBtn}  type="submit">Создать новость</button>
+            <Button fontSize='16px' padding='50px' className={styles.createBtn}  type="submit">Создать</Button>
 
         </form>
-
+        </Card>
     )
 }
 

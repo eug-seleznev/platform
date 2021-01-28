@@ -16,8 +16,6 @@ const Office = () => {
 const dispatch = useDispatch()
 const liked = useSelector(state => state.office.likedProposes)
 const dated = useSelector(state => state.office.dateProposes)
-const revLiked = liked!=null && liked.reverse()
-const revDated = dated!=null && dated.reverse()
 const loaded = useSelector(state => state.office.loaded)
 
     const [show, setShow] = useState(dated)

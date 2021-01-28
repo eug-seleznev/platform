@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom"
 
 
 export const Header =  styled.div`
-    position: absolute;
+    position: fixed;
     display: grid;
     grid-template-columns: 1fr max-content max-content;
     // flex-direction: row;

@@ -1,4 +1,4 @@
-import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES, DATE_PROPOSES, LIKE_PROPOSE, DELETE_PROPOSE } from "../types";
+import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES, DATE_PROPOSES, LIKE_PROPOSE, DELETE_PROPOSE, IN_WORK } from "../types";
 
 
 
@@ -24,7 +24,7 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     newPropose: payload,
-
+                    
 
                     error: ''
                 }
@@ -33,7 +33,7 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     likedProposes: payload,
-
+                    loaded: true,
 
                     error: ''
                 }
@@ -41,7 +41,7 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     dateProposes: payload,
-
+                    loaded: true,
 
                     error: ''
                 }
@@ -53,6 +53,13 @@ export default function(state = initialState, action) {
 
 
                     error: ''
+                }
+            case IN_WORK:
+                return {
+                    ...state,
+                    msg:payload,
+
+                    error:''
                 }
 
             case DELETE_PROPOSE:

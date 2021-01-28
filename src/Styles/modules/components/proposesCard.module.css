@@ -1,10 +1,34 @@
-.cardContainer{
+.cardGrid{
     display: grid;
     grid-template-areas:
-    '. date delete'
+    'cross card inWork'
+    ;
+    grid-template-columns: max-content 1fr max-content;
+    column-gap: 35px;
+}
+.inWork{
+    grid-area: inWork;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.deleteBtn{
+    grid-area: cross;
+    margin-top: auto;
+    margin-bottom: auto;
+    transition: all .3s ease-in-out;
+}
+        .deleteBtn:hover{
+            transform: scale(1.2);
+        }
+
+.cardContainer{
+    grid-area: card;
+    display: grid;
+    grid-template-areas:
+    '. . date'
     'title . .'
-    'texts likes likeB'
-    'filters . .'
+    'texts . .'
+    'filters likes likeB'
     ;
     grid-template-columns: 1fr max-content max-content;
     column-gap: 10px;
@@ -24,16 +48,22 @@
 .likes{
     grid-area: likes;
     text-align: right;
+    margin-top: auto;
+    margin-bottom: auto;
 
 }
 .likeBtn{
     grid-area: likeB;
-
+    /* height: 30px; */
 }
-.deleteBtn{
-    grid-area: delete;
 
-}
 .filters{
     grid-area: filters;
+    margin-top: auto;
+    margin-bottom: auto;
+
+}
+.inWorkBtn{
+    display: inline-block;
+    cursor:pointer;
 }
