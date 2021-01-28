@@ -1,21 +1,18 @@
 import Axios from "axios";
-import { GET_URN } from "../types";
+import { GET_TOKEN, GET_URN, NEW_ERROR } from "../types";
 
-export const newTicket = ({ formData, file }) => async (dispatch) => {
+export const postModel = (formData) => async (dispatch) => {
   // formData.append('userName', 'Fred');
 
   try {
     // console.log(formData, 'data')
     const form = new FormData();
-    if (file) {
-      form.append("file", file);
-    }
 
     Object.keys(formData).map((el, index) => {
       form.append(`${el}`, formData[el]);
     });
 
-    const res = await Axios.post("/tickets", form, {
+    const res = await Axios.post("/up/upload/p", form, {
       baseURL: "http://192.168.0.16:7770",
       headers: {
         "content-type": "multipart/form-data",
@@ -28,6 +25,33 @@ export const newTicket = ({ formData, file }) => async (dispatch) => {
       payload: res.data,
     });
     // dispatch(loadUser())
+  } catch (err) {
+    const errors = err.response.data.errors;
+    errors.map((error) => {
+      return dispatch({
+        type: NEW_ERROR,
+        payload: error.msg,
+      });
+    });
+  }
+};
+
+
+export const Oauth = (crypt) => async (dispatch) => {
+  let body = {
+    crypt: crypt
+  }
+  try {
+        const res = await Axios.get(`/up/tkn/p/${crypt}`,  {
+          baseURL: "http://192.168.0.16:7770",
+          headers: {
+            "content-type": "application/json",
+          },
+        });
+    dispatch({
+      type: GET_TOKEN,
+      payload: res.data
+    })
   } catch (err) {
     const errors = err.response.data.errors;
     errors.map((error) => {

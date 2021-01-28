@@ -37,7 +37,8 @@ import MyProjects from './components/Projects/My';
 import News from './components/Superadmin/newsAdm';
 import { innerBackend, setAuthToken } from './components/utils/axios';
 import { Container } from '../src/Styles/common'
-import Viewer from './components/models';
+import Viewer from './components/Viewer';
+import Helper from './components/Viewer/helper';
 
 
 
@@ -122,6 +123,10 @@ const App = () => {
 
               <Route exact path="/projects/:id" component={Project} />
               <Route exact path="/projects/:id/:id" component={Sprint} />
+              <Switch>
+                <Route exact path="/projects/:id/model/test" component={Helper} />
+              </Switch>
+
               <Route exact path="/admin/editproj" component={ProjectsEdit} />
               <Route exact path="/admin/editproj/:id" component={OneProjEdit} />
               {/* <Route exact path="/new" component={ ProjectNew } />  */}
@@ -136,8 +141,7 @@ const App = () => {
               <Route exact path="/admin/permissions" component={Permissions} />
               <Route exact path="/admin/news" component={News} />
 
-              
-              <Route exact path="/viewer" component={Viewer} />
+              <Route exact path="/viewer" component={Helper} />
             </Container>
           </Switch>
         </Router>
