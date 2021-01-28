@@ -71,7 +71,7 @@ export const DATE_PROPOSES = 'date_proposes'
 export const LIKE_PROPOSE = 'like_propose'
 export const DELETE_PROPOSE = 'delete_propose'
 export const PROPOSE_FAIL = 'propose_fail'
-
+export const IN_WORK = 'in_work'
 
 
 

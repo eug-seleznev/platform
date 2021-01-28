@@ -31,7 +31,6 @@ const onChange = e => {
 
 const onSubmit = (e) => {
     e.preventDefault();
-
     dispatch(newPropose(formData))
 
     setTimeout(() => {

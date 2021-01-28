@@ -1,6 +1,6 @@
 import styles from '../../Styles/modules/components/proposesCard.module.css'
-import { useDispatch} from 'react-redux'
-import { likedProposes, dateProposes, likePropose, deletePropose} from '../../redux/actions/office'
+import { useDispatch, useSelector} from 'react-redux'
+import { likedProposes, dateProposes, likePropose, deletePropose, inWork} from '../../redux/actions/office'
 import {Card} from '../../Styles/common'
 import { Bold, Thin, Regular} from '../../Styles/typography'
 import {Button, FilterButton, ButtonText } from '../../Styles/buttons'
@@ -44,10 +44,11 @@ const deleteButton =(id) =>{
             <Regular size='16px' className={styles.text}>{cardContent.text}</Regular>
             <Thin className={styles.date}>{cardContent.date.slice(5,10).split('-').reverse().join('.')}</Thin>
             <img src='/like.png' className={styles.likeBtn} onClick={()=>likeButton(cardContent._id)} />
-            <div className={styles.filters}>#{filters}, реверс: {`${reverse}`} || <Bold style={{display: 'inline-block'}} size='12'>в работу</Bold></div>
+            <div className={styles.filters}>#{filters}, реверс: {`${reverse}`} || <Bold className={styles.inWorkBtn} size='12' onClick={()=>dispatch(inWork(cardContent._id))}>в работу</Bold></div>
         </Card>
 
-        <Bold size='12' className={styles.inWork}>в работе</Bold>
+        <Bold size='12' className={styles.inWork} style={{opacity: cardContent.status? 1:0}}>в работе</Bold> 
+        
 
        </div>
                   
