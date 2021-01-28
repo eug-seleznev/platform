@@ -2,7 +2,7 @@ import { Button,CancelButton } from "../../../Styles/buttons"
 import { Thin } from "../../../Styles/typography"
 import{	useState, useEffect} from 'react'
 import { useForm, useFieldArray } from "react-hook-form";
-import {  addTasks,addInfoSprint,addSprint} from "../../../redux/actions/projects";
+import {  addTasks,addInfoSprint,addSprint,getProject} from "../../../redux/actions/projects";
 import { useDispatch,useSelector} from "react-redux"
 import style from '../../../Styles/modules/components/Project/sprintForm.module.css'
 
@@ -69,6 +69,9 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 				setTimeout(() => {
 					dispatch(addSprint(project.crypt))
 				}, 500);
+				setTimeout(() => {
+					dispatch(getProject(project.crypt))
+				}, 800);
 				
 
 		}
@@ -76,17 +79,18 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 			offWindow()
 		}
 	useEffect(()=>{
+		offWindow ()
 		if(reload){
 			let tasks = sprintData
 			let sprintId = sprint.id	
 				dispatch(addInfoSprint(sprintId, formData))
 				dispatch(addTasks({tasks, sprintId }))
 			
-				setTimeout(() => {
-					offWindow ()
-				}, 300);
+				
 		}
-		
+	
+					
+				
 	},[reload])
 		
 

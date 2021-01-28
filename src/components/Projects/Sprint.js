@@ -5,6 +5,7 @@ import { addToChosen } from '../../redux/actions/auth'
 import { useForm, FormProvider, useFormContext, useFieldArray, Controller } from "react-hook-form";
 import './sprint.css'
 import style from '../../Styles/modules/components/Project/oneproj.module.css'
+import sprintCss from '../../Styles/modules/components/Project/onesprint.module.css'
 import {Button, CancelButton} from '../../Styles/buttons'
 import { Table, Td, Tr } from "../../Styles/tables";
 import { Container, Card, } from "../../Styles/common";
@@ -161,8 +162,9 @@ const Sprint = ({match, history}) => {
               {!loaded?<div>...</div>:<div className={style.title__deadline}>Дней до дедлайна: {diff.toString().slice(0,1)}</div>}
               <div className={style.title__deadline}></div>
             </Light>
-           <div style={{display:'flex', justifyContent:'space-between'}} > 
-            <Card style={{height:'fit-content',width:'30vw', paddingBottom:'20px'}} >
+           <div  style={{display:'flex', justifyContent:'space-between',flexWrap:'wrap'}} >
+           
+            <Card className={sprintCss.first_block} >
               <Regular size='30' style={{marginBottom:'10px'}}>Текущие задачи</Regular> 
               <Light style={{paddingBottom:'30px',borderBottom:'1px solid black', marginBottom:'40px'}}>{sprint.description}</Light>
               <div style={{display:'flex',justifyContent:'flex-end'}}>
@@ -197,7 +199,7 @@ const Sprint = ({match, history}) => {
             </Card>
             {/* addInfoSprint */}
 
-            <Card style={{opacity: `${sprint.status?0: 1}`,pointerEvents: `${sprint.status?'none': 'auto'}`,textAlign: 'right',width:'40vw', height:'fit-content', paddingBottom:'20px'}}>
+            <Card className={sprintCss.second_block} style={{opacity: `${sprint.status?0: 1}`,pointerEvents: `${sprint.status?'none': 'auto'}`}}>
             <Regular size={30} style={{textAlign: 'left',width:'100%', marginBottom:'20px'}}> Задачи </Regular>
             {taskArr.tasks.map((task, ind) => {
                return (
@@ -269,6 +271,7 @@ const Sprint = ({match, history}) => {
                         
               </Card>
             </div>
+         
           </div>)}
         </div>
     )

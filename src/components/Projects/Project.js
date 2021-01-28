@@ -19,7 +19,7 @@ import ModalWindow from "./components/ModalWindow";
 
 // const sprintDays = [];
 
-let months = ['янв','фев',"март","апр","май","июнь","июль","авг","сен","окт","ноя","дек"]
+let months = ['янв','фев',"мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"]
 let count = [1,2,3,4]
 
 
@@ -222,7 +222,7 @@ useEffect(() => {
      }
           
             // return history.push(`${id}/${sprint.id}`)
-    
+    // 
     
 
     //  const createSprint = () => {
@@ -455,6 +455,7 @@ useEffect(() => {
                   <br />
                   {project.team.length == 0 && (
                     <Button
+                     
                       onClick={hadleTeam}
                       style={{
                        
@@ -471,18 +472,10 @@ useEffect(() => {
                       return (
                         <Bold
                           onClick={hadleTeam}
-                          style={{
-                            
-                            fontSize: '16px',
-                            left:'auto',
-                            right:'60px',
-                            color:'black',
-                            transform:'translateY(-70px)',
-                            position:'absolute',
-                            display: `${project.status ? "none" : "block"}`,
-                          }}
+                          className={style.exit}
+                          style={{display: `${project.status ? "none" : "flex"}`}}
                         >
-                          Выйти из команды проекта
+                          <p>Выйти </p><p className={style.exit_in}>из команды проекта</p>
                         </Bold>
                       );
                     } else if (project.team.length - 1 == ind) {
@@ -490,9 +483,8 @@ useEffect(() => {
                         <Button
                           fontSize={'20px'}
                           onClick={hadleTeam}
+                          className={style.team__button}
                           style={{
-                            width: '442px',
-                            height: '202px',
                             backgroundColor:'white',
                             color:'black',
                             display: `${project.status ? "none" : "block"}`,

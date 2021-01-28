@@ -53,7 +53,7 @@ export const ItemHead = styled.div`
 
 export const BackendMsg = styled.div`
 z-index:10001;
-position: absolute;
+position: fixed;
 top:2vh;
 left:20vw;
 width:60vw;

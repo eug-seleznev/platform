@@ -1,5 +1,5 @@
 
-import { ADD_SPRINT, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT } from '../types'
+import { ADD_SPRINT, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL,CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT } from '../types'
 
 
 
@@ -16,8 +16,9 @@ const initialState = {
     error: '',
     reload: false,
     trick: false,
-    sprintLoad: false
-    
+    sprintLoad: false,
+    msg:'',
+    sprint_msg:'',
 }
 
 export default function(state = initialState, action) {
@@ -41,6 +42,18 @@ export default function(state = initialState, action) {
 
                     error: ''
                 }
+                case CREATE_PROJECT:
+                return {
+                    ...state,
+                    project: payload,
+                    loadedAllProj: false,
+                    loadProject: true,
+                    sprint_load: false,
+                    sprintLoad: false,
+                    reload: false,
+                    error: '',
+                    msg: payload.msg
+                }
                 case EDIT_PROJECT:
                     return {
                         ...state,
@@ -55,7 +68,7 @@ export default function(state = initialState, action) {
                     loadProject: true,
                     sprint_load: false,
                     sprintLoad: false,
-
+                    reload: false,
                     error: ''
                 }
             case ADD_SPRINT:
@@ -63,9 +76,10 @@ export default function(state = initialState, action) {
                     ...state,
                     sprint: payload,
                     sprint_load: true,
-
+                    loadProject: false,
                     reload: true,
-                    error: ''
+                    error: '',
+                    sprint_msg:payload.msg,
                 }
             case ADD_INFO_SPRINT: 
                 return {

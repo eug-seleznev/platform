@@ -39,7 +39,7 @@ export const login = (formData) => async dispatch  => {
 
         }
       catch (err) {
-        const errors = err.response.data.errors;
+        const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
             type: AUTH_ERROR,
@@ -65,7 +65,7 @@ export const register = ({formData}) => async dispatch  => {
         
       }
       catch (err) {
-        const errors = err.response.data.errors;
+        const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
             type: AUTH_ERROR,
@@ -99,7 +99,7 @@ export const changeData = (formData) => async dispatch  => {
 
     }
     catch (err) {
-      const errors = err.response.data.errors;
+      const errors = err.response.data.err;
       errors.map(error => {
          return dispatch({
           type: AUTH_ERROR,
@@ -137,7 +137,7 @@ export const changeAvatar = (file) => async dispatch  => {
 
     }
     catch (err) {
-      const errors = err.response.data.errors;
+      const errors = err.response.data.err;
       errors.map(error => {
          return dispatch({
           type: AUTH_ERROR,
@@ -160,7 +160,7 @@ export const addToChosen = (id) => async dispatch  => {
       })
       }
     catch (err) {
-      const errors = err.response.data.errors;
+      const errors = err.response.data.err;
       errors.map(error => {
          return dispatch({
           type: SPRINT_ERROR,

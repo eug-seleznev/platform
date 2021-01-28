@@ -57,7 +57,7 @@ const SprintDescription = ({sprintname, index, dateOpen,taskcomplite, alltasks, 
 					</div>
 				</div>
 				<div>
-					<div className={style.card__date2}> <Light size='16'>Дней до дедлайна: {diff.toString().slice(0,1)}</Light></div>
+					<div className={style.card__date2}> <Light size='16'>Дней до дедлайна: {diff.toString().slice(0,2)}</Light></div>
 					<div className={style.card__tasks}> 
 						<Regular>Задачи</Regular> 
 						<div className={style.card__tasks}> 

@@ -17,7 +17,7 @@ export const newPropose = (formData) => async dispatch  => {
 
         }
       catch (err) {
-        const errors = err.response.data.errors;
+        const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
             type: PROPOSE_FAIL,
@@ -43,7 +43,7 @@ export const likedProposes = () => async dispatch => {
         })
     }
     catch (err) {
-        const errors = err.response.data.errors
+        const errors = err.response.data.err
         errors.map(error => {
             return dispatch({
              type: PROPOSE_FAIL,
@@ -66,7 +66,7 @@ export const dateProposes = () => async dispatch => {
         })
     }
     catch (err) {
-        const errors = err.response.data.errors
+        const errors = err.response.data.err
         errors.map(error => {
             return dispatch({
              type: PROPOSE_FAIL,
@@ -89,7 +89,7 @@ export const likePropose = (id) => async dispatch => {
         })
     }
     catch (err) {
-        const errors = err.response.data.errors
+        const errors = err.response.data.err
         errors.map(error => {
             return dispatch({
              type: PROPOSE_FAIL,
@@ -112,7 +112,7 @@ export const deletePropose = (id) => async dispatch => {
         })
     }
     catch (err) {
-        const errors = err.response.data.errors
+        const errors = err.response.data.err
         errors.map(error => {
             return dispatch({
              type: PROPOSE_FAIL,

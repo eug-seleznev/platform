@@ -15,7 +15,7 @@ const Admin = ({closeWindow}) => {
         
         problemname: '',   //title
         text: '',     //about problem
-        emergency: '', 
+        emergency: 0, 
         pcpass: '', // password,
 
       
@@ -35,7 +35,11 @@ const Admin = ({closeWindow}) => {
         console.log (e.target.value)
         setFormData({ ...formData, [e.target.name]: e.target.value });
      }
-     
+     const onOptionChange = e => {
+        e.preventDefault(); 
+        console.log(e.target.value)
+        setFormData({ ...formData, emergency: e.target.value })
+     }
 
 
      const onSubmit = async e => {
@@ -46,7 +50,7 @@ const Admin = ({closeWindow}) => {
         ...formData,
             problemname: '',   //title
             text: '',     //about problem
-            emergency: '', 
+            emergency: 0, 
             pcpass: '',
        })
        
@@ -102,13 +106,13 @@ const Admin = ({closeWindow}) => {
                             <Thin className={style.small__title2}>Срочность (опционально)</Thin>
                             <div className={style.week} >
                                     
-                                    <select name="date"onChange={e => onChange(e)} className={style.select} >
-                                        <option selected>нет</option>
-                                        <option>Не срочно</option>
-                                        <option>Средней срочности</option>
-                                        <option>Очень срочно</option>
-                                        <option>Вот прям горит, жесть вообще</option>
-                                        <option>Все очень плохо, все сломалось</option>
+                                    <select name="emergency" onChange={e =>  onOptionChange(e)} className={style.select} >
+                                        <option value='0' selected>нет</option>
+                                        <option value='1'>Не срочно</option>
+                                        <option value='2'>Средней срочности</option>
+                                        <option value='3'>Очень срочно</option>
+                                        <option value='4'>Вот прям горит, жесть вообще</option>
+                                        <option value='5'>Все очень плохо, все сломалось</option>
                                     </select>
                                 </div>
                         </div>

@@ -28,6 +28,7 @@ export const Button =  styled.button`
 
 `
 export const CancelButton =  styled.div`
+  text-align: center;
   display: inline-block;
   border: 0.4px solid #B7B7B7;
   border-radius: 13px;

@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { ALL_NEWS, GET_NEWS, DELETE_NEWS, UPDATE_NEWS, NEWS_FAIL, } from "../types";
+import { ALL_NEWS, GET_NEWS,CREATE_NEWS, DELETE_NEWS, UPDATE_NEWS, NEWS_FAIL, } from "../types";
 
 
 export const createNews = (formData) => async dispatch  => {
@@ -8,13 +8,13 @@ export const createNews = (formData) => async dispatch  => {
         const res = await innerBackend.post('/news', formData)
         console.log('creating news')
         dispatch({
-            type: GET_NEWS,
+            type: CREATE_NEWS,
             payload: res.data
         })
 
         }
       catch (err) {
-        const errors = err.response.data.errors;
+        const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
             type: NEWS_FAIL,
@@ -41,7 +41,7 @@ export const allNews = () => async dispatch  => {
 
         }
       catch (err) {
-        const errors = err.response.data.errors;
+        const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
             type: NEWS_FAIL,
@@ -65,7 +65,7 @@ export const getNews = (id) => async dispatch  => {
 
         }
       catch (err) {
-        const errors = err.response.data.errors;
+        const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
             type: NEWS_FAIL,
@@ -89,7 +89,7 @@ export const deleteNews = (id) => async dispatch  => {
 
         }
       catch (err) {
-        const errors = err.response.data.errors;
+        const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
             type: NEWS_FAIL,
@@ -113,7 +113,7 @@ export const updateNews = ({id,data}) => async dispatch  => {
 
         }
       catch (err) {
-        const errors = err.response.data.errors;
+        const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
             type: NEWS_FAIL,

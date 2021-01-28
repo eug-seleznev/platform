@@ -9,7 +9,10 @@ height: 100%;
 padding-top: 200px;
 padding-bottom: 200px;
 background-color: #ECECEC;
-
+@media (max-width:700px){
+    padding-left:0;
+    padding-top: 110px;
+}
 
 `
 
