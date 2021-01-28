@@ -1,4 +1,35 @@
-.cardsContainer{
+.openForm{
+    height: 110px;
     display: grid;
-    row-gap: 30px;
+    place-content: center;
+}
+.officeContainer{
+    display: grid;
+    grid-template-areas:
+    'title .'
+    'filters .'
+    'cards form'
+    ;
+    grid-template-rows: max-content max-content auto;
+    grid-template-columns: 1.3fr 1fr .15fr;
+    column-gap: 180px;
+}
+
+
+.title{
+    grid-area: title;
+    margin-left: 60px;
+}
+.filters{
+    grid-area: filters;
+    margin-left: 60px;
+    
+}
+.cardsContainer{
+    grid-area: cards;
+    display: grid;
+    row-gap: 18px;
+}
+.formArea{
+    grid-area: form;
 }

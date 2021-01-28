@@ -53,7 +53,23 @@ export const ButtonText =  styled.button`
 
 `
 
+export const FilterButton = styled.div`
+display: inline-block;
+outline:none;
+filter:none;
+background-color:none;
+border:none;
+margin: 20px;
+cursor: pointer;
+user-select: none;
 
+&::after{
+  content: '\u25BC';
+  opacity: ${props=> props.arrow? 1 : 0 };
+  display: inline-block;
+  transform: ${props=> props.reverse?'rotate(180deg)':'rotate(0deg)'};
+}
+`
 
 
 export const LoginButton =  styled.button` 
