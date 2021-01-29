@@ -182,18 +182,25 @@
 
 }
 @media (max-width:700px){
+	.sprintdescr__cont {
+		width: 86vw
+	}
 	.team__button {
-		width:100vw
+		width: 100%;
 	
 	}
 	.card {
-	
-		width: 89vw;
+		
+		width: 100%;
+		
+		margin-right:0;
 		
 	}
 	.special__button {
-	
-		width: 100vw;
+		border-radius: 15px;
+		
+		height: 290px;
+		margin-top: 25px;
 		
 	}
 	.title__options {
@@ -205,7 +212,7 @@
 			justify-content: space-between;
 			align-items: flex-end;
 			text-align: left;
-			width: 100vw;
+
 			border-bottom: 1px solid black;
 			font-size: 24px;
 			padding-bottom: 10px;
@@ -220,7 +227,13 @@
 		border-radius: 15px;
 		height: 180px;
 		margin:0;
-		width: 100vw
+		width: 100%;
+	}
+	.calend__title{
+		position: absolute;
+		margin-left:0px;
+		margin-right: 0;
+		margin-top: -40px;
 	}
 	.exit{
 		left:auto;

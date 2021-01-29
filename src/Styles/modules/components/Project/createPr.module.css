@@ -63,9 +63,13 @@
 		border-radius: 5px;
 		height: 20px;
 	}	
+	.button{
+		width: 100%;
+		margin-bottom:30px
+	}
 	.small__title {
 		margin-top: 5px;
-		margin-bottom:5px;
+		margin-bottom:15px;
 	}
 	.input__mid{
 		width:100%

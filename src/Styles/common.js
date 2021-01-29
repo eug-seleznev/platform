@@ -2,16 +2,19 @@ import styled from 'styled-components'
 
 
 export const Container =  styled.div`
-padding-left: ${props => props.dimensions.width<600? '30' : props.dimensions.width<1700? '135': '250'}px;
-padding-right:${props => props.dimensions.width<600? '30' : props.dimensions.width<1700? '70': '70'}px;
+padding-left: ${props => props.dimensions.width<600? '0' : props.dimensions.width<1700? '135': '250'}px;
+padding-right:${props => props.dimensions.width<600? '0' : props.dimensions.width<1700? '70': '70'}px;
 width: 100%;
 height: 100%;
 padding-top: 200px;
 padding-bottom: 200px;
 background-color: #ECECEC;
 @media (max-width:700px){
-    padding-left:0;
+    width: 100vw;
+    padding-left:5px;
     padding-top: 110px;
+    padding-right:5px;
+    padding-bottom: 100px;
 }
 
 `
@@ -33,7 +36,14 @@ width: 60vw;
 margin-left:15vw;
 height: 55vh;
 background-color: white;
+@media(min-width:700px) and (max-height:720px) {
+    padding: 30px;
+    margin-top: 50px;
+    height:500px;
+        
+}
 @media(max-width:700px) {
+    padding: 30px;
     margin-top: 0vh;
     height:100vh;
     margin-left:0;
@@ -46,10 +56,14 @@ background-color: white;
 export const Card = styled.div`
 background: #FFFFFF;
 
-padding: 15px;
-padding-left:25px;
+padding: 10px;
+padding-left:20px;
 border: 1px solid #CECECE;
 border-radius: 15px;
+@media(max-width:700px) {
+    padding: 10px;
+    padding-left:10px;   
+}
 `
 
 

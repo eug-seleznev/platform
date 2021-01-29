@@ -12,9 +12,9 @@ import { Container, Card, } from "../../Styles/common";
 import { H1, H3, Light, Regular,Bold} from '../../Styles/typography'
 
 const Sprint = ({match, history}) => {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
     let {id} = match.params;
-    
+    const chosenSprints = useSelector(state => state.auth.user.sprints)
     let back = match.url;
     const sprint = useSelector(state => state.projects.sprint)
     const taskArr = useSelector(state => state.projects.sprint)
@@ -30,6 +30,7 @@ const Sprint = ({match, history}) => {
     const [dateOpenIn, setDateOpenIn] = useState (0)
     const [duration, setDuration] = useState (7)
     const [sprintId,setSprintId] = useState (0)
+    const [status, setStatus] = useState (false)
     const { register, control, handleSubmit, reset, watch } = useForm({
         defaultValues: {
             tasks: [{ taskTitle: "задача", workVolume: "5", taskState: false }]
@@ -63,7 +64,9 @@ const Sprint = ({match, history}) => {
 			setActualClose (noData)
 		}	
     }
-		
+    {chosenSprints.filter(sprint => sprint._id===id).map(()=>{
+      setStatus(true)
+    })}
 	},[loading])
   useEffect (()=> {
      
@@ -113,7 +116,7 @@ const Sprint = ({match, history}) => {
 
  
     const chosenSprint = (e) => {
-
+      setStatus(!status)
       dispatch(addToChosen(id));
 
      
@@ -265,7 +268,7 @@ const Sprint = ({match, history}) => {
                   </div>
                 </form>
                 <Button fontSize={'16px'} onClick={()=>handleBack()} style={{marginTop:'70px', marginBottom:'10px'}}grey>Вернуться к проекту</Button>
-                <Button fontSize={'16px'} style={{marginLeft:'50px', marginBottom:'10px'}} onClick={chosenSprint}>Добавить спринт в избранное</Button>
+                <Button fontSize={'16px'} style={{marginLeft:'50px', marginBottom:'10px'}} onClick={chosenSprint}>{!status? 'Добавить в избранное': 'Убрать из избранного'}</Button>
                 <Button fontSize={'16px'} style={{marginLeft:'50px', marginBottom:'10px'}} onClick={handleSprint}>Завершить спринт</Button>
                 
                         

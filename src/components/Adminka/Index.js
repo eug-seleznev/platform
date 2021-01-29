@@ -79,14 +79,14 @@ const Admin = ({closeWindow}) => {
 
                 
                     
-                    <Thin className={style.small__title}>Описание проблемы</Thin>
+                    <Thin className={style.small__title2}>Описание проблемы</Thin>
                     <textarea 
                         className={style.input__big}
                         name='text'
                         value={text}
                         onChange={e => onChange(e)}/>
                     <div className={style.row}>
-                        <div>
+                        <div className={style.small__input}>
                             <Thin className={style.small__title2}>Пароль от компьютера (опционально)</Thin>
                             <input 
                                 type='text'
@@ -95,14 +95,14 @@ const Admin = ({closeWindow}) => {
                                 value={pcpass}
                                 onChange={e => onChange(e)}/>
                         </div>
-                        <div>
+                        <div className={style.small__input}>
                             <Thin className={style.small__title2}>Скриншот проблемы (опционально)</Thin>
                             <input 
                                 type='file'
                                 placeholder='скриншот проблемы (опционально)'
                                 onChange={handleFile}/>
                         </div>
-                        <div>
+                        <div className={style.small__input}>
                             <Thin className={style.small__title2}>Срочность (опционально)</Thin>
                             <div className={style.week} >
                                     
@@ -119,8 +119,8 @@ const Admin = ({closeWindow}) => {
                     </div>
                 </div>
                 <div className={style.row} >
-                    <CancelButton padd={'70px'} grey onClick={closeWindow}>Отмена</CancelButton>
-                    <Button className='alltik__6' fontSize={'16px'} type="submit" value="Submit"> Отправить проблему</Button>
+                    <CancelButton padd={'70px'} className={style.button} grey onClick={closeWindow}>Отмена</CancelButton>
+                    <Button className={style.button} fontSize={'16px'} type="submit" value="Submit"> Отправить проблему</Button>
                 </div>
             </form>
            

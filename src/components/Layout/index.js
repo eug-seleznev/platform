@@ -27,7 +27,7 @@ const Layout = ({dimensions, histCurrent}) => {
     const [currentTitle, setCurrentTitle] = useState (false)
     const [color, setColor] = useState (false)
     const [status, setStatus] = useState (false)
-    const [selector, setSelector] = useState (false)
+
    
    
 
@@ -35,14 +35,11 @@ const Layout = ({dimensions, histCurrent}) => {
         if(errorAuth !=""){
             setError(errorAuth)
         }
-        
     },[errorAuth])
     useEffect(()=>{
         if(msgTask !=""&& msgTask !=undefined){
             setMsg(msgTask.msg)
-            
         }
-      
     },[msgTask])
     useEffect(()=>{
         if(msgAuth !=""&& msgAuth !=undefined){
@@ -60,7 +57,6 @@ const Layout = ({dimensions, histCurrent}) => {
             setMsg(createSprMsg)
         }
     },[createSprMsg])
-    
     useEffect(()=>{
         if(errorNews !=""&&errorNews !=undefined){
             setError(errorNews)
@@ -76,7 +72,6 @@ const Layout = ({dimensions, histCurrent}) => {
             setMsg(msgNews)
         }
     },[msgNews])
-   
     useEffect(()=>{
         if(errorProject !=""&&errorProject !=undefined){
             setError(errorProject)
@@ -98,9 +93,8 @@ const Layout = ({dimensions, histCurrent}) => {
             setMsgTiming(true)
                 setTimeout(()=>{
                     setMsgTiming(false)
-                },3500)
+                },4500)
         }
-     
     },[error])
     useEffect(()=>{
         if(msg!=''){
@@ -110,7 +104,6 @@ const Layout = ({dimensions, histCurrent}) => {
                     setMsgTiming(false)
                 },3500)
         }
-     
     },[msg])
     const createProj =()=>{
    
@@ -134,7 +127,7 @@ const Layout = ({dimensions, histCurrent}) => {
     return <div style={{zIndex: '9999'}}>
         <Header createProj={createProj} createTicket={createTicket} createNews={createNews} dimensions={dimensions} />
         <Sidebar dimensions={dimensions} />
-        <BackendMsg color={color} style={{opacity:`${msgTiming?1:0}`, transition:'500ms ease all'}}>
+        <BackendMsg color={color} style={{opacity:`${msgTiming?1:0}`,zIndex:`${msgTiming?10000:-1000}`, transition:'500ms ease all'}}>
             {color==='red'?error:color==='green'?msg:''}
          
       </BackendMsg>

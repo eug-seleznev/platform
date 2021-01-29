@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux"
 import { Card } from "../../Styles/common"
 import { H1, H3} from '../../Styles/typography'
+import style from '../../Styles/modules/components/Project/allproj.module.css'
 const { Container, Title,} = require("../../Styles/common")
 const { Table, Tr, Td } = require("../../Styles/tables")
 
@@ -18,21 +19,23 @@ const MyProjects = ({history}) => {
             {!projects ? <p> проектов нет  </p>: (
 
             <Table>
-                <Tr columns='1fr 1fr 1fr 1fr' top='top'> 
-                <Td>Название</Td>
-                <Td>Дата начала</Td>
-                <Td>Дедлайн</Td>
-                <Td>Статус</Td>
+                <Tr className={style.tr} top='top'> 
+                    <Td>Название</Td>
+                    <Td className={style.turn__off}>Дата начала</Td>
+                    <Td>Дедлайн</Td>
+                    <Td className={style.turn__off}>Статус</Td>
+                    <Td>Спринты</Td>
                 </Tr>
           
                 {projects.map((project,index) => {
                     return(  
-                    <Tr columns='1fr 1fr 1fr 1fr' key={index} onClick={() => history.replace(`/projects/${project.crypt}`)} title="Открыть проект">
+                    <Tr className={style.tr} key={index} onClick={() => history.replace(`/projects/${project.crypt}`)} title="Открыть проект">
                     
                         <Td>{project.title}</Td>
-                        <Td>{project.dateStart.slice(0, 10)}</Td>
+                        <Td className={style.turn__off}>{project.dateStart.slice(0, 10)}</Td>
                         <Td>{project.dateFinish!==undefined?project.dateFinish.slice(0, 10):'нет'}</Td>
-                        <Td>{project.status ? <p>Завершен</p>:<p>В работе</p>}</Td>
+                        <Td className={style.turn__off}>{project.status ? <p>Завершен</p>:<p>В работе</p>}</Td>
+                        <Td>{project.sprints.filter(sprint => sprint.status).length}/{project.sprints.length}</Td>
                     </Tr>
                     )
                 })}
