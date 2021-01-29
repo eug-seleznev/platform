@@ -130,7 +130,7 @@ export default function(state = initialState, action) {
                 case FINISH_PROJECT:
                     return {
                         ...state,
-                        msg: payload,
+                        msg: payload.msg,
                         loadedAllProj: false,
                     }
             case FINISH_SPRINT:
@@ -167,7 +167,7 @@ export default function(state = initialState, action) {
             case DELETE_PROJECT: 
                 return {
                     ...state,
-                    msg: payload
+                    msg: payload.msg
                 }
 
 
