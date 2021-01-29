@@ -11,13 +11,13 @@ import { useDispatch, useSelector } from "react-redux"
 import { allTickets } from "../../redux/actions/tikets";
 import { allProjects } from '../../redux/actions/projects';
 
-
+import style from '../../Styles/modules/components/Project/allproj.module.css'
 import { loadUser } from '../../redux/actions/auth';
 // import { allUsers } from "../../redux/actions/user";
 import { Table, Tr, Td } from '../../Styles/tables';
 import { Container, Card, } from '../../Styles/common'
 import { H1, H3} from '../../Styles/typography'
-
+import {useState} from 'react'
 
 
 
@@ -28,11 +28,11 @@ const Projects = ({history}) => {
     const loaded = useSelector(state => state.projects.loadedAllProj)
     const projects = useSelector(state => state.projects.projects)
 
-
-    useEffect(() => {
-        
-        
-    }, [])
+    const [dimensions, setDimensions] = useState({
+        height: window.innerHeight,
+        width: window.innerWidth,
+      })
+    
     useEffect (()=>{
         if (!loaded){
            dispatch(allProjects()) 
@@ -48,29 +48,29 @@ const Projects = ({history}) => {
 <Card>
             <H1> Проекты в работе</H1>
                     <p> количество проектов: {projects.length} </p>
-                    <Table>
+                    <Table >
   
-    <Tr columns='1fr 1fr 1fr 1fr 1fr' top='top'>
+    <Tr className={style.tr} top='top'>
  
       <Td>Название</Td>
-      <Td>Дата начала</Td>
+      <Td className={style.turn__off}>Дата начала</Td>
       <Td>Дедлайн</Td>
-      <Td>Статус</Td>
-      <Td>Спринты</Td>
+      <Td className={style.turn__off}>Статус</Td>
+      <Td >Спринты</Td>
 
     </Tr>
    
    
        {projects.filter(project => !project.status).map((project,index) => {
            return(  
-        <Tr columns='1fr 1fr 1fr 1fr 1fr' key={index} onClick={() => history.replace(`/projects/${project.crypt}`)} title="Открыть проект">
-           
-            <Td>{project.title}</Td>
-            <Td>{project.dateStart.slice(0, 10)}</Td>
-            <Td>{project.dateFinish!==undefined&&project.dateFinish!==null?project.dateFinish.slice(0, 10):'нет'}</Td>
-            <Td>{project.status ? <p>Завершен</p>:<p>В работе</p>}</Td>
-            <Td>{project.sprints.filter(sprint => sprint.status).length}/{project.sprints.length}</Td>
-        </Tr>
+            <Tr className={style.tr}key={index} onClick={() => history.replace(`/projects/${project.crypt}`)} title="Открыть проект">
+            
+                <Td>{project.title}</Td>
+                <Td className={style.turn__off}>{project.dateStart.slice(0, 10)}</Td>
+                <Td>{project.dateFinish!==undefined&&project.dateFinish!==null?project.dateFinish.slice(0, 10):'нет'}</Td>
+                <Td className={style.turn__off}>{project.status ? <p>Завершен</p>:<p>В работе</p>}</Td>
+                <Td>{project.sprints.filter(sprint => sprint.status).length}/{project.sprints.length}</Td>
+            </Tr>
         )
        })}
      
@@ -87,23 +87,23 @@ const Projects = ({history}) => {
 
 <Table>
   
-    <Tr columns='1fr 1fr 1fr 1fr 1fr' top='top'>
+    <Tr className={style.tr} top='top'>
         
       <Td>Название</Td>
-      <Td>Дата начала</Td>
+      <Td className={style.turn__off}>Дата начала</Td>
       <Td>Дедлайн</Td>
-      <Td>Статус</Td>
+      <Td className={style.turn__off}>Статус</Td>
       <Td>Спринты</Td>
     </Tr>
  
        {projects.filter(project => project.status).map((project,index) => {
            return(  
-        <Tr columns='1fr 1fr 1fr 1fr 1fr' key={index} onClick={() => history.replace(`/projects/${project.crypt}`)} title="Открыть проект">
+        <Tr className={style.tr} key={index} onClick={() => history.replace(`/projects/${project.crypt}`)} title="Открыть проект">
          
             <Td>{project.title}</Td>
-            <Td>{project.dateStart.slice(0, 10)}</Td>
-            <Td>{project.dateFinish!==undefined?project.dateFinish.slice(0, 10):'нет'}</Td>
-            <Td>{project.status ? <p>Завершен</p>:<p>В работе</p>}</Td>
+            <Td className={style.turn__off}>{project.dateStart.slice(0, 10)}</Td>
+            <Td>{project.dateFinish!==undefined&&project.dateFinish!==null?project.dateFinish.slice(0, 10):'нет'}</Td>
+            <Td className={style.turn__off}>{project.status ? <p>Завершен</p>:<p>В работе</p>}</Td>
             <Td>{project.sprints.filter(sprint => sprint.status).length}/{project.sprints.length}</Td>
         </Tr>
         )
