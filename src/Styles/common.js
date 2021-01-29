@@ -38,6 +38,15 @@ background-color: #ECECEC;
 }
 @media (max-width:1000px){
   
+    padding-left:25vw;
+    padding-top: 15px;
+    padding-right:25vw;
+    padding-bottom: 15px;
+
+    background-color: #3F496C;
+}
+@media (max-width:500px){
+  
     padding-left:10px;
     padding-top: 15px;
     padding-right:10px;
