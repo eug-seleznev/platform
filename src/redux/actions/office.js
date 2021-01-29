@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES, DATE_PROPOSES, LIKE_PROPOSE, DELETE_PROPOSE } from "../types";
+import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES, DATE_PROPOSES, LIKE_PROPOSE, DELETE_PROPOSE, IN_WORK } from "../types";
 
 
 
@@ -8,8 +8,11 @@ import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES, DATE_PROPOSES, LIKE_PROPOSE,
 
 export const newPropose = (formData) => async dispatch  => {
     try {
+        console.log(formData)
 
         const res = await innerBackend.post('/props', formData)
+console.log(formData)
+
         dispatch({
             type: NEW_PROPOSE,
             payload: res.data
@@ -17,7 +20,7 @@ export const newPropose = (formData) => async dispatch  => {
 
         }
       catch (err) {
-        const errors = err.response.data.errors;
+        const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
             type: PROPOSE_FAIL,
@@ -43,7 +46,7 @@ export const likedProposes = () => async dispatch => {
         })
     }
     catch (err) {
-        const errors = err.response.data.errors
+        const errors = err.response.data.err
         errors.map(error => {
             return dispatch({
              type: PROPOSE_FAIL,
@@ -66,7 +69,7 @@ export const dateProposes = () => async dispatch => {
         })
     }
     catch (err) {
-        const errors = err.response.data.errors
+        const errors = err.response.data.err
         errors.map(error => {
             return dispatch({
              type: PROPOSE_FAIL,
@@ -89,6 +92,30 @@ export const likePropose = (id) => async dispatch => {
         })
     }
     catch (err) {
+        const errors = err.response.data.err
+        errors.map(error => {
+            return dispatch({
+             type: PROPOSE_FAIL,
+             payload: error.msg
+         })
+         })            
+       
+    }
+
+}
+
+
+export const inWork = (id) => async dispatch => {
+
+    try {
+        
+        const res = await innerBackend.put(`/props/sts/${id}`)
+        dispatch({
+            type: IN_WORK,
+            payload: res.data
+        })
+    }
+    catch (err) {
         const errors = err.response.data.errors
         errors.map(error => {
             return dispatch({
@@ -101,6 +128,7 @@ export const likePropose = (id) => async dispatch => {
 
 }
 
+
 export const deletePropose = (id) => async dispatch => {
 
     try {
@@ -112,7 +140,7 @@ export const deletePropose = (id) => async dispatch => {
         })
     }
     catch (err) {
-        const errors = err.response.data.errors
+        const errors = err.response.data.err
         errors.map(error => {
             return dispatch({
              type: PROPOSE_FAIL,

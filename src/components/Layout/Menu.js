@@ -78,15 +78,15 @@ const exit = () => {
                         Мой профиль
                     </StyledLink>
 
-                    <StyledLink to='/projects/my'>
+                    <StyledLink to='/myprojects'>
                         Мои проекты
                     </StyledLink>
 
-                    <StyledLink to='/projects/my'>
+                    <StyledLink to='/myprojects'>
                         Отдел
                     </StyledLink>
 
-                    <StyledLink to='/projects/my'>
+                    <StyledLink to='/myprojects'>
                         Новости
                     </StyledLink>
 

@@ -9,7 +9,8 @@ const initialState = {
     token: false,
     msg:'',
     error: '',
-    loaded: false
+    loaded: false,
+    chosenSprint: false
 }
 
 export default function(state = initialState, action) {
@@ -61,8 +62,8 @@ export default function(state = initialState, action) {
                 
                 return {
                         ...state,
-                        
-                        msg: payload
+                        chosenSprint:!state.chosenSprint,
+                        msg: payload.msg
                     }
             case AUTH_ERROR:
                 return {

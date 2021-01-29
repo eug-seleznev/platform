@@ -22,7 +22,9 @@ export const USER_ERR = 'get_all_users_error'
 //PROJECTS
 export const EDIT_PROJECT = 'edit_project';
 export const ALL_PROJECTS = 'all_projects';
+export const CREATE_PROJECT = 'create_project';
 export const GET_PROJECT = 'get_project';
+
 export const CREATE_SPRINT = 'create_sprint';
 export const UPDATE_PROJECT = 'project_updated';
 export const PROJECT_ID = 'project_updated';
@@ -44,7 +46,7 @@ export const JOIN_TEAM = 'join_to_team'
 export const CREATE_FAIL= 'error_on_project_create';
 
 //news
-
+export const CREATE_NEWS = 'create_news';
 export const ALL_NEWS = 'all_news'
 export const GET_NEWS = 'get_news'
 export const DELETE_NEWS = 'delete_news'
@@ -71,7 +73,7 @@ export const DATE_PROPOSES = 'date_proposes'
 export const LIKE_PROPOSE = 'like_propose'
 export const DELETE_PROPOSE = 'delete_propose'
 export const PROPOSE_FAIL = 'propose_fail'
-
+export const IN_WORK = 'in_work'
 
 
 

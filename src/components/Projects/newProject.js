@@ -144,9 +144,9 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
               <div className={style.row}>
                 <div className={style.input__long}>
                   <Thin className={style.title}>Описание</Thin>
-                  <input
+                  <textarea
                     className={style.input__long}
-                    style={{height:'85px'}}
+
                       type="text"
                       name="about"
                       value={about}
@@ -156,8 +156,8 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
               </div>
               </div>
               <div className={style.buttons}>
-                <CancelButton grey padd={'70px'} onClick={closeWindow}> Отмена</CancelButton>
-                <Button fontSize={'16px'} padd={'20px'} type="submit"> Создать новый проект</Button>
+                <CancelButton grey padd={'70px'} style={{marginTop:'10px'}} onClick={closeWindow}> Отмена</CancelButton>
+                <Button fontSize={'16px'}style={{marginTop:'10px'}} padd={'20px'} type="submit"> Создать новый проект</Button>
               </div>
 
      

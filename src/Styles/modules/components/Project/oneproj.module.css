@@ -140,6 +140,11 @@
 	width: 43px;
 	padding-bottom: 10px;
 }
+.contain__menu {
+	display:flex; 
+	justify-content:space-between;
+	flex-direction: row;
+}
 .weeks {
 	margin-top:25px;
 	border-top: 1px solid #929292;
@@ -157,9 +162,72 @@
 .one__week {
 	font-family: SuisseIntlLight;
 	font-size: 12px;
-	padding-top:-20px;
+	padding-top:-15px;
 	margin-top:15px;
-	width: 20px;
-	height: 20px;
+	width: 17px;
+	height: 17px;
 	background-color: grey;
+}
+.exit{
+	left:auto;
+	right:60px;
+	font-size: 16px;
+	color:black;
+	transform:translateY(-85px);
+	position:absolute
+}
+.team__button {
+	width:442px;
+	height:202px;
+
+}
+@media (max-width:700px){
+	.team__button {
+		width:100vw
+	
+	}
+	.card {
+	
+		width: 89vw;
+		
+	}
+	.special__button {
+	
+		width: 100vw;
+		
+	}
+	.title__options {
+		display: none;
+	}
+	.title {
+	
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+			text-align: left;
+			width: 100vw;
+			border-bottom: 1px solid black;
+			font-size: 24px;
+			padding-bottom: 10px;
+			margin-bottom: 10px;
+		
+	}
+	.calend {
+		padding-top:10px;
+		font-size: 16px;
+		font-family: SuisseIntlLight;
+		background-color: white;
+		border-radius: 15px;
+		height: 180px;
+		margin:0;
+		width: 100vw
+	}
+	.exit{
+		left:auto;
+		right:5px;
+		
+	}
+	.exit_in {
+		display: none;
+	}
 }

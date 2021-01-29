@@ -18,9 +18,7 @@ const MyProjects = ({history}) => {
             {!projects ? <p> проектов нет  </p>: (
 
             <Table>
-           
-                <Tr columns='1fr 1fr 1fr 1fr' top='top'>
-                    
+                <Tr columns='1fr 1fr 1fr 1fr' top='top'> 
                 <Td>Название</Td>
                 <Td>Дата начала</Td>
                 <Td>Дедлайн</Td>

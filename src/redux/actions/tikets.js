@@ -46,7 +46,7 @@ export const newTicket = ({formData, file}) => async dispatch  => {
 
         }
       catch (err) {
-        const errors = err.response.data.errors;
+        const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
             type: NEW_ERROR,
@@ -71,7 +71,7 @@ export const allTickets = () => async dispatch  => {
 
         }
       catch (err) {
-        const errors = err.response.data.errors;
+        const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
             type: NEW_ERROR,
@@ -98,7 +98,7 @@ export const getTicket = (id) => async dispatch  => {
 
         }
       catch (err) {
-        const errors = err.response.data.errors;
+        const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
             type: NEW_ERROR,

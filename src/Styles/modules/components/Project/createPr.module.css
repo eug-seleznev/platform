@@ -53,3 +53,39 @@
 	margin-top: auto;
 	
 } 
+@media(max-width:700px) {
+	.buttons {
+	flex-direction: column;
+	} 
+	.form textarea{
+		width:95%;
+		border: 0.6px solid #717171;
+		border-radius: 5px;
+		height: 20px;
+	}	
+	.small__title {
+		margin-top: 5px;
+		margin-bottom:5px;
+	}
+	.input__mid{
+		width:100%
+	}
+	.input__short{
+		margin-top: 5px;
+		width:50%
+	}
+	.row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 10px;
+}
+.form input{
+	width:95%;
+	border: 0.6px solid #717171;
+	border-radius: 5px;
+	height: 20px;
+}
+}

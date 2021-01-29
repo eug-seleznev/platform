@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom"
 
 
 export const Header =  styled.div`
-    position: absolute;
+    position: fixed;
     display: grid;
     grid-template-columns: 1fr max-content max-content;
     // flex-direction: row;
@@ -51,6 +51,21 @@ export const ItemHead = styled.div`
 `
 
 
+export const BackendMsg = styled.div`
+z-index:10001;
+position: fixed;
+top:2vh;
+left:20vw;
+width:60vw;
+background-color:${props => props.color=='green'?'rgba(0,255,0,0.1)':props => props.color=='red'?'rgba(255,0,0,0.1)':''};
+border: solid ${props => props.color} 1px;
+font-family: SuisseIntlThin;
+height: 30px;
+fontSize: 18px;
+border-radius: 10px;
+padding-top:10px;
+padding-left:10px;
+`
 
 export const MenuHead = styled.div`
 

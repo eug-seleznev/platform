@@ -1,4 +1,4 @@
-import { ALL_NEWS, GET_NEWS, DELETE_NEWS, UPDATE_NEWS, NEWS_FAIL, } from "../types";
+import { ALL_NEWS,CREATE_NEWS, GET_NEWS, DELETE_NEWS, UPDATE_NEWS, NEWS_FAIL, } from "../types";
 
 
 
@@ -6,7 +6,7 @@ const initialState = {
     news: null,
     getNews: null,
     error: '',
-   
+    msg:'',
     loaded: false,
     
 }
@@ -29,7 +29,14 @@ export default function(state = initialState, action) {
                     // loadNews: true,
                     error: ''
                 }
-
+                case CREATE_NEWS:
+                    return {
+                        ...state,
+                        getNews: payload,
+                        // loadNews: true,
+                        msg:payload.msg,
+                        error: ''
+                    }
             case GET_NEWS:
                 return {
                     ...state,

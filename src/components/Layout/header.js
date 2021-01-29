@@ -12,6 +12,7 @@ import MenuMobile from './menuMobile'
 const HeaderL = ({dimensions, createProj, createNews, createTicket}) => {
     const loaded = useSelector(state => state.auth.loaded)
     const user = useSelector(state => state.auth.user)
+   
     const [open, setOpen] = useState({
         menu: false,
         menuProfile: false,

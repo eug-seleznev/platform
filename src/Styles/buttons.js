@@ -28,6 +28,7 @@ export const Button =  styled.button`
 
 `
 export const CancelButton =  styled.div`
+  text-align: center;
   display: inline-block;
   border: 0.4px solid #B7B7B7;
   border-radius: 13px;
@@ -78,15 +79,52 @@ export const ButtonText =  styled.button`
 
 `
 
+export const FilterButton = styled.div`
+display: inline-block;
+outline:none;
+filter:none;
+background-color:none;
+border:none;
+margin: 20px;
+cursor: pointer;
+user-select: none;
 
+&::after{
+  content: '\u25BC';
+  opacity: ${props=> props.arrow? 1 : 0 };
+  display: inline-block;
+  transform: ${props=> props.reverse?'rotate(180deg)':'rotate(0deg)'};
+}
+`
 
 
 export const LoginButton =  styled.button` 
   outline: none;
-  display: inline-block;
-  border-radius: 0px;
-  padding: 10px ;
-  border: 0px solid black;
-  background-color: white;
+
+  display: grid;
+  grid-template-columns: minmax(170px, max-content);
+  border: 1px solid white;
+  border-radius: 13px;
+  font-size: 16px;
+  font-family: SuisseIntlSemibold;
+  
+  
+  
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 20px;
+  padding-right: 20px;
+ 
+  outline: none;
+  text-decoration: none;
+  color: ${props => props.color};
+  background-color: ${props => props.bgColor};
+  ;
+
+  &:hover{
+  // text-decoration: underline;
+  background-color: black;
+
+}
 
 `

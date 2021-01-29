@@ -18,7 +18,7 @@ export const allUsers = () => async dispatch  => {
 
       }
       catch (err) {
-        const errors = err.response.data.errors;
+        const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
             type: USER_ERR,
@@ -41,7 +41,7 @@ export const getUser = (id) => async dispatch  => {
 
     }
     catch (err) {
-      const errors = err.response.data.errors;
+      const errors = err.response.data.err;
       errors.map(error => {
          return dispatch({
           type: USER_ERR,
@@ -74,7 +74,7 @@ export const userPermissions = (perm, id) => async dispatch  => {
 
     }
     catch (err) {
-      const errors = err.response.data.errors;
+      const errors = err.response.data.err;
       errors.map(error => {
          return dispatch({
           type: USER_ERR,

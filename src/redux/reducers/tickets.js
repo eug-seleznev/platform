@@ -8,8 +8,8 @@ const initialState = {
     ticket: null,
     ticketLoad: false,
     error: '',
-    loaded: false
-    
+    loaded: false,
+    msg: '',
 }
 
 export default function(state = initialState, action) {
@@ -21,7 +21,7 @@ export default function(state = initialState, action) {
         case NEW_TICKET:
             return {
                 ...state,
-                error: ''
+                msg: payload.msg,
                 
                 
             }
