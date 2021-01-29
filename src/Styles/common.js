@@ -2,13 +2,24 @@ import styled from 'styled-components'
 
 
 export const Container =  styled.div`
-padding-left: ${props => props.dimensions.width<600? '0' : props.dimensions.width<1700? '135': '250'}px;
-padding-right:${props => props.dimensions.width<600? '0' : props.dimensions.width<1700? '70': '70'}px;
+padding-left:  250px;
+padding-right:  70px;
 width: 100%;
 height: 100%;
 padding-top: 200px;
 padding-bottom: 200px;
 background-color: #ECECEC;
+
+@media (max-width:1700px){
+    width: 100vw;
+    padding-left:135px;
+    padding-top: 110px;
+    padding-right:70px;
+    padding-bottom: 100px;
+}
+
+
+
 @media (max-width:700px){
     width: 100vw;
     padding-left:5px;

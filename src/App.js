@@ -49,10 +49,10 @@ const App = () => {
   const [load, setLoad] = useState(false)
   const auth = useSelector(state => state.auth.isAuthenticated)
   const loaded = useSelector(state => state.auth.loaded)
-  const [dimensions, setDimensions] = useState({
-    height: window.innerHeight,
-    width: window.innerWidth,
-  })
+  // const [dimensions, setDimensions] = useState({
+  //   height: window.innerHeight,
+  //   width: window.innerWidth,
+  // })
 
   //chek auth token on render
   useEffect(() => {
@@ -83,18 +83,18 @@ const App = () => {
 
 
 
-  useEffect(() => {
-    const handleResize = () => {
-    setDimensions ({width: window.innerWidth, height: window.innerHeight})  
-  }
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //   setDimensions ({width: window.innerWidth, height: window.innerHeight})  
+  // }
   
-    window.addEventListener('resize', handleResize)
+  //   window.addEventListener('resize', handleResize)
   
-    return _ => {
-      window.removeEventListener('resize', handleResize)
+  //   return _ => {
+  //     window.removeEventListener('resize', handleResize)
     
-  }
-  })
+  // }
+  // })
 
 
 
@@ -106,9 +106,9 @@ const App = () => {
       </LoginContainer>
       ) : (
         <Router history={history}>
-          <Layout dimensions={dimensions} histCurrent={history} />
+          <Layout histCurrent={history} />
           <Switch>
-            <Container dimensions={dimensions}>
+            <Container >
               {/* main */}
               <Route exact path="/" component={Main} />
 
