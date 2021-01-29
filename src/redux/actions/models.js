@@ -64,6 +64,7 @@ export const Oauth = (crypt) => async (dispatch) => {
 
 export const Status = (crypt) => async (dispatch) => {
   try {
+    console.log('hello')
     const res = await Axios.get(`/up/status/p/${crypt}`, {
       baseURL: "http://192.168.0.16:7770",
       headers: {
