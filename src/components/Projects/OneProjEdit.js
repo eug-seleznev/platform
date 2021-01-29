@@ -5,7 +5,7 @@ import { newTicket } from '../../redux/actions/tikets';
 import './projects.css'
 import {Container, SmallContainer, Card, } from '../../Styles/common';
 import { Button } from '../../Styles/buttons';
-import { H1, H3} from '../../Styles/typography'
+import { H1, H3, Regular} from '../../Styles/typography'
 
 const ProjectEdit = ({history, match}) => {
 	let {id} = match.params;
@@ -74,8 +74,9 @@ const ProjectEdit = ({history, match}) => {
 		<div>
         
 		{!loadProject?<div>loading...</div>:(
-			<div>
-            <H1> Тут можно редактировать данные проекта </H1>
+			<div style={{display:'flex',justifyContent:'center'}}>
+            <div>
+            <Regular size={'20'}> Тут можно редактировать данные проекта </Regular>
             <form className='form' onSubmit={onSubmit}>
             <input 
 
@@ -130,11 +131,11 @@ const ProjectEdit = ({history, match}) => {
 
 
 
-            <Button  type="submit">Сохранить</Button>
+            <Button style={{height:'40px'}} type="submit">Сохранить</Button>
 			
-			<Button  onClick={Redirect}>Ничего не менять</Button>
+			<Button  style={{height:'40px'}} grey onClick={Redirect}>Ничего не менять</Button>
             </form>
-			
+			</div>
         </div>
 
 		)}
