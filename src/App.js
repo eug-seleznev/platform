@@ -36,7 +36,7 @@ import { createBrowserHistory } from "history";
 import MyProjects from './components/Projects/My';
 import News from './components/Superadmin/newsAdm';
 import { innerBackend, setAuthToken } from './components/utils/axios';
-import { Container } from '../src/Styles/common'
+import { Container, LoginContainer } from '../src/Styles/common'
 import Viewer from './components/Viewer';
 import Helper from './components/Viewer/helper';
 
@@ -101,7 +101,9 @@ const App = () => {
   return (
     <div className="App">
       {!auth ? (
-        <Auth />
+      <LoginContainer>
+          <Auth />
+      </LoginContainer>
       ) : (
         <Router history={history}>
           <Layout dimensions={dimensions} histCurrent={history} />

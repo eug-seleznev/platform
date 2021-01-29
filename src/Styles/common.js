@@ -18,6 +18,35 @@ background-color: #ECECEC;
 }
 
 `
+export const LoginContainer =  styled.div`
+padding-left:  250px;
+padding-right: 250px;
+width: 100%;
+height: 100%;
+padding-top: 200px;
+padding-bottom: 200px;
+background-color: #ECECEC;
+@media (max-width: 1600px){
+    padding-left:150px;
+    padding-top: 80px;
+    padding-right:150px;
+}
+@media (max-width: 1250px){
+    padding-left:50px;
+    padding-top: 80px;
+    padding-right:50px;
+}
+@media (max-width:1000px){
+  
+    padding-left:10px;
+    padding-top: 15px;
+    padding-right:10px;
+    padding-bottom: 15px;
+
+    background-color: #3F496C;
+}
+
+`
 
 export const ModalContainer = styled.div`
 z-index:10000;

@@ -27,3 +27,24 @@
     grid-area: button;
     margin-left: auto;
 }
+
+
+@media (max-width: 1000px){
+    .registerForm{
+        display: grid;
+        grid-template-areas:
+        'title'
+        'mail'
+        'rocket'
+        'button'
+        ;
+        row-gap: 24px;
+    }
+.title{
+    text-align: center;
+}
+.button{
+    margin-right: auto;
+}
+
+}
