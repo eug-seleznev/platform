@@ -15,7 +15,6 @@ const Viewer = () => {
     file: null,
   });
 
-  const [file, setFile] = useState(null);
   const [loaded, setLoad] = useState(false)
 
 
@@ -24,9 +23,8 @@ const Viewer = () => {
         setLoad(true)
     }
   }, [project.urn])
-  const handleFile = (e) => {
-    setFile(e.target.files[0]);
-  };
+
+
   const onChange = (e) => {
     e.preventDefault();
     console.log(e.target.value);

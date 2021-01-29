@@ -38,9 +38,6 @@ export const postModel = (formData) => async (dispatch) => {
 
 
 export const Oauth = (crypt) => async (dispatch) => {
-  let body = {
-    crypt: crypt
-  }
   try {
         const res = await Axios.get(`/up/tkn/p/${crypt}`,  {
           baseURL: "http://192.168.0.16:7770",
@@ -52,6 +49,31 @@ export const Oauth = (crypt) => async (dispatch) => {
       type: GET_TOKEN,
       payload: res.data
     })
+  } catch (err) {
+    const errors = err.response.data.errors;
+    errors.map((error) => {
+      return dispatch({
+        type: NEW_ERROR,
+        payload: error.msg,
+      });
+    });
+  }
+};
+
+
+
+export const Status = (crypt) => async (dispatch) => {
+  try {
+    const res = await Axios.get(`/up/status/p/${crypt}`, {
+      baseURL: "http://192.168.0.16:7770",
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+    dispatch({
+      type: GET_TOKEN,
+      payload: res.data,
+    });
   } catch (err) {
     const errors = err.response.data.errors;
     errors.map((error) => {
