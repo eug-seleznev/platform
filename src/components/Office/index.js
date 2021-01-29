@@ -62,6 +62,10 @@ const dateFIlter = () => {
         setReverse(!reverse)
     }
 }
+useEffect(()=>{
+
+},[liked, dated])
+
 
 
 useEffect(() => {
