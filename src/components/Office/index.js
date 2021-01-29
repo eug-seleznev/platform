@@ -29,7 +29,9 @@ const reverseFunc = () =>{
   } 
 
   useEffect(()=>{
-   show!=null && setShow(show.reverse()) 
+//    show!=null && setShow(show.reverse()) 
+console.log(liked, 'liked')
+console.log(revLiked, 'revLiked')
 
 
 },[reverse])
@@ -40,10 +42,14 @@ const likeFIlter = () => {
         setShow(liked)
         setFilters('по лайкам')
         console.log(show,reverse, 'function !=')
-    } else if (show==liked || show==liked.reverse()) {
-        setReverse(!reverse)
-        console.log(show,reverse, 'function ==')
+    } else if (show==liked ) {
+        setReverse(true)
+        setShow(revLiked)
+        console.log(show,reverse,revLiked, 'function ==')
 
+    } else if (show==revLiked){
+        setReverse(false)
+        setShow(liked)
     }
     
   
@@ -62,7 +68,8 @@ const dateFIlter = () => {
 useEffect(()=>{
     dispatch(likedProposes())
     dispatch(dateProposes())
-   setShow(dated)
+    setTimeout(()=>{setShow(dated)},200)
+   
 },[])
 
     return (
