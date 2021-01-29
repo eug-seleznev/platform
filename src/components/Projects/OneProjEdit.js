@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {  getProject, editProject } from '../../redux/actions/projects';
 import { newTicket } from '../../redux/actions/tikets';
 import './projects.css'
-import { SmallContainer, Card, } from '../../Styles/common';
+import {Container, SmallContainer, Card, } from '../../Styles/common';
 import { Button } from '../../Styles/buttons';
 import { H1, H3} from '../../Styles/typography'
 
@@ -71,8 +71,8 @@ const ProjectEdit = ({history, match}) => {
         }
 
     return (
-		<SmallContainer>
-            <Card>
+		<div>
+        
 		{!loadProject?<div>loading...</div>:(
 			<div>
             <H1> Тут можно редактировать данные проекта </H1>
@@ -138,8 +138,8 @@ const ProjectEdit = ({history, match}) => {
         </div>
 
 		)}
-        </Card>
-		</SmallContainer>
+      
+		</div>
     )
 }
 

@@ -284,7 +284,7 @@ useEffect(() => {
                       <div className={style.title__small}>
                       
                         <div className={style.title__options} onClick={() => history.replace(`/admin/editproj/${project.crypt}`)}>Настройки</div>
-                        <img src='/image 1.png'></img>
+                        <img onClick={() => history.replace(`/admin/editproj/${project.crypt}`)} src='/image 1.png'></img>
                       </div>
                       </Bold>
                   </div>
