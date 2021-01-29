@@ -16,7 +16,7 @@ const Office = () => {
 const dispatch = useDispatch()
 const liked = useSelector(state => state.office.likedProposes)
 const dated = useSelector(state => state.office.dateProposes)
-const revLiked = liked!=null && liked.reverse()
+let revLiked;
 const revDated = dated!=null && dated.reverse()
 const loaded = useSelector(state => state.office.loaded)
 
@@ -25,8 +25,6 @@ const loaded = useSelector(state => state.office.loaded)
     const [form, setForm] = useState(false)
     const [filters, setFilters] = useState()
 
-const reverseFunc = () =>{
-  } 
 
   useEffect(()=>{
 //    show!=null && setShow(show.reverse()) 
@@ -64,6 +62,12 @@ const dateFIlter = () => {
         setReverse(!reverse)
     }
 }
+
+
+useEffect(() => {
+ 
+}, [])
+
 
 useEffect(()=>{
     dispatch(likedProposes())
