@@ -53,7 +53,7 @@
 	margin-top: auto;
 	
 } 
-@media(max-width:1000px) {
+@media(max-width:700px) {
 	.buttons {
 	flex-direction: column;
 	} 
