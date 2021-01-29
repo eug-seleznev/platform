@@ -2,8 +2,10 @@
 
 
 .container{
-    width: 95%;
-    margin: 200px;
+    /* width: 95%; */
+    /* margin-top: 200px; */
+    /* margin-left: auto;
+    margin-right: auto; */
     
     overflow: hidden;
     border: 1px solid #707070;
@@ -66,3 +68,34 @@
     padding: 75px;
 
 }
+
+/* @media (max-width: 1700px){
+    .container{
+        margin: 8vw;
+    }
+}
+
+@media (max-width: 1700px){
+    .container{
+        margin: 6vw;
+    }
+}
+@media (max-width: 1400px){
+    .container{
+        margin: 5vw;
+    }
+}
+@media (max-width: 1400px){
+    .container{
+        margin: 3vw;
+        width: auto;
+    }
+}
+
+
+
+@media (max-width: 1000px){
+    .container{
+        margin: 5vw;
+    }
+} */
