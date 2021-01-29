@@ -100,8 +100,8 @@ useEffect(()=>{
 					onChange={e => onChange(e)}/>
 			</div>
 			<div className={style.row}>
-				<CancelButton  grey padd={'60px'}onClick={closeWindow}>Отмена</CancelButton>
-				<Button style={{height:'40px'}} padd={'30px'} fontSize={'16px'} type="submit">Создать новость</Button>
+				<CancelButton className={style.button}  grey padd={'60px'}onClick={closeWindow}>Отмена</CancelButton>
+				<Button style={{height:'40px'}} className={style.button} padd={'30px'} fontSize={'16px'} type="submit">Создать новость</Button>
 			</div>
             
         </form>

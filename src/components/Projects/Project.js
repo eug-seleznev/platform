@@ -253,8 +253,8 @@ useEffect(() => {
    
     return (
       
-      <div className={style.grid__container}>
-        <div className={style.main}>
+  
+        <div>
 
         
         {!loaded ? (
@@ -532,7 +532,7 @@ useEffect(() => {
           </div>
         )}
         </div>
-      </div>
+     
     );
 }
 

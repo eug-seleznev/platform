@@ -41,7 +41,11 @@
 }
 @media (max-width:700px){
 	.card {
-		width: 89vw;
+		width: 85vw;
+		margin-right:0;
 	}
-
+	.image_info{
+		display: flex;
+	
+	}
 }
