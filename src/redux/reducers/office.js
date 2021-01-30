@@ -1,4 +1,4 @@
-import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES, DATE_PROPOSES, LIKE_PROPOSE, DELETE_PROPOSE, IN_WORK } from "../types";
+import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES, DATE_PROPOSES, LIKE_PROPOSE, DELETE_PROPOSE, IN_WORK,REVERSE_ARR } from "../types";
 
 
 
@@ -8,6 +8,7 @@ const initialState = {
     newPropose: null,
     loaded: false,
     msg: null,
+    data: null
 
     
 }
@@ -50,8 +51,6 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     msg: payload,
-
-
                     error: ''
                 }
             case IN_WORK:
@@ -69,6 +68,11 @@ export default function(state = initialState, action) {
 
 
                     error: ''
+                }
+            case REVERSE_ARR:
+                return {
+                    ...state,
+                    data: payload
                 }
 
     case PROPOSE_FAIL:

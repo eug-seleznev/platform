@@ -80,6 +80,9 @@ export const IN_WORK = 'in_work'
 //error handler
 
 
+//REVERSE
+export const REVERSE_ARR = 'reverse';
+
 
 
 
