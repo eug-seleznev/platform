@@ -26,6 +26,7 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     newPropose: payload,
+                    reload: !state.reload,
                     
                     
                     error: ''
@@ -60,6 +61,7 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     msg:payload,
+                    reload: !state.reload,
 
                     error:''
                 }
@@ -68,6 +70,7 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     msg: payload,
+                    reload: !state.reload,
 
 
                     error: ''

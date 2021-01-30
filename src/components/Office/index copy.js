@@ -22,6 +22,7 @@ const Office = () => {
 
     //dispatch initial value
     useEffect(()=>{
+        setFilter('like')
         isInitial = true;
         dispatch(Reverse({isInitial}))
 },[])
@@ -54,9 +55,13 @@ useEffect(()=>{
 
     if (filter=='like'){
         isInitial = true
+    console.log('reloadingLikes') 
+        
         return dispatch(Reverse({isInitial}))
     } if (filter=='date'){
         isInitial = true
+    console.log('reloadingDates') 
+
         return dispatch(ReverseDate({isInitial}))
     }
 
