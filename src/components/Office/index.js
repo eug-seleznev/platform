@@ -16,64 +16,54 @@ const Office = () => {
 const dispatch = useDispatch()
 const liked = useSelector(state => state.office.likedProposes)
 const dated = useSelector(state => state.office.dateProposes)
-const revLiked = liked!=null && liked.reverse()
-const revDated = dated!=null && dated.reverse()
 const loaded = useSelector(state => state.office.loaded)
 
-    const [show, setShow] = useState(dated)
+    const [visibleArray, setVisibleArray] = useState({
+        content:dated,
+        filter:'date'
+    })
     const [reverse, setReverse] = useState(false)
     const [form, setForm] = useState(false)
-    const [filters, setFilters] = useState()
 
-const reverseFunc = () =>{
-  } 
+useEffect(()=>{
+    
+console.log(liked,'liked dont spin, please',visibleArray)
 
-  useEffect(()=>{
-//    show!=null && setShow(show.reverse()) 
-console.log(liked, 'liked')
-console.log(revLiked, 'revLiked')
+},[visibleArray])
 
-
-},[reverse])
 
 const likeFIlter = () => {
-    if(show!=liked){
+    if(visibleArray.filter!='like'){
+        setVisibleArray({filter: 'like', content: liked})
         setReverse(false)
-        setShow(liked)
-        setFilters('по лайкам')
-        console.log(show,reverse, 'function !=')
-    } else if (show==liked ) {
-        setReverse(true)
-        setShow(revLiked)
-        console.log(show,reverse,revLiked, 'function ==')
 
-    } else if (show==revLiked){
-        setReverse(false)
-        setShow(liked)
+    } if (visibleArray.filter=='like'){
+        setVisibleArray({...visibleArray, content: visibleArray.content.reverse()})
+        setReverse(!reverse)
     }
-    
-  
-    
+
 }
 const dateFIlter = () => {
-    if(show!=dated){
+
+    if(visibleArray.filter!='date'){
+        setVisibleArray({filter: 'date', content: dated})
         setReverse(false)
-        setShow(dated)
-        setFilters('по дате')
-    } else if (show==dated) {
+
+    } if (visibleArray.filter=='date'){
+        setVisibleArray({...visibleArray, content: visibleArray.content.reverse()})
         setReverse(!reverse)
     }
 }
+
+
 useEffect(()=>{
 
+    setVisibleArray({content: dated, filter:'date'})
 },[liked, dated])
-
 
 useEffect(()=>{
     dispatch(likedProposes())
-    dispatch(dateProposes())
-    setTimeout(()=>{setShow(dated)},200)
-   
+    dispatch(dateProposes())   
 },[])
 
     return (
@@ -81,8 +71,8 @@ useEffect(()=>{
             <Thin size='24' className={styles.title}>Предложения для офиса: </Thin>
 
             <div className={styles.filters}>
-            <FilterButton arrow={show==liked? true : false} reverse={reverse} onClick={()=>likeFIlter()}>Лайки</FilterButton>
-            <FilterButton arrow={show==dated? true : false} reverse={reverse} onClick={()=>dateFIlter()}>Дата</FilterButton>
+            <FilterButton arrow={visibleArray.filter=='like'? true : false} reverse={reverse} onClick={()=>likeFIlter()}>Лайки</FilterButton>
+            <FilterButton arrow={visibleArray.filter=='date'? true : false} reverse={reverse} onClick={()=>dateFIlter()}>Дата</FilterButton>
             </div>
         
         <div className={styles.formArea}>
@@ -100,10 +90,10 @@ useEffect(()=>{
             
 
             <div className={styles.cardsContainer}>
-                {loaded && show!=null && show.map((el, i)=>{
+                {loaded && visibleArray.content!=null && visibleArray.content.map((el, i)=>{
                     return(
                         
-                            <ProposeCard cardContent={el} className={styles.cardsContainer} filters={filters} reverse={reverse} />
+                            <ProposeCard cardContent={el} className={styles.cardsContainer} filters={visibleArray.filter} reverse={reverse} />
                     )
                 })}
 
