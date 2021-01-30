@@ -1,7 +1,7 @@
 import styles from '../../Styles/modules/office/office.module.css'
 import { useState, useEffect} from 'react'
 import { useDispatch, useSelector} from 'react-redux'
-import {Reverse} from '../../redux/actions/office'
+import {Reverse, ReverseDate} from '../../redux/actions/office'
 import {Card} from '../../Styles/common'
 import { Bold,  Thin, Regular} from '../../Styles/typography'
 import { FilterButton } from '../../Styles/buttons'
@@ -13,18 +13,56 @@ import  ProposeForm  from './proposeForm'
 const Office = () => {
         const dispatch = useDispatch()
         const data = useSelector(state => state.office.data)
+        const reload = useSelector(state => state.office.reload)
 
         const [form, setForm] = useState(false);
+        const [filter, setFilter] = useState('');
 
         let isInitial;
 
-
     //dispatch initial value
-        useEffect(()=>{
-            isInitial = true;
-            dispatch(Reverse({isInitial}))
-    },[])
+    useEffect(()=>{
+        isInitial = true;
+        dispatch(Reverse({isInitial}))
+},[])
 
+
+const likeButton = ()=>{
+    if (filter!='like'){
+        isInitial = true
+        setFilter('like')
+        return dispatch(Reverse({isInitial}))
+    }
+    
+    dispatch(Reverse({data, isInitial}))
+   
+}
+const dateButton = ()=>{
+    if (filter!='date'){
+        isInitial = true
+        setFilter('date')
+        return dispatch(ReverseDate({isInitial}))
+    }
+    dispatch(ReverseDate({data, isInitial}))
+   
+}
+
+
+useEffect(()=>{
+    console.log('reloading') 
+
+
+    if (filter=='like'){
+        isInitial = true
+        return dispatch(Reverse({isInitial}))
+    } if (filter=='date'){
+        isInitial = true
+        return dispatch(ReverseDate({isInitial}))
+    }
+
+
+
+},[reload])
 
     if(data) isInitial=false;
 
@@ -33,8 +71,8 @@ const Office = () => {
             <Thin size='24' className={styles.title}>Предложения для офиса: </Thin>
 
             <div className={styles.filters}>
-            <FilterButton onClick={() => dispatch(Reverse({data, isInitial}))} >Лайки</FilterButton>
-            {/* <FilterButton onClick={() => dispatch(Reverse({data, isInitial}))} >Дата</FilterButton> */}
+            <FilterButton onClick={() => likeButton()} >Лайки</FilterButton>
+            <FilterButton onClick={() => dateButton()} >Дата</FilterButton>
             </div>
         
         <div className={styles.formArea}>

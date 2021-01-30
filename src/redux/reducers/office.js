@@ -1,4 +1,4 @@
-import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES, DATE_PROPOSES, LIKE_PROPOSE, DELETE_PROPOSE, IN_WORK,REVERSE_ARR } from "../types";
+import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES, DATE_PROPOSES, LIKE_PROPOSE, DELETE_PROPOSE, IN_WORK,REVERSE_ARR, REVERSE_ARRDATE } from "../types";
 
 
 
@@ -77,7 +77,11 @@ export default function(state = initialState, action) {
                     ...state,
                     data: payload
                 }
-
+                case REVERSE_ARRDATE:
+                    return {
+                        ...state,
+                        data: payload
+                    }
     case PROPOSE_FAIL:
         return {
             ...state,
