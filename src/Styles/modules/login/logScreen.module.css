@@ -1,9 +1,7 @@
 
-
+.mobSlogan{display: none;}
 
 .container{
-    width: 95%;
-    margin: 200px;
     
     overflow: hidden;
     border: 1px solid #707070;
@@ -45,7 +43,7 @@
     padding: 35px;
 
     }
-        .buroTitile{
+        .buroTitle{
             margin-bottom: 18px;
         }
         .buroText{
@@ -66,3 +64,59 @@
     padding: 75px;
 
 }
+
+
+
+@media (max-width: 1000px){
+  .buroTitle, .buroText, .platform{
+      display: none;
+  }  
+.container{
+    border: none;
+    
+    display: grid;
+    grid-template-areas:
+    'buro'
+    'forms'
+    'buroCont'
+    ;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: 1fr;
+    height: 100vh;
+}
+    .buro{
+        padding: 0;
+        padding-bottom: 40px ;
+        border: 0;
+    }
+   
+    .mobSlogan{
+        display: block;
+    }
+    .buroContent{
+        background-color: #3F496C;
+        padding: 0;
+        padding-top: 50px;
+    }
+    .btnCont{
+        display: grid;
+        justify-content: center;
+        place-content: center;
+        row-gap: 20px;
+    }
+            .register{
+               margin: 0;
+            }
+            .client{
+                margin: 0;
+                
+            }
+    .forms{
+       
+        background-color: white;
+        padding: 16px;
+        padding-top: 30px;
+        padding-bottom: 25px;
+        border-radius: 15px;
+    }
+} 

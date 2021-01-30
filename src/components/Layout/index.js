@@ -6,7 +6,7 @@ import Sidebar from './sidebar'
 import {useSelector} from 'react-redux'
 import { BackendMsg }  from '../../Styles/layout'
 
-const Layout = ({dimensions, histCurrent}) => {
+const Layout = ({ histCurrent}) => {
     const project = useSelector(state => state.projects)
     const createSprMsg = useSelector(state => state.projects.sprint_msg)
     const createProjMsg = useSelector(state => state.projects.msg)
@@ -125,8 +125,8 @@ const Layout = ({dimensions, histCurrent}) => {
         setStatus(false)
     }
     return <div style={{zIndex: '9999'}}>
-        <Header createProj={createProj} createTicket={createTicket} createNews={createNews} dimensions={dimensions} />
-        <Sidebar dimensions={dimensions} />
+        <Header createProj={createProj} createTicket={createTicket} createNews={createNews}/>
+        <Sidebar/>
         <BackendMsg color={color} style={{opacity:`${msgTiming?1:0}`,zIndex:`${msgTiming?10000:-1000}`, transition:'500ms ease all'}}>
             {color==='red'?error:color==='green'?msg:''}
          

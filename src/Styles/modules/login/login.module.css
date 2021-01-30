@@ -31,3 +31,25 @@
     grid-area: button;
     margin-left: auto;
 }
+@media (max-width: 1000px){
+    .loginForm{
+        display: grid;
+        grid-template-areas:
+        'title'
+        'mail'
+        'password'
+        'forgot'
+        'button'
+        ;
+        row-gap: 20px;
+    }
+    .title{
+        text-align: center
+    }
+    .forgot{
+        text-align: center;
+    }
+    .button{
+        margin-right: auto;
+    }
+}

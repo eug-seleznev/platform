@@ -19,9 +19,11 @@ export const Header =  styled.div`
     width: auto;
     height: 67px;
 
-    background-color: ${props => props.mobile? '#3F496C' : 'white'};
+    background-color: white;
     z-index:999;
-    
+    @media(max-width: 1000px){
+        background-color: #3F496C
+    }
 `
 
 export const ItemHead = styled.div`
@@ -32,22 +34,36 @@ export const ItemHead = styled.div`
     cursor: pointer;
 
     &.mobile__menu{
-       opacity: ${props => props.mobile? '1':'0'};
-       width:  ${props => props.mobile? 'max-content' : '0px'};
-       margin-left: ${props => props.mobile? '20px' : '0px'};
+       opacity: 0;
+       width:  0px;
+       margin-left: 0px;
 
     }
 
         .invert{
-            filter: invert(${props => props.mobile? '1': '0'}) ;
+            filter: invert(0) ;
         }
 
         .arrow{
            align-self:center;
-    filter: invert(${props => props.mobile? '1': '0'}) ;
-
+            filter: invert(0) ;
         }
-    
+@media(max-width: 1000px){
+
+    &.mobile__menu{
+        opacity: 1;
+        width: max-content;
+        margin-left: 20px;
+ 
+     }
+     .invert{
+        filter: invert(1) ;
+    }
+    .arrow{
+        align-self:center;
+        filter: invert(1) ;
+     }
+}
 `
 
 
@@ -80,7 +96,7 @@ export const MenuHead = styled.div`
     background-color: white;
     height: max-content;
     width: 238px;
-    position: absolute;
+    position: fixed;
     top:81px;
     padding:10px;
     border-radius: 15px;
@@ -157,6 +173,7 @@ font-size: 16px;
 
 
 export const SidebarContainer = styled.div`
+display: block;
 position: fixed;
 width: 67px;
 min-height: 100vh;
@@ -164,6 +181,9 @@ padding-top: 18px;
 z-index: 9999;
 background-color: #3F496C;
 text-align: center;
+@media (max-width: 1000px){
+    display:none;
+}
 `
 
 export const SidebarLink = styled(NavLink)`
@@ -197,6 +217,16 @@ p{
 }
 `
 
+
+
+
+
+
+
+
+// /////////////   not in use??  ////////////////////////////////////
+
+
 export const SidebarOpen = styled.div`
 display: ${props => props.open? 'block' : 'none'};
 position: absolute;
@@ -207,12 +237,6 @@ background-color: white;
 `
 
 
-
-
-
-
-
-// /////////////   not in use??  ////////////////////////////////////
 export const MenuPro = styled.div`
     position: absolute;
     width: 10vw;

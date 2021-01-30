@@ -1,5 +1,5 @@
 
-import { ADD_SPRINT, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL,CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT } from '../types'
+import { ADD_SPRINT, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL,CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT } from '../types'
 
 
 
@@ -17,6 +17,7 @@ const initialState = {
     reload: false,
     trick: false,
     sprintLoad: false,
+    outh: null,
     msg:'',
     sprint_msg:'',
 }
@@ -87,6 +88,12 @@ export default function(state = initialState, action) {
                     sprint: payload,
                     sprintLoad: false,
                 }
+
+                case GET_TOKEN:
+                    return {
+                        ...state,
+                        oauth: payload
+                    }
                 case ADD_TASKS:
                 return {
                     ...state,

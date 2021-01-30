@@ -36,7 +36,9 @@ import { createBrowserHistory } from "history";
 import MyProjects from './components/Projects/My';
 import News from './components/Superadmin/newsAdm';
 import { innerBackend, setAuthToken } from './components/utils/axios';
-import { Container } from '../src/Styles/common'
+import { Container, LoginContainer } from '../src/Styles/common'
+import Viewer from './components/Viewer';
+import Helper from './components/Viewer/helper';
 
 
 
@@ -47,10 +49,10 @@ const App = () => {
   const [load, setLoad] = useState(false)
   const auth = useSelector(state => state.auth.isAuthenticated)
   const loaded = useSelector(state => state.auth.loaded)
-  const [dimensions, setDimensions] = useState({
-    height: window.innerHeight,
-    width: window.innerWidth,
-  })
+  // const [dimensions, setDimensions] = useState({
+  //   height: window.innerHeight,
+  //   width: window.innerWidth,
+  // })
 
   //chek auth token on render
   useEffect(() => {
@@ -81,73 +83,71 @@ const App = () => {
 
 
 
-  useEffect(() => {
-    const handleResize = () => {
-    setDimensions ({width: window.innerWidth, height: window.innerHeight})  
-  }
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //   setDimensions ({width: window.innerWidth, height: window.innerHeight})  
+  // }
   
-    window.addEventListener('resize', handleResize)
+  //   window.addEventListener('resize', handleResize)
   
-    return _ => {
-      window.removeEventListener('resize', handleResize)
+  //   return _ => {
+  //     window.removeEventListener('resize', handleResize)
     
-  }
-  })
+  // }
+  // })
 
 
 
   return (
     <div className="App">
-      {!auth ? <Auth /> : (
-      <Router history={history}> 
-        
-        <Layout dimensions={dimensions} histCurrent={history}/> 
-        <Switch>
-        <Container dimensions={dimensions}>
-          {/* main */}
-          <Route exact path="/" component={ Main } />
-          
+      {!auth ? (
+      <LoginContainer>
+          <Auth />
+      </LoginContainer>
+      ) : (
+        <Router history={history}>
+          <Layout histCurrent={history} />
+          <Switch>
+            <Container >
+              {/* main */}
+              <Route exact path="/" component={Main} />
 
-          
-          {/* сисадминошная */}
-          <Route exact path="/help" component={ Admin } />
-          <Route exact path="/tickets" component={ Dashboard } />
-          <Route exact path="/tickets/:id" component={Ticket} />
+              {/* сисадминошная */}
+              <Route exact path="/help" component={Admin} />
+              <Route exact path="/tickets" component={Dashboard} />
+              <Route exact path="/tickets/:id" component={Ticket} />
 
+              <Route exact path="/db" component={DataBase} />
+              <Route exact path="/office" component={Office} />
+              {/* projects */}
+              <Route exact path="/projects" component={Projects} />
+              <Route exact path="/projects/my" component={MyProjects} />
 
+              <Route exact path="/projects/:id" component={Project} />
+              <Route exact path="/projects/:id/:id" component={Sprint} />
+              <Switch>
+                <Route exact path="/projects/:id/model/test" component={Helper} />
+              </Switch>
 
-          <Route exact path="/db" component={ DataBase } />
-          <Route exact path="/office" component={ Office } />
-          {/* projects */}
-          <Route exact path="/projects" component={ Projects } />
-          <Route exact path="/myprojects" component={ MyProjects } />
+              <Route exact path="/admin/editproj" component={ProjectsEdit} />
+              <Route exact path="/admin/editproj/:id" component={OneProjEdit} />
+              {/* <Route exact path="/new" component={ ProjectNew } />  */}
 
-          <Route exact path="/projects/:id" component={ Project } />
-          <Route exact path="/projects/:id/:id" component={ Sprint } />
-          <Route exact path="/admin/editproj" component={ ProjectsEdit } />
-          <Route exact path="/admin/editproj/:id" component={ OneProjEdit } />
-          {/* <Route exact path="/new" component={ ProjectNew } />  */}
+              {/* users */}
+              <Route exact path="/users" component={Users} />
+              <Route exact path="/users/me" component={MyProfile} />
+              <Route exact path="/users/:id" component={Employe} />
+              <Route exact path="/edit" component={Edit} />
+              {/*adminka */}
+              <Route exact path="/admin" component={Superadmin} />
+              <Route exact path="/admin/permissions" component={Permissions} />
+              <Route exact path="/admin/news" component={News} />
 
-          {/* users */}
-          <Route exact path="/users" component={ Users } /> 
-          <Route exact path="/users/me" component={ MyProfile } />
-          <Route exact path="/users/:id" component={ Employe } />
-          <Route exact path="/edit"component={ Edit } />
-          {/*adminka */}
-          <Route exact path="/admin" component={ Superadmin } /> 
-          <Route exact path="/admin/permissions" component={ Permissions } />
-          <Route exact path="/admin/news" component={ News } />
-          
-
-        </Container>
-        </Switch>
-     
-
-
-        
-        </Router> )
-    }
-      
+              <Route exact path="/viewer" component={Helper} />
+            </Container>
+          </Switch>
+        </Router>
+      )}
     </div>
   );
 }

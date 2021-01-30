@@ -15,6 +15,8 @@ import { Bold, H1, H3, Light} from '../../Styles/typography'
 import SprintDescription from './components/SprintDescrForOneProj'
 import ProjTeam from './components/ProjTeam'
 import ModalWindow from "./components/ModalWindow";
+import Viewer from "./model";
+import { Oauth } from "../../redux/actions/models";
 
 
 // const sprintDays = [];
@@ -56,6 +58,7 @@ const Project = ({match, history}) => {
     useEffect(() => {
 
         dispatch(getProject(id));
+        
 
 
     }, [])
@@ -64,7 +67,7 @@ const Project = ({match, history}) => {
     
     if (loaded && sprintsLoad && trick){
      
-    
+    dispatch(Oauth(project.crypt));
       console.log('stage2')
       const Calendar = () => {return new Promise((resolve, reject) =>  {
         
@@ -526,6 +529,10 @@ useEffect(() => {
                     {" "}
                     {user.permission === "user" ? "" : "Удалить проект"}
                   </Button>
+                </div>
+
+                <div>
+                  <Viewer />
                 </div>
               </>
             )}

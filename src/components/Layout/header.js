@@ -9,7 +9,7 @@ import Menu from './Menu'
 import MenuMobile from './menuMobile'
 
 
-const HeaderL = ({dimensions, createProj, createNews, createTicket}) => {
+const HeaderL = ({ createProj, createNews, createTicket}) => {
     const loaded = useSelector(state => state.auth.loaded)
     const user = useSelector(state => state.auth.user)
    
@@ -18,7 +18,7 @@ const HeaderL = ({dimensions, createProj, createNews, createTicket}) => {
         menuProfile: false,
         mobile: false
     })
-    const mobile = dimensions.width<600? true : false
+
 
     const mobClick = () => { 
         setOpen({...open, mobile: !open.mobile})
@@ -33,19 +33,19 @@ const HeaderL = ({dimensions, createProj, createNews, createTicket}) => {
     return (
         <>
         {!loaded? <div>loading...</div> :(
-        <Header mobile={mobile}>
+        <Header>
 
-            <ItemHead className='mobile__menu' mobile={mobile} onClick={() => mobClick()}>
+            <ItemHead className='mobile__menu' onClick={() => mobClick()}>
                 <Bold size='14' color='white'>меню</Bold>
                 <img className='arrow' src='/headerArrow.png'/>
             </ItemHead>
 
-            <ItemHead mobile={mobile} onClick={() => setOpen({...open, menuProfile:false , menu: !open.menu})}>
+            <ItemHead onClick={() => setOpen({...open, menuProfile:false , menu: !open.menu})}>
                 <img className='invert' src='/headerPlus.png'/>
                 <img className='arrow' src='/headerArrow.png'/>
             </ItemHead>
             
-            <ItemHead mobile={mobile} onClick={() => setOpen({...open, menu:false, menuProfile: !open.menuProfile})}>
+            <ItemHead onClick={() => setOpen({...open, menu:false, menuProfile: !open.menuProfile})}>
                 <img  width="40px" style={{borderRadius:'50px'}} src={`${url}/${user != null? (user!= undefined? user.avatar:''):''}`}/>
                 <img className='arrow' src='/headerArrow.png'/>
             </ItemHead>
@@ -54,7 +54,7 @@ const HeaderL = ({dimensions, createProj, createNews, createTicket}) => {
 
         </Header>
 )}
-        <Menu createTicket={createTicket} createNews={createNews} createProj={createProj} closeAll={()=>allFalse()} mobile={mobile} state={open}/>
+        <Menu createTicket={createTicket} createNews={createNews} createProj={createProj} closeAll={()=>allFalse()}  state={open}/>
         <MenuMobile open={open.mobile} closeAll={()=>allFalse()} />
 
           </>

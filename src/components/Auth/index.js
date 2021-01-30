@@ -16,13 +16,13 @@ const Auth = () => {
         <div className={styles.container}>
             <div className={styles.buro}>
                 <Bold size='30' color='white'>BURO82</Bold>
+                <Light size='16' color='white' className={styles.mobSlogan}>Вся информация о проекте в единой информационной среде.</Light>
             </div>
 
             <div className={styles.buroContentBG} style={{backgroundImage: 'url(/loginBG.png)'}}> 
                 <div className={styles.buroContent}>
-                    <Regular size='30' color='white' className={styles.buroTitile}>Платформа для ведения <br/> архитектурно-строительных проектов</Regular>
+                    <Regular size='30' color='white' className={styles.buroTitle}>Платформа для ведения <br/> архитектурно-строительных проектов</Regular>
                     <Light size='16' color='white' className={styles.buroText}>Вся информация о проекте в единой информационной среде.</Light>
-                    {/* <LoginButton style={{fontWeight:`${page===0?'bold':'normal'}`}} onClick={(() => setPage(0))}>Логин</LoginButton> */}
                     <div className={styles.btnCont}>
                         <LoginButton color='#3F496C' bgColor='white'  className={styles.register} onClick={(() => page==0? setPage(1) : setPage(0))}>{page==0?'Регистрация':'Логин'}</LoginButton>
                         <LoginButton color='white' bgColor='transparent' className={styles.client} onClick={(() => setPage(2))}>Я клиент</LoginButton>

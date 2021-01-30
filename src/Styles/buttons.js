@@ -123,8 +123,13 @@ export const LoginButton =  styled.button`
 
   &:hover{
   // text-decoration: underline;
-  background-color: black;
+  filter: scale(1.1)
 
+  @media (max-width: 1000px){
+    &.hover{
+      filter: none;
+    }
+  }
 }
 
 `
