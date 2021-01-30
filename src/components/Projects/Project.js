@@ -31,17 +31,12 @@ const Project = ({match, history}) => {
     const loaded = useSelector(state => state.projects.loadProject);
     const sprintsLoad = useSelector(state => state.projects.loadSprints)
     const user = useSelector(state => state.auth.user) 
-    const sprintLoad = useSelector(state => state.projects.sprint_load)
-    const reload = useSelector(state => state.projects.reload)
-   
 
-    const sprint = useSelector(state => state.projects.sprint)
-    const users = useSelector(state => state.users.users)
     const project = useSelector(state => state.projects.project)
     const sprints = useSelector(state => state.projects.sprints)
     const trick = useSelector(state => state.projects.trick)
 
-    const descr = useSelector(state => state.projects.sprints.description)
+ 
     const [sprintDays, setSprintDays] = useState([]);
     const [calendLoader, setCalendLoader] = useState (false);
     const [paint, setPaint] = useState(false);
@@ -303,6 +298,7 @@ useEffect(() => {
                      className={style.special__button}
                       onClick={openMod}
                       style={{
+                        width:'84vw',
                         color:'black',
                         backgroundColor:'white',
                         fontSize:'20px',

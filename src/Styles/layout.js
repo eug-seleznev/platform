@@ -84,7 +84,7 @@ padding-top:10px;
 padding-left:10px;
 @media(max-width:1000px){
 
-    background-color:${props => props.color=='green'?'rgba(0,255,0,0.5)':props => props.color=='red'?'rgba(255,0,0,0.7)':''};
+    background-color:${props => props.color=='green'?'rgba(0,208,86,1)':props => props.color=='red'?'rgba(255,0,0,0.7)':''};
 }
 `
 

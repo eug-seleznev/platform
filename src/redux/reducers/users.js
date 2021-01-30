@@ -39,7 +39,7 @@ export default function(state = initialState, action) {
                     return {
                         ...state,
                         loaded: true,
-                        msg: payload
+                        msg: payload.msg
                     }
                     
                     

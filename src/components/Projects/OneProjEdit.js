@@ -56,7 +56,7 @@ const ProjectEdit = ({history, match}) => {
 
      const Redirect = () => {
      
-             return history.push(`/admin/editproj`)
+             return history.push(`/projects/${id}`)
          
      }
 

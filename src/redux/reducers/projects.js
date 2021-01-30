@@ -59,7 +59,7 @@ export default function(state = initialState, action) {
                     return {
                         ...state,
                         loadProject: false,
-                     
+                        msg: payload.msg
                     }
             case GET_PROJECT:
                 return {
@@ -98,7 +98,8 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     tasks: payload,
-                    error: ''
+                    error: '',
+                    msg:payload.msg
                 }
                 case JOIN_TEAM:
                     return {
@@ -143,7 +144,7 @@ export default function(state = initialState, action) {
             case FINISH_SPRINT:
                 return {
                     ...state,
-                    msg: payload,
+                    msg: payload.msg,
                     error: ''
                 }
                 // case ADD_SPRINT_TO_CHOSEN:
