@@ -17,6 +17,7 @@ const Office = () => {
 
         const [form, setForm] = useState(false);
         const [filter, setFilter] = useState('');
+        const [arrowReverse, setArrowReverse] = useState('');
 
         let isInitial;
 
@@ -32,9 +33,10 @@ const likeButton = ()=>{
     if (filter!='like'){
         isInitial = true
         setFilter('like')
+        setArrowReverse(false)
         return dispatch(Reverse({isInitial}))
     }
-    
+    setArrowReverse(!arrowReverse)
     dispatch(Reverse({data, isInitial}))
    
 }
@@ -42,8 +44,10 @@ const dateButton = ()=>{
     if (filter!='date'){
         isInitial = true
         setFilter('date')
+        setArrowReverse(false)
         return dispatch(ReverseDate({isInitial}))
     }
+    setArrowReverse(!arrowReverse)
     dispatch(ReverseDate({data, isInitial}))
    
 }
@@ -66,8 +70,9 @@ useEffect(()=>{
     }
 
 
-
 },[reload])
+
+
 
     if(data) isInitial=false;
 
@@ -76,8 +81,8 @@ useEffect(()=>{
             <Thin size='24' className={styles.title}>Предложения для офиса: </Thin>
 
             <div className={styles.filters}>
-            <FilterButton onClick={() => likeButton()} >Лайки</FilterButton>
-            <FilterButton onClick={() => dateButton()} >Дата</FilterButton>
+            <FilterButton arrow={filter=='like'? true : false} reverse={arrowReverse} onClick={() => likeButton()} >Лайки</FilterButton>
+            <FilterButton arrow={filter=='date'? true : false} reverse={arrowReverse} onClick={() => dateButton()} >Дата</FilterButton>
             </div>
         
         <div className={styles.formArea}>
