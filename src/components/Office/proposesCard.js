@@ -13,21 +13,20 @@ const ProposeCard = ({cardContent, filters, reverse}) => {
 const dispatch = useDispatch()
 
 
-
-
-const likeButton =(id) =>{
-    dispatch(likePropose(id))
-    setTimeout(() => {
-        dispatch(likedProposes)
-        dispatch(dateProposes)
-    }, 100);
+const reload = () => {
+    dispatch(likedProposes())
+    dispatch(dateProposes())
 }
-const deleteButton =(id) =>{
-    dispatch(deletePropose(id))
-    setTimeout(() => {
-        dispatch(likedProposes)
-        dispatch(dateProposes)
-    }, 100);
+
+const likeButton =(id, callback) =>{
+   dispatch(likePropose(id))
+
+   callback(reload())
+}
+const deleteButton =(id, callback) =>{
+   dispatch(deletePropose(id))
+
+   callback(reload())
 }
 
 
