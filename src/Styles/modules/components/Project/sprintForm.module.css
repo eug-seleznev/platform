@@ -23,7 +23,13 @@
 .buttons {
 	display:flex;
 	justify-content:space-between;
-	margin-bottom: 30px;
+	margin-bottom: 170px;
+}
+.small__title {
+	margin-bottom: 5px;
+}
+.formContain input {
+	height: 30px;
 }
 .taskContain {
 	
@@ -32,7 +38,32 @@
 	height: 250px;
 	overflow-y: scroll;
 }
-.cancel__button {
-	font-size: 16px;
-	background-color: #3F496C;
+
+.button {
+	width: 200px
+}
+@media(max-width:700px){
+	.buttons {
+		display:flex;
+		justify-content:space-between;
+		margin-bottom: 230px;
+	}
+	.week {
+		margin-left:0;
+		margin-right:auto;
+		width:210px;
+		margin-top:50px
+	}
+	.taskDescr {
+		width:40vw;
+		font-family:SuisseIntlThin;
+		font-size:16px;
+	}
+	.taskContain {
+	
+		scrollbar-width: none;
+		width: 45vw;
+		height: 250px;
+		overflow-y: scroll;
+	}
 }

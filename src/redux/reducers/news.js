@@ -58,7 +58,7 @@ export default function(state = initialState, action) {
             case DELETE_NEWS: 
                 return {
                     ...state,
-                    msg: payload
+                    msg: payload.msg
                 }
 
                 case NEWS_FAIL:

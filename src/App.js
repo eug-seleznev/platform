@@ -17,7 +17,7 @@ import { loadUser } from './redux/actions/auth';
 import Admin from './components/Adminka/Index';
 import DataBase from './components/DataBase';
 import Projects from './components/Projects';
-import Office from './components/Office';
+import Office from './components/Office/index copy';
 import Users from './components/User';
 import Dashboard from './components/Adminka/dashboard';
 import MyProfile from './components/User/me';
@@ -121,7 +121,7 @@ const App = () => {
               <Route exact path="/office" component={Office} />
               {/* projects */}
               <Route exact path="/projects" component={Projects} />
-              <Route exact path="/projects/my" component={MyProjects} />
+              <Route exact path="/myprojects" component={MyProjects} />
 
               <Route exact path="/projects/:id" component={Project} />
               <Route exact path="/projects/:id/:id" component={Sprint} />

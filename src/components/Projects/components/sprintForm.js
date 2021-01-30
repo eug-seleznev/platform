@@ -100,7 +100,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 			<form className={style.formContain} onSubmit={handleSubmit(onSubmit)}>
 			
 					<div onMouseEnter={enter}>
-						<Thin style={{marginTop:'40px'}} size={16}>{smallTitles[0]}</Thin>
+						<Thin className={style.small__title}  style={{marginTop:'40px'}} size={16}>{smallTitles[0]}</Thin>
 						
 						
 							<input 
@@ -113,15 +113,15 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 								onChange={e => onChange2(e)}>  
 							</input>
 							<div className={style.week} >
-								<Thin size={16}>{smallTitles[1]}</Thin>
+								<Thin  className={style.small__title} size={16}>{smallTitles[1]}</Thin>
 								<select name="date"className={style.select} onChange={e => onChangeDate(e)}>
 										<option selected>нет</option>
 										<option>1 неделя</option>
 										<option>2 недели</option>
 								</select>
 							</div>
-							<div style={{width:'31vw', overflowX:`${fields.length<3?'hidden':'visible'}`}}>
-							<div className={style.taskContain}>
+							<div  >
+							<div style={{ overflowY:`${fields.length<3?'hidden':'scroll'}`}} className={style.taskContain}>
 								<ul style={{padding:0,listStyleType:'none'}}>
 
 									{fields.map((item, index) => (
@@ -162,8 +162,8 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 					</div>
 					
 					<div className={style.buttons}>
-						<CancelButton padd={'55px'} fontSize={'16px'} grey onClick={cancel}>Отмена</CancelButton>
-						<Button type="submit"fontSize={'16px'} padd={'55px'}>{buttonTitle}</Button>
+						<CancelButton  className={style.button} fontSize={'16px'} grey onClick={cancel}>Отмена</CancelButton>
+						<Button className={style.button} type="submit"fontSize={'16px'} >{buttonTitle}</Button>
 					</div>
 			
 			</form>

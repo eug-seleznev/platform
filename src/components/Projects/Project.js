@@ -31,17 +31,12 @@ const Project = ({match, history}) => {
     const loaded = useSelector(state => state.projects.loadProject);
     const sprintsLoad = useSelector(state => state.projects.loadSprints)
     const user = useSelector(state => state.auth.user) 
-    const sprintLoad = useSelector(state => state.projects.sprint_load)
-    const reload = useSelector(state => state.projects.reload)
-   
 
-    const sprint = useSelector(state => state.projects.sprint)
-    const users = useSelector(state => state.users.users)
     const project = useSelector(state => state.projects.project)
     const sprints = useSelector(state => state.projects.sprints)
     const trick = useSelector(state => state.projects.trick)
 
-    const descr = useSelector(state => state.projects.sprints.description)
+ 
     const [sprintDays, setSprintDays] = useState([]);
     const [calendLoader, setCalendLoader] = useState (false);
     const [paint, setPaint] = useState(false);
@@ -287,7 +282,7 @@ useEffect(() => {
                       <div className={style.title__small}>
                       
                         <div className={style.title__options} onClick={() => history.replace(`/admin/editproj/${project.crypt}`)}>Настройки</div>
-                        <img src='/image 1.png'></img>
+                        <img onClick={() => history.replace(`/admin/editproj/${project.crypt}`)} src='/image 1.png'></img>
                       </div>
                       </Bold>
                   </div>
@@ -303,20 +298,21 @@ useEffect(() => {
                      className={style.special__button}
                       onClick={openMod}
                       style={{
+                        
                         color:'black',
                         backgroundColor:'white',
                         fontSize:'20px',
                         fontFamily:'SuisseIntlSemibold',
-                      display: `${
+                      // display: `${
                         
-                        user.permission === "user" || project.status
-                          ? "none"
-                          : "block"
-                      }`,
+                      //   user.permission === "user" || project.status
+                      //     ? "none"
+                      //     : "block"
+                      // }`,
                     }}
                   >
-                    {" "}
-                    {user.permission === "user" ? "" : "Создать спринт"}
+                 
+                   Создать спринт
                   </Button>
                   ) : (
                    <div className={style.sprintdescr__cont}>
@@ -334,16 +330,16 @@ useEffect(() => {
                         backgroundColor:'white',
                         fontSize:'20px',
                         fontFamily:'SuisseIntlSemibold',
-                      display: `${
+                      // display: `${
                         
-                        user.permission === "user" || project.status
-                          ? "none"
-                          : "block"
-                      }`,
+                      //   user.permission === "user" || project.status
+                      //     ? "none"
+                      //     : "block"
+                      // }`,
                     }}
                   >
-                    {" "}
-                    {user.permission === "user" ? "" : "Создать спринт"}
+           
+                   Создать спринт
                   </Button>
                    </div>
                   )}
