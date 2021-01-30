@@ -311,8 +311,8 @@ useEffect(() => {
                       // }`,
                     }}
                   >
-                    {" "}
-                    {user.permission === "user" ? "" : "Создать спринт"}
+                 
+                   Создать спринт
                   </Button>
                   ) : (
                    <div className={style.sprintdescr__cont}>
@@ -338,8 +338,8 @@ useEffect(() => {
                       // }`,
                     }}
                   >
-                    {" "}
-                    {user.permission === "user" ? "" : "Создать спринт"}
+           
+                   Создать спринт
                   </Button>
                    </div>
                   )}
