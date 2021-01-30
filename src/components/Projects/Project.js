@@ -298,17 +298,17 @@ useEffect(() => {
                      className={style.special__button}
                       onClick={openMod}
                       style={{
-                        width:'84vw',
+                        
                         color:'black',
                         backgroundColor:'white',
                         fontSize:'20px',
                         fontFamily:'SuisseIntlSemibold',
-                      display: `${
+                      // display: `${
                         
-                        user.permission === "user" || project.status
-                          ? "none"
-                          : "block"
-                      }`,
+                      //   user.permission === "user" || project.status
+                      //     ? "none"
+                      //     : "block"
+                      // }`,
                     }}
                   >
                     {" "}
@@ -330,12 +330,12 @@ useEffect(() => {
                         backgroundColor:'white',
                         fontSize:'20px',
                         fontFamily:'SuisseIntlSemibold',
-                      display: `${
+                      // display: `${
                         
-                        user.permission === "user" || project.status
-                          ? "none"
-                          : "block"
-                      }`,
+                      //   user.permission === "user" || project.status
+                      //     ? "none"
+                      //     : "block"
+                      // }`,
                     }}
                   >
                     {" "}

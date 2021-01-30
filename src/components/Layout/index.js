@@ -99,6 +99,7 @@ const Layout = ({ histCurrent}) => {
     useEffect(()=>{
         if(msg!=''){
             setColor('green')
+            
             setMsgTiming(true)
                 setTimeout(()=>{
                     setMsgTiming(false)
