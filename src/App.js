@@ -121,7 +121,7 @@ const App = () => {
               <Route exact path="/office" component={Office} />
               {/* projects */}
               <Route exact path="/projects" component={Projects} />
-              <Route exact path="/projects/my" component={MyProjects} />
+              <Route exact path="/myprojects" component={MyProjects} />
 
               <Route exact path="/projects/:id" component={Project} />
               <Route exact path="/projects/:id/:id" component={Sprint} />
