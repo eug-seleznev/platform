@@ -17,6 +17,8 @@ const dispatch = useDispatch()
 const liked = useSelector(state => state.office.likedProposes)
 const dated = useSelector(state => state.office.dateProposes)
 const loaded = useSelector(state => state.office.loaded)
+const reload = useSelector(state => state.office.reload)
+
 
     const [visibleArray, setVisibleArray] = useState({
         content:dated,
@@ -26,7 +28,7 @@ const loaded = useSelector(state => state.office.loaded)
     const [form, setForm] = useState(false)
 
 useEffect(()=>{
-    
+
 console.log(liked,'liked dont spin, please',visibleArray)
 
 },[visibleArray])
@@ -59,12 +61,21 @@ const dateFIlter = () => {
 useEffect(()=>{
 
     setVisibleArray({content: dated, filter:'date'})
-},[liked, dated])
+    console.log('first.load')
+},[loaded])
 
 useEffect(()=>{
     dispatch(likedProposes())
-    dispatch(dateProposes())   
-},[])
+    dispatch(dateProposes())  
+    console.log('reloading') 
+
+},[reload])
+
+useEffect(()=>{
+    visibleArray.filter=='date'? setVisibleArray({...visibleArray, content: dated}) : setVisibleArray({...visibleArray, content: liked})
+    console.log('liked, dated changed => reloading array')
+},[liked, dated])
+
 
     return (
         <div className={styles.officeContainer}> 

@@ -8,7 +8,7 @@ const initialState = {
     newPropose: null,
     loaded: false,
     msg: null,
-
+    reload:false,
     
 }
 
@@ -25,7 +25,7 @@ export default function(state = initialState, action) {
                     ...state,
                     newPropose: payload,
                     
-
+                    
                     error: ''
                 }
             
@@ -50,7 +50,7 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     msg: payload,
-
+                    reload: !state.reload,
 
                     error: ''
                 }

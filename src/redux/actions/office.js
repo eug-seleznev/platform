@@ -90,6 +90,7 @@ export const likePropose = (id) => async dispatch => {
             type: LIKE_PROPOSE,
             payload: res.data
         })
+        console.log('hehehehhe')
     }
     catch (err) {
         const errors = err.response.data.err

@@ -4,29 +4,27 @@ import { likedProposes, dateProposes, likePropose, deletePropose, inWork} from '
 import {Card} from '../../Styles/common'
 import { Bold, Thin, Regular} from '../../Styles/typography'
 import {Button, FilterButton, ButtonText } from '../../Styles/buttons'
+import { useEffect } from 'react'
 
 
 
 
 const ProposeCard = ({cardContent, filters, reverse}) => {
-
 const dispatch = useDispatch()
 
 
 const reload = () => {
-    dispatch(likedProposes())
-    dispatch(dateProposes())
+    
 }
 
-const likeButton =(id, callback) =>{
-   dispatch(likePropose(id))
 
-   callback(reload())
+
+const likeButton =(id) =>{
+ dispatch(likePropose(id))
 }
-const deleteButton =(id, callback) =>{
+const deleteButton =(id) =>{
    dispatch(deletePropose(id))
 
-   callback(reload())
 }
 
 
