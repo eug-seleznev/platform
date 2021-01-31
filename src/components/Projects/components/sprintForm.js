@@ -2,7 +2,7 @@ import { Button,CancelButton } from "../../../Styles/buttons"
 import { Thin } from "../../../Styles/typography"
 import{	useState, useEffect} from 'react'
 import { useForm, useFieldArray } from "react-hook-form";
-import {  addTasks,addInfoSprint,addSprint,getProject} from "../../../redux/actions/projects";
+import {  addTasks,addInfoSprint,addSprint,getSprint, getProject} from "../../../redux/actions/projects";
 import { useDispatch,useSelector} from "react-redux"
 import style from '../../../Styles/modules/components/Project/sprintForm.module.css'
 
@@ -24,13 +24,16 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 	  });
 	const [formData, setFormData] = useState(
 		{
-			description: ``, 
-			date: '',  
+			description: ``,
+			date:``
 			 
 		}
 	  )
-	  
-	  const [sprintData,setSprintData] = useState (0)
+	
+	  const [sprintData,setSprintData] = useState ({
+		
+
+	  })
 	  const [enterWin,setEnterWin] =useState (false)
 	  const {description, date} = formData;
 	  //
@@ -52,6 +55,9 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 		setFormData({ ...formData, [e.target.name]:  e.target.value=='нет'?'':editedYY +'-'+editedMM+'-'+editedDD})
 		
 	 }
+	 	useEffect(()=>{
+			console.log(sprintData)
+		 },[sprintData])
 	  useEffect(()=>{
 		console.log(formData)
 	  },[formData])
@@ -63,36 +69,24 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 	 	const enter =()=>{
 			 setEnterWin(true)
 		 }
-	const onSubmit = (data)=> {
-		console.log(data)
-				setSprintData(data)
-				setTimeout(() => {
-					dispatch(addSprint(project.crypt))
-				}, 500);
-				setTimeout(() => {
-					dispatch(getProject(project.crypt))
-				}, 800);
-				
-
-		}
+		const onSubmit = (data)=> {
+			console.log(data)
+					
+					setTimeout(() => {
+						dispatch(addSprint(project.crypt,formData,data))
+						offWindow ()
+					}, 500);
+					setTimeout(() => {
+							dispatch(getProject(project.crypt))
+							
+						}, 700);
+	
+			}
+	
 		const cancel =()=>{
 			offWindow()
 		}
-	useEffect(()=>{
-		offWindow ()
-		if(reload){
-			let tasks = sprintData
-			let sprintId = sprint.id	
-				dispatch(addInfoSprint(sprintId, formData))
-				dispatch(addTasks({tasks, sprintId }))
-			
-				
-		}
-	
-					
-				
-	},[reload])
-		
+
 
 	return (
 	<>
@@ -133,8 +127,22 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 										ref={register()}
 										placeholder="Описание задачи" // make sure to set up defaultValue
 										/>
-									
-										
+									 <input
+										type="number"
+										value={0}
+											name={`tasks[${index}].workVolume`}
+											ref={register()}
+											style={{display:'none'}}
+											placeholder="Объем в часах" 
+											/>
+										 <input
+										type="boolean"
+										value={false}
+											name={`tasks[${index}].taskState`}
+											ref={register()}
+											style={{display:'none'}}
+											placeholder="Стейт" 
+											/>
 										<Button type="button" style={{display: `${fields.length===1?'none':'block'}`,
 											color:'#3F496C',
 											backgroundColor:'white',

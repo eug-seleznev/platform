@@ -14,6 +14,7 @@ import { H1, H3, Light, Regular,Bold} from '../../Styles/typography'
 const Sprint = ({match, history}) => {
     const dispatch = useDispatch();
     let {id} = match.params;
+  
     const chosenSprints = useSelector(state => state.auth.user.sprints)
     let back = match.url;
     const sprint = useSelector(state => state.projects.sprint)
@@ -110,7 +111,7 @@ const Sprint = ({match, history}) => {
     useEffect(() => {
         
             dispatch(getSprint(id))    
-           console.log(user)
+        
     }, [])
 
 
@@ -168,7 +169,7 @@ const Sprint = ({match, history}) => {
            <div  style={{display:'flex', justifyContent:'space-between',flexWrap:'wrap'}} >
            
             <Card className={sprintCss.first_block} >
-              <Regular size='30' style={{marginBottom:'10px'}}>Текущие задачи</Regular> 
+              <Regular size='30' style={{marginBottom:'10px'}}>Информация</Regular> 
               <Light style={{paddingBottom:'30px',borderBottom:'1px solid black', marginBottom:'40px'}}>{sprint.description}</Light>
               <div style={{display:'flex',justifyContent:'flex-end'}}>
                 <Light>Продолжительность:   </Light> 
@@ -239,7 +240,7 @@ const Sprint = ({match, history}) => {
                   <CancelButton
                       fontSize={'16px'}
                       style={{
-                              display:`${!newFields?'block':'none'}`,
+                              display:`${!newFields&& user.permission != "user"?'block':'none'}`,
                               color:'#3F496C',
                               backgroundColor:'white',
                               border:'none'}}

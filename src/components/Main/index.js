@@ -9,7 +9,7 @@ import ProjectsCard from './projectsCard'
 import './main.css'
 import { useSelector, useDispatch } from "react-redux"
 import { allNews } from '../../redux/actions/news';
-
+import { allProjects } from '../../redux/actions/projects';
 // import { allUsers } from "../../redux/actions/user";
 import { Container} from '../../Styles/common'
 import { Bold, Thin } from '../../Styles/typography'
@@ -26,6 +26,8 @@ const Main = ({history}) => {
 
 useEffect(()=>{
     dispatch(allNews())
+    dispatch(allProjects())
+    
 },[])
 
     return (

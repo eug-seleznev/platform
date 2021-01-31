@@ -57,9 +57,9 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
           about: '',
         }),50) 
         closeWindow()
-        // setTimeout(() => Redirect(),100) 
+        setTimeout(() => Redirect(),100) 
         
-            // register({ name, email, password});
+         
     
            
         }
