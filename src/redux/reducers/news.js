@@ -1,4 +1,4 @@
-import { ALL_NEWS,CREATE_NEWS, GET_NEWS, DELETE_NEWS, UPDATE_NEWS, NEWS_FAIL, } from "../types";
+import { ALL_NEWS,CREATE_NEWS, GET_NEWS, DELETE_NEWS, UPDATE_NEWS, NEWS_FAIL, CLEAR_MSG, CLEAR_ERROR, } from "../types";
 
 
 
@@ -37,6 +37,16 @@ export default function(state = initialState, action) {
                         msg:payload.msg,
                         error: ''
                     }
+                    case CLEAR_ERROR:
+                        return {
+                            ...state,
+                           error:''
+                        }
+                    case CLEAR_MSG:
+                        return {
+                            ...state,
+                            msg:''
+                        }
             case GET_NEWS:
                 return {
                     ...state,

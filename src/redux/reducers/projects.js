@@ -1,5 +1,5 @@
 
-import { ADD_SPRINT, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL,CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT } from '../types'
+import { ADD_SPRINT, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL,CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR } from '../types'
 
 
 
@@ -20,6 +20,7 @@ const initialState = {
     outh: null,
     msg:'',
     sprint_msg:'',
+    hey:''
 }
 
 export default function(state = initialState, action) {
@@ -47,14 +48,27 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     project: payload,
-                    loadedAllProj: false,
-                    loadProject: true,
+                    loadedAllProj: true,
+                    loadProject: false,
                     sprint_load: false,
                     sprintLoad: false,
                     reload: false,
                     error: '',
                     msg: payload.msg
                 }
+                case CLEAR_ERROR:
+                    return {
+                        ...state,
+                       error:''
+                       
+                    }
+                case CLEAR_MSG:
+                    return {
+                        ...state,
+                        msg:'',
+                        sprint_msg:'',
+                        hey:''
+                    }
                 case EDIT_PROJECT:
                     return {
                         ...state,

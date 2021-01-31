@@ -1,5 +1,5 @@
 
-import {REGISTER, AUTH_ERROR, LOGIN, USER_LOADED, CHANGE_USERDATA, CHANGE_AVATAR, CHANGE_LOADED, ADD_SPRINT_TO_CHOSEN} from '../types'
+import {REGISTER, AUTH_ERROR, LOGIN, USER_LOADED, CHANGE_USERDATA, CHANGE_AVATAR, CHANGE_LOADED, ADD_SPRINT_TO_CHOSEN, CLEAR_MSG, CLEAR_ERROR} from '../types'
 
 
 
@@ -30,6 +30,16 @@ export default function(state = initialState, action) {
                 error: ''
                 
             }
+            case CLEAR_ERROR:
+                return {
+                    ...state,
+                   error:''
+                }
+            case CLEAR_MSG:
+                return {
+                    ...state,
+                    msg:''
+                }
             case USER_LOADED:
                 return {
                     ...state,
@@ -66,10 +76,12 @@ export default function(state = initialState, action) {
                         msg: payload.msg
                     }
             case AUTH_ERROR:
+                console.log('here is payload',payload) 
                 return {
                     ...state,
+                    
                     isAuthenticated: false,
-                    error: payload
+                    error: payload.err,
                 }
             
             default: 

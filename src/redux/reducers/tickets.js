@@ -1,4 +1,4 @@
-import { ALL_TICKETS, GET_TICKET, NEW_ERROR, NEW_TICKET } from "../types";
+import { ALL_TICKETS, CLEAR_ERROR, CLEAR_MSG, GET_TICKET, NEW_ERROR, NEW_TICKET } from "../types";
 
 
 
@@ -34,7 +34,18 @@ export default function(state = initialState, action) {
                 
                 
             }
-
+            case CLEAR_ERROR:
+                return {
+                    ...state,
+                   error:''
+                   
+                }
+            case CLEAR_MSG:
+                return {
+                    ...state,
+                    msg:'',
+                   
+                }
         case GET_TICKET:
             return {
                 ...state,

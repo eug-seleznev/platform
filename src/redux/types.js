@@ -76,9 +76,10 @@ export const PROPOSE_FAIL = 'propose_fail'
 export const IN_WORK = 'in_work'
 
 
-
+// msg catch
+export const CLEAR_MSG = 'clear_msg_field'
 //error handler
-
+export const CLEAR_ERROR = 'clear_error_field'
 
 
 

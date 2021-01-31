@@ -1,4 +1,4 @@
-import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES, DATE_PROPOSES, LIKE_PROPOSE, DELETE_PROPOSE, IN_WORK } from "../types";
+import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES, DATE_PROPOSES, LIKE_PROPOSE, DELETE_PROPOSE, IN_WORK, CLEAR_ERROR, CLEAR_MSG } from "../types";
 
 
 
@@ -7,8 +7,8 @@ const initialState = {
     dateProposes: null,
     newPropose: null,
     loaded: false,
-    msg: null,
-
+    msg: '',
+    error:''
     
 }
 
@@ -37,6 +37,16 @@ export default function(state = initialState, action) {
 
                     error: ''
                 }
+                case CLEAR_ERROR:
+                    return {
+                        ...state,
+                       error:''
+                    }
+                case CLEAR_MSG:
+                    return {
+                        ...state,
+                        msg:''
+                    }
             case DATE_PROPOSES:
                 return {
                     ...state,

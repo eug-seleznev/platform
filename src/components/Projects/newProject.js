@@ -1,6 +1,6 @@
 import  {useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { newProject } from '../../redux/actions/projects';
+import { allProjects, getProject, newProject } from '../../redux/actions/projects';
 import { newTicket } from '../../redux/actions/tikets';
 import style from '../../Styles/modules/components/Project/createPr.module.css'
 
@@ -10,7 +10,7 @@ import { Bold, H1, H3, Light, Regular, Thin} from '../../Styles/typography'
 
 const ProjectNew = ({histCurrent,closeWindow}) => {
     const dispatch = useDispatch();
-
+    const project = useSelector(state => state.projects.project)
     const [formData, setFormData ] = useState({
         
         title: '',   
@@ -38,8 +38,8 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
      
 
      const Redirect = () => {
-     
-             return histCurrent.push(`/projects`)
+            
+            histCurrent.push(`/projects/`)
          
      }
 
@@ -57,6 +57,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
           about: '',
         }),50) 
         closeWindow()
+       
         setTimeout(() => Redirect(),100) 
         
          
