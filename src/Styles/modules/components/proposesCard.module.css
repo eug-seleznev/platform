@@ -67,3 +67,26 @@
     display: inline-block;
     cursor:pointer;
 }
+@media(max-width: 1000px){
+    .cardGrid{
+        display: grid;
+        grid-template-areas:
+        'card card'
+        'cross inWork'
+        ;
+        grid-template-columns: max-content 1fr;
+        column-gap: 35px;
+        row-gap: 10px;
+    }
+    .inWork{
+        grid-area: inWork;
+        
+    }
+    .deleteBtn{
+        grid-area: cross;
+        margin-left: 20px;
+    }
+            .deleteBtn:hover{
+                transform: scale(1);
+            }
+}

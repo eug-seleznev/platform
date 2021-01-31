@@ -1,8 +1,8 @@
 import styles from '../../Styles/modules/main/main.module.css'
 import Profile from './profileComponent'
-import NewsCard from './newsCard'
+import NewsCard from '../News/newsCard'
 import ProjectsCard from './projectsCard'
-
+import NewsOpen from '../News/openNews'
 
 
 //профиль пользователя по ID
@@ -13,7 +13,7 @@ import { allNews } from '../../redux/actions/news';
 // import { allUsers } from "../../redux/actions/user";
 import { Container} from '../../Styles/common'
 import { Bold, Thin } from '../../Styles/typography'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 ///////////////
 const Main = ({history}) => {
@@ -23,6 +23,10 @@ const Main = ({history}) => {
     const listNews = useSelector(state => state.news.news)
     const loadedUser = useSelector(state => state.auth.loaded)
     const user = useSelector(state => state.auth.user)
+    const [newsOpen, setNewsOpen] = useState({
+        open: false,
+        content: null,
+    })
 
 useEffect(()=>{
     dispatch(allNews())
@@ -58,7 +62,7 @@ useEffect(()=>{
                         listNews.map((el,i)=>{
                             
                                 return(
-                                i<3 && <NewsCard el={el}/>
+                                i<3 && <div onClick={()=>setNewsOpen({open:true, content: el})}><NewsCard el={el} /></div>
                                 )
                             })
                     }
@@ -66,10 +70,13 @@ useEffect(()=>{
                     <Bold color='#3F496C' size='12' className={styles.allNews}>Все новости</Bold>       
                 </div>
 
-
+                {newsOpen.open==true && <NewsOpen close={()=>setNewsOpen({open:false, content: null})} content={newsOpen.content} />}
                 
                         
             </div>)
+
+
+
         }
         </>
     )

@@ -85,7 +85,7 @@ outline:none;
 filter:none;
 background-color:none;
 border:none;
-margin: 20px;
+margin-right: 20px;
 cursor: pointer;
 user-select: none;
 

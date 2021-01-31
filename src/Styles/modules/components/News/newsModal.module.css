@@ -1,0 +1,47 @@
+.bg{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(63, 73, 108, 0.7);
+    z-index: 9999999;
+    display: grid;
+    place-content: center;
+}
+    .card{
+       width: 60vw;
+        display: grid;
+    grid-template-areas:
+    '.      date'
+    'name   . '
+    'title  title'
+    'texts texts'
+    'filter . '
+    ;
+    grid-template-columns: 1fr max-content;
+    }
+    .name{
+        grid-area: name;
+    }
+    .title{
+        grid-area: title;
+        margin-top: 5px;
+        margin-bottom: 30px;
+    }
+    .text{
+        grid-area: texts;
+        margin-bottom: 30px;
+    }
+    .date{
+        grid-area: date;
+    
+    }
+    .filter{
+        grid-area: filter;
+    }
+    @media (max-width: 1000px){
+        .card{
+            width: 90vw;
+        }
+    }

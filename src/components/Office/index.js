@@ -87,12 +87,14 @@ useEffect(()=>{
             </div>
         
         <div className={styles.formArea}>
+            <div className={styles.formSticky}>
                 {!form?
                     <Card className={styles.openForm} onClick={()=>setForm(true)}>
                         <Bold size='12' color='#3F496C'>Предложить свое...</Bold>
                     </Card>
                     :
                     <ProposeForm closeForm={()=>setForm(false)} />}  
+            </div>
         </div>
            
       

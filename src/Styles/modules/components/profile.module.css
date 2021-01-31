@@ -41,7 +41,7 @@ row-gap: 8px;
         grid-area: rocket;
     }
 
-@media (max-width: 1500px){
+@media (max-width: 1000px){
         .profile{
             display: grid;
             grid-template-areas: 

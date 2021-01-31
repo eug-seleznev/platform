@@ -86,7 +86,7 @@ const exit = () => {
                         Отдел
                     </StyledLink>
 
-                    <StyledLink to='/myprojects'>
+                    <StyledLink to='/news'>
                         Новости
                     </StyledLink>
 

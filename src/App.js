@@ -34,7 +34,7 @@ import Permissions from './components/Superadmin/permissions';
 import Superadmin from './components/Superadmin/index.js';
 import { createBrowserHistory } from "history";
 import MyProjects from './components/Projects/My';
-import News from './components/Superadmin/newsAdm';
+import News from './components/News';
 import { innerBackend, setAuthToken } from './components/utils/axios';
 import { Container, LoginContainer } from '../src/Styles/common'
 import Viewer from './components/Viewer';
@@ -141,7 +141,7 @@ const App = () => {
               {/*adminka */}
               <Route exact path="/admin" component={Superadmin} />
               <Route exact path="/admin/permissions" component={Permissions} />
-              <Route exact path="/admin/news" component={News} />
+              <Route exact path="/news" component={News} />
 
               <Route exact path="/viewer" component={Helper} />
             </Container>
