@@ -14,9 +14,10 @@ useEffect(()=>{
     if (sprints!=undefined){
 
          let filterAll = (item) => {
+             
              return project.sprints.some(el => el==item )
              }
-             
+            
          const filtered = sprints!=undefined && sprints.filter(item => filterAll(item._id))   
          setFilt(filtered)
     } 

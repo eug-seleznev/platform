@@ -45,7 +45,7 @@ const SprintDescription = ({sprintname, index, dateOpen,taskcomplite, alltasks, 
 		const chosenSprint = () => {
 			setStatus(!status)
 			dispatch(addToChosen(id));
-	  
+		
 		   
 		}
 

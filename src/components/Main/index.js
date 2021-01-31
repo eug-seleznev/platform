@@ -15,6 +15,7 @@ import { Container} from '../../Styles/common'
 import { Bold, Thin } from '../../Styles/typography'
 import { useEffect, useState } from 'react'
 import { ButtonText } from '../../Styles/buttons'
+import { loadUser } from '../../redux/actions/auth'
 
 ///////////////
 const Main = ({history}) => {
@@ -24,6 +25,7 @@ const Main = ({history}) => {
     const listNews = useSelector(state => state.news.news)
     const loadedUser = useSelector(state => state.auth.loaded)
     const user = useSelector(state => state.auth.user)
+    const reloadSprints = useSelector(state => state.auth.chosenSprint)
     const [newsOpen, setNewsOpen] = useState({
         open: false,
         content: null,
@@ -32,8 +34,14 @@ const Main = ({history}) => {
 useEffect(()=>{
     dispatch(allNews())
     dispatch(allProjects())
-    
+
 },[])
+useEffect(()=>{
+    
+    dispatch(loadUser())
+
+},[reloadSprints])
+
 
     return (
         <>
