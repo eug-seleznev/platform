@@ -19,7 +19,8 @@
         row-gap: 20px;
     }
         .allNews{
-            text-align: right;
+            /* text-align: right; */
+            margin-left: auto;
             color: #3F496C;
         }
     .projects{
@@ -57,7 +58,7 @@
 
 
 
-@media (max-width: 800px){
+@media (max-width: 1000px){
     .mainContainer{
         display: grid;
         grid-template-areas: 

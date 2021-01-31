@@ -1,0 +1,10 @@
+.container{
+display: grid;
+row-gap: 100px;
+}
+.createDep{
+    height: 100px;
+    width: auto;
+    display: grid;
+    place-content: center;
+}

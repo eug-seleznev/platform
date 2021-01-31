@@ -32,6 +32,7 @@ import OneProjEdit from './components/Projects/OneProjEdit';
 import Main from './components/Main/index'
 import Permissions from './components/Superadmin/permissions';
 import Superadmin from './components/Superadmin/index.js';
+import Department from './components/Department/index'
 import { createBrowserHistory } from "history";
 import MyProjects from './components/Projects/My';
 import News from './components/News';
@@ -138,10 +139,8 @@ const App = () => {
               <Route exact path="/users/me" component={MyProfile} />
               <Route exact path="/users/:id" component={Employe} />
               <Route exact path="/edit" component={Edit} />
-              {/*adminka */}
-              <Route exact path="/admin" component={Superadmin} />
-              <Route exact path="/admin/permissions" component={Permissions} />
-              <Route exact path="/news" component={News} />
+              
+              <Route exact path="/department" component={Department} />
 
               <Route exact path="/viewer" component={Helper} />
             </Container>

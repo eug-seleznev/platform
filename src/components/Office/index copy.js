@@ -14,6 +14,7 @@ const Office = () => {
         const dispatch = useDispatch()
         const data = useSelector(state => state.office.data)
         const reload = useSelector(state => state.office.reload)
+        const user = useSelector(state => state.auth.user)
 
         const [form, setForm] = useState(false);
         const [filter, setFilter] = useState('');
@@ -98,9 +99,12 @@ useEffect(()=>{
 
             <div className={styles.cardsContainer}>
                 {data && data.map((el, i) =>                  
-                    <ProposeCard cardContent={el} key={i} className={styles.cardsContainer}/>
+                    <ProposeCard cardContent={el} key={i} className={styles.cardsContainer} user={user}/>
                 )}      
             </div>
+
+
+            
 
         </div>
     )

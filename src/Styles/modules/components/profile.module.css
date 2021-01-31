@@ -47,16 +47,24 @@ row-gap: 8px;
             grid-template-areas: 
             'ava  name '
             'ava  pos  '
+            'ava change'
+            'ava  .'
             ; 
-            grid-template-columns: 59px 1fr;
-            grid-template-rows: auto auto ;
-            height: 59px;
+            grid-template-columns: max-content 1fr;
+            grid-template-rows: min-content min-content min-content 1fr ;
+            height: auto;
     }
-
+    .change{
+        grid-area: change;
+        display: grid;
+        place-content: center left;
+        transform: translate3d(0px,0px,0);
+    }
     .avatar{
         grid-area: ava;
-        height: 100%;
-        width: 100%;
+        height: 20vw;
+        width: 20vw;
+        border-radius: 50%;
     }
     .name{
         grid-area: name;
@@ -76,5 +84,12 @@ row-gap: 8px;
     }
     .rocket{
         display: none;
+    }
+}
+@media (max-width: 600px){
+    .avatar{
+        grid-area: ava;
+        height: 30vw;
+        width: 30vw;
     }
 }

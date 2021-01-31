@@ -14,6 +14,7 @@ import { allNews } from '../../redux/actions/news';
 import { Container} from '../../Styles/common'
 import { Bold, Thin } from '../../Styles/typography'
 import { useEffect, useState } from 'react'
+import { ButtonText } from '../../Styles/buttons'
 
 ///////////////
 const Main = ({history}) => {
@@ -60,14 +61,14 @@ useEffect(()=>{
                     {!loadedNews? <p>loading...</p> : 
                         
                         listNews.map((el,i)=>{
-                            
+                            const amount = window.innerWidth<1000? 2 : 3
                                 return(
-                                i<3 && <div onClick={()=>setNewsOpen({open:true, content: el})}><NewsCard el={el} /></div>
+                                i<amount && <div onClick={()=>setNewsOpen({open:true, content: el})}><NewsCard el={el} /></div>
                                 )
                             })
                     }
                     
-                    <Bold color='#3F496C' size='12' className={styles.allNews}>Все новости</Bold>       
+                    <ButtonText color='#3F496C' size='12' className={styles.allNews} onClick={() => history.replace(`/news`)}>Все новости</ButtonText>       
                 </div>
 
                 {newsOpen.open==true && <NewsOpen close={()=>setNewsOpen({open:false, content: null})} content={newsOpen.content} />}

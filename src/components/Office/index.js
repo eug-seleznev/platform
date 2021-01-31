@@ -18,7 +18,7 @@ const liked = useSelector(state => state.office.likedProposes)
 const dated = useSelector(state => state.office.dateProposes)
 const loaded = useSelector(state => state.office.loaded)
 const reload = useSelector(state => state.office.reload)
-
+const user = useSelector(state => state.auth.user)
 
     const [visibleArray, setVisibleArray] = useState({
         content:dated,
@@ -106,7 +106,7 @@ useEffect(()=>{
                 {loaded && visibleArray.content!=null && visibleArray.content.map((el, i)=>{
                     return(
                         
-                            <ProposeCard cardContent={el} className={styles.cardsContainer} filters={visibleArray.filter} reverse={reverse} />
+                            <ProposeCard cardContent={el} className={styles.cardsContainer} filters={visibleArray.filter} reverse={reverse} user={user}/>
                     )
                 })}
 
