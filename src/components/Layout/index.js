@@ -27,7 +27,7 @@ const Layout = ({ histCurrent}) => {
     const [currentTitle, setCurrentTitle] = useState (false)
     const [color, setColor] = useState (false)
     const [status, setStatus] = useState (false)
-
+ 
    
    
 

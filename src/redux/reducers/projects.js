@@ -73,6 +73,7 @@ export default function(state = initialState, action) {
                     error: ''
                 }
             case ADD_SPRINT:
+                console.log(payload)
                 return {
                     ...state,
                     sprint: payload,
@@ -132,7 +133,7 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     loadedAllProj: true,
-                    project: payload,
+                    project: payload.sprint,
                     error: ''
                 }
                 case FINISH_PROJECT:
@@ -175,6 +176,7 @@ export default function(state = initialState, action) {
             case DELETE_PROJECT: 
                 return {
                     ...state,
+                    loadedAllProj: false,
                     msg: payload.msg
                 }
 

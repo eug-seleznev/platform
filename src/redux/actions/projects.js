@@ -79,11 +79,17 @@ export const getProject = (id) => async dispatch  => {
 }
 
 
-export const addSprint = (id) => async dispatch  => {
+export const addSprint = (id,formData,data) => async dispatch  => {
     try {
-        console.log(id, 'spriiiint');
+    
 
-        const res = await innerBackend.post(`/projects/sprints/new/${id}`)
+        let body = {
+            description: formData.description,
+            date: formData.date,
+            tasks: data.tasks
+        }
+        console.log(data)
+        const res = await innerBackend.post(`/projects/sprints/new/${id}`,body,)
         dispatch({
             type: ADD_SPRINT,
             payload: res.data
@@ -177,7 +183,7 @@ export const getSprint = (id) => async dispatch  => {
 
 
 
-export const addTasks = ({tasks, sprintId}) => async dispatch  => {
+export const addTasks = ({ sprintId,tasks}) => async dispatch  => {
     console.log(tasks, sprintId, 'retuuuuuuuuuuuurd')
     
     try {
