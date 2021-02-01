@@ -49,6 +49,11 @@ const Edit = ({match, history}) => {
         e.preventDefault(); 
 		console.log (e.target.value)
         setFormData({ ...formData, [e.target.name]: e.target.value });
+	 }
+	 const divisionChange = e => {
+        e.preventDefault(); 
+		console.log (e.target.value)
+        setFormData({ ...formData, [division]: e.target.value });
      }
      
 	 const changeMsg = () => {
@@ -109,13 +114,18 @@ const Edit = ({match, history}) => {
 			  	onChange={e => onChange(e)}
 			></Input>
 <p>Отдел</p>
-		  <Input 
-			  	type='text'
-			 	placeholder={division}
-				name="division"
-				value={division}
-			  	onChange={e => onChange(e)}
-			></Input>
+			<select
+			onChange={e => divisionChange(e)}
+			name='division'
+			>
+				<option  disabled>Выберите отдел</option>
+				<option value='Архитектура'>Архитектура</option>
+				<option value='Визуализации'>Визуализации</option>
+				<option value='Конструкции'>Конструкции</option>
+				<option value='Сети'>Сети</option>
+				<option value='Управление'>Управление</option>
+			</select>
+		
 
 			<p>Сменить должность</p>
  		<Input 
