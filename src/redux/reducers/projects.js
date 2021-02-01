@@ -47,12 +47,12 @@ export default function(state = initialState, action) {
                 case CREATE_PROJECT:
                 return {
                     ...state,
-                    project: payload,
-                    loadedAllProj: true,
-                    loadProject: false,
+                    // project: payload,
+                    loadedAllProj: false,
+                    loadProject: true,
                     sprint_load: false,
                     sprintLoad: false,
-                    reload: false,
+                    reload: true,
                     error: '',
                     msg: payload.msg
                 }

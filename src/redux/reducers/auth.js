@@ -81,7 +81,7 @@ export default function(state = initialState, action) {
                     ...state,
                     
                     isAuthenticated: false,
-                    error: payload.err,
+                    error: payload.err?'Заполните все поля':payload.err,
                 }
             
             default: 

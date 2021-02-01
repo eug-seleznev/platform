@@ -240,7 +240,7 @@ const Sprint = ({match, history}) => {
                   <CancelButton
                       fontSize={'16px'}
                       style={{
-                              display:`${!newFields&& user.permission != "user"?'block':'none'}`,
+                              display:`${newFields||user.permission =='user'?'none':'block'}`,
                               color:'#3F496C',
                               backgroundColor:'white',
                               border:'none'}}
