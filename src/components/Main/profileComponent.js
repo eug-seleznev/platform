@@ -5,7 +5,7 @@ import { Bold, Light } from '../../Styles/typography'
 import { ButtonText } from '../../Styles/buttons'
 
 const ProfileComponent = ({user, history, change}) => {
-console.log(user,'user')
+
     return(
         <div className={styles.profile}>
             <img className={styles.avatar} src={`${url}/${user != null? (user!= undefined? user.avatar:''):''}`}/>
@@ -16,7 +16,7 @@ console.log(user,'user')
             <Light color='#4B4B4B' size='16' className={styles.pos}>Должность: {user.position}</Light>
             <Bold size='24' className={styles.contacts}>Контакты:</Bold>
             <Light color='#4B4B4B' size='16' className={styles.mail}>{user.email}</Light>
-            <Light color='#4B4B4B' size='16' className={styles.rocket}>rocket</Light>
+            <Light color='#4B4B4B' size='16' className={styles.rocket}>rocket: {user.rocketchat && user.rocketchat}</Light>
         </div>
     )
 }

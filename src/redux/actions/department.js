@@ -78,16 +78,18 @@ export const findDepartment = (divname) => async dispatch  => {
 
 }
 
-export const joinDepartment = (divname) => async dispatch  => {
+export const joinDepartment = (id) => async dispatch  => {
     try {
-
-        const res = await innerBackend.put(`/divisions/${divname}`)
+console.log('join1' , id)
+        const res = await innerBackend.put(`/divisions/${id}`)
+        console.log('join2')
 
 
         dispatch({
             type: JOIN_DEPARTMENT,
             payload: res.data
         })
+        console.log('join3')
 
         }
       catch (err) {

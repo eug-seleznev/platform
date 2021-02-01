@@ -30,7 +30,7 @@ const exit = () => {
         }}
         unmountOnExit
         >
-        <MenuHead right={state.mobile?'30px':'110px'} onMouseLeave={closeAll}>
+        <MenuHead right='110px' onMouseLeave={closeAll}>
             
 
                     <div className='my__name'>
@@ -67,7 +67,7 @@ const exit = () => {
             }}
             unmountOnExit
             >
-            <MenuHead right={state.mobile?'30px':'30px'} onMouseLeave={closeAll}>
+            <MenuHead right='30px' onMouseLeave={closeAll}>
         
                    
                     <div className='my__name'>

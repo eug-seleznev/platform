@@ -7,10 +7,12 @@ import { useEffect, useState } from 'react'
 import { Card } from '../../Styles/common'
 import DepartmentForm from './depForm'
 import DepartmentCard from './departmentCard'
+import { allUsers } from '../../redux/actions/user'
 
 const Department = ({history}) => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.auth.user)
+    const users = useSelector(state => state.users.users)
     const departments = useSelector(state => state.departments.departments)
     const loaded = useSelector(state => state.departments.loaded)
 
@@ -18,6 +20,7 @@ const Department = ({history}) => {
 
  useEffect(()=>{
     dispatch(allDepartments())
+    dispatch(allUsers())
  },[])
  useEffect(()=>{
     console.log(departments, 'dddddddddddddddddddddddddd')
@@ -35,7 +38,7 @@ const Department = ({history}) => {
          departments.map((el, i)=>{
 
             return(
-                <DepartmentCard content={el} user={user}/>
+                <DepartmentCard content={el} user={user} history={history} users={users}/>
                 )
          })
         }

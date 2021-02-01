@@ -103,6 +103,9 @@ export const MenuHead = styled.div`
     // display: grid;
     row-gap: 14px;
 
+@media(max-width: 1000px){
+    right: 30px;
+}
     
     div.my__name{
         position: static;
