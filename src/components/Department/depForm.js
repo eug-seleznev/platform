@@ -14,13 +14,13 @@ const dispatch = useDispatch()
 
     const [formData, setFormData ] = useState({
         
-        title: '',   
-        text: '',  
+        divname: '',   
+        description: '',  
       
       });
-      const { title, text,} = formData;
+      const { divname, description,} = formData;
 
-
+  
 const onChange = e => {
 
     e.preventDefault(); 
@@ -39,7 +39,7 @@ const onSubmit = (e) => {
         closeForm()
     }, 100);  
     setFormData({
-        title:'',subtitle:'',text:''
+        divname:'',description:''
     })
 }
 
@@ -55,8 +55,8 @@ const onSubmit = (e) => {
                 className={styles.title}
                 type='text'
                 placeholder='Заголовок'
-                name='title'
-                value={title}
+                name='divname'
+                value={divname}
                 onChange={e => onChange(e)}/>
 
    
@@ -66,8 +66,8 @@ const onSubmit = (e) => {
                 className={styles.texts}
                 
                 placeholder='Описание'
-                name='text'
-                value={text}
+                name='description'
+                value={description}
                 onChange={e => onChange(e)}/>
             
 

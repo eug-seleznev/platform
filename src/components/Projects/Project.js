@@ -512,7 +512,7 @@ const Project = ({match, history}) => {
                 </div>
 
                 <div>
-                  <Viewer />
+                  {/* <Viewer /> */}
                 </div>
               </>
             )}

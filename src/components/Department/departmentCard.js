@@ -38,7 +38,7 @@ const [showConfirm, setShowConfirm] = useState(false)
             </Bold>
             <ButtonText className={styles.joinBtn}  fontSize='16px' onClick={()=>join()}>Вступить в отдел</ButtonText>
             <div className={styles.members}>
-                <div>111</div>
+                <div onClick={()=>dispatch(allDepartments())}>111</div>
                 <div>222</div>
                 <div>333</div>
                 <div>444</div>
