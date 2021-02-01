@@ -44,13 +44,12 @@ const adminka = useRef(null)
                     <p>Офис</p>
             </SidebarLink>
 
-
-            {user.permission==='admin'?
-            <SidebarLink ref={adminka}  to='/admin' className="nav-link">
-                    <img src='/sidebarIcon.png' title="Админка"></img>  
-                    {user.permission==='admin'?<p>Админка</p>:''}
-            </SidebarLink>: ''}
-                                    
+            <SidebarLink to='/department' className="nav-link" > 
+                    <img src='/sidebarIcon.png' title="Отдел"/>
+                    <p>Отдел</p>
+            </SidebarLink>
+           
+           
 
          </SidebarContainer>
          )

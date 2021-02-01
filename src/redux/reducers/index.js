@@ -6,6 +6,7 @@ import projects from './projects'
 import news from './news'
 import models from './models'
 import office from './office'
+import departments from './department'
 
 
 export default combineReducers({
@@ -16,5 +17,6 @@ export default combineReducers({
     news,
     models,
     office,
+    departments,
 
 });

@@ -6,11 +6,12 @@
     display: grid;
   
     
-    grid-template-rows: max-content 26px 224px max-content;
+    grid-template-rows: max-content 26px 100px max-content;
     column-gap: 20px;
     row-gap: 23px;
 }
 .title{
+
 }
 .texts{
 

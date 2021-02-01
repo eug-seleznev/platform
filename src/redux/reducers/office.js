@@ -1,4 +1,4 @@
-import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES, DATE_PROPOSES, LIKE_PROPOSE, DELETE_PROPOSE, IN_WORK, CLEAR_ERROR, CLEAR_MSG } from "../types";
+import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES, DATE_PROPOSES, LIKE_PROPOSE, DELETE_PROPOSE, IN_WORK,REVERSE_ARR, REVERSE_ARRDATE, CLEAR_ERROR, CLEAR_MSG } from "../types";
 
 
 
@@ -8,7 +8,11 @@ const initialState = {
     newPropose: null,
     loaded: false,
     msg: '',
-    error:''
+    error:'',
+ 
+    reload:false,
+    data: null
+
     
 }
 
@@ -24,8 +28,9 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     newPropose: payload,
+                    reload: !state.reload,
                     
-
+                    
                     error: ''
                 }
             
@@ -60,7 +65,7 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     msg: payload,
-
+                    reload: !state.reload,
 
                     error: ''
                 }
@@ -68,6 +73,7 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     msg:payload,
+                    reload: !state.reload,
 
                     error:''
                 }
@@ -76,11 +82,21 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     msg: payload,
+                    reload: !state.reload,
 
 
                     error: ''
                 }
-
+            case REVERSE_ARR:
+                return {
+                    ...state,
+                    data: payload
+                }
+                case REVERSE_ARRDATE:
+                    return {
+                        ...state,
+                        data: payload
+                    }
     case PROPOSE_FAIL:
         return {
             ...state,

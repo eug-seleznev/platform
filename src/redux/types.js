@@ -75,12 +75,22 @@ export const DELETE_PROPOSE = 'delete_propose'
 export const PROPOSE_FAIL = 'propose_fail'
 export const IN_WORK = 'in_work'
 
+// departments
+export const NEW_DEPARTMENT = 'new_department'
+export const ALL_DEPARTMENTS = 'all_departments'
+export const FIND_DEPARTMENT = 'find_department'
+export const JOIN_DEPARTMENT = 'join_department'
+export const LEAVE_DEPARTMENT = 'leave_department'
+export const DEPARTMENT_FAIL = 'department_fail'
 
 // msg catch
 export const CLEAR_MSG = 'clear_msg_field'
 //error handler
 export const CLEAR_ERROR = 'clear_error_field'
 
+//REVERSE
+export const REVERSE_ARR = 'reverse';
+export const REVERSE_ARRDATE = 'revarrdate'
 
 
 

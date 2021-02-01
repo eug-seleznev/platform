@@ -1,75 +1,89 @@
 import styles from '../../Styles/modules/office/office.module.css'
 import { useState, useEffect} from 'react'
 import { useDispatch, useSelector} from 'react-redux'
-import { newPropose, likedProposes, dateProposes, likePropose, deletePropose} from '../../redux/actions/office'
+import {Reverse, ReverseDate} from '../../redux/actions/office'
 import {Card} from '../../Styles/common'
-import { Bold, Light, Thin, Regular} from '../../Styles/typography'
-import {Button, FilterButton, ButtonText } from '../../Styles/buttons'
+import { Bold,  Thin, Regular} from '../../Styles/typography'
+import { FilterButton } from '../../Styles/buttons'
 import  ProposeCard  from './proposesCard'
 import  ProposeForm  from './proposeForm'
 
 
+
 const Office = () => {
+        const dispatch = useDispatch()
+        const data = useSelector(state => state.office.data)
+        const reload = useSelector(state => state.office.reload)
+        const user = useSelector(state => state.auth.user)
+
+        const [form, setForm] = useState(false);
+        const [filter, setFilter] = useState('');
+        const [arrowReverse, setArrowReverse] = useState('');
+
+        let isInitial;
+
+    //dispatch initial value
+    useEffect(()=>{
+        setFilter('like')
+        isInitial = true;
+        dispatch(Reverse({isInitial}))
+},[])
 
 
-
-const dispatch = useDispatch()
-const liked = useSelector(state => state.office.likedProposes)
-const dated = useSelector(state => state.office.dateProposes)
-const loaded = useSelector(state => state.office.loaded)
-
-    const [show, setShow] = useState(dated)
-    const [reverse, setReverse] = useState(false)
-    const [form, setForm] = useState(false)
-    const [filters, setFilters] = useState()
-
-const reverseFunc = () =>{
-  } 
-
-  useEffect(()=>{
-   show!=null && setShow(show.reverse()) 
-
-
-},[reverse])
-
-const likeFIlter = () => {
-    if(show!=liked){
-        setReverse(false)
-        setShow(liked)
-        setFilters('по лайкам')
-        console.log(show,reverse, 'function !=')
-    } else if (show==liked || show==liked.reverse()) {
-        setReverse(!reverse)
-        console.log(show,reverse, 'function ==')
-
+const likeButton = ()=>{
+    if (filter!='like'){
+        isInitial = true
+        setFilter('like')
+        setArrowReverse(false)
+        return dispatch(Reverse({isInitial}))
     }
-    
-  
-    
+    setArrowReverse(!arrowReverse)
+    dispatch(Reverse({data, isInitial}))
+   
 }
-const dateFIlter = () => {
-    if(show!=dated){
-        setReverse(false)
-        setShow(dated)
-        setFilters('по дате')
-    } else if (show==dated) {
-        setReverse(!reverse)
+const dateButton = ()=>{
+    if (filter!='date'){
+        isInitial = true
+        setFilter('date')
+        setArrowReverse(false)
+        return dispatch(ReverseDate({isInitial}))
     }
+    setArrowReverse(!arrowReverse)
+    dispatch(ReverseDate({data, isInitial}))
+   
 }
+
 
 useEffect(()=>{
-    dispatch(likedProposes())
-    dispatch(dateProposes())
-   setShow(dated)
-},[])
+    console.log('reloading') 
+
+
+    if (filter=='like'){
+        isInitial = true
+    console.log('reloadingLikes') 
+        
+        return dispatch(Reverse({isInitial}))
+    } if (filter=='date'){
+        isInitial = true
+    console.log('reloadingDates') 
+
+        return dispatch(ReverseDate({isInitial}))
+    }
+
+
+},[reload])
+
+
+
+    if(data) isInitial=false;
 
     return (
         <div className={styles.officeContainer}> 
             <Thin size='24' className={styles.title}>Предложения для офиса: </Thin>
 
             <div className={styles.filters}>
-            <FilterButton arrow={show==liked? true : false} reverse={reverse} onClick={()=>likeFIlter()}>Лайки</FilterButton>
-            <FilterButton arrow={show==dated? true : false} reverse={reverse} onClick={()=>dateFIlter()}>Дата</FilterButton>
+            <FilterButton arrow={filter=='like'? true : false} reverse={arrowReverse} onClick={() => likeButton()} >Лайки</FilterButton>
+            <FilterButton arrow={filter=='date'? true : false} reverse={arrowReverse} onClick={() => dateButton()} >Дата</FilterButton>
             </div>
         
         <div className={styles.formArea}>
@@ -81,21 +95,16 @@ useEffect(()=>{
                     <ProposeForm closeForm={()=>setForm(false)} />}  
         </div>
            
-      
-
-            {/* <Button onClick={()=>console.log(liked, 'liked', dated, 'dated')}>console log proposes</Button> */}
-            
+                  
 
             <div className={styles.cardsContainer}>
-                {loaded && show!=null && show.map((el, i)=>{
-                    return(
-                        
-                            <ProposeCard cardContent={el} className={styles.cardsContainer} filters={filters} reverse={reverse} />
-                    )
-                })}
-
-                
+                {data && data.map((el, i) =>                  
+                    <ProposeCard cardContent={el} key={i} className={styles.cardsContainer} user={user}/>
+                )}      
             </div>
+
+
+            
 
         </div>
     )

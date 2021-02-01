@@ -13,6 +13,7 @@
     grid-template-rows: max-content max-content auto;
     grid-template-columns: 1.3fr 1fr .15fr;
     column-gap: 180px;
+    row-gap: 20px;
 }
 
 
@@ -32,4 +33,46 @@
 }
 .formArea{
     grid-area: form;
+}
+
+@media (max-width: 1400px){
+    .officeContainer{
+ 
+        grid-template-columns: 1.5fr 1fr;
+     
+    }
+}
+@media (max-width: 1000px){
+    .officeContainer{
+        display: grid;
+        grid-template-areas:
+        'title'
+        'form'
+        'filters'
+        'cards'
+        ;
+        grid-template-rows: unset;
+        grid-template-columns: 1.3fr;
+  
+    }
+    .cardsContainer{
+        grid-area: cards;
+        display: grid;
+        row-gap: 30px;
+    }
+}   
+@media (max-width: 500px){
+    .newsContainer{
+        display: grid;
+        grid-template-columns: 1fr;
+        column-gap: 30px;
+        row-gap: 10px;
+    }
+    .buttons{
+        display: grid;
+        place-content: unset;
+        row-gap: 10px;
+        margin-left: 10px;
+    }
+  
 }

@@ -1,4 +1,5 @@
-.formContainer{
+
+.form{
     margin-top: 20px;
     margin-bottom: 20px;
     margin-right: 20px;
@@ -11,15 +12,16 @@
     row-gap: 23px;
 }
 .title{
-}
-.texts{
 
 }
-.createBtn{
+.subTitle{
+
+}
+.text{
+    resize: none;
+}
+.button{
     width: 170px;
 margin-left: auto
 }
-.formSticky{
-    position: sticky;
-    top:100px;
-}
+

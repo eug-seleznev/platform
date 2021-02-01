@@ -3,7 +3,7 @@
     grid-template-areas:
     'cross card inWork'
     ;
-    grid-template-columns: max-content 1fr max-content;
+    grid-template-columns: 25px 1fr max-content;
     column-gap: 35px;
 }
 .inWork{
@@ -26,11 +26,11 @@
     display: grid;
     grid-template-areas:
     '. . date'
-    'title . .'
-    'texts . .'
-    'filters likes likeB'
+    'title title .'
+    'texts texts .'
+    'likes filters  likeB'
     ;
-    grid-template-columns: 1fr max-content max-content;
+    grid-template-columns:max-content 1fr  max-content;
     column-gap: 10px;
     row-gap: 10px;
 }
@@ -57,13 +57,33 @@
     /* height: 30px; */
 }
 
-.filters{
+.inWorkBtn{
     grid-area: filters;
     margin-top: auto;
     margin-bottom: auto;
-
-}
-.inWorkBtn{
     display: inline-block;
     cursor:pointer;
+}
+@media(max-width: 1000px){
+    .cardGrid{
+        display: grid;
+        grid-template-areas:
+        'card card'
+        'cross inWork'
+        ;
+        grid-template-columns: max-content 1fr;
+        column-gap: 35px;
+        row-gap: 10px;
+    }
+    .inWork{
+        grid-area: inWork;
+        
+    }
+    .deleteBtn{
+        grid-area: cross;
+        margin-left: 20px;
+    }
+            .deleteBtn:hover{
+                transform: scale(1);
+            }
 }
