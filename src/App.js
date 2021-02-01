@@ -140,6 +140,9 @@ const App = () => {
               <Route exact path="/users/:id" component={Employe} />
               <Route exact path="/edit" component={Edit} />
               
+              <Route exact path="/news" component={News} />
+
+
               <Route exact path="/department" component={Department} />
 
               <Route exact path="/viewer" component={Helper} />
