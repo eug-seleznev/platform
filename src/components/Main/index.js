@@ -16,6 +16,7 @@ import { Bold, Thin } from '../../Styles/typography'
 import { useEffect, useState } from 'react'
 import { ButtonText } from '../../Styles/buttons'
 import { loadUser } from '../../redux/actions/auth'
+import { Redirect } from 'react-router-dom'
 
 ///////////////
 const Main = ({history}) => {
@@ -30,6 +31,10 @@ const Main = ({history}) => {
         open: false,
         content: null,
     })
+
+
+
+
 
 useEffect(()=>{
         dispatch(loadUser());
@@ -49,6 +54,12 @@ useEffect(()=>{
 
 },[reloadSprints])
 
+
+
+
+if(!user.name){
+    return <Redirect to='edit' />
+}
 
     return (
         <>
