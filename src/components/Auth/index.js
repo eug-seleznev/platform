@@ -1,19 +1,26 @@
 import styles from '../../Styles/modules/login/logScreen.module.css'
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import Login from './Login'
 import Register from './Register'
 import RegisterCustomer from './RegisterCustomer'
 import { Card, Container} from '../../Styles/common'
 import {LoginButton} from '../../Styles/buttons'
 import {Bold, Regular, Light} from '../../Styles/typography'
-
+import {useSelector} from 'react-redux'
 
 
 const Auth = () => {
     const [page, setPage] = useState(0)
+    const errorAuth = useSelector(state => state.auth.error)
+    // useEffect(()=>{
+    //     if(errorAuth !=""){
+    //         setError(errorAuth)
+    //     }
+    // },[errorAuth])
     return (
         <div className={styles.margins}>
         <div className={styles.container}>
+            
             <div className={styles.buro}>
                 <Bold size='30' color='white'>BURO82</Bold>
                 <Light size='16' color='white' className={styles.mobSlogan}>Вся информация о проекте в единой информационной среде.</Light>

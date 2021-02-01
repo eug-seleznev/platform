@@ -279,7 +279,9 @@ useEffect(() => {
                     
                     <H1 size='24' >{project.title}</H1>
                     <Bold size='16'>
-                      <div className={style.title__small}>
+                      <div className={style.title__small} style={{ display: `${
+                        user.permission === "user" ? "none" : "flex"
+                      }`}}>
                       
                         <div className={style.title__options} onClick={() => history.replace(`/admin/editproj/${project.crypt}`)}>Настройки</div>
                         <img onClick={() => history.replace(`/admin/editproj/${project.crypt}`)} src='/image 1.png'></img>
