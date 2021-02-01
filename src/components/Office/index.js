@@ -18,7 +18,7 @@ const liked = useSelector(state => state.office.likedProposes)
 const dated = useSelector(state => state.office.dateProposes)
 const loaded = useSelector(state => state.office.loaded)
 const reload = useSelector(state => state.office.reload)
-
+const user = useSelector(state => state.auth.user)
 
     const [visibleArray, setVisibleArray] = useState({
         content:dated,
@@ -87,12 +87,14 @@ useEffect(()=>{
             </div>
         
         <div className={styles.formArea}>
+            <div className={styles.formSticky}>
                 {!form?
                     <Card className={styles.openForm} onClick={()=>setForm(true)}>
                         <Bold size='12' color='#3F496C'>Предложить свое...</Bold>
                     </Card>
                     :
                     <ProposeForm closeForm={()=>setForm(false)} />}  
+            </div>
         </div>
            
       
@@ -104,7 +106,7 @@ useEffect(()=>{
                 {loaded && visibleArray.content!=null && visibleArray.content.map((el, i)=>{
                     return(
                         
-                            <ProposeCard cardContent={el} className={styles.cardsContainer} filters={visibleArray.filter} reverse={reverse} />
+                            <ProposeCard cardContent={el} className={styles.cardsContainer} filters={visibleArray.filter} reverse={reverse} user={user}/>
                     )
                 })}
 

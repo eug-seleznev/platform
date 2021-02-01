@@ -32,9 +32,10 @@ import OneProjEdit from './components/Projects/OneProjEdit';
 import Main from './components/Main/index'
 import Permissions from './components/Superadmin/permissions';
 import Superadmin from './components/Superadmin/index.js';
+import Department from './components/Department/index'
 import { createBrowserHistory } from "history";
 import MyProjects from './components/Projects/My';
-import News from './components/Superadmin/newsAdm';
+import News from './components/News';
 import { innerBackend, setAuthToken } from './components/utils/axios';
 import { Container, LoginContainer } from '../src/Styles/common'
 import Viewer from './components/Viewer';
@@ -138,10 +139,8 @@ const App = () => {
               <Route exact path="/users/me" component={MyProfile} />
               <Route exact path="/users/:id" component={Employe} />
               <Route exact path="/edit" component={Edit} />
-              {/*adminka */}
-              <Route exact path="/admin" component={Superadmin} />
-              <Route exact path="/admin/permissions" component={Permissions} />
-              <Route exact path="/admin/news" component={News} />
+              
+              <Route exact path="/department" component={Department} />
 
               <Route exact path="/viewer" component={Helper} />
             </Container>

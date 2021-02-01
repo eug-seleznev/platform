@@ -24,7 +24,7 @@ const MyProfile = ({match, history}) => {
     return (
         <div className={styles.mainContainer}>
 
-            <ProfileComponent user={user} history={history}/>
+            <ProfileComponent user={user} history={history} change/>
 
             <div className={styles.projects}>
                     <Bold color='black' size='36' className={styles.myProj}>Мои проекты</Bold>

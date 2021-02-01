@@ -81,7 +81,7 @@ const Edit = ({match, history}) => {
    
   
     return (
-		<SmallContainer>
+		<div>
 			<Card style={{paddingBottom:'75px'}}>
         {!loaded? <div>loaded...</div> :
 		  
@@ -151,7 +151,7 @@ const Edit = ({match, history}) => {
              
    )}
 			</Card>
-	</SmallContainer>
+	</div>
 
     )
 }

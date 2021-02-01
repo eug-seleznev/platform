@@ -1,0 +1,77 @@
+.mainContainer{
+    display: grid;
+    grid-template-areas:
+    'title . '
+    'cards form'
+    ;
+    grid-template-columns: 1.5fr 1fr 0.1fr;
+    column-gap: 200px;
+    row-gap: 30px;
+}
+.formArea{
+    grid-area: form;
+}
+    .formSticky{
+        position: sticky;
+        top:100px;
+    }
+.allNewsList{
+    grid-area: cards;
+    display: grid;
+    row-gap: 30px;
+}
+    .title{
+        grid-area: title;
+        border-bottom: 1px solid black ;
+        padding-bottom: 20px;
+    }
+.newsContainer{
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    column-gap: 30px;
+}
+    .buttons{
+        display: grid;
+        place-content: center;
+        row-gap: 10px;
+    }
+    .openForm{
+      
+        height: 110px;
+        display: grid;
+        place-content: center;
+    }
+    @media (max-width: 1400px){
+        .mainContainer{
+     
+            grid-template-columns: 1.5fr 1fr;
+         
+        }
+    }
+    @media (max-width: 1000px){
+        .mainContainer{
+            display: grid;
+            grid-template-areas:
+            'title'
+            'form'
+            'cards'
+            ;
+            grid-template-columns: 1fr;
+            column-gap: 200px;
+            row-gap: 30px;
+        }
+    }   
+    @media (max-width: 500px){
+        .newsContainer{
+            display: grid;
+            grid-template-columns: 1fr;
+            column-gap: 30px;
+            row-gap: 10px;
+        }
+        .buttons{
+            display: grid;
+            place-content: unset;
+            row-gap: 10px;
+            margin-left: 10px;
+        }
+    }
