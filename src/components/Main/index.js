@@ -33,18 +33,16 @@ const Main = ({history}) => {
 
 useEffect(()=>{
         dispatch(loadUser());
-setTimeout(() => {
-   
-}, 0)
+
  
 
 },[])
 useEffect(() => {
-    if(user){
+
 dispatch(allNews());
 dispatch(allProjects());
-    }
-}, [user])
+    
+}, [])
 useEffect(()=>{
     
     dispatch(loadUser())
