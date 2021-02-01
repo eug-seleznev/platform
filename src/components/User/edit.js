@@ -10,12 +10,16 @@ import {Button} from '../../Styles/buttons'
 import { Card, SmallContainer } from "../../Styles/common";
 import { Input, LogForm } from "../../Styles/Forms";
 import styled from "styled-components";
+import { allDepartments, joinDepartment } from "../../redux/actions/department";
 
 const Edit = ({match, history}) => {
 	
 	const loaded = useSelector(state => state.auth.loaded)
-    const user = useSelector(state => state.auth.user)
-    const dispatch = useDispatch();
+	const user = useSelector(state => state.auth.user)
+	const departments = useSelector(state => state.departments.departments)
+	// const select = user.division.divname==el.divname && selected
+	const dispatch = useDispatch();
+	console.log(departments, 'alaljlhskhdahsldjljk')
     const [formData, setFormData ] = useState({
         
 		name: user.name ? user.name : '',
@@ -36,15 +40,15 @@ const Edit = ({match, history}) => {
       const handleFile = e => {
         setFile(e.target.files[0])
 	}
-	// useEffect (()=> {
-	// 	if (file !== null) {
-	// 		setTimeout(() => {
-	// 		dispatch (changeAvatar(file))
-	// 	}, 200);
-	// 	}
-		
-		
-	// },[file])
+
+
+
+	useEffect (()=> {
+	dispatch(allDepartments())
+	},[])
+
+
+
     const onChange = e => {
         e.preventDefault(); 
 		console.log (e.target.value)
@@ -52,8 +56,8 @@ const Edit = ({match, history}) => {
 	 }
 	 const divisionChange = e => {
         e.preventDefault(); 
-		console.log (e.target.value)
-        setFormData({ ...formData, [division]: e.target.value });
+		// setFormData({ ...formData, [division]: e.target.value });
+		dispatch(joinDepartment(e.target.value))
      }
      
 	 const changeMsg = () => {
@@ -118,12 +122,14 @@ const Edit = ({match, history}) => {
 			onChange={e => divisionChange(e)}
 			name='division'
 			>
-				<option  disabled>Выберите отдел</option>
-				<option value='Архитектура'>Архитектура</option>
-				<option value='Визуализации'>Визуализации</option>
-				<option value='Конструкции'>Конструкции</option>
-				<option value='Сети'>Сети</option>
-				<option value='Управление'>Управление</option>
+				<option disabled>Выберите отдел</option>
+				{departments && departments.map((el,i)=>{
+
+					return(
+						<option selected={user.division.divname==el.divname ? true : false} value={el.divname}>{el.divname}</option>
+					)
+				})}
+				
 			</select>
 		
 

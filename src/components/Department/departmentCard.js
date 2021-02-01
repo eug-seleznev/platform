@@ -11,24 +11,25 @@ import UserCard from '../User/userCard'
 import { allUsers } from '../../redux/actions/user';
 import { loadUser } from '../../redux/actions/auth';
 
-const DepartmentCard = ({content, user, history, users}) => {
+const DepartmentCard = ({ user, history, users}) => {
 
 
 
 const dispatch = useDispatch()
+const content=user.division
 const member = user.division && user.division.divname==content.divname
 const usersArr = users.filter(item => item.division? item.division.divname== content.divname : false)
 
 const [showConfirm, setShowConfirm] = useState(false)
 
 
-    const join = () => {
-        dispatch(joinDepartment(content.divname))
-        setTimeout(() => {
-        dispatch(allUsers())
-        dispatch(loadUser())
-    }, 100);
-    }
+    // const join = () => {
+    //     dispatch(joinDepartment(content.divname))
+    //     setTimeout(() => {
+    //     dispatch(allUsers())
+    //     dispatch(loadUser())
+    // }, 100);
+    // }
 
     const deleteDep = () => {
         dispatch(deleteDepartment(content.divname))
@@ -42,7 +43,7 @@ const [showConfirm, setShowConfirm] = useState(false)
     return(
         <div className={styles.container}>
             <Bold className={styles.title} size='30'>{content.divname}</Bold>
-            <Bold className={styles.joinBtn}  size='16px' color='#3F496C' onClick={!member?()=>join() : ()=>setShowConfirm(true)}>{!member?'Вступить в отдел' : 'Выйти из отдела'}</Bold>
+            <Bold className={styles.joinBtn}  size='16px' color='#3F496C' onClick={()=>setShowConfirm(true)}>Выйти из отдела</Bold>
             <div className={styles.members}>
               
 

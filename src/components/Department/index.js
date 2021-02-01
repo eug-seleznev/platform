@@ -22,25 +22,23 @@ const Department = ({history}) => {
     dispatch(allDepartments())
     dispatch(allUsers())
  },[])
- useEffect(()=>{
-    console.log(departments, 'dddddddddddddddddddddddddd')
- },[departments])
+console.log(users,'ssssssssssssssssssssssssssss')
 
     return(
         <div className={styles.container}>
             <Profile   user={user} history={history}/>
 
-        { user.permission=='admin' && (
-        !openForm? <Card className={styles.createDep} onClick={()=>setOpenForm(true)}>Создать отдел</Card> : <DepartmentForm closeForm={()=>setOpenForm(false)}/>
-        )}
-            
-        {!loaded? <div>loading ...</div> :
-         departments.map((el, i)=>{
+    
+        {!user.division? <div>loading ...</div> :
 
-            return(
-                <DepartmentCard content={el} user={user} history={history} users={users}/>
-                )
-         })
+            <DepartmentCard user={user} history={history} users={users}/>
+
+        //  departments.map((el, i)=>{
+
+        //     return(
+        //         <DepartmentCard content={el} user={user} history={history} users={users}/>
+        //         )
+        //  })
         }
             
 
