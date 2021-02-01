@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { ALL_USERS, USER_ERR, CHANGE_PERMISSION, PERM_RETURN, ONE_USER,} from "../types";
+import { ALL_USERS, USER_ERR, CHANGE_PERMISSION, PERM_RETURN, ONE_USER, CLEAR_ERROR, CLEAR_MSG,} from "../types";
 
 
 
@@ -52,6 +52,7 @@ export const getUser = (id) => async dispatch  => {
     } 
 
 }
+
 export const permissionReturn = () =>  dispatch => {
   return dispatch({
     type: PERM_RETURN,

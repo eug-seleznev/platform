@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { ALL_NEWS, GET_NEWS,CREATE_NEWS, DELETE_NEWS, UPDATE_NEWS, NEWS_FAIL, } from "../types";
+import { ALL_NEWS, GET_NEWS,CREATE_NEWS,CLEAR_MSG, DELETE_NEWS, UPDATE_NEWS, NEWS_FAIL,CLEAR_ERROR } from "../types";
 
 
 export const createNews = (formData) => async dispatch  => {

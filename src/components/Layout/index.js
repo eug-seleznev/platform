@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react'
 import ModalWindow from '../Projects/components/ModalWindow'
 import Header from './header'
 import Sidebar from './sidebar'
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { BackendMsg }  from '../../Styles/layout'
 
+import {errorAuthClear, msgAuthClear}  from "../../redux/actions/auth";
 const Layout = ({ histCurrent}) => {
+    const dispatch = useDispatch()
     const project = useSelector(state => state.projects)
     const createSprMsg = useSelector(state => state.projects.sprint_msg)
     const createProjMsg = useSelector(state => state.projects.msg)
@@ -93,16 +95,25 @@ const Layout = ({ histCurrent}) => {
             setMsgTiming(true)
                 setTimeout(()=>{
                     setMsgTiming(false)
+                    
+                        setError('')
+                        dispatch(errorAuthClear())
+             
                 },4500)
         }
     },[error])
     useEffect(()=>{
         if(msg!=''){
             setColor('green')
-            
+           
             setMsgTiming(true)
-                setTimeout(()=>{
+                setTimeout(()=>{ 
                     setMsgTiming(false)
+                    
+                         setMsg('')
+                         dispatch(msgAuthClear())
+               
+                   
                 },3500)
         }
     },[msg])
@@ -128,10 +139,10 @@ const Layout = ({ histCurrent}) => {
     return <div style={{zIndex: '9999'}}>
         <Header createProj={createProj} createTicket={createTicket} createNews={createNews}/>
         <Sidebar/>
-        <BackendMsg color={color} style={{opacity:`${msgTiming?1:0}`,zIndex:`${msgTiming?10000:-1000}`, transition:'500ms ease all'}}>
+        <BackendMsg color={color} style={{opacity:`${msgTiming?1:0}`,zIndex:`${msgTiming?10000:-1000}`}}>
             {color==='red'?error:color==='green'?msg:''}
          
-      </BackendMsg>
+        </BackendMsg>
         <ModalWindow 
             bigTitle={currentTitle} 
             histCurrent={histCurrent} 

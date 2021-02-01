@@ -55,22 +55,22 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 		setFormData({ ...formData, [e.target.name]:  e.target.value=='нет'?'':editedYY +'-'+editedMM+'-'+editedDD})
 		
 	 }
-	 	useEffect(()=>{
-			console.log(sprintData)
-		 },[sprintData])
-	  useEffect(()=>{
-		console.log(formData)
-	  },[formData])
+	 	// useEffect(()=>{
+		// 	console.log(sprintData)
+		//  },[sprintData])
+	//   useEffect(()=>{
+	// 	console.log(formData)
+	//   },[formData])
 	  const onChange2 = e => {
 		e.preventDefault(); 
-		console.log (e.target.value)
+		// console.log (e.target.value)
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	 }
 	 	const enter =()=>{
 			 setEnterWin(true)
 		 }
 		const onSubmit = (data)=> {
-			console.log(data)
+			// console.log(data)
 					
 					setTimeout(() => {
 						dispatch(addSprint(project.crypt,formData,data))
