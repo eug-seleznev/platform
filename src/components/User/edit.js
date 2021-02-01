@@ -4,11 +4,12 @@ import {changeData, changeAvatar} from '../../redux/actions/auth'
 import { url } from '../utils/axios';
 
 
-
+import styles from '../../Styles/modules/components/user/edit.module.css'
 //styled components
 import {Button} from '../../Styles/buttons'
 import { Card, SmallContainer } from "../../Styles/common";
 import { Input, LogForm } from "../../Styles/Forms";
+import styled from "styled-components";
 
 const Edit = ({match, history}) => {
 	
@@ -86,8 +87,8 @@ const Edit = ({match, history}) => {
         {!loaded? <div>loaded...</div> :
 		  
 		  (  
-			  <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-		  <LogForm  onSubmit={onSubmit}>
+			  <div /*style={{display:'flex', flexDirection:'column', alignItems:'center'}}*/>
+		  <LogForm className={styles.editForm}  onSubmit={onSubmit}>
 
 		<p>Имя</p>
 		  <Input 
@@ -134,19 +135,18 @@ const Edit = ({match, history}) => {
 			></Input>
 			
 			
-			<br/>
-			<br/>
-			<Button style={{width:'20vw', transform: 'translateY(60px)'}} onClick={changeMsg}  type="submit" value="Submit" >Сохранить</Button>
-			<Button style={{width:'20vw', transform: 'translateY(80px)'}} onClick={Redirect}  >Ничего не менять</Button>
-		  </LogForm>
-		  <form style={{marginTop:'-110px'}} >
 			  <p>Сменить аватар</p>
 			 <Input 
                 type='file'
                 placeholder='загрузите изображение'
-				onChange={handleFile}></Input><br/><br/>
-				</form>
-				<div style={{opacity: `${text !==''?1:0}`, transition:'500ms ease opacity', marginTop: '70px'}}>{text}</div>
+				onChange={handleFile}></Input>
+				
+			
+			<Button  onClick={changeMsg}  type="submit" value="Submit" >Сохранить</Button>
+			<span />
+			<Button  onClick={Redirect}  >Ничего не менять</Button>
+		  </LogForm>
+		  
 				</div>
              
    )}
