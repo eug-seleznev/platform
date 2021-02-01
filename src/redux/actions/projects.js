@@ -32,13 +32,11 @@ export const newProject = (formData) => async dispatch  => {
 export const allProjects = () => async dispatch  => {
     
     try {
-        console.log('hello projects')
-        const res = await instance.get('/projects')
+        const res = await innerBackend.get('/projects')
         dispatch({
             type: ALL_PROJECTS,
             payload: res.data
         })
-        console.log(res, 'hello res')
         }
       catch (err) {
         const errors = err.response.data.err;
