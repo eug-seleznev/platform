@@ -530,7 +530,7 @@ useEffect(() => {
                 </div>
 
                 <div>
-                  <Viewer />
+                  {/* <Viewer /> */}
                 </div>
               </>
             )}
