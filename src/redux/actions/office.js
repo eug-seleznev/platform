@@ -8,10 +8,8 @@ import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES, DATE_PROPOSES, LIKE_PROPOSE,
 
 export const newPropose = (formData) => async dispatch  => {
     try {
-        console.log(formData)
 
         const res = await innerBackend.post('/props', formData)
-console.log(formData)
 
         dispatch({
             type: NEW_PROPOSE,
@@ -90,7 +88,6 @@ export const likePropose = (id) => async dispatch => {
             type: LIKE_PROPOSE,
             payload: res.data
         })
-        console.log('hehehehhe')
     }
     catch (err) {
         const errors = err.response.data.err
