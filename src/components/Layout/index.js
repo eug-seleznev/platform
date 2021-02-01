@@ -95,10 +95,10 @@ const Layout = ({ histCurrent}) => {
             setMsgTiming(true)
                 setTimeout(()=>{
                     setMsgTiming(false)
-                    setError('')
-                  
-                    dispatch(errorAuthClear())
-                   
+                    setTimeout(() => {
+                        setError('')
+                        dispatch(errorAuthClear())
+                    }, 500);
                 },4500)
         }
     },[error])
@@ -107,11 +107,12 @@ const Layout = ({ histCurrent}) => {
             setColor('green')
             
             setMsgTiming(true)
-                setTimeout(()=>{
-                    setMsg('')
+                setTimeout(()=>{ 
                     setMsgTiming(false)
-                  
-                    dispatch(msgAuthClear())
+                    setTimeout(() => {
+                         setMsg('')
+                         dispatch(msgAuthClear())
+                    }, 500);
                    
                 },3500)
         }

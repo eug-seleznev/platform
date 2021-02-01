@@ -28,8 +28,11 @@ const Auth = () => {
             setMsgTiming(true)
                 setTimeout(()=>{
                     setMsgTiming(false)
-                    setError('')
-                    dispatch(errorAuthClear()) 
+                    setTimeout(() => {
+                        setError('')
+                        dispatch(errorAuthClear())
+                    }, 500);
+                     
                 },4500)
         }
     },[error])
@@ -40,8 +43,10 @@ const Auth = () => {
             setMsgTiming(true)
                 setTimeout(()=>{
                     setMsgTiming(false)
-                    dispatch(msgAuthClear()) 
-                    setMsg('')
+                    setTimeout(() => {
+                        dispatch(msgAuthClear()) 
+                        setMsg('')
+                }, 500);
                 },3500)
         }
     },[msg])

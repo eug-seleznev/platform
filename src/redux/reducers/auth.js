@@ -27,8 +27,8 @@ export default function(state = initialState, action) {
                 ...state,
                 loaded: true,
                 token: true,
-                error: ''
-                
+                error: payload.err,
+                msg:'',
             }
             case CLEAR_ERROR:
                 return {
@@ -81,7 +81,7 @@ export default function(state = initialState, action) {
                     ...state,
                     
                     isAuthenticated: false,
-                    error: payload.err?'Заполните все поля':payload.err,
+                    error: payload.err
                 }
             
             default: 
