@@ -33,7 +33,9 @@ export default function(state = initialState, action) {
             
         
             case ALL_DEPARTMENTS:
+                console.log(payload, 'payload')
                 return {
+                    
                     ...state,
                     departments: payload,
                     loaded: true,
