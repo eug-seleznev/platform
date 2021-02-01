@@ -28,7 +28,7 @@ export default function(state = initialState, action) {
                 loaded: true,
                 token: true,
                 error: payload.err,
-                msg:'',
+                msg:''
             }
             case CLEAR_ERROR:
                 return {

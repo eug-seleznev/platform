@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import "./oneproject.css"
 
 import style from '../../Styles/modules/components/Project/oneproj.module.css'
-import { useLocation} from "react-router";
-import { addSprint, getProject, allSprints, deleteProject, joinTeam, finishProject} from "../../redux/actions/projects";
-import { getTicket } from "../../redux/actions/tikets";
-import {Button} from '../../Styles/buttons'
-import {  Redirect } from 'react-router-dom';
+
+import { getProject, allSprints, deleteProject, joinTeam, finishProject} from "../../redux/actions/projects";
+
+import {Button, CancelButton} from '../../Styles/buttons'
+
 import { Table, Td, Tr } from "../../Styles/tables";
 import { Status } from "../../Styles/project";
-import { Container, Card,} from "../../Styles/common";
+import {ModalContainer, ModalWind,} from "../../Styles/common";
 import { Bold, H1, H3, Light} from '../../Styles/typography'
 import SprintDescription from './components/SprintDescrForOneProj'
 import ProjTeam from './components/ProjTeam'
@@ -36,7 +36,7 @@ const Project = ({match, history}) => {
     const sprints = useSelector(state => state.projects.sprints)
     const trick = useSelector(state => state.projects.trick)
 
- 
+    const [status, setStatus] = useState (false)
     const [sprintDays, setSprintDays] = useState([]);
     const [calendLoader, setCalendLoader] = useState (false);
     const [paint, setPaint] = useState(false);
@@ -63,7 +63,7 @@ const Project = ({match, history}) => {
     if (loaded && sprintsLoad && trick){
      
     dispatch(Oauth(project.crypt));
-      console.log('stage2')
+      // console.log('stage2')
       const Calendar = () => {return new Promise((resolve, reject) =>  {
         
         //  Вот это все короче собирает инфу с бекенда, 
@@ -91,29 +91,27 @@ const Project = ({match, history}) => {
       )  
     }
     
-
 }, [sprintsLoad, loaded, trick])
         
 
 
 
-useEffect(() => {
-  console.log(sprintDays, 'new sprintDay')
-  console.log(calendLoader, 'CALENDAR LOADER TIME HERE')
-}, [calendLoader])
+// useEffect(() => {
+//   console.log(sprintDays, 'new sprintDay')
+//   console.log(calendLoader, 'CALENDAR LOADER TIME HERE')
+// }, [calendLoader])
 
-useEffect(() => {
-  console.log(sprintPaint, 'my sprint paint here')
-}, [sprintPaint])
-
+// useEffect(() => {
+//   console.log(sprintPaint, 'my sprint paint here')
+// }, [sprintPaint])
 
     useEffect (()=>{  
 
             if(calendLoader){
-              console.log('STAGE 4')
+              // console.log('STAGE 4')
               setpr(false)
               const MapCheck = () =>  new Promise((resolve, reject) => {
-                console.log('stage5')
+                // console.log('stage5')
          // вот это цикл для подсчета нужного количества квадратов в календаре и пуша в каждый
          // инфы о месяцах
                 for (let i = 0; i <= 47; i++) {
@@ -137,20 +135,15 @@ useEffect(() => {
                         i%4==4?0:1])}}
               }
 
-
                resolve()
-                
-                
-             
-             })
 
+             })
 
               MapCheck().then(() =>{
               let sprintArray = [];
              
               conditionalWeeks.map ((body, i) => {
-                  console.log('stage7')
-                 
+                  // console.log('stage7')
                     let int = 0
                     //фильтры мапы для показа понедельно квадратиков в нужных местах
                     // инт отвечает за статус/цвет по умолчанию 0=серый
@@ -166,26 +159,16 @@ useEffect(() => {
                          int = 2
                          })
 
-
                      sprintDays.filter((sprintday)=>Math.trunc(sprintday[0]/7.75)+1===body[2])
                        .filter((sprintday)=>sprintday[1]===body[1]).filter((sprintday)=>sprintday[2]===sprintday[3])
                        .map (() => {
                          int = 3
                            })
 
-                      
                         sprintArray.push ([body[0],body[1],body[2],int])  
-                         
-                        setpr(true)
-                           
-                 
-                      
-                                                          
           
-                 
-                        
-                        
-                        
+                        setpr(true)
+          
                })
                
                 setPaintSprint(sprintArray)
@@ -194,7 +177,7 @@ useEffect(() => {
                   setPaint(true)
 
                 }, 50)
-                console.log('stage 8')
+                // console.log('stage 8')
               
               } 
               )
@@ -213,21 +196,15 @@ useEffect(() => {
     }, [loaded])
     
    
-      
+    const openModHistory = () => {
+      setStatus(!status)
+     
+ }
      const openMod = () => {
           setModal(true)
          
      }
-          
-            // return history.push(`${id}/${sprint.id}`)
-    // 
-    
 
-    //  const createSprint = () => {
-        
-    //     dispatch(addSprint(project.crypt))
-
-    // }
     const handleEnd = () => {
         
         dispatch(finishProject(id))
@@ -243,8 +220,6 @@ useEffect(() => {
       setModal(false)
     }
     const hadleTeam = () => {
-        // console.log (project.team)
-        // console.log  (project.msg)
         dispatch(joinTeam(id))
         
     }
@@ -381,65 +356,72 @@ useEffect(() => {
                      })}
                      </>)}
                      
-                  
+                 
                   </div>
+                   <Bold style={{color:'#171F65',marginLeft:'300px',marginTop:'10px'}} onClick={openModHistory}>Подробная история спринтов</Bold>
                   </div>
                 </>)}
-                  
-                  {/* {sprints.length == 0 ? (
-                    <p>Завершенных спринтов нет</p>
-                  ) : (
-                    <Table>
-                      <Tr columns="1fr 1fr 1fr 1fr" top>
-                        <Td> Дата </Td>
-                        <Td> Название</Td>
-                        <Td> Задачи</Td>
-                        <Td> Статус</Td>
-                      </Tr>
-
-                      {sprints
-                        .filter((sprint) => sprint.status)
-                        .map((sprint, i) => {
-                          return (
-                            <Tr
-                              columns="1fr 1fr 1fr 1fr"
-                              key={i}
-                              title="Открыть спринт"
-                              onClick={() =>
-                                history.push(`/projects/${id}/${sprint._id}`)
-                              }
-                            >
-                              <Td>
-                                {" "}
-                                {sprint.dateOpen
-                                  .slice(0, 16)
-                                  .replace(/T/g, "  ")}
-                              </Td>
-                              <Td>спринт {i}</Td>
-                              <Td>
-                                {" "}
-                                {
-                                  sprint.tasks.filter((task) => task.taskStatus)
-                                    .length
-                                }
-                                /{sprint.tasks.length}
-                              </Td>
-                              <Td>
-                                {sprint.tasks.length -
-                                  sprint.tasks.filter((task) => task.taskStatus)
-                                    .length ===
-                                0 ? (
-                                  <Status green />
-                                ) : (
-                                  <Status red />
-                                )}
-                              </Td>
+                 
+                      <ModalContainer style={{display:`${!status?'none':'block'}`}}>
+                        <ModalWind>
+                        {sprints.length == 0 ? (
+                          <p>Завершенных спринтов нет</p>
+                        ) : (
+                          <Table>
+                            <Tr columns="1fr 1fr 1fr" top>
+                              <Td> Дата </Td>
+                              
+                              <Td> Задачи</Td>
+                              <Td style={{textAlign:'center'}}> Статус</Td>
                             </Tr>
-                          );
-                        })}
-                    </Table>
-                  )} */}
-            
+
+                            {sprints
+                              .filter((sprint) => sprint.status)
+                              .map((sprint, i) => {
+                                return (
+                                  <Tr
+                                    columns="1fr 1fr 1fr "
+                                    key={i}
+                                    title="Открыть спринт"
+                                    onClick={() =>
+                                      history.push(`/projects/${id}/${sprint._id}`)
+                                    }
+                                  >
+                                    <Td>
+                                      {" "}
+                                      {sprint.dateOpen
+                                        .slice(0, 16)
+                                        .replace(/T/g, "  ")}
+                                    </Td>
+                                    
+                                    <Td>
+                                      {" "}
+                                      {
+                                        sprint.tasks.filter((task) => task.taskStatus)
+                                          .length
+                                      }
+                                      /{sprint.tasks.length}
+                                    </Td>
+                                    <Td>
+                                      {sprint.tasks.length -
+                                        sprint.tasks.filter((task) => task.taskStatus)
+                                          .length ===
+                                      0 ? (
+                                        <Status green />
+                                      ) : (
+                                        <Status red />
+                                      )}
+                                    </Td>
+                                  </Tr>
+                                );
+                              })}
+                          </Table>
+                        )}
+                        <CancelButton padd={'55px'}grey onClick={openModHistory}>Закрыть</CancelButton>
+                        </ModalWind>
+                  </ModalContainer>
+      
+                
             <div className={style.border__team}><H1 style={{marginBottom:'10px'}}>Команда</H1></div>
                
                  

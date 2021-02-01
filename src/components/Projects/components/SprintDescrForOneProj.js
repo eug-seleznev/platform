@@ -17,7 +17,7 @@ const SprintDescription = ({sprintname, index, dateOpen,taskcomplite, alltasks, 
 
 			if (actualClose!=null){
 				let d1 = new Date ()
-				console.log(actualClose, d1)
+				// console.log(actualClose, d1)
 				setDiff (Math.abs(actualClose-d1)/86400000)
 				
 				setTimeout (()=>{

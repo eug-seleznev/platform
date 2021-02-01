@@ -31,7 +31,7 @@ const Auth = () => {
                     setTimeout(() => {
                         setError('')
                         dispatch(errorAuthClear())
-                    }, 500);
+                    }, 100);
                      
                 },4500)
         }
@@ -46,7 +46,7 @@ const Auth = () => {
                     setTimeout(() => {
                         dispatch(msgAuthClear()) 
                         setMsg('')
-                }, 500);
+                }, 100);
                 },3500)
         }
     },[msg])

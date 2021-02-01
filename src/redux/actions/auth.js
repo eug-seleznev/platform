@@ -78,13 +78,14 @@ export const register = ({formData}) => async dispatch  => {
         
       }
       catch (err) {
-        const errors = err.response.data.err;
-        errors.map(error => {
-           return dispatch({
-            type: AUTH_ERROR,
-            payload: error.msg
+        const errors = err.response.data
+ 
+    
+           dispatch({
+              type: AUTH_ERROR,
+              payload: errors
         })
-        })
+      
 
         
         

@@ -95,24 +95,24 @@ const Layout = ({ histCurrent}) => {
             setMsgTiming(true)
                 setTimeout(()=>{
                     setMsgTiming(false)
-                    setTimeout(() => {
+                    
                         setError('')
                         dispatch(errorAuthClear())
-                    }, 500);
+             
                 },4500)
         }
     },[error])
     useEffect(()=>{
         if(msg!=''){
             setColor('green')
-            
+           
             setMsgTiming(true)
                 setTimeout(()=>{ 
                     setMsgTiming(false)
-                    setTimeout(() => {
+                    
                          setMsg('')
                          dispatch(msgAuthClear())
-                    }, 500);
+               
                    
                 },3500)
         }
@@ -139,7 +139,7 @@ const Layout = ({ histCurrent}) => {
     return <div style={{zIndex: '9999'}}>
         <Header createProj={createProj} createTicket={createTicket} createNews={createNews}/>
         <Sidebar/>
-        <BackendMsg color={color} style={{opacity:`${msgTiming?1:0}`,zIndex:`${msgTiming?10000:-1000}`, transition:'500ms ease all'}}>
+        <BackendMsg color={color} style={{opacity:`${msgTiming?1:0}`,zIndex:`${msgTiming?10000:-1000}`}}>
             {color==='red'?error:color==='green'?msg:''}
          
         </BackendMsg>

@@ -46,14 +46,14 @@ const Sprint = ({match, history}) => {
     
     
 
-  useEffect(()=>{
-    console.log(duration)
-  },[duration])
+  // useEffect(()=>{
+  //   console.log(duration)
+  // },[duration])
 	useEffect (()=> {
     setSprintId(match.params.id)
-    console.log(sprintId, match.params.id)
+    // console.log(sprintId, match.params.id)
     if(loading){
-      console.log (sprint)
+      // console.log (sprint)
       setDateOpenIn (sprint.dateOpen)
       if (sprint.dateClosePlan!=null&&sprint.dateClosePlan!=undefined) {
 			let d2 = new Date (sprint.dateClosePlan.slice(0, 10).replace(/-/g, "/"))
@@ -74,7 +74,7 @@ const Sprint = ({match, history}) => {
     if (actualClose!=0){
       let d0 = new Date (sprint.dateOpen.slice(0, 10).replace(/-/g, "/"))
       let d1 = new Date ()
-      console.log(actualClose, d1)
+      // console.log(actualClose, d1)
       setDiff (Math.abs(actualClose-d1)/86400000)
       setDuration (Math.abs(actualClose-d0)/86400000)
       if (sprint.dateClosePlan != null) {
@@ -100,13 +100,13 @@ const Sprint = ({match, history}) => {
             
 
     }
-    const onEnter = e => {
-      e.preventDefault();
+//     const prevPage = e => {
+//       e.preventDefault();
    
-      setTimeout(() => {
-        return history.replace(`${back.slice(0,14)}`);
-}, 200);
-    }
+//       setTimeout(() => {
+//         return history.replace(`${back.slice(0,14)}`);
+// }, 200);
+//     }
    
     useEffect(() => {
         
@@ -143,7 +143,7 @@ const Sprint = ({match, history}) => {
    }
  
 
-   const handleBack = (e) => {
+   const prevPage = (e) => {
 
     
     // //зачем тут таймаут? 
@@ -175,8 +175,22 @@ const Sprint = ({match, history}) => {
                 <Light>Продолжительность:   </Light> 
                 <Regular >{duration==7?'1 неделя':duration==14?'2 недели':'??'}</Regular>
               </div>
-              
-                        
+              <div style={{display:`${sprint.status?'block':'none'}`}}>
+                <Regular size={30} style={{textAlign: 'left',width:'100%', marginTop:'10px', marginBottom:'10px'}}> Задачи </Regular>
+                  {taskArr.tasks.map((task, ind) => {
+                    return (
+                            <div key={ind} >
+                              <form>
+                                <div style={{display:'flex'}}>
+                                  <label style={{display:`${sprint.status?'none':'block'}`}}></label>
+                                  <input style={{display:`${sprint.status?'none':'block'}`}} type="checkbox" id="vehicle1" name="vehicle1" defaultChecked={task.taskStatus} value={task._id} onChange={onChange}/>
+                                  <Light style={{textAlign:'left', marginLeft:'10px',textDecoration:`${task.taskStatus?'line-through':'none'}`}}>{ind+1}.  {task.taskTitle!==''?task.taskTitle:'Без названия'}</Light>
+                                </div>
+                              </form>
+                            </div>
+                            )
+                    })}
+              </div>          
 {/* 
                         {sprint.status && <div>
                             <H1>невыполненные задачи</H1>
@@ -199,7 +213,8 @@ const Sprint = ({match, history}) => {
                                  )
                         })}
                           </div>} */}  
-                <Button onClick={handleSprint} style={{display:`${sprint.status?'block':'none'}`,marginTop: '20px'}}> Восстановить спринт</Button>
+                <Button onClick={handleSprint} fontSize={'16px'} style={{display:`${sprint.status?'block':'none'}`,marginTop: '20px',width:'100%'}}> Восстановить спринт</Button>
+                <CancelButton onClick={()=>prevPage()} grey style={{display:`${sprint.status?'block':'none'}`,marginTop: '20px'}}>Назад</CancelButton>
             </Card>
             {/* addInfoSprint */}
 
@@ -268,7 +283,7 @@ const Sprint = ({match, history}) => {
                     </Button>
                   </div>
                 </form>
-                <Button fontSize={'16px'} onClick={()=>handleBack()} style={{marginTop:'70px', marginBottom:'10px'}}grey>Вернуться к проекту</Button>
+                <Button fontSize={'16px'} onClick={()=>prevPage()} style={{marginTop:'70px', marginBottom:'10px'}}grey>Вернуться к проекту</Button>
                 <Button fontSize={'16px'} style={{marginLeft:'50px', marginBottom:'10px'}} onClick={chosenSprint}>{!status? 'Добавить в избранное': 'Убрать из избранного'}</Button>
                 <Button fontSize={'16px'} style={{marginLeft:'50px', marginBottom:'10px'}} onClick={handleSprint}>Завершить спринт</Button>
                 
