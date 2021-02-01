@@ -1,4 +1,4 @@
-import {REGISTER, AUTH_ERROR, LOGIN, USER_LOADED,CHANGE_AVATAR, CHANGE_USERDATA, CHANGE_LOADED, ADD_SPRINT_TO_CHOSEN, SPRINT_ERROR} from '../types'
+import {REGISTER, AUTH_ERROR, LOGIN, USER_LOADED,CHANGE_AVATAR,CLEAR_MSG,CLEAR_ERROR, CHANGE_USERDATA, CHANGE_LOADED, ADD_SPRINT_TO_CHOSEN, SPRINT_ERROR} from '../types'
 import {innerBackend, instance, setAuthToken} from '../../components/utils/axios'
 
 
@@ -22,8 +22,20 @@ export const loadUser = () => async dispatch => {
    
   };
     
-
-
+export const msgAuthClear = ()=>dispatch => {
+    
+    return dispatch({
+        type: CLEAR_MSG,
+    
+      })
+}
+export const errorAuthClear = ()=>dispatch => {
+    
+  return dispatch({
+      type: CLEAR_ERROR,
+  
+    })
+}
 export const login = (formData) => async dispatch  => {
     try {
       console.log(formData, 'data?')
@@ -39,11 +51,14 @@ export const login = (formData) => async dispatch  => {
 
         }
       catch (err) {
+        console.log(err.response.data.err);
+
         const errors = err.response.data.err;
-        errors.map(error => {
+        errors.map(err => {
+          
            return dispatch({
             type: AUTH_ERROR,
-            payload: error.msg
+            payload: err
         })
         })            
       
@@ -65,13 +80,14 @@ export const register = ({formData}) => async dispatch  => {
         
       }
       catch (err) {
-        const errors = err.response.data.err;
-        errors.map(error => {
-           return dispatch({
-            type: AUTH_ERROR,
-            payload: error.msg
+        const errors = err.response.data
+ 
+    
+           dispatch({
+              type: AUTH_ERROR,
+              payload: errors
         })
-        })
+      
 
         
         

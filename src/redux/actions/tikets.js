@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { innerBackend } from "../../components/utils/axios";
-import { ALL_TICKETS, NEW_ERROR, NEW_TICKET, GET_TICKET } from "../types";
+import { ALL_TICKETS, NEW_ERROR,CLEAR_MSG,CLEAR_ERROR, NEW_TICKET, GET_TICKET } from "../types";
 import {url} from '../../components/utils/axios'
 
 
@@ -57,7 +57,6 @@ export const newTicket = ({formData, file}) => async dispatch  => {
     }
 
 }
-
 
 export const allTickets = () => async dispatch  => {
     try {

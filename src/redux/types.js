@@ -83,9 +83,10 @@ export const JOIN_DEPARTMENT = 'join_department'
 export const LEAVE_DEPARTMENT = 'leave_department'
 export const DEPARTMENT_FAIL = 'department_fail'
 
-
+// msg catch
+export const CLEAR_MSG = 'clear_msg_field'
 //error handler
-
+export const CLEAR_ERROR = 'clear_error_field'
 
 //REVERSE
 export const REVERSE_ARR = 'reverse';
@@ -96,3 +97,4 @@ export const REVERSE_ARRDATE = 'revarrdate'
 ///autodesk forge @ MODELS 
 export const GET_TOKEN = 'get_oauth_token'
 export const GET_URN = 'get_urn'
+export const GET_STATUS = 'loading_status'

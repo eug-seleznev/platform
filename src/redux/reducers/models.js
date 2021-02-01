@@ -1,10 +1,11 @@
-import { GET_URN } from "../types";
+import { GET_STATUS, GET_URN } from "../types";
 
 
 
 
 const initialState = {
-    urn: ''
+    urn: '',
+    status: ''
 }
 
 
@@ -14,9 +15,17 @@ export default function(state = initialState, action) {
         type, payload
     } = action;
 
-    switch(type){
+    switch(type) {
         case GET_URN:
-            return {urn: payload}
+            return {
+                ...state,
+                urn: payload
+            }
+        case GET_STATUS:
+            return {
+                ...state,
+                status: payload
+            }
 
             default:
                 return state
