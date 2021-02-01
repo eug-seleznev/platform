@@ -16,11 +16,16 @@
     }
         .deleteBtn{
             margin-left: 10px;
+            display: inline-block;
+            cursor: pointer;
         }
     .joinBtn{
         grid-area: btn;
         border-bottom: 1px solid black;
         padding-bottom: 15x;
+        display: grid;
+        place-content: center;
+        cursor: pointer;
 
 
     }

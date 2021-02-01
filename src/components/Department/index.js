@@ -31,15 +31,15 @@ const Department = ({history}) => {
         !openForm? <Card className={styles.createDep} onClick={()=>setOpenForm(true)}>Создать отдел</Card> : <DepartmentForm closeForm={()=>setOpenForm(false)}/>
         )}
             
-        {/* {!loaded? <div>loading ...</div> :
+        {!loaded? <div>loading ...</div> :
          departments.map((el, i)=>{
 
             return(
-                <DepartmentCard content={el}/>
+                <DepartmentCard content={el} user={user}/>
                 )
          })
-        } */}
-                <DepartmentCard content='el' user={user}/>
+        }
+            
 
         
         </div>

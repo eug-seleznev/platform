@@ -8,6 +8,7 @@ import { allDepartments, deleteDepartment, joinDepartment } from '../../redux/ac
 import Confirm from './confirm'
 import { useState } from 'react';
 
+
 const DepartmentCard = ({content, user}) => {
 
 const dispatch = useDispatch()
@@ -33,30 +34,25 @@ const [showConfirm, setShowConfirm] = useState(false)
 
     return(
         <div className={styles.container}>
-            <Bold className={styles.title} size='30'>Отдел по борьбе с наркотиками 
-               { user.permission=='admin' && <ButtonText className={styles.deleteBtn} fontSize='12' onClick={()=>setShowConfirm(true)}> удалить отдел</ButtonText>}
+            <Bold className={styles.title} size='30'>{content.divname}
+               { user.permission=='admin' && <Bold color='#3F496C' className={styles.deleteBtn} size='12' onClick={()=>setShowConfirm(true)}> удалить отдел</Bold>}
             </Bold>
-            <ButtonText className={styles.joinBtn}  fontSize='16px' onClick={()=>join()}>Вступить в отдел</ButtonText>
+            <Bold className={styles.joinBtn}  size='16px' color='#3F496C' onClick={()=>join()}>Вступить в отдел</Bold>
             <div className={styles.members}>
-                <div onClick={()=>dispatch(allDepartments())}>111</div>
-                <div>222</div>
-                <div>333</div>
-                <div>444</div>
+              
 
-                {/* {content.users.map((el,i_=>{
+                {content.members && content.members.map((el,i)=>{
 
                 return(
-                    <Profile user={el}/>
+                    <div>hi</div>
+                    // <Profile user={el}/>
                 )
-                }))} */} 
+                })} 
             </div>
             <Bold className={styles.activeTitle}  size='30'>Активные проекты</Bold>
             <div className={styles.activeProjects}>
-                <div>111</div>
-                <div>222</div>
-                <div>333</div>
-                <div>444</div>
-
+                
+                Development
                 {/* {content.users.map((el,i_=>{
 
                 return(
