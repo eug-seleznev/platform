@@ -3,7 +3,7 @@ import Profile from '../Main/profileComponent'
 import {useSelector, useDispatch} from 'react-redux'
 import { newDepartment, allDepartments} from '../../redux/actions/department'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Card } from '../../Styles/common'
 import DepartmentForm from './depForm'
 import DepartmentCard from './departmentCard'
@@ -16,9 +16,12 @@ const Department = ({history}) => {
 
     const [openForm, setOpenForm] = useState(false)
 
- useSelector(()=>{
-    // dispatch(allDepartments())
+ useEffect(()=>{
+    dispatch(allDepartments())
  },[])
+ useEffect(()=>{
+    console.log(departments, 'dddddddddddddddddddddddddd')
+ },[departments])
 
     return(
         <div className={styles.container}>

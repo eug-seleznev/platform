@@ -6,16 +6,18 @@ import { NEW_DEPARTMENT, ALL_DEPARTMENTS, FIND_DEPARTMENT, JOIN_DEPARTMENT, LEAV
 
 
 
-export const newDepartment = (data) => async dispatch  => {
+export const newDepartment = (formData) => async dispatch  => {
     try {
+        console.log(formData, 'dadadadta')
+        const res = await innerBackend.post('/divisions', formData)
 
-        const res = await innerBackend.post('/div', data)
-
+        console.log(formData, '222222')
 
         dispatch({
             type: NEW_DEPARTMENT,
             payload: res.data
         })
+        console.log(formData, '333333333333')
 
         }
       catch (err) {
@@ -33,13 +35,16 @@ export const newDepartment = (data) => async dispatch  => {
 
 export const allDepartments = () => async dispatch  => {
     try {
+        console.log( '111111111111')
 
-        const res = await innerBackend.get('/div/all')
+        const res = await innerBackend.get('/divisions/all')
+        console.log(res, '2222222222222')
 
         dispatch({
             type: ALL_DEPARTMENTS,
             payload: res.data
         })
+        console.log( '333333333333333')
 
         }
       catch (err) {
@@ -57,7 +62,7 @@ export const allDepartments = () => async dispatch  => {
 
 export const findDepartment = (divname) => async dispatch  => {
     try {
-        const res = await innerBackend.get(`/div/${divname}`)
+        const res = await innerBackend.get(`/divisions/${divname}`)
 
 
         dispatch({
@@ -82,7 +87,7 @@ export const findDepartment = (divname) => async dispatch  => {
 export const joinDepartment = (divname) => async dispatch  => {
     try {
 
-        const res = await innerBackend.put(`/div/${divname}`)
+        const res = await innerBackend.put(`/divisions/${divname}`)
 
 
         dispatch({
@@ -107,7 +112,7 @@ export const joinDepartment = (divname) => async dispatch  => {
 export const deleteDepartment = (divname) => async dispatch  => {
     try {
 
-        const res = await innerBackend.delete(`/div/${divname}`)
+        const res = await innerBackend.delete(`/divisions/${divname}`)
 
 
         dispatch({
