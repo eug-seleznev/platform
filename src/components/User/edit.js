@@ -19,7 +19,6 @@ const Edit = ({match, history}) => {
 	const departments = useSelector(state => state.departments.departments)
 	// const select = user.division.divname==el.divname && selected
 	const dispatch = useDispatch();
-	console.log(departments, 'alaljlhskhdahsldjljk')
     const [formData, setFormData ] = useState({
         
 		name: user.name ? user.name : '',
@@ -32,7 +31,7 @@ const Edit = ({match, history}) => {
       });
      const [text, setText] = useState ('') 
 
-      const {name,lastname, position, division, email } = formData;
+      const {name,lastname, position, email } = formData;
 
       const  [file, setFile] = useState(null) 
 
@@ -51,14 +50,11 @@ const Edit = ({match, history}) => {
 
     const onChange = e => {
         e.preventDefault(); 
-		console.log (e.target.value)
         setFormData({ ...formData, [e.target.name]: e.target.value });
 	 }
 	 const divisionChange = e => {
 		e.preventDefault(); 
-		console.log (e.target.value)
 		
-		setFormData({ ...formData, [division]: e.target.value });
 		dispatch(joinDepartment(e.target.value))
      }
      
@@ -77,7 +73,6 @@ const Edit = ({match, history}) => {
 }
      const onSubmit = e => {
         e.preventDefault();
-		console.log(formData)
 		// dispatch(changeData({formData})) так не обязательно
 		dispatch(changeData(formData))
 		if (file !== null && file !== undefined) {
@@ -101,7 +96,7 @@ const Edit = ({match, history}) => {
 			  <div /*style={{display:'flex', flexDirection:'column', alignItems:'center'}}*/>
 		  <LogForm className={styles.editForm}  onSubmit={onSubmit}>
 
-		<p>Имя</p>
+		<p className={styles.p}>Имя</p>
 		  <Input 
 			  	type='text'
 			 	placeholder={user.name}
@@ -111,7 +106,7 @@ const Edit = ({match, history}) => {
 			></Input>
 
 
-<p>Фамилия</p>
+<p className={styles.p}>Фамилия</p>
 		  <Input 
 			  	type='text'
 			 	placeholder={user.lastname}
@@ -119,7 +114,7 @@ const Edit = ({match, history}) => {
 				value={lastname}
 			  	onChange={e => onChange(e)}
 			></Input>
-<p>Отдел</p>
+<p className={styles.p}>Отдел</p>
 			<select
 			onChange={e => divisionChange(e)}
 			name='division'
@@ -135,7 +130,7 @@ const Edit = ({match, history}) => {
 			</select>
 		
 
-			<p>Сменить должность</p>
+			<p className={styles.p}>Сменить должность</p>
  		<Input 
 			  type='text'
 			  placeholder={user.position}
@@ -143,7 +138,7 @@ const Edit = ({match, history}) => {
 			  value={position}
 			  onChange={e => onChange(e)}
 			></Input>
-			<p>Сменить e-mail</p>
+			<p className={styles.p}>Сменить e-mail</p>
  		<Input 
 			  type='text'
 			  placeholder={user.email}
@@ -160,7 +155,7 @@ const Edit = ({match, history}) => {
 			<span />
 			<Button  onClick={Redirect}  >Ничего не менять</Button>
 		  </LogForm>
-		  <p>Сменить аватар</p>
+		  <p className={styles.p}>Сменить аватар</p>
 			 <Input 
                 type='file'
                 placeholder='загрузите изображение'
