@@ -19,7 +19,6 @@ const Edit = ({match, history}) => {
 	const departments = useSelector(state => state.departments.departments)
 	// const select = user.division.divname==el.divname && selected
 	const dispatch = useDispatch();
-	console.log(departments, 'alaljlhskhdahsldjljk')
     const [formData, setFormData ] = useState({
         
 		name: user.name ? user.name : '',
@@ -32,7 +31,7 @@ const Edit = ({match, history}) => {
       });
      const [text, setText] = useState ('') 
 
-      const {name,lastname, position, division, email } = formData;
+      const {name,lastname, position, email } = formData;
 
       const  [file, setFile] = useState(null) 
 
@@ -51,14 +50,11 @@ const Edit = ({match, history}) => {
 
     const onChange = e => {
         e.preventDefault(); 
-		console.log (e.target.value)
         setFormData({ ...formData, [e.target.name]: e.target.value });
 	 }
 	 const divisionChange = e => {
 		e.preventDefault(); 
-		console.log (e.target.value)
 		
-		setFormData({ ...formData, [division]: e.target.value });
 		dispatch(joinDepartment(e.target.value))
      }
      
@@ -77,7 +73,6 @@ const Edit = ({match, history}) => {
 }
      const onSubmit = e => {
         e.preventDefault();
-		console.log(formData)
 		// dispatch(changeData({formData})) так не обязательно
 		dispatch(changeData(formData))
 		if (file !== null && file !== undefined) {
