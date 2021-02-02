@@ -55,7 +55,6 @@ const Layout = ({ histCurrent}) => {
     },[createProjMsg])
     useEffect(()=>{
         if(createSprMsg !=""&& createSprMsg !=undefined){
-            console.log(createSprMsg)
             setMsg(createSprMsg)
         }
     },[createSprMsg])
