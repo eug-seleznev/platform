@@ -8,7 +8,7 @@ import { useState } from 'react'
 
 
 
-const Menu = ({closeAll, state, createProj, createTicket,createNews}) => {
+const Menu = ({closeAll, state, createProj, createTicket,createNews, user}) => {
 
 const [depForm, setDepForm] = useState(false)
 const exit = () => {
@@ -21,7 +21,6 @@ const plusMenuClick = (callback) => {
     callback()
 }
 
-    const user = useSelector(state => state.auth.user)
     return (
         <>
         <CSSTransition
@@ -46,17 +45,17 @@ const plusMenuClick = (callback) => {
                         Проблемы с компом
                     </StyledIn>
 
-                    <StyledIn onClick={()=>plusMenuClick(createNews)} className='menu__nav' to='/admin/news'>
+                    {user.permission!='user' && <StyledIn onClick={()=>plusMenuClick(createNews)} className='menu__nav' to='/admin/news'>
                         Добавить новость
-                    </StyledIn>
+                    </StyledIn>}
 
-                    <StyledIn onClick={()=>plusMenuClick(createProj)}>
+                    {user.permission!='user' && <StyledIn onClick={()=>plusMenuClick(createProj)}>
                         Создать проект
-                    </StyledIn>
+                    </StyledIn>}
 
-                    <StyledIn onClick={()=>plusMenuClick(()=>setDepForm(true))}>
+                    {user.permission!='user' && <StyledIn onClick={()=>plusMenuClick(()=>setDepForm(true))}>
                         Создать отдел
-                    </StyledIn>
+                    </StyledIn>}
 
             
         </MenuHead>
@@ -91,7 +90,7 @@ const plusMenuClick = (callback) => {
                         Мои проекты
                     </StyledLink>
 
-                    <StyledLink to='/myprojects' onClick={closeAll}>
+                    <StyledLink to='/department' onClick={closeAll}>
                         Отдел
                     </StyledLink>
 

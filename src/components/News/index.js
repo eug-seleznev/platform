@@ -133,8 +133,8 @@ useEffect(()=>{
                                     <NewsCard el={el} />
                                 </div>
                                 <div className={styles.buttons}>
-                                    <ButtonText onClick={(e)=>onUpdate(e, el)}>Редактировать</ButtonText>
-                                    <ButtonText onClick={(e)=>onDelete(e, el)}>Удалить</ButtonText>
+                                    {user.permission!='user' && <ButtonText onClick={(e)=>onUpdate(e, el)}>Редактировать</ButtonText>}
+                                    {user.permission!='user' && <ButtonText onClick={(e)=>onDelete(e, el)}>Удалить</ButtonText>}
                                 </div>
                             </div>
                         )
