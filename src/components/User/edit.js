@@ -55,8 +55,10 @@ const Edit = ({match, history}) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
 	 }
 	 const divisionChange = e => {
-        e.preventDefault(); 
-		// setFormData({ ...formData, [division]: e.target.value });
+		e.preventDefault(); 
+		console.log (e.target.value)
+		
+		setFormData({ ...formData, [division]: e.target.value });
 		dispatch(joinDepartment(e.target.value))
      }
      
@@ -122,11 +124,11 @@ const Edit = ({match, history}) => {
 			onChange={e => divisionChange(e)}
 			name='division'
 			>
-				<option disabled>Выберите отдел</option>
+				<option selected={user.division? false : true}>Выберите отдел</option>
 				{departments && departments.map((el,i)=>{
 
 					return(
-						<option selected={user.division.divname==el.divname ? true : false} value={el.divname}>{el.divname}</option>
+						<option selected={user.division&& (user.division.divname==el.divname ? true : false)} value={el.divname}>{el.divname}</option>
 					)
 				})}
 				
@@ -151,18 +153,18 @@ const Edit = ({match, history}) => {
 			></Input>
 			
 			
-			  <p>Сменить аватар</p>
-			 <Input 
-                type='file'
-                placeholder='загрузите изображение'
-				onChange={handleFile}></Input>
+			  
 				
 			
 			<Button  onClick={changeMsg}  type="submit" value="Submit" >Сохранить</Button>
 			<span />
 			<Button  onClick={Redirect}  >Ничего не менять</Button>
 		  </LogForm>
-		  
+		  <p>Сменить аватар</p>
+			 <Input 
+                type='file'
+                placeholder='загрузите изображение'
+				onChange={handleFile}></Input>
 				</div>
              
    )}
