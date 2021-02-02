@@ -18,6 +18,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
         city: '',  
         type: '',
         stage: 'Концепт',
+        par:'',
         dateFinish: '',
         customer: '',
         about: '',
@@ -27,7 +28,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
    
 
 
-      const { title, dateStart, dateFinish, city, type, stage, customer, about} = formData;
+      const { title, dateStart, dateFinish, city, type, stage, customer, about, par} = formData;
 
   
     const onChange = e => {
@@ -51,6 +52,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
           dateStart: '', 
           city: '',  
           type: '',
+          par:'',
           stage: 'Концепт',
           dateFinish: '',
           customer: '',
@@ -101,24 +103,13 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                     onChange={(e) => onChange(e)}
                   />
                 </div>
+                
                 <div className={style.input__short}>
                   <Thin className={style.title}>Дедлайн</Thin>
                   <input
                     type="date"
                     name="dateFinish"
                     value={dateFinish}
-                    onChange={(e) => onChange(e)}
-                  />
-                </div>
-              
-              </div>
-              <div className={style.row}>
-                <div className={style.input__mid}>
-                  <Thin className={style.title}>Тип проекта</Thin>
-                  <input
-                    type="text"
-                    name="type"
-                    value={type}
                     onChange={(e) => onChange(e)}
                   />
                 </div>
@@ -131,15 +122,27 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                       <option value='Рабочая'>Рабочая</option>
                   </select>
                 </div>
-                {/* <div className={style.input__mid}>
-                  <Thin className={style.title}>Фаза</Thin>
+              </div>
+              <div className={style.row}>
+                <div className={style.input__mid}>
+                  <Thin className={style.title}>Тип проекта</Thin>
                   <input
                     type="text"
-                    name="stage"
-                    value={stage}
+                    name="type"
+                    value={type}
                     onChange={(e) => onChange(e)}
                   />
-                </div> */}
+                </div>
+                
+                <div className={style.input__short}>
+                  <Thin className={style.title}>Раздел</Thin>
+                  <input
+                    type="text"
+                    name="par"
+                    value={par}
+                    onChange={(e) => onChange(e)}
+                  />
+                </div>
                 <div className={style.input__mid}>
                   <Thin className={style.title}>Заказчик</Thin>
                   <input
