@@ -145,12 +145,12 @@ useEffect(()=>{
 
             <div className={styles.formArea}>
                 <div className={styles.formSticky}>
-                {!createForm?
+                {user.permission!='user' && (!createForm?
                     <Card className={styles.openForm} onClick={()=>setCreateForm(true)}>
                         <Bold size='12' color='#3F496C'>Создать новость</Bold>
                     </Card>
                     :
-                    <CreateNews closeForm={()=>setCreateForm(false)} />}  
+                    <CreateNews closeForm={()=>setCreateForm(false)} />)}  
                 </div>
             </div>
                 
