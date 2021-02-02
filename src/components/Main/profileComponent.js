@@ -9,7 +9,7 @@ const ProfileComponent = ({user, history, change}) => {
     return(
         <div className={styles.profile}>
             <img className={styles.avatar} src={`${url}/${user != null? (user!= undefined? user.avatar:''):''}`}/>
-            <Bold size='30' className={styles.name}> {user.name} {user.lastname}</Bold>
+            <Bold size='30' mobSize='24' className={styles.name}> {user.name} {user.lastname}</Bold>
                 {!change? <div className={styles.change}></div> :
                 <ButtonText color='#3F496C 80 %;' fontSize='12' className={styles.change} onClick={() => history.replace(`/edit`)}>изменить</ButtonText>
                 }  
