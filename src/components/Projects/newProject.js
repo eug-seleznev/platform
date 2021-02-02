@@ -17,7 +17,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
         dateStart: '', 
         city: '',  
         type: '',
-        stage: '',
+        stage: 'Концепт',
         dateFinish: '',
         customer: '',
         about: '',
@@ -51,7 +51,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
           dateStart: '', 
           city: '',  
           type: '',
-          stage: '',
+          stage: 'Концепт',
           dateFinish: '',
           customer: '',
           about: '',
@@ -123,14 +123,23 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                   />
                 </div>
                 <div className={style.input__short}>
-                  <Thin className={style.title}>Стадия</Thin>
+                  <Thin className={style.title}>Фаза</Thin>
+                  <select defaultValue='Концепт' name="stage" onChange={e =>  onChange(e)} className={style.select} >
+                      <option value='Концепт'>Концепт</option>
+                      <option value='Эскиз'>Эскиз</option>
+                      <option value='Проект'>Проект</option>
+                      <option value='Рабочая'>Рабочая</option>
+                  </select>
+                </div>
+                {/* <div className={style.input__mid}>
+                  <Thin className={style.title}>Фаза</Thin>
                   <input
                     type="text"
                     name="stage"
                     value={stage}
                     onChange={(e) => onChange(e)}
                   />
-                </div>
+                </div> */}
                 <div className={style.input__mid}>
                   <Thin className={style.title}>Заказчик</Thin>
                   <input

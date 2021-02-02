@@ -39,7 +39,10 @@
 	height: 70px;
 }					
 					
-
+.select {
+	width: 100%;
+	height: 30px;
+}
 .input__mid{
 	width:35%
 }

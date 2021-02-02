@@ -46,7 +46,7 @@ const plusMenuClick = (callback) => {
                         Проблемы с компом
                     </StyledIn>
 
-                    <StyledIn onClick={()=>plusMenuClick(createNews)} className='menu__nav' to='/admin/news'>
+                    <StyledIn style={{display:`${user.permission=='user'?'none':'block'}`}}  onClick={()=>plusMenuClick(createNews)} className='menu__nav' to='/admin/news'>
                         Добавить новость
                     </StyledIn>
 
@@ -54,7 +54,7 @@ const plusMenuClick = (callback) => {
                         Создать проект
                     </StyledIn>
 
-                    <StyledIn onClick={()=>plusMenuClick(()=>setDepForm(true))}>
+                    <StyledIn style={{display:`${user.permission=='user'?'none':'block'}`}} onClick={()=>plusMenuClick(()=>setDepForm(true))}>
                         Создать отдел
                     </StyledIn>
 
@@ -95,7 +95,7 @@ const plusMenuClick = (callback) => {
                         Отдел
                     </StyledLink>
 
-                    <StyledLink to='/news' onClick={closeAll}>
+                    <StyledLink style={{display:`${user.permission=='user'?'none':'block'}`}} to='/news' onClick={closeAll}>
                         Новости
                     </StyledLink>
 
