@@ -95,7 +95,7 @@ const Sprint = ({match, history}) => {
             dispatch(addTasks({tasks, sprintId }))
            
             setTimeout(() => {
-              return history.push(`${back.slice(0,14)}`);
+              return history.push(`./`);
           }, 200);
             
 
@@ -138,7 +138,7 @@ const Sprint = ({match, history}) => {
       
         dispatch(finishSprint(id));
         setTimeout(() => {
-          return history.replace(`${back.slice(0,14)}`);
+          return history.push(`./`);
   }, 200);
    }
  
@@ -148,7 +148,7 @@ const Sprint = ({match, history}) => {
     
     // //зачем тут таймаут? 
     // setTimeout(() => {
-      return history.push(`${back.slice(0,14)}`);
+      return history.push(`./`);
     // }, 200);
     
    }

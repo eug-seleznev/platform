@@ -57,7 +57,7 @@ const Project = ({match, history}) => {
 
         dispatch(getProject(id));
         
-
+        
 
     }, [])
    
@@ -93,7 +93,7 @@ const Project = ({match, history}) => {
       Calendar().then(() =>   setCalendLoader(true)
       )  
     }
-    
+   
 }, [sprintsLoad, loaded, trick])
         
 
@@ -252,6 +252,7 @@ const Project = ({match, history}) => {
               
               <p> loading...</p>
             ) : (
+              console.log(project),
               <>
            <ModalWindow
                       status={modal} 
@@ -279,8 +280,8 @@ const Project = ({match, history}) => {
                   </div>
                   
                   <Light className={style.title__small} size='16'>
-                    <div className={style.title__deadline}>Дней до дедлайна: ?</div> 
-                    <div className={style.title__deadline}>Стадия: {project.stage}</div>
+                    <div className={style.title__deadline}>Дедлайн: {project.dateFinish!=null?project.dateFinish.slice(0,10):"?"}</div> 
+                    <div className={style.title__deadline}>Этап: {project.stage}</div>
                   </Light>
                 <div>
                   
