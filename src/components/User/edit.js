@@ -96,7 +96,7 @@ const Edit = ({match, history}) => {
 			  <div /*style={{display:'flex', flexDirection:'column', alignItems:'center'}}*/>
 		  <LogForm className={styles.editForm}  onSubmit={onSubmit}>
 
-		<p>Имя</p>
+		<p className={styles.p}>Имя</p>
 		  <Input 
 			  	type='text'
 			 	placeholder={user.name}
@@ -106,7 +106,7 @@ const Edit = ({match, history}) => {
 			></Input>
 
 
-<p>Фамилия</p>
+<p className={styles.p}>Фамилия</p>
 		  <Input 
 			  	type='text'
 			 	placeholder={user.lastname}
@@ -114,7 +114,7 @@ const Edit = ({match, history}) => {
 				value={lastname}
 			  	onChange={e => onChange(e)}
 			></Input>
-<p>Отдел</p>
+<p className={styles.p}>Отдел</p>
 			<select
 			onChange={e => divisionChange(e)}
 			name='division'
@@ -130,7 +130,7 @@ const Edit = ({match, history}) => {
 			</select>
 		
 
-			<p>Сменить должность</p>
+			<p className={styles.p}>Сменить должность</p>
  		<Input 
 			  type='text'
 			  placeholder={user.position}
@@ -138,7 +138,7 @@ const Edit = ({match, history}) => {
 			  value={position}
 			  onChange={e => onChange(e)}
 			></Input>
-			<p>Сменить e-mail</p>
+			<p className={styles.p}>Сменить e-mail</p>
  		<Input 
 			  type='text'
 			  placeholder={user.email}
@@ -155,7 +155,7 @@ const Edit = ({match, history}) => {
 			<span />
 			<Button  onClick={Redirect}  >Ничего не менять</Button>
 		  </LogForm>
-		  <p>Сменить аватар</p>
+		  <p className={styles.p}>Сменить аватар</p>
 			 <Input 
                 type='file'
                 placeholder='загрузите изображение'
