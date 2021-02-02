@@ -85,10 +85,10 @@ export const addSprint = (id,formData,data) => async dispatch  => {
         let body = {
             description: formData.description,
             date: formData.date,
-            tasks: data.tasks
+            tasks: data.tasks[0].taskTitle==""?[]:data.tasks
         }
         console.log(data)
-        const res = await innerBackend.post(`/projects/sprints/new/${id}`,body,)
+        const res = await innerBackend.post(`/projects/sprints/new/${id}`,body)
         dispatch({
             type: ADD_SPRINT,
             payload: res.data

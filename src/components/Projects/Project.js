@@ -15,7 +15,7 @@ import { Bold, H1, H3, Light} from '../../Styles/typography'
 import SprintDescription from './components/SprintDescrForOneProj'
 import ProjTeam from './components/ProjTeam'
 import ModalWindow from "./components/ModalWindow";
-import Viewer from "./model";
+
 import { Oauth } from "../../redux/actions/models";
 
 
@@ -358,7 +358,7 @@ const Project = ({match, history}) => {
                      
                  
                   </div>
-                   <Bold style={{color:'#171F65',marginLeft:'300px',marginTop:'10px'}} onClick={openModHistory}>Подробная история спринтов</Bold>
+                   <Bold className={style.hist__sprint} onClick={openModHistory}>Подробная история спринтов</Bold>
                   </div>
                 </>)}
                  

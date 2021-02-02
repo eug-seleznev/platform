@@ -39,7 +39,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
 
      const Redirect = () => {
             
-            histCurrent.push(`/projects/`)
+            // histCurrent.push(`/projects`)
          
      }
 
