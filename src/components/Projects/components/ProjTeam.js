@@ -8,7 +8,7 @@ import { Thin, Bold, Light,Regular } from "../../../Styles/typography"
 export const url = process.env.REACT_APP_IP;
 
 
-const ProjTeam = ({userName,userPos,userAvatar,userId,histProp}) => {
+const ProjTeam = ({userName,userPos,userAvatar,userId,histProp, lastName}) => {
 	
 	return (
 	<>
@@ -19,7 +19,7 @@ const ProjTeam = ({userName,userPos,userAvatar,userId,histProp}) => {
 					<div className={style.image_info}>
 						<img  className={style.image} src={url+'/'+userAvatar}></img>
 						<div className={style.info}>
-							<div className={style.name}><Bold size={24}>{userName}</Bold></div>
+							<div className={style.name}><Bold size={24}>{userName}</Bold> <Bold size={24}>{lastName}</Bold></div>
 							<div className={style.position}><Light size={20}>{userPos}</Light></div>
 						</div>
 						

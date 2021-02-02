@@ -15,8 +15,9 @@ import { Bold, H1, H3, Light} from '../../Styles/typography'
 import SprintDescription from './components/SprintDescrForOneProj'
 import ProjTeam from './components/ProjTeam'
 import ModalWindow from "./components/ModalWindow";
-import Viewer from "./model";
+
 import { Oauth } from "../../redux/actions/models";
+import Confirm from "./confirm";
 
 
 // const sprintDays = [];
@@ -40,7 +41,9 @@ const Project = ({match, history}) => {
     const [sprintDays, setSprintDays] = useState([]);
     const [calendLoader, setCalendLoader] = useState (false);
     const [paint, setPaint] = useState(false);
-    const [pr, setpr] = useState (false)
+    const [pr, setpr] = useState (false) 
+    const [confirm, setConfirm] = useState (false)
+    const [buttonTitle, setButtonTitle] = useState ('')
     // const project = useSelector(state => state.projects.project.team)
   const [modal, setModal] = useState (false)
   const [sprintId, setSprintId] = useState ('')
@@ -208,11 +211,22 @@ const Project = ({match, history}) => {
     const handleEnd = () => {
         
         dispatch(finishProject(id))
-        return history.push(`.`)
 
+        openConfirmEnd()
+        return history.push(`./`)
+
+    }
+    const openConfirmEnd = ()=>{
+      setButtonTitle('Завершить')
+      setConfirm (!confirm)
+    }
+    const openConfirm = ()=>{
+      setButtonTitle('Удалить')
+      setConfirm (!confirm)
     }
     const handleDelete = () => {
         dispatch(deleteProject(id))
+        openConfirm()
         return history.push(`./`)
 
     }
@@ -358,7 +372,7 @@ const Project = ({match, history}) => {
                      
                  
                   </div>
-                   <Bold style={{color:'#171F65',marginLeft:'300px',marginTop:'10px'}} onClick={openModHistory}>Подробная история спринтов</Bold>
+                   <Bold className={style.hist__sprint} onClick={openModHistory}>Подробная история спринтов</Bold>
                   </div>
                 </>)}
                  
@@ -430,7 +444,7 @@ const Project = ({match, history}) => {
             <div className={style.sprintdescr__cont}>
                     {project.team.map((user, i) => {
                       return (
-                        <ProjTeam  histProp={history} userId={user._id} userName={user.name} userAvatar={user.avatar} userPos={user.position}></ProjTeam>
+                        <ProjTeam  histProp={history} userId={user._id} userName={user.name} lastName={user.lastname} userAvatar={user.avatar} userPos={user.position}></ProjTeam>
                       );
                     })}
                    
@@ -482,7 +496,7 @@ const Project = ({match, history}) => {
 
                 <div style={{marginTop:'30px'}}>
                   <Button
-                    onClick={handleEnd}
+                    onClick={openConfirmEnd}
                     style={{
                       display: `${
                         user.permission === "user" ? "none" : "block"
@@ -497,8 +511,9 @@ const Project = ({match, history}) => {
                       ? "Восстановить проект"
                       : "Завершить проект"}
                   </Button>
+                  <div style={{display:`${confirm?'block':'none'}`}}><Confirm buttonTitle={buttonTitle} handleEnd={handleEnd} handleDelete={handleDelete} openConfirm={openConfirm} title={project.title}></Confirm></div>
                   <Button
-                    onClick={handleDelete}
+                    onClick={openConfirm}
                     style={{
                       display: `${
                         user.permission === "user" ? "none" : "block"

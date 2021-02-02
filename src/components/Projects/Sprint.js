@@ -285,7 +285,7 @@ const Sprint = ({match, history}) => {
                 </form>
                 <Button fontSize={'16px'} onClick={()=>prevPage()} style={{marginTop:'70px', marginBottom:'10px'}}grey>Вернуться к проекту</Button>
                 <Button fontSize={'16px'} style={{marginLeft:'50px', marginBottom:'10px'}} onClick={chosenSprint}>{!status? 'Добавить в избранное': 'Убрать из избранного'}</Button>
-                <Button fontSize={'16px'} style={{marginLeft:'50px', marginBottom:'10px'}} onClick={handleSprint}>Завершить спринт</Button>
+                <Button fontSize={'16px'} style={{marginLeft:'50px', marginBottom:'10px',display:`${user.permission=='user'?'none':'block'}`}} onClick={handleSprint}>Завершить спринт</Button>
                 
                         
               </Card>

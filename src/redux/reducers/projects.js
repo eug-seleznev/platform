@@ -172,8 +172,8 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     error: payload,
-                    loadProject: false,
-                    loadedAllProj: false
+                    // loadProject: false,
+                    // loadedAllProj: false
                 }
                 case FINISH_TASK:
                     return {

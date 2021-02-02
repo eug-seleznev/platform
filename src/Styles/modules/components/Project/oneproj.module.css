@@ -22,6 +22,11 @@
 	margin-top: 25px;
 	margin-bottom: 25px;
 }
+.hist__sprint {
+	color:#171F65;
+	margin-left:300px;
+	margin-top:10px
+}
 .card__date1 {
 	text-align: right;
 }
@@ -242,5 +247,10 @@
 	}
 	.exit_in {
 		display: none;
+	}
+	.hist__sprint {
+		color:#171F65;
+		margin-left:0px;
+		margin-top:10px
 	}
 }
