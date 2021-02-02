@@ -17,6 +17,7 @@ import ProjTeam from './components/ProjTeam'
 import ModalWindow from "./components/ModalWindow";
 
 import { Oauth } from "../../redux/actions/models";
+import Confirm from "./confirm";
 
 
 // const sprintDays = [];
@@ -40,7 +41,9 @@ const Project = ({match, history}) => {
     const [sprintDays, setSprintDays] = useState([]);
     const [calendLoader, setCalendLoader] = useState (false);
     const [paint, setPaint] = useState(false);
-    const [pr, setpr] = useState (false)
+    const [pr, setpr] = useState (false) 
+    const [confirm, setConfirm] = useState (false)
+    const [buttonTitle, setButtonTitle] = useState ('')
     // const project = useSelector(state => state.projects.project.team)
   const [modal, setModal] = useState (false)
   const [sprintId, setSprintId] = useState ('')
@@ -208,11 +211,22 @@ const Project = ({match, history}) => {
     const handleEnd = () => {
         
         dispatch(finishProject(id))
-        return history.push(`.`)
 
+        openConfirmEnd()
+        return history.push(`./`)
+
+    }
+    const openConfirmEnd = ()=>{
+      setButtonTitle('Завершить')
+      setConfirm (!confirm)
+    }
+    const openConfirm = ()=>{
+      setButtonTitle('Удалить')
+      setConfirm (!confirm)
     }
     const handleDelete = () => {
         dispatch(deleteProject(id))
+        openConfirm()
         return history.push(`./`)
 
     }
@@ -482,7 +496,7 @@ const Project = ({match, history}) => {
 
                 <div style={{marginTop:'30px'}}>
                   <Button
-                    onClick={handleEnd}
+                    onClick={openConfirmEnd}
                     style={{
                       display: `${
                         user.permission === "user" ? "none" : "block"
@@ -497,8 +511,9 @@ const Project = ({match, history}) => {
                       ? "Восстановить проект"
                       : "Завершить проект"}
                   </Button>
+                  <div style={{display:`${confirm?'block':'none'}`}}><Confirm buttonTitle={buttonTitle} handleEnd={handleEnd} handleDelete={handleDelete} openConfirm={openConfirm} title={project.title}></Confirm></div>
                   <Button
-                    onClick={handleDelete}
+                    onClick={openConfirm}
                     style={{
                       display: `${
                         user.permission === "user" ? "none" : "block"
