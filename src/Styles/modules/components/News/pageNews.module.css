@@ -70,8 +70,10 @@
         }
         .buttons{
             display: grid;
+            grid-template-columns: max-content 1fr;
+            column-gap: 20px;
             place-content: unset;
-            row-gap: 10px;
+           
             margin-left: 10px;
         }
     }

@@ -13,3 +13,11 @@
 .p{
     margin: 0;
 }
+@media(max-width:1000px){
+    .editForm{
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 10px;
+        column-gap: 30px;
+    }
+}

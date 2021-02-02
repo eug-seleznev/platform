@@ -25,6 +25,9 @@ const MenuMobile = ({open, closeAll}) => {
                         <MobMenuLink to='/' className={styles.menuButton} onClick={closeAll}> Главная</MobMenuLink>
                         <MobMenuLink to='/projects' className={styles.menuButton} onClick={closeAll}>Проекты</MobMenuLink>
                         <MobMenuLink to='/users' className={styles.menuButton} onClick={closeAll}>Сотрудники</MobMenuLink>
+                        <MobMenuLink to='/office' className={styles.menuButton} onClick={closeAll}>Офис</MobMenuLink>
+                        <MobMenuLink to='/department' className={styles.menuButton} onClick={closeAll}>Отдел</MobMenuLink>
+
                     <Light className={styles.title} color='white' size='16'>тут что-то будет</Light>
                 </div>    
             </div> 

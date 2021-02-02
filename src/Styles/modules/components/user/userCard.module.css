@@ -5,6 +5,7 @@
     'ava pos'
     '. profile'
     ;
+    grid-template-columns: max-content 1fr;
     row-gap: 5px;
     column-gap: 20px;
 }
