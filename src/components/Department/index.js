@@ -31,7 +31,7 @@ console.log(users,'ssssssssssssssssssssssssssss')
             <Profile   user={user} history={history}/>
 
     
-        {!user.division? <Regular size='16'>Вы не состоите ни в одном отделе, вступить можно на <ButtonText fontSize='18px'>странице редактирования профиля</ButtonText> </Regular> :
+        {!user.division? <Regular size='16'>Вы не состоите ни в одном отделе, вступить можно на <ButtonText fontSize='18px' onClick={()=>history.replace('/edit')}>странице редактирования профиля</ButtonText> </Regular> :
 
             <DepartmentCard user={user} history={history} users={users}/>
 
