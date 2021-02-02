@@ -33,7 +33,6 @@ export default function(state = initialState, action) {
             
         
             case ALL_DEPARTMENTS:
-                console.log(payload, 'payload')
                 return {
                     
                     ...state,
@@ -44,6 +43,8 @@ export default function(state = initialState, action) {
                 }
 
             case JOIN_DEPARTMENT:
+console.log('join4' , payload)
+                
                 return {
                     ...state,
                     msg: payload,
@@ -61,6 +62,8 @@ export default function(state = initialState, action) {
                 }
 
             case LEAVE_DEPARTMENT:
+console.log('leave' , payload)
+
                 return {
                     ...state,
                     msg: payload,

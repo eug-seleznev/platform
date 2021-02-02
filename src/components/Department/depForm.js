@@ -10,6 +10,9 @@ import { Card } from '../../Styles/common'
 
 const DepartmentForm = ({closeForm}) => {
 
+
+    const [overCard, setOvercard] = useState(false)
+
 const dispatch = useDispatch()
 
     const [formData, setFormData ] = useState({
@@ -46,15 +49,15 @@ const onSubmit = (e) => {
 
     return (
      
-          
-       <Card>
+        <div className={styles.bg} onClick={!overCard && closeForm}>
+       <Card onMouseEnter={()=>setOvercard(true)} onMouseLeave={()=>setOvercard(false)}>
         <form className={styles.formContainer} onSubmit={onSubmit}>
             <Regular size='30'>Новый отдел</Regular>
            
             <input 
                 className={styles.title}
                 type='text'
-                placeholder='Заголовок'
+                placeholder='Название'
                 name='divname'
                 value={divname}
                 onChange={e => onChange(e)}/>
@@ -77,6 +80,7 @@ const onSubmit = (e) => {
 
         </form>
         </Card>
+        </div>
     )
 }
 

@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { GET_TOKEN, GET_URN, NEW_ERROR } from "../types";
+import { GET_TOKEN, GET_URN, NEW_ERROR, GET_STATUS } from "../types";
 
 export const postModel = (formData) => async (dispatch) => {
   // formData.append('userName', 'Fred');
@@ -64,14 +64,16 @@ export const Oauth = (crypt) => async (dispatch) => {
 
 export const Status = (crypt) => async (dispatch) => {
   try {
+    console.log('started')
     const res = await Axios.get(`/up/status/p/${crypt}`, {
       baseURL: "http://192.168.0.16:7770",
       headers: {
         "content-type": "application/json",
       },
     });
+    console.log(res.data, 'response')
     dispatch({
-      type: GET_TOKEN,
+      type: GET_STATUS,
       payload: res.data,
     });
   } catch (err) {

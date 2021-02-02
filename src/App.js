@@ -50,6 +50,7 @@ const App = () => {
   const [load, setLoad] = useState(false)
   const auth = useSelector(state => state.auth.isAuthenticated)
   const loaded = useSelector(state => state.auth.loaded)
+  // const user = useSelector(state => state.auth.user)
   // const [dimensions, setDimensions] = useState({
   //   height: window.innerHeight,
   //   width: window.innerWidth,
@@ -82,7 +83,10 @@ const App = () => {
   }, [loaded])
 
 
+  useEffect(()=>{
 
+//  auth && (!user.name && history.replace("/edit"))
+  },[auth])
 
   // useEffect(() => {
   //   const handleResize = () => {

@@ -8,7 +8,7 @@ grid-template-areas:
 'ava  rocket   rocket'
 'ava   .       .'
 ;
-grid-template-columns: 342px min-content 1fr;
+grid-template-columns: 342px minmax(min-content,max-content) 1fr;
 grid-template-rows: max-content 60px max-content max-content max-content 1fr;
 column-gap: 30px;
 row-gap: 8px;
@@ -23,9 +23,8 @@ row-gap: 8px;
     }
         .change{
             grid-area: change;
-            display: grid;
-            place-content: center left;
-            transform: translate3d(-18px,2px,0);
+            margin-top: auto;
+            transform: translate3d(-18px,-5px,0);
         }
 
     .pos{

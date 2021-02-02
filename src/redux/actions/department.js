@@ -8,16 +8,13 @@ import { NEW_DEPARTMENT, ALL_DEPARTMENTS, FIND_DEPARTMENT, JOIN_DEPARTMENT, LEAV
 
 export const newDepartment = (formData) => async dispatch  => {
     try {
-        console.log(formData, 'dadadadta')
         const res = await innerBackend.post('/divisions', formData)
 
-        console.log(formData, '222222')
 
         dispatch({
             type: NEW_DEPARTMENT,
             payload: res.data
         })
-        console.log(formData, '333333333333')
 
         }
       catch (err) {
@@ -35,16 +32,13 @@ export const newDepartment = (formData) => async dispatch  => {
 
 export const allDepartments = () => async dispatch  => {
     try {
-        console.log( '111111111111')
 
         const res = await innerBackend.get('/divisions/all')
-        console.log(res, '2222222222222')
 
         dispatch({
             type: ALL_DEPARTMENTS,
             payload: res.data
         })
-        console.log( '333333333333333')
 
         }
       catch (err) {
@@ -84,16 +78,18 @@ export const findDepartment = (divname) => async dispatch  => {
 
 }
 
-export const joinDepartment = (divname) => async dispatch  => {
+export const joinDepartment = (id) => async dispatch  => {
     try {
-
-        const res = await innerBackend.put(`/divisions/${divname}`)
+console.log('join1' , id)
+        const res = await innerBackend.put(`/divisions/${id}`)
+        console.log('join2')
 
 
         dispatch({
             type: JOIN_DEPARTMENT,
             payload: res.data
         })
+        console.log('join3')
 
         }
       catch (err) {

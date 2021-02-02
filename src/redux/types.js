@@ -97,3 +97,4 @@ export const REVERSE_ARRDATE = 'revarrdate'
 ///autodesk forge @ MODELS 
 export const GET_TOKEN = 'get_oauth_token'
 export const GET_URN = 'get_urn'
+export const GET_STATUS = 'loading_status'

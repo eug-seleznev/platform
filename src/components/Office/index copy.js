@@ -55,17 +55,14 @@ const dateButton = ()=>{
 
 
 useEffect(()=>{
-    console.log('reloading') 
 
 
     if (filter=='like'){
         isInitial = true
-    console.log('reloadingLikes') 
         
         return dispatch(Reverse({isInitial}))
     } if (filter=='date'){
         isInitial = true
-    console.log('reloadingDates') 
 
         return dispatch(ReverseDate({isInitial}))
     }

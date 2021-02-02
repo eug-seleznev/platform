@@ -1,0 +1,30 @@
+.userCard{
+    display: grid;
+    grid-template-areas:
+    'ava name'
+    'ava pos'
+    '. profile'
+    ;
+    row-gap: 5px;
+    column-gap: 20px;
+}
+.avatar{
+grid-area: ava;
+width: 90px;
+height: 90px;
+border-radius: 50%;
+}
+.name{
+    grid-area: name;
+
+}
+.position{
+    grid-area: pos;
+
+}
+.profile{
+    grid-area: profile;
+    width: 50%;
+    margin-left: auto;
+
+}

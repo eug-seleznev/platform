@@ -4,17 +4,22 @@ import {changeData, changeAvatar} from '../../redux/actions/auth'
 import { url } from '../utils/axios';
 
 
-
+import styles from '../../Styles/modules/components/user/edit.module.css'
 //styled components
 import {Button} from '../../Styles/buttons'
 import { Card, SmallContainer } from "../../Styles/common";
 import { Input, LogForm } from "../../Styles/Forms";
+import styled from "styled-components";
+import { allDepartments, joinDepartment } from "../../redux/actions/department";
 
 const Edit = ({match, history}) => {
 	
 	const loaded = useSelector(state => state.auth.loaded)
-    const user = useSelector(state => state.auth.user)
-    const dispatch = useDispatch();
+	const user = useSelector(state => state.auth.user)
+	const departments = useSelector(state => state.departments.departments)
+	// const select = user.division.divname==el.divname && selected
+	const dispatch = useDispatch();
+	console.log(departments, 'alaljlhskhdahsldjljk')
     const [formData, setFormData ] = useState({
         
 		name: user.name ? user.name : '',
@@ -35,19 +40,24 @@ const Edit = ({match, history}) => {
       const handleFile = e => {
         setFile(e.target.files[0])
 	}
-	// useEffect (()=> {
-	// 	if (file !== null) {
-	// 		setTimeout(() => {
-	// 		dispatch (changeAvatar(file))
-	// 	}, 200);
-	// 	}
-		
-		
-	// },[file])
+
+
+
+	useEffect (()=> {
+	dispatch(allDepartments())
+	},[])
+
+
+
     const onChange = e => {
         e.preventDefault(); 
 		console.log (e.target.value)
         setFormData({ ...formData, [e.target.name]: e.target.value });
+	 }
+	 const divisionChange = e => {
+        e.preventDefault(); 
+		// setFormData({ ...formData, [division]: e.target.value });
+		dispatch(joinDepartment(e.target.value))
      }
      
 	 const changeMsg = () => {
@@ -86,8 +96,8 @@ const Edit = ({match, history}) => {
         {!loaded? <div>loaded...</div> :
 		  
 		  (  
-			  <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-		  <LogForm  onSubmit={onSubmit}>
+			  <div /*style={{display:'flex', flexDirection:'column', alignItems:'center'}}*/>
+		  <LogForm className={styles.editForm}  onSubmit={onSubmit}>
 
 		<p>Имя</p>
 		  <Input 
@@ -108,13 +118,20 @@ const Edit = ({match, history}) => {
 			  	onChange={e => onChange(e)}
 			></Input>
 <p>Отдел</p>
-		  <Input 
-			  	type='text'
-			 	placeholder={division}
-				name="division"
-				value={division}
-			  	onChange={e => onChange(e)}
-			></Input>
+			<select
+			onChange={e => divisionChange(e)}
+			name='division'
+			>
+				<option disabled>Выберите отдел</option>
+				{departments && departments.map((el,i)=>{
+
+					return(
+						<option selected={user.division.divname==el.divname ? true : false} value={el.divname}>{el.divname}</option>
+					)
+				})}
+				
+			</select>
+		
 
 			<p>Сменить должность</p>
  		<Input 
@@ -134,19 +151,18 @@ const Edit = ({match, history}) => {
 			></Input>
 			
 			
-			<br/>
-			<br/>
-			<Button style={{width:'20vw', transform: 'translateY(60px)'}} onClick={changeMsg}  type="submit" value="Submit" >Сохранить</Button>
-			<Button style={{width:'20vw', transform: 'translateY(80px)'}} onClick={Redirect}  >Ничего не менять</Button>
-		  </LogForm>
-		  <form style={{marginTop:'-110px'}} >
 			  <p>Сменить аватар</p>
 			 <Input 
                 type='file'
                 placeholder='загрузите изображение'
-				onChange={handleFile}></Input><br/><br/>
-				</form>
-				<div style={{opacity: `${text !==''?1:0}`, transition:'500ms ease opacity', marginTop: '70px'}}>{text}</div>
+				onChange={handleFile}></Input>
+				
+			
+			<Button  onClick={changeMsg}  type="submit" value="Submit" >Сохранить</Button>
+			<span />
+			<Button  onClick={Redirect}  >Ничего не менять</Button>
+		  </LogForm>
+		  
 				</div>
              
    )}

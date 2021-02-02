@@ -7,10 +7,12 @@ import { useEffect, useState } from 'react'
 import { Card } from '../../Styles/common'
 import DepartmentForm from './depForm'
 import DepartmentCard from './departmentCard'
+import { allUsers } from '../../redux/actions/user'
 
 const Department = ({history}) => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.auth.user)
+    const users = useSelector(state => state.users.users)
     const departments = useSelector(state => state.departments.departments)
     const loaded = useSelector(state => state.departments.loaded)
 
@@ -18,28 +20,27 @@ const Department = ({history}) => {
 
  useEffect(()=>{
     dispatch(allDepartments())
+    dispatch(allUsers())
  },[])
- useEffect(()=>{
-    console.log(departments, 'dddddddddddddddddddddddddd')
- },[departments])
+console.log(users,'ssssssssssssssssssssssssssss')
 
     return(
         <div className={styles.container}>
             <Profile   user={user} history={history}/>
 
-        { user.permission=='admin' && (
-        !openForm? <Card className={styles.createDep} onClick={()=>setOpenForm(true)}>Создать отдел</Card> : <DepartmentForm closeForm={()=>setOpenForm(false)}/>
-        )}
-            
-        {/* {!loaded? <div>loading ...</div> :
-         departments.map((el, i)=>{
+    
+        {!user.division? <div>loading ...</div> :
 
-            return(
-                <DepartmentCard content={el}/>
-                )
-         })
-        } */}
-                <DepartmentCard content='el' user={user}/>
+            <DepartmentCard user={user} history={history} users={users}/>
+
+        //  departments.map((el, i)=>{
+
+        //     return(
+        //         <DepartmentCard content={el} user={user} history={history} users={users}/>
+        //         )
+        //  })
+        }
+            
 
         
         </div>

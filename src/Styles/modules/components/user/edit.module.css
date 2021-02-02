@@ -1,0 +1,15 @@
+.editForm{
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    row-gap: 20px;
+    column-gap: 30px;
+}
+.avaForm{
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    
+
+}
+p{
+    margin: 0;
+}
