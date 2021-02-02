@@ -444,7 +444,7 @@ const Project = ({match, history}) => {
             <div className={style.sprintdescr__cont}>
                     {project.team.map((user, i) => {
                       return (
-                        <ProjTeam  histProp={history} userId={user._id} userName={user.name} userAvatar={user.avatar} userPos={user.position}></ProjTeam>
+                        <ProjTeam  histProp={history} userId={user._id} userName={user.name} lastName={user.lastname} userAvatar={user.avatar} userPos={user.position}></ProjTeam>
                       );
                     })}
                    
