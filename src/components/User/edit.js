@@ -72,9 +72,12 @@ const Edit = ({match, history}) => {
 	
 }
      const onSubmit = e => {
-        e.preventDefault();
-		// dispatch(changeData({formData})) так не обязательно
+		e.preventDefault();
+
+
 		dispatch(changeData(formData))
+
+
 		if (file !== null && file !== undefined) {
 		
 			dispatch (changeAvatar(file))
@@ -98,6 +101,7 @@ const Edit = ({match, history}) => {
 
 		<p className={styles.p}>Имя</p>
 		  <Input 
+		  required 
 			  	type='text'
 			 	placeholder={user.name}
 				name="name"
@@ -108,6 +112,7 @@ const Edit = ({match, history}) => {
 
 <p className={styles.p}>Фамилия</p>
 		  <Input 
+		  required 
 			  	type='text'
 			 	placeholder={user.lastname}
 				name="lastname"
@@ -116,6 +121,7 @@ const Edit = ({match, history}) => {
 			></Input>
 <p className={styles.p}>Отдел</p>
 			<select
+			required 
 			onChange={e => divisionChange(e)}
 			name='division'
 			>
@@ -131,7 +137,8 @@ const Edit = ({match, history}) => {
 		
 
 			<p className={styles.p}>Сменить должность</p>
- 		<Input 
+		 <Input 
+		 required 
 			  type='text'
 			  placeholder={user.position}
 			  name="position"
@@ -139,7 +146,8 @@ const Edit = ({match, history}) => {
 			  onChange={e => onChange(e)}
 			></Input>
 			<p className={styles.p}>Сменить e-mail</p>
- 		<Input 
+		 <Input 
+		 required 
 			  type='text'
 			  placeholder={user.email}
 			  value={email}
@@ -148,18 +156,18 @@ const Edit = ({match, history}) => {
 			></Input>
 			
 			
-			  
+			<p className={styles.p}>Сменить аватар</p>
+			 <Input 
+                type='file'
+                placeholder='загрузите изображение'
+				onChange={handleFile}></Input>
 				
 			
 			<Button  onClick={changeMsg}  type="submit" value="Submit" >Сохранить</Button>
 			<span />
 			<Button  onClick={Redirect}  >Ничего не менять</Button>
 		  </LogForm>
-		  <p className={styles.p}>Сменить аватар</p>
-			 <Input 
-                type='file'
-                placeholder='загрузите изображение'
-				onChange={handleFile}></Input>
+		  
 				</div>
              
    )}
