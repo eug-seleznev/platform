@@ -65,7 +65,7 @@ const Project = ({match, history}) => {
     
     if (loaded && sprintsLoad && trick){
      
-    dispatch(Oauth(project.crypt));
+    // dispatch(Oauth(project.crypt));
       // console.log('stage2')
       const Calendar = () => {return new Promise((resolve, reject) =>  {
         
