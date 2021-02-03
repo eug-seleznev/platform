@@ -46,7 +46,9 @@ const HeaderL = ({ createProj, createNews, createTicket}) => {
             </ItemHead>
             
             <ItemHead onClick={() => setOpen({...open, menu:false, menuProfile: !open.menuProfile})}>
-                <img  width="40px" style={{borderRadius:'50px'}} src={`${url}/${user != null? (user!= undefined? user.avatar:''):''}`}/>
+                <div className='avatar' >
+                    <img  height="100%"  src={`${url}/${user != null? (user!= undefined? user.avatar:''):''}`}/>
+                </div>
                 <img className='arrow' src='/headerArrow.png'/>
             </ItemHead>
             
@@ -54,7 +56,7 @@ const HeaderL = ({ createProj, createNews, createTicket}) => {
 
         </Header>
 )}
-        <Menu createTicket={createTicket} createNews={createNews} createProj={createProj} closeAll={()=>allFalse()}  state={open}/>
+        <Menu createTicket={createTicket} createNews={createNews} createProj={createProj} closeAll={()=>allFalse()}  state={open} user={user}/>
         <MenuMobile open={open.mobile} closeAll={()=>allFalse()} />
 
           </>

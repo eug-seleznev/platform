@@ -17,6 +17,7 @@ row-gap: 8px;
         grid-area: ava;
         height: 342px;
         width: 342px;
+        object-fit: cover;
     }
     .name{
         grid-area: name;

@@ -8,6 +8,8 @@ import { Card } from '../../Styles/common'
 import DepartmentForm from './depForm'
 import DepartmentCard from './departmentCard'
 import { allUsers } from '../../redux/actions/user'
+import { ButtonText } from '../../Styles/buttons'
+import { Regular } from '../../Styles/typography'
 
 const Department = ({history}) => {
     const dispatch = useDispatch()
@@ -29,7 +31,7 @@ const Department = ({history}) => {
             <Profile   user={user} history={history}/>
 
     
-        {!user.division? <div>loading ...</div> :
+        {!user.division? <Regular size='16'>Вы не состоите ни в одном отделе, вступить можно на <ButtonText fontSize='18px' onClick={()=>history.replace('/edit')}>странице редактирования профиля</ButtonText> </Regular> :
 
             <DepartmentCard user={user} history={history} users={users}/>
 

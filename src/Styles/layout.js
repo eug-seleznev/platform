@@ -39,7 +39,17 @@ export const ItemHead = styled.div`
        margin-left: 0px;
 
     }
-
+        .avatar{
+          
+            overflow:hidden;
+            width:40px;
+            height:40px;
+            border-radius:50px;
+            
+            
+        }
+           
+        
         .invert{
             filter: invert(0) ;
         }
