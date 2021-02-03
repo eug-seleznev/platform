@@ -71,7 +71,7 @@ const CreateNews = ({permissions, closeWindow}) => {
 
 useEffect(()=>{
  dispatch(allNews())
- console.log(user,'hiiiiiiiiiiii')
+//  console.log(user,'hiiiiiiiiiiii')
 },[])
 
     return (

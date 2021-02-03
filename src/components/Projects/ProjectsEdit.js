@@ -16,7 +16,7 @@ const ProjectsEdit = ({history}) => {
 
 
     useEffect(() => {
-        console.log ('hi')
+        // console.log ('hi')
         dispatch(allProjects())
     }, [])
     

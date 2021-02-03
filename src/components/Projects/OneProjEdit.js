@@ -28,11 +28,11 @@ const ProjectEdit = ({history, match}) => {
 	  
 	  useEffect(() => {
 		dispatch(getProject(id));
-        console.log (project)
+        // console.log (project)
     }, [])
 	useEffect(() => {
 		if (loadProject ) {
-			console.log (project.customer)
+			// console.log (project.customer)
 			setFormData ({...formData, title: project.title, 
 				dateStart: project.dateStart,
 				city: project.city,

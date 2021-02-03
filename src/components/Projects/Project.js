@@ -18,6 +18,9 @@ import ModalWindow from "./components/ModalWindow";
 
 import { Oauth } from "../../redux/actions/models";
 import Confirm from "./confirm";
+import TitleOfProject from "./components/OneProject/titleOfProject";
+import AllSprintsOfProj from "./components/OneProject/allSprintsOfproj";
+import CalendSprint from "./components/OneProject/sprintCalend";
 
 
 // const sprintDays = [];
@@ -46,7 +49,7 @@ const Project = ({match, history}) => {
     const [buttonTitle, setButtonTitle] = useState ('')
     // const project = useSelector(state => state.projects.project.team)
   const [modal, setModal] = useState (false)
-  const [sprintId, setSprintId] = useState ('')
+  
     // эт массивы для календаря
     const[conditionalWeeks] =useState([]) 
     const[sprintPaint, setPaintSprint] = useState ([])
@@ -67,31 +70,8 @@ const Project = ({match, history}) => {
      
     dispatch(Oauth(project.crypt));
       // console.log('stage2')
-      const Calendar = () => {return new Promise((resolve, reject) =>  {
-        
-        //  Вот это все короче собирает инфу с бекенда, 
-        // режет в нужный мне формат и пушит в массив
-        // с отрисовкой пока беда работает ток на f5
-
-         sprints.filter((sprint)=>sprint.dateClosePlan!=null).map ((body, i) => {
-          let month = body.dateClosePlan.slice(5,7)
-          let day = body.dateClosePlan.slice(8,10)
-          let sprintStatusDone = body.tasks.length - body.tasks.filter((task) => !task.taskStatus).length
-          let sprintStatusFull = body.tasks.length
-          let monthInt = Number(month)
-          let dayInt = Number(day)
-          setSprintDays(state => [...state, [dayInt,monthInt,sprintStatusDone,sprintStatusFull]])
-         })
-
-         
          setCalendLoader(true)
-         resolve()
-         
       
-      })}
-
-      Calendar().then(() =>   setCalendLoader(true)
-      )  
     }
    
 }, [sprintsLoad, loaded, trick])
@@ -113,79 +93,10 @@ const Project = ({match, history}) => {
             if(calendLoader){
               // console.log('STAGE 4')
               setpr(false)
-              const MapCheck = () =>  new Promise((resolve, reject) => {
-                // console.log('stage5')
-         // вот это цикл для подсчета нужного количества квадратов в календаре и пуша в каждый
-         // инфы о месяцах
-                for (let i = 0; i <= 47; i++) {
-                  if (project.crypt === id){
-                    let yu = project.dateStart.slice(5,7)
-                    let index = Number(yu)
-                    if ((index+i/4) <13){
-                      conditionalWeeks.push([i, Math.trunc((i/4)+index),
-                        i%4==1?2:
-                        i%4==2?3:
-                        i%4==3?4:
-                        i%4==4?0:1])
-                     
-                    }
-              // елс иф для адекватной отрисовки первого месяца как стартового для проекта  
-                    else if (index+i/4>=13){
-                      conditionalWeeks.push([i, Math.trunc((i/4)+index-12),
-                        i%4==1?2:
-                        i%4==2?3:
-                        i%4==3?4:
-                        i%4==4?0:1])}}
-              }
+            
+             }})
 
-               resolve()
-
-             })
-
-              MapCheck().then(() =>{
-              let sprintArray = [];
              
-              conditionalWeeks.map ((body, i) => {
-                  // console.log('stage7')
-                    let int = 0
-                    //фильтры мапы для показа понедельно квадратиков в нужных местах
-                    // инт отвечает за статус/цвет по умолчанию 0=серый
-                     sprintDays.filter((sprintday)=>Math.trunc(sprintday[0]/7.75)+1===body[2])
-                     .filter((sprintday)=>sprintday[1]===body[1]).filter((sprintday)=>sprintday[2]<sprintday[3]/ 100 * 50)
-                     .map (() => {
-                       int = 1
-                         })
-
-                     sprintDays.filter((sprintday)=>Math.trunc(sprintday[0]/7.75)+1===body[2])
-                     .filter((sprintday)=>sprintday[1]===body[1])
-                     .filter((sprintday)=>sprintday[2]>=sprintday[3]/ 100 * 50).map (() => { 
-                         int = 2
-                         })
-
-                     sprintDays.filter((sprintday)=>Math.trunc(sprintday[0]/7.75)+1===body[2])
-                       .filter((sprintday)=>sprintday[1]===body[1]).filter((sprintday)=>sprintday[2]===sprintday[3])
-                       .map (() => {
-                         int = 3
-                           })
-
-                        sprintArray.push ([body[0],body[1],body[2],int])  
-          
-                        setpr(true)
-          
-               })
-               
-                setPaintSprint(sprintArray)
-
-                setTimeout(() => {
-                  setPaint(true)
-
-                }, 50)
-                // console.log('stage 8')
-              
-              } 
-              )
-            }
-         },[calendLoader])
        
     
 
@@ -193,7 +104,7 @@ const Project = ({match, history}) => {
         if(loaded){
             dispatch(allSprints(project.crypt))
         }
-        // console.log (project)
+        console.log (project)
         // console.log (conditionalWeeks)
         // console.log (sprint)
     }, [loaded])
@@ -203,10 +114,7 @@ const Project = ({match, history}) => {
       setStatus(!status)
      
  }
-     const openMod = () => {
-          setModal(true)
-         
-     }
+  
 
     const handleEnd = () => {
         
@@ -237,7 +145,7 @@ const Project = ({match, history}) => {
         dispatch(joinTeam(id))
         
     }
-   
+ 
     return (
       
   
@@ -252,130 +160,12 @@ const Project = ({match, history}) => {
               
               <p> loading...</p>
             ) : (
-              console.log(project),
+              
               <>
-           <ModalWindow
-                      status={modal} 
-                      bigTitle={'Создание нового спринта'}
-                      smallTitles={['Описание спринта','Продолжительность']}
-                      customElements={'CreateSprint'}
-                      buttonTitle={'Сохранить'}
-                      sprintId={sprintId}
-                      offWindow={offWindow}
-                    >
-
-                    </ModalWindow>
-                  <div className={style.title}>
-                    
-                    <H1 size='24' >{project.title}</H1>
-                    <Bold size='16'>
-                      <div className={style.title__small} style={{ display: `${
-                        user.permission === "user" ? "none" : "flex"
-                      }`}}>
-                      
-                        <div className={style.title__options} onClick={() => history.replace(`/admin/editproj/${project.crypt}`)}>Настройки</div>
-                        <img onClick={() => history.replace(`/admin/editproj/${project.crypt}`)} src='/image 1.png'></img>
-                      </div>
-                      </Bold>
-                  </div>
-                  
-                  <Light className={style.title__small} size='16'>
-                    <div className={style.title__deadline}>Дедлайн: {project.dateFinish!=null?project.dateFinish.slice(0,10):"?"}</div> 
-                    <div className={style.title__deadline}>Этап: {project.stage}</div>
-                  </Light>
-                <div>
-                  
-                  {sprints.length == 0 ? (
-                     <Button
-                     className={style.special__button}
-                      onClick={openMod}
-                      style={{
-                        
-                        color:'black',
-                        backgroundColor:'white',
-                        fontSize:'20px',
-                        fontFamily:'SuisseIntlSemibold',
-                      // display: `${
-                        
-                      //   user.permission === "user" || project.status
-                      //     ? "none"
-                      //     : "block"
-                      // }`,
-                    }}
-                  >
-                 
-                   Создать спринт
-                  </Button>
-                  ) : (
-                   <div className={style.sprintdescr__cont}>
-                     {sprints.filter((sprint)=> !sprint.status).map ((sprint, i) => {
-                       return (
-                         <SprintDescription dateClosePlan={sprint.dateClosePlan} descr={sprint.description} history={history} params={match.params} id={sprint._id} key={i} taskcomplite={sprint.tasks.filter((task) => task.taskStatus).length} 
-                         alltasks={sprint.tasks.length} index={i+1}sprintname={sprint.name} dateOpen={sprint.dateOpen}></SprintDescription>
-                       )
-                     })}
-                     <Button
-                     className={style.special__button}
-                      onClick={openMod}
-                      style={{
-                        color:'black',
-                        backgroundColor:'white',
-                        fontSize:'20px',
-                        fontFamily:'SuisseIntlSemibold',
-                      // display: `${
-                        
-                      //   user.permission === "user" || project.status
-                      //     ? "none"
-                      //     : "block"
-                      // }`,
-                    }}
-                  >
-           
-                   Создать спринт
-                  </Button>
-                   </div>
-                  )}
-                  
-                  <br />
-                  
-                  <br />
-                </div>
-                <div className={style.border__calend}></div>
-                
-                {!paint?<div>loading...</div>:(
-                  //календарь со спринтами
-                  <> 
-
-                  <div className={style.calend} >
-                  <div className={style.calend__title}>Статистика проекта</div>
-                  <div className={style.weeks}>
-                    {count.map ((body, i) => {
-                      
-                       return <div key={i} className={style.count}>{i+1}</div>
-                     })}
-                     {!pr?<div>loading..</div>:(<>
-                      {sprintPaint.map ((body, i) => {
-                       
-                       return <div 
-                           style = {{
-                             backgroundColor:`${
-                             body[3]===1?'red':body[3]===2?'rgba(0,255,0,0.5)':body[3]===3 ?'green':'gray'
-                             }`
-                           }}
-                           key={i} className={style.one__week}>
-                             <div className={style.months}> 
-                               {body[0]%4===0&&body[1]<=12?months[body[1]-1]: //это отрисовка месяцев
-                               body[0]==0?months[1]:
-                             ''}</div></div>
-                     
-                     })}
-                     </>)}
-                     
-                 
-                  </div>
-                   <Bold className={style.hist__sprint} onClick={openModHistory}>Подробная история спринтов</Bold>
-                  </div>
-                </>)}
+          
+                <TitleOfProject hist={history}></TitleOfProject>
+                <AllSprintsOfProj match={match} hist={history}></AllSprintsOfProj>
+                <CalendSprint id={id} project={project}></CalendSprint>
                  
                       <ModalContainer style={{display:`${!status?'none':'block'}`}}>
                         <ModalWind>

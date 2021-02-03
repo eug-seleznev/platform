@@ -8,7 +8,7 @@ import { ALL_USERS, USER_ERR, CHANGE_PERMISSION, PERM_RETURN, ONE_USER, CLEAR_ER
 
 export const allUsers = () => async dispatch  => {
     try {
-        console.log('hello all users?')
+        // console.log('hello all users?')
         const res = await innerBackend.get('/users/all')
         dispatch({
             type: ALL_USERS,
@@ -31,7 +31,7 @@ export const allUsers = () => async dispatch  => {
 }
 export const getUser = (id) => async dispatch  => {
   try {
-      console.log('hello 1 user?')
+      // console.log('hello 1 user?')
       const res = await innerBackend.get(`/users/${id}`)
       dispatch({
           type: ONE_USER,
@@ -65,7 +65,7 @@ export const userPermissions = (perm, id) => async dispatch  => {
     permission: perm
 }
   try {
-      console.log('hello permissions', id, perm) 
+      // console.log('hello permissions', id, perm) 
       const res = await innerBackend.put(`/users/permchange/${id}`, body)
       dispatch({
           type: CHANGE_PERMISSION,

@@ -22,7 +22,7 @@ const Department = ({history}) => {
     dispatch(allDepartments())
     dispatch(allUsers())
  },[])
-console.log(users,'ssssssssssssssssssssssssssss')
+// console.log(users,'ssssssssssssssssssssssssssss')
 
     return(
         <div className={styles.container}>

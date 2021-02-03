@@ -64,14 +64,14 @@ export const Oauth = (crypt) => async (dispatch) => {
 
 export const Status = (crypt) => async (dispatch) => {
   try {
-    console.log('started')
+    // console.log('started')
     const res = await Axios.get(`/up/status/p/${crypt}`, {
       baseURL: "http://192.168.0.16:7770",
       headers: {
         "content-type": "application/json",
       },
     });
-    console.log(res.data, 'response')
+    // console.log(res.data, 'response')
     dispatch({
       type: GET_STATUS,
       payload: res.data,

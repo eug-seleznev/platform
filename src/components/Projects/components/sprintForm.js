@@ -108,8 +108,8 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 							</input>
 							<div className={style.week} >
 								<Thin  className={style.small__title} size={16}>{smallTitles[1]}</Thin>
-								<select name="date"className={style.select} onChange={e => onChangeDate(e)}>
-										<option selected>нет</option>
+								<select defaultValue='нет' name="date"className={style.select} onChange={e => onChangeDate(e)}>
+										<option value='нет'>нет</option>
 										<option>1 неделя</option>
 										<option>2 недели</option>
 								</select>

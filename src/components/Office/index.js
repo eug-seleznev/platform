@@ -29,7 +29,7 @@ const user = useSelector(state => state.auth.user)
 
 useEffect(()=>{
 
-console.log(liked,'liked dont spin, please',visibleArray)
+// console.log(liked,'liked dont spin, please',visibleArray)
 
 },[visibleArray])
 
@@ -61,19 +61,19 @@ const dateFIlter = () => {
 useEffect(()=>{
 
     setVisibleArray({content: dated, filter:'date'})
-    console.log('first.load')
+    // console.log('first.load')
 },[loaded])
 
 useEffect(()=>{
     dispatch(likedProposes())
     dispatch(dateProposes())  
-    console.log('reloading') 
+    // console.log('reloading') 
 
 },[reload])
 
 useEffect(()=>{
     visibleArray.filter=='date'? setVisibleArray({...visibleArray, content: dated}) : setVisibleArray({...visibleArray, content: liked})
-    console.log('liked, dated changed => reloading array')
+    // console.log('liked, dated changed => reloading array')
 },[liked, dated])
 
 

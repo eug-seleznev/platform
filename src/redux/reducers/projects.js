@@ -87,7 +87,7 @@ export default function(state = initialState, action) {
                     error: ''
                 }
             case ADD_SPRINT:
-                console.log(payload)
+                // console.log(payload)
                 return {
                     ...state,
                     sprint: payload,

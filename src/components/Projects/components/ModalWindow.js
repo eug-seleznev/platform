@@ -12,7 +12,7 @@ import Ticket from "../../Adminka/Index";
 export const url = process.env.REACT_APP_IP;
 
 
-const ModalWindow = ({closeWindow, bigTitle,smallTitles,customElements,histCurrent,buttonTitle,sprintId, offWindow, status}) => {
+const ModalWindow = ({closeWindow, bigTitle,smallTitles,customElements,histCurrent,buttonTitle, offWindow, status}) => {
 	
 	return (
 	<>
@@ -24,7 +24,7 @@ const ModalWindow = ({closeWindow, bigTitle,smallTitles,customElements,histCurre
 						<Bold size={30}>{bigTitle}</Bold>
 						{customElements === 'CreateSprint'? 
 						<>
-							<SprintForm offWindow={offWindow} sprintId={sprintId}smallTitles={smallTitles} buttonTitle={buttonTitle} customElements={customElements}>
+							<SprintForm offWindow={offWindow} smallTitles={smallTitles} buttonTitle={buttonTitle} customElements={customElements}>
 							</SprintForm>
 						</>:customElements === 'CreateProject'?
 						<>

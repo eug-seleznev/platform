@@ -7,7 +7,7 @@ import { ADD_SPRINT, ADD_TASKS, ALL_PROJECTS, ALL_SPRINT,ADD_SPRINT_TO_CHOSEN, C
 
 export const newProject = (formData) => async dispatch  => {
     try {
-        console.log('hello', formData)
+        // console.log('hello', formData)
         const res = await innerBackend.post('/projects/add', formData)
         dispatch({
             type: CREATE_PROJECT,
@@ -85,7 +85,7 @@ export const addSprint = (id,formData,data) => async dispatch  => {
             date: formData.date,
             tasks: data.tasks[0].taskTitle==""?[]:data.tasks
         }
-        console.log(data)
+        // console.log(data)
         const res = await innerBackend.post(`/projects/sprints/new/${id}`,body)
         dispatch({
             type: ADD_SPRINT,
@@ -107,7 +107,7 @@ export const addSprint = (id,formData,data) => async dispatch  => {
 }
 export const editProject = (formData, id) => async dispatch  => {
     try {
-        console.log('hello edit', formData)
+        // console.log('hello edit', formData)
         const res = await innerBackend.put(`/projects/${id}`, formData)
         dispatch({
             type: EDIT_PROJECT,
@@ -137,7 +137,7 @@ export const allSprints = (id) => async dispatch  => {
             type: ALL_SPRINT,
             payload: res.data.sprints
         })
-        console.log(res.data, 'my data')
+        // console.log(res.data, 'my data')
 
         }
       catch (err) {
@@ -156,7 +156,7 @@ export const allSprints = (id) => async dispatch  => {
 
 
 export const getSprint = (id) => async dispatch  => {
-    console.log(id, 'айдишека')
+    // console.log(id, 'айдишека')
     try {
         const res = await innerBackend.get(`/projects/getsprint/${id}`)
         dispatch({
@@ -181,7 +181,7 @@ export const getSprint = (id) => async dispatch  => {
 
 
 export const addTasks = ({ sprintId,tasks}) => async dispatch  => {
-    console.log(tasks, sprintId, 'retuuuuuuuuuuuurd')
+    // console.log(tasks, sprintId, 'retuuuuuuuuuuuurd')
     
     try {
         // console.log(tasks, 'tasks', id, 'id')
@@ -255,7 +255,7 @@ export const finishSprint = (id) => async dispatch  => {
 
 }
 export const addInfoSprint = (id, form) => async dispatch  => {
-    console.log (form.description, form.date, id)
+    // console.log (form.description, form.date, id)
     let body = {
         description: form.description,
         date: form.date,

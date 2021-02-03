@@ -33,7 +33,7 @@ const Permission = ({history}) => {
 	}, [])
 	
 	const selected =(e, id)=> {
-			console.log (e.target.value, id)
+			// console.log (e.target.value, id)
 			dispatch(userPermissions(e.target.value, id))
 	}
     return (
