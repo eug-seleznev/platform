@@ -23,10 +23,10 @@ const CreateNews = ({permissions, closeWindow}) => {
     
     const user = useSelector(state => state.auth.user)
 
-    const [newsOpen, setOpen] = useState({
-        status: false,
-        post: '',
-    })
+    // const [newsOpen, setOpen] = useState({
+    //     status: false,
+    //     post: '',
+    // })
     const [deleteConfirm, setConfirm] = useState({
         status: false,
         post:'',
