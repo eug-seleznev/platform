@@ -7,7 +7,7 @@ import { ADD_SPRINT, ADD_TASKS, ALL_PROJECTS, ALL_SPRINT,ADD_SPRINT_TO_CHOSEN, C
 
 export const newProject = (formData) => async dispatch  => {
     try {
-        // console.log('hello', formData)
+   
         const res = await innerBackend.post('/projects/add', formData)
         dispatch({
             type: CREATE_PROJECT,
