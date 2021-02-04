@@ -141,7 +141,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 											color:'#3F496C',
 											backgroundColor:'white',
 											border:'none',
-											width:'30vw',
+											width:'95%',
 											textAlign:'right'}} onClick={() => remove(index)}>Удалить</Button>
 									</li>
 									))}
@@ -151,7 +151,8 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 									type="button"
 									style={{color:'#3F496C',
 										backgroundColor:'white',
-										border:'none',width:'30vw',
+										border:'none',width:'95%',
+										paddingRight: '55px',
 										textAlign:'right'}}
 									onClick={() => append({ firstName: "appendBill", lastName: "appendLuo" })}
 								>

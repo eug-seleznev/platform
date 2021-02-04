@@ -55,15 +55,23 @@
 		margin-top:50px
 	}
 	.taskDescr {
-		width:40vw;
+		width:95%;
 		font-family:SuisseIntlThin;
 		font-size:16px;
 	}
 	.taskContain {
 	
 		scrollbar-width: none;
-		width: 45vw;
+		width: 100%;
 		height: 250px;
 		overflow-y: scroll;
+		overflow-x: hidden;
+	}
+}
+@media(max-height:600px){
+	.taskContain {
+	
+		height: 200px;
+	
 	}
 }
