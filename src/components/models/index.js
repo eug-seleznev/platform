@@ -25,6 +25,7 @@ const Viewer = () => {
      
     const onSubmit =(e) => {
         e.preventDefault();
+        console.log(formData)
         dispatch(postModel(formData))
     }
 
@@ -33,9 +34,8 @@ const Viewer = () => {
 
     return (
       <div>
-        <p> hello world</p>
         <form onSubmit={onSubmit}>
-            <input type="file" name="file" onChan-ge={e => onChange(e)}/>
+            <input type="file" name="file" onChange={onChange}/>
           <button type="submit"> load model</button>
         </form>
       </div>

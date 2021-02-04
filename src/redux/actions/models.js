@@ -1,11 +1,11 @@
 import Axios from "axios";
-import { GET_TOKEN, GET_URN, NEW_ERROR, GET_STATUS } from "../types";
+import { GET_TOKEN, GET_URN, NEW_ERROR, GET_STATUS, CLEAR_MODEL_DATA } from "../types";
 
 export const postModel = (formData) => async (dispatch) => {
   // formData.append('userName', 'Fred');
 
   try {
-    // console.log(formData, 'data')
+    console.log(formData, 'data')
     const form = new FormData();
 
     Object.keys(formData).map((el, index) => {
@@ -71,7 +71,6 @@ export const Status = (crypt) => async (dispatch) => {
         "content-type": "application/json",
       },
     });
-    // console.log(res.data, 'response')
     dispatch({
       type: GET_STATUS,
       payload: res.data,
@@ -86,3 +85,14 @@ export const Status = (crypt) => async (dispatch) => {
     });
   }
 };
+
+
+export const cleardData = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: CLEAR_MODEL_DATA
+    })
+  } catch (err) {
+    
+  }
+}

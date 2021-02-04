@@ -43,8 +43,7 @@ const CalendSprint = ({hist, match, id}) => {
     
     if (loaded && sprintsLoad && trick){
      
-    dispatch(Oauth(project.crypt));
-      console.log('stage2')
+    // dispatch(Oauth(project.crypt));
       const Calendar = () => {return new Promise((resolve, reject) =>  {
         
         //  Вот это все короче собирает инфу с бекенда, 
