@@ -183,8 +183,8 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
               </div>
               </div>
               <div className={style.buttons}>
-                <CancelButton grey padd={'70px'} style={{marginTop:'10px'}} onClick={closeWindow}> Отмена</CancelButton>
-                <Button fontSize={'16px'}style={{marginTop:'10px'}} padd={'20px'} type="submit"> Создать новый проект</Button>
+                <CancelButton grey padd={'70px'} style={{marginTop:'5px'}} onClick={closeWindow}> Отмена</CancelButton>
+                <Button fontSize={'16px'}style={{marginTop:'5px'}} padd={'20px'} type="submit"> Создать новый проект</Button>
               </div>
 
      
