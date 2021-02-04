@@ -76,7 +76,7 @@ useEffect(()=>{
 
     return (
 
-	<div >
+	<div className={style.container}>
 		<form className={style.form} onSubmit={onSubmit}>
 			<div>
 				<Thin className={style.small__title}>Заголовок</Thin>

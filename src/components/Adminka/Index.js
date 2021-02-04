@@ -89,7 +89,7 @@ const Admin = ({closeWindow}) => {
                         onChange={e => onChange(e)}/>
                     <div className={style.row}>
                         <div className={style.small__input}>
-                            <Thin className={style.small__title2}>Пароль от компьютера (опционально)</Thin>
+                            <Thin className={style.small__title2}>Пароль от компа</Thin>
                             <input 
                                 type='text'
                                 
@@ -98,14 +98,14 @@ const Admin = ({closeWindow}) => {
                                 onChange={e => onChange(e)}/>
                         </div>
                         <div className={style.small__input}>
-                            <Thin className={style.small__title2}>Скриншот проблемы (опционально)</Thin>
+                            <Thin className={style.small__title2}>Скриншот</Thin>
                             <input 
                                 type='file'
                                 placeholder='скриншот проблемы (опционально)'
                                 onChange={handleFile}/>
                         </div>
                         <div className={style.small__input}>
-                            <Thin className={style.small__title2}>Срочность (опционально)</Thin>
+                            <Thin className={style.small__title2}>Срочность</Thin>
                             <div className={style.week} >
                                     
                                     <select defaultValue='0' name="emergency" onChange={e =>  onOptionChange(e)} className={style.select} >

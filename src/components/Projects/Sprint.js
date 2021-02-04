@@ -121,7 +121,7 @@ const Sprint = ({match, history}) => {
     const chosenSprint = (e) => {
       setStatus(!status)
       dispatch(addToChosen(id));
-
+      
      
   }
    

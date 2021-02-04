@@ -6,6 +6,11 @@
 	width: 100%;
 	height: 55vh;
 }
+.container {
+	overflow-y: scroll;
+	height: 77vh
+	
+}
 .form__inside {
 	flex-direction: column;
 	justify-content: space-between;

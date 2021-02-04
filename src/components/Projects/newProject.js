@@ -78,7 +78,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
         }
 
     return (
-      <div>
+      <div className={style.container}>
           <form className={style.form} onSubmit={onSubmit}>
             <div>
               <div className={style.row}>
