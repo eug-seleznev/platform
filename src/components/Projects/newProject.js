@@ -69,7 +69,6 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
           rcheck: false,
         }),50) 
         closeWindow()
-       
         setTimeout(() => Redirect(),100) 
         
          
