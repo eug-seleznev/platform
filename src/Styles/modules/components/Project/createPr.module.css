@@ -24,6 +24,7 @@
 	width:100%
 }
 .title {
+	
 	margin-bottom: 5px;
 }
 .form input{
@@ -48,6 +49,20 @@
 }
 .input__short{
 	width:13%
+}
+.checkbox__rocket{
+	width: 10px;
+	height: 10px;
+	margin: 0;
+	padding:0;
+}
+.input__rocket{
+	width:35%;
+	display: flex;
+	align-items: center
+}
+.title__rocket {
+	width: 100%;
 }
 .buttons {
 	display: flex;

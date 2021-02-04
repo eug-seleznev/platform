@@ -34,7 +34,9 @@ const Sprint = ({match, history}) => {
     const [status, setStatus] = useState (false)
     const { register, control, handleSubmit, reset, watch } = useForm({
         defaultValues: {
-            tasks: [{ taskTitle: "задача", workVolume: "5", taskState: false }]
+            tasks: [{ taskTitle: "задача",
+              workVolume: "5",
+              taskState: false }]
             
           }
     });
@@ -202,7 +204,7 @@ const Sprint = ({match, history}) => {
                return (
                       <div key={ind} >
                         <form>
-                          <div sclassName={sprintCss.tasks_cont}>
+                          <div className={sprintCss.tasks_cont}>
                             <label style={{display:`${sprint.status?'none':'block'}`}}></label>
                             <input style={{display:`${sprint.status?'none':'block'}`}} type="checkbox" id="vehicle1" name="vehicle1" defaultChecked={task.taskStatus} value={task._id} onChange={onChange}/>
                             <Light className={sprintCss.one_task}style={{textDecoration:`${task.taskStatus?'line-through':'none'}`}}>{ind+1}.  {task.taskTitle!==''?task.taskTitle:'Без названия'}</Light>
