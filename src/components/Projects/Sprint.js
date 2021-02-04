@@ -166,68 +166,46 @@ const Sprint = ({match, history}) => {
               {!loaded?<div>...</div>:<div className={style.title__deadline}>Дней до дедлайна: {diff.toString().slice(0,1)}</div>}
               <div className={style.title__deadline}></div>
             </Light>
-           <div  style={{display:'flex', justifyContent:'space-between',flexWrap:'wrap'}} >
+           <div className={sprintCss.first_flex}>
            
             <Card className={sprintCss.first_block} >
-              <Regular size='30' style={{marginBottom:'10px'}}>Информация</Regular> 
-              <Light style={{paddingBottom:'30px',borderBottom:'1px solid black', marginBottom:'40px'}}>{sprint.description}</Light>
-              <div style={{display:'flex',justifyContent:'flex-end'}}>
+              <Regular size='30' className={sprintCss.info}>Информация</Regular> 
+              <Light className={sprintCss.descr} >{sprint.description}</Light>
+              <div className={sprintCss.time}>
                 <Light>Продолжительность:   </Light> 
                 <Regular >{duration==7?'1 неделя':duration==14?'2 недели':'??'}</Regular>
               </div>
               <div style={{display:`${sprint.status?'block':'none'}`}}>
-                <Regular size={30} style={{textAlign: 'left',width:'100%', marginTop:'10px', marginBottom:'10px'}}> Задачи </Regular>
+                <Regular size={30} className={sprintCss.tasks}> Задачи </Regular>
                   {taskArr.tasks.map((task, ind) => {
                     return (
                             <div key={ind} >
                               <form>
-                                <div style={{display:'flex'}}>
+                                <div className={sprintCss.tasks_cont}>
                                   <label style={{display:`${sprint.status?'none':'block'}`}}></label>
                                   <input style={{display:`${sprint.status?'none':'block'}`}} type="checkbox" id="vehicle1" name="vehicle1" defaultChecked={task.taskStatus} value={task._id} onChange={onChange}/>
-                                  <Light style={{textAlign:'left', marginLeft:'10px',textDecoration:`${task.taskStatus?'line-through':'none'}`}}>{ind+1}.  {task.taskTitle!==''?task.taskTitle:'Без названия'}</Light>
+                                  <Light className={sprintCss.one_task} style={{textDecoration:`${task.taskStatus?'line-through':'none'}`}}>{ind+1}.  {task.taskTitle!==''?task.taskTitle:'Без названия'}</Light>
                                 </div>
                               </form>
                             </div>
                             )
                     })}
               </div>          
-{/* 
-                        {sprint.status && <div>
-                            <H1>невыполненные задачи</H1>
-                            {taskArr.tasks.filter(task => !task.taskStatus).map((task, ind) => {
-                            return (
-                              
-                                <div key={ind} className="sprint__tasks">
-                                    <p></p>
-                                    <form>
-                                        <div>
-                                          
-                                            <p>{ind+1}.  {task.taskTitle!==0?task.taskTitle:'Без названия'}</p>
-                                            <label></label>
-                                            <input type="checkbox" id="vehicle1" name="vehicle1" defaultChecked={task.taskStatus} value={task._id} onChange={onChange}/>
-
-                                        </div>
-                                    </form>
-                                    
-                                </div>
-                                 )
-                        })}
-                          </div>} */}  
                 <Button onClick={handleSprint} fontSize={'16px'} style={{display:`${sprint.status?'block':'none'}`,marginTop: '20px',width:'100%'}}> Восстановить спринт</Button>
                 <CancelButton onClick={()=>prevPage()} grey style={{display:`${sprint.status?'block':'none'}`,marginTop: '20px'}}>Назад</CancelButton>
             </Card>
             {/* addInfoSprint */}
 
             <Card className={sprintCss.second_block} style={{opacity: `${sprint.status?0: 1}`,pointerEvents: `${sprint.status?'none': 'auto'}`}}>
-            <Regular size={30} style={{textAlign: 'left',width:'100%', marginBottom:'20px'}}> Задачи </Regular>
+            <Regular size={30} className={sprintCss.tasks}> Задачи </Regular>
             {taskArr.tasks.map((task, ind) => {
                return (
                       <div key={ind} >
                         <form>
-                          <div style={{display:'flex'}}>
+                          <div sclassName={sprintCss.tasks_cont}>
                             <label style={{display:`${sprint.status?'none':'block'}`}}></label>
                             <input style={{display:`${sprint.status?'none':'block'}`}} type="checkbox" id="vehicle1" name="vehicle1" defaultChecked={task.taskStatus} value={task._id} onChange={onChange}/>
-                            <Light style={{textAlign:'left', marginLeft:'10px',textDecoration:`${task.taskStatus?'line-through':'none'}`}}>{ind+1}.  {task.taskTitle!==''?task.taskTitle:'Без названия'}</Light>
+                            <Light className={sprintCss.one_task}style={{textDecoration:`${task.taskStatus?'line-through':'none'}`}}>{ind+1}.  {task.taskTitle!==''?task.taskTitle:'Без названия'}</Light>
                           </div>
                         </form>
                       </div>
@@ -237,9 +215,9 @@ const Sprint = ({match, history}) => {
                   <ul style={{ listStyleType: 'none'}}>
                   <div style={{display:`${newFields?'block':'none'}`}}>
                     {fields.map((item, index) => (
-                      <li key={item.id} style= {{display:'flex'}}>
+                      <li key={item.id} className={sprintCss.tasks_cont}>
                         <input
-                        style={{width:'35vw',height: '20px'}}
+                          style={{width:'35vw',height: '20px'}}
                           name={`tasks[${index}].taskTitle`}
                           ref={register()}
                           placeholder="Название задачи" // make sure to set up defaultValue
@@ -254,11 +232,13 @@ const Sprint = ({match, history}) => {
                   </ul>
                   <CancelButton
                       fontSize={'16px'}
+                      
                       style={{
                               display:`${newFields||user.permission =='user'?'none':'block'}`,
                               color:'#3F496C',
                               backgroundColor:'white',
-                              border:'none'}}
+                              border:'none',
+                              textAlign:'right'}}
                       onClick={createField}>
                     Добавить задачу
                   </CancelButton>
@@ -283,11 +263,11 @@ const Sprint = ({match, history}) => {
                     </Button>
                   </div>
                 </form>
-                <Button fontSize={'16px'} onClick={()=>prevPage()} style={{marginTop:'70px', marginBottom:'10px'}}grey>Вернуться к проекту</Button>
-                <Button fontSize={'16px'} style={{marginLeft:'50px', marginBottom:'10px'}} onClick={chosenSprint}>{!status? 'Добавить в избранное': 'Убрать из избранного'}</Button>
-                <Button fontSize={'16px'} style={{marginLeft:'50px', marginBottom:'10px',display:`${user.permission=='user'?'none':'block'}`}} onClick={handleSprint}>Завершить спринт</Button>
-                
-                        
+                <div className={sprintCss.buttons} >
+                  <Button fontSize={'16px'} onClick={()=>prevPage()} style={{ }}grey>Вернуться к проекту</Button>
+                  <Button fontSize={'16px'}  onClick={chosenSprint}>{!status? 'Добавить в избранное': 'Убрать из избранного'}</Button>
+                  <Button fontSize={'16px'} style={{display:`${user.permission=='user'?'none':'flex'}`}} onClick={handleSprint}>Завершить спринт</Button>
+                </div>     
               </Card>
             </div>
          

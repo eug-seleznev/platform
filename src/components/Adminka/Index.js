@@ -75,12 +75,14 @@ const Admin = ({closeWindow}) => {
                         type='text'
                         name='problemname'
                         value={problemname}
+                        required
                         onChange={e => onChange(e)}/>
 
                 
                     
                     <Thin className={style.small__title2}>Описание проблемы</Thin>
                     <textarea 
+                     required
                         className={style.input__big}
                         name='text'
                         value={text}

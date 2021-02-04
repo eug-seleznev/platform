@@ -1,9 +1,9 @@
 import { CancelButton } from "../../../../Styles/buttons";
 import { ModalContainer, ModalWind } from "../../../../Styles/common";
 import { Table, Td, Tr } from "../../../../Styles/tables";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Status } from "../../../../Styles/project";
-const SprintHistory = ({history, id, openModHistory, status}) => {
+const SprintHistory = ({hist, id, openModHistory, status}) => {
 	const sprints = useSelector(state => state.projects.sprints)
 
     return (
@@ -29,9 +29,7 @@ const SprintHistory = ({history, id, openModHistory, status}) => {
                                     columns="1fr 1fr 1fr "
                                     key={i}
                                     title="Открыть спринт"
-                                    onClick={() =>
-                                      history.push(`/projects/${id}/${sprint._id}`)
-                                    }
+                                    onClick={()=> {hist.push(`/projects/${id}/${sprint._id}`)}}
                                   >
                                     <Td>
                                       {" "}

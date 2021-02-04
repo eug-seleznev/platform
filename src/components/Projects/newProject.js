@@ -78,6 +78,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                   className={style.input__long}
                   type="text"
                   name="title"
+                  required
                   value={title}
                   onChange={(e) => onChange(e)}
                 />
@@ -87,7 +88,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                 <div className={style.input__mid}>
                   <Thin className={style.title}>Город</Thin>
                   <input
-                  
+                    required
                     type="text"
                     name="city"
                     value={city}
@@ -127,6 +128,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                 <div className={style.input__mid}>
                   <Thin className={style.title}>Тип проекта</Thin>
                   <input
+                  required
                     type="text"
                     name="type"
                     value={type}
@@ -137,6 +139,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                 <div className={style.input__short}>
                   <Thin className={style.title}>Раздел</Thin>
                   <input
+                  required
                     type="text"
                     name="par"
                     value={par}

@@ -55,19 +55,16 @@ const onSubmit = (e) => {
             <Regular size='30'>Новый отдел</Regular>
            
             <input 
+                required
                 className={styles.title}
                 type='text'
                 placeholder='Название'
                 name='divname'
                 value={divname}
                 onChange={e => onChange(e)}/>
-
-   
-    
-
             <textarea 
-                className={styles.texts}
-                
+                required
+                className={styles.texts}  
                 placeholder='Описание'
                 name='description'
                 value={description}

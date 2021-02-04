@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import style from '../../../../Styles/modules/components/Project/oneproj.module.css'
 
-import { getProject, allSprints} from "../../../../redux/actions/projects";
+import { allSprints} from "../../../../redux/actions/projects";
 
 
 import { Bold } from '../../../../Styles/typography'
@@ -174,7 +174,7 @@ const CalendSprint = ({hist, match, id}) => {
 
     return (
       <>
-		<div className={style.border__calend}></div>
+				<div className={style.border__calend}></div>
 					
 					{!paint?<div>loading...</div>:(
 					//календарь со спринтами
@@ -192,9 +192,7 @@ const CalendSprint = ({hist, match, id}) => {
 						
 						return <div 
 							style = {{
-								backgroundColor:`${
-								body[3]===1?'red':body[3]===2?'rgba(0,255,0,0.5)':body[3]===3 ?'green':'gray'
-								}`
+								backgroundColor:`${body[3]===1?'red':body[3]===2?'rgba(0,255,0,0.5)':body[3]===3 ?'green':'gray'}`
 							}}
 							key={i} className={style.one__week}>
 								<div className={style.months}> 
@@ -209,7 +207,7 @@ const CalendSprint = ({hist, match, id}) => {
 					</div>
 					<Bold className={style.hist__sprint} onClick={openModHistory}>Подробная история спринтов</Bold>
 					</div>
-					<SprintHistory status={status} openModHistory={openModHistory} id={id}></SprintHistory>
+					<SprintHistory hist={hist} status={status} openModHistory={openModHistory} id={id}></SprintHistory>
 					</>)}
 	  </>
   

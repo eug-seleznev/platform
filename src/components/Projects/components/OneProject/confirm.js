@@ -1,7 +1,7 @@
-import styles from '../../Styles/modules/components/News/confirm.module.css'
-import {Card} from '../../Styles/common'
-import {Button} from '../../Styles/buttons'
-import { useState } from 'react'
+import styles from '../../../../Styles/modules/components/News/confirm.module.css'
+import {Card} from '../../../../Styles/common'
+import {Button} from '../../../../Styles/buttons'
+
 
 const Confirm = ({ title,openConfirm, handleDelete, buttonTitle,handleEnd}) => {
     // const [overCard, setOvercard] = useState(false)
@@ -11,7 +11,7 @@ const Confirm = ({ title,openConfirm, handleDelete, buttonTitle,handleEnd}) => {
             <Card className={styles.card} >
                 
                     <div>Вы уверенны что хотите {buttonTitle.toLowerCase()} проект "{title}"</div>
-                    <Button  onClick={buttonTitle=='Удалить'?handleDelete:buttonTitle=='Завершить'?handleEnd:''} >{buttonTitle} проект</Button>
+                    <Button  onClick={buttonTitle=='Удалить'?handleDelete:buttonTitle=='Завершить'||buttonTitle=='Восстановить'?handleEnd:''} >{buttonTitle} проект</Button>
                     <Button onClick={openConfirm} >Отмена</Button>
                 
             </Card>
