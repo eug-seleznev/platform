@@ -1,4 +1,4 @@
-import  {useState } from 'react'
+import  {useState,useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { allProjects, getProject, newProject } from '../../redux/actions/projects';
 import { newTicket } from '../../redux/actions/tikets';
@@ -11,6 +11,7 @@ import { Bold, H1, H3, Light, Regular, Thin} from '../../Styles/typography'
 const ProjectNew = ({histCurrent,closeWindow}) => {
     const dispatch = useDispatch();
     const project = useSelector(state => state.projects.project)
+    const [checked, setChecked] = useState (false)
     const [formData, setFormData ] = useState({
         
         title: '',   
@@ -22,18 +23,24 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
         dateFinish: '',
         customer: '',
         about: '',
-
+        rcheck: false,
       
       });
    
 
 
-      const { title, dateStart, dateFinish, city, type, stage, customer, about, par} = formData;
+      const { title, dateStart, dateFinish, city, type, stage, customer, about, par, rcheck} = formData;
 
-  
+      const onChangeCheckbox = () => {
+        setChecked(!checked)
+     }
+     useEffect(()=>{
+        setFormData({ ...formData, rcheck: checked });
+        console.log(checked)
+     },[checked])
     const onChange = e => {
         e.preventDefault(); 
-
+        console.log(e.target.checked)
         setFormData({ ...formData, [e.target.name]: e.target.value });
      }
      
@@ -47,7 +54,9 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
      const onSubmit = async e => {
         e.preventDefault();
         dispatch(newProject(formData))
-        setTimeout(() => setFormData({
+        setTimeout(() =>
+        setChecked (false),
+        setFormData({
           title: '',   
           dateStart: '', 
           city: '',  
@@ -57,6 +66,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
           dateFinish: '',
           customer: '',
           about: '',
+          rcheck: false,
         }),50) 
         closeWindow()
        
@@ -78,6 +88,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                   className={style.input__long}
                   type="text"
                   name="title"
+                  required
                   value={title}
                   onChange={(e) => onChange(e)}
                 />
@@ -87,7 +98,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                 <div className={style.input__mid}>
                   <Thin className={style.title}>Город</Thin>
                   <input
-                  
+                    required
                     type="text"
                     name="city"
                     value={city}
@@ -124,26 +135,21 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                 </div>
               </div>
               <div className={style.row}>
-                <div className={style.input__mid}>
-                  <Thin className={style.title}>Тип проекта</Thin>
-                  <input
-                    type="text"
-                    name="type"
-                    value={type}
-                    onChange={(e) => onChange(e)}
-                  />
+                <div className={style.input__rocket}>
+                  <input type="checkbox" style={{width: '30px',height: '30px',marginRight:'20px'}} name="rcheck" defaultValue={false} onClick={onChangeCheckbox}/>
+                  <Thin className={style.title__rocket}>Создать комнату в rocket chat</Thin>
                 </div>
-                
                 <div className={style.input__short}>
                   <Thin className={style.title}>Раздел</Thin>
                   <input
+                  required
                     type="text"
                     name="par"
                     value={par}
                     onChange={(e) => onChange(e)}
                   />
                 </div>
-                <div className={style.input__mid}>
+                <div className={style.input__short}>
                   <Thin className={style.title}>Заказчик</Thin>
                   <input
                     type="text"
@@ -152,7 +158,16 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                     onChange={(e) => onChange(e)}
                   />
                 </div>
-                
+                <div className={style.input__short}>
+                  <Thin className={style.title}>Тип проекта</Thin>
+                  <input
+                    required
+                    type="text"
+                    name="type"
+                    value={type}
+                    onChange={(e) => onChange(e)}
+                  />
+                </div>
               </div>
               <div className={style.row}>
                 <div className={style.input__long}>

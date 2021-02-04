@@ -37,10 +37,10 @@ const Users = ({history}) => {
                                     <Td className={style.turn__off}>Активные проекты</Td>
                                 </Tr>
                         
-                                {users.map(user => {
+                                {users.map((user,i) => {
                                     return(  
-                                    <Tr className={style.tr__user} onClick={() => history.replace(`/users/${user._id}`)}>
-                                        <Td>{user.name}</Td>
+                                    <Tr className={style.tr__user} key={i} onClick={() => history.replace(`/users/${user._id}`)}>
+                                        <Td>{user.name} {user.lastname}</Td>
                                         <Td className={style.turn__off}>{user.email}</Td>
                                         <Td>{user.position}</Td>
                                         <Td className={style.turn__off}>{user.projects.length}</Td>

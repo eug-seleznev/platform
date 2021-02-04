@@ -15,7 +15,7 @@ const Helper = ({match, history}) => {
     useEffect(async () => {
         let crypt = match.params.id
         await dispatch(Oauth(crypt))
-        console.log('auth success')
+        // console.log('auth success')
 
     }, [ ])
 
@@ -23,7 +23,7 @@ const Helper = ({match, history}) => {
     useEffect(() => {
         if(oauth){
             setLoaded(true)
-            console.log(oauth.urn, 'urn', oauth.token, 'toke')
+            // console.log(oauth.urn, 'urn', oauth.token, 'toke')
         }
     }, [oauth])
 

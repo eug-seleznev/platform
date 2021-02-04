@@ -10,14 +10,14 @@ export const loadUser = () => async dispatch => {
      
      const res = await innerBackend.get("/users/me");
 
-     console.log(res, "/response???");
+    //  console.log(res, "/response???");
     
      dispatch({
        type: USER_LOADED,
        payload: res.data,
      });
   } catch (err) {
-    console.log(err.response.data, 'ERROR!!!')
+    // console.log(err.response.data, 'ERROR!!!')
   }
    
   };
@@ -38,9 +38,9 @@ export const errorAuthClear = ()=>dispatch => {
 }
 export const login = (formData) => async dispatch  => {
     try {
-      console.log(formData, 'data?')
+      // console.log(formData, 'data?')
         const res = await instance.post('/auth', formData)
-        console.log(res, 'respond')
+        // console.log(res, 'respond')
         dispatch({
             type: LOGIN,
             payload: res.data
@@ -51,7 +51,7 @@ export const login = (formData) => async dispatch  => {
 
         }
       catch (err) {
-        console.log(err.response.data.err);
+        // console.log(err.response.data.err);
 
         const errors = err.response.data.err;
         errors.map(err => {
@@ -105,7 +105,7 @@ export const changeData = (formData) => async dispatch  => {
   // }
   //////////////////////
   try {
-      console.log('hello change', formData)
+      // console.log('hello change', formData)
       const res = await innerBackend.put(`/users/me`, formData)
       dispatch({
           type: CHANGE_USERDATA,
@@ -140,7 +140,7 @@ export const changeAvatar = (file) => async dispatch  => {
   }
   
 
-      console.log(form.get('file'), 'file HERE')
+      // console.log(form.get('file'), 'file HERE')
    
 
 
@@ -167,7 +167,7 @@ export const changeAvatar = (file) => async dispatch  => {
 
 
 export const addToChosen = (id) => async dispatch  => {
-  console.log ('hi sprint', id)
+  // console.log ('hi sprint', id)
   try {
       const res = await innerBackend.put(`projects/favsprint/${id}`)
       dispatch({

@@ -22,7 +22,7 @@ const HeaderL = ({ createProj, createNews, createTicket}) => {
 
     const mobClick = () => { 
         setOpen({...open, mobile: !open.mobile})
-        console.log(open)
+        // console.log(open)
     }
 
 

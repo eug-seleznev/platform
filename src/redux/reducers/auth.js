@@ -22,7 +22,7 @@ export default function(state = initialState, action) {
         case REGISTER:
         case LOGIN:
              localStorage.setItem('token', payload.token);
-             console.log(localStorage.token, 'NEW TOKEN ')
+            //  console.log(localStorage.token, 'NEW TOKEN ')
             return {
                 ...state,
                 loaded: true,
@@ -68,7 +68,7 @@ export default function(state = initialState, action) {
                             msg: payload.msg
                         }
                 case ADD_SPRINT_TO_CHOSEN:
-                    console.log('here is payload',payload)    
+                    // console.log('here is payload',payload)    
                 
                 return {
                         ...state,
@@ -76,7 +76,7 @@ export default function(state = initialState, action) {
                         msg: payload.msg
                     }
             case AUTH_ERROR:
-                console.log('here is payload',payload) 
+                // console.log('here is payload',payload) 
                 return {
                     ...state,
                     

@@ -6,7 +6,7 @@ import style from '../../../Styles/modules/components/Project/oneproj.module.css
 import { Thin, Bold, Light,Regular } from "../../../Styles/typography"
 import { useSelector,useDispatch} from "react-redux"
 import { addToChosen } from '../../../redux/actions/auth'
-const SprintDescription = ({sprintname, index, dateOpen,taskcomplite, alltasks, history, id, params,descr, dateClosePlan}) => {
+const SprintDescription = ({projStatus,sprintname, index, dateOpen,taskcomplite, alltasks, history, id, params,descr, dateClosePlan}) => {
 	const dispatch = useDispatch();
 	const [loaded, setLoaded] = useState (0)
 	const [diff, setDiff] = useState (0)
@@ -70,7 +70,7 @@ const SprintDescription = ({sprintname, index, dateOpen,taskcomplite, alltasks, 
 					</div>
 				</div>
 				<div>
-					<div className={style.card__date2}> <Light size='16'>Дней до дедлайна: {diff.toString().slice(0,2)}</Light></div>
+					<div className={style.card__date2}> <Light  size='16'>Дней до дедлайна: {diff.toString().slice(0,2)}</Light></div>
 					<div className={style.card__tasks}> 
 						<Regular>Задачи</Regular> 
 						<div className={style.card__tasks}> 
@@ -80,7 +80,7 @@ const SprintDescription = ({sprintname, index, dateOpen,taskcomplite, alltasks, 
 						
 						
 					</div>
-					<div className={style.card__buttons}>
+					<div className={style.card__buttons} style={{display:`${projStatus?'none':'flex'}`}} >
 						
 						<Button fontSize={'16px'}padd={'5px'} onClick={chosenSprint} grey>{!status? 'Добавить в избранное': 'Убрать из избранного'}</Button>
 						<Button fontSize={'16px'} onClick={() => history.push(`/projects/${params.id}/${id}`)}>Подробнее</Button>

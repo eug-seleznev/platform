@@ -6,7 +6,7 @@ export const createNews = (formData) => async dispatch  => {
     try {
 
         const res = await innerBackend.post('/news', formData)
-        console.log('creating news')
+        // console.log('creating news')
         dispatch({
             type: CREATE_NEWS,
             payload: res.data
@@ -32,7 +32,7 @@ export const allNews = () => async dispatch  => {
     try {
 
         const res = await innerBackend.get('/news/all')
-        console.log('showing news')
+        // console.log('showing news')
 
         dispatch({
             type: ALL_NEWS,
@@ -104,7 +104,7 @@ export const deleteNews = (id) => async dispatch  => {
 export const updateNews = ({id,data}) => async dispatch  => {
 
     try {
-        console.log(data, 'data', id, 'id')
+        // console.log(data, 'data', id, 'id')
         const res = await innerBackend.put(`news/${id}`, data)
         dispatch({
             type: UPDATE_NEWS,

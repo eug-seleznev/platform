@@ -1,10 +1,7 @@
-import { useEffect, useState } from "react"
-import { Button } from "../../../Styles/buttons"
-import { Card } from "../../../Styles/common"
-
-
-import style from '../../../Styles/modules/components/Project/projteam.module.css'
-import { Thin, Bold, Light,Regular } from "../../../Styles/typography"
+import { Button } from "../../../../Styles/buttons"
+import { Card } from "../../../../Styles/common"
+import style from '../../../../Styles/modules/components/Project/projteam.module.css'
+import { Bold, Light} from "../../../../Styles/typography"
 export const url = process.env.REACT_APP_IP;
 
 

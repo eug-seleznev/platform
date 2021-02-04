@@ -8,9 +8,7 @@ import style from '../../../Styles/modules/components/Project/sprintForm.module.
 
 const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 	// Отправка описания и даты окончания
-	const reload = useSelector(state => state.projects.reload)
 	const project = useSelector(state => state.projects.project)
-	const sprint = useSelector(state => state.projects.sprint)
 	const dispatch = useDispatch();
 	const { register, control, handleSubmit } = useForm({
         defaultValues: {
@@ -29,11 +27,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 			 
 		}
 	  )
-	
-	  const [sprintData,setSprintData] = useState ({
-		
 
-	  })
 	  const [enterWin,setEnterWin] =useState (false)
 	  const {description, date} = formData;
 	  //
@@ -108,8 +102,8 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 							</input>
 							<div className={style.week} >
 								<Thin  className={style.small__title} size={16}>{smallTitles[1]}</Thin>
-								<select name="date"className={style.select} onChange={e => onChangeDate(e)}>
-										<option selected>нет</option>
+								<select defaultValue='нет' name="date"className={style.select} onChange={e => onChangeDate(e)}>
+										<option value='нет'>нет</option>
 										<option>1 неделя</option>
 										<option>2 недели</option>
 								</select>
@@ -129,7 +123,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 										/>
 									 <input
 										type="number"
-										value={0}
+										defaultValue={0}
 											name={`tasks[${index}].workVolume`}
 											ref={register()}
 											style={{display:'none'}}
@@ -137,7 +131,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 											/>
 										 <input
 										type="boolean"
-										value={false}
+										defaultValue={false}
 											name={`tasks[${index}].taskState`}
 											ref={register()}
 											style={{display:'none'}}

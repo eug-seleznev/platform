@@ -24,7 +24,7 @@ const Employe = ({match, history}) => {
     useEffect(()=>{
         
         dispatch(getUser(id))
-        console.log(history, 'aaaaaaaaaaaaaaaaaaaaaaaaaa')
+        // console.log(history, 'aaaaaaaaaaaaaaaaaaaaaaaaaa')
     },[])
     
     return (

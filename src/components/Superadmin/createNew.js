@@ -71,7 +71,7 @@ const CreateNews = ({permissions, closeWindow}) => {
 
 useEffect(()=>{
  dispatch(allNews())
- console.log(user,'hiiiiiiiiiiii')
+//  console.log(user,'hiiiiiiiiiiii')
 },[])
 
     return (
@@ -83,18 +83,20 @@ useEffect(()=>{
 				<input 
 				
 					type='text'
-					
+					required
 					name='title'
 					value={title}
 					onChange={e => onChange(e)}/>
 				<Thin className={style.small__title}>Подзаголовок</Thin>
-				<input 
+                <input 
+                required
 					type='text'
 					name='subtitle'
 					value={subtitle}
 					onChange={e => onChange(e)}/>
 				<Thin className={style.small__title}>Текст</Thin>
-				<textarea 
+                <textarea 
+                required
 					name='text'
 					value={text}
 					onChange={e => onChange(e)}/>

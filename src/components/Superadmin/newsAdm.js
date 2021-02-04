@@ -67,7 +67,7 @@ const News = ({permissions}) => {
             })
     }
     const onDelete = async (e,id) => {
-console.log(deleteConfirm)
+// console.log(deleteConfirm)
         e.preventDefault();
         
         setConfirm({status:true,post:id})
@@ -112,7 +112,7 @@ console.log(deleteConfirm)
 
 useEffect(()=>{
  dispatch(allNews())
- console.log(user,'hiiiiiiiiiiii')
+//  console.log(user,'hiiiiiiiiiiii')
 },[])
 
     return (

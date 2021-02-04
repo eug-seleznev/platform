@@ -59,7 +59,7 @@ const Project = ({ match, history }) => {
     return history.push(`./`);
   };
   const hadleTeam = () => {
-    console.log(project.msg);
+    // console.log(project.msg);
     dispatch(joinTeam(id));
   };
 
