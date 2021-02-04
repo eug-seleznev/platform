@@ -27,8 +27,6 @@ export const newTicket = ({formData, file}) => async dispatch  => {
         )
     })
 
-        // console.log(form.get('file'), 'file HERE')
-        // console.log(form.get('text'), 'text HERE')
 
 
         const res = await Axios.post('/tickets', form, {
