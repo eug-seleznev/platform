@@ -29,7 +29,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
    
 
 
-      const { title, dateStart, dateFinish, city, type, stage, customer, about, par} = formData;
+      const { title, dateStart, dateFinish, city, type, stage, customer, about, par, rcheck} = formData;
 
       const onChangeCheckbox = () => {
         setChecked(!checked)
