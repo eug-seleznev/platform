@@ -10,10 +10,10 @@ import {
   
 } from "react-router-dom";
 import Layout from './components/Layout';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { loadUser } from './redux/actions/auth';
 
-//pages
+//pages 
 import Admin from './components/Adminka/Index';
 import DataBase from './components/DataBase';
 import Projects from './components/Projects';
@@ -24,82 +24,49 @@ import MyProfile from './components/User/me';
 import Employe from './components/User/Employe';
 import Edit from './components/User/edit';
 import Ticket from './components/Adminka/Ticket';
-import ProjectNew from './components/Projects/newProject';
 import Project from './components/Projects/Project';
 import Sprint from './components/Projects/Sprint';
 import ProjectsEdit from './components/Projects/ProjectsEdit';
 import OneProjEdit from './components/Projects/OneProjEdit';
 import Main from './components/Main/index'
-import Permissions from './components/Superadmin/permissions';
-import Superadmin from './components/Superadmin/index.js';
 import Department from './components/Department/index'
 import { createBrowserHistory } from "history";
 import MyProjects from './components/Projects/My';
 import News from './components/News';
-import { innerBackend, setAuthToken } from './components/utils/axios';
-import { Container, LoginContainer } from '../src/Styles/common'
-import Viewer from './components/Viewer';
+import {  setAuthToken } from './components/utils/axios';
 import Helper from './components/Viewer/helper';
-
+import { Container, LoginContainer } from "../src/Styles/common";
 
 
 
 const App = () => {
   const dispatch = useDispatch();
   const history = createBrowserHistory();
-  const [load, setLoad] = useState(false)
   const auth = useSelector(state => state.auth.isAuthenticated)
   const loaded = useSelector(state => state.auth.loaded)
-  // const user = useSelector(state => state.auth.user)
-  // const [dimensions, setDimensions] = useState({
-  //   height: window.innerHeight,
-  //   width: window.innerWidth,
-  // })
+
 
   //chek auth token on render
   useEffect(() => {
     setAuthToken(localStorage.token)
-
     if(localStorage.token){
       dispatch(loadUser());
-
     }
-
-
   })
 
 
   useEffect(() => {
     if (loaded) {
-      // console.log(localStorage.token, 'FOR POSTMAN'); //for postman tests
-      // innerBackend(localStorage.token);
+
       setAuthToken(localStorage.token)
       setTimeout(() => {
         dispatch(loadUser());
       }, 1000);
     }
-    // dispatch(loadUser());
+
    
   }, [loaded])
 
-
-  useEffect(()=>{
-
-//  auth && (!user.name && history.replace("/edit"))
-  },[auth])
-
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //   setDimensions ({width: window.innerWidth, height: window.innerHeight})  
-  // }
-  
-  //   window.addEventListener('resize', handleResize)
-  
-  //   return _ => {
-  //     window.removeEventListener('resize', handleResize)
-    
-  // }
-  // })
 
 
 
@@ -133,23 +100,18 @@ const App = () => {
               <Switch>
                 <Route exact path="/projects/:id/model/test" component={Helper} />
               </Switch>
-
               <Route exact path="/admin/editproj" component={ProjectsEdit} />
               <Route exact path="/admin/editproj/:id" component={OneProjEdit} />
-              {/* <Route exact path="/new" component={ ProjectNew } />  */}
 
               {/* users */}
               <Route exact path="/users" component={Users} />
               <Route exact path="/users/me" component={MyProfile} />
               <Route exact path="/users/:id" component={Employe} />
               <Route exact path="/edit" component={Edit} />
-              
               <Route exact path="/news" component={News} />
-
-
               <Route exact path="/department" component={Department} />
-
               <Route exact path="/viewer" component={Helper} />
+
             </Container>
           </Switch>
         </Router>

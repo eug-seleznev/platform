@@ -64,7 +64,8 @@ export const Oauth = (crypt) => async (dispatch) => {
 
 export const Status = (crypt) => async (dispatch) => {
   try {
-    // console.log('started')
+     console.log('started')
+     let date = new Date().getMilliseconds();
     const res = await Axios.get(`/up/status/p/${crypt}`, {
       baseURL: "http://192.168.0.16:7770",
       headers: {
@@ -73,7 +74,7 @@ export const Status = (crypt) => async (dispatch) => {
     });
     dispatch({
       type: GET_STATUS,
-      payload: res.data,
+      payload: res.data.progress +' '+ date,
     });
   } catch (err) {
     const errors = err.response.data.errors;

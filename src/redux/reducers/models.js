@@ -24,7 +24,7 @@ export default function(state = initialState, action) {
         case GET_STATUS:
             return {
               ...state,
-              status: payload.progress
+              status: payload
             };
         case CLEAR_MODEL_DATA:
             return  initialState
