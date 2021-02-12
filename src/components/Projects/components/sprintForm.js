@@ -92,7 +92,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 						
 						
 							<input 
-								style={{width:'100%'}}	
+								style={{width:'50Laborum officia sit deserunt quis et magna exercitation aliquip ut eu in ea duis. Eu Lorem quis dolore aliqua sunt incididunt anim id ut id consectetur proident. Qui id aute eiusmod cillum sunt adipisicing dolor labore pariatur sit. Occaecat nostrud ipsum amet occaecat duis ullamco commodo officia laboris voluptate labore consequat. Qui reprehenderit elit laborum elit laborum pariatur. Anim excepteur nisi excepteur ullamco do duis aute aliqua. Anim incididunt fugiat nulla exercitation.%'}}	
 								type='text'
 								name="description"
 								value={description}
