@@ -50,11 +50,11 @@ const Projects = ({history}) => {
                     <p> количество проектов: {projects.length} </p>
                     <Table >
   
-    <Tr className={style.tr} top='top'>
+    <Tr className={style.trr} top='top'>
  
       <Td>Название</Td>
       <Td className={style.turn__off}>Дата начала</Td>
-      <Td>Дедлайн</Td>
+      <Td className={style.turn__off}>Дедлайн</Td>
       <Td className={style.turn__off}>Статус</Td>
       <Td >Спринты</Td>
 
@@ -67,7 +67,7 @@ const Projects = ({history}) => {
             
                 <Td>{project.title}</Td>
                 <Td className={style.turn__off}>{project.dateStart.slice(0, 10)}</Td>
-                <Td>{project.dateFinish!==undefined&&project.dateFinish!==null?project.dateFinish.slice(0, 10):'нет'}</Td>
+                <Td className={style.turn__off}>{project.dateFinish!==undefined&&project.dateFinish!==null?project.dateFinish.slice(0, 10):'нет'}</Td>
                 <Td className={style.turn__off}>{project.status ? <p>Завершен</p>:<p>В работе</p>}</Td>
                 <Td>{project.sprints.filter(sprint => sprint.status).length}/{project.sprints.length}</Td>
             </Tr>
@@ -87,11 +87,11 @@ const Projects = ({history}) => {
 
 <Table>
   
-    <Tr className={style.tr} top='top'>
+    <Tr className={style.trr} top='top'>
         
       <Td>Название</Td>
       <Td className={style.turn__off}>Дата начала</Td>
-      <Td>Дедлайн</Td>
+      <Td className={style.turn__off}>Дедлайн</Td>
       <Td className={style.turn__off}>Статус</Td>
       <Td>Спринты</Td>
     </Tr>
@@ -102,7 +102,7 @@ const Projects = ({history}) => {
          
             <Td>{project.title}</Td>
             <Td className={style.turn__off}>{project.dateStart.slice(0, 10)}</Td>
-            <Td>{project.dateFinish!==undefined&&project.dateFinish!==null?project.dateFinish.slice(0, 10):'нет'}</Td>
+            <Td className={style.turn__off}>{project.dateFinish!==undefined&&project.dateFinish!==null?project.dateFinish.slice(0, 10):'нет'}</Td>
             <Td className={style.turn__off}>{project.status ? <p>Завершен</p>:<p>В работе</p>}</Td>
             <Td>{project.sprints.filter(sprint => sprint.status).length}/{project.sprints.length}</Td>
         </Tr>
