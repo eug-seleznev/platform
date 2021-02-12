@@ -1,6 +1,3 @@
-
-
-
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Card } from "../../../Styles/common";
@@ -27,19 +24,25 @@ const Viewer = ({project}) => {
 
   useEffect(() => {
     if(loaded.submit){
-      if (model_status == "complete") {
+      let new_status = model_status.split(' ')
+      console.log('first useEffect if submit true', new_status[0])
+      if (new_status[0] == "complete") {
                setLoad({ model: true, status: true, submit: false });
       } else {
+               console.log('next try')
                setLoad({ status: !loaded.status, model: false, submit: true });
       }
     }
+    return () => dispatch(cleardData())
   }, [model_status]);
+
 
   useEffect(() => {
     if(loaded.submit) {
         setTimeout(() => {
+          console.log('trying to dispatch value')
           dispatch(Status(project.crypt));
-        }, 1000);
+        }, 2000);
     } 
   }, [loaded.submit, loaded.status])
 

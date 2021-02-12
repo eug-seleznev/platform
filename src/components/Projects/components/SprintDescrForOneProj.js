@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import { Button } from "../../../Styles/buttons"
 import { Card } from "../../../Styles/common"
-import './sprintdescr.css'
+import './sprintdescr.css' //css испортируется тут глобальный. У нас глобальный уже создан ниже, и делать новый смысла нет - тут нужны modules
 import style from '../../../Styles/modules/components/Project/oneproj.module.css'
-import { Thin, Bold, Light,Regular } from "../../../Styles/typography"
+import { Light,Regular } from "../../../Styles/typography"
 import { useSelector,useDispatch} from "react-redux"
 import { addToChosen } from '../../../redux/actions/auth'
-const SprintDescription = ({projStatus,sprintname, index, dateOpen,taskcomplite, alltasks, history, id, params,descr, dateClosePlan}) => {
+const SprintDescription = ({projStatus, dateOpen,taskcomplite, alltasks, history, id, params,descr, dateClosePlan}) => {
+	
 	const dispatch = useDispatch();
 	const [loaded, setLoaded] = useState (0)
 	const [diff, setDiff] = useState (0)

@@ -8,7 +8,7 @@ var viewer;
 
 
 
-const Viewer = ({oauth}) => {
+const Viewer = ({oauth, project}) => {
     const dispatch = useDispatch();
     let Autodesk = window.Autodesk;
     const container = useRef();           
@@ -45,7 +45,7 @@ const Viewer = ({oauth}) => {
    Autodesk.Viewing.Initializer(options, () => {
     viewer = new Autodesk.Viewing.GuiViewer3D(container.current, { extensions: [ 'Autodesk.DocumentBrowser'] });
     viewer.start();
-    var documentId = 'urn:' + oauth.urn;
+    var documentId = 'urn:' + project.urn;
     Autodesk.Viewing.Document.load(documentId, onDocumentLoadSuccess, onDocumentLoadFailure);
   });
 

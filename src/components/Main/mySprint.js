@@ -5,9 +5,11 @@ import { finishTask, } from '../../redux/actions/projects'
 import { Bold, Light } from '../../Styles/typography'
 
 const MySprint = ({content}) => {
+
 const dispatch = useDispatch()
 const user = useSelector(state => state.auth.user)
 const sprint = content
+
 const [progress, setProgress] = useState(0)
 const [sprintDaysLeft, setSprintDaysLeft] = useState(null)
 

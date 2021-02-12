@@ -40,6 +40,7 @@ export const SPRINT_ERROR = 'sprint_error';
 export const ALL_SPRINT = 'get_project_sprints'
 export const FINISH_SPRINT = 'finish_sprint' 
 export const ADD_SPRINT_TO_CHOSEN = 'add_sprint_to_chosen' 
+export const DELETE_SPRINT = 'delete_sprint'
 //teams
 export const JOIN_TEAM = 'join_to_team'
 //projects errors
