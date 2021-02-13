@@ -105,6 +105,17 @@ export const addSprint = (id,formData,data) => async dispatch  => {
     }
 
 }
+
+export const EditTask = ({editTask, id}) => async (dispatch) => {
+    try {
+        const res = await innerBackend.put(`projects/sprints/taskedit/${id}`, editTask);
+        console.log(res.data)
+    } catch (err) {
+        
+    }
+} 
+
+
 export const editProject = (formData, id) => async dispatch  => {
     try {
         // console.log('hello edit', formData)

@@ -3,9 +3,7 @@
 
 
 const DataBase = () => {
-    return (
-        <div> <h1> База знаний</h1></div>
-    )
+    return <h1> База знаний</h1>
 }
 
 

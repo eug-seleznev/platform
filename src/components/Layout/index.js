@@ -9,6 +9,15 @@ import { BackendMsg }  from '../../Styles/layout'
 import {errorAuthClear, msgAuthClear}  from "../../redux/actions/auth";
 const Layout = ({ histCurrent}) => {
     const dispatch = useDispatch()
+
+    //error handler
+    const new_error = useSelector(state => state.errors)
+
+
+
+
+
+
     const project = useSelector(state => state.projects)
     const createSprMsg = useSelector(state => state.projects.sprint_msg)
     const createProjMsg = useSelector(state => state.projects.msg)
@@ -33,11 +42,18 @@ const Layout = ({ histCurrent}) => {
    
    
 
+    useEffect(() => {
+      console.log("hello error", new_error.msg);
+    }, [new_error.msg]);
+
+
+
+
     useEffect(()=>{
         if(errorAuth !=""){
             setError(errorAuth)
         }
-    },[errorAuth])
+    },[errorAuth ])
     useEffect(()=>{
         if(msgTask !==""&& msgTask !==undefined){
             setMsg(msgTask.msg)

@@ -100,3 +100,10 @@ export const GET_TOKEN = 'get_oauth_token'
 export const GET_URN = 'get_urn'
 export const GET_STATUS = 'loading_status'
 export const CLEAR_MODEL_DATA = 'clear_model_data'
+
+
+
+
+///errors
+
+export const ERROR_MSG ='error_msg'

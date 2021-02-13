@@ -1,15 +1,15 @@
-import { url } from '../utils/axios';
-import styles from '../../Styles/modules/department/departmentCard.module.css'
+import { useState } from "react";
 
-import { Bold, Light } from '../../Styles/typography'
-import { ButtonText } from '../../Styles/buttons'
-import { useDispatch } from 'react-redux';
-import { allDepartments, deleteDepartment, joinDepartment } from '../../redux/actions/department';
-import Confirm from './confirm'
-import { useEffect, useState } from 'react';
+import { useDispatch } from "react-redux";
+import { allUsers } from "../../redux/actions/user";
+import { loadUser } from "../../redux/actions/auth";
+import { deleteDepartment } from "../../redux/actions/department";
+
+import styles from '../../Styles/modules/department/departmentCard.module.css'
+import { Bold } from '../../Styles/typography'
+
 import UserCard from '../User/userCard'
-import { allUsers } from '../../redux/actions/user';
-import { loadUser } from '../../redux/actions/auth';
+import Confirm from "./confirm";
 
 const DepartmentCard = ({ user, history, users}) => {
 
@@ -17,19 +17,10 @@ const DepartmentCard = ({ user, history, users}) => {
 
 const dispatch = useDispatch()
 const content=user.division
-const member = user.division && user.division.divname==content.divname
 const usersArr = users.filter(item => item.division? item.division.divname== content.divname : false)
 
 const [showConfirm, setShowConfirm] = useState(false)
 
-
-    // const join = () => {
-    //     dispatch(joinDepartment(content.divname))
-    //     setTimeout(() => {
-    //     dispatch(allUsers())
-    //     dispatch(loadUser())
-    // }, 100);
-    // }
 
     const deleteDep = () => {
         dispatch(deleteDepartment(content.divname))
