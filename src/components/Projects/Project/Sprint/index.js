@@ -75,7 +75,7 @@ const Sprint = ({match, history}) => {
     {chosenSprints.filter(sprint => sprint._id===id).map(()=>{
       setStatus(true)
     })}
-	},[loading])
+	},[loading, sprint])
   useEffect (()=> {
      
     if (actualClose!=0){
@@ -151,6 +151,13 @@ const Sprint = ({match, history}) => {
     
       let id = match.params.id
       dispatch(EditTask({editTask, id})); 
+      setEdit(!isEdit);
+      setEditTask({
+        ...editTask,
+        editIndex: -1
+      })
+      dispatch(getSprint(id));    
+
     }
 
 
@@ -320,7 +327,6 @@ const Sprint = ({match, history}) => {
                   Задачи{" "}
                 </Regular>
                 {taskArr.tasks.map((task, ind) => {
-                  console.log(ind === taskArr.tasks.length-1 )
                   return (
                     <div key={ind}>
                       <form onChange={editTasksHandler}>
