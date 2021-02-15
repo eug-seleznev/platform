@@ -58,24 +58,32 @@ const Sprint = ({match, history}) => {
 
 
 
-	useEffect (()=> {
-    setSprintId(match.params.id)
-    if(loading){
-      setDateOpenIn (sprint.dateOpen)
-      if (sprint.dateClosePlan!=null&&sprint.dateClosePlan!=undefined) {
-			let d2 = new Date(sprint.dateClosePlan.slice(0, 10).replace(/-/g, "/"))
-			
-			setActualClose (d2)
-		}
-		else if(sprint.dateClosePlan==null||sprint.dateClosePlan==undefined) {
-			let noData = new Date (sprint.dateOpen.slice(0, 10).replace(/-/g, "/"))
-			setActualClose (noData)
-		}	
+	useEffect(() => {
+    setSprintId(match.params.id);
+    console.log('hello sprint update')
+    if (loading) {
+      setDateOpenIn(sprint.dateOpen);
+      if (sprint.dateClosePlan != null && sprint.dateClosePlan != undefined) {
+        let d2 = new Date(sprint.dateClosePlan.slice(0, 10).replace(/-/g, "/"));
+
+        setActualClose(d2);
+      } else if (
+        sprint.dateClosePlan == null ||
+        sprint.dateClosePlan == undefined
+      ) {
+        let noData = new Date(sprint.dateOpen.slice(0, 10).replace(/-/g, "/"));
+        setActualClose(noData);
+      }
     }
-    {chosenSprints.filter(sprint => sprint._id===id).map(()=>{
-      setStatus(true)
-    })}
-	},[loading, sprint])
+    {
+      chosenSprints
+        .filter((sprint) => sprint._id === id)
+        .map(() => {
+          setStatus(true);
+        });
+    }
+  }, [loading, sprint, taskArr]);
+
   useEffect (()=> {
      
     if (actualClose!=0){
@@ -389,7 +397,7 @@ const Sprint = ({match, history}) => {
                               </Button>
                             )}
 
-                            {isEdit && <Button type='submit' onClick={handleEditSubmit}> hey</Button>}
+                            {isEdit && <Button type='submit' onClick={handleEditSubmit}> save</Button>}
                           </>
                         )}
                       </form>
@@ -436,11 +444,7 @@ const Sprint = ({match, history}) => {
                   <CancelButton
                     fontSize={"16px"}
                     style={{
-                      display: `${
-                        newFields || user.permission == "user"
-                          ? "none"
-                          : "block"
-                      }`,
+                      display:"block",
                       color: "#3F496C",
                       backgroundColor: "white",
                       border: "none",

@@ -1,5 +1,5 @@
 
-import { ADD_SPRINT, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL,CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR, GET_URN, DELETE_SPRINT } from '../types'
+import { ADD_SPRINT, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL, EDIT_TASK, CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR, GET_URN, DELETE_SPRINT } from '../types'
 
 
 
@@ -59,8 +59,12 @@ export default function(state = initialState, action) {
                 case CLEAR_ERROR:
                     return {
                         ...state,
-                       error:''
-                       
+                       error:''  
+                    }
+                case EDIT_TASK: 
+                    return {
+                        ...state,
+                        sprint: payload.sprint
                     }
                 case CLEAR_MSG:
                     return {
