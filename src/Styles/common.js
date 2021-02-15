@@ -85,7 +85,7 @@ width: 60vw;
 margin-left:15vw;
 height: 55vh;
 background-color: white;
-@media(min-width:700px) and (max-height:720px) {
+@media(min-width:700px) and (max-height:800px) {
     padding: 30px;
     margin-top: 50px;
     height:500px;

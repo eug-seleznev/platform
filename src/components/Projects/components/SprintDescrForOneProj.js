@@ -83,7 +83,7 @@ const SprintDescription = ({projStatus, dateOpen,taskcomplite, alltasks, history
 					</div>
 					<div className={style.card__buttons} style={{display:`${projStatus?'none':'flex'}`}} >
 						
-						<Button fontSize={'16px'}padd={'5px'} onClick={chosenSprint} grey>{!status? 'Добавить в избранное': 'Убрать из избранного'}</Button>
+						<Button fontSize={'16px'}padd={'5px'}  onClick={chosenSprint} grey>{!status? 'Добавить в избранное': 'Убрать из избранного'}</Button>
 						<Button fontSize={'16px'} onClick={() => history.push(`/projects/${params.id}/${id}`)}>Подробнее</Button>
 					</div>
 				</div>

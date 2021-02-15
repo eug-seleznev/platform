@@ -15,24 +15,24 @@ const TitleOfProject = ({hist}) => {
  
     return (
       <>
-	  <div className={style.title}>
+	      <div className={style.title}>
                     
-                    <H1 size='24' >{project.title}</H1>
-                    <Bold size='16'>
-                      <div className={style.title__small} style={{ display: `${
-                        user.permission === "user" ? "none" : "flex"
-                      }`}}>
-                      
-                        <div className={style.title__options} onClick={returnEditPage}>Настройки</div>
-                        <img onClick={returnEditPage} src='/image 1.png'></img>
-                      </div>
-                      </Bold>
-                  </div>
-                  
-                  <Light className={style.title__small} size='16'>
-                    <div className={style.title__deadline}>Дедлайн: {project.dateFinish!=null?project.dateFinish.slice(0,10):"?"}</div> 
-                    <div className={style.title__deadline}>Этап: {project.stage}</div>
-                  </Light>
+          <H1 size='24' >{project.title}</H1>
+          <Bold size='16'>
+              <div className={style.title__small} style={{ display: `${
+                user.permission === "user" ? "none" : "flex"
+              }`}}>
+              
+                <div className={style.title__options} onClick={returnEditPage}>Настройки</div>
+                <img onClick={returnEditPage} src='/image 1.png'></img>
+              </div>
+          </Bold>
+          </div>
+          
+          <Light className={style.title__small} size='16'>
+            <div className={style.title__deadline}>Дедлайн: {project.dateFinish!=null?project.dateFinish.slice(0,10):"?"}</div> 
+            <div className={style.title__deadline}>Этап: {project.stage}</div>
+          </Light>
 	  </>
   
     )

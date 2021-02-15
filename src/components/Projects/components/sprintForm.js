@@ -1,5 +1,5 @@
 import { Button,CancelButton } from "../../../Styles/buttons"
-import { Thin } from "../../../Styles/typography"
+import { Bold, Regular, Thin } from "../../../Styles/typography"
 import{	useState, useEffect} from 'react'
 import { useForm, useFieldArray } from "react-hook-form";
 import {  addTasks,addInfoSprint,addSprint,getSprint, getProject} from "../../../redux/actions/projects";
@@ -88,34 +88,35 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 			<form className={style.formContain} onSubmit={handleSubmit(onSubmit)}>
 			
 					<div onMouseEnter={enter}>
-						<Thin className={style.small__title}  style={{marginTop:'40px'}} size={16}>{smallTitles[0]}</Thin>
-						
-						
-							<input 
-								style={{width:'50%'}}	
-								type='text'
-								name="description"
-								value={description}
-								
-								
-								onChange={e => onChange2(e)}>  
-							</input>
-							<div className={style.week} >
-								<Thin  className={style.small__title} size={16}>{smallTitles[1]}</Thin>
+						<div className={style.row}>
+							<div className={style.line}>
+								<Bold className={style.small__title}   size={16}>{smallTitles[0]}</Bold>
+								<textarea
+								className={style.textarea}	
+									type='text'
+									name="description"
+									value={description}
+									onChange={e => onChange2(e)}>  
+								</textarea>
+							</div>
+							<div className={style.line2}>
+								<Bold  className={style.small__title} size={16}>{smallTitles[1]}</Bold>
 								<select defaultValue='нет' name="date"className={style.select} onChange={e => onChangeDate(e)}>
 										<option value='нет'>нет</option>
 										<option>1 неделя</option>
 										<option>2 недели</option>
 								</select>
 							</div>
+						</div>
 							<div  >
-							<div style={{ overflowY:`${fields.length<3?'hidden':'scroll'}`}} className={style.taskContain}>
+							<div style={{ overflowY:`${fields.length<6?'hidden':'scroll'}`}} className={style.taskContain}>
 								<ul style={{padding:0,listStyleType:'none'}}>
 
 									{fields.map((item, index) => (
-									<li key={item.id} >
+									<li key={item.id}  style={{display:'flex'}}>
+										<div style={{fontSize:'20px',marginRight:'10px'}}>{index+1}</div>
 										<input
-										
+										style={{marginRight:'40px'}}
 										className={style.taskDescr}
 										name={`tasks[${index}].taskTitle`}
 										ref={register()}
@@ -137,27 +138,29 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 											style={{display:'none'}}
 											placeholder="Стейт" 
 											/>
-										<Button type="button" style={{display: `${fields.length===1?'none':'block'}`,
+										<Button type="button" style={{display: `${fields.length===index+1?'none':'block'}`,
 											color:'#3F496C',
 											backgroundColor:'white',
 											border:'none',
-											width:'95%',
-											textAlign:'right'}} onClick={() => remove(index)}>Удалить</Button>
+											
+											}} onClick={() => remove(index)}>Удалить</Button>
+										
+										<Button
+											type="button"
+											style={{
+												
+												color:'#3F496C',
+												display: `${fields.length!=index+1?'none':'block'}`,
+												backgroundColor:'white',
+												border:'none'}}
+											onClick={() => append({ firstName: "appendBill", lastName: "appendLuo" })}
+										>
+											Добавить задачу
+										</Button>
 									</li>
 									))}
 								</ul>
 								
-								<Button
-									type="button"
-									style={{color:'#3F496C',
-										backgroundColor:'white',
-										border:'none',width:'95%',
-										paddingRight: '55px',
-										textAlign:'right'}}
-									onClick={() => append({ firstName: "appendBill", lastName: "appendLuo" })}
-								>
-									Добавить задачу
-								</Button>
 								</div>
 								</div>
 								

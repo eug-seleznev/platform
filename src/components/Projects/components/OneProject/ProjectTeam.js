@@ -17,9 +17,9 @@ const ProjectTeam = ({id, hist}) => {
     }
     return (
       <>
-	<div className={style.border__team}><H1 style={{marginBottom:'10px'}}>Команда</H1></div>     
+              <div className={style.border__team}><H1 style={{marginBottom:'10px'}}>Команда</H1></div>     
                   <div className={style.sprintdescr__cont}>
-                          {project.team.map((user, i) => {
+                      {project.team.map((user, i) => {
                             return (
                               <ProjTeam key={i} histProp={hist} userId={user._id} userName={user.name} lastName={user.lastname} userAvatar={user.avatar} userPos={user.position}></ProjTeam>
                             );
@@ -48,26 +48,26 @@ const ProjectTeam = ({id, hist}) => {
                               key={ind}
                                 onClick={hadleTeam}
                                 className={style.exit}
-                                style={{display: `${project.status ? "none" : "flex"}`}}
+                                style={{display: `${project.status ? "none" : "flex"}`,cursor:'pointer'}}
                               >
                                 <Bold style={{textAlign:'center'}}>Выйти </Bold><Bold style={{textAlign:'center'}} className={style.exit_in}>из команды проекта</Bold>
                               </div>
                             );
                           } else if (project.team.length - 1 == ind) {
                             return (
-                              <Button
-                              key={ind}
+                              <button
+                                key={ind}
                                 fontSize={'20px'}
                                 onClick={hadleTeam}
                                 className={style.team__button}
                                 style={{
-                                  backgroundColor:'white',
+                                  outline:'none',
                                   color:'black',
                                   display: `${project.status ? "none" : "block"}`,
                                 }}
                               >
                                 Вступить в команду проекта
-                              </Button>
+                              </button>
                             );
                           }
                         })}

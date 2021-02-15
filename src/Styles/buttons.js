@@ -22,7 +22,7 @@ export const Button =  styled.button`
   &:hover{
   // text-decoration: underline;
   background-color: black;
-
+  cursor: pointer;
 }
 
 
@@ -43,12 +43,13 @@ export const CancelButton =  styled.div`
   outline: none;
   text-decoration: none;
   color: white;
-  background-color: ${props => props.grey ? "grey" : "#3F496C"};
+  background-color: ${props => props.grey ? "#C4C4C4" : "#3F496C"};
   ;
 
   &:hover{
   // text-decoration: underline;
   background-color: black;
+  cursor: pointer;
 
 }
 

@@ -55,7 +55,7 @@ export default function(state = initialState, action) {
             case FIND_DEPARTMENT:
                 return {
                     ...state,
-                    findDep:payload,
+                    findDep: payload,
                     reload: !state.reload,
 
                     error:''

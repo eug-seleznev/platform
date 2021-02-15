@@ -13,7 +13,7 @@ const Department = ({history}) => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.auth.user)
     const users = useSelector(state => state.users.users)
-
+    const department = useSelector(state => state.departments.findDep)
 
  useEffect(()=>{
     dispatch(allDepartments())
@@ -22,11 +22,11 @@ const Department = ({history}) => {
 
     return(
         <div className={styles.container}>
-            <Profile   user={user} history={history}/>
+            <Profile user={user} history={history}/>
 
         {!user.division ? <Regular size='16'>Вы не состоите ни в одном отделе, вступить можно на <ButtonText fontSize='18px' onClick={()=>history.replace('/edit')}>странице редактирования профиля</ButtonText> </Regular> :
 
-            <DepartmentCard user={user} history={history} users={users}/>
+            <DepartmentCard  department={department} user={user} history={history} users={users}/>
   
         }
             

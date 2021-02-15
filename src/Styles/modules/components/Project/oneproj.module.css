@@ -71,6 +71,14 @@
 	width: 450px;
 	height: 290px;
 	margin-top: 25px;
+	background-color: #C4C4C4;
+	border: 0px;
+	outline: none;
+	text-decoration: none;
+}
+.special__button:hover{
+	outline: none;
+	background-color: white;
 }
 .border__calend{
 	width: 100%;
@@ -183,9 +191,17 @@
 	margin-top: 20px;
 }
 .team__button {
-	width:442px;
-	height:202px;
-
+	width:433px;
+	height:190px;
+	border-radius: 15px;
+	font-size: 20px;
+	font-family: SuisseIntlSemibold;
+	background-color:#C4C4C4;
+	border: 0px;
+}
+.team__button:hover {
+	cursor: pointer;
+	background-color:white;
 }
 @media (max-width:700px){
 	.sprintdescr__cont {

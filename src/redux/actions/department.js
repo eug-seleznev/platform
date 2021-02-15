@@ -56,7 +56,7 @@ export const allDepartments = () => async dispatch  => {
 
 export const findDepartment = (divname) => async dispatch  => {
     try {
-        const res = await innerBackend.get(`/divisions/${divname}`)
+        const res = await innerBackend.get(`/divisions/find/${divname}`)
 
 
         dispatch({
