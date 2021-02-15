@@ -7,7 +7,6 @@ import { Bold, Light } from '../../Styles/typography'
 const MySprint = ({content}) => {
 
 const dispatch = useDispatch()
-const user = useSelector(state => state.auth.user)
 const sprint = content
 
 const [progress, setProgress] = useState(0)
