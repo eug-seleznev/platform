@@ -1,16 +1,16 @@
-import { useState } from "react";
+
 
 import { useDispatch } from "react-redux";
-import { allUsers } from "../../redux/actions/user";
-import { loadUser } from "../../redux/actions/auth";
-import { deleteDepartment } from "../../redux/actions/department";
+
+
+
 
 import styles from '../../Styles/modules/department/departmentCard.module.css'
-import { Bold } from '../../Styles/typography'
+
 
 import { Bold, Light } from '../../Styles/typography'
 import { ButtonText } from '../../Styles/buttons'
-import { useDispatch } from 'react-redux';
+
 import { allDepartments, deleteDepartment, joinDepartment, findDepartment } from '../../redux/actions/department';
 import Confirm from './confirm'
 import { useEffect, useState } from 'react';
@@ -60,11 +60,16 @@ const [showConfirm, setShowConfirm] = useState(false)
     const pushToArray =(el)=>{
         projArray = projArray.concat(el.projects)
         newA()
+        console.log(projArray)
     }
     const newA = ()=>{
         setNewArr (state => [...state, [...new Map(projArray.map(item => [item._id, item])).values()]]) 
-        setLastArr (newArr[newArr.length-1])
+       
+        console.log(newArr)
     }
+    useEffect(()=>{
+        setLastArr (newArr[newArr.length-1])
+    },[newArr])
     useEffect(()=>{
        console.log(lastArr) 
     },[lastArr])
@@ -72,7 +77,9 @@ const [showConfirm, setShowConfirm] = useState(false)
     useEffect(()=>{
         if (department!=null){
              department.members.map((el,i)=>{
+               
                 return pushToArray(el)
+
             }) 
         }
            
@@ -81,7 +88,7 @@ const [showConfirm, setShowConfirm] = useState(false)
     
     useEffect(()=>{
         if(department!=null) {
-          console.log(department)
+     
            
         }
         
