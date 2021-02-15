@@ -35,7 +35,8 @@ export const ADD_SPRINT = 'crate_new_sprint';
 export const ADD_INFO_SPRINT = 'add_info_sprint'
 export const GET_SPRINT = 'get_sprint';
 export const ADD_TASKS = 'add_tasks_to_sprint';
-export const FINISH_TASK = 'finish_task'
+export const FINISH_TASK = 'finish_task';
+export const EDIT_TASK = 'edit_task';
 export const SPRINT_ERROR = 'sprint_error';
 export const ALL_SPRINT = 'get_project_sprints'
 export const FINISH_SPRINT = 'finish_sprint' 
@@ -100,3 +101,10 @@ export const GET_TOKEN = 'get_oauth_token'
 export const GET_URN = 'get_urn'
 export const GET_STATUS = 'loading_status'
 export const CLEAR_MODEL_DATA = 'clear_model_data'
+
+
+
+
+///errors
+
+export const ERROR_MSG ='error_msg'

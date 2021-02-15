@@ -166,8 +166,9 @@ export const Reverse = ({data, isInitial }) => async (dispatch) => {
         }
         
         
-       let arr = [...data]
-       const  res =  arr.reverse();
+    //    let arr = [...data]
+       const  res =  data.reverse();
+
         dispatch({
             type: REVERSE_ARR,
             payload: res
@@ -191,8 +192,8 @@ export const ReverseDate = ({data, isInitial }) => async (dispatch) => {
         }
         
         
-       let arr = [...data]
-       const  res =  arr.reverse();
+    //    let arr = [...data]
+       const res = data.reverse();
         dispatch({
             type: REVERSE_ARRDATE,
             payload: res

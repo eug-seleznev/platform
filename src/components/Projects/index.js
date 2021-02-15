@@ -1,49 +1,47 @@
 
 
 
-import {  Redirect } from 'react-router-dom';
 
 
 //профиль пользователя по ID
 import './projects.css'
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { allTickets } from "../../redux/actions/tikets";
+
+
+
 import { allProjects } from '../../redux/actions/projects';
 
 import style from '../../Styles/modules/components/Project/allproj.module.css'
-import { loadUser } from '../../redux/actions/auth';
-// import { allUsers } from "../../redux/actions/user";
 import { Table, Tr, Td } from '../../Styles/tables';
-import { Container, Card, } from '../../Styles/common'
-import { H1, H3} from '../../Styles/typography'
-import {useState} from 'react'
+import { Card, } from '../../Styles/common'
+import { H1} from '../../Styles/typography'
 
 
 
 
 const Projects = ({history}) => {
     const dispatch = useDispatch();
-    // const auth = useSelector(state => state.auth.isAuthenticated)
-    const loaded = useSelector(state => state.projects.loadedAllProj)
     const projects = useSelector(state => state.projects.projects)
 
-    const [dimensions, setDimensions] = useState({
-        height: window.innerHeight,
-        width: window.innerWidth,
-      })
-    
     useEffect (()=>{
-        if (!loaded){
            dispatch(allProjects()) 
-        }
-        
-    },[loaded])
+    }, [])
+
+
+    
+    if(!projects){
+        return <p> loading...</p>
+    }
+
+
+    
+
     return (
-    <div>
+  
 
        
-            {!loaded ? <p>loading...</p> : (
+           
                 <div className='projects__grid'>
 <Card>
             <H1> Проекты в работе</H1>
@@ -113,9 +111,9 @@ const Projects = ({history}) => {
     </Table>
 </Card>
                 </div>
-            )}
-        </div>
-    )
+        
+     
+    )    
 }
 
 

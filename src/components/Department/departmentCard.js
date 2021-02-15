@@ -1,5 +1,12 @@
-import { url } from '../utils/axios';
+import { useState } from "react";
+
+import { useDispatch } from "react-redux";
+import { allUsers } from "../../redux/actions/user";
+import { loadUser } from "../../redux/actions/auth";
+import { deleteDepartment } from "../../redux/actions/department";
+
 import styles from '../../Styles/modules/department/departmentCard.module.css'
+import { Bold } from '../../Styles/typography'
 
 import { Bold, Light } from '../../Styles/typography'
 import { ButtonText } from '../../Styles/buttons'

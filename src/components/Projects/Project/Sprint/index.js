@@ -1,14 +1,14 @@
 import { useEffect, useState} from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { addTasks, deleteSprint, finishSprint, finishTask, getSprint } from "../../../redux/actions/projects";
-import { addToChosen } from '../../../redux/actions/auth'
+import { addTasks, deleteSprint, EditTask, finishSprint, finishTask, getSprint } from "../../../../redux/actions/projects";
+import { addToChosen } from '../../../../redux/actions/auth'
 import { useForm,  useFieldArray } from "react-hook-form";
-import '../sprint.css'
-import style from "../../../Styles/modules/components/Project/oneproj.module.css";
-import sprintCss from '../../../Styles/modules/components/Project/onesprint.module.css'
-import {Button, CancelButton} from '../../../Styles/buttons'
-import { Card } from "../../../Styles/common";
-import { Light, Regular,Bold} from '../../../Styles/typography'
+// import '../sprint.css'
+import style from "../../../../Styles/modules/components/Project/oneproj.module.css";
+import sprintCss from '../../../../Styles/modules/components/Project/onesprint.module.css'
+import {Button, CancelButton} from '../../../../Styles/buttons'
+import { Card } from "../../../../Styles/common";
+import { Light, Regular,Bold} from '../../../../Styles/typography'
 
 const Sprint = ({match, history}) => {
     const dispatch = useDispatch();
@@ -36,7 +36,8 @@ const Sprint = ({match, history}) => {
     const [isEdit, setEdit] = useState(false) //enable edit for ongoing tasks
     const [editTask, setEditTask] = useState({
       taskid: '',
-      taskTitle: ''
+      taskTitle: '',
+      editIndex: -1
     })
 
     const { register, control, handleSubmit } = useForm({
@@ -57,24 +58,32 @@ const Sprint = ({match, history}) => {
 
 
 
-	useEffect (()=> {
-    setSprintId(match.params.id)
-    if(loading){
-      setDateOpenIn (sprint.dateOpen)
-      if (sprint.dateClosePlan!=null&&sprint.dateClosePlan!=undefined) {
-			let d2 = new Date(sprint.dateClosePlan.slice(0, 10).replace(/-/g, "/"))
-			
-			setActualClose (d2)
-		}
-		else if(sprint.dateClosePlan==null||sprint.dateClosePlan==undefined) {
-			let noData = new Date (sprint.dateOpen.slice(0, 10).replace(/-/g, "/"))
-			setActualClose (noData)
-		}	
+	useEffect(() => {
+    setSprintId(match.params.id);
+    console.log('hello sprint update')
+    if (loading) {
+      setDateOpenIn(sprint.dateOpen);
+      if (sprint.dateClosePlan != null && sprint.dateClosePlan != undefined) {
+        let d2 = new Date(sprint.dateClosePlan.slice(0, 10).replace(/-/g, "/"));
+
+        setActualClose(d2);
+      } else if (
+        sprint.dateClosePlan == null ||
+        sprint.dateClosePlan == undefined
+      ) {
+        let noData = new Date(sprint.dateOpen.slice(0, 10).replace(/-/g, "/"));
+        setActualClose(noData);
+      }
     }
-    {chosenSprints.filter(sprint => sprint._id===id).map(()=>{
-      setStatus(true)
-    })}
-	},[loading])
+    {
+      chosenSprints
+        .filter((sprint) => sprint._id === id)
+        .map(() => {
+          setStatus(true);
+        });
+    }
+  }, [loading, sprint, taskArr]);
+
   useEffect (()=> {
      
     if (actualClose!=0){
@@ -137,6 +146,7 @@ const Sprint = ({match, history}) => {
       if(ind>=0){
       
       setEditTask({
+        ...editTask,
         taskid: taskArr.tasks[ind]._id,
         taskTitle: e.target.value,
       });
@@ -144,8 +154,18 @@ const Sprint = ({match, history}) => {
 
 
     }
-    const handleEditSubmit = () => {
-      console.log(editTask)
+    const handleEditSubmit = (e) => {
+      e.preventDefault();
+    
+      let id = match.params.id
+      dispatch(EditTask({editTask, id})); 
+      setEdit(!isEdit);
+      setEditTask({
+        ...editTask,
+        editIndex: -1
+      })
+      dispatch(getSprint(id));    
+
     }
 
 
@@ -263,7 +283,9 @@ const Sprint = ({match, history}) => {
                                   task.taskStatus ? "line-through" : "none"
                                 }`,
                               }}
+                              
                             >
+
                               {ind + 1}.{" "}
                               {task.taskTitle !== ""
                                 ? task.taskTitle
@@ -313,7 +335,6 @@ const Sprint = ({match, history}) => {
                   Задачи{" "}
                 </Regular>
                 {taskArr.tasks.map((task, ind) => {
-                  console.log(ind === taskArr.tasks.length-1 )
                   return (
                     <div key={ind}>
                       <form onChange={editTasksHandler}>
@@ -335,7 +356,7 @@ const Sprint = ({match, history}) => {
                             value={task._id}
                             onChange={onChange}
                           />
-                          {isEdit ? (
+                          {(isEdit && (ind===editTask.editIndex)) && (
                             <input
                               className={sprintCss.one_task}
                               type="text"
@@ -348,7 +369,9 @@ const Sprint = ({match, history}) => {
                                 }`,
                               }}
                             ></input>
-                          ) : (
+                          ) }
+                          
+                           {ind !== editTask.editIndex   && 
                             <Light
                               className={sprintCss.one_task}
                               style={{
@@ -356,26 +379,25 @@ const Sprint = ({match, history}) => {
                                   task.taskStatus ? "line-through" : "none"
                                 }`,
                               }}
+                              onClick={(e) => setEditTask({...editTask, editIndex: ind}) }
                             >
                               {ind + 1}.{" "}
                               {task.taskTitle !== ""
                                 ? task.taskTitle
                                 : "Без названия"}
                             </Light>
-                          )}
+                }
+                          
                         </div>
-                        {ind === taskArr.tasks.length - 1 && (
+                        {ind === taskArr.tasks.length - 1 &&(
                           <>
-                            {!isEdit ? (
+                            {!isEdit && (
                               <Button onClick={() => setEdit(!isEdit)}>
                                 edit fields
                               </Button>
-                            ) : ( <> </>
-                              // <Button type="submit" onSubmit={handleEditSubmit}>
-                              //   {" "}
-                              //   submit
-                              // </Button>
                             )}
+
+                            {isEdit && <Button type='submit' onClick={handleEditSubmit}> save</Button>}
                           </>
                         )}
                       </form>
@@ -422,11 +444,7 @@ const Sprint = ({match, history}) => {
                   <CancelButton
                     fontSize={"16px"}
                     style={{
-                      display: `${
-                        newFields || user.permission == "user"
-                          ? "none"
-                          : "block"
-                      }`,
+                      display:"block",
                       color: "#3F496C",
                       backgroundColor: "white",
                       border: "none",

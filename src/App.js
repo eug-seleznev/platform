@@ -1,6 +1,9 @@
 
 import { useDispatch, useSelector } from 'react-redux';
+import { createBrowserHistory } from "history";
+
 import './App.css';
+
 import Auth from './components/Auth/index'
 
 import {
@@ -25,16 +28,17 @@ import Employe from './components/User/Employe';
 import Edit from './components/User/edit';
 import Ticket from './components/Adminka/Ticket';
 import Project from './components/Projects/Project';
-import Sprint from './components/Projects/Sprint';
+import Sprint from './components/Projects/Project/Sprint';
 import ProjectsEdit from './components/Projects/ProjectsEdit';
 import OneProjEdit from './components/Projects/OneProjEdit';
 import Main from './components/Main/index'
 import Department from './components/Department/index'
-import { createBrowserHistory } from "history";
 import MyProjects from './components/Projects/My';
 import News from './components/News';
 import {  setAuthToken } from './components/utils/axios';
 import Helper from './components/Viewer/helper';
+
+
 import { Container, LoginContainer } from "../src/Styles/common";
 
 
