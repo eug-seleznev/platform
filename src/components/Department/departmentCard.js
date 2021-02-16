@@ -60,18 +60,18 @@ const [showConfirm, setShowConfirm] = useState(false)
     const pushToArray =(el)=>{
         projArray = projArray.concat(el.projects)
         newA()
-        console.log(projArray)
+        // console.log(projArray)
     }
     const newA = ()=>{
         setNewArr (state => [...state, [...new Map(projArray.map(item => [item._id, item])).values()]]) 
        
-        console.log(newArr)
+        // console.log(newArr)
     }
     useEffect(()=>{
         setLastArr (newArr[newArr.length-1])
     },[newArr])
     useEffect(()=>{
-       console.log(lastArr) 
+    //    console.log(lastArr) 
     },[lastArr])
     
     useEffect(()=>{
