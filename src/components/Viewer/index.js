@@ -71,13 +71,27 @@ function onDocumentLoadFailure(viewerErrorCode) {
 
 
     return (
-        <div style={{width: "80vw", height: "80vh", backgroundColor: "grey", left: "0px"}}>
-            <div id="forgeViewer" className="viewer-app" style={{position: "absolute", width:"80vw", height:"80vh"}} ref={container}>
+    <>
+        <h1> model for: {project.title}</h1>
+        <div
+          style={{
+            width: "80vw",
+            height: "80vh",
+            backgroundColor: "grey",
+            left: "0px",
+          }}
+        >
+          <div
+            id="forgeViewer" 
+            className="viewer-app"
+            style={{ position: "absolute", width: "80vw", height: "80vh" }}
+            ref={container}
+          ></div>
 
-            </div>
-          
+
         </div>
-    )
+      </>
+    );
 }
 
 

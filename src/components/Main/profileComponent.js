@@ -14,7 +14,7 @@ const ProfileComponent = ({user, history, change}) => {
             user != null ? (user != undefined ? user.avatar : "") : ""
           }`}
         />
-        
+
         <Bold size="30" mobSize="24" className={styles.name}>
           {" "}
           {user.name} {user.lastname}
@@ -48,7 +48,9 @@ const ProfileComponent = ({user, history, change}) => {
           rocket:{" "}
           <a
             target="_blank"
-            href={`https://chat.buro82.ru/direct/${user ? user.rocketId : ""}`}
+            href={`https://chat.buro82.ru/direct/${
+              user ? user.rocketchat : ""
+            }`}
           >
             {" "}
             {user.rocketchat && user.rocketchat}{" "}

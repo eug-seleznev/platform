@@ -33,7 +33,7 @@ const Project = ({match, history}) => {
     useEffect(() => {
         if(loaded){
             dispatch(allSprints(project.crypt))
-            // dispatch(Oauth(project.crypt));
+            dispatch(Oauth(project.crypt)); //3d viewer  oauth token
         }
     }, [loaded])
     return (
@@ -48,7 +48,7 @@ const Project = ({match, history}) => {
               <CalendSprint id={id} hist={history} project={project}></CalendSprint>
               <ProjectTeam hist={history} id={id}></ProjectTeam>
               <DeliteEnd hist={history} id={id}></DeliteEnd> 
-              {/* <Viewer project={project} />   */}
+              <Viewer project={project} />  
             </>
                 )}
         </div>

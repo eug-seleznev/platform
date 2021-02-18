@@ -102,7 +102,7 @@ const App = () => {
               <Route exact path="/projects/:id" component={Project} />
               <Route exact path="/projects/:id/:id" component={Sprint} />
               <Switch>
-                <Route exact path="/projects/:id/model/test" component={Helper} />
+                <Route exact path="/projects/:id/model/view" component={Helper} />
               </Switch>
               <Route exact path="/admin/editproj" component={ProjectsEdit} />
               <Route exact path="/admin/editproj/:id" component={OneProjEdit} />
