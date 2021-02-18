@@ -47,7 +47,6 @@ const Project = ({match, history}) => {
               <AllSprintsOfProj status={project.status} match={match} hist={history}></AllSprintsOfProj>
               <CalendSprint id={id} hist={history} project={project}></CalendSprint>
               <ProjectTeam hist={history} id={id}></ProjectTeam>
-              <DeliteEnd hist={history} id={id}></DeliteEnd> 
               <Viewer project={project} />  
             </>
                 )}

@@ -20,13 +20,18 @@ const Employe = ({match, history}) => {
     const user = useSelector(state => state.users.user)
     const loaded = useSelector(state => state.users.userLoaded)
     const dispatch = useDispatch();
- 
+    const myUser = useSelector(state => state.auth.user)
+    const [permission, setPermission] = useState('')
     useEffect(()=>{
         
         dispatch(getUser(id))
         // console.log(history, 'aaaaaaaaaaaaaaaaaaaaaaaaaa')
     },[])
-    
+    useEffect(()=>{
+        if (myUser!=undefined){
+           setPermission(myUser.permission)
+        } 
+     },[myUser])
     return (
         <div style={{display: history.location.pathname === '/users/me'? 'none' : 'block'}}>
         {!loaded? (<div>loading...</div>):
@@ -41,7 +46,7 @@ const Employe = ({match, history}) => {
                     {user.projects.map((el,i)=>{
                         
                         return(
-                            <ProjectsCard project={el}  sprints={user.sprints} history={history}/>
+                            <ProjectsCard project={el} permission={permission} sprints={user.sprints} history={history}/>
                         )
                     })}
                     

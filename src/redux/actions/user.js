@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { ALL_USERS, USER_ERR, CHANGE_PERMISSION, PERM_RETURN, ONE_USER, CLEAR_ERROR, CLEAR_MSG,} from "../types";
+import { ALL_USERS, USER_ERR, CHANGE_PERMISSION, PERM_RETURN, ONE_USER,SEARCH_USER, CLEAR_ERROR, CLEAR_MSG,} from "../types";
 
 
 
@@ -27,6 +27,28 @@ export const allUsers = () => async dispatch  => {
         })
             
       } 
+
+}
+export const searchUser = (request) => async dispatch  => {
+  try {
+ 
+      const res = await innerBackend.get(`/users/usr/get?name=${request}`)
+      dispatch({
+          type: SEARCH_USER,
+          payload: res.data
+      })
+
+      }
+    catch (err) {
+      const errors = err.response.data.err
+      errors.map(error => {
+         return dispatch({
+          type: USER_ERR,
+          payload: error.msg
+      })
+      })            
+    
+  }
 
 }
 export const getUser = (id) => async dispatch  => {

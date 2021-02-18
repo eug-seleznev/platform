@@ -5,14 +5,19 @@ import { Bold,Light,Thin, Regular } from '../../Styles/typography'
 import { useEffect, useState } from 'react'
 import  MySprint from './mySprint'
 
-const ProjectsCard = ({project, sprints, history}) => {
+const ProjectsCard = ({project,permission, sprints, history}) => {
     const [filt, setFilt] = useState(null)
+   
     const [daysLeft, setDaysLeft] = useState(null)
-
+    useEffect(()=>{
+        if(filt!=null) {
+            console.log (filt)
+        }
+    },[filt])
 useEffect(()=>{
     
     if (sprints!=undefined){
-
+        
          let filterAll = (item) => {
              
              return project.sprints.some(el => el==item )
@@ -22,7 +27,7 @@ useEffect(()=>{
          setFilt(filtered)
     } 
  },[sprints])
-
+ 
  useEffect(()=>{
      const now = new Date()
      const finish = new Date(project.dateFinish)
@@ -48,13 +53,19 @@ useEffect(()=>{
                     <Light size='16' className={styles.filter}>#ЭП</Light>
                     <Button className={styles.button} onClick={() => history.replace(`/projects/${project.crypt}`)}>Подробнее</Button>
                     <div className={styles.sprints}>
-
-                        {sprints!= undefined && filt !=null && filt.map((item,i)=>{
-                            
+                      
+                       
+                        {sprints!=undefined && filt !=null && filt.map((item,i)=>{
+                            console.log(item)
                             return(
-                              <MySprint content={item}/>
+                              <MySprint key={i} content={item}/>
                             )
                         })}
+                        
+                            
+                        
+                        
+                        
                     </div>              
                             
             

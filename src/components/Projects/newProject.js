@@ -4,14 +4,19 @@ import { allProjects, getProject, newProject } from '../../redux/actions/project
 import { newTicket } from '../../redux/actions/tikets';
 import style from '../../Styles/modules/components/Project/createPr.module.css'
 
-import {Container, Card, Title,} from '../../Styles/common'
+import {Container, Card, Title, ModalContainer,} from '../../Styles/common'
 import { Button, CancelButton } from '../../Styles/buttons';
 import { Bold, H1, H3, Light, Regular, Thin} from '../../Styles/typography'
+import { allUsers, searchUser } from '../../redux/actions/user';
 
 const ProjectNew = ({histCurrent,closeWindow}) => {
     const dispatch = useDispatch();
     const project = useSelector(state => state.projects.project)
+    const userList = useSelector(state => state.users.users)
+    const searchResult = useSelector(state => state.users.searchResult)
     const [checked, setChecked] = useState (false)
+    const [menu, setMenu] = useState (false)
+    const [idList, setIdList] = useState (null)
     const [formData, setFormData ] = useState({
         
         title: '',   
@@ -24,7 +29,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
         customer: '',
         about: '',
         rcheck: false,
-      
+        userid: [],
       });
    
 
@@ -38,19 +43,41 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
         setFormData({ ...formData, rcheck: checked });
         console.log(checked)
      },[checked])
+     useEffect(()=>{
+       
+       if(idList!=null&&!formData.userid.includes(idList)) {
+          formData.userid.push(idList)
+          console.log(formData.userid)
+       }
+       
+      
+   },[idList])
     const onChange = e => {
         e.preventDefault(); 
         console.log(e.target.checked)
         setFormData({ ...formData, [e.target.name]: e.target.value });
      }
      
+     const searchMenu = (e) => {
+setMenu(true)
+      
+ }
+     const PeopleList = (e) => {
 
-     const Redirect = () => {
-            
-            // histCurrent.push(`/projects`)
-         
+          let request = e.target.value
+          if(request.length>=3){
+            setMenu(true)
+            console.log(e.target.value)
+            dispatch(searchUser(request))
+          }
+          else{
+            setMenu(false)
+          }
+          
+          
      }
-
+     
+     
      const onSubmit = async e => {
         e.preventDefault();
         dispatch(newProject(formData))
@@ -67,9 +94,10 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
           customer: '',
           about: '',
           rcheck: false,
+          userid: [],
         }),50) 
         closeWindow()
-        setTimeout(() => Redirect(),100) 
+        // setTimeout(() => Redirect(),100) 
         
          
     
@@ -94,7 +122,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                 </div>
               </div>
               <div className={style.row}>
-                <div className={style.input__mid}>
+                <div className={style.input__short}>
                   <Thin className={style.title}>Город</Thin>
                   <input
                     required
@@ -103,6 +131,18 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                     value={city}
                     onChange={(e) => onChange(e)}
                   />
+                </div>
+                <div className={style.input__short}>
+                  <Thin className={style.title}>Добавить сотрудников</Thin>
+                  <input placeholder='введите имя'  onChange={(e) => PeopleList(e)}/>
+                  <div className={style.searchMenu} style={{display:`${menu?'block':'none'}` }}>
+                    {searchResult.map((user,i)=>{
+                      
+                      return (
+                        <div onClick={()=>setIdList(user._id)} key={i}>{user.fullname}</div>
+                      )
+                    })}
+                  </div>
                 </div>
                 <div className={style.input__short}>
                   <Thin className={style.title}>Начало</Thin>
@@ -182,6 +222,24 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                 </div>
               </div>
               </div>
+              {/* <ModalContainer style={{display:`${pop?'block':'none'}`}}>
+                <div className={style.people__list}>
+                  <div className={style.window}>
+                    {!pop?<div>123123</div>: userList.map((el,i)=>{
+                      return(
+                        <div style={{display:'flex'}}>
+                          <input type="checkbox"style={{width:'20px',marginRight:'20px'}} name="vehicle1"/>
+                          <Bold style={{marginTop:'10px'}} key={i}>
+                            {el.name}
+                          </Bold>
+                        </div>
+                        
+                      )
+                      
+                    })}
+                  </div>
+                </div>
+              </ModalContainer> */}
               <div className={style.buttons}>
                 <CancelButton grey padd={'70px'} style={{marginTop:'5px'}} onClick={closeWindow}> Отмена</CancelButton>
                 <Button fontSize={'16px'}style={{marginTop:'5px'}} padd={'20px'} type="submit"> Создать новый проект</Button>

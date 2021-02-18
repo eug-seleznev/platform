@@ -56,7 +56,7 @@ const HeaderL = ({ createProj, createNews, createTicket}) => {
 
         </Header>
 )}
-        <Menu createTicket={createTicket} createNews={createNews} createProj={createProj} closeAll={()=>allFalse()}  state={open} user={user}/>
+        <Menu  createTicket={createTicket} createNews={createNews} createProj={createProj} closeAll={()=>allFalse()}  state={open} user={user}/>
         <MenuMobile open={open.mobile} closeAll={()=>allFalse()} />
 
           </>

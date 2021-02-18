@@ -5,7 +5,7 @@ import { Bold, Light } from '../../Styles/typography'
 import { ButtonText } from '../../Styles/buttons'
 
 const ProfileComponent = ({user, history, change}) => {
-
+    
     return (
       <div className={styles.profile}>
         <img
@@ -54,6 +54,7 @@ const ProfileComponent = ({user, history, change}) => {
             {user.rocketchat && user.rocketchat}{" "}
           </a>
         </Light>
+        <div>{user.report}</div>
       </div>
     );
 }
