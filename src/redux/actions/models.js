@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { GET_TOKEN, GET_URN, NEW_ERROR, GET_STATUS, CLEAR_MODEL_DATA } from "../types";
-let url = "http://192.168.0.15:7770";
+let url = process.env.REACT_APP_IP_MODELS;
 export const postModel = (formData) => async (dispatch) => {
   // formData.append('userName', 'Fred');
 
