@@ -35,7 +35,6 @@ export const clearUrn = () => async dispatch => {
             type: CLEAR_URN
         })
     } catch (error) {
-        console.log('hahahahaah')
     }
 }
 
