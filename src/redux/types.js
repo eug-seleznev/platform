@@ -48,7 +48,9 @@ export const DELETE_SPRINT = 'delete_sprint'
 export const JOIN_TEAM = 'join_to_team'
 //projects errors
 export const CREATE_FAIL= 'error_on_project_create';
-
+//contractors
+export const ADD_CONTRACTOR = 'add_contractor';
+export const ALL_CONTRACTORS = 'all_contractors';
 //news
 export const CREATE_NEWS = 'create_news';
 export const ALL_NEWS = 'all_news'

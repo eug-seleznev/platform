@@ -40,6 +40,7 @@ import Helper from './components/Viewer/helper';
 
 
 import { Container, LoginContainer } from "../src/Styles/common";
+import Contractors from './components/Superadmin/contractors';
 
 
 
@@ -115,7 +116,7 @@ const App = () => {
               <Route exact path="/news" component={News} />
               <Route exact path="/department" component={Department} />
               <Route exact path="/viewer" component={Helper} />
-
+              <Route exact path="/contractors" component={Contractors} />
             </Container>
           </Switch>
         </Router>

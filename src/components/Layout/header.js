@@ -9,7 +9,7 @@ import Menu from './Menu'
 import MenuMobile from './menuMobile'
 
 
-const HeaderL = ({ createProj, createNews, createTicket}) => {
+const HeaderL = ({addPodsos, createProj, createNews, createTicket}) => {
     const loaded = useSelector(state => state.auth.loaded)
     const user = useSelector(state => state.auth.user)
    
@@ -56,7 +56,7 @@ const HeaderL = ({ createProj, createNews, createTicket}) => {
 
         </Header>
 )}
-        <Menu  createTicket={createTicket} createNews={createNews} createProj={createProj} closeAll={()=>allFalse()}  state={open} user={user}/>
+        <Menu addPodsos={addPodsos} createTicket={createTicket} createNews={createNews} createProj={createProj} closeAll={()=>allFalse()}  state={open} user={user}/>
         <MenuMobile open={open.mobile} closeAll={()=>allFalse()} />
 
           </>
