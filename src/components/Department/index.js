@@ -17,7 +17,7 @@ const Department = ({history}) => {
 
  useEffect(()=>{
     dispatch(allDepartments())
-    dispatch(allUsers())
+    dispatch(allUsers('name', true))
  },[])
 
     return(
