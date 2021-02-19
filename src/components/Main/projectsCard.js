@@ -10,24 +10,37 @@ const ProjectsCard = ({project,permission, sprints, history}) => {
    
     const [daysLeft, setDaysLeft] = useState(null)
     useEffect(()=>{
-        if(filt!=null) {
-            console.log (filt)
+        if(project!=undefined) {
+            console.log (project)
         }
-    },[filt])
+    },[project])
+
+    
 useEffect(()=>{
     
     if (sprints!=undefined){
-        
+
          let filterAll = (item) => {
-             
-             return project.sprints.some(el => el==item )
+                console.log(item)
+                console.log(project.sprints)
+                project.sprints.some(el => el===item)
+
              }
-            
-         const filtered = sprints!=undefined && sprints.filter(item => filterAll(item._id))   
+             console.log(sprints)
+         const filtered = sprints.filter(item => filterAll(item._id))  
+         
          setFilt(filtered)
     } 
  },[sprints])
- 
+
+
+
+
+
+
+ useEffect(()=>{
+    console.log(filt)
+ },[filt])
  useEffect(()=>{
      const now = new Date()
      const finish = new Date(project.dateFinish)
@@ -54,9 +67,15 @@ useEffect(()=>{
                     <Button className={styles.button} onClick={() => history.replace(`/projects/${project.crypt}`)}>Подробнее</Button>
                     <div className={styles.sprints}>
                       
-                       
-                        {sprints!=undefined && filt !=null && filt.map((item,i)=>{
-                            console.log(item)
+                        {
+                        permission==='admin'&&project.sprints!=undefined? 
+                        project.sprints.map((item, i)=>{
+                                return(
+                                    <MySprint key={i} content={item}/>
+                                )
+                        }):
+                        sprints!=undefined && filt !=null && filt.map((item,i)=>{
+                            
                             return(
                               <MySprint key={i} content={item}/>
                             )

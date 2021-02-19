@@ -33,11 +33,11 @@ const repl =()=>{
 				unmountOnExit
 			>
         		<div className={styles.menu} onMouseLeave={closeAll}>
-					
+
                     <StyledIn onClick={()=>repl()} className='menu__nav' to='/help'>
                         Изменить проект
                     </StyledIn>
-					<DeliteEnd></DeliteEnd>
+					<DeliteEnd id={project.crypt} hist={hist}></DeliteEnd>
 				</div>
 			</CSSTransition>
 		</div>
