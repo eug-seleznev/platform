@@ -19,28 +19,39 @@ const TitleOfProject = ({hist}) => {
      }
     return (
       <>
-	      <div className={style.title}>
-                    
-          <H1 size='24' >{project.title}</H1>
-          <Bold size='16'>
-              <div className={style.title__small} style={{ display: `${
-                user.permission === "user" ? "none" : "flex"
-              }`}}>
-              
-                <div className={style.title__options}  onClick={openMenu}>Настройки</div>
-                <img  src='/image 1.png' onClick={openMenu}></img>
-                <SetMenu closeAll={closeAll} project={project} hist={hist} state={open}></SetMenu>
+        <div className={style.title}>
+          <H1 size="24">{project.title}</H1>
+          <Bold size="16">
+            <div
+              className={style.title__small}
+              style={{
+                display: `${user.permission === "user" ? "none" : "flex"}`,
+              }}
+            >
+              <div className={style.title__options} onClick={openMenu}>
+                Настройки
               </div>
+              <img src="/image 1.png" onClick={openMenu}></img>
+              <SetMenu
+                closeAll={closeAll}
+                project={project}
+                hist={hist}
+                state={open}
+              ></SetMenu>
+            </div>
           </Bold>
+        </div>
+
+        <Light className={style.title__small} size="16">
+          <div className={style.title__deadline}>
+            Дедлайн:{" "}
+            {project.dateFinish != null ? project.dateFinish.slice(0, 10) : "?"}
           </div>
-          
-          <Light className={style.title__small} size='16'>
-            <div className={style.title__deadline}>Дедлайн: {project.dateFinish!=null?project.dateFinish.slice(0,10):"?"}</div> 
-            <div className={style.title__deadline}>Этап: {project.stage}</div>
-          </Light>
-	  </>
-  
-    )
+          <div className={style.title__deadline}>Тип: {project.type}</div>
+          <div className={style.title__deadline}>Шифр:  {project.crypter}</div>
+        </Light>
+      </>
+    );
 }
 
 

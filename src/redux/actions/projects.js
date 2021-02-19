@@ -1,5 +1,5 @@
 import { innerBackend, instance } from "../../components/utils/axios";
-import { ADD_SPRINT, ADD_TASKS,CLEAR_URN, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK, CREATE_FAIL, DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, PROJECT_ID, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT,CLEAR_MSG, CLEAR_ERROR, DELETE_SPRINT  } from "../types";
+import { ADD_SPRINT, SORT_PROJECTS, ADD_TASKS,CLEAR_URN, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK, CREATE_FAIL, DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, PROJECT_ID, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT,CLEAR_MSG, CLEAR_ERROR, DELETE_SPRINT, PROJECTS_SORT  } from "../types";
 
 
 
@@ -28,6 +28,20 @@ export const newProject = (formData) => async dispatch  => {
 
 }
 
+export const sortProjects = ({ query, orderSort }) => async (dispatch) => {
+  try {
+    const res = await innerBackend.get(
+      `/projects?field=${query}&order=${orderSort}`
+    );
+    dispatch({
+      type: SORT_PROJECTS,
+      payload: res.data,
+    });
+  } catch (err) {
+    alert("hahaha classic");
+  }
+};
+
 
 export const clearUrn = () => async dispatch => {
     try {
@@ -42,7 +56,7 @@ export const clearUrn = () => async dispatch => {
 export const allProjects = () => async dispatch  => {
     
     try {
-        const res = await innerBackend.get('/projects')
+        const res = await innerBackend.get('/projects?field=title&order=true')
         dispatch({
             type: ALL_PROJECTS,
             payload: res.data

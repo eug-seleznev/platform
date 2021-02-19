@@ -6,10 +6,10 @@ import { ALL_USERS, USER_ERR, CHANGE_PERMISSION, PERM_RETURN, ONE_USER,SEARCH_US
 
 
 
-export const allUsers = () => async dispatch  => {
+export const allUsers = ({query, sortOrder}) => async dispatch  => {
     try {
         // console.log('hello all users?')
-        const res = await innerBackend.get('/users/all')
+        const res = await innerBackend.get(`/users/all?field=${query}&order=${sortOrder}`)
         dispatch({
             type: ALL_USERS,
             payload: res.data
