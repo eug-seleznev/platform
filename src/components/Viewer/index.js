@@ -12,8 +12,7 @@ const Viewer = ({oauth, project}) => {
     const dispatch = useDispatch();
     let Autodesk = window.Autodesk;
     const container = useRef();           
-    var documentId =
-     `urn:${oauth.urn}`
+
 
 // let options = {
 //   env: "AutodeskProduction",
@@ -35,26 +34,22 @@ const Viewer = ({oauth, project}) => {
 
 
 
-    useEffect(() => {
-
-    }, [])
-
-    useEffect(async ()  =>  {
+    useEffect(()  =>  {
  
 
    Autodesk.Viewing.Initializer(options, () => {
     viewer = new Autodesk.Viewing.GuiViewer3D(container.current, { extensions: [ 'Autodesk.DocumentBrowser'] });
     viewer.start();
-    var documentId = 'urn:' + project.urn;
+    let documentId = 'urn:' + project.urn;
     Autodesk.Viewing.Document.load(documentId, onDocumentLoadSuccess, onDocumentLoadFailure);
   });
 
     }, []);
     
 function onDocumentLoadSuccess(doc) {
-  var viewables = doc.getRoot().getDefaultGeometry();
+  let viewables = doc.getRoot().getDefaultGeometry();
   viewer.loadDocumentNode(doc, viewables).then((i) => {
-    // documented loaded, any action?
+    console.log(Autodesk.Viewing.UI.ToolBar);
   });
 }
 

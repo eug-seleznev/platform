@@ -16,3 +16,22 @@
     height: 0px;
     transition: all .3s;
 }
+
+.menu {
+    z-index: 10;
+  
+    
+    background-color: white;
+    
+    width: 238px;
+    position: absolute;
+    left: auto;
+    right: 100px;
+    height: 100PX;
+    padding:10px;
+    border-radius: 15px;
+
+
+
+    margin-top: 30px;
+}

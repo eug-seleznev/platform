@@ -15,6 +15,9 @@
 	flex-direction: column;
 	justify-content: space-between;
 }
+.checkbox {
+	width: 10px;
+}
 .row {
 	display: flex;
 	justify-content: space-between;
@@ -28,9 +31,31 @@
 .input__long{
 	width:100%
 }
+.people__list {
+	width: 100vw;
+	height: 100vh;
+	display: grid;
+	grid-template-columns: 1fr 500px 1fr;
+	grid-template-rows: 1fr 650px 1fr;
+	grid-template-areas:
+	'. . .'
+	'. wind .'
+
+}
+.window {
+	grid-area: wind;
+	background-color: white;
+}
 .title {
 	
 	margin-bottom: 5px;
+}
+.searchMenu {
+	width:8%;
+	position:absolute;
+	border:1px solid black; 
+	height:auto;
+	background-color: white;
 }
 .form input{
 	width:100%;
@@ -103,6 +128,9 @@
 	}
 	.input__mid{
 		width:100%
+	}
+	.searchMenu {
+		width:40%;
 	}
 	.input__short{
 		margin-top: 5px;

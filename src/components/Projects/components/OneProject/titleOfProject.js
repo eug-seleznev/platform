@@ -1,18 +1,22 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import style from '../../../../Styles/modules/components/Project/oneproj.module.css'
 import { Bold, H1, Light} from '../../../../Styles/typography'
-
+import SetMenu from './settingsMenu';
 
 
 const TitleOfProject = ({hist}) => {
 
     const user = useSelector(state => state.auth.user) 
-
+    const [open,setOpen] = useState(false)
     const project = useSelector(state => state.projects.project)
-	const returnEditPage = () => {
-		hist.replace(`/admin/editproj/${project.crypt}`)
+	  const openMenu = () => {
+		
+      setOpen(!open)
 	   }
- 
+     const closeAll =()=>{
+       setOpen (false)
+     }
     return (
       <>
 	      <div className={style.title}>
@@ -23,8 +27,9 @@ const TitleOfProject = ({hist}) => {
                 user.permission === "user" ? "none" : "flex"
               }`}}>
               
-                <div className={style.title__options} onClick={returnEditPage}>Настройки</div>
-                <img onClick={returnEditPage} src='/image 1.png'></img>
+                <div className={style.title__options}  onClick={openMenu}>Настройки</div>
+                <img  src='/image 1.png' onClick={openMenu}></img>
+                <SetMenu closeAll={closeAll} project={project} hist={hist} state={open}></SetMenu>
               </div>
           </Bold>
           </div>

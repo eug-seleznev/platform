@@ -25,7 +25,8 @@
 .hist__sprint {
 	color:#171F65;
 	margin-left:300px;
-	margin-top:10px
+	margin-top:10px;
+	cursor: pointer;
 }
 .card__date1 {
 	text-align: right;

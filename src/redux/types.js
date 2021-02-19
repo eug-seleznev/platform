@@ -18,7 +18,8 @@ export const ONE_USER = 'get_one'
 
 //user errors
 export const USER_ERR = 'get_all_users_error'
-
+//search user 
+export const SEARCH_USER = 'search_user'
 //PROJECTS
 export const EDIT_PROJECT = 'edit_project';
 export const ALL_PROJECTS = 'all_projects';

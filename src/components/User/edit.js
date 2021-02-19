@@ -26,12 +26,12 @@ const Edit = ({match, history}) => {
 		position: user.position ? user.position : '',
 		division: user.division ? user.division : '',  
         email: user.email ? user.email : '', 
-
+		report: user.report ? user.report : '', 
       
       });
      const [text, setText] = useState ('') 
 
-      const {name,lastname, position, email } = formData;
+      const {name,lastname, position, email, report } = formData;
 
       const  [file, setFile] = useState(null) 
 
@@ -154,7 +154,15 @@ const Edit = ({match, history}) => {
 			  name="email"
 			  onChange={e => onChange(e)}
 			></Input>
-			
+			<p className={styles.p}>Ссылка на отчетность</p>
+				<Input 
+				required 
+					type='text'
+					placeholder={user.report}
+					value={report}
+					name="report"
+					onChange={e => onChange(e)}
+					></Input>
 			
 			<p className={styles.p}>Сменить аватар</p>
 			 <Input 

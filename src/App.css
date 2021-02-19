@@ -48,3 +48,21 @@ input{
     transform: rotate(360deg);
   }
 }
+
+
+
+.adsk-viewing-viewer #toolbar-explodeTool{display:none!important}
+.adsk-viewing-viewer #toolbar-measurementSubmenuTool{display:none!important}
+.adsk-viewing-viewer #toolbar-modelStructureTool{display:none!important}
+.adsk-viewing-viewer #toolbar-cameraSubmenuTool{display: none !important;}
+
+.adsk-viewing-viewer #toolbar-propertiesTool{display: none !important;}
+
+.adsk-viewing-viewer.dark-theme .adsk-control-group {
+    background-color: rgb(63 73 108);
+}
+
+
+.adsk-viewing-viewer.dark-theme .adsk-button.active, .adsk-viewing-viewer.dark-theme .adsk-button:focus{
+  box-shadow: none;
+}

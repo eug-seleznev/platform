@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {Button} from '../../../../Styles/buttons'
 import Confirm from "./confirm";
 import { deleteProject, finishProject } from '../../../../redux/actions/projects';
-
+import { StyledIn } from "../../../../Styles/layout";
+import styles from '../../../../Styles/modules/components/headerMenu.module.css'
 
 const DeliteEnd = ({id, hist}) => {
 	const dispatch = useDispatch();
@@ -40,14 +41,15 @@ const DeliteEnd = ({id, hist}) => {
  
     return (
       <>
-		<div style={{marginTop:'30px'}}>
-				<Button
+		<div >
+				<StyledIn
 				onClick={openConfirmEnd}
+				
 				style={{
 					display: `${
 					user.permission === "user" ? "none" : "block"
 					}`,
-					marginBottom: "30px",
+					
 				}}
 				>
 				{" "}
@@ -56,21 +58,25 @@ const DeliteEnd = ({id, hist}) => {
 					: project.status
 					? "Восстановить проект"
 					: "Завершить проект"}
-				</Button>
-				<div style={{display:`${confirm?'block':'none'}`}}>
-					<Confirm buttonTitle={buttonTitle} handleEnd={handleEnd} handleDelete={handleDelete} openConfirm={openConfirm} title={project.title}></Confirm></div>
-				<Button
+				</StyledIn>
+				
+				<StyledIn
+				
 				onClick={openConfirm}
 				style={{
 					display: `${
 					user.permission === "user" ? "none" : "block"
 					}`,
-					marginBottom: "30px",
+					
 				}}
 				>
 				{" "}
 				{user.permission === "user" ? "" : "Удалить проект"}
-				</Button>
+				<div style={{display:`${confirm?'block':'none'}`, zIndex:2222}}>
+					<Confirm buttonTitle={buttonTitle} handleEnd={handleEnd} handleDelete={handleDelete} openConfirm={openConfirm} title={project.title}></Confirm>
+				</div>
+				</StyledIn>
+				
 		</div>
 	  </>
   

@@ -1,5 +1,5 @@
 
-import { ALL_USERS, CHANGE_PERMISSION,PERM_RETURN,ONE_USER, CLEAR_ERROR, CLEAR_MSG} from '../types'
+import { ALL_USERS, CHANGE_PERMISSION,PERM_RETURN,ONE_USER, CLEAR_ERROR, CLEAR_MSG, SEARCH_USER} from '../types'
 
 
 
@@ -9,7 +9,8 @@ const initialState = {
     loaded: false,
     msg: '',
     userLoaded: false,
-    error:''
+    error:'',
+    searchResult:[],
 }
 
 export default function(state = initialState, action) {
@@ -18,6 +19,11 @@ export default function(state = initialState, action) {
     } = action;
 
     switch(type){
+        case SEARCH_USER: 
+            return {
+                ...state,
+                searchResult:payload,
+            }
         case ONE_USER:
             return {
                 ...state,

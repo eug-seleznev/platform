@@ -1,7 +1,7 @@
 .bg{
-    position: fixed;
-    left: 0px;
-    top: 0px;
+    position: fixed !important;
+    left: 0px !important;
+    top: 0px !important;
     width: 100vw;
     height: 100vh;
     background-color: rgba(63, 73, 108, 0.7);
