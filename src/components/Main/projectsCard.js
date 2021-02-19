@@ -5,50 +5,37 @@ import { Bold,Light,Thin, Regular } from '../../Styles/typography'
 import { useEffect, useState } from 'react'
 import  MySprint from './mySprint'
 
-const ProjectsCard = ({project,permission, sprints, history}) => {
+
+
+
+
+
+const ProjectsCard = ({project, sprints, history}) => {
+
     const [filt, setFilt] = useState(null)
-   
     const [daysLeft, setDaysLeft] = useState(null)
-    useEffect(()=>{
-        if(project!=undefined) {
-            // console.log (project)
-        }
-    },[project])
 
-    
-useEffect(()=>{
-    
-    if (sprints!=undefined){
+        useEffect(()=>{
+            if (sprints!=undefined){
+                const filtered = sprints!=undefined && sprints.filter(item => filterAll(item._id))  
 
-         let filterAll = (item) => {
-                // console.log(item)
-                // console.log(project.sprints)
-                project.sprints.some(el => el===item)
-
-             }
-            //  console.log(sprints)
-         const filtered = sprints.filter(item => filterAll(item._id))  
-         
-         setFilt(filtered)
-    } 
- },[sprints])
-
-
-
-
-
-
-//  useEffect(()=>{
-//     console.log(filt)
-//  },[filt])
+                setFilt(filtered)
+                
+            } 
+ },[])
+ 
  useEffect(()=>{
      const now = new Date()
      const finish = new Date(project.dateFinish)
      const left = (finish.getTime() - now.getTime()) / (1000*60*60*24)
      const days = Math.floor(left)
-   
     setDaysLeft(days)
  },[])
+
+        
+    let filterAll = (item) => {
+        return project.sprints.some((el) => el._id == item);
+    };
 
 
     return(
@@ -65,21 +52,39 @@ useEffect(()=>{
             <Button className={styles.button} onClick={() => history.replace(`/projects/${project.crypt}`)}>Подробнее</Button>
             <div className={styles.sprints}>
                 
-                {
-                permission==='admin'&&project.sprints!=undefined? 
-                project.sprints.map((item, i)=>{
-                        return(
-                            <MySprint key={i} content={item}/>
-                        )
-                }):
-                sprints!=undefined && filt !=null && filt.map((item,i)=>{
-                    
-                    return(
-                        <MySprint key={i} content={item}/>
-                    )
-                })}
-            </div>              
+                    <Bold size='24' className={styles.title} >{project.title}</Bold>
+                    <Light size='16' className={styles.description}>{project.about!=null? project.about: 'Короткое описание проекта'}</Light>
+                    <Light size='18' className={styles.dates} >
+                        {project.dateStart ? project.dateStart.slice(5,10).split('-').reverse().join('.') : '??' 
+                        +' \u2014 '+ 
+                        project.dateFinish ? project.dateFinish.slice(5,10).split('-').reverse().join('.') : '??'} 
+                    </Light>
+                    <Light size='18' className={styles.left}>Осталось: {daysLeft} {daysLeft<1?'день': daysLeft<5? 'дня': 'дней'}</Light>
+                    <Light size='16' className={styles.filter}>#ЭП</Light>
+                    <Button className={styles.button} onClick={() => history.replace(`/projects/${project.crypt}`)}>Подробнее</Button>
+                    <div className={styles.sprints}>
+                      
+                       
+                        {sprints!=undefined && filt !=null && filt.map((item,i)=>{
+                            return(
+                              <MySprint key={i} content={item}/>
+                            )
+                        })}
+                        
+                            </div> 
+                        
+                        
+                        
+                    </div>              
+                            
+            
         </Card>
     )
 }
 export default ProjectsCard
+// permission==='admin'&&project.sprints!=undefined? 
+// project.sprints.map((item, i)=>{
+//         return(
+//             <MySprint key={i} content={item}/>
+//         )
+// }):

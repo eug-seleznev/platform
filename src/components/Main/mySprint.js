@@ -7,7 +7,6 @@ import { Bold, Light } from '../../Styles/typography'
 const MySprint = ({content}) => {
 
 const dispatch = useDispatch()
-const user = useSelector(state => state.auth.user)
 const sprint = content
 
 const [progress, setProgress] = useState(0)
@@ -62,7 +61,7 @@ const onCheck = (e,id) => {
 
                        return(
                             <Light size='16'  className={styles.parag}>
-                                <input className={styles.input} style={{pointerEvents: user.permission=='user'?'none':'block'}} type="checkbox" id="vehicle1" name="vehicle1" defaultChecked={el.taskStatus} value={el._id} onChange={(e)=>onCheck(e,sprint._id)}/> 
+                                <input className={styles.input} style={{pointerEvents: 'block'}} type="checkbox" id="vehicle1" name="vehicle1" defaultChecked={el.taskStatus} value={el._id} onChange={(e)=>onCheck(e,sprint._id)}/> 
                                 {el.taskTitle!=''?el.taskTitle:'Без названия'}
                             </Light>
                        )

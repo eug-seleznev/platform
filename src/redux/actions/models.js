@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { GET_TOKEN, GET_URN, NEW_ERROR, GET_STATUS, CLEAR_MODEL_DATA } from "../types";
-
+let url = "http://192.168.0.15:7770";
 export const postModel = (formData) => async (dispatch) => {
   // formData.append('userName', 'Fred');
 
@@ -12,14 +12,16 @@ export const postModel = (formData) => async (dispatch) => {
       form.append(`${el}`, formData[el]);
     });
 
+
+    
     const res = await Axios.post("/up/upload/p", form, {
-      baseURL: "http://192.168.0.16:7770",
+      baseURL: url,
       headers: {
         "content-type": "multipart/form-data",
         "auth-token": localStorage.token,
       },
     });
-
+    console.log(res)
     dispatch({
       type: GET_URN,
       payload: res.data,
@@ -40,7 +42,7 @@ export const postModel = (formData) => async (dispatch) => {
 export const Oauth = (crypt) => async (dispatch) => {
   try {
         const res = await Axios.get(`/up/tkn/p/${crypt}`,  {
-          baseURL: "http://192.168.0.16:7770",
+          baseURL: url,
           headers: {
             "content-type": "application/json",
           },
@@ -67,7 +69,7 @@ export const Status = (crypt) => async (dispatch) => {
      console.log('started')
      let date = new Date().getMilliseconds();
     const res = await Axios.get(`/up/status/p/${crypt}`, {
-      baseURL: "http://192.168.0.16:7770",
+      baseURL:url,
       headers: {
         "content-type": "application/json",
       },

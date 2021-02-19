@@ -28,11 +28,11 @@ const Helper = ({match, history}) => {
         if(oauth && project){
             setLoaded(true)
 
-            // console.log(oauth.urn, 'urn', oauth.token, 'toke')
         }
     }, [oauth, project])
 
 
+    
 
     return (
         <>

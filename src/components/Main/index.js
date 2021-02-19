@@ -73,7 +73,7 @@ if(!user.name){
                 <div className={styles.projects}>
                     <Bold color='black' size='36' className={styles.myProj}>Мои проекты</Bold>
 
-                    {user.projects.map((el,i)=>{
+                    {user.projects && user.projects.map((el,i)=>{
                         
                         return(
                             <ProjectsCard project={el} key={i} sprints={user.sprints} history={history} />

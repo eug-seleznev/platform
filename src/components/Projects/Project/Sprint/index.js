@@ -8,7 +8,7 @@ import style from "../../../../Styles/modules/components/Project/oneproj.module.
 import sprintCss from '../../../../Styles/modules/components/Project/onesprint.module.css'
 import {Button, CancelButton} from '../../../../Styles/buttons'
 import { Card } from "../../../../Styles/common";
-import { Light, Regular,Bold} from '../../../../Styles/typography'
+import { Light, Regular,Bold, Thin} from '../../../../Styles/typography'
 
 const Sprint = ({match, history}) => {
     const dispatch = useDispatch();
@@ -356,7 +356,7 @@ const Sprint = ({match, history}) => {
                             value={task._id}
                             onChange={onChange}
                           />
-                          {(isEdit && (ind===editTask.editIndex)) && (
+                          {isEdit && ind === editTask.editIndex && (
                             <input
                               className={sprintCss.one_task}
                               type="text"
@@ -369,9 +369,9 @@ const Sprint = ({match, history}) => {
                                 }`,
                               }}
                             ></input>
-                          ) }
-                          
-                           {ind !== editTask.editIndex   && 
+                          )}
+
+                          {ind !== editTask.editIndex && (
                             <Light
                               className={sprintCss.one_task}
                               style={{
@@ -379,17 +379,24 @@ const Sprint = ({match, history}) => {
                                   task.taskStatus ? "line-through" : "none"
                                 }`,
                               }}
-                              onClick={(e) => setEditTask({...editTask, editIndex: ind}) }
+                              onClick={(e) =>
+                                isEdit
+                                  ? setEditTask({ ...editTask, editIndex: ind })
+                                  : ""
+                              }
                             >
                               {ind + 1}.{" "}
                               {task.taskTitle !== ""
                                 ? task.taskTitle
                                 : "Без названия"}
                             </Light>
-                }
-                          
+                          )}
+
+                          {isEdit && <Thin  onClick={(e) =>
+                                
+                                   setEditTask({ ...editTask, editIndex: ind })}>     редактировать</Thin>}
                         </div>
-                        {ind === taskArr.tasks.length - 1 &&(
+                        {ind === taskArr.tasks.length - 1 && user.permission !== 'user'  && (
                           <>
                             {!isEdit && (
                               <Button onClick={() => setEdit(!isEdit)}>
@@ -397,7 +404,12 @@ const Sprint = ({match, history}) => {
                               </Button>
                             )}
 
-                            {isEdit && <Button type='submit' onClick={handleEditSubmit}> save</Button>}
+                            {isEdit && (
+                              <Button type="submit" onClick={handleEditSubmit}>
+                                {" "}
+                                save
+                              </Button>
+                            )}
                           </>
                         )}
                       </form>

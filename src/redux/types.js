@@ -25,6 +25,7 @@ export const EDIT_PROJECT = 'edit_project';
 export const ALL_PROJECTS = 'all_projects';
 export const CREATE_PROJECT = 'create_project';
 export const GET_PROJECT = 'get_project';
+export const CLEAR_URN = 'clear_urn'
 
 export const CREATE_SPRINT = 'create_sprint';
 export const UPDATE_PROJECT = 'project_updated';
