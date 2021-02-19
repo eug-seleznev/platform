@@ -11,7 +11,7 @@ const ProjectsCard = ({project,permission, sprints, history}) => {
     const [daysLeft, setDaysLeft] = useState(null)
     useEffect(()=>{
         if(project!=undefined) {
-            console.log (project)
+            // console.log (project)
         }
     },[project])
 
@@ -21,12 +21,12 @@ useEffect(()=>{
     if (sprints!=undefined){
 
          let filterAll = (item) => {
-                console.log(item)
-                console.log(project.sprints)
+                // console.log(item)
+                // console.log(project.sprints)
                 project.sprints.some(el => el===item)
 
              }
-             console.log(sprints)
+            //  console.log(sprints)
          const filtered = sprints.filter(item => filterAll(item._id))  
          
          setFilt(filtered)
@@ -38,9 +38,9 @@ useEffect(()=>{
 
 
 
- useEffect(()=>{
-    console.log(filt)
- },[filt])
+//  useEffect(()=>{
+//     console.log(filt)
+//  },[filt])
  useEffect(()=>{
      const now = new Date()
      const finish = new Date(project.dateFinish)
@@ -52,42 +52,33 @@ useEffect(()=>{
 
 
     return(
-        <Card className={styles.projContainer}>
-
+        <Card className={styles.projContainer}> 
+            <Bold size='24' className={styles.title} >{project.title}</Bold>
+            <Light size='16' className={styles.description}>{project.about!=null? project.about: 'Короткое описание проекта'}</Light>
+            <Light size='18' className={styles.dates} >
+                {project.dateStart ? project.dateStart.slice(5,10).split('-').reverse().join('.') : '??' 
+                +' \u2014 '+ 
+                project.dateFinish ? project.dateFinish.slice(5,10).split('-').reverse().join('.') : '??'} 
+            </Light>
+            <Light size='18' className={styles.left}>Осталось: {daysLeft} {daysLeft<1?'день': daysLeft<5? 'дня': 'дней'}</Light>
+            <Light size='16' className={styles.filter}>#ЭП</Light>
+            <Button className={styles.button} onClick={() => history.replace(`/projects/${project.crypt}`)}>Подробнее</Button>
+            <div className={styles.sprints}>
                 
-                    <Bold size='24' className={styles.title} >{project.title}</Bold>
-                    <Light size='16' className={styles.description}>{project.about!=null? project.about: 'Короткое описание проекта'}</Light>
-                    <Light size='18' className={styles.dates} >
-                        {project.dateStart ? project.dateStart.slice(5,10).split('-').reverse().join('.') : '??' 
-                        +' \u2014 '+ 
-                        project.dateFinish ? project.dateFinish.slice(5,10).split('-').reverse().join('.') : '??'} 
-                    </Light>
-                    <Light size='18' className={styles.left}>Осталось: {daysLeft} {daysLeft<1?'день': daysLeft<5? 'дня': 'дней'}</Light>
-                    <Light size='16' className={styles.filter}>#ЭП</Light>
-                    <Button className={styles.button} onClick={() => history.replace(`/projects/${project.crypt}`)}>Подробнее</Button>
-                    <div className={styles.sprints}>
-                      
-                        {
-                        permission==='admin'&&project.sprints!=undefined? 
-                        project.sprints.map((item, i)=>{
-                                return(
-                                    <MySprint key={i} content={item}/>
-                                )
-                        }):
-                        sprints!=undefined && filt !=null && filt.map((item,i)=>{
-                            
-                            return(
-                              <MySprint key={i} content={item}/>
-                            )
-                        })}
-                        
-                            
-                        
-                        
-                        
-                    </div>              
-                            
-            
+                {
+                permission==='admin'&&project.sprints!=undefined? 
+                project.sprints.map((item, i)=>{
+                        return(
+                            <MySprint key={i} content={item}/>
+                        )
+                }):
+                sprints!=undefined && filt !=null && filt.map((item,i)=>{
+                    
+                    return(
+                        <MySprint key={i} content={item}/>
+                    )
+                })}
+            </div>              
         </Card>
     )
 }
