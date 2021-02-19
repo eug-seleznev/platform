@@ -94,7 +94,7 @@ const Sprint = ({match, history}) => {
       setDuration (Math.abs(actualClose-d0)/86400000)
       
       if (sprint.dateClosePlan != null) {
-        setClose(sprint.dateClosePlan.slice(5,10).replace(/-/g, "."))
+        setClose(sprint.dateClosePlan.slice(5,10).split('-').reverse().join('.'))
       }
 
       else if (sprint.dateClosePlan == null) {
@@ -210,7 +210,7 @@ const Sprint = ({match, history}) => {
             <div className={style.title}>
               <Bold size="24">
                 Спринт 
-                {sprint.dateOpen.slice(5, 10).replace(/-/g, ".") + "-" + close}
+                {sprint.dateOpen.slice(5, 10).split('-').reverse().join('.') + "-" + close}
               </Bold>
             </div>
 
@@ -223,7 +223,7 @@ const Sprint = ({match, history}) => {
                 <div>...</div>
               ) : (
                 <div className={style.title__deadline}>
-                  Дней до дедлайна: {diff.toString().slice(0, 1)}
+                  Дней до дедлайна: {diff.toString().slice(0, 2)}
                 </div>
               )}
               <div className={style.title__deadline}></div>

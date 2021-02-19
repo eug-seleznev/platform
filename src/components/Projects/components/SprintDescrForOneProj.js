@@ -59,11 +59,11 @@ const SprintDescription = ({projStatus, dateOpen,taskcomplite, alltasks, history
 			<Card className={style.card}style={{border:`${!status?'5px solid transparent':'5px solid green'}`}}>
 				<div>
 					<div className={style.card__date1}>
-						<Light size='20'>{dateOpen.slice(5,10).replace(/-/g, ".")}-{dateClosePlan === null?'??': dateClosePlan.slice(5,10).replace(/-/g, ".")}
+						<Light size='20'>{dateOpen.slice(5,10).split('-').reverse().join('.')}-{dateClosePlan === null?'??': dateClosePlan.slice(5,10).split('-').reverse().join('.')}
 						</Light>
 					</div>
 					<div className={style.card__title}>
-						<Regular size='30'>Спринт {dateOpen.slice(5,10).replace(/-/g, ".")}
+						<Regular size='30'>Спринт {dateOpen.slice(5,10).split('-').reverse().join('.')}
 						</Regular>
 					</div>
 					<div className={style.card__descr}>
