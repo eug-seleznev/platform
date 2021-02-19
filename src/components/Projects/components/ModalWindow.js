@@ -5,7 +5,7 @@ import SprintForm from './sprintForm'
 import style from '../../../Styles/modules/components/Project/modWindow.module.css'
 import {H1, Bold } from "../../../Styles/typography"
 import ProjectNew from "../newProject";
-
+import AddContractor from "../../Superadmin/addContractor";
 import CreateNew from "../../Superadmin/createNew";
 import Ticket from "../../Adminka/Index";
 
@@ -38,7 +38,12 @@ const ModalWindow = ({closeWindow, bigTitle,smallTitles,customElements,histCurre
 						<>
 							<Ticket closeWindow={closeWindow} histCurrent={histCurrent}>
 							</Ticket>
-						</>:''}
+						</>:customElements === 'addPodsos'?
+						<>
+							<AddContractor closeWindow={closeWindow} histCurrent={histCurrent}>
+							</AddContractor>
+						</>
+						:''}
 					</ModalWind>
 				</ModalContainer>
 			</div>

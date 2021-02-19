@@ -8,7 +8,7 @@ import { useState } from 'react'
 
 
 
-const Menu = ({closeAll, state, createProj, createTicket,createNews, user}) => {
+const Menu = ({addPodsos, closeAll, state, createProj, createTicket,createNews, user}) => {
 
 const [depForm, setDepForm] = useState(false)
 const exit = () => {
@@ -56,7 +56,9 @@ const plusMenuClick = (callback) => {
                     {user.permission!='user' && <StyledIn onClick={()=>plusMenuClick(()=>setDepForm(true))}>
                         Создать отдел
                     </StyledIn>}
-
+                    {user.permission!='user' && <StyledIn onClick={()=>plusMenuClick(addPodsos)}>
+                        Добавить смежника
+                    </StyledIn>}
             
         </MenuHead>
 

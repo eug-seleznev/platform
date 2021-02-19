@@ -148,11 +148,16 @@ const Layout = ({ histCurrent}) => {
         setCurrentElem ('CreateNews')
         setStatus(true)
     }
+    const addPodsos =()=>{
+        setCurrentTitle ('Добавить смежника')
+        setCurrentElem ('addPodsos')
+        setStatus(true)
+    }
     const closeWindow =()=>{
         setStatus(false)
     }
     return <div style={{zIndex: '9999'}}>
-        <Header createProj={createProj} createTicket={createTicket} createNews={createNews}/>
+        <Header createProj={createProj} addPodsos={addPodsos} createTicket={createTicket} createNews={createNews}/>
         <Sidebar/>
         <BackendMsg color={color} style={{opacity:`${msgTiming?1:0}`,zIndex:`${msgTiming?10000:-1000}`}}>
             {color==='red'?error:color==='green'?msg:''}

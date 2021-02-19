@@ -1,6 +1,9 @@
 .tr {
 	grid-template-columns: repeat(6,1fr);
 }
+.contractors {
+	grid-template-columns: repeat(4,1fr);
+}
 .trr {
 	grid-template-columns: repeat(6,1fr);
 }

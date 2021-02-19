@@ -32,8 +32,9 @@ const Viewer = ({project}) => {
       if (new_status[0] == "complete") {
                setLoad({ model: true, status: true, submit: false });
       } else {
-               console.log('next try')
-               setLoad({ status: !loaded.status, model: false, submit: true });
+          setTimeout(() => {
+            setLoad({ status: !loaded.status, model: false, submit: true });
+          }, 2000)            
       }
     }
     return () => dispatch(cleardData())

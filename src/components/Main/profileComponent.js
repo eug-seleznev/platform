@@ -1,11 +1,29 @@
 import { url } from '../utils/axios';
 import styles from '../../Styles/modules/components/profile.module.css'
-
+import {useSelector} from  'react-redux'
 import { Bold, Light } from '../../Styles/typography'
 import { ButtonText } from '../../Styles/buttons'
+import { useEffect, useState } from 'react';
 
 const ProfileComponent = ({user, history, change}) => {
-    
+  const me = useSelector(state => state.auth.user)
+  const [link,setLink] = useState ('')
+  useEffect(()=>{
+    if(user!=null&&user!=undefined&&user.report!=undefined) {
+       if (user.report.match(/https:/)){
+        setLink(user.report)
+      }
+     else {
+        setLink(`https://${user.report}`)
+     }
+    }
+   
+     
+  
+  },[user])
+  useEffect(()=>{
+    console.log(link)
+  },[link])
     return (
       <div className={styles.profile}>
         <img
@@ -56,7 +74,7 @@ const ProfileComponent = ({user, history, change}) => {
             {user.rocketchat && user.rocketchat}{" "}
           </a>
         </Light>
-        <div>{user.report}</div>
+        {change||me.permission==='admin'? <div>Отчетность: <a target="_blank" href={link}>ссылка</a></div>:''}
       </div>
     );
 }

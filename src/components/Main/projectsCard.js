@@ -10,7 +10,7 @@ import  MySprint from './mySprint'
 
 
 
-const ProjectsCard = ({project, sprints, history}) => {
+const ProjectsCard = ({project,permission, sprints, history}) => {
 
     const [filt, setFilt] = useState(null)
     const [daysLeft, setDaysLeft] = useState(null)
@@ -55,7 +55,16 @@ const ProjectsCard = ({project, sprints, history}) => {
                     <div className={styles.sprints}>
                       
                        
-                        {sprints!=undefined && filt !=null && filt.map((item,i)=>{
+                        {
+                            permission==='admin'&&project.sprints!=undefined
+                            ? 
+                            project.sprints.map((item, i)=>{
+                                    return(
+                                        <MySprint key={i} content={item}/>
+                                    )
+                            })
+                            :
+                        sprints!=undefined && filt !=null && filt.map((item,i)=>{
                             return(
                               <MySprint key={i} content={item}/>
                             )

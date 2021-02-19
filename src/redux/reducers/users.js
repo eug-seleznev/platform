@@ -1,5 +1,5 @@
 
-import { ALL_USERS, CHANGE_PERMISSION,PERM_RETURN,ONE_USER, CLEAR_ERROR, CLEAR_MSG, SEARCH_USER} from '../types'
+import { ALL_USERS, CHANGE_PERMISSION,PERM_RETURN,ONE_USER, CLEAR_ERROR, CLEAR_MSG, SEARCH_USER, ADD_CONTRACTOR, ALL_CONTRACTORS} from '../types'
 
 
 
@@ -11,6 +11,7 @@ const initialState = {
     userLoaded: false,
     error:'',
     searchResult:[],
+    contractors: []
 }
 
 export default function(state = initialState, action) {
@@ -23,6 +24,20 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 searchResult:payload,
+                
+            }
+        case ALL_CONTRACTORS: 
+            return {
+                ...state,
+                contractors: payload
+                
+              
+            }
+        case ADD_CONTRACTOR: 
+            return {
+                ...state,
+                msg:payload.msg,
+              
             }
         case ONE_USER:
             return {
