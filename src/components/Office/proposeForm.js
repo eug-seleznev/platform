@@ -57,14 +57,15 @@ const onSubmit = (e) => {
                 placeholder='Заголовок'
                 name='title'
                 value={title}
+                required
                 onChange={e => onChange(e)}/>
-
+               
    
     
 
             <textarea 
                 className={styles.texts}
-                
+                required
                 placeholder='Текст'
                 name='text'
                 value={text}
