@@ -7,9 +7,8 @@
 	height: 55vh;
 }
 .container {
-	/* overflow-y: scroll; */
-	/* height: 77vh */
-	
+	width: 50vw;
+	margin-left: 20vw;
 }
 .form__inside {
 	flex-direction: column;
@@ -24,12 +23,28 @@
 	width: 100%;
 	margin-top: 30px;
 }
+.place {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	
+}
+.search__user {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 0px;
+	font-size: 24px;
+	margin-bottom: 5px;
+}
 .small__title {
 	margin-top: 40px;
 	margin-bottom:5px;
 }
 .input__long{
-	width:100%
+	width:100%;
+	font-size: ;
 }
 .people__list {
 	width: 100vw;
@@ -42,20 +57,26 @@
 	'. wind .'
 
 }
+.users__list {
+	margin-top: 100px;
+}
 .window {
 	grid-area: wind;
 	background-color: white;
+}
+.add__people {
+	margin-top: 50px;
+	width: 70%;
 }
 .title {
 	
 	margin-bottom: 5px;
 }
 .searchMenu {
-	width:8%;
+	width:24%;
 	position:absolute;
-	border:1px solid black; 
-	height:auto;
-	background-color: white;
+	height:37px;
+	font-size: 24px;
 }
 .form input{
 	width:100%;
@@ -75,10 +96,10 @@
 	height: 30px;
 }
 .input__mid{
-	width:35%
+	width:45%
 }
 .input__short{
-	width:13%
+	width:23%
 }
 .checkbox__rocket{
 	width: 10px;
@@ -101,12 +122,22 @@
 	margin-top: auto;
 	
 } 
+@media (max-width:1000px) {
+	.container {
+	width: 80vw;
+	margin-left: 0vw;
+	}
+}
 @media(max-width:700px) {
+	.add__people {
+		margin-top: 50px;
+		width: 100%;
+	}
 	.container {
 		overflow-y: scroll;
 		overflow-x: hidden;
-		height: 78vh
-		
+		height: 78vh;
+		width: 100vw;
 	}
 	.buttons {
 	flex-direction: column;
@@ -144,6 +175,7 @@
 	width: 100%;
 	margin-top: 10px;
 }
+
 .form input{
 	width:95%;
 	border: 0.6px solid #717171;

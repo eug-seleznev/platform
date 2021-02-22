@@ -16,7 +16,11 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
     const searchResult = useSelector(state => state.users.searchResult)
     const [checked, setChecked] = useState (false)
     const [menu, setMenu] = useState (false)
+    const [trick, setTrick] = useState (false)
+    const [step, setStep] = useState (1)
     const [idList, setIdList] = useState (null)
+    const [names] = useState ([])
+    const [namesList, setNamesList] = useState (null)
     const [formData, setFormData ] = useState({
         
         title: '',   
@@ -52,15 +56,25 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
        
       
    },[idList])
+      useEffect(()=>{
+        if(namesList!=null&&!names.includes(idList)) {
+          names.push(namesList)
+          console.log(names)
+          setTrick(!trick)
+        }
+    },[namesList])
+   const nextStep =(step)=>{
+     setStep(step)
+   }
     const onChange = e => {
         e.preventDefault(); 
         console.log(e.target.checked)
         setFormData({ ...formData, [e.target.name]: e.target.value });
      }
      
-     const searchMenu = (e) => {
-setMenu(true)
-      
+     const addUser = (user) => {
+      setIdList(user._id)
+      setNamesList(user.fullname)
  }
      const PeopleList = (e) => {
 
@@ -106,181 +120,272 @@ setMenu(true)
 
     return (
       <div className={style.container}>
-        <form className={style.form} onSubmit={onSubmit}>
-          <div>
-            <div className={style.row}>
-              <div className={style.input__long}>
-                <Thin className={style.title}>Название</Thin>
-                <input
-                  className={style.input__long}
-                  type="text"
-                  name="title"
-                  required
-                  value={title}
-                  onChange={(e) => onChange(e)}
-                />
-              </div>
-            </div>
-            <div className={style.row}>
-              <div className={style.input__short}>
-                <Thin className={style.title}>Город</Thin>
-                <input
-                  required
-                  type="text"
-                  name="city"
-                  value={city}
-                  onChange={(e) => onChange(e)}
-                />
-              </div>
-              {/* <div className={style.input__short}>
-                  <Thin className={style.title}>Добавить сотрудников</Thin>
-                  <input placeholder='введите имя'  onChange={(e) => PeopleList(e)}/>
-                  <div className={style.searchMenu} style={{display:`${menu?'block':'none'}` }}>
-                    {searchResult.map((user,i)=>{
-                      
-                      return (
-                        <div onClick={()=>setIdList(user._id)} key={i}>{user.fullname}</div>
-                      )
-                    })}
-                  </div>
-                </div> */}
-              <div className={style.input__short}>
-                <Thin className={style.title}>Начало</Thin>
-                <input
-                  type="date"
-                  name="dateStart"
-                  value={dateStart}
-                  onChange={(e) => onChange(e)}
-                />
-              </div>
-
-              <div className={style.input__short}>
-                <Thin className={style.title}>Дедлайн</Thin>
-                <input
-                  type="date"
-                  name="dateFinish"
-                  value={dateFinish}
-                  onChange={(e) => onChange(e)}
-                />
-              </div>
-              <div className={style.input__short}>
-                <Thin className={style.title}>Фаза</Thin>
-                <select
-                  defaultValue="Концепт"
-                  name="satge"
-                  onChange={(e) => onChange(e)}
-                  className={style.select}
-                >
-                  <option value="Концепт">Концепт</option>
-                  <option value="Эскиз">Эскиз</option>
-                  <option value="Проект">Проект</option>
-                  <option value="Рабочая">Рабочая</option>
-                </select>
-              </div>
-            </div>
-            <div className={style.row}>
-              <div className={style.input__rocket}>
-                <input
-                  type="checkbox"
-                  style={{ width: "30px", height: "30px", marginRight: "20px" }}
-                  name="rcheck"
-                  defaultValue={false}
-                  onClick={onChangeCheckbox}
-                />
-                <Thin className={style.title__rocket}>
-                  Создать комнату в rocket chat
-                </Thin>
-              </div>
-              {/* <div className={style.input__short}>
-                <Thin className={style.title}>Раздел</Thin>
-                <input
-                required
-                  type="text"
-                  name="par"
-                  value={par}
-                  onChange={(e) => onChange(e)}
-                />
-              </div> */}
-              <div className={style.input__short}>
-                <Thin className={style.title}>Заказчик</Thin>
-                <input
-                  type="text"
-                  name="customer"
-                  value={customer}
-                  onChange={(e) => onChange(e)}
-                />
-              </div>
-              <div className={style.input__short}>
-                <Thin className={style.title}>Тип проекта</Thin>
-                <select
-                  defaultValue="Концепт"
-                  name="type"
-                  onChange={(e) => onChange(e)}
-                  className={style.select}
-                >
-                  <option value="ЖК">ЖК</option>
-                  <option value="Общественное пространство">
-                    Общественное пространство
-                  </option>
-                  <option value="Частный дом">Частный дом</option>
-                  <option value="Визуализации">Визуализации</option>
-                  <option value="Интерьер">Интерьер</option>
-                  <option value="Другое">Другое</option>
-                </select>
-              </div>
-            </div>
-            <div className={style.row}>
-              <div className={style.input__long}>
-                <Thin className={style.title}>Описание</Thin>
-                <textarea
-                  className={style.input__long}
-                  type="text"
-                  name="about"
-                  value={about}
-                  onChange={(e) => onChange(e)}
-                />
-              </div>
-            </div>
-          </div>
-          {/* <ModalContainer style={{display:`${pop?'block':'none'}`}}>
-                <div className={style.people__list}>
-                  <div className={style.window}>
-                    {!pop?<div>123123</div>: userList.map((el,i)=>{
-                      return(
-                        <div style={{display:'flex'}}>
-                          <input type="checkbox"style={{width:'20px',marginRight:'20px'}} name="vehicle1"/>
-                          <Bold style={{marginTop:'10px'}} key={i}>
-                            {el.name}
-                          </Bold>
-                        </div>
-                        
-                      )
-                      
-                    })}
-                  </div>
-                </div>
-              </ModalContainer> */}
-          <div className={style.buttons}>
-            <CancelButton
-              grey
-              padd={"70px"}
-              style={{ marginTop: "5px" }}
-              onClick={closeWindow}
-            >
-              {" "}
-              Отмена
-            </CancelButton>
-            <Button
-              fontSize={"16px"}
-              style={{ marginTop: "5px" }}
-              padd={"20px"}
-              type="submit"
-            >
-              {" "}
-              Создать новый проект
-            </Button>
-          </div>
-        </form>
+        <Bold size='32'>{step===1? 'Шаг 1: Основная информация о проекте':step===2?'Шаг 2: Добавление людей в проект (опционально)':''}</Bold>
+        {step===1?(
+           <form className={style.form} onSubmit={onSubmit}>
+             <div>
+               <div className={style.row}>
+                 <div className={style.input__mid}>
+                   <Thin className={style.title}>Название</Thin>
+                   <input
+                     className={style.input__long}
+                     type="text"
+                     name="title"
+                     required
+                     value={title}
+                     onChange={(e) => onChange(e)}
+                   />
+                   
+                 </div>
+                 <div className={style.input__mid}>
+                   <Thin className={style.title}>Официальное название</Thin>
+                   <input
+                     className={style.input__long}
+                     // type="text"
+                     // name="title"
+                     
+                     value={title}
+                     // onChange={(e) => onChange(e)}
+                   />
+                   
+                 </div>
+                 
+               </div>
+               <div className={style.row}>
+                
+                
+               
+                   <div className={style.input__short}>
+                     <Thin className={style.title}>Начало</Thin>
+                     <input
+                       type="date"
+                       name="dateStart"
+                       value={dateStart}
+                       onChange={(e) => onChange(e)}
+                     />
+                   </div>
+                   <div className={style.input__short}>
+                     <Thin className={style.title}>Город</Thin>
+                     <input
+                       required
+                       type="text"
+                       name="city"
+                       value={city}
+                       onChange={(e) => onChange(e)}
+                     />
+                   </div>
+                   <div className={style.input__short}>
+                     <Thin className={style.title}>Дедлайн</Thin>
+                     <input
+                       type="date"
+                       name="dateFinish"
+                       value={dateFinish}
+                       onChange={(e) => onChange(e)}
+                     />
+                  
+                 </div>
+   
+                 
+               </div>
+               <div className={style.row}>
+                 <div className={style.input__mid}>
+                   <Thin className={style.title}>Фаза</Thin>
+                   <select
+                     defaultValue="Концепт"
+                     name="satge"
+                     onChange={(e) => onChange(e)}
+                     className={style.select}
+                   >
+                     <option value="Концепт">Концепт</option>
+                     <option value="Эскиз">Эскиз</option>
+                     <option value="Проект">Проект</option>
+                     <option value="Рабочая">Рабочая</option>
+                   </select>
+                 </div>
+                 <div className={style.input__rocket}>
+                   <input
+                     type="checkbox"
+                     style={{ width: "30px", height: "30px", marginRight: "20px" }}
+                     name="rcheck"
+                     defaultValue={false}
+                     onClick={onChangeCheckbox}
+                   />
+                   <Thin className={style.title__rocket}>
+                     Создать комнату в rocket chat
+                   </Thin>
+                 </div>
+                 {/* <div className={style.input__short}>
+                   <Thin className={style.title}>Раздел</Thin>
+                   <input
+                   required
+                     type="text"
+                     name="par"
+                     value={par}
+                     onChange={(e) => onChange(e)}
+                   />
+                 </div> */}
+               </div>
+               <div className={style.row}>
+                 <div className={style.input__mid}>
+                   <Thin className={style.title}>Заказчик</Thin>
+                   <input
+                     type="text"
+                     name="customer"
+                     value={customer}
+                     onChange={(e) => onChange(e)}
+                   />
+                 </div>
+                 <div className={style.input__mid}>
+                   <Thin className={style.title}>Тип проекта</Thin>
+                   <select
+                     defaultValue="Концепт"
+                     name="type"
+                     onChange={(e) => onChange(e)}
+                     className={style.select}
+                   >
+                     <option value="ЖК">ЖК</option>
+                     <option value="Общественное пространство">
+                       Общественное пространство
+                     </option>
+                     <option value="Частный дом">Частный дом</option>
+                     <option value="Визуализации">Визуализации</option>
+                     <option value="Интерьер">Интерьер</option>
+                     <option value="Другое">Другое</option>
+                   </select>
+                 </div>
+               
+               </div>
+               <div className={style.row}>
+                 <div className={style.input__long}>
+                   <Thin className={style.title}>Описание</Thin>
+                   <textarea
+                     className={style.input__long}
+                     type="text"
+                     name="about"
+                     value={about}
+                     onChange={(e) => onChange(e)}
+                   />
+                 </div>
+               </div>
+               <div className={style.row}>
+                 <div className={style.input__short}>
+                   <Thin className={style.title}>Ссылка на бюджет</Thin>
+                   <input
+                     className={style.input__long}
+                     // type="text"
+                     // name="title"
+                     // required
+                     value={title}
+                     // onChange={(e) => onChange(e)}
+                   />
+                   
+                 </div>
+                 <div className={style.input__short}>
+                   <Thin className={style.title}>Ссылка на календарный график</Thin>
+                   <input
+                     className={style.input__long}
+                     // type="text"
+                     // name="title"
+                     
+                     value={title}
+                     // onChange={(e) => onChange(e)}
+                   />
+                   
+                 </div>
+                 <div className={style.input__short}>
+                   <Thin className={style.title}>Ссылка на хранилице для заказчика</Thin>
+                   <input
+                     className={style.input__long}
+                     // type="text"
+                     // name="title"
+                     
+                     value={title}
+                     // onChange={(e) => onChange(e)}
+                   />
+                   
+                 </div>
+               </div>
+             </div>
+             <div className={style.buttons}>
+               <CancelButton
+                 grey
+                 padd={"70px"}
+                 style={{ marginTop: "5px" }}
+                 onClick={closeWindow}
+               >
+                 {" "}
+                 Отмена
+               </CancelButton>
+               <CancelButton
+                 fontSize={"16px"}
+                 style={{ marginTop: "5px" }}
+                 padd={"20px"}
+                 onClick={()=>nextStep(2)}
+               >
+                 {" "}
+                 Перейти к следующему шагу
+               </CancelButton>
+             </div>
+             
+           </form>
+        ):step===2?<div>
+           <div className={style.add__people}>
+                     <Thin size='28' className={style.title}>Поиск сотрудников</Thin>
+                     <input placeholder='введите имя' className={style.input__long} onChange={(e) => PeopleList(e)}/>
+                     <div className={style.searchMenu} style={{display:`${menu?'block':'none'}` }}>
+                       {searchResult.map((user,i)=>{
+                         
+                         return (
+                           <div className={style.search__user}>
+                             <div  key={i}>{user.fullname}</div>
+                             <Button grey style={{display:`${formData.userid.includes(user._id)||idList===user._id?'none':'block'}`}} onClick={()=>addUser(user)}>Добавить</Button>
+                           </div>
+                           
+                         )
+                       })}
+                     </div>
+                     
+                     <div className={style.users__list} >
+                       <Thin size='28'  className={style.title}>Список сотрудников для добавления</Thin>
+                       {names.map((user,i)=>{
+                         
+                         return (
+                           <div key={i} className={style.search__user}>
+                             <div >{user}</div>
+                             <div className={style.place}>
+                               <Thin size='24'>Должность:</Thin>
+                               <input className={style.input__mid} style={{height:'30px'}} placeholder='введите должность'></input>
+                             </div>
+                             {/* <Button grey style={{display:`${formData.userid.includes(user._id)||idList===user._id?'none':'block'}`}} onClick={()=>addUser(user)}>Добавить</Button> */}
+                           </div>
+                           
+                         )
+                       })}
+                     </div>
+                     
+                   </div> 
+                      <div className={style.buttons}>
+                        <CancelButton
+                          grey
+                          padd={"70px"}
+                          style={{ marginTop: "25px" }}
+                          onClick={()=>nextStep(1)}
+                        >
+                          {" "}
+                          Предыдущий шаг
+                        </CancelButton>
+                        <Button
+                          fontSize={"16px"}
+                          style={{ marginTop: "25px" }}
+                          padd={"20px"}
+                          type="submit"
+                        >
+                          {" "}
+                          Создать новый проект
+                        </Button>
+                      </div>
+        </div>:''}
+       
       </div>
     );
 }
