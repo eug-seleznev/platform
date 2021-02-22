@@ -40,7 +40,8 @@ const Projects = ({history}) => {
         setOrder(!orderSort)
         dispatch(sortProjects({query, orderSort}))
     }
-    
+
+
 
     return (
       <div className="projects__grid">
@@ -63,13 +64,14 @@ const Projects = ({history}) => {
                 Дедлайн &#8597;
               </Td>
               <Td className={style.turn__off}>Статус</Td>
-              <Td className={style.turn__off}>Шифр</Td>
+              <Td className={style.turn__off}>Тип проекта</Td>
               <Td>Спринты</Td>
             </Tr>
 
             {projects
               .filter((project) => !project.status)
               .map((project, index) => {
+              
                 return (
                   <Tr
                     className={style.tr}

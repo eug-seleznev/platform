@@ -19,12 +19,12 @@ import { allUsers } from '../../redux/actions/user';
 import { loadUser } from '../../redux/actions/auth';
 import ProjectsCard from '../Main/projectsCard';
 
-const DepartmentCard = ({ department, user, history, users}) => {
+const DepartmentCard = ({itsAllDepsPage, department, user, history, users}) => {
 
 
 
 const dispatch = useDispatch()
-const content = user.division
+const content = user.division!==null?user.division:department
 const member = user.division && user.division.divname==content.divname
 // const usersArr = users.filter(item => item.division? item.division.divname== content.divname : false)
 const usersArr = content.members
@@ -33,16 +33,9 @@ const usersArr = content.members
 let projArray = []
 const [newArr, setNewArr] = useState([])
 const [lastArr, setLastArr] = useState(null)
+const [pageStatus, setPageStatus] =useState(false)
 const [showConfirm, setShowConfirm] = useState(false)
-
-
-    // const join = () => {
-    //     dispatch(joinDepartment(content.divname))
-    //     setTimeout(() => {
-    //     dispatch(allUsers())
-    //     dispatch(loadUser())
-    // }, 100);
-    // }
+  
     useEffect(()=>{
         if(usersArr!=undefined) {
             usersArr.concat(user.projects);
@@ -70,9 +63,7 @@ const [showConfirm, setShowConfirm] = useState(false)
     useEffect(()=>{
         setLastArr (newArr[newArr.length-1])
     },[newArr])
-    useEffect(()=>{
-    //    console.log(lastArr) 
-    },[lastArr])
+   
     
     useEffect(()=>{
         if (department!=null){
@@ -85,7 +76,9 @@ const [showConfirm, setShowConfirm] = useState(false)
            
         
     },[department])
-    
+    useEffect(()=>{
+        setPageStatus(itsAllDepsPage)
+    },[itsAllDepsPage])
     useEffect(()=>{
         if(department!=null) {
      
@@ -97,18 +90,22 @@ const [showConfirm, setShowConfirm] = useState(false)
         dispatch(deleteDepartment(content.divname))
         setShowConfirm(false)
         setTimeout(() => {
-            dispatch(allUsers())
+            dispatch(allUsers('name', true))
             dispatch(loadUser())
         }, 100);
     }
-
+    const departStatus =()=>{
+        if(itsAllDepsPage) {
+            setPageStatus(!pageStatus)
+        }
+    }
     return(
-        <div className={styles.container}>
-            <Bold className={styles.title} size='30'>{content.divname}</Bold>
-            <Bold className={styles.joinBtn} size='16px' color='#3F496C' onClick={()=>setShowConfirm(true)}>Выйти из отдела</Bold>
+        <div className={styles.container} style={{height: `${pageStatus?'60px':'auto'}`,overflowY: `${pageStatus?'hidden':'visible'}`}}>
+            <Bold className={styles.title} title={pageStatus?'Открыть отдел':''} onClick={()=>departStatus()} style={{cursor: `${itsAllDepsPage?'pointer':'default'}`}} size='30'>{department!==null?department.divname:''}</Bold>
+            <Bold className={styles.joinBtn} style={{display:`${content.divname!==department.divname||user.division===null?'none':'grid'}`}} size='16px' color='#3F496C' onClick={()=>setShowConfirm(true)}>Выйти из отдела</Bold>
             <div className={styles.members}>
               
-
+            <div style={{display:`${department.members.length!==0?'none':'block'}`}}>В этом отделе нет сотрудников</div>
             {department==null?'':department.members.map((el,i)=>{
                 // console.log(el.projects)
                 return(
@@ -120,6 +117,7 @@ const [showConfirm, setShowConfirm] = useState(false)
             </div>
             <Bold className={styles.activeTitle}  size='30'>Проекты отдела</Bold>
             <div className={styles.activeProjects}>
+            <div style={{display:`${lastArr!==null&&lastArr!==undefined&&lastArr.length!==0?'none':'block'}`}}>У этого отдела нет проектов</div>
                 {lastArr===null||lastArr===undefined?'':lastArr.map((el,i)=>{
                    
                     // if(el!=undefined){

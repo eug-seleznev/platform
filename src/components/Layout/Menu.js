@@ -49,9 +49,10 @@ const plusMenuClick = (callback) => {
                         Добавить новость
                     </StyledIn>}
 
-                    {user.permission!='user' && <StyledIn onClick={()=>plusMenuClick(createProj)}>
+                    {user.permission!='user' &&  <StyledLink className='menu__nav' to='/admin/newproject'>
+
                         Создать проект
-                    </StyledIn>}
+                    </StyledLink>}
 
                     {user.permission!='user' && <StyledIn onClick={()=>plusMenuClick(()=>setDepForm(true))}>
                         Создать отдел

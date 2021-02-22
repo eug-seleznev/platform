@@ -7,7 +7,7 @@ const initialState = {
     findDep: null,
     loaded: false,
     reload: false,
-
+    
     msg:'',
     error: '',
     

@@ -33,7 +33,7 @@ const Project = ({match, history}) => {
     useEffect(() => {
         if(loaded){
             dispatch(allSprints(project.crypt))
-            dispatch(Oauth(project.crypt)); //3d viewer  oauth token
+            // dispatch(Oauth(project.crypt)); //3d viewer  oauth token
         }
     }, [loaded])
     return (

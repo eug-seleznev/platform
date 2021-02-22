@@ -133,10 +133,10 @@ const Layout = ({ histCurrent}) => {
         }
     },[msg])
     const createProj =()=>{
-   
-        setCurrentTitle ('Создание нового проекта')
-        setCurrentElem ('CreateProject')
-        setStatus(true)
+        histCurrent.replace('/admin/newproject')
+        // setCurrentTitle ('Создание нового проекта')
+        // setCurrentElem ('CreateProject')
+        // setStatus(true)
     }
     const createTicket =()=>{
         setCurrentTitle ('Проблемы с компьютером')

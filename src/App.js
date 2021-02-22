@@ -38,9 +38,10 @@ import News from './components/News';
 import {  setAuthToken } from './components/utils/axios';
 import Helper from './components/Viewer/helper';
 
-
+import CreateProject from './components/Projects/newProject';
 import { Container, LoginContainer } from "../src/Styles/common";
 import Contractors from './components/Superadmin/contractors';
+import AllDepartments from './components/Department/allDepartments'
 
 
 
@@ -107,14 +108,16 @@ const App = () => {
               </Switch>
               <Route exact path="/admin/editproj" component={ProjectsEdit} />
               <Route exact path="/admin/editproj/:id" component={OneProjEdit} />
-
+              <Route exact path="/admin/newproject" component={CreateProject} />
               {/* users */}
               <Route exact path="/users" component={Users} />
               <Route exact path="/users/me" component={MyProfile} />
               <Route exact path="/users/:id" component={Employe} />
               <Route exact path="/edit" component={Edit} />
               <Route exact path="/news" component={News} />
+              {/* depatrments */}
               <Route exact path="/department" component={Department} />
+              <Route exact path="/departments/all" component={AllDepartments} />
               <Route exact path="/viewer" component={Helper} />
               <Route exact path="/contractors" component={Contractors} />
             </Container>
