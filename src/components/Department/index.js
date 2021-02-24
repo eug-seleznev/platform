@@ -1,7 +1,7 @@
 import styles from '../../Styles/modules/department/index.module.css'
 import Profile from '../Main/profileComponent'
 import {useSelector, useDispatch} from 'react-redux'
-import { allDepartments} from '../../redux/actions/department'
+import { allDepartments, findDepartment} from '../../redux/actions/department'
 
 import { useEffect, useState } from 'react'
 import DepartmentCard from './departmentCard'
@@ -14,17 +14,24 @@ const Department = ({history}) => {
     const user = useSelector(state => state.auth.user)
     const users = useSelector(state => state.users.users)
     const department = useSelector(state => state.departments.findDep)
-
+    const allDeps = useSelector(state => state.departments.departments)
  useEffect(()=>{
     dispatch(allDepartments())
     dispatch(allUsers('name', true))
+    
  },[])
-
+useEffect(()=>{
+    if(user!==null&&user!==undefined) {
+        if(user.division!==null) {
+            dispatch(findDepartment(user.division.divname))
+        }
+    }
+},[user])
     return(
         <div className={styles.container}>
             <Profile user={user} history={history}/>
 
-        {!user.division ? <Regular size='16'>Вы не состоите ни в одном отделе, вступить можно на <ButtonText fontSize='18px' onClick={()=>history.replace('/edit')}>странице редактирования профиля</ButtonText> </Regular> :
+        {user.division===null||department===null? <Regular size='16'>Вы не состоите ни в одном отделе, вступить можно на <ButtonText fontSize='18px' onClick={()=>history.replace('/edit')}>странице редактирования профиля</ButtonText> </Regular> :
 
             <DepartmentCard itsAllDepsPage={false} department={department} user={user} history={history} users={users}/>
   

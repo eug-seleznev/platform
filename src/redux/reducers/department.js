@@ -1,4 +1,4 @@
-import { NEW_DEPARTMENT, ALL_DEPARTMENTS, FIND_DEPARTMENT, JOIN_DEPARTMENT, LEAVE_DEPARTMENT, DEPARTMENT_FAIL} from "../types";
+import { NEW_DEPARTMENT, ALL_DEPARTMENTS, FIND_DEPARTMENT, JOIN_DEPARTMENT, LEAVE_DEPARTMENT, DEPARTMENT_FAIL,CLEAR_DEPS} from "../types";
 
 
 
@@ -30,7 +30,11 @@ export default function(state = initialState, action) {
                     
                     error: ''
                 }
-            
+            case CLEAR_DEPS:
+                    return {
+                        ...state,
+                        findDep:null
+                    }
         
             case ALL_DEPARTMENTS:
                 return {
@@ -67,6 +71,7 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     msg: payload,
+                    findDep: null,
                     reload: !state.reload,
 
 

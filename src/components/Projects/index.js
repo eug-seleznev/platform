@@ -64,7 +64,8 @@ const Projects = ({history}) => {
                 Дедлайн &#8597;
               </Td>
               <Td className={style.turn__off}>Статус</Td>
-              <Td className={style.turn__off}>Тип проекта</Td>
+              <Td className={style.turn__off}
+              onClick={() => sortFunction("type")}>Тип проекта &#8597;</Td>
               <Td>Спринты</Td>
             </Tr>
 
@@ -94,7 +95,7 @@ const Projects = ({history}) => {
                     <Td className={style.turn__off}>
                       {project.status ? <p>Завершен</p> : <p>В работе</p>}
                     </Td>
-                    <Td className={style.turn__off}>{project.crypter}</Td>
+                    <Td className={style.turn__off}>{project.type}</Td>
                     <Td>
                       {project.sprints.filter((sprint) => sprint.status).length}
                       /{project.sprints.length}

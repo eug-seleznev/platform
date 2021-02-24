@@ -44,7 +44,7 @@ const [showConfirm, setShowConfirm] = useState(false)
         
     },[usersArr])
     useEffect(()=>{
-        if(content!=undefined) {
+        if(content!=undefined&&content!==null) {
            dispatch(findDepartment(content.divname))
            
         }
@@ -84,7 +84,6 @@ const [showConfirm, setShowConfirm] = useState(false)
      
            
         }
-        
     },[department])
     const deleteDep = () => {
         dispatch(deleteDepartment(content.divname))
@@ -92,6 +91,7 @@ const [showConfirm, setShowConfirm] = useState(false)
         setTimeout(() => {
             dispatch(allUsers('name', true))
             dispatch(loadUser())
+           
         }, 100);
     }
     const departStatus =()=>{
@@ -100,29 +100,32 @@ const [showConfirm, setShowConfirm] = useState(false)
         }
     }
     return(
-        <div className={styles.container} style={{height: `${pageStatus?'60px':'auto'}`,overflowY: `${pageStatus?'hidden':'visible'}`}}>
+        <div>
+       <div className={styles.container} style={{height: `${pageStatus?'60px':'auto'}`,overflowY: `${pageStatus?'hidden':'visible'}`}}>
             <Bold className={styles.title} title={pageStatus?'Открыть отдел':''} onClick={()=>departStatus()} style={{cursor: `${itsAllDepsPage?'pointer':'default'}`}} size='30'>{department!==null?department.divname:''}</Bold>
-            <Bold className={styles.joinBtn} style={{display:`${content.divname!==department.divname||user.division===null?'none':'grid'}`}} size='16px' color='#3F496C' onClick={()=>setShowConfirm(true)}>Выйти из отдела</Bold>
+            <Bold className={styles.joinBtn} style={{display:`${itsAllDepsPage?'none':'grid'}`}} size='16px' color='#3F496C' onClick={()=>setShowConfirm(true)}>Выйти из отдела</Bold>
             <div className={styles.members}>
-              
-            <div style={{display:`${department.members.length!==0?'none':'block'}`}}>В этом отделе нет сотрудников</div>
+            {department!==null?<div style={{display:`${department.members.length!==0?'none':'block'}`}}>В этом отделе нет сотрудников</div>:''}
+           
             {department==null?'':department.members.map((el,i)=>{
-                // console.log(el.projects)
-                return(
-                    
-                    <UserCard key={i} user={el} history={history}/>
+               
+                        return(
+                            
+                            <UserCard key={i} user={el} history={history}/>
 
-                )
-            })} 
+                        )
+                    }) 
+                }
+                
             </div>
             <Bold className={styles.activeTitle}  size='30'>Проекты отдела</Bold>
             <div className={styles.activeProjects}>
             <div style={{display:`${lastArr!==null&&lastArr!==undefined&&lastArr.length!==0?'none':'block'}`}}>У этого отдела нет проектов</div>
                 {lastArr===null||lastArr===undefined?'':lastArr.map((el,i)=>{
-                   
+                    
                     // if(el!=undefined){
-                       return(
-                       
+                        return(
+                        
                         <ProjectsCard key={i} project={el} history={history} sprints={user.sprints}/>
                     ) 
                     
@@ -132,10 +135,13 @@ const [showConfirm, setShowConfirm] = useState(false)
             </div>
 
 
-             {showConfirm && <Confirm accept={()=>deleteDep()} decline={()=>setShowConfirm(false)} title={content.divname}/> }  
+            {showConfirm && <Confirm accept={()=>deleteDep()} decline={()=>setShowConfirm(false)} title={content.divname}/> }  
 
 
-        </div>
+            </div>
+        
+       </div>
+        
     )
 }
 export default DepartmentCard

@@ -49,8 +49,9 @@ const adminka = useRef(null)
                     <p>Отдел</p>
             </SidebarLink>
             <SidebarLink to='/contractors' className="nav-link" > 
-                    <img src='/sidebarIcon.png' title="Смежники"/>
-                    <p>Смежники</p>
+                    <img src='/sidebarIcon.png' title="Субподрядчики"/>
+                    <p>Субподряд
+                            чики</p>
             </SidebarLink>
             {user.permission==='admin'?<SidebarLink to='/departments/all' className="nav-link" > 
                     <img src='/sidebarIcon.png' title="Все отделы"/>

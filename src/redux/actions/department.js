@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { NEW_DEPARTMENT, ALL_DEPARTMENTS, FIND_DEPARTMENT, JOIN_DEPARTMENT, LEAVE_DEPARTMENT, DEPARTMENT_FAIL} from "../types";
+import { NEW_DEPARTMENT, ALL_DEPARTMENTS, FIND_DEPARTMENT, JOIN_DEPARTMENT, LEAVE_DEPARTMENT, DEPARTMENT_FAIL,CLEAR_DEPS} from "../types";
 
 
 
@@ -29,7 +29,13 @@ export const newDepartment = (formData) => async dispatch  => {
     }
 
 }
+export const clearDeps = () => async dispatch  => {
+  
+        dispatch({
+            type: CLEAR_DEPS,
+        })
 
+}
 export const allDepartments = () => async dispatch  => {
     try {
 

@@ -12,7 +12,7 @@ const Confirm = ({accept, decline, title}) => {
                 
                     <div>Вы уверенны что хотите покинуть отдел "{title}"</div>
                     <Button  type="submit" onClick={accept}>Покинуть отдел</Button>
-                    <Button  type="submit" onClick={decline}>Отмена</Button>
+                    <Button grey type="submit" onClick={decline}>Отмена</Button>
                 
             </Card>
     </div>

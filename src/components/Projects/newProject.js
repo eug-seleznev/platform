@@ -9,7 +9,7 @@ import { Button, CancelButton } from '../../Styles/buttons';
 import { Bold, H1, H3, Light, Regular, Thin} from '../../Styles/typography'
 import { allUsers, searchUser } from '../../redux/actions/user';
 
-const ProjectNew = ({histCurrent,closeWindow}) => {
+const ProjectNew = ({history,closeWindow}) => {
     const dispatch = useDispatch();
     const project = useSelector(state => state.projects.project)
     const userList = useSelector(state => state.users.users)
@@ -18,9 +18,14 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
     const [menu, setMenu] = useState (false)
     const [trick, setTrick] = useState (false)
     const [step, setStep] = useState (1)
-    const [idList, setIdList] = useState (null)
-    const [names] = useState ([])
-    const [namesList, setNamesList] = useState (null)
+    const [idCurrent, setIdCurrent] = useState (null)
+    const [currentPos, setCurrentPos] = useState (null)
+    const [userStage, setUserStage] = useState (1)
+    const [idList,setIdList] = useState ([])
+    const [nameCurrent, setNameCurrent] = useState (null)
+    const [workerDataList, setWorkerDataList] = useState ({
+      task:'работать'
+    })
     const [formData, setFormData ] = useState({
         
         title: '',   
@@ -33,13 +38,34 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
         customer: '',
         about: '',
         rcheck: false,
-        userid: [],
+        userid2: [],
+        offTitle:'',
+        budget:'',
+        schedule:'',
+        cusStorage:''
       });
    
 
 
-      const { title, dateStart, dateFinish, city, type, stage, customer, about, par, rcheck} = formData;
-
+      const { title, dateStart, dateFinish, city, type, stage, customer, about, par, rcheck, offTitle, budget, schedule,cusStorage,userid2 } = formData;
+      const posCurrent =(e)=>{
+        setCurrentPos (e.target.value)
+        setWorkerDataList ({ ...workerDataList, position:e.target.value})
+        console.log (workerDataList)
+      }
+      const pushUserToForm =(e)=>{
+          formData.userid2.push(workerDataList)
+          setWorkerDataList({task:'работать'})
+          setNameCurrent(null)
+          setCurrentPos('')
+          setUserStage(1)
+      }
+      const returnToSearch =()=>{
+        setUserStage(1)
+        idList.pop()
+        setIdCurrent (null)
+        console.log(idList)
+      }
       const onChangeCheckbox = () => {
         setChecked(!checked)
      }
@@ -48,33 +74,34 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
         console.log(checked)
      },[checked])
      useEffect(()=>{
-       
-       if(idList!=null&&!formData.userid.includes(idList)) {
-          formData.userid.push(idList)
-          console.log(formData.userid)
-       }
-       
-      
-   },[idList])
-      useEffect(()=>{
-        if(namesList!=null&&!names.includes(idList)) {
-          names.push(namesList)
-          console.log(names)
-          setTrick(!trick)
-        }
-    },[namesList])
+      setWorkerDataList ({ ...workerDataList, user:idCurrent, fullname:nameCurrent})
+      if(idCurrent!==null) {
+         idList.push(idCurrent)
+          console.log (idList)
+      }
+     
+   },[idCurrent])
+
+    //   useEffect(()=>{
+    //     if(nameCurrent!=null&&!names.includes(idCurrent)) {
+    //       names.push(nameCurrent)
+    //       console.log(names)
+    //       setTrick(!trick)
+    //     }
+    // },[nameCurrent])
    const nextStep =(step)=>{
      setStep(step)
    }
     const onChange = e => {
         e.preventDefault(); 
-        console.log(e.target.checked)
+       
         setFormData({ ...formData, [e.target.name]: e.target.value });
      }
      
      const addUser = (user) => {
-      setIdList(user._id)
-      setNamesList(user.fullname)
+      setIdCurrent(user._id)
+      setNameCurrent(user.fullname)
+      setUserStage(2)
  }
      const PeopleList = (e) => {
 
@@ -95,6 +122,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
      const onSubmit = async e => {
         e.preventDefault();
         dispatch(newProject(formData))
+        setIdList([])
         setTimeout(() =>
         setChecked (false),
         setFormData({
@@ -102,16 +130,22 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
           dateStart: '', 
           city: '',  
           type: '',
-          par:'ХХ',
           stage: 'Концепт',
+          par:'ХХ',
           dateFinish: '',
           customer: '',
           about: '',
           rcheck: false,
-          userid: [],
+          userid2: [],
+          offTitle:'',
+          budget:'',
+          schedule:'',
+          cusStorage:''
         }),50) 
-        closeWindow()
-        // setTimeout(() => Redirect(),100) 
+       
+        setTimeout(() => {
+          history.replace('./../projects')
+        },100) 
         
          
     
@@ -121,8 +155,9 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
     return (
       <div className={style.container}>
         <Bold size='32'>{step===1? 'Шаг 1: Основная информация о проекте':step===2?'Шаг 2: Добавление людей в проект (опционально)':''}</Bold>
+        <form className={style.form} onSubmit={onSubmit}>
         {step===1?(
-           <form className={style.form} onSubmit={onSubmit}>
+           <div>  
              <div>
                <div className={style.row}>
                  <div className={style.input__mid}>
@@ -141,11 +176,11 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                    <Thin className={style.title}>Официальное название</Thin>
                    <input
                      className={style.input__long}
-                     // type="text"
-                     // name="title"
+                     type="text"
+                     name="offTitle"
                      
-                     value={title}
-                     // onChange={(e) => onChange(e)}
+                     value={offTitle}
+                     onChange={(e) => onChange(e)}
                    />
                    
                  </div>
@@ -192,7 +227,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                    <Thin className={style.title}>Фаза</Thin>
                    <select
                      defaultValue="Концепт"
-                     name="satge"
+                     name="stage"
                      onChange={(e) => onChange(e)}
                      className={style.select}
                    >
@@ -214,16 +249,6 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                      Создать комнату в rocket chat
                    </Thin>
                  </div>
-                 {/* <div className={style.input__short}>
-                   <Thin className={style.title}>Раздел</Thin>
-                   <input
-                   required
-                     type="text"
-                     name="par"
-                     value={par}
-                     onChange={(e) => onChange(e)}
-                   />
-                 </div> */}
                </div>
                <div className={style.row}>
                  <div className={style.input__mid}>
@@ -272,11 +297,11 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                    <Thin className={style.title}>Ссылка на бюджет</Thin>
                    <input
                      className={style.input__long}
-                     // type="text"
-                     // name="title"
-                     // required
-                     value={title}
-                     // onChange={(e) => onChange(e)}
+                     type="text"
+                     name="budget"
+                     required
+                     value={budget}
+                     onChange={(e) => onChange(e)}
                    />
                    
                  </div>
@@ -284,11 +309,11 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                    <Thin className={style.title}>Ссылка на календарный график</Thin>
                    <input
                      className={style.input__long}
-                     // type="text"
-                     // name="title"
-                     
-                     value={title}
-                     // onChange={(e) => onChange(e)}
+                     type="text"
+                     name="schedule"
+                     required
+                     value={schedule}
+                     onChange={(e) => onChange(e)}
                    />
                    
                  </div>
@@ -296,11 +321,11 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                    <Thin className={style.title}>Ссылка на хранилице для заказчика</Thin>
                    <input
                      className={style.input__long}
-                     // type="text"
-                     // name="title"
-                     
-                     value={title}
-                     // onChange={(e) => onChange(e)}
+                     type="text"
+                     name="cusStorage"
+                      required
+                     value={cusStorage}
+                     onChange={(e) => onChange(e)}
                    />
                    
                  </div>
@@ -326,11 +351,12 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                  Перейти к следующему шагу
                </CancelButton>
              </div>
-             
-           </form>
+           </div>  
+           
         ):step===2?<div>
-           <div className={style.add__people}>
-                     <Thin size='28' className={style.title}>Поиск сотрудников</Thin>
+           <div className={style.add__people}  >
+                  <div style={{display:`${userStage===1?'block':'none'}`}}>
+                      <Thin size='28' className={style.title}>Поиск сотрудников</Thin>
                      <input placeholder='введите имя' className={style.input__long} onChange={(e) => PeopleList(e)}/>
                      <div className={style.searchMenu} style={{display:`${menu?'block':'none'}` }}>
                        {searchResult.map((user,i)=>{
@@ -338,25 +364,39 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                          return (
                            <div className={style.search__user}>
                              <div  key={i}>{user.fullname}</div>
-                             <Button grey style={{display:`${formData.userid.includes(user._id)||idList===user._id?'none':'block'}`}} onClick={()=>addUser(user)}>Добавить</Button>
+                             <CancelButton fontSize={"16px"}padd={"20px"} style={{display:`${idList.includes(user._id)||idCurrent===user._id?'none':'block'}`}} onClick={()=>addUser(user)}>Добавить</CancelButton>
                            </div>
                            
                          )
                        })}
                      </div>
-                     
+                     </div>
+                     <div  style={{display:`${userStage===2?'block':'none'}`}}>  
+                      <Thin size='28' className={style.title}>Введите должность сотрудника</Thin>
+                      <div className={style.search__user}>
+                        <div>{nameCurrent}</div> 
+                        <input className={style.position}  value={currentPos} onChange={(e) => posCurrent(e)} placeholder='должность'></input>
+                        
+                      </div>
+                      <div className={style.buttons}>
+                        <CancelButton fontSize={"16px"} padd={"20px"} grey onClick={returnToSearch}>Вернуться к поиску</CancelButton>
+                        <CancelButton fontSize={"16px"} padd={"20px"} onClick={pushUserToForm}>Добавить</CancelButton>
+                          
+                        </div>
+                     </div>
+                    
                      <div className={style.users__list} >
                        <Thin size='28'  className={style.title}>Список сотрудников для добавления</Thin>
-                       {names.map((user,i)=>{
+                       {formData.userid2.map((user,i)=>{
                          
                          return (
                            <div key={i} className={style.search__user}>
-                             <div >{user}</div>
+                             <div >{user.fullname}</div>
                              <div className={style.place}>
-                               <Thin size='24'>Должность:</Thin>
-                               <input className={style.input__mid} style={{height:'30px'}} placeholder='введите должность'></input>
+                               <Thin size='24'>{user.position}</Thin>
+                               
                              </div>
-                             {/* <Button grey style={{display:`${formData.userid.includes(user._id)||idList===user._id?'none':'block'}`}} onClick={()=>addUser(user)}>Добавить</Button> */}
+                             {/* <Button grey style={{display:`${formData.userid.includes(user._id)||idCurrent===user._id?'none':'block'}`}} onClick={()=>addUser(user)}>Добавить</Button> */}
                            </div>
                            
                          )
@@ -384,7 +424,7 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
                           Создать новый проект
                         </Button>
                       </div>
-        </div>:''}
+        </div>:''}</form>
        
       </div>
     );

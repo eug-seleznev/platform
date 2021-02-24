@@ -23,7 +23,7 @@ const Contractors = ({history}) => {
     return (
         <div>
             <Card>
-             <H1>Смежники</H1>
+             <H1>Субподрядчики</H1>
             {!contractors ? <p> проектов нет  </p>: (
 
             <Table>

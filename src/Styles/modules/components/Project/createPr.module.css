@@ -4,11 +4,11 @@
 
 	justify-content: space-between;
 	width: 100%;
-	height: 55vh;
+	
 }
 .container {
 	width: 50vw;
-	margin-left: 20vw;
+	margin-left: 10vw;
 }
 .form__inside {
 	flex-direction: column;
@@ -30,6 +30,9 @@
 	justify-content: flex-end;
 	
 }
+.position {
+	width: 300px !important
+}
 .search__user {
 	display: flex;
 	justify-content: space-between;
@@ -37,6 +40,7 @@
 	margin-top: 0px;
 	font-size: 24px;
 	margin-bottom: 5px;
+	height: 40px;
 }
 .small__title {
 	margin-top: 40px;
@@ -58,7 +62,7 @@
 
 }
 .users__list {
-	margin-top: 100px;
+	margin-top: 200px;
 }
 .window {
 	grid-area: wind;
@@ -66,7 +70,7 @@
 }
 .add__people {
 	margin-top: 50px;
-	width: 70%;
+	width: 100%;
 }
 .title {
 	
@@ -134,9 +138,9 @@
 		width: 100%;
 	}
 	.container {
-		overflow-y: scroll;
+		overflow-y: visible;
 		overflow-x: hidden;
-		height: 78vh;
+	
 		width: 100vw;
 	}
 	.buttons {
@@ -186,8 +190,7 @@
 }
 @media(max-width:340px) {
 	.container {
-		overflow-y: scroll;
-		height: 80vh
+		
 		
 	}
 }

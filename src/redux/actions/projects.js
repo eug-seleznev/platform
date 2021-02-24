@@ -6,6 +6,7 @@ import { ADD_SPRINT, SORT_PROJECTS, ADD_TASKS,CLEAR_URN, ALL_PROJECTS, ALL_SPRIN
 
 
 export const newProject = (formData) => async dispatch  => {
+    console.log (formData)
     try {
    
         const res = await innerBackend.post('/projects/add', formData)
