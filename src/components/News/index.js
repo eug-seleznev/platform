@@ -1,5 +1,4 @@
 
-import {  Redirect } from 'react-router-dom';
 
 
 //профиль пользователя по ID
@@ -12,18 +11,13 @@ import Confirm from './confirm'
 
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { allTickets } from "../../redux/actions/tikets";
 import { allNews, createNews, deleteNews, updateNews} from '../../redux/actions/news';
 // import { allUsers } from "../../redux/actions/user";
-import { Container, Card, } from '../../Styles/common';
-import { Button, ButtonText } from '../../Styles/buttons';
+import {  Card, } from '../../Styles/common';
+import {  ButtonText } from '../../Styles/buttons';
 import {Bold} from '../../Styles/typography'
 
-//////////////////////////////////////// ШО ЭТО
-import Me from '../User/me'
-import { url } from '../utils/axios';
-///////////////
-const News = ({permissions}) => {
+const News = () => {
     const dispatch = useDispatch();
     // const auth = useSelector(state => state.auth.isAuthenticated)
     const loaded = useSelector(state => state.news.loaded)
@@ -52,35 +46,18 @@ const News = ({permissions}) => {
       
       });
   
-      const { title, subtitle, text,} = formData;
 
 
-    const onChange = e => {
-
-            e.preventDefault(); 
-
-            setFormData({ ...formData, [e.target.name]: e.target.value });
-    }
-//     const Redirect = () => {  
-//         return history.push(`/projects`)
-// }
     
     const onDelete = async (e,id) => {
-console.log(deleteConfirm)
         e.preventDefault();
-        
         setConfirm({status:true,post:id})
-       
     }
     const onUpdate = async (e,id) => {
 
         e.preventDefault();
         setUpdateOpen({status:true, post:id})
-    //    setFormData({
-    //     title: id.title,   
-    //     subtitle: id.subtitle, 
-    //     text: id.text,  
-    //    })
+
     }
     const deleteNewsButton = async e => {
         e.preventDefault();
@@ -93,25 +70,12 @@ console.log(deleteConfirm)
     }
 
     
-    const updateNewsButton = async e => {
-        e.preventDefault();
 
-        let id = updateOpen.post._id
-        let data = formData
-        dispatch(updateNews({id, data}))
-
-
-        setTimeout(() => {
-            setUpdateOpen({status:false, post:''})
-            dispatch(allNews())
-        }, 100);
-    }
   
 
 
 useEffect(()=>{
  dispatch(allNews())
- console.log(user,'hiiiiiiiiiiii')
 },[])
 
     return (

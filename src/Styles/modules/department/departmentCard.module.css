@@ -52,9 +52,10 @@
     }
     @media (max-width: 1350px){
         .members{
-           
             grid-template-columns: 1fr 1fr;
-           
+        }
+        .activeProjects{
+            grid-template-columns: 1fr 1fr;
         }
     }
     @media (max-width: 1000px){
@@ -62,5 +63,8 @@
            
             grid-template-columns: 1fr ;
            
+        }
+        .activeProjects{
+            grid-template-columns: 1fr;
         }
     }

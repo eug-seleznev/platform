@@ -9,6 +9,15 @@ import { BackendMsg }  from '../../Styles/layout'
 import {errorAuthClear, msgAuthClear}  from "../../redux/actions/auth";
 const Layout = ({ histCurrent}) => {
     const dispatch = useDispatch()
+
+    //error handler
+    const new_error = useSelector(state => state.errors)
+
+
+
+
+
+
     const project = useSelector(state => state.projects)
     const createSprMsg = useSelector(state => state.projects.sprint_msg)
     const createProjMsg = useSelector(state => state.projects.msg)
@@ -33,65 +42,71 @@ const Layout = ({ histCurrent}) => {
    
    
 
+    useEffect(() => {
+      console.log("hello error", new_error.msg);
+    }, [new_error.msg]);
+
+
+
+
     useEffect(()=>{
         if(errorAuth !=""){
             setError(errorAuth)
         }
-    },[errorAuth])
+    },[errorAuth ])
     useEffect(()=>{
-        if(msgTask !=""&& msgTask !=undefined){
+        if(msgTask !==""&& msgTask !==undefined){
             setMsg(msgTask.msg)
         }
     },[msgTask])
     useEffect(()=>{
-        if(msgAuth !=""&& msgAuth !=undefined){
+        if(msgAuth !==""&& msgAuth !==undefined){
             setMsg(msgAuth)
         }
     },[msgAuth])
     useEffect(()=>{
-        if(createProjMsg !=""&& createProjMsg !=undefined){
+        if(createProjMsg !==""&& createProjMsg !==undefined){
             setMsg(createProjMsg)
         }
     },[createProjMsg])
     useEffect(()=>{
-        if(createSprMsg !=""&& createSprMsg !=undefined){
-            console.log(createSprMsg)
+        if(createSprMsg !==""&& createSprMsg !==undefined){
             setMsg(createSprMsg)
         }
     },[createSprMsg])
     useEffect(()=>{
-        if(errorNews !=""&&errorNews !=undefined){
+        if(errorNews !==""&&errorNews !==undefined){
             setError(errorNews)
         }
     },[errorNews])
     useEffect(()=>{
-        if( msgTickets !=""&& msgTickets !=undefined){
+        if( msgTickets !==""&& msgTickets !==undefined){
             setMsg( msgTickets)
         }
     },[msgTickets])
     useEffect(()=>{
-        if(msgNews !=""&&msgNews !=undefined){
+        if(msgNews !==""&&msgNews !==undefined){
             setMsg(msgNews)
         }
     },[msgNews])
     useEffect(()=>{
-        if(errorProject !=""&&errorProject !=undefined){
+        if(errorProject !==""&&errorProject !==undefined){
             setError(errorProject)
         }
     },[errorProject])
     useEffect(()=>{
-        if(errorTickets !=""&&errorTickets !=undefined){
+        if(errorTickets !==""&&errorTickets !==undefined){
             setError(errorTickets)
         }
     },[errorTickets])
     useEffect(()=>{
-        if(msgUser !=""&&msgUser !=undefined){
+        if(msgUser !==""&&msgUser !==undefined){
             setMsg(msgUser)
         }
     },[msgUser])
     useEffect(()=>{
         setColor('red')
-        if(error!=''){
+        if(error!==''){
             setMsgTiming(true)
                 setTimeout(()=>{
                     setMsgTiming(false)
@@ -103,7 +118,7 @@ const Layout = ({ histCurrent}) => {
         }
     },[error])
     useEffect(()=>{
-        if(msg!=''){
+        if(msg!==''){
             setColor('green')
            
             setMsgTiming(true)
@@ -118,10 +133,10 @@ const Layout = ({ histCurrent}) => {
         }
     },[msg])
     const createProj =()=>{
-   
-        setCurrentTitle ('Создание нового проекта')
-        setCurrentElem ('CreateProject')
-        setStatus(true)
+        histCurrent.replace('/admin/newproject')
+        // setCurrentTitle ('Создание нового проекта')
+        // setCurrentElem ('CreateProject')
+        // setStatus(true)
     }
     const createTicket =()=>{
         setCurrentTitle ('Проблемы с компьютером')
@@ -133,11 +148,16 @@ const Layout = ({ histCurrent}) => {
         setCurrentElem ('CreateNews')
         setStatus(true)
     }
+    const addPodsos =()=>{
+        setCurrentTitle ('Добавить смежника')
+        setCurrentElem ('addPodsos')
+        setStatus(true)
+    }
     const closeWindow =()=>{
         setStatus(false)
     }
     return <div style={{zIndex: '9999'}}>
-        <Header createProj={createProj} createTicket={createTicket} createNews={createNews}/>
+        <Header createProj={createProj} addPodsos={addPodsos} createTicket={createTicket} createNews={createNews}/>
         <Sidebar/>
         <BackendMsg color={color} style={{opacity:`${msgTiming?1:0}`,zIndex:`${msgTiming?10000:-1000}`}}>
             {color==='red'?error:color==='green'?msg:''}

@@ -1,13 +1,14 @@
 import { innerBackend, instance } from "../../components/utils/axios";
-import { ADD_SPRINT, ADD_TASKS, ALL_PROJECTS, ALL_SPRINT,ADD_SPRINT_TO_CHOSEN, CREATE_FAIL, DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, PROJECT_ID, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT,CLEAR_MSG, CLEAR_ERROR  } from "../types";
+import { ADD_SPRINT, SORT_PROJECTS, ADD_TASKS,CLEAR_URN, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK, CREATE_FAIL, DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, PROJECT_ID, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT,CLEAR_MSG, CLEAR_ERROR, DELETE_SPRINT, PROJECTS_SORT  } from "../types";
 
 
 
 
 
 export const newProject = (formData) => async dispatch  => {
+    console.log (formData)
     try {
-        console.log('hello', formData)
+   
         const res = await innerBackend.post('/projects/add', formData)
         dispatch({
             type: CREATE_PROJECT,
@@ -28,11 +29,35 @@ export const newProject = (formData) => async dispatch  => {
 
 }
 
+export const sortProjects = ({ query, orderSort }) => async (dispatch) => {
+  try {
+    const res = await innerBackend.get(
+      `/projects?field=${query}&order=${orderSort}`
+    );
+    dispatch({
+      type: SORT_PROJECTS,
+      payload: res.data,
+    });
+  } catch (err) {
+    alert("hahaha classic");
+  }
+};
+
+
+export const clearUrn = () => async dispatch => {
+    try {
+        dispatch({
+            type: CLEAR_URN
+        })
+    } catch (error) {
+    }
+}
+
 
 export const allProjects = () => async dispatch  => {
     
     try {
-        const res = await innerBackend.get('/projects')
+        const res = await innerBackend.get('/projects?field=title&order=true')
         dispatch({
             type: ALL_PROJECTS,
             payload: res.data
@@ -83,10 +108,10 @@ export const addSprint = (id,formData,data) => async dispatch  => {
         let body = {
             description: formData.description,
             date: formData.date,
-            tasks: data.tasks
+            tasks: data.tasks[0].taskTitle==""?[]:data.tasks
         }
-        console.log(data)
-        const res = await innerBackend.post(`/projects/sprints/new/${id}`,body,)
+        // console.log(data)
+        const res = await innerBackend.post(`/projects/sprints/new/${id}`,body)
         dispatch({
             type: ADD_SPRINT,
             payload: res.data
@@ -105,9 +130,23 @@ export const addSprint = (id,formData,data) => async dispatch  => {
     }
 
 }
+
+export const EditTask = ({editTask, id}) => async (dispatch) => {
+    try {
+        const res = await innerBackend.put(`projects/sprints/taskedit/${id}`, editTask);
+        dispatch({
+            type: EDIT_TASK,
+            payload: res.data
+        })
+    } catch (err) {
+        
+    }
+} 
+
+
 export const editProject = (formData, id) => async dispatch  => {
     try {
-        console.log('hello edit', formData)
+        // console.log('hello edit', formData)
         const res = await innerBackend.put(`/projects/${id}`, formData)
         dispatch({
             type: EDIT_PROJECT,
@@ -137,7 +176,7 @@ export const allSprints = (id) => async dispatch  => {
             type: ALL_SPRINT,
             payload: res.data.sprints
         })
-        console.log(res.data, 'my data')
+        // console.log(res.data, 'my data')
 
         }
       catch (err) {
@@ -156,7 +195,7 @@ export const allSprints = (id) => async dispatch  => {
 
 
 export const getSprint = (id) => async dispatch  => {
-    console.log(id, 'айдишека')
+    // console.log(id, 'айдишека')
     try {
         const res = await innerBackend.get(`/projects/getsprint/${id}`)
         dispatch({
@@ -179,9 +218,23 @@ export const getSprint = (id) => async dispatch  => {
 }
 
 
+export const deleteSprint = (id) => async dispatch => {
+    try {
+        console.log(id, 'sprint id')
+        const res = await innerBackend.delete(`/projects/sprints/${id}`);
+        dispatch({
+            type: DELETE_SPRINT,
+            payload: res.data
+        })
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+
 
 export const addTasks = ({ sprintId,tasks}) => async dispatch  => {
-    console.log(tasks, sprintId, 'retuuuuuuuuuuuurd')
+    // console.log(tasks, sprintId, 'retuuuuuuuuuuuurd')
     
     try {
         // console.log(tasks, 'tasks', id, 'id')
@@ -255,7 +308,7 @@ export const finishSprint = (id) => async dispatch  => {
 
 }
 export const addInfoSprint = (id, form) => async dispatch  => {
-    console.log (form.description, form.date, id)
+    // console.log (form.description, form.date, id)
     let body = {
         description: form.description,
         date: form.date,

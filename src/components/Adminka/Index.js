@@ -32,12 +32,12 @@ const Admin = ({closeWindow}) => {
     }
     const onChange = e => {
         e.preventDefault(); 
-        console.log (e.target.value)
+        // console.log (e.target.value)
         setFormData({ ...formData, [e.target.name]: e.target.value });
      }
      const onOptionChange = e => {
         e.preventDefault(); 
-        console.log(e.target.value)
+        // console.log(e.target.value)
         setFormData({ ...formData, emergency: e.target.value })
      }
 
@@ -54,7 +54,7 @@ const Admin = ({closeWindow}) => {
             pcpass: '',
        })
        
-       console.log(formData)
+    //    console.log(formData)
           setTimeout(() => closeWindow()
           ,150)
      
@@ -75,19 +75,21 @@ const Admin = ({closeWindow}) => {
                         type='text'
                         name='problemname'
                         value={problemname}
+                        required
                         onChange={e => onChange(e)}/>
 
                 
                     
                     <Thin className={style.small__title2}>Описание проблемы</Thin>
                     <textarea 
+                     required
                         className={style.input__big}
                         name='text'
                         value={text}
                         onChange={e => onChange(e)}/>
                     <div className={style.row}>
                         <div className={style.small__input}>
-                            <Thin className={style.small__title2}>Пароль от компьютера (опционально)</Thin>
+                            <Thin className={style.small__title2}>Пароль от компа</Thin>
                             <input 
                                 type='text'
                                 
@@ -96,18 +98,18 @@ const Admin = ({closeWindow}) => {
                                 onChange={e => onChange(e)}/>
                         </div>
                         <div className={style.small__input}>
-                            <Thin className={style.small__title2}>Скриншот проблемы (опционально)</Thin>
+                            <Thin className={style.small__title2}>Скриншот</Thin>
                             <input 
                                 type='file'
                                 placeholder='скриншот проблемы (опционально)'
                                 onChange={handleFile}/>
                         </div>
                         <div className={style.small__input}>
-                            <Thin className={style.small__title2}>Срочность (опционально)</Thin>
+                            <Thin className={style.small__title2}>Срочность</Thin>
                             <div className={style.week} >
                                     
-                                    <select name="emergency" onChange={e =>  onOptionChange(e)} className={style.select} >
-                                        <option value='0' selected>нет</option>
+                                    <select defaultValue='0' name="emergency" onChange={e =>  onOptionChange(e)} className={style.select} >
+                                        <option value='0'>нет</option>
                                         <option value='1'>Не срочно</option>
                                         <option value='2'>Средней срочности</option>
                                         <option value='3'>Очень срочно</option>

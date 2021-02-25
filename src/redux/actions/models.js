@@ -1,25 +1,27 @@
 import Axios from "axios";
-import { GET_TOKEN, GET_URN, NEW_ERROR, GET_STATUS } from "../types";
-
+import { GET_TOKEN, GET_URN, NEW_ERROR, GET_STATUS, CLEAR_MODEL_DATA } from "../types";
+let url = process.env.REACT_APP_IP_MODELS;
 export const postModel = (formData) => async (dispatch) => {
   // formData.append('userName', 'Fred');
 
   try {
-    // console.log(formData, 'data')
+    console.log(formData, 'data')
     const form = new FormData();
 
     Object.keys(formData).map((el, index) => {
       form.append(`${el}`, formData[el]);
     });
 
+
+    
     const res = await Axios.post("/up/upload/p", form, {
-      baseURL: "http://192.168.0.16:7770",
+      baseURL: url,
       headers: {
         "content-type": "multipart/form-data",
         "auth-token": localStorage.token,
       },
     });
-
+    console.log(res)
     dispatch({
       type: GET_URN,
       payload: res.data,
@@ -40,7 +42,7 @@ export const postModel = (formData) => async (dispatch) => {
 export const Oauth = (crypt) => async (dispatch) => {
   try {
         const res = await Axios.get(`/up/tkn/p/${crypt}`,  {
-          baseURL: "http://192.168.0.16:7770",
+          baseURL: url,
           headers: {
             "content-type": "application/json",
           },
@@ -64,17 +66,17 @@ export const Oauth = (crypt) => async (dispatch) => {
 
 export const Status = (crypt) => async (dispatch) => {
   try {
-    console.log('started')
+     console.log('started')
+     let date = new Date().getMilliseconds();
     const res = await Axios.get(`/up/status/p/${crypt}`, {
-      baseURL: "http://192.168.0.16:7770",
+      baseURL:url,
       headers: {
         "content-type": "application/json",
       },
     });
-    console.log(res.data, 'response')
     dispatch({
       type: GET_STATUS,
-      payload: res.data,
+      payload: res.data.progress +' '+ date,
     });
   } catch (err) {
     const errors = err.response.data.errors;
@@ -86,3 +88,14 @@ export const Status = (crypt) => async (dispatch) => {
     });
   }
 };
+
+
+export const cleardData = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: CLEAR_MODEL_DATA
+    })
+  } catch (err) {
+    
+  }
+}

@@ -1,5 +1,5 @@
 
-import { ADD_SPRINT, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL,CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR } from '../types'
+import { ADD_SPRINT,SORT_PROJECTS, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL, EDIT_TASK, CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR, GET_URN, DELETE_SPRINT, CLEAR_URN } from '../types'
 
 
 
@@ -32,6 +32,7 @@ export default function(state = initialState, action) {
        
 
             case ALL_PROJECTS:
+            case SORT_PROJECTS:
                 return {
                     ...state,
                     loadedAllProj: true,
@@ -44,6 +45,7 @@ export default function(state = initialState, action) {
 
                     error: ''
                 }
+                
                 case CREATE_PROJECT:
                 return {
                     ...state,
@@ -59,8 +61,12 @@ export default function(state = initialState, action) {
                 case CLEAR_ERROR:
                     return {
                         ...state,
-                       error:''
-                       
+                       error:''  
+                    }
+                case EDIT_TASK: 
+                    return {
+                        ...state,
+                        sprint: payload.sprint
                     }
                 case CLEAR_MSG:
                     return {
@@ -87,7 +93,7 @@ export default function(state = initialState, action) {
                     error: ''
                 }
             case ADD_SPRINT:
-                console.log(payload)
+                // console.log(payload)
                 return {
                     ...state,
                     sprint: payload,
@@ -108,6 +114,16 @@ export default function(state = initialState, action) {
                     return {
                         ...state,
                         oauth: payload
+                    }
+                case CLEAR_URN: 
+                    return {
+                        ...state,
+                        oauth: null
+                    }
+                case DELETE_SPRINT:
+                    return {
+                        ...state,
+                        test: payload
                     }
                 case ADD_TASKS:
                 return {
@@ -150,6 +166,12 @@ export default function(state = initialState, action) {
                     project: payload.sprint,
                     error: ''
                 }
+            case GET_URN:
+                return {
+                    ...state,
+                    project: payload.project,
+                    msg: payload.msg
+                }
                 case FINISH_PROJECT:
                     return {
                         ...state,
@@ -172,8 +194,8 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     error: payload,
-                    loadProject: false,
-                    loadedAllProj: false
+                    // loadProject: false,
+                    // loadedAllProj: false
                 }
                 case FINISH_TASK:
                     return {

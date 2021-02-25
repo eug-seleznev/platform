@@ -15,36 +15,44 @@ export const ALL_USERS = 'users';
 export const GET_EMPLOYE = 'get_users';
 export const CHANGE_PERMISSION = 'change_permission';
 export const ONE_USER = 'get_one'
+export const PARTITION_UPDATE = 'update_user_partition';
 
 //user errors
 export const USER_ERR = 'get_all_users_error'
-
+//search user 
+export const SEARCH_USER = 'search_user'
 //PROJECTS
 export const EDIT_PROJECT = 'edit_project';
 export const ALL_PROJECTS = 'all_projects';
 export const CREATE_PROJECT = 'create_project';
 export const GET_PROJECT = 'get_project';
+export const CLEAR_URN = 'clear_urn'
+export const SORT_PROJECTS = 'sort_projects' //PROJECTS SORT
 
-export const CREATE_SPRINT = 'create_sprint';
 export const UPDATE_PROJECT = 'project_updated';
 export const PROJECT_ID = 'project_updated';
 export const DELETE_PROJECT = 'delete_project'
 export const FINISH_PROJECT = 'finish_project'
     //sprints
+export const CREATE_SPRINT = "create_sprint";
 export const ADD_SPRINT = 'crate_new_sprint';
 export const ADD_INFO_SPRINT = 'add_info_sprint'
 export const GET_SPRINT = 'get_sprint';
 export const ADD_TASKS = 'add_tasks_to_sprint';
-export const FINISH_TASK = 'finish_task'
+export const FINISH_TASK = 'finish_task';
+export const EDIT_TASK = 'edit_task';
 export const SPRINT_ERROR = 'sprint_error';
 export const ALL_SPRINT = 'get_project_sprints'
 export const FINISH_SPRINT = 'finish_sprint' 
 export const ADD_SPRINT_TO_CHOSEN = 'add_sprint_to_chosen' 
+export const DELETE_SPRINT = 'delete_sprint'
 //teams
 export const JOIN_TEAM = 'join_to_team'
 //projects errors
 export const CREATE_FAIL= 'error_on_project_create';
-
+//contractors
+export const ADD_CONTRACTOR = 'add_contractor';
+export const ALL_CONTRACTORS = 'all_contractors';
 //news
 export const CREATE_NEWS = 'create_news';
 export const ALL_NEWS = 'all_news'
@@ -98,3 +106,11 @@ export const REVERSE_ARRDATE = 'revarrdate'
 export const GET_TOKEN = 'get_oauth_token'
 export const GET_URN = 'get_urn'
 export const GET_STATUS = 'loading_status'
+export const CLEAR_MODEL_DATA = 'clear_model_data'
+export const CLEAR_DEPS = 'clear_deps'
+
+
+
+///errors
+
+export const ERROR_MSG ='error_msg'

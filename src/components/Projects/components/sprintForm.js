@@ -1,5 +1,5 @@
 import { Button,CancelButton } from "../../../Styles/buttons"
-import { Thin } from "../../../Styles/typography"
+import { Bold, Regular, Thin } from "../../../Styles/typography"
 import{	useState, useEffect} from 'react'
 import { useForm, useFieldArray } from "react-hook-form";
 import {  addTasks,addInfoSprint,addSprint,getSprint, getProject} from "../../../redux/actions/projects";
@@ -8,9 +8,7 @@ import style from '../../../Styles/modules/components/Project/sprintForm.module.
 
 const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 	// Отправка описания и даты окончания
-	const reload = useSelector(state => state.projects.reload)
 	const project = useSelector(state => state.projects.project)
-	const sprint = useSelector(state => state.projects.sprint)
 	const dispatch = useDispatch();
 	const { register, control, handleSubmit } = useForm({
         defaultValues: {
@@ -24,16 +22,12 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 	  });
 	const [formData, setFormData] = useState(
 		{
-			description: ``,
+			description: '',
 			date:``
 			 
 		}
 	  )
-	
-	  const [sprintData,setSprintData] = useState ({
-		
 
-	  })
 	  const [enterWin,setEnterWin] =useState (false)
 	  const {description, date} = formData;
 	  //
@@ -42,6 +36,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 	  
 
 	  const onChangeDate = (e) => {
+		console.log(e.target.value, 'value')
 		let today = new Date();
 		let chose = e.target.value == '2 недели'?14:7
 		let dd = String(today.getDate()+chose).padStart(2, '0');
@@ -89,95 +84,135 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 
 
 	return (
-	<>
-		{/* {!loaded?<div>loading...</div>:( */}
-			<form className={style.formContain} onSubmit={handleSubmit(onSubmit)}>
-			
-					<div onMouseEnter={enter}>
-						<Thin className={style.small__title}  style={{marginTop:'40px'}} size={16}>{smallTitles[0]}</Thin>
-						
-						
-							<input 
-								style={{width:'100%'}}	
-								type='text'
-								name="description"
-								value={description}
-								
-								
-								onChange={e => onChange2(e)}>  
-							</input>
-							<div className={style.week} >
-								<Thin  className={style.small__title} size={16}>{smallTitles[1]}</Thin>
-								<select name="date"className={style.select} onChange={e => onChangeDate(e)}>
-										<option selected>нет</option>
-										<option>1 неделя</option>
-										<option>2 недели</option>
-								</select>
-							</div>
-							<div  >
-							<div style={{ overflowY:`${fields.length<3?'hidden':'scroll'}`}} className={style.taskContain}>
-								<ul style={{padding:0,listStyleType:'none'}}>
+    <>
+      {/* {!loaded?<div>loading...</div>:( */}
+      <form className={style.formContain} onSubmit={handleSubmit(onSubmit)}>
+        <div onMouseEnter={enter}>
+          <div className={style.row}>
+            <div className={style.line}>
+              <Bold className={style.small__title} size={16}>
+                {smallTitles[0]}
+              </Bold>
+              <textarea
+                required
+                className={style.textarea}
+                type="text"
+                name="description"
+                value={description}
+                onChange={(e) => onChange2(e)}
+              ></textarea>
+            </div>
+            <div className={style.line2}>
+              <Bold className={style.small__title} size={16}>
+                {smallTitles[1]}
+              </Bold>
+              <select
+                required
+                name="date"
+                className={style.select}
+                onChange={(e) => onChangeDate(e)}
+              >
+                <option value=""></option>
+                <option value="1 неделя">1 неделя</option>
+                <option value="2 недели">2 недели</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <div
+              style={{
+                overflowY: `${fields.length < 6 ? "hidden" : "scroll"}`,
+              }}
+              className={style.taskContain}
+            >
+              <ul style={{ padding: 0, listStyleType: "none" }}>
+                {fields.map((item, index) => (
+                  <li key={item.id} style={{ display: "flex" }}>
+                    <div style={{ fontSize: "20px", marginRight: "10px" }}>
+                      {index + 1}
+                    </div>
+                    <input
+                      style={{ marginRight: "40px" }}
+                      className={style.taskDescr}
+                      name={`tasks[${index}].taskTitle`}
+                      ref={register()}
+					  required
+                      placeholder="Описание задачи" // make sure to set up defaultValue
+                    />
+                    <input
+                      type="number"
+                      defaultValue={0}
+                      name={`tasks[${index}].workVolume`}
+                      ref={register()}
+                      style={{ display: "none" }}
+                      placeholder="Объем в часах"
+                    />
+                    <input
+                      type="boolean"
+                      defaultValue={false}
+                      name={`tasks[${index}].taskState`}
+                      ref={register()}
+                      style={{ display: "none" }}
+                      placeholder="Стейт"
+                    />
+                    <Button
+                      type="button"
+                      style={{
+                        display: `${
+                          fields.length === index + 1 ? "none" : "block"
+                        }`,
+                        color: "#3F496C",
+                        backgroundColor: "white",
+                        border: "none",
+                      }}
+                      onClick={() => remove(index)}
+                    >
+                      Удалить
+                    </Button>
 
-									{fields.map((item, index) => (
-									<li key={item.id} >
-										<input
-										
-										className={style.taskDescr}
-										name={`tasks[${index}].taskTitle`}
-										ref={register()}
-										placeholder="Описание задачи" // make sure to set up defaultValue
-										/>
-									 <input
-										type="number"
-										value={0}
-											name={`tasks[${index}].workVolume`}
-											ref={register()}
-											style={{display:'none'}}
-											placeholder="Объем в часах" 
-											/>
-										 <input
-										type="boolean"
-										value={false}
-											name={`tasks[${index}].taskState`}
-											ref={register()}
-											style={{display:'none'}}
-											placeholder="Стейт" 
-											/>
-										<Button type="button" style={{display: `${fields.length===1?'none':'block'}`,
-											color:'#3F496C',
-											backgroundColor:'white',
-											border:'none',
-											width:'30vw',
-											textAlign:'right'}} onClick={() => remove(index)}>Удалить</Button>
-									</li>
-									))}
-								</ul>
-								
-								<Button
-									type="button"
-									style={{color:'#3F496C',
-										backgroundColor:'white',
-										border:'none',width:'30vw',
-										textAlign:'right'}}
-									onClick={() => append({ firstName: "appendBill", lastName: "appendLuo" })}
-								>
-									Добавить задачу
-								</Button>
-								</div>
-								</div>
-								
-						
-					</div>
-					
-					<div className={style.buttons}>
-						<CancelButton  className={style.button} fontSize={'16px'} grey onClick={cancel}>Отмена</CancelButton>
-						<Button className={style.button} type="submit"fontSize={'16px'} >{buttonTitle}</Button>
-					</div>
-			
-			</form>
-			
-		{/* )} */}
-		</>
-	)
+                    <Button
+                      type="button"
+                      style={{
+                        color: "#3F496C",
+                        display: `${
+                          fields.length != index + 1 ? "none" : "block"
+                        }`,
+                        backgroundColor: "white",
+                        border: "none",
+                      }}
+                      onClick={() =>
+                        append({
+                          firstName: "appendBill",
+                          lastName: "appendLuo",
+                        })
+                      }
+                    >
+                      Добавить задачу
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className={style.buttons}>
+          <CancelButton
+            className={style.button}
+            fontSize={"16px"}
+            grey
+            onClick={cancel}
+          >
+            Отмена
+          </CancelButton>
+          <Button className={style.button} type="submit" fontSize={"16px"}>
+            {buttonTitle}
+          </Button>
+        </div>
+      </form>
+
+      {/* )} */}
+    </>
+  );
 }
 export default SprintForm

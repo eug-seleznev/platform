@@ -1,7 +1,7 @@
 
 //@ALL USERS PAGE
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 import { useDispatch, useSelector } from "react-redux"
 import { allUsers } from "../../redux/actions/user";
@@ -18,41 +18,62 @@ const Users = ({history}) => {
 
     const dispatch = useDispatch();
     const users = useSelector(state => state.users.users)
+    const [sortOrder, setOrder] = useState(false)
 
 
     useEffect(() => {
-        dispatch(allUsers())
+        let query = 'name'
+        dispatch(allUsers({query, sortOrder}))
     }, [])
+
+
+    const sortFunction = (query) => {
+        setOrder(!sortOrder)
+        dispatch(allUsers({query, sortOrder}))
+    }
     return (
-        <div> 
-            <Card>
-                <H1 > Все сотрудники</H1>
-                    {!users ? <p>loading...</p> : (
-                        <Table>
-                            
-                                <Tr className={style.tr__user} top='top'>
-                                    <Td>Имя</Td>
-                                    <Td className={style.turn__off}>email</Td>
-                                    <Td>Должность</Td>
-                                    <Td className={style.turn__off}>Активные проекты</Td>
-                                </Tr>
-                        
-                                {users.map(user => {
-                                    return(  
-                                    <Tr className={style.tr__user} onClick={() => history.replace(`/users/${user._id}`)}>
-                                        <Td>{user.name}</Td>
-                                        <Td className={style.turn__off}>{user.email}</Td>
-                                        <Td>{user.position}</Td>
-                                        <Td className={style.turn__off}>{user.projects.length}</Td>
-                                    </Tr>
-                                    )
-                                })}
-                            
-                        </Table>
-                    )}
-            </Card>
-        </div>
-    )
+      <div>
+        <Card>
+          <H1> Все сотрудники</H1>
+          {!users ? (
+            <p>loading...</p>
+          ) : (
+            <Table>
+              <Tr className={style.tr__user} top="top">
+                <Td onClick={() => sortFunction("name")}>Имя &#8597;</Td>
+                <Td
+                  onClick={() => sortFunction("email")}
+                  className={style.turn__off}
+                >
+                  email &#8597;
+                </Td>
+                <Td onClick={() => sortFunction("position")}>
+                  Должность &#8597;
+                </Td>
+                <Td className={style.turn__off}>Активные проекты</Td>
+              </Tr>
+
+              {users.map((user, i) => {
+                return (
+                  <Tr
+                    className={style.tr__user}
+                    key={i}
+                    onClick={() => history.replace(`/users/${user._id}`)}
+                  >
+                    <Td>
+                      {user.name} {user.lastname}
+                    </Td>
+                    <Td className={style.turn__off}>{user.email}</Td>
+                    <Td>{user.position}</Td>
+                    <Td className={style.turn__off}>{user.projects.length}</Td>
+                  </Tr>
+                );
+              })}
+            </Table>
+          )}
+        </Card>
+      </div>
+    );
 }
 
 

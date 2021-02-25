@@ -8,12 +8,11 @@ export const url = process.env.REACT_APP_IP;
 
 
 export const setAuthToken = (token) => {
-    console.log(token, 'token')
-
     if(token){
         innerBackend.defaults.headers.common['auth-token'] = token;
     } 
 }
+
 
 
 

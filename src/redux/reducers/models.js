@@ -1,10 +1,10 @@
-import { GET_STATUS, GET_URN } from "../types";
+import { GET_STATUS, GET_URN, CLEAR_MODEL_DATA } from "../types";
 
 
 
 
 const initialState = {
-    urn: '',
+    urn: null,
     status: ''
 }
 
@@ -19,13 +19,16 @@ export default function(state = initialState, action) {
         case GET_URN:
             return {
                 ...state,
-                urn: payload
+                status: 'started'
             }
         case GET_STATUS:
             return {
-                ...state,
-                status: payload
-            }
+              ...state,
+              status: payload
+            };
+        case CLEAR_MODEL_DATA:
+            return  initialState
+        
 
             default:
                 return state

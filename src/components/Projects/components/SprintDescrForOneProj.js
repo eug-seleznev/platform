@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import { Button } from "../../../Styles/buttons"
 import { Card } from "../../../Styles/common"
-import './sprintdescr.css'
+import './sprintdescr.css' //css испортируется тут глобальный. У нас глобальный уже создан ниже, и делать новый смысла нет - тут нужны modules
 import style from '../../../Styles/modules/components/Project/oneproj.module.css'
-import { Thin, Bold, Light,Regular } from "../../../Styles/typography"
+import { Light,Regular } from "../../../Styles/typography"
 import { useSelector,useDispatch} from "react-redux"
 import { addToChosen } from '../../../redux/actions/auth'
-const SprintDescription = ({sprintname, index, dateOpen,taskcomplite, alltasks, history, id, params,descr, dateClosePlan}) => {
+const SprintDescription = ({projStatus, dateOpen,taskcomplite, alltasks, history, id, params,descr, dateClosePlan}) => {
+	
 	const dispatch = useDispatch();
 	const [loaded, setLoaded] = useState (0)
 	const [diff, setDiff] = useState (0)
@@ -58,11 +59,11 @@ const SprintDescription = ({sprintname, index, dateOpen,taskcomplite, alltasks, 
 			<Card className={style.card}style={{border:`${!status?'5px solid transparent':'5px solid green'}`}}>
 				<div>
 					<div className={style.card__date1}>
-						<Light size='20'>{dateOpen.slice(5,10).replace(/-/g, ".")}-{dateClosePlan === null?'??': dateClosePlan.slice(5,10).replace(/-/g, ".")}
+						<Light size='20'>{dateOpen.slice(5,10).split('-').reverse().join('.')}-{dateClosePlan === null?'??': dateClosePlan.slice(5,10).split('-').reverse().join('.')}
 						</Light>
 					</div>
 					<div className={style.card__title}>
-						<Regular size='30'>Спринт {dateOpen.slice(5,10).replace(/-/g, ".")}
+						<Regular size='30'>Спринт {dateOpen.slice(5,10).split('-').reverse().join('.')}
 						</Regular>
 					</div>
 					<div className={style.card__descr}>
@@ -70,7 +71,7 @@ const SprintDescription = ({sprintname, index, dateOpen,taskcomplite, alltasks, 
 					</div>
 				</div>
 				<div>
-					<div className={style.card__date2}> <Light size='16'>Дней до дедлайна: {diff.toString().slice(0,2)}</Light></div>
+					<div className={style.card__date2}> <Light  size='16'>Дней до дедлайна: {diff.toString().slice(0,2)}</Light></div>
 					<div className={style.card__tasks}> 
 						<Regular>Задачи</Regular> 
 						<div className={style.card__tasks}> 
@@ -80,9 +81,9 @@ const SprintDescription = ({sprintname, index, dateOpen,taskcomplite, alltasks, 
 						
 						
 					</div>
-					<div className={style.card__buttons}>
+					<div className={style.card__buttons} style={{display:`${projStatus?'none':'flex'}`}} >
 						
-						<Button fontSize={'16px'}padd={'5px'} onClick={chosenSprint} grey>{!status? 'Добавить в избранное': 'Убрать из избранного'}</Button>
+						<Button fontSize={'16px'}padd={'5px'}  onClick={chosenSprint} grey>{!status? 'Добавить в избранное': 'Убрать из избранного'}</Button>
 						<Button fontSize={'16px'} onClick={() => history.push(`/projects/${params.id}/${id}`)}>Подробнее</Button>
 					</div>
 				</div>

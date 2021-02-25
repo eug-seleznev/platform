@@ -1,12 +1,12 @@
 import { innerBackend } from "../../components/utils/axios";
-import { ALL_NEWS, GET_NEWS,CREATE_NEWS,CLEAR_MSG, DELETE_NEWS, UPDATE_NEWS, NEWS_FAIL,CLEAR_ERROR } from "../types";
+import { ALL_NEWS, GET_NEWS,CREATE_NEWS, DELETE_NEWS, UPDATE_NEWS, ERROR_MSG } from "../types";
 
 
 export const createNews = (formData) => async dispatch  => {
     try {
 
         const res = await innerBackend.post('/news', formData)
-        console.log('creating news')
+        // console.log('creating news')
         dispatch({
             type: CREATE_NEWS,
             payload: res.data
@@ -17,7 +17,7 @@ export const createNews = (formData) => async dispatch  => {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: NEWS_FAIL,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })            
@@ -32,7 +32,7 @@ export const allNews = () => async dispatch  => {
     try {
 
         const res = await innerBackend.get('/news/all')
-        console.log('showing news')
+        // console.log('showing news')
 
         dispatch({
             type: ALL_NEWS,
@@ -44,9 +44,9 @@ export const allNews = () => async dispatch  => {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: NEWS_FAIL,
-            payload: error.msg
-        })
+             type: ERROR_MSG,
+             payload: error.msg,
+           });
         })            
       
     }
@@ -68,9 +68,9 @@ export const getNews = (id) => async dispatch  => {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: NEWS_FAIL,
-            payload: error.msg
-        })
+             type: ERROR_MSG,
+             payload: error.msg,
+           });
         })            
       
     }
@@ -92,9 +92,9 @@ export const deleteNews = (id) => async dispatch  => {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: NEWS_FAIL,
-            payload: error.msg
-        })
+             type: ERROR_MSG,
+             payload: error.msg,
+           });
         })            
       
     }
@@ -104,7 +104,7 @@ export const deleteNews = (id) => async dispatch  => {
 export const updateNews = ({id,data}) => async dispatch  => {
 
     try {
-        console.log(data, 'data', id, 'id')
+        // console.log(data, 'data', id, 'id')
         const res = await innerBackend.put(`news/${id}`, data)
         dispatch({
             type: UPDATE_NEWS,
@@ -116,9 +116,9 @@ export const updateNews = ({id,data}) => async dispatch  => {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: NEWS_FAIL,
-            payload: error.msg
-        })
+             type: ERROR_MSG,
+             payload: error.msg,
+           });
         })            
       
     }

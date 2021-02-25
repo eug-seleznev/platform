@@ -4,7 +4,7 @@ import styles from '../../Styles/modules/main/main.module.css'
 import { url } from '../utils/axios';
 import {Button} from '../../Styles/buttons'
 import styled from 'styled-components'
-import { useEffect } from "react";
+import { useEffect, useState} from "react";
 import {changeLoaded, loadUser} from '../../redux/actions/auth'
 import { Card, SmallContainer, } from "../../Styles/common";
 import { Bold } from '../../Styles/typography'
@@ -18,9 +18,16 @@ const MyProfile = ({match, history}) => {
     const dispatch = useDispatch ()
     const loaded = useSelector(state => state.auth.loaded)
     const user = useSelector(state => state.auth.user)
+    const [permission, setPermission] = useState('')
     useEffect (()=> {
         dispatch (loadUser())
     },[])
+    useEffect(()=>{
+        if (user!=undefined){
+            console.log(user)
+           setPermission(user.permission)
+        } 
+     },[user])
     return (
         <div className={styles.mainContainer}>
 
@@ -32,7 +39,7 @@ const MyProfile = ({match, history}) => {
                     {user.projects.map((el,i)=>{
                         
                         return(
-                            <ProjectsCard project={el}  sprints={user.sprints} history={history}/>
+                            <ProjectsCard project={el} permission={permission} sprints={user.sprints} history={history}/>
                         )
                     })}
                     

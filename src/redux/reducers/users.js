@@ -1,5 +1,5 @@
 
-import {REGISTER, AUTH_ERROR, LOGIN, USER_LOADED, ALL_USERS, CHANGE_PERMISSION,PERM_RETURN,ONE_USER, CHANGE_USERDATA, CHANGE_AVATAR, CLEAR_ERROR, CLEAR_MSG} from '../types'
+import { ALL_USERS, CHANGE_PERMISSION,PERM_RETURN,ONE_USER, CLEAR_ERROR, CLEAR_MSG, SEARCH_USER, ADD_CONTRACTOR, ALL_CONTRACTORS, PARTITION_UPDATE} from '../types'
 
 
 
@@ -9,7 +9,9 @@ const initialState = {
     loaded: false,
     msg: '',
     userLoaded: false,
-    error:''
+    error:'',
+    searchResult:[],
+    contractors: []
 }
 
 export default function(state = initialState, action) {
@@ -18,6 +20,25 @@ export default function(state = initialState, action) {
     } = action;
 
     switch(type){
+        case SEARCH_USER: 
+            return {
+                ...state,
+                searchResult:payload,
+                
+            }
+        case ALL_CONTRACTORS: 
+            return {
+                ...state,
+                contractors: payload
+                
+              
+            }
+        case ADD_CONTRACTOR: 
+            return {
+                ...state,
+                msg:payload.msg,
+              
+            }
         case ONE_USER:
             return {
                 ...state,
@@ -30,6 +51,11 @@ export default function(state = initialState, action) {
                 loaded: false,
                 
             }
+        case PARTITION_UPDATE: 
+        return {
+            ...state,
+            user: payload
+        } 
             case CLEAR_ERROR:
                 return {
                     ...state,

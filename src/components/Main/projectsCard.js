@@ -5,32 +5,37 @@ import { Bold,Light,Thin, Regular } from '../../Styles/typography'
 import { useEffect, useState } from 'react'
 import  MySprint from './mySprint'
 
-const ProjectsCard = ({project, sprints, history}) => {
+
+
+
+
+
+const ProjectsCard = ({project,permission, sprints, history}) => {
+
     const [filt, setFilt] = useState(null)
     const [daysLeft, setDaysLeft] = useState(null)
 
-useEffect(()=>{
-    
-    if (sprints!=undefined){
+        useEffect(()=>{
+            if (sprints!=undefined){
+                const filtered = sprints!=undefined && sprints.filter(item => filterAll(item._id))  
 
-         let filterAll = (item) => {
-             
-             return project.sprints.some(el => el==item )
-             }
-            
-         const filtered = sprints!=undefined && sprints.filter(item => filterAll(item._id))   
-         setFilt(filtered)
-    } 
- },[sprints])
-
+                setFilt(filtered)
+                
+            } 
+ },[])
+ 
  useEffect(()=>{
      const now = new Date()
      const finish = new Date(project.dateFinish)
      const left = (finish.getTime() - now.getTime()) / (1000*60*60*24)
      const days = Math.floor(left)
-   
     setDaysLeft(days)
  },[])
+
+        
+    let filterAll = (item) => {
+        return project.sprints.some((el) => el._id == item);
+    };
 
 
     return(
@@ -48,13 +53,27 @@ useEffect(()=>{
                     <Light size='16' className={styles.filter}>#ЭП</Light>
                     <Button className={styles.button} onClick={() => history.replace(`/projects/${project.crypt}`)}>Подробнее</Button>
                     <div className={styles.sprints}>
-
-                        {sprints!= undefined && filt !=null && filt.map((item,i)=>{
-                            
+                      
+                       
+                        {
+                            permission==='admin'&&project.sprints!=undefined
+                            ? 
+                            project.sprints.map((item, i)=>{
+                                    return(
+                                        <MySprint key={i} content={item}/>
+                                    )
+                            })
+                            :
+                        sprints!=undefined && filt !=null && filt.map((item,i)=>{
                             return(
-                              <MySprint content={item}/>
+                              <MySprint key={i} content={item}/>
                             )
                         })}
+                        
+                            
+                        
+                        
+                        
                     </div>              
                             
             

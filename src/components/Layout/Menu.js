@@ -8,7 +8,7 @@ import { useState } from 'react'
 
 
 
-const Menu = ({closeAll, state, createProj, createTicket,createNews, user}) => {
+const Menu = ({addPodsos, closeAll, state, createProj, createTicket,createNews, user}) => {
 
 const [depForm, setDepForm] = useState(false)
 const exit = () => {
@@ -49,14 +49,17 @@ const plusMenuClick = (callback) => {
                         Добавить новость
                     </StyledIn>}
 
-                    {user.permission!='user' && <StyledIn onClick={()=>plusMenuClick(createProj)}>
+                    {user.permission!='user' &&  <StyledLink className='menu__nav' to='/admin/newproject'>
+
                         Создать проект
-                    </StyledIn>}
+                    </StyledLink>}
 
                     {user.permission!='user' && <StyledIn onClick={()=>plusMenuClick(()=>setDepForm(true))}>
                         Создать отдел
                     </StyledIn>}
-
+                    {user.permission!='user' && <StyledIn onClick={()=>plusMenuClick(addPodsos)}>
+                        Добавить смежника
+                    </StyledIn>}
             
         </MenuHead>
 
@@ -94,7 +97,7 @@ const plusMenuClick = (callback) => {
                         Отдел
                     </StyledLink>
 
-                    <StyledLink to='/news' onClick={closeAll}>
+                    <StyledLink style={{display:`${user.permission=='user'?'none':'block'}`}} to='/news' onClick={closeAll}>
                         Новости
                     </StyledLink>
 

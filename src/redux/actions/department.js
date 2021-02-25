@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { NEW_DEPARTMENT, ALL_DEPARTMENTS, FIND_DEPARTMENT, JOIN_DEPARTMENT, LEAVE_DEPARTMENT, DEPARTMENT_FAIL} from "../types";
+import { NEW_DEPARTMENT, ALL_DEPARTMENTS, FIND_DEPARTMENT, JOIN_DEPARTMENT, LEAVE_DEPARTMENT, DEPARTMENT_FAIL,CLEAR_DEPS} from "../types";
 
 
 
@@ -29,7 +29,13 @@ export const newDepartment = (formData) => async dispatch  => {
     }
 
 }
+export const clearDeps = () => async dispatch  => {
+  
+        dispatch({
+            type: CLEAR_DEPS,
+        })
 
+}
 export const allDepartments = () => async dispatch  => {
     try {
 
@@ -56,7 +62,7 @@ export const allDepartments = () => async dispatch  => {
 
 export const findDepartment = (divname) => async dispatch  => {
     try {
-        const res = await innerBackend.get(`/divisions/${divname}`)
+        const res = await innerBackend.get(`/divisions/find/${divname}`)
 
 
         dispatch({
@@ -80,16 +86,16 @@ export const findDepartment = (divname) => async dispatch  => {
 
 export const joinDepartment = (id) => async dispatch  => {
     try {
-console.log('join1' , id)
+// console.log('join1' , id)
         const res = await innerBackend.put(`/divisions/${id}`)
-        console.log('join2')
+        // console.log('join2')
 
 
         dispatch({
             type: JOIN_DEPARTMENT,
             payload: res.data
         })
-        console.log('join3')
+        // console.log('join3')
 
         }
       catch (err) {

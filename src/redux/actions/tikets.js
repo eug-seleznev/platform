@@ -27,8 +27,6 @@ export const newTicket = ({formData, file}) => async dispatch  => {
         )
     })
 
-        console.log(form.get('file'), 'file HERE')
-        console.log(form.get('text'), 'text HERE')
 
 
         const res = await Axios.post('/tickets', form, {
@@ -66,7 +64,7 @@ export const allTickets = () => async dispatch  => {
             type: ALL_TICKETS,
             payload: res.data
         })
-        console.log(res.data, 'respond')
+        // console.log(res.data, 'respond')
 
         }
       catch (err) {
@@ -88,7 +86,7 @@ export const allTickets = () => async dispatch  => {
 
 export const getTicket = (id) => async dispatch  => {
     try {
-        console.log(id, 'my id ticket')
+        // console.log(id, 'my id ticket')
         const res = await innerBackend.get(`/tickets/${id}`)
         dispatch({
             type: GET_TICKET,

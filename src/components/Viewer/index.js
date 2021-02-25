@@ -8,12 +8,11 @@ var viewer;
 
 
 
-const Viewer = ({oauth}) => {
+const Viewer = ({oauth, project}) => {
     const dispatch = useDispatch();
     let Autodesk = window.Autodesk;
     const container = useRef();           
-    var documentId =
-     `urn:${oauth.urn}`
+
 
 // let options = {
 //   env: "AutodeskProduction",
@@ -35,26 +34,22 @@ const Viewer = ({oauth}) => {
 
 
 
-    useEffect(() => {
-
-    }, [])
-
-    useEffect(async ()  =>  {
+    useEffect(()  =>  {
  
 
    Autodesk.Viewing.Initializer(options, () => {
     viewer = new Autodesk.Viewing.GuiViewer3D(container.current, { extensions: [ 'Autodesk.DocumentBrowser'] });
     viewer.start();
-    var documentId = 'urn:' + oauth.urn;
+    let documentId = 'urn:' + project.urn;
     Autodesk.Viewing.Document.load(documentId, onDocumentLoadSuccess, onDocumentLoadFailure);
   });
 
     }, []);
     
 function onDocumentLoadSuccess(doc) {
-  var viewables = doc.getRoot().getDefaultGeometry();
+  let viewables = doc.getRoot().getDefaultGeometry();
   viewer.loadDocumentNode(doc, viewables).then((i) => {
-    // documented loaded, any action?
+    console.log(Autodesk.Viewing.UI.ToolBar);
   });
 }
 
@@ -71,13 +66,27 @@ function onDocumentLoadFailure(viewerErrorCode) {
 
 
     return (
-        <div style={{width: "80vw", height: "80vh", backgroundColor: "grey", left: "0px"}}>
-            <div id="forgeViewer" className="viewer-app" style={{position: "absolute", width:"80vw", height:"80vh"}} ref={container}>
+    <>
+        <h1> model for: {project.title}</h1>
+        <div
+          style={{
+            width: "80vw",
+            height: "80vh",
+            backgroundColor: "grey",
+            left: "0px",
+          }}
+        >
+          <div
+            id="forgeViewer" 
+            className="viewer-app"
+            style={{ position: "absolute", width: "80vw", height: "80vh" }}
+            ref={container}
+          ></div>
 
-            </div>
-          
+
         </div>
-    )
+      </>
+    );
 }
 
 

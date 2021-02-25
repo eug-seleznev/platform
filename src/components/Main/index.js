@@ -73,10 +73,10 @@ if(!user.name){
                 <div className={styles.projects}>
                     <Bold color='black' size='36' className={styles.myProj}>Мои проекты</Bold>
 
-                    {user.projects.map((el,i)=>{
+                    {user.projects && user.projects.map((el,i)=>{
                         
                         return(
-                            <ProjectsCard project={el}  sprints={user.sprints} history={history} />
+                            <ProjectsCard project={el} key={i} sprints={user.sprints} history={history} />
                         )
                     })}
                     
@@ -91,7 +91,7 @@ if(!user.name){
                         listNews.map((el,i)=>{
                             const amount = window.innerWidth<1000? 2 : 3
                                 return(
-                                i<amount && <div onClick={()=>setNewsOpen({open:true, content: el})}><NewsCard el={el} /></div>
+                                i<amount && <div key={i} onClick={()=>setNewsOpen({open:true, content: el})}><NewsCard el={el} /></div>
                                 )
                             })
                     }

@@ -1,64 +1,151 @@
-import  {useState } from 'react'
+import  {useState,useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { allProjects, getProject, newProject } from '../../redux/actions/projects';
 import { newTicket } from '../../redux/actions/tikets';
 import style from '../../Styles/modules/components/Project/createPr.module.css'
 
-import {Container, Card, Title,} from '../../Styles/common'
+import {Container, Card, Title, ModalContainer,} from '../../Styles/common'
 import { Button, CancelButton } from '../../Styles/buttons';
 import { Bold, H1, H3, Light, Regular, Thin} from '../../Styles/typography'
+import { allUsers, searchUser } from '../../redux/actions/user';
 
-const ProjectNew = ({histCurrent,closeWindow}) => {
+const ProjectNew = ({history,closeWindow}) => {
     const dispatch = useDispatch();
     const project = useSelector(state => state.projects.project)
+    const userList = useSelector(state => state.users.users)
+    const searchResult = useSelector(state => state.users.searchResult)
+    const [checked, setChecked] = useState (false)
+    const [menu, setMenu] = useState (false)
+    const [trick, setTrick] = useState (false)
+    const [step, setStep] = useState (1)
+    const [idCurrent, setIdCurrent] = useState (null)
+    const [currentPos, setCurrentPos] = useState (null)
+    const [userStage, setUserStage] = useState (1)
+    const [idList,setIdList] = useState ([])
+    const [nameCurrent, setNameCurrent] = useState (null)
+    const [workerDataList, setWorkerDataList] = useState ({
+      task:'работать'
+    })
     const [formData, setFormData ] = useState({
         
         title: '',   
         dateStart: '', 
         city: '',  
-        type: '',
-        stage: '',
+        type: 'ЖК',
+        stage: 'Концепт',
+        par:'ХХ',
         dateFinish: '',
         customer: '',
         about: '',
-
-      
+        rcheck: false,
+        userid2: [],
+        offTitle:'',
+        budget:'',
+        schedule:'',
+        cusStorage:''
       });
    
 
 
-      const { title, dateStart, dateFinish, city, type, stage, customer, about} = formData;
+      const { title, dateStart, dateFinish, city, type, stage, customer, about, par, rcheck, offTitle, budget, schedule,cusStorage,userid2 } = formData;
+      const posCurrent =(e)=>{
+        setCurrentPos (e.target.value)
+        setWorkerDataList ({ ...workerDataList, position:e.target.value})
+        console.log (workerDataList)
+      }
+      const pushUserToForm =(e)=>{
+          formData.userid2.push(workerDataList)
+          setWorkerDataList({task:'работать'})
+          setNameCurrent(null)
+          setCurrentPos('')
+          setUserStage(1)
+      }
+      const returnToSearch =()=>{
+        setUserStage(1)
+        idList.pop()
+        setIdCurrent (null)
+        console.log(idList)
+      }
+      const onChangeCheckbox = () => {
+        setChecked(!checked)
+     }
+     useEffect(()=>{
+        setFormData({ ...formData, rcheck: checked });
+        console.log(checked)
+     },[checked])
+     useEffect(()=>{
+      setWorkerDataList ({ ...workerDataList, user:idCurrent, fullname:nameCurrent})
+      if(idCurrent!==null) {
+         idList.push(idCurrent)
+          console.log (idList)
+      }
+     
+   },[idCurrent])
 
-  
+    //   useEffect(()=>{
+    //     if(nameCurrent!=null&&!names.includes(idCurrent)) {
+    //       names.push(nameCurrent)
+    //       console.log(names)
+    //       setTrick(!trick)
+    //     }
+    // },[nameCurrent])
+   const nextStep =(step)=>{
+     setStep(step)
+   }
     const onChange = e => {
         e.preventDefault(); 
-
+       
         setFormData({ ...formData, [e.target.name]: e.target.value });
      }
      
+     const addUser = (user) => {
+      setIdCurrent(user._id)
+      setNameCurrent(user.fullname)
+      setUserStage(2)
+ }
+     const PeopleList = (e) => {
 
-     const Redirect = () => {
-            
-            histCurrent.push(`/projects/`)
-         
+          let request = e.target.value
+          if(request.length>=3){
+            setMenu(true)
+            console.log(e.target.value)
+            dispatch(searchUser(request))
+          }
+          else{
+            setMenu(false)
+          }
+          
+          
      }
-
+     
+     
      const onSubmit = async e => {
         e.preventDefault();
         dispatch(newProject(formData))
-        setTimeout(() => setFormData({
+        setIdList([])
+        setTimeout(() =>
+        setChecked (false),
+        setFormData({
           title: '',   
           dateStart: '', 
           city: '',  
           type: '',
-          stage: '',
+          stage: 'Концепт',
+          par:'ХХ',
           dateFinish: '',
           customer: '',
           about: '',
+          rcheck: false,
+          userid2: [],
+          offTitle:'',
+          budget:'',
+          schedule:'',
+          cusStorage:''
         }),50) 
-        closeWindow()
        
-        setTimeout(() => Redirect(),100) 
+        setTimeout(() => {
+          history.replace('./../projects')
+        },100) 
         
          
     
@@ -66,104 +153,304 @@ const ProjectNew = ({histCurrent,closeWindow}) => {
         }
 
     return (
-      <div>
-          <form className={style.form} onSubmit={onSubmit}>
-            <div>
-              <div className={style.row}>
-                <div className={style.input__long}>
-                <Thin className={style.title}>Название</Thin>
-                <input
-                  className={style.input__long}
-                  type="text"
-                  name="title"
-                  value={title}
-                  onChange={(e) => onChange(e)}
-                />
-                </div>
-              </div>
-              <div className={style.row}>
-                <div className={style.input__mid}>
-                  <Thin className={style.title}>Город</Thin>
-                  <input
-                  
-                    type="text"
-                    name="city"
-                    value={city}
-                    onChange={(e) => onChange(e)}
-                  />
-                </div>
-                <div className={style.input__short}>
-                  <Thin className={style.title}>Начало</Thin>
-                  <input
-                    type="date"
-                    name="dateStart"
-                    value={dateStart}
-                    onChange={(e) => onChange(e)}
-                  />
-                </div>
-                <div className={style.input__short}>
-                  <Thin className={style.title}>Дедлайн</Thin>
-                  <input
-                    type="date"
-                    name="dateFinish"
-                    value={dateFinish}
-                    onChange={(e) => onChange(e)}
-                  />
-                </div>
-              
-              </div>
-              <div className={style.row}>
-                <div className={style.input__mid}>
-                  <Thin className={style.title}>Тип проекта</Thin>
-                  <input
-                    type="text"
-                    name="type"
-                    value={type}
-                    onChange={(e) => onChange(e)}
-                  />
-                </div>
-                <div className={style.input__short}>
-                  <Thin className={style.title}>Стадия</Thin>
-                  <input
-                    type="text"
-                    name="stage"
-                    value={stage}
-                    onChange={(e) => onChange(e)}
-                  />
-                </div>
-                <div className={style.input__mid}>
-                  <Thin className={style.title}>Заказчик</Thin>
-                  <input
-                    type="text"
-                    name="customer"
-                    value={customer}
-                    onChange={(e) => onChange(e)}
-                  />
-                </div>
+      <div className={style.container_new_proj}>
+        <div className={style.stages}>
+          <div className={style.circle}>
+            <div className={style.number} style={{borderColor: `${step===1?'#3F496C':'#B7B7B7'}`}}>1</div>
+            <Regular >Информация о проекте</Regular>
+          </div>
+          <div className={style.line}></div>
+          <div className={style.circle}>
+            <div className={style.number} style={{borderColor: `${step===2?'#3F496C':'#B7B7B7'}`}}>2</div>
+            <Regular >Команда проекта</Regular>
+          </div>
+          <div className={style.line}></div>
+          <div className={style.circle}>
+            <div className={style.number} style={{borderColor: `${step===3?'#3F496C':'#B7B7B7'}`}}>3</div>
+            <Regular >Модель проекта</Regular>
+          </div>
+        </div> 
+        <Bold size='25' className={style.form__title}>Создание нового проекта</Bold>
+        <div className={style.info}>
+        <div className={style.description}>
+          <Bold size='22' style={{marginTop:'20px'}}>Страница создания нового проекта</Bold>
+          <Light className={style.descr1}>На этой странице мы создаем проекты, добавляем сотрудников в команду и записываем необходимую общую информацию.</Light>
+          <Light className={style.descr1}>При создании проекта создается закрытый канал в рокете, в который автоматически приглашаются все добавленные в команду (и зарегестрированные на платформе) сотрудники.</Light>
+        </div>
+        <form className={style.form} onSubmit={onSubmit}>
+       
+        {step===1?(
+           <div>  
+             <div>
+               <div className={style.row}>
+                 <div className={style.input__mid}>
+                   <Thin className={style.title}>Название</Thin>
+                   <input
+                     className={style.input__long}
+                     type="text"
+                     name="title"
+                     required
+                     value={title}
+                     onChange={(e) => onChange(e)}
+                   />
+                   
+                 </div>
+                 <div className={style.input__mid}>
+                   <Thin className={style.title}>Официальное название</Thin>
+                   <input
+                     className={style.input__long}
+                     type="text"
+                     name="offTitle"
+                     
+                     value={offTitle}
+                     onChange={(e) => onChange(e)}
+                   />
+                   
+                 </div>
+                 
+               </div>
+               <div className={style.row}>
                 
-              </div>
-              <div className={style.row}>
-                <div className={style.input__long}>
-                  <Thin className={style.title}>Описание</Thin>
-                  <textarea
-                    className={style.input__long}
-
-                      type="text"
-                      name="about"
-                      value={about}
-                      onChange={(e) => onChange(e)}
-                    />
-                </div>
-              </div>
-              </div>
-              <div className={style.buttons}>
-                <CancelButton grey padd={'70px'} style={{marginTop:'10px'}} onClick={closeWindow}> Отмена</CancelButton>
-                <Button fontSize={'16px'}style={{marginTop:'10px'}} padd={'20px'} type="submit"> Создать новый проект</Button>
-              </div>
-
-     
-            
-          </form>
+                
+               
+                   <div className={style.input__short}>
+                     <Thin className={style.title}>Начало</Thin>
+                     <input
+                       type="date"
+                       name="dateStart"
+                       value={dateStart}
+                       onChange={(e) => onChange(e)}
+                     />
+                   </div>
+                   <div className={style.input__short}>
+                     <Thin className={style.title}>Город</Thin>
+                     <input
+                       required
+                       type="text"
+                       name="city"
+                       value={city}
+                       onChange={(e) => onChange(e)}
+                     />
+                   </div>
+                   <div className={style.input__short}>
+                     <Thin className={style.title}>Дедлайн</Thin>
+                     <input
+                       type="date"
+                       name="dateFinish"
+                       value={dateFinish}
+                       onChange={(e) => onChange(e)}
+                     />
+                  
+                 </div>
+   
+                 
+               </div>
+               <div className={style.row}>
+                 <div className={style.input__mid}>
+                   <Thin className={style.title}>Фаза</Thin>
+                   <select
+                     defaultValue="Концепт"
+                     name="stage"
+                     onChange={(e) => onChange(e)}
+                     className={style.select}
+                   >
+                     <option value="Концепт">Концепт</option>
+                     <option value="Эскиз">Эскиз</option>
+                     <option value="Проект">Проект</option>
+                     <option value="Рабочая">Рабочая</option>
+                   </select>
+                 </div>
+                 <div className={style.input__rocket}>
+                   <input
+                     type="checkbox"
+                     style={{ width: "30px", height: "30px", marginRight: "20px" }}
+                     name="rcheck"
+                     defaultValue={false}
+                     onClick={onChangeCheckbox}
+                   />
+                   <Thin className={style.title__rocket}>
+                     Создать комнату в rocket chat
+                   </Thin>
+                 </div>
+               </div>
+               <div className={style.row}>
+                 <div className={style.input__mid}>
+                   <Thin className={style.title}>Заказчик</Thin>
+                   <input
+                     type="text"
+                     name="customer"
+                     value={customer}
+                     onChange={(e) => onChange(e)}
+                   />
+                 </div>
+                 <div className={style.input__mid}>
+                   <Thin className={style.title}>Тип проекта</Thin>
+                   <select
+                     defaultValue="Концепт"
+                     name="type"
+                     onChange={(e) => onChange(e)}
+                     className={style.select}
+                   >
+                     <option value="ЖК">ЖК</option>
+                     <option value="Общественное пространство">
+                       Общественное пространство
+                     </option>
+                     <option value="Частный дом">Частный дом</option>
+                     <option value="Визуализации">Визуализации</option>
+                     <option value="Интерьер">Интерьер</option>
+                     <option value="Другое">Другое</option>
+                   </select>
+                 </div>
+               
+               </div>
+               <div className={style.row}>
+                 <div className={style.input__long}>
+                   <Thin className={style.title}>Описание</Thin>
+                   <textarea
+                     className={style.input__long}
+                     type="text"
+                     name="about"
+                     value={about}
+                     onChange={(e) => onChange(e)}
+                   />
+                 </div>
+               </div>
+               <div className={style.row}>
+                 <div className={style.input__short} style={{marginBottom:'30px'}}>
+                   <Thin className={style.title3}>Ссылка на бюджет</Thin>
+                   <input
+                     className={style.input__long}
+                     type="text"
+                     name="budget"
+                     required
+                     value={budget}
+                     onChange={(e) => onChange(e)}
+                   />
+                   
+                 </div>
+                 <div className={style.input__short}>
+                   <Thin className={style.title3}>Ссылка на календарный график</Thin>
+                   <input
+                     className={style.input__long}
+                     type="text"
+                     name="schedule"
+                     required
+                     value={schedule}
+                     onChange={(e) => onChange(e)}
+                   />
+                   
+                 </div>
+                 <div className={style.input__short}>
+                   <Thin className={style.title3}>Ссылка на хранилице для заказчика</Thin>
+                   <input
+                     className={style.input__long}
+                     type="text"
+                     name="cusStorage"
+                      required
+                     value={cusStorage}
+                     onChange={(e) => onChange(e)}
+                   />
+                   
+                 </div>
+               </div>
+             </div>
+             
+           </div>  
+           
+        ):step===2?<div>
+           <div className={style.add__people}  >
+                  <div style={{display:`${userStage===1?'block':'none'}`}}>
+                      <Thin size='28' className={style.title}>Поиск сотрудников</Thin>
+                     <input placeholder='введите имя' className={style.input__long} onChange={(e) => PeopleList(e)}/>
+                     <div className={style.searchMenu} style={{display:`${menu?'block':'none'}` }}>
+                       {searchResult.map((user,i)=>{
+                         console.log(searchResult)
+                         return (
+                           <div className={style.search__user}>
+                             <div  key={i}>{user.fullname}</div>
+                             <CancelButton fontSize={"16px"}padd={"20px"} style={{display:`${idList.includes(user._id)||idCurrent===user._id?'none':'block'}`}} onClick={()=>addUser(user)}>Добавить</CancelButton>
+                           </div>
+                           
+                         )
+                       })}
+                     </div>
+                     </div>
+                     <div  style={{display:`${userStage===2?'block':'none'}`}}>  
+                      <Thin size='28' className={style.title}>Введите должность сотрудника</Thin>
+                      <div className={style.search__user}>
+                        <div>{nameCurrent}</div> 
+                        <input className={style.position}  value={currentPos} onChange={(e) => posCurrent(e)} placeholder='должность'></input>
+                        
+                      </div>
+                      <div className={style.buttons}>
+                        <CancelButton fontSize={"16px"} padd={"20px"} grey onClick={returnToSearch}>Вернуться к поиску</CancelButton>
+                        <CancelButton fontSize={"16px"} padd={"20px"} onClick={pushUserToForm}>Добавить</CancelButton>
+                          
+                        </div>
+                     </div>
+                    
+                     <div className={style.users__list} >
+                       <Thin size='28'  className={style.title}>Список сотрудников для добавления</Thin>
+                       {formData.userid2.map((user,i)=>{
+                         
+                         return (
+                           <div key={i} className={style.search__user}>
+                             <div >{user.fullname}</div>
+                             <div className={style.place}>
+                               <Thin size='24'>{user.position}</Thin>
+                               
+                             </div>
+                             {/* <Button grey style={{display:`${formData.userid.includes(user._id)||idCurrent===user._id?'none':'block'}`}} onClick={()=>addUser(user)}>Добавить</Button> */}
+                           </div>
+                           
+                         )
+                       })}
+                     </div>
+                     
+                   </div> 
+                   <div className={style.buttons2cont}>
+                      <div className={style.buttons2}>
+                        <CancelButton
+                          grey
+                          padd={"70px"}
+                          style={{ marginTop: "25px",marginRight:'20px' }}
+                          onClick={()=>nextStep(1)}
+                        >
+                          {" "}
+                          Предыдущий шаг
+                        </CancelButton>
+                        <Button
+                          fontSize={"16px"}
+                          style={{ marginTop: "25px" }}
+                          padd={"20px"}
+                          type="submit"
+                        >
+                          {" "}
+                          Создать новый проект
+                        </Button>
+                      </div>
+                    </div>
+        </div>:''}</form></div>
+        <div className={style.buttons} style={{display:`${step===1?'flex':'none'}`}}>
+               <CancelButton
+                 grey
+                 padd={"70px"}
+                 style={{ marginTop: "5px" }}
+                 onClick={closeWindow}
+               >
+                 {" "}
+                 Отмена
+               </CancelButton>
+               <CancelButton
+                 fontSize={"16px"}
+                 style={{ marginTop: "5px" }}
+                 padd={"20px"}
+                 onClick={()=>nextStep(2)}
+               >
+                 {" "}
+                 Перейти к следующему шагу
+               </CancelButton>
+             </div>
        
       </div>
     );

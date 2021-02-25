@@ -5,14 +5,14 @@ import SprintForm from './sprintForm'
 import style from '../../../Styles/modules/components/Project/modWindow.module.css'
 import {H1, Bold } from "../../../Styles/typography"
 import ProjectNew from "../newProject";
-
+import AddContractor from "../../Superadmin/addContractor";
 import CreateNew from "../../Superadmin/createNew";
 import Ticket from "../../Adminka/Index";
 
 export const url = process.env.REACT_APP_IP;
 
 
-const ModalWindow = ({closeWindow, bigTitle,smallTitles,customElements,histCurrent,buttonTitle,sprintId, offWindow, status}) => {
+const ModalWindow = ({closeWindow, bigTitle,smallTitles,customElements,histCurrent,buttonTitle, offWindow, status}) => {
 	
 	return (
 	<>
@@ -24,7 +24,7 @@ const ModalWindow = ({closeWindow, bigTitle,smallTitles,customElements,histCurre
 						<Bold size={30}>{bigTitle}</Bold>
 						{customElements === 'CreateSprint'? 
 						<>
-							<SprintForm offWindow={offWindow} sprintId={sprintId}smallTitles={smallTitles} buttonTitle={buttonTitle} customElements={customElements}>
+							<SprintForm offWindow={offWindow} smallTitles={smallTitles} buttonTitle={buttonTitle} customElements={customElements}>
 							</SprintForm>
 						</>:customElements === 'CreateProject'?
 						<>
@@ -38,7 +38,12 @@ const ModalWindow = ({closeWindow, bigTitle,smallTitles,customElements,histCurre
 						<>
 							<Ticket closeWindow={closeWindow} histCurrent={histCurrent}>
 							</Ticket>
-						</>:''}
+						</>:customElements === 'addPodsos'?
+						<>
+							<AddContractor closeWindow={closeWindow} histCurrent={histCurrent}>
+							</AddContractor>
+						</>
+						:''}
 					</ModalWind>
 				</ModalContainer>
 			</div>
