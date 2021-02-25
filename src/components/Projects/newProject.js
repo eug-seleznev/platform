@@ -31,7 +31,7 @@ const ProjectNew = ({history,closeWindow}) => {
         title: '',   
         dateStart: '', 
         city: '',  
-        type: '',
+        type: 'ЖК',
         stage: 'Концепт',
         par:'ХХ',
         dateFinish: '',
@@ -153,9 +153,32 @@ const ProjectNew = ({history,closeWindow}) => {
         }
 
     return (
-      <div className={style.container}>
-        <Bold size='32'>{step===1? 'Шаг 1: Основная информация о проекте':step===2?'Шаг 2: Добавление людей в проект (опционально)':''}</Bold>
+      <div className={style.container_new_proj}>
+        <div className={style.stages}>
+          <div className={style.circle}>
+            <div className={style.number} style={{borderColor: `${step===1?'#3F496C':'#B7B7B7'}`}}>1</div>
+            <Regular >Информация о проекте</Regular>
+          </div>
+          <div className={style.line}></div>
+          <div className={style.circle}>
+            <div className={style.number} style={{borderColor: `${step===2?'#3F496C':'#B7B7B7'}`}}>2</div>
+            <Regular >Команда проекта</Regular>
+          </div>
+          <div className={style.line}></div>
+          <div className={style.circle}>
+            <div className={style.number} style={{borderColor: `${step===3?'#3F496C':'#B7B7B7'}`}}>3</div>
+            <Regular >Модель проекта</Regular>
+          </div>
+        </div> 
+        <Bold size='25' className={style.form__title}>Создание нового проекта</Bold>
+        <div className={style.info}>
+        <div className={style.description}>
+          <Bold size='22' style={{marginTop:'20px'}}>Страница создания нового проекта</Bold>
+          <Light className={style.descr1}>На этой странице мы создаем проекты, добавляем сотрудников в команду и записываем необходимую общую информацию.</Light>
+          <Light className={style.descr1}>При создании проекта создается закрытый канал в рокете, в который автоматически приглашаются все добавленные в команду (и зарегестрированные на платформе) сотрудники.</Light>
+        </div>
         <form className={style.form} onSubmit={onSubmit}>
+       
         {step===1?(
            <div>  
              <div>
@@ -293,8 +316,8 @@ const ProjectNew = ({history,closeWindow}) => {
                  </div>
                </div>
                <div className={style.row}>
-                 <div className={style.input__short}>
-                   <Thin className={style.title}>Ссылка на бюджет</Thin>
+                 <div className={style.input__short} style={{marginBottom:'30px'}}>
+                   <Thin className={style.title3}>Ссылка на бюджет</Thin>
                    <input
                      className={style.input__long}
                      type="text"
@@ -306,7 +329,7 @@ const ProjectNew = ({history,closeWindow}) => {
                    
                  </div>
                  <div className={style.input__short}>
-                   <Thin className={style.title}>Ссылка на календарный график</Thin>
+                   <Thin className={style.title3}>Ссылка на календарный график</Thin>
                    <input
                      className={style.input__long}
                      type="text"
@@ -318,7 +341,7 @@ const ProjectNew = ({history,closeWindow}) => {
                    
                  </div>
                  <div className={style.input__short}>
-                   <Thin className={style.title}>Ссылка на хранилице для заказчика</Thin>
+                   <Thin className={style.title3}>Ссылка на хранилице для заказчика</Thin>
                    <input
                      className={style.input__long}
                      type="text"
@@ -331,26 +354,7 @@ const ProjectNew = ({history,closeWindow}) => {
                  </div>
                </div>
              </div>
-             <div className={style.buttons}>
-               <CancelButton
-                 grey
-                 padd={"70px"}
-                 style={{ marginTop: "5px" }}
-                 onClick={closeWindow}
-               >
-                 {" "}
-                 Отмена
-               </CancelButton>
-               <CancelButton
-                 fontSize={"16px"}
-                 style={{ marginTop: "5px" }}
-                 padd={"20px"}
-                 onClick={()=>nextStep(2)}
-               >
-                 {" "}
-                 Перейти к следующему шагу
-               </CancelButton>
-             </div>
+             
            </div>  
            
         ):step===2?<div>
@@ -360,7 +364,7 @@ const ProjectNew = ({history,closeWindow}) => {
                      <input placeholder='введите имя' className={style.input__long} onChange={(e) => PeopleList(e)}/>
                      <div className={style.searchMenu} style={{display:`${menu?'block':'none'}` }}>
                        {searchResult.map((user,i)=>{
-                         
+                         console.log(searchResult)
                          return (
                            <div className={style.search__user}>
                              <div  key={i}>{user.fullname}</div>
@@ -404,11 +408,12 @@ const ProjectNew = ({history,closeWindow}) => {
                      </div>
                      
                    </div> 
-                      <div className={style.buttons}>
+                   <div className={style.buttons2cont}>
+                      <div className={style.buttons2}>
                         <CancelButton
                           grey
                           padd={"70px"}
-                          style={{ marginTop: "25px" }}
+                          style={{ marginTop: "25px",marginRight:'20px' }}
                           onClick={()=>nextStep(1)}
                         >
                           {" "}
@@ -424,7 +429,28 @@ const ProjectNew = ({history,closeWindow}) => {
                           Создать новый проект
                         </Button>
                       </div>
-        </div>:''}</form>
+                    </div>
+        </div>:''}</form></div>
+        <div className={style.buttons} style={{display:`${step===1?'flex':'none'}`}}>
+               <CancelButton
+                 grey
+                 padd={"70px"}
+                 style={{ marginTop: "5px" }}
+                 onClick={closeWindow}
+               >
+                 {" "}
+                 Отмена
+               </CancelButton>
+               <CancelButton
+                 fontSize={"16px"}
+                 style={{ marginTop: "5px" }}
+                 padd={"20px"}
+                 onClick={()=>nextStep(2)}
+               >
+                 {" "}
+                 Перейти к следующему шагу
+               </CancelButton>
+             </div>
        
       </div>
     );
