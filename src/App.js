@@ -42,6 +42,7 @@ import CreateProject from './components/Projects/newProject';
 import { Container, LoginContainer } from "../src/Styles/common";
 import Contractors from './components/Superadmin/contractors';
 import AllDepartments from './components/Department/allDepartments'
+import Partition from './components/User/partition';
 
 
 
@@ -79,14 +80,14 @@ const App = () => {
   return (
     <div className="App">
       {!auth ? (
-      <LoginContainer>
+        <LoginContainer>
           <Auth />
-      </LoginContainer>
+        </LoginContainer>
       ) : (
         <Router history={history}>
           <Layout histCurrent={history} />
           <Switch>
-            <Container >
+            <Container>
               {/* main */}
               <Route exact path="/" component={Main} />
 
@@ -104,7 +105,11 @@ const App = () => {
               <Route exact path="/projects/:id" component={Project} />
               <Route exact path="/projects/:id/:id" component={Sprint} />
               <Switch>
-                <Route exact path="/projects/:id/model/view" component={Helper} />
+                <Route
+                  exact
+                  path="/projects/:id/model/view"
+                  component={Helper}
+                />
               </Switch>
               <Route exact path="/admin/editproj" component={ProjectsEdit} />
               <Route exact path="/admin/editproj/:id" component={OneProjEdit} />
@@ -112,6 +117,8 @@ const App = () => {
               {/* users */}
               <Route exact path="/users" component={Users} />
               <Route exact path="/users/me" component={MyProfile} />
+              <Route exact path="/users/me/partition" component={Partition} />
+
               <Route exact path="/users/:id" component={Employe} />
               <Route exact path="/edit" component={Edit} />
               <Route exact path="/news" component={News} />

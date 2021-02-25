@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { ALL_USERS, USER_ERR, CHANGE_PERMISSION, PERM_RETURN, ONE_USER,SEARCH_USER, CLEAR_ERROR, CLEAR_MSG,ADD_CONTRACTOR,ALL_CONTRACTORS } from "../types";
+import { ALL_USERS, USER_ERR, CHANGE_PERMISSION, PERM_RETURN, ONE_USER,SEARCH_USER, CLEAR_ERROR, CLEAR_MSG,ADD_CONTRACTOR,ALL_CONTRACTORS, PARTITION_UPDATE } from "../types";
 
 
 
@@ -50,6 +50,28 @@ export const allUsers = ({query, sortOrder}) => async dispatch  => {
             
       } 
 
+}
+
+
+export const usersPartition = (partition) => async dispatch =>  {
+  try {
+    let body = {
+      partition: partition
+    }
+    console.log(body);
+
+    const res = await innerBackend.put('users/part', body)
+
+    dispatch({
+      type: PARTITION_UPDATE,
+      payload: res.data
+    })
+
+  } catch (err) {
+    console.log('lol')
+
+
+  }
 }
 export const searchUser = (request) => async dispatch  => {
   try {

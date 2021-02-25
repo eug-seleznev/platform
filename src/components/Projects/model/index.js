@@ -37,7 +37,7 @@ const Viewer = ({project}) => {
           }, 2000)            
       }
     }
-    return () => dispatch(cleardData())
+  
   }, [model_status]);
 
 
