@@ -136,7 +136,7 @@ const App = () => {
                   path="/departments/all"
                   component={AllDepartments}
                 />
-                {/* <Route exact path="/:id/viewer" component={PublicViewer} /> */}
+                <Route exact path="/:id/viewer" component={PublicViewer} />
 
                 <Route exact path="/viewer" component={Helper} />
                 <Route exact path="/contractors" component={Contractors} />
@@ -146,9 +146,9 @@ const App = () => {
         )}
       </Router>
 
-      <Router history={history}>
+      {/* <Router history={history}>
         <Route exact path="models/:id/viewer" component={PublicViewer} />
-      </Router>
+      </Router> */}
     </div>
   );
 }
