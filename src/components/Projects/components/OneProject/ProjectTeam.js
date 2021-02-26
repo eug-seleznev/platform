@@ -5,13 +5,16 @@ import { Bold, H1} from '../../../../Styles/typography'
 import ProjTeam from './oneTeammate'
 import { joinTeam } from '../../../../redux/actions/projects';
 import { useEffect, useState } from 'react';
-
+import Subtitle from './subtitle';
+import { Card} from '../../../../Styles/common';
+import { Table } from '../../../../Styles/tables';
 
 
 const ProjectTeam = ({id, hist}) => {
 	const dispatch = useDispatch();
   const [idArray] = useState([])
   const [button,setButton] = useState(false)
+  const [open,setOpen] = useState(false)
     const user = useSelector(state => state.auth.user) 
    	const project = useSelector(state => state.projects.project)
     useEffect(()=>{
@@ -38,38 +41,28 @@ const ProjectTeam = ({id, hist}) => {
         
         
     }
+    const openfunc=()=>{
+      setOpen(!open)
+    }
     return (
-      <>
-              <div className={style.border__team}><H1 style={{marginBottom:'10px'}}>Команда</H1></div>     
+      <div style={{height:`${!open?'65px':'auto'}`, overflowY:'hidden'}}>    
+            <div style={{display:'flex', alignItems:'center'}}>
+              <Subtitle title='Команда проекта' isopen={open} openfunc={openfunc} src='/team.png' open={true} srcplus={button} buttonFunc={hadleTeam} subtwidth='40%' buttonActive={true}></Subtitle> 
+              
+            </div>   
                   <div className={style.sprintdescr__cont}>
+                    <Card >
+                     
                       {project.team.map((user, i) => {
                             return (
-                              <ProjTeam key={i} histProp={hist} userId={user._id} userName={user.name} lastName={user.lastname} userAvatar={user.avatar} userPos={user.position}></ProjTeam>
+                              <ProjTeam key={i} histProp={hist} userId={user._id} userName={user.fullname} lastName={user.lastname} userAvatar={user.avatar} userPos={user.position}></ProjTeam>
                             );
                           })}
                           
                         
                         <br />
-                        
-                        {project.team.map((empl, ind) => {
-                          // console.log(user, "emp id");
-                          if (empl._id === user.id) {
-                            // console.log(ind, "INDEX USER");
-                            return (
-                              <div
-                                key={ind}
-                                onClick={hadleTeam}
-                                className={style.exit}
-                                style={{display: `${project.status ? "none" : "flex"}`,cursor:'pointer'}}
-                              >
-                                <Bold style={{textAlign:'center'}}>Выйти </Bold><Bold style={{textAlign:'center'}} className={style.exit_in}>из команды проекта</Bold>
-                              </div>
-                            );
-                          }
-                          
-                        })}
-                       
-                    
+                      
+{/*                     
                            {  
                                     <button
                                       fontSize={'20px'}
@@ -83,12 +76,13 @@ const ProjectTeam = ({id, hist}) => {
                                     >
                                       Вступить в команду проекта
                                     </button>
-                           }
-                              
+                           } */}
+                         
+                        </Card>      
                          
                     </div>
 
-	  </>
+	  </div>
   
     )
 }

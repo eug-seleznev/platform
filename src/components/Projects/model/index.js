@@ -5,6 +5,7 @@ import { cleardData, postModel, Status } from "../../../redux/actions/models";
 import { Link } from "react-router-dom";
 import { clearUrn } from "../../../redux/actions/projects";
 import { Button } from "../../../Styles/buttons";
+import Subtitle from "../components/OneProject/subtitle";
 
 const Viewer = ({project}) => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const Viewer = ({project}) => {
     submit: false, // for form submit
     button: false //render model load button
   });
-
+  const [open,setOpen] = useState(false)
 
   useEffect(() => {
     if(loaded.submit){
@@ -69,8 +70,13 @@ const Viewer = ({project}) => {
     dispatch(postModel(formData));
     dispatch(clearUrn())
   };
+  const openfunc=()=>{
+    setOpen(!open)
+  }
   return (
-    <Card>
+    <div style={{height:`${!open?'65px':'auto'}`, overflowY:'hidden'}}>
+      <Subtitle title="Модель проекта"openfunc={openfunc} subtwidth='40%' isopen={open} src='/model.png' open={true}></Subtitle>
+      <Card style={{width:'33.3%'}}>
       {!loaded.submit && (
         <form onSubmit={onSubmit}>
           <label> Тут можно загрузить новую модель:  </label>
@@ -89,6 +95,8 @@ const Viewer = ({project}) => {
         <p>Модели в проекте пока что нет, но можно загрузить</p>
       )}
     </Card>
+    </div>
+    
   );
 };
 

@@ -10,7 +10,7 @@ import TitleOfProject from "../components/OneProject/titleOfProject";
 import AllSprintsOfProj from "../components/OneProject/allSprintsOfproj";
 import CalendSprint from "../components/OneProject/sprintCalend";
 import ProjectTeam from "../components/OneProject/ProjectTeam";
-import DeliteEnd from "../components/OneProject/deliteEnd";
+
 import Viewer from "../model";
 
 const Project = ({match, history}) => {
@@ -45,9 +45,14 @@ const Project = ({match, history}) => {
             <>
               <TitleOfProject hist={history}></TitleOfProject>
               <AllSprintsOfProj status={project.status} match={match} hist={history}></AllSprintsOfProj>
-              <CalendSprint id={id} hist={history} project={project}></CalendSprint>
-              <ProjectTeam hist={history} id={id}></ProjectTeam>
-              <Viewer project={project} />  
+              <div style={{width:'100%', display:'flex'}}>
+                <div style={{width:'100%'}}>
+                  <ProjectTeam hist={history} id={id}></ProjectTeam>
+                  <CalendSprint id={id} hist={history} project={project}></CalendSprint>
+                  <Viewer project={project} />
+                </div>
+                <ProjInfo></ProjInfo>
+              </div> 
             </>
                 )}
         </div>

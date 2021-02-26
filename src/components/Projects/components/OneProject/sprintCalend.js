@@ -9,6 +9,7 @@ import { allSprints} from "../../../../redux/actions/projects";
 import { Bold } from '../../../../Styles/typography'
 import { Oauth } from "../../../../redux/actions/models";
 import SprintHistory from "./sprintHistory";
+import Subtitle from "./subtitle";
 
 let months = ['янв','фев',"мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"]
 let count = [1,2,3,4]
@@ -34,7 +35,7 @@ const CalendSprint = ({hist, match, id}) => {
     // эт массивы для календаря
     const[conditionalWeeks] =useState([]) 
     const[sprintPaint, setPaintSprint] = useState ([])
-
+    const [open,setOpen] = useState(false)
 
 
  
@@ -78,17 +79,17 @@ const CalendSprint = ({hist, match, id}) => {
     useEffect (()=>{  
 
             if(calendLoader){
-              console.log('STAGE 4')
+              // console.log('STAGE 4')
               setpr(false)
               const MapCheck = () =>  new Promise((resolve, reject) => {
-				console.log('STAGE 5')
+				//console.log('STAGE 5')
                 for (let i = 0; i <= 47; i++) {
 			
                   if (project.crypt === id){
                     let yu = project.dateStart.slice(5,7)
                     let index = Number(yu)
                     if ((index+i/4) <13){
-						console.log('hi')
+						// console.log('hi')
                       conditionalWeeks.push([i, Math.trunc((i/4)+index),
                         i%4==1?2:
                         i%4==2?3:
@@ -98,7 +99,7 @@ const CalendSprint = ({hist, match, id}) => {
                     }
               // елс иф для адекватной отрисовки первого месяца как стартового для проекта  
                     else if (index+i/4>=13){
-						console.log('hi')
+						// console.log('hi')
                       conditionalWeeks.push([i, Math.trunc((i/4)+index-12),
                         i%4==1?2:
                         i%4==2?3:
@@ -111,11 +112,11 @@ const CalendSprint = ({hist, match, id}) => {
              })
 
               MapCheck().then(() =>{
-				console.log('stage7')
+				// console.log('stage7')
               let sprintArray = [];
              
               conditionalWeeks.map ((body, i) => {
-				console.log('stage7')
+				// console.log('stage7')
                     let int = 0
                      sprintDays.filter((sprintday)=>Math.trunc(sprintday[0]/7.75)+1===body[2])
                      .filter((sprintday)=>sprintday[1]===body[1]).filter((sprintday)=>sprintday[2]<sprintday[3]/ 100 * 50)
@@ -169,18 +170,20 @@ const CalendSprint = ({hist, match, id}) => {
      
  }
   
- 
+ const openfunc=()=>{
+  setOpen(!open)
+}
 
     return (
-      <>
+      <div style={{height:`${!open?'65px':'auto'}`, overflowY:'hidden'}}>
 				<div className={style.border__calend}></div>
-					
+					<Subtitle title='История проекта' src='/history.png' openfunc={openfunc} isopen={open} open={true} subtwidth='40%' buttonActive={false}></Subtitle> 
 					{!paint?<div>loading...</div>:(
 					//календарь со спринтами
 					<> 
 
 					<div className={style.calend} >
-					<div className={style.calend__title}>Статистика проекта</div>
+					
 					<div className={style.weeks}>
 						{count.map ((body, i) => {
 						
@@ -208,7 +211,7 @@ const CalendSprint = ({hist, match, id}) => {
 					</div>
 					<SprintHistory hist={hist} status={status} openModHistory={openModHistory} id={id}></SprintHistory>
 					</>)}
-	  </>
+	  </div>
   
     )
 }
