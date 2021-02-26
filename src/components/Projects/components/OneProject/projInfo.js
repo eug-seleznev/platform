@@ -8,7 +8,7 @@ const ProjInfo = ({}) => {
     // const [overCard, setOvercard] = useState(false)
 
     return(
-		<div className={styles.sprint__title} style={{width:subtwidth}}>
+		<div className={styles.sprint__title} >
 			
 	  	</div>
     )

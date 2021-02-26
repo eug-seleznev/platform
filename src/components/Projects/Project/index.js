@@ -12,6 +12,7 @@ import CalendSprint from "../components/OneProject/sprintCalend";
 import ProjectTeam from "../components/OneProject/ProjectTeam";
 
 import Viewer from "../model";
+import ProjInfo from "../components/OneProject/projInfo";
 
 const Project = ({match, history}) => {
 

@@ -11,21 +11,23 @@ import Confirm from './confirm'
 const ProposeCard = ({cardContent, filters, reverse, user}) => {
 const dispatch = useDispatch()
 const reload = useSelector(state => state.office.reload)
-const likeTrue =  cardContent.likes.some(el => el.user == user.id)
+const likeTrue =  cardContent.likes.some(el => el.user == user._id)
 
 
 const [showConfirm, setShowConfirm] = useState(false)
 
 const likeButton =(id) =>{
     dispatch(likePropose(id))
- 
+    
 }
 const deleteButton =(id) =>{
    dispatch(deletePropose(id))
     setShowConfirm(false)
 }
 
-
+useEffect(()=>{
+    console.log(cardContent.likes) 
+},[])
 
 
     return (
@@ -39,7 +41,7 @@ const deleteButton =(id) =>{
             <Regular size='16px' className={styles.text}>{cardContent.text}</Regular>
             <Thin className={styles.date}>{cardContent.date.slice(5,10).split('-').reverse().join('.')}</Thin>
     
-            <img src={likeTrue? '/redLike.png' :'/like.png'} className={styles.likeBtn} onClick={()=>likeButton(cardContent._id)} />
+            <img src='/like.png' style={{backgroundColor:`${likeTrue?'red':'white'}`, cursor:'pointer'}} className={styles.likeBtn} onClick={()=>likeButton(cardContent._id)} />
             
             <Bold size='12' className={styles.likes}>{cardContent.likeCount} людям нравится</Bold>
 
