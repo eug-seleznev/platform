@@ -37,12 +37,12 @@ import MyProjects from './components/Projects/My';
 import News from './components/News';
 import {  setAuthToken } from './components/utils/axios';
 import Helper from './components/Viewer/helper';
-
 import CreateProject from './components/Projects/newProject';
 import { Container, LoginContainer } from "../src/Styles/common";
 import Contractors from './components/Superadmin/contractors';
 import AllDepartments from './components/Department/allDepartments'
 import Partition from './components/User/partition';
+import PublicViewer from './components/Viewer/publicViewer';
 
 
 
@@ -70,67 +70,85 @@ const App = () => {
         dispatch(loadUser());
       }, 1000);
     }
-
-   
   }, [loaded])
-
 
 
 
   return (
     <div className="App">
-      {!auth ? (
-        <LoginContainer>
-          <Auth />
-        </LoginContainer>
-      ) : (
-        <Router history={history}>
-          <Layout histCurrent={history} />
-          <Switch>
-            <Container>
-              {/* main */}
-              <Route exact path="/" component={Main} />
+      <Router history={history}>
+        {!auth ? (
+          <LoginContainer>
+            <Route exact path="/" component={Auth} />
+            <Route exact path="/:id/viewer" component={PublicViewer} />
+          </LoginContainer>
+        ) : (
+          <>
+            <Layout histCurrent={history} />
+            <Switch>
+              <Container>
+                {/* main */}
+                <Route exact path="/" component={Main} />
 
-              {/* сисадминошная */}
-              <Route exact path="/help" component={Admin} />
-              <Route exact path="/tickets" component={Dashboard} />
-              <Route exact path="/tickets/:id" component={Ticket} />
+                {/* сисадминошная */}
+                <Route exact path="/help" component={Admin} />
+                <Route exact path="/tickets" component={Dashboard} />
+                <Route exact path="/tickets/:id" component={Ticket} />
 
-              <Route exact path="/db" component={DataBase} />
-              <Route exact path="/office" component={Office} />
-              {/* projects */}
-              <Route exact path="/projects" component={Projects} />
-              <Route exact path="/myprojects" component={MyProjects} />
+                <Route exact path="/db" component={DataBase} />
+                <Route exact path="/office" component={Office} />
+                {/* projects */}
+                <Route exact path="/projects" component={Projects} />
+                <Route exact path="/myprojects" component={MyProjects} />
 
-              <Route exact path="/projects/:id" component={Project} />
-              <Route exact path="/projects/:id/:id" component={Sprint} />
-              <Switch>
+                <Route exact path="/projects/:id" component={Project} />
+                <Route exact path="/projects/:id/:id" component={Sprint} />
+                <Switch>
+                  <Route
+                    exact
+                    path="/projects/:id/model/view"
+                    component={Helper}
+                  />
+                </Switch>
+                <Route exact path="/admin/editproj" component={ProjectsEdit} />
                 <Route
                   exact
-                  path="/projects/:id/model/view"
-                  component={Helper}
+                  path="/admin/editproj/:id"
+                  component={OneProjEdit}
                 />
-              </Switch>
-              <Route exact path="/admin/editproj" component={ProjectsEdit} />
-              <Route exact path="/admin/editproj/:id" component={OneProjEdit} />
-              <Route exact path="/admin/newproject" component={CreateProject} />
-              {/* users */}
-              <Route exact path="/users" component={Users} />
-              <Route exact path="/users/me" component={MyProfile} />
-              <Route exact path="/users/me/partition" component={Partition} />
+                <Route
+                  exact
+                  path="/admin/newproject"
+                  component={CreateProject}
+                />
+                {/* users */}
+                <Route exact path="/users" component={Users} />
+                <Route exact path="/users/me" component={MyProfile} />
+                <Route exact path="/users/me/partition" component={Partition} />
 
-              <Route exact path="/users/:id" component={Employe} />
-              <Route exact path="/edit" component={Edit} />
-              <Route exact path="/news" component={News} />
-              {/* depatrments */}
-              <Route exact path="/department" component={Department} />
-              <Route exact path="/departments/all" component={AllDepartments} />
-              <Route exact path="/viewer" component={Helper} />
-              <Route exact path="/contractors" component={Contractors} />
-            </Container>
-          </Switch>
-        </Router>
-      )}
+                <Route exact path="/users/:id" component={Employe} />
+                <Route exact path="/edit" component={Edit} />
+                <Route exact path="/news" component={News} />
+                {/* depatrments */}
+                <Route exact path="/department" component={Department} />
+                <Route
+                  exact
+                  path="/departments/all"
+                  component={AllDepartments}
+                />
+                {/* <Route exact path="/:id/viewer" component={PublicViewer} /> */}
+
+                <Route exact path="/viewer" component={Helper} />
+                <Route exact path="/contractors" component={Contractors} />
+              </Container>
+            </Switch>
+          </>
+        )}
+      </Router>
+
+      <Router history={history}>
+        <Route exact path="models/:id/viewer" component={PublicViewer} />
+      </Router>
     </div>
   );
 }
