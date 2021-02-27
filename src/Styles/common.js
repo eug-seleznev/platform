@@ -114,7 +114,18 @@ border-radius: 15px;
     padding-left:10px;   
 }
 `
+export const SmallCard = styled.div`
+background: #FFFFFF;
 
+padding: 5px;
+padding-left:10px;
+border: 1px solid #CECECE;
+border-radius: 5px;
+@media(max-width:700px) {
+    padding: 10px;
+    padding-left:10px;   
+}
+`
 
 
 

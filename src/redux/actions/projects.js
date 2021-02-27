@@ -404,11 +404,11 @@ export const deleteProject = (crypt) => async dispatch  => {
 
 
 
-export const joinTeam = (id) => async dispatch  => {
-
+export const joinTeam = (id,formData) => async dispatch  => {
+console.log(formData,id)
     try {
 
-        const res = await innerBackend.put(`/projects/jointeam/${id}`)
+        const res = await innerBackend.put(`/projects/join2/${id}`, formData)
         dispatch({
             type: JOIN_TEAM,
             payload: res.data

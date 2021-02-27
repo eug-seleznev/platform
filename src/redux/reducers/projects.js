@@ -135,9 +135,11 @@ export default function(state = initialState, action) {
                 case JOIN_TEAM:
                     return {
                         ...state,
-                        project: payload,
+                        project: payload.project,
                         msg: payload.msg,
-                        error: ''
+                        error: '',
+                        reload:true
+                     
                     }
             case ALL_SPRINT:
                 return {

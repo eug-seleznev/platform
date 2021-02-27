@@ -10,7 +10,7 @@ import TitleOfProject from "../components/OneProject/titleOfProject";
 import AllSprintsOfProj from "../components/OneProject/allSprintsOfproj";
 import CalendSprint from "../components/OneProject/sprintCalend";
 import ProjectTeam from "../components/OneProject/ProjectTeam";
-
+import style from '../../../Styles/modules/components/Project/oneproj.module.css'
 import Viewer from "../model";
 import ProjInfo from "../components/OneProject/projInfo";
 
@@ -28,13 +28,13 @@ const Project = ({match, history}) => {
 
     useEffect(() => {
         dispatch(getProject(id));
-     
+        
     }, [])
 
     useEffect(() => {
         if(loaded){
             dispatch(allSprints(project.crypt))
-            // dispatch(Oauth(project.crypt)); //3d viewer  oauth token
+            console.log(project)
         }
     }, [loaded])
     return (
@@ -46,13 +46,13 @@ const Project = ({match, history}) => {
             <>
               <TitleOfProject hist={history}></TitleOfProject>
               <AllSprintsOfProj status={project.status} match={match} hist={history}></AllSprintsOfProj>
-              <div style={{width:'100%', display:'flex'}}>
-                <div style={{width:'100%'}}>
+              <div style={{width:'100%', display:'flex'}} className={style.info__flex}>
+                <div  style={{width:'100%'}}>
                   <ProjectTeam hist={history} id={id}></ProjectTeam>
                   <CalendSprint id={id} hist={history} project={project}></CalendSprint>
                   <Viewer project={project} />
                 </div>
-                <ProjInfo></ProjInfo>
+                <ProjInfo project={project}></ProjInfo>
               </div> 
             </>
                 )}

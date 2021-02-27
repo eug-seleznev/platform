@@ -8,17 +8,26 @@
 	grid-template-columns: repeat(6,1fr);
 }
 .tr__inproj {
-	grid-template-columns: repeat(5,1fr);
+	grid-template-columns: repeat(4,1fr);
+	height: 50px;
 }
 .tr__user{
 	grid-template-columns: repeat(4,1fr);
 }
 .image {
 	border-radius: 100%;
-	height: 50px;
+	height:50px;
 	width: 50px;
+	object-fit: cover;
 }
 @media(max-width:1000px){
+	.image {
+		display: none;
+	}
+	.tr__inproj {
+		grid-template-columns: repeat(2,1fr);
+		height: 50px;
+	}
 	.tr {
 		grid-template-columns: 1fr 25px;
 	}

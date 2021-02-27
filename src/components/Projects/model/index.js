@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { clearUrn } from "../../../redux/actions/projects";
 import { Button } from "../../../Styles/buttons";
 import Subtitle from "../components/OneProject/subtitle";
+import style from '../../../Styles/modules/components/Project/oneproj.module.css'
+import { Thin } from "../../../Styles/typography";
 
 const Viewer = ({project}) => {
   const dispatch = useDispatch();
@@ -75,26 +77,27 @@ const Viewer = ({project}) => {
   }
   return (
     <div style={{height:`${!open?'65px':'auto'}`, overflowY:'hidden'}}>
-      <Subtitle title="Модель проекта"openfunc={openfunc} subtwidth='40%' isopen={open} src='/model.png' open={true}></Subtitle>
-      <Card style={{width:'33.3%'}}>
-      {!loaded.submit && (
-        <form onSubmit={onSubmit}>
-          <label> Тут можно загрузить новую модель:  </label>
-          <input type="file" name="file" onChange={(e) => onChange(e)} />
-         {loaded.button && <Button type="submit"> Загрузка модели</Button> }
-        </form>
-      )}
+      <Subtitle title="Модель проекта"openfunc={openfunc} subtwidth='90%' isopen={open} src='/model.png' open={true}></Subtitle>
+      <div style={{width:'80%'}}>
       {loaded.model ? (
         <p>
           {" "}
-          Модель загрузилась и доступна   <Link to={`${project.crypt}/model/view`}>тут</Link>
+          <Link  to={`${project.crypt}/model/view`}></Link>
         </p>
       ) : loaded.submit ? (
         <p> модель загружается, это займет некоторое время, status: {model_status}</p>
       ) : (
         <p>Модели в проекте пока что нет, но можно загрузить</p>
       )}
-    </Card>
+      {!loaded.submit && (
+        <form onSubmit={onSubmit}>
+          <Thin style={{backgroundColor:'white',width:'243px', textAlign:'center', padding:'2px',cursor:'pointer',transform:'translateY(23px)', borderRadius:'5px',border:'1px solid #C4C4C4'}}>Загрузить новую модель</Thin>
+          <input type="file" name="file" style={{opacity:0,cursor:'pointer'}} onChange={(e) => onChange(e)} />
+         {loaded.button && <Button type="submit"> Загрузка модели</Button> }
+        </form>
+      )}
+      
+    </div>
     </div>
     
   );

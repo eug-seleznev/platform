@@ -23,7 +23,7 @@ const TitleOfProject = ({hist}) => {
           <H1 size="24">{project.title}</H1>
           <Bold size="16">
             <div
-              className={style.title__small}
+              className={style.title__2}
               style={{
                 display: `${user.permission === "user" ? "none" : "flex"}`,
               }}
@@ -48,7 +48,7 @@ const TitleOfProject = ({hist}) => {
             {project.dateFinish != null ? project.dateFinish.slice(0, 10) : "?"}
           </div>
           <div className={style.title__deadline}>Тип: {project.type}</div>
-          <div className={style.title__deadline}>Шифр:  {project.crypter}</div>
+         
         </Light>
       </>
     );
