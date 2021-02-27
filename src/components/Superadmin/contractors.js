@@ -40,7 +40,7 @@ const Contractors = ({history}) => {
                     <Tr className={style.contractors} key={index}  title="Открыть проект">
                     
                         <Td>{contractor.fullname}</Td>
-                        <Td className={style.turn__off}>{contractor.job}</Td>
+                        <Td >{contractor.job}</Td>
                         <Td>{contractor.contacts.phone}</Td>
                         <Td className={style.turn__off}>{contractor.contacts.email}</Td>
                         {/* <Td>{project.sprints.filter(sprint => sprint.status).length}/{project.sprints.length}</Td> */}
