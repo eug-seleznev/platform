@@ -177,7 +177,7 @@ const ProjectNew = ({history,closeWindow}) => {
           <Light className={style.descr1}>На этой странице мы создаем проекты, добавляем сотрудников в команду и записываем необходимую общую информацию.</Light>
           <Light className={style.descr1}>При создании проекта создается закрытый канал в рокете, в который автоматически приглашаются все добавленные в команду (и зарегестрированные на платформе) сотрудники.</Light>
         </div>
-        <form className={style.form} onSubmit={onSubmit}>
+        <form className={style.form2} onSubmit={onSubmit}>
        
         {step===1?(
            <div>  
@@ -436,7 +436,7 @@ const ProjectNew = ({history,closeWindow}) => {
                  grey
                  padd={"70px"}
                  style={{ marginTop: "5px" }}
-                 onClick={closeWindow}
+                 onClick={()=>history.replace('./../')}
                >
                  {" "}
                  Отмена

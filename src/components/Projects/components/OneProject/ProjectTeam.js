@@ -3,8 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {Button} from '../../../../Styles/buttons'
 import { Bold, H1} from '../../../../Styles/typography'
 import ProjTeam from './oneTeammate'
-import { joinTeam } from '../../../../redux/actions/projects';
+import { getProject, joinTeam } from '../../../../redux/actions/projects';
 import { useEffect, useState } from 'react';
+import Subtitle from './subtitle';
+import UserForm from './infoForm';
+import { SmallCard} from '../../../../Styles/common';
+import { Table } from '../../../../Styles/tables';
 
 
 
@@ -12,83 +16,88 @@ const ProjectTeam = ({id, hist}) => {
 	const dispatch = useDispatch();
   const [idArray] = useState([])
   const [button,setButton] = useState(false)
+  const [open,setOpen] = useState(false)
+  const [modal,setModal] = useState(false)
     const user = useSelector(state => state.auth.user) 
    	const project = useSelector(state => state.projects.project)
     useEffect(()=>{
-      if(project!=undefined) {
-        console.log(project.team)
+      console.log(project.team2, 'asdasdasdasdasdqwdzxcxz')
+      if(project!=undefined&&project.team2!==undefined) {
+        console.log(project.team2)
         console.log(user)
-        project.team.map((el)=>{
+        project.team2.map((el)=>{
           idArray.push(el._id)
         })
       }
     },[project])
+    
     useEffect (()=>{
-      if(idArray.includes(user.id)) {
+      
+      if(idArray.includes(user._id)) {
         setButton(true)
       }
       else{
         setButton(false)
       }
     },[idArray])
-    const hadleTeam = () => {
-        dispatch(joinTeam(id))
-  
-          setButton(!button)
+    const hadleTeam =()=>{
+      setModal(true)
+    }
+    const teamInfo = (formData) => {
+        dispatch(joinTeam(id,formData))
+        setModal(false)
+        setButton(!button)
         
         
     }
-    return (
-      <>
-              <div className={style.border__team}><H1 style={{marginBottom:'10px'}}>Команда</H1></div>     
-                  <div className={style.sprintdescr__cont}>
-                      {project.team.map((user, i) => {
-                            return (
-                              <ProjTeam key={i} histProp={hist} userId={user._id} userName={user.name} lastName={user.lastname} userAvatar={user.avatar} userPos={user.position}></ProjTeam>
-                            );
-                          })}
-                          
-                        
-                        <br />
-                        
-                        {project.team.map((empl, ind) => {
-                          // console.log(user, "emp id");
-                          if (empl._id === user.id) {
-                            // console.log(ind, "INDEX USER");
-                            return (
-                              <div
-                                key={ind}
-                                onClick={hadleTeam}
-                                className={style.exit}
-                                style={{display: `${project.status ? "none" : "flex"}`,cursor:'pointer'}}
-                              >
-                                <Bold style={{textAlign:'center'}}>Выйти </Bold><Bold style={{textAlign:'center'}} className={style.exit_in}>из команды проекта</Bold>
-                              </div>
-                            );
-                          }
-                          
-                        })}
-                       
+    const openfunc=()=>{
+      setOpen(!open)
+    }
+    return (<>
+      {project? <div style={{height:`${!open?'65px':'auto'}`, overflowY:'hidden'}}>    
+      <div style={{display:'flex', alignItems:'center'}}>
+        <Subtitle title='Команда проекта' isopen={open} openfunc={openfunc} src='/team.png' open={true} srcplus={button} buttonFunc={hadleTeam} subtwidth='90%' buttonActive={true}></Subtitle> 
+        <div style={{display:`${modal?'block':'none'}`}}>
+          <UserForm setModal={setModal} teamInfo={teamInfo}/>
+        </div>
+        
+          
+        
+      </div>   
+            <div className={style.sprintdescr__cont}>
+              <SmallCard style={{width:'90%'}}>
+               
+                {project.team2!==undefined? project.team2.map((user, i) => {
+                      return (
+                        <ProjTeam key={i} id={id} histProp={hist}userMail={user.user.email} userId={user.user._id} userName={user.user.fullname} lastName={user.user.lastname} userAvatar={user.user.avatar} userPos={user.position}></ProjTeam>
+                      );
+                    }):''}
                     
-                           {  
-                                    <button
-                                      fontSize={'20px'}
-                                      onClick={hadleTeam}
-                                      className={style.team__button}
-                                      style={{
-                                        outline:'none',
-                                        color:'black',
-                                        display: `${project.status||button? "none" : "block"}`,
-                                      }}
-                                    >
-                                      Вступить в команду проекта
-                                    </button>
-                           }
-                              
-                         
-                    </div>
+                  
+                  <br />
+                
+{/*                     
+                     {  
+                              <button
+                                fontSize={'20px'}
+                                onClick={hadleTeam}
+                                className={style.team__button}
+                                style={{
+                                  outline:'none',
+                                  color:'black',
+                                  display: `${project.status||button? "none" : "block"}`,
+                                }}
+                              >
+                                Вступить в команду проекта
+                              </button>
+                     } */}
+                   
+                  </SmallCard>      
+                   
+              </div>
 
-	  </>
+</div>:""}
+     </>
   
     )
 }

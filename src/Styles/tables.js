@@ -10,7 +10,7 @@ border-bottom: 2px solid Black;
 export const Tr = styled.div` //need columns='...' on <Tr> and top='top' on sorting <Tr>
 display: grid;
 grid-template-columns: ${props => props.columns};     
-column-gap: 20px;   
+column-gap: 0px;   
 // grid-template-rows: 52px; 
 border-bottom: .5px solid gray;  
 cursor: ${props => props.top?'default':'pointer'};
@@ -26,6 +26,8 @@ font-weight: ${props => props.top?'bold':'normal'};
 
 `
 export const Td = styled.p`
+font-family: SuisseIntlThin;
+font-size: 16px;
 overflow: hidden; 
 white-space: nowrap;
 text-overflow: ellipsis;
