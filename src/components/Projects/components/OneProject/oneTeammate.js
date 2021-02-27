@@ -15,7 +15,7 @@ const ProjTeam = ({userName,userPos,userAvatar,userId,histProp, lastName, userMa
 		
 		
 			
-					<Tr className={table.tr__inproj}>
+					<Tr className={table.tr__inproj} onClick={() => histProp.push(`/users/${userId}`)}>
 						
 						<Td style={{display:'flex'}}><Bold>ОВ</Bold>  {userName}</Td>
 						<Td style={{textAlign:'center'}} className={table.turn__off}>{userPos}</Td>
