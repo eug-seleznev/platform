@@ -38,7 +38,6 @@ const Helper = ({match, history}) => {
         <>
         {!loaded ? <p> loading...</p> :(
             <Viewer oauth={oauth} project={project} />
-            
         )}
         </>
     )

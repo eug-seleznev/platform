@@ -58,7 +58,7 @@ const plusMenuClick = (callback) => {
                         Создать отдел
                     </StyledIn>}
                     {user.permission!='user' && <StyledIn onClick={()=>plusMenuClick(addPodsos)}>
-                        Добавить смежника
+                        Добавить субподрядчика
                     </StyledIn>}
             
         </MenuHead>

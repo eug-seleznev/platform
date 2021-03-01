@@ -1,5 +1,5 @@
 
-import { ALL_USERS, CHANGE_PERMISSION,PERM_RETURN,ONE_USER, CLEAR_ERROR, CLEAR_MSG, SEARCH_USER, ADD_CONTRACTOR, ALL_CONTRACTORS} from '../types'
+import { ALL_USERS, CHANGE_PERMISSION,PERM_RETURN,ONE_USER, CLEAR_ERROR, CLEAR_MSG, SEARCH_USER, ADD_CONTRACTOR, ALL_CONTRACTORS, PARTITION_UPDATE} from '../types'
 
 
 
@@ -51,6 +51,11 @@ export default function(state = initialState, action) {
                 loaded: false,
                 
             }
+        case PARTITION_UPDATE: 
+        return {
+            ...state,
+            user: payload
+        } 
             case CLEAR_ERROR:
                 return {
                     ...state,

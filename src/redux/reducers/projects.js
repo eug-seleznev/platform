@@ -20,7 +20,7 @@ const initialState = {
     outh: null,
     msg:'',
     sprint_msg:'',
-    hey:''
+    hey:'', 
 }
 
 export default function(state = initialState, action) {
@@ -171,7 +171,6 @@ export default function(state = initialState, action) {
             case GET_URN:
                 return {
                     ...state,
-                    project: payload.project,
                     msg: payload.msg
                 }
                 case FINISH_PROJECT:

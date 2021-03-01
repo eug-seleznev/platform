@@ -16,9 +16,9 @@ import style from '../../Styles/modules/components/Project/allproj.module.css'
 import { Table, Tr, Td } from '../../Styles/tables';
 import { Card, } from '../../Styles/common'
 import { H1} from '../../Styles/typography'
+import {Circle} from '../../Styles/project'
 
-
-
+let  types = ['все', "общественное пространство", "Частный дом", "Визуализация", "Интерьер", "ЖК"]
 
 const Projects = ({history}) => {
     const dispatch = useDispatch();
@@ -42,6 +42,11 @@ const Projects = ({history}) => {
     }
 
 
+    const projectType = (e) => {
+      console.log(e.target.value)
+      //server call
+    }
+
 
     return (
       <div className="projects__grid">
@@ -64,15 +69,21 @@ const Projects = ({history}) => {
                 Дедлайн &#8597;
               </Td>
               <Td className={style.turn__off}>Статус</Td>
-              <Td className={style.turn__off}
-              onClick={() => sortFunction("type")}>Тип проекта &#8597;</Td>
+              <Td className={style.turn__off}>
+                <form>
+                  <select onChange={projectType}>
+                    {types.map((type) => {
+                      return <option value={type}>{type}</option>;
+                    })}
+                  </select>
+                </form>
+              </Td>
               <Td>Спринты</Td>
             </Tr>
 
             {projects
               .filter((project) => !project.status)
               .map((project, index) => {
-              
                 return (
                   <Tr
                     className={style.tr}
@@ -96,9 +107,14 @@ const Projects = ({history}) => {
                       {project.status ? <p>Завершен</p> : <p>В работе</p>}
                     </Td>
                     <Td className={style.turn__off}>{project.type}</Td>
-                    <Td>
-                      {project.sprints.filter((sprint) => sprint.status).length}
-                      /{project.sprints.length}
+
+                    <Td className={style.turn__off}>
+                      {project.sprints.filter((sprint) => !sprint.status)
+                        .length >= 1 ? (
+                        <Circle green />
+                      ) : (
+                        <Circle red />
+                      )}
                     </Td>
                   </Tr>
                 );

@@ -28,7 +28,7 @@ const Viewer = ({oauth, project}) => {
  var options = {
    env: "AutodeskProduction",
    accessToken: oauth.token,
-   api: "derivativeV2", // for models uploaded to EMEA change this option to 'derivativeV2_EU'
+   api: "derivativeV2_EU", // for models uploaded to EMEA change this option to 'derivativeV2_EU'
  };
 
 
@@ -38,7 +38,7 @@ const Viewer = ({oauth, project}) => {
  
 
    Autodesk.Viewing.Initializer(options, () => {
-    viewer = new Autodesk.Viewing.GuiViewer3D(container.current, { extensions: [ 'Autodesk.DocumentBrowser'] });
+    viewer = new Autodesk.Viewing.GuiViewer3D(container.current);
     viewer.start();
     let documentId = 'urn:' + project.urn;
     Autodesk.Viewing.Document.load(documentId, onDocumentLoadSuccess, onDocumentLoadFailure);
@@ -47,9 +47,11 @@ const Viewer = ({oauth, project}) => {
     }, []);
     
 function onDocumentLoadSuccess(doc) {
+
   let viewables = doc.getRoot().getDefaultGeometry();
   viewer.loadDocumentNode(doc, viewables).then((i) => {
     console.log(Autodesk.Viewing.UI.ToolBar);
+
   });
 }
 
