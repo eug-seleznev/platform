@@ -62,7 +62,7 @@ const App = () => {
     if(localStorage.token){
       dispatch(loadUser());
     }
-  })
+  }, [])
 
 
   useEffect(() => {
@@ -70,10 +70,10 @@ const App = () => {
 
       setAuthToken(localStorage.token)
       setTimeout(() => {
-        dispatch(loadUser());
+        // dispatch(loadUser());
       }, 1000);
     }
-  }, [loaded])
+  }, [])
 
 
 
