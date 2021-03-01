@@ -18,7 +18,7 @@ import { Card, } from '../../Styles/common'
 import { H1} from '../../Styles/typography'
 import {Circle} from '../../Styles/project'
 
-
+let  types = ['все', "общественное пространство", "Частный дом", "Визуализация", "Интерьер", "ЖК"]
 
 const Projects = ({history}) => {
     const dispatch = useDispatch();
@@ -42,8 +42,9 @@ const Projects = ({history}) => {
     }
 
 
-    const projectType = () => {
-
+    const projectType = (e) => {
+      console.log(e.target.value)
+      //server call
     }
 
 
@@ -69,9 +70,13 @@ const Projects = ({history}) => {
               </Td>
               <Td className={style.turn__off}>Статус</Td>
               <Td className={style.turn__off}>
-                <select>
-                  
-                </select>
+                <form>
+                  <select onChange={projectType}>
+                    {types.map((type) => {
+                      return <option value={type}>{type}</option>;
+                    })}
+                  </select>
+                </form>
               </Td>
               <Td>Спринты</Td>
             </Tr>

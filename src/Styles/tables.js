@@ -7,6 +7,16 @@ margin-bottom:40px;
 border-bottom: 2px solid Black;
 
 `
+
+export const Sprint_Table = styled.table`
+  margin: 0;
+  margin-bottom: 40px;
+  border-bottom: 1px solid blue;
+`;
+
+
+
+
 export const Tr = styled.div` //need columns='...' on <Tr> and top='top' on sorting <Tr>
 display: grid;
 grid-template-columns: ${props => props.columns};     

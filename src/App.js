@@ -45,6 +45,9 @@ import Partition from './components/User/partition';
 import PublicViewer from './components/Viewer/publicViewer';
 
 
+//ОТБЕРИТЕ У МЕНЯ КОМПЬЮТЕР НАХУЙ
+import Sprint_New from './components/Projects/Project/Sprint/new'
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -100,7 +103,7 @@ const App = () => {
                 {/* projects */}
                 <Route exact path="/projects" component={Projects} />
                 <Route exact path="/myprojects" component={MyProjects} />
-
+                <Route exact path='/projects/:crypt/:sprint_id/new' component={Sprint_New} />
                 <Route exact path="/projects/:id" component={Project} />
                 <Route exact path="/projects/:id/:id" component={Sprint} />
                 <Switch>
