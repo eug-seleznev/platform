@@ -24,8 +24,8 @@ const UserInfo = ({user, change, link, me}) => {
 				</a>
 			</div>
 				<Contact text={user.phone} src='/phone.png'></Contact>
-			<Light style={{marginTop:'10px'}}>Отдел:  {user.division!==null?user.division:'нет'}</Light>
-			<Light style={{marginTop:'10px'}}>День рождения:  ??</Light>
+			<Light style={{marginTop:'10px'}}>Отдел:  {user.division!==null?user.division.divname:'нет'}</Light>
+			<Light style={{marginTop:'10px'}}>День рождения:  {user.bday?user.bday.slice(5,10).split('-').reverse().join('.'):''}</Light>
         	{change||me.permission==='admin'? <div style={{marginTop:'7px'}}>Отчетность: <a target="_blank" href={link}>google drive</a></div>:''}
     	</InfoCard>
 	)

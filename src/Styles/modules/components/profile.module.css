@@ -108,13 +108,16 @@
     
 }
 @media (max-width: 600px){
+    .row2 {
+        width: 85vw;
+    }
     .info__title {
-        width: 90vw;
+        width: 85vw;
         
     }
     .info {
         
-        width: 90vw;
+        width: 85vw;
        
         
     }

@@ -6,7 +6,7 @@ import { url } from '../utils/axios';
 
 import styles from '../../Styles/modules/components/user/edit.module.css'
 //styled components
-import {Button} from '../../Styles/buttons'
+import {Button, CancelButton} from '../../Styles/buttons'
 import { Card, SmallContainer } from "../../Styles/common";
 import { Input, LogForm } from "../../Styles/Forms";
 import styled from "styled-components";
@@ -27,11 +27,12 @@ const Edit = ({match, history}) => {
 		division: user.division ? user.division : '',  
         email: user.email ? user.email : '', 
 		report: user.report ? user.report : '', 
-      
+		bday: user.bday ? user.bday : '', 
+		phone: user.phone ? user.phone : '', 
       });
      const [text, setText] = useState ('') 
 
-      const {name,lastname, position, email, report } = formData;
+      const {name,lastname, position, email, report, bday, phone } = formData;
 
       const  [file, setFile] = useState(null) 
 
@@ -163,17 +164,34 @@ const Edit = ({match, history}) => {
 					name="report"
 					onChange={e => onChange(e)}
 					></Input>
-			
+			<p className={styles.p}>Телефон</p>
+				<Input 
+				 
+					type='text'
+					placeholder={user.phone}
+					value={phone}
+					name="phone"
+					onChange={e => onChange(e)}
+					></Input>
+			<p className={styles.p}>День рождения</p>
+				<Input 
+					
+					type='date'
+					placeholder={user.report}
+					value={bday}
+					name="bday"
+					onChange={e => onChange(e)}
+					></Input>
 			<p className={styles.p}>Сменить аватар</p>
 			 <Input 
                 type='file'
                 placeholder='загрузите изображение'
 				onChange={handleFile}></Input>
 				
-			
-			<Button  onClick={changeMsg}  type="submit" value="Submit" >Сохранить</Button>
-			<span />
-			<Button  onClick={Redirect}  >Ничего не менять</Button>
+			<CancelButton fontSize='16px' grey onClick={Redirect}  >Ничего не менять</CancelButton>
+				<Button fontSize='16px' onClick={changeMsg}  type="submit" value="Submit" >Сохранить</Button>
+				
+		
 		  </LogForm>
 		  
 				</div>
