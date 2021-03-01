@@ -1,9 +1,9 @@
-import { url } from '../utils/axios';
-import styles from '../../Styles/modules/components/user/userCard.module.css'
+import { url } from '../../utils/axios';
+import styles from '../../../Styles/modules/components/user/userCard.module.css'
 
-import { Bold, Light } from '../../Styles/typography'
-import { Button, ButtonText } from '../../Styles/buttons'
-import { Card } from '../../Styles/common';
+import { Bold, Light } from '../../../Styles/typography'
+import { Button, ButtonText } from '../../../Styles/buttons'
+import { Card } from '../../../Styles/common';
 
 
 const UserCard = ({user, history}) => {

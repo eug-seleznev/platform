@@ -1,46 +1,77 @@
 .profile{
-display: grid;
-grid-template-areas: 
-'ava  name  change'
-'ava  pos    pos'
-'ava  contacts contacts'
-'ava  mail     mail'
-'ava  rocket   rocket'
-'ava   .       .'
-;
-grid-template-columns: 342px minmax(min-content,max-content) 1fr;
-grid-template-rows: max-content 60px max-content max-content max-content 1fr;
-column-gap: 30px;
-row-gap: 8px;
+    display: flex;
+
+
 }
     .avatar{
-        grid-area: ava;
+
         height: 342px;
         width: 342px;
         object-fit: cover;
     }
-    .name{
-        grid-area: name;
+    .small__avatar{
+        display: none;
+        height: 55px;
+        width: 55px;
+        object-fit: cover;
+        border-radius: 100%;
     }
+    .gap_img{
+       margin-left: 0px; 
+    }
+    .info__title {
+        display: flex;
+        justify-content: space-between;
+        width: 520px;
+        margin-top: 60px;
+        margin-bottom: 10px;
+        
+    }
+    .row {
+        display: flex;
+        justify-content: space-between;
+    }
+    .row2 {
+        display: flex;
+        
+    }
+    .info {
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
+        width: 500px;
+    }
+    .info__point {
+        margin-top: 10px;
+        display: flex;
+        text-decoration: none;
+        align-items: center;
+    }
+   
         .change{
-            grid-area: change;
-            margin-top: auto;
-            transform: translate3d(-18px,-5px,0);
+           display: flex;
+           align-items: flex-end;
         }
-
-    .pos{
-        grid-area: pos;
+        .name{
+            margin-right: 10px;
+        }
+        .gap {
+            margin-left: 75px;
+        }
+@media (max-width: 1500px){
+    .gap_img{
+        margin-left: 20px; 
+     }
+    .avatar{
+        display: none;
     }
-    .contacts{
-        grid-area: contacts;
+    .gap {
+        margin-left: 0px;
     }
-    .mail{
-        grid-area: mail;
+    .small__avatar{
+        display: block;
     }
-    .rocket{
-        grid-area: rocket;
-    }
-
+}
 @media (max-width: 1000px){
         .profile{
             display: grid;
@@ -57,7 +88,6 @@ row-gap: 8px;
     .change{
         grid-area: change;
         display: grid;
-        place-content: center left;
         transform: translate3d(0px,0px,0);
     }
     .avatar{
@@ -69,24 +99,29 @@ row-gap: 8px;
     .name{
         grid-area: name;
     }
-        .change{
-            display: none;
-        }
+       
+    
 
     .pos{
         grid-area: pos;
     }
-    .contacts{
-        display: none;    
-    }
-    .mail{
-        display: none;
-    }
-    .rocket{
-        display: none;
-    }
+    
 }
 @media (max-width: 600px){
+    .info__title {
+        width: 90vw;
+        
+    }
+    .info {
+        
+        width: 90vw;
+       
+        
+    }
+    .row {
+        display: flex;
+       flex-direction: column;
+    }
     .avatar{
         grid-area: ava;
         height: 30vw;
