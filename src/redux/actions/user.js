@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { ALL_USERS, USER_ERR, CHANGE_PERMISSION, PERM_RETURN, ONE_USER,SEARCH_USER, CLEAR_ERROR, CLEAR_MSG,ADD_CONTRACTOR,ALL_CONTRACTORS, PARTITION_UPDATE } from "../types";
+import { ALL_USERS, USER_ERR, CHANGE_PERMISSION, PERM_RETURN, ONE_USER,SEARCH_USER, CLEAR_ERROR, CLEAR_MSG,ADD_CONTRACTOR,ALL_CONTRACTORS, ERROR_MSG, GREEN_MSG,PARTITION_UPDATE} from "../types";
 
 
 
@@ -20,7 +20,7 @@ export const allContractors = () => async dispatch  => {
       const errors = err.response.data.err;
       errors.map(error => {
          return dispatch({
-          type: USER_ERR,
+          type: ERROR_MSG,
           payload: error.msg
       })
       })
@@ -43,7 +43,7 @@ export const allUsers = ({query, sortOrder}) => async dispatch  => {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: USER_ERR,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })
@@ -87,7 +87,7 @@ export const searchUser = (request) => async dispatch  => {
       const errors = err.response.data.err
       errors.map(error => {
          return dispatch({
-          type: USER_ERR,
+          type: ERROR_MSG,
           payload: error.msg
       })
       })            
@@ -110,7 +110,7 @@ export const getUser = (id) => async dispatch  => {
       const errors = err.response.data.err;
       errors.map(error => {
          return dispatch({
-          type: USER_ERR,
+          type: ERROR_MSG,
           payload: error.msg
       })
       })
@@ -135,6 +135,10 @@ export const addContractor = (formData) => async dispatch  => {
           type: ADD_CONTRACTOR,
           payload: res.data
       })
+      dispatch({
+        type: GREEN_MSG,
+        payload: res.data
+    })
       // setAuthToken(localStorage.token);
 
     }
@@ -142,7 +146,7 @@ export const addContractor = (formData) => async dispatch  => {
       const errors = err.response.data.err;
       errors.map(error => {
          return dispatch({
-          type: USER_ERR,
+          type: ERROR_MSG,
           payload: error.msg
       })
       })
@@ -175,7 +179,7 @@ export const userPermissions = (perm, id) => async dispatch  => {
       const errors = err.response.data.err;
       errors.map(error => {
          return dispatch({
-          type: USER_ERR,
+          type: ERROR_MSG,
           payload: error.msg
       })
       })

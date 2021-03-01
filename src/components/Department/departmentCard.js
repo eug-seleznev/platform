@@ -14,7 +14,7 @@ import { ButtonText } from '../../Styles/buttons'
 import { allDepartments, deleteDepartment, joinDepartment, findDepartment } from '../../redux/actions/department';
 import Confirm from './confirm'
 import { useEffect, useState } from 'react';
-import UserCard from '../User/userCard'
+import UserCard from '../User/components/userCard'
 import { allUsers } from '../../redux/actions/user';
 import { loadUser } from '../../redux/actions/auth';
 import ProjectsCard from '../Main/projectsCard';

@@ -30,18 +30,34 @@ const ProjectTeam = ({id, hist}) => {
         })
       }
     },[project])
-    
     useEffect (()=>{
+      console.log(project.team2.map(member=>{
+        if (member.user._id===user._id) {
+          setButton(true)
+          console.log('hi')
+        }
+        
+        
+      }), 'asdasdasdsad')
+    },[project])
+    // useEffect (()=>{
       
-      if(idArray.includes(user._id)) {
-        setButton(true)
-      }
-      else{
-        setButton(false)
-      }
-    },[idArray])
+    //   if(idArray.includes(user._id)) {
+    //     setButton(true)
+    //   }
+    //   else{
+    //     setButton(false)
+    //   }
+    // },[idArray])
     const hadleTeam =()=>{
-      setModal(true)
+      if(button) { 
+        dispatch(joinTeam(id))
+        setButton(!button)
+      }
+      
+      if(!button) {
+       setModal(true)
+      }
     }
     const teamInfo = (formData) => {
         dispatch(joinTeam(id,formData))
@@ -56,7 +72,16 @@ const ProjectTeam = ({id, hist}) => {
     return (<>
       {project? <div style={{height:`${!open?'65px':'auto'}`, overflowY:'hidden'}}>    
       <div style={{display:'flex', alignItems:'center'}}>
-        <Subtitle title='Команда проекта' isopen={open} openfunc={openfunc} src='/team.png' open={true} srcplus={button} buttonFunc={hadleTeam} subtwidth='90%' buttonActive={true}></Subtitle> 
+        <Subtitle title='Команда проекта' isopen={open}
+            openfunc={openfunc} 
+            src='/team.png'
+            open={true} 
+            srcplus={button} 
+            buttonFunc={hadleTeam} 
+            subtwidth='90%' 
+            buttonActive={true}
+        >
+        </Subtitle> 
         <div style={{display:`${modal?'block':'none'}`}}>
           <UserForm setModal={setModal} teamInfo={teamInfo}/>
         </div>
@@ -69,7 +94,15 @@ const ProjectTeam = ({id, hist}) => {
                
                 {project.team2!==undefined? project.team2.map((user, i) => {
                       return (
-                        <ProjTeam key={i} id={id} histProp={hist}userMail={user.user.email} userId={user.user._id} userName={user.user.fullname} lastName={user.user.lastname} userAvatar={user.user.avatar} userPos={user.position}></ProjTeam>
+                        <ProjTeam key={i} id={id}
+                          histProp={hist}
+                          userMail={user.user.email}
+                          userId={user.user._id} 
+                          userName={user.user.fullname}
+                          lastName={user.user.lastname} 
+                          userAvatar={user.user.avatar} 
+                          userPos={user.position}>
+                        </ProjTeam>
                       );
                     }):''}
                     

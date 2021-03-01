@@ -4,6 +4,8 @@ import {useSelector} from  'react-redux'
 import { Bold, Light } from '../../Styles/typography'
 import { ButtonText } from '../../Styles/buttons'
 import { useEffect, useState } from 'react';
+import UserInfo from '../User/components/infoCard';
+import TopInfo from '../User/components/topInfo';
 
 const ProfileComponent = ({user, history, change}) => {
   const me = useSelector(state => state.auth.user)
@@ -31,51 +33,30 @@ const ProfileComponent = ({user, history, change}) => {
           src={`${url}/${
             user != null ? (user != undefined ? user.avatar : "") : ""
           }`}
-        />
-
-        <Bold size="30" mobSize="24" className={styles.name}>
-          {" "}
-          {user.name} {user.lastname}
-        </Bold>
-        {!change ? (
-          <div className={styles.change}></div>
-        ) : (
-          <ButtonText
-            color="#3F496C 80 %;"
-            fontSize="12"
-            className={styles.change}
-            onClick={() => history.replace(`/edit`)}
-          >
-            изменить
-          </ButtonText>
-        )}
-
-        <Light color="#4B4B4B" size="16" className={styles.pos}>
-          Должность: {user.position}
-        </Light>
-
-        <Bold size="24" className={styles.contacts}>
-          Контакты:
-        </Bold>
-
-        <Light color="#4B4B4B" size="16" className={styles.mail}>
-          {user.email}
-        </Light>
-
-        <Light color="#4B4B4B" size="16" className={styles.rocket}>
-          rocket:{" "}
-          <a
-            target="_blank"
-            href={`https://chat.buro82.ru/direct/${
-              user ? user.rocketchat : ""
-            }`}
-          >
-            {" "}
-            {user.rocketchat && user.rocketchat}{" "}
-          </a>
-        </Light>
-        {change||me.permission==='admin'? <div>Отчетность: <a target="_blank" href={link}>ссылка</a></div>:''}
+			  />
+        <div className={styles.gap}>
+        <TopInfo user={user} url={url}></TopInfo>
+        
+          <div className={styles.info__title}>
+            <Bold size="18" color='#3F496C' className={styles.contacts}>
+              Информация
+            </Bold>
+            {!change ? (
+                <div className={styles.change}></div>
+              ) : (
+                <ButtonText
+                  color="#445AAA"
+                  fontSize="12"
+                  
+                  onClick={() => history.replace(`/edit`)}
+                >
+                  изменить
+                </ButtonText>
+              )}
+            </div>
+        <UserInfo user={user}me={me} change={change} link={link}></UserInfo></div>
       </div>
+     
     );
 }
 export default ProfileComponent

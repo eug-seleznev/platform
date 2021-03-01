@@ -10,27 +10,8 @@ import {errorAuthClear, msgAuthClear}  from "../../redux/actions/auth";
 const Layout = ({ histCurrent}) => {
     const dispatch = useDispatch()
 
-    //error handler
-    const new_error = useSelector(state => state.errors)
-
-
-
-
-
-
-    const project = useSelector(state => state.projects)
-    const createSprMsg = useSelector(state => state.projects.sprint_msg)
-    const createProjMsg = useSelector(state => state.projects.msg)
-    const errorAuth = useSelector(state => state.auth.error)
-    const msgAuth = useSelector(state => state.auth.msg)
-    const errorNews = useSelector(state => state.news.error)
-    const msgNews = useSelector(state => state.news.msg)
-    const errorProject = useSelector(state => state.projects.error)
-    const msgTask = useSelector(state => state.projects.hey)
-    const errorTickets = useSelector(state => state.tickets.error)
-    const msgTickets = useSelector(state => state.tickets.msg)
-    const msgUser = useSelector(state => state.users.msg)
-    const state = useSelector(state => state)
+    const errorAll = useSelector(state => state.messages.error) 
+    const msgAll = useSelector(state => state.messages.msg)
     const [error, setError] = useState ('')
     const [msg, setMsg] = useState (false)
     const [msgTiming, setMsgTiming] = useState (false)
@@ -38,89 +19,23 @@ const Layout = ({ histCurrent}) => {
     const [currentTitle, setCurrentTitle] = useState (false)
     const [color, setColor] = useState (false)
     const [status, setStatus] = useState (false)
- 
-   
-   
-
-    useEffect(() => {
-      console.log("hello error", new_error.msg);
-    }, [new_error.msg]);
-
-
-
 
     useEffect(()=>{
-        if(errorAuth !=""){
-            setError(errorAuth)
+        if(errorAll !=""){
+            setError(errorAll)
+            setColor('red')
         }
-    },[errorAuth ])
+    },[errorAll])
     useEffect(()=>{
-        if(msgTask !==""&& msgTask !==undefined){
-            setMsg(msgTask.msg)
-        }
-    },[msgTask])
-    useEffect(()=>{
-        if(msgAuth !==""&& msgAuth !==undefined){
-            setMsg(msgAuth)
-        }
-    },[msgAuth])
-    useEffect(()=>{
-        if(createProjMsg !==""&& createProjMsg !==undefined){
-            setMsg(createProjMsg)
-        }
-    },[createProjMsg])
-    useEffect(()=>{
-        if(createSprMsg !==""&& createSprMsg !==undefined){
-            setMsg(createSprMsg)
-        }
-    },[createSprMsg])
-    useEffect(()=>{
-        if(errorNews !==""&&errorNews !==undefined){
-            setError(errorNews)
-        }
-    },[errorNews])
-    useEffect(()=>{
-        if( msgTickets !==""&& msgTickets !==undefined){
-            setMsg( msgTickets)
-        }
-    },[msgTickets])
-    useEffect(()=>{
-        if(msgNews !==""&&msgNews !==undefined){
-            setMsg(msgNews)
-        }
-    },[msgNews])
-    useEffect(()=>{
-        if(errorProject !==""&&errorProject !==undefined){
-            setError(errorProject)
-        }
-    },[errorProject])
-    useEffect(()=>{
-        if(errorTickets !==""&&errorTickets !==undefined){
-            setError(errorTickets)
-        }
-    },[errorTickets])
-    useEffect(()=>{
-        if(msgUser !==""&&msgUser !==undefined){
-            setMsg(msgUser)
-        }
-    },[msgUser])
-    useEffect(()=>{
-        setColor('red')
-        if(error!==''){
-            setMsgTiming(true)
-                setTimeout(()=>{
-                    setMsgTiming(false)
-                    
-                        setError('')
-                        dispatch(errorAuthClear())
-             
-                },4500)
-        }
-    },[error])
-    useEffect(()=>{
-        if(msg!==''){
+        if(msgAll !==""&& msgAll !==undefined){
+            setMsg(msgAll)
             setColor('green')
-           
+        }
+    },[msgAll])
+    
+    useEffect(()=>{
+        if(msg!==''&&msg!==undefined&&msg!==false){
+            console.log(msg)
             setMsgTiming(true)
                 setTimeout(()=>{ 
                     setMsgTiming(false)
@@ -132,6 +47,19 @@ const Layout = ({ histCurrent}) => {
                 },3500)
         }
     },[msg])
+    useEffect(()=>{
+        if(error!==''){
+         
+            setMsgTiming(true)
+                setTimeout(()=>{
+                    setMsgTiming(false)
+                        
+                        setError('')
+                        dispatch(errorAuthClear())
+             
+                },4500)
+        }
+    },[error])
     const createProj =()=>{
         histCurrent.replace('/admin/newproject')
         // setCurrentTitle ('Создание нового проекта')
