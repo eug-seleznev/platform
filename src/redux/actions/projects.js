@@ -138,7 +138,6 @@ export const EditTask = ({ taskTitle, id, focusRow }) => async (dispatch) => {
       taskid: focusRow,
     };
 
-   console.log(body, 'he y ')
     const res = await innerBackend.put(`projects/sprints/taskedit/${id}`, body);
     dispatch({
       type: EDIT_TASK,

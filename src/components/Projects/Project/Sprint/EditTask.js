@@ -8,7 +8,7 @@ import { Bold } from "../../../../Styles/typography"
 
 
 
-const TaskManagment = ({ id, sprint_description, focusRow, editebleRow }) => {
+const TaskManagment = ({ id, sprint_description, focusRow, editebleRow, creator }) => {
   const dispatch = useDispatch();
 
   //description handler
@@ -66,6 +66,7 @@ return () => {
     <>
       <Bold> Задачи </Bold>
       <div>
+        <p> Создал: {creator} </p>
         <form onSubmit={onEditSubmit}>
           {!isSubmit ? (
             <input

@@ -73,10 +73,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
       
   }
 
-  //delete key
-  const KeyPress = (e) => {
-    console.log(e.key)
-  }
+
 
 
   const teamHandle = (e, task) => {
@@ -105,7 +102,6 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
           <tr
             onMouseOver={() => handleHover(task)}
             onClick={() => doubleClickEdit(task)}
-            onKeyPress={KeyPress}
             style={{
               backgroundColor: (task._id === focusRow || task._id == taskId) ? "grey" : "white",
             }}
