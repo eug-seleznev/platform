@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { ALL_NEWS, GET_NEWS,CREATE_NEWS, DELETE_NEWS, UPDATE_NEWS, ERROR_MSG } from "../types";
+import { ALL_NEWS, GET_NEWS,CREATE_NEWS, DELETE_NEWS, UPDATE_NEWS, ERROR_MSG, GREEN_MSG } from "../types";
 
 
 export const createNews = (formData) => async dispatch  => {
@@ -11,7 +11,10 @@ export const createNews = (formData) => async dispatch  => {
             type: CREATE_NEWS,
             payload: res.data
         })
-
+        dispatch({
+          type: GREEN_MSG,
+          payload: res.data
+      })
         }
       catch (err) {
         const errors = err.response.data.err;
@@ -86,7 +89,10 @@ export const deleteNews = (id) => async dispatch  => {
             type: DELETE_NEWS,
             payload: res.data
         })
-
+        dispatch({
+          type: GREEN_MSG,
+          payload: res.data
+      })
         }
       catch (err) {
         const errors = err.response.data.err;
@@ -110,7 +116,10 @@ export const updateNews = ({id,data}) => async dispatch  => {
             type: UPDATE_NEWS,
             payload: res.data
         })
-
+        dispatch({
+          type: GREEN_MSG,
+          payload: res.data
+      })
         }
       catch (err) {
         const errors = err.response.data.err;

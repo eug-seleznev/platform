@@ -1,5 +1,5 @@
 import { innerBackend, instance } from "../../components/utils/axios";
-import { ADD_SPRINT, SORT_PROJECTS, ADD_TASKS,CLEAR_URN, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK, CREATE_FAIL, DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, PROJECT_ID, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT,CLEAR_MSG, CLEAR_ERROR, DELETE_SPRINT, PROJECTS_SORT  } from "../types";
+import { ADD_SPRINT, SORT_PROJECTS, ADD_TASKS, GREEN_MSG, CLEAR_URN, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK, CREATE_FAIL, DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, PROJECT_ID, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT,CLEAR_MSG, CLEAR_ERROR, DELETE_SPRINT, PROJECTS_SORT, ERROR_MSG  } from "../types";
 
 
 
@@ -14,13 +14,17 @@ export const newProject = (formData) => async dispatch  => {
             type: CREATE_PROJECT,
             payload: res.data
         })
-
+        dispatch({
+            type: GREEN_MSG,
+            payload: res.data
+        })
         }
       catch (err) {
+          console.log(err.response.data.err)
         const errors = err.response.data.err
         errors.map(error => {
            return dispatch({
-            type: CREATE_FAIL,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })            
@@ -67,7 +71,7 @@ export const allProjects = () => async dispatch  => {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: CREATE_FAIL,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })            
@@ -91,7 +95,7 @@ export const getProject = (id) => async dispatch  => {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: CREATE_FAIL,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })            
@@ -116,19 +120,22 @@ export const addSprint = (id,formData,data) => async dispatch  => {
             type: ADD_SPRINT,
             payload: res.data
         })
-
+        dispatch({
+            type: GREEN_MSG,
+            payload: res.data
+        })
         }
       catch (err) {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: SPRINT_ERROR,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })            
       
     }
-
+   
 }
 
 export const EditTask = ({editTask, id}) => async (dispatch) => {
@@ -136,6 +143,10 @@ export const EditTask = ({editTask, id}) => async (dispatch) => {
         const res = await innerBackend.put(`projects/sprints/taskedit/${id}`, editTask);
         dispatch({
             type: EDIT_TASK,
+            payload: res.data
+        })
+        dispatch({
+            type: GREEN_MSG,
             payload: res.data
         })
     } catch (err) {
@@ -159,7 +170,7 @@ export const editProject = (formData, id) => async dispatch  => {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: CREATE_FAIL,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })
@@ -183,7 +194,7 @@ export const allSprints = (id) => async dispatch  => {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: SPRINT_ERROR,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })            
@@ -208,7 +219,7 @@ export const getSprint = (id) => async dispatch  => {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: SPRINT_ERROR,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })            
@@ -224,6 +235,10 @@ export const deleteSprint = (id) => async dispatch => {
         const res = await innerBackend.delete(`/projects/sprints/${id}`);
         dispatch({
             type: DELETE_SPRINT,
+            payload: res.data
+        })
+        dispatch({
+            type: GREEN_MSG,
             payload: res.data
         })
     } catch (err) {
@@ -243,13 +258,16 @@ export const addTasks = ({ sprintId,tasks}) => async dispatch  => {
             type: ADD_TASKS,
             payload: res.data
         })
-
+        dispatch({
+            type: GREEN_MSG,
+            payload: res.data
+        })
         }
       catch (err) {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: SPRINT_ERROR,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })            
@@ -271,13 +289,16 @@ export const finishTask = ({taskid, id}) => async dispatch  => {
             type: FINISH_TASK,
             payload: res.data
         })
-
+        dispatch({
+            type: GREEN_MSG,
+            payload: res.data
+        })
         }
       catch (err) {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: SPRINT_ERROR,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })            
@@ -294,12 +315,16 @@ export const finishSprint = (id) => async dispatch  => {
             type: FINISH_SPRINT,
             payload: res.data
         })
+        dispatch({
+            type: GREEN_MSG,
+            payload: res.data
+        })
         }
       catch (err) {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: SPRINT_ERROR,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })            
@@ -324,7 +349,7 @@ export const addInfoSprint = (id, form) => async dispatch  => {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: SPRINT_ERROR,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })            
@@ -363,12 +388,16 @@ export const finishProject = (id) => async dispatch  => {
             type: FINISH_PROJECT,
             payload: res.data
         })
+        dispatch({
+            type: GREEN_MSG,
+            payload: res.data
+        })
         }
       catch (err) {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: CREATE_FAIL,
+            type:ERROR_MSG,
             payload: error.msg
         })
         })            
@@ -386,13 +415,16 @@ export const deleteProject = (crypt) => async dispatch  => {
             type: DELETE_PROJECT,
             payload: res.data
         })
-
+        dispatch({
+            type: GREEN_MSG,
+            payload: res.data
+        })
         }
       catch (err) {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: SPRINT_ERROR,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })            
@@ -419,7 +451,7 @@ console.log(formData,id)
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: SPRINT_ERROR,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })            

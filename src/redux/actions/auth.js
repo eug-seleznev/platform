@@ -1,4 +1,4 @@
-import {REGISTER, AUTH_ERROR, LOGIN, USER_LOADED,CHANGE_AVATAR,CLEAR_MSG,CLEAR_ERROR, CHANGE_USERDATA, CHANGE_LOADED, ADD_SPRINT_TO_CHOSEN, SPRINT_ERROR} from '../types'
+import {REGISTER, AUTH_ERROR, LOGIN, USER_LOADED,CHANGE_AVATAR,CLEAR_MSG,CLEAR_ERROR, CHANGE_USERDATA, CHANGE_LOADED, ADD_SPRINT_TO_CHOSEN, SPRINT_ERROR,ERROR_MSG, GREEN_MSG} from '../types'
 import {innerBackend, instance, setAuthToken} from '../../components/utils/axios'
 
 
@@ -15,7 +15,11 @@ export const loadUser = () => async dispatch => {
      dispatch({
        type: USER_LOADED,
        payload: res.data,
-     });
+     })
+     dispatch({
+      type: GREEN_MSG,
+      payload: res.data
+  })
   } catch (err) {
     // console.log(err.response.data, 'ERROR!!!')
   }
@@ -45,20 +49,21 @@ export const login = (formData) => async dispatch  => {
             type: LOGIN,
             payload: res.data
         })
+      
                   setAuthToken(res.data.token);
-                  setTimeout(() =>loadUser(),200)
+                  setTimeout(() =>{loadUser()
+                    },200)
+                  
                   
 
         }
       catch (err) {
-        // console.log(err.response.data.err);
-
-        const errors = err.response.data.err;
+        const errors = err.response.data.errors;
         errors.map(err => {
           
            return dispatch({
-            type: AUTH_ERROR,
-            payload: err
+            type: ERROR_MSG,
+            payload: err.err
         })
         })            
       
@@ -84,7 +89,7 @@ export const register = ({formData}) => async dispatch  => {
  
     
            dispatch({
-              type: AUTH_ERROR,
+              type: ERROR_MSG,
               payload: errors
         })
       
@@ -111,14 +116,17 @@ export const changeData = (formData) => async dispatch  => {
           type: CHANGE_USERDATA,
           payload: res.data
       })
-  
+      dispatch({
+        type: GREEN_MSG,
+        payload: res.data
+    })
 
     }
     catch (err) {
       const errors = err.response.data.err;
       errors.map(error => {
          return dispatch({
-          type: AUTH_ERROR,
+          type: ERROR_MSG,
           payload: error.msg
       })
       })
@@ -156,7 +164,7 @@ export const changeAvatar = (file) => async dispatch  => {
       const errors = err.response.data.err;
       errors.map(error => {
          return dispatch({
-          type: AUTH_ERROR,
+          type: ERROR_MSG,
           payload: error.msg
       })
       })
@@ -174,12 +182,16 @@ export const addToChosen = (id) => async dispatch  => {
           type: ADD_SPRINT_TO_CHOSEN,
           payload: res.data
       })
+      dispatch({
+        type: GREEN_MSG,
+        payload: res.data
+    })
       }
     catch (err) {
       const errors = err.response.data.err;
       errors.map(error => {
          return dispatch({
-          type: SPRINT_ERROR,
+          type: ERROR_MSG,
           payload: error.msg
       })
       })            

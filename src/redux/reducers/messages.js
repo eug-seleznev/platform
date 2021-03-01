@@ -1,9 +1,8 @@
-import { ERROR_MSG } from "../types";
+import { ERROR_MSG, GREEN_MSG} from "../types";
 
 const initialState = {
   msg: '',
-  color: '',
-
+  error:'',
 };
 
 export default function (state = initialState, action) {
@@ -11,12 +10,20 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case ERROR_MSG:
+      console.log(payload)
+
+      return {
+        ...state,
+        error: payload,
+        
+      };
+      case GREEN_MSG:
+        console.log(payload)
       return {
         ...state,
         msg: payload.msg,
-        color: payload.color
+       
       };
-      
     default:
       return initialState;
   }

@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { GET_TOKEN, GET_URN, NEW_ERROR, GET_STATUS, CLEAR_MODEL_DATA } from "../types";
+import { GET_TOKEN, GET_URN, NEW_ERROR, GET_STATUS, CLEAR_MODEL_DATA, ERROR_MSG } from "../types";
 let url = process.env.REACT_APP_IP_MODELS;
 export const postModel = (formData) => async (dispatch) => {
   // formData.append('userName', 'Fred');
@@ -31,7 +31,7 @@ export const postModel = (formData) => async (dispatch) => {
     const errors = err.response.data.errors;
     errors.map((error) => {
       return dispatch({
-        type: NEW_ERROR,
+        type: ERROR_MSG,
         payload: error.msg,
       });
     });
@@ -55,7 +55,7 @@ export const Oauth = (crypt) => async (dispatch) => {
     const errors = err.response.data.errors;
     errors.map((error) => {
       return dispatch({
-        type: NEW_ERROR,
+        type: ERROR_MSG,
         payload: error.msg,
       });
     });
@@ -82,7 +82,7 @@ export const Status = (crypt) => async (dispatch) => {
     const errors = err.response.data.errors;
     errors.map((error) => {
       return dispatch({
-        type: NEW_ERROR,
+        type: ERROR_MSG,
         payload: error.msg,
       });
     });

@@ -12,18 +12,26 @@ import {errorAuthClear, msgAuthClear}  from "../../redux/actions/auth";
 const Auth = () => {   
      const [error, setError] = useState(0)
     const [page, setPage] = useState(0)
-    const errorAuth = useSelector(state => state.auth.error)
+    const errorAll = useSelector(state => state.messages.error)
+    const msgAll = useSelector(state => state.messages.error)
     const [msg, setMsg] = useState (false)
     const [msgTiming, setMsgTiming] = useState (false)
     const [color, setColor] = useState (false)
     const dispatch = useDispatch()
     useEffect(()=>{
-        if(errorAuth !=""){
-            setError(errorAuth)
+        if(errorAll!==""){
+            setError(errorAll)
+            setColor('red')
         }
-    },[errorAuth])
+    },[errorAll])
     useEffect(()=>{
-        setColor('red')
+        if(msgAll!==""&&msgAll!==undefined){
+            console.log(msgAll)
+            setMsg(msgAll)
+            setColor('red')
+        }
+    },[msgAll])
+    useEffect(()=>{
         if(error!=''){
             setMsgTiming(true)
                 setTimeout(()=>{
@@ -38,8 +46,6 @@ const Auth = () => {
     },[error])
     useEffect(()=>{
         if(msg!=''){
-            setColor('green')
-            
             setMsgTiming(true)
                 setTimeout(()=>{
                     setMsgTiming(false)
