@@ -29,7 +29,7 @@
     '. . date'
     'title title .'
     'texts texts .'
-    'likes filters  likeB'
+    'filters likes   likeB'
     ;
     grid-template-columns:max-content 1fr  max-content;
     column-gap: 10px;
@@ -55,7 +55,7 @@
 }
 .likeBtn{
     grid-area: likeB;
-    /* height: 30px; */
+    height: 30px;
 }
 
 .inWorkBtn{

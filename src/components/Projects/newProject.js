@@ -358,9 +358,9 @@ const ProjectNew = ({history,closeWindow}) => {
            </div>  
            
         ):step===2?<div>
-           <div className={style.add__people}  >
+           <div className={style.add__people}>
                   <div style={{display:`${userStage===1?'block':'none'}`}}>
-                      <Thin size='28' className={style.title}>Поиск сотрудников</Thin>
+                    <Thin size='28' className={style.title}>Поиск сотрудников</Thin>
                      <input placeholder='введите имя' className={style.input__long} onChange={(e) => PeopleList(e)}/>
                      <div className={style.searchMenu} style={{display:`${menu?'block':'none'}` }}>
                        {searchResult.map((user,i)=>{
@@ -370,7 +370,6 @@ const ProjectNew = ({history,closeWindow}) => {
                              <div  key={i}>{user.fullname}</div>
                              <CancelButton fontSize={"16px"}padd={"20px"} style={{display:`${idList.includes(user._id)||idCurrent===user._id?'none':'block'}`}} onClick={()=>addUser(user)}>Добавить</CancelButton>
                            </div>
-                           
                          )
                        })}
                      </div>

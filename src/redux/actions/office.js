@@ -106,11 +106,14 @@ export const likePropose = (id) => async dispatch => {
 }
 
 
-export const inWork = (id) => async dispatch => {
-
+export const inWork = (id, user) => async dispatch => {
+    let body = {
+        executor: user
+    }
+  
     try {
-        
-        const res = await innerBackend.put(`/props/sts/${id}`)
+        console.log(user, id)
+        const res = await innerBackend.put(`/props/sts/${id}`,body)
         dispatch({
             type: IN_WORK,
             payload: res.data

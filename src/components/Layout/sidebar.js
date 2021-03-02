@@ -53,10 +53,10 @@ const adminka = useRef(null)
                     <p>Субподряд
                             чики</p>
             </SidebarLink>
-            {user.permission==='admin'?<SidebarLink to='/departments/all' className="nav-link" > 
+            <SidebarLink to='/departments' className="nav-link" > 
                     <img src='/sidebarIcon.png' title="Все отделы"/>
                     <p>Все отделы</p>
-            </SidebarLink>:''}
+            </SidebarLink>
            
            
 

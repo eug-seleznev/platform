@@ -6,9 +6,10 @@ import { Bold, Thin, Regular} from '../../Styles/typography'
 import {Button, FilterButton, ButtonText } from '../../Styles/buttons'
 import { useEffect, useState } from 'react'
 import Confirm from './confirm'
+import { url } from '../utils/axios'
 
 
-const ProposeCard = ({cardContent,rip, filters, reverse, user}) => {
+const ProposeCard = ({cardContent, rip, filters, addExecutor, reverse, user}) => {
 const dispatch = useDispatch()
 const reload = useSelector(state => state.office.reload)
 const likeTrue =  cardContent.likes.some(el => el.user == user._id)
@@ -26,7 +27,8 @@ const deleteButton =(id) =>{
 }
 
 useEffect(()=>{
-    console.log(cardContent.likes) 
+    console.log(cardContent.executor) 
+
 },[])
 
 
@@ -41,11 +43,15 @@ useEffect(()=>{
             <Regular size='16px' className={styles.text}>{cardContent.text}</Regular>
             <Thin className={styles.date}>{cardContent.date.slice(5,10).split('-').reverse().join('.')}</Thin>
     
+            {!cardContent.status?<>
             <img src='/like.png'  style={{backgroundColor:`${likeTrue?'red':'white'}`, display:`${rip?'none':'grid'}`, cursor:'pointer'}} className={styles.likeBtn} onClick={()=>likeButton(cardContent._id)} />
             
-            <Bold size='12' className={styles.likes}>{cardContent.likeCount} людям нравится</Bold>
+            <Bold size='12' className={styles.likes}>{cardContent.likeCount} людям нравится</Bold></>
+            : cardContent.executor!==null&&cardContent.executor!==undefined?<>
+            <Thin className={styles.likes}>Исполнитель: {cardContent.executor.fullname}</Thin>
+            <img src={url+'/'+cardContent.executor.avatar} className={styles.likeBtn} onClick={()=>likeButton(cardContent._id)}/></>:'' }
 
-                {user.permission=='admin' && <Bold className={styles.inWorkBtn} size='12' style={{display:rip?'none':'grid'}} color='#3F496C' onClick={()=>dispatch(inWork(cardContent._id))}>{!cardContent.status ? 'в работу' : 'отложить'}</Bold>}
+                {user.permission=='admin' && <Bold className={styles.inWorkBtn} size='12' style={{display:rip?'none':'grid'}} color='#3F496C' onClick={()=>!cardContent.status?addExecutor(cardContent._id): dispatch(inWork(cardContent._id))}>{!cardContent.status ? 'в работу' : 'отложить'}</Bold>}
            
         </Card>
 

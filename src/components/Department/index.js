@@ -15,11 +15,17 @@ const Department = ({history}) => {
     const users = useSelector(state => state.users.users)
     const department = useSelector(state => state.departments.findDep)
     const allDeps = useSelector(state => state.departments.departments)
+    const [load, setLoad] = useState (true)
  useEffect(()=>{
     dispatch(allDepartments())
     dispatch(allUsers('name', true))
     
  },[])
+ useEffect(()=>{
+    setTimeout(()=>{
+        setLoad(true)
+    },5000)
+},[])
 useEffect(()=>{
     if(user!==null&&user!==undefined) {
         if(user.division!==null) {
@@ -33,7 +39,7 @@ useEffect(()=>{
 
         {user.division===null||department===null? <Regular size='16'>Вы не состоите ни в одном отделе, вступить можно на <ButtonText fontSize='18px' onClick={()=>history.replace('/edit')}>странице редактирования профиля</ButtonText> </Regular> :
 
-            <DepartmentCard itsAllDepsPage={false} department={department} user={user} history={history} users={users}/>
+            <DepartmentCard load={load} itsAllDepsPage={false} department={department} user={user} history={history} users={users}/>
   
         }
             
