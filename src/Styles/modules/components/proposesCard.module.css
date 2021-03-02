@@ -5,6 +5,7 @@
     ;
     grid-template-columns: 25px 1fr max-content;
     column-gap: 35px;
+    margin-top: 30px;
 }
 .inWork{
     grid-area: inWork;

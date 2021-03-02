@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES, DATE_PROPOSES, LIKE_PROPOSE, DELETE_PROPOSE, IN_WORK, REVERSE_ARR, REVERSE_ARRDATE, ERROR_MSG, GREEN_MSG } from "../types";
+import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES,END_PROPOSE, DATE_PROPOSES, LIKE_PROPOSE, DELETE_PROPOSE, IN_WORK, REVERSE_ARR, REVERSE_ARRDATE, ERROR_MSG, GREEN_MSG } from "../types";
 
 
 
@@ -133,6 +133,28 @@ export const inWork = (id) => async dispatch => {
 
 }
 
+export const endPropose = (id) => async dispatch => {
+
+    try {
+        
+        const res = await innerBackend.put(`/props/sts/f/${id}`)
+        dispatch({
+            type: END_PROPOSE,
+            payload: res.data
+        })
+    }
+    catch (err) {
+        const errors = err.response.data.err
+        errors.map(error => {
+            return dispatch({
+             type: ERROR_MSG,
+             payload: error.msg
+         })
+         })            
+       
+    }
+
+}
 
 export const deletePropose = (id) => async dispatch => {
 
