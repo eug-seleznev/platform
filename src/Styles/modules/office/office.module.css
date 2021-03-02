@@ -19,17 +19,31 @@
 
 .title{
     grid-area: title;
-    margin-left: 60px;
+    margin-left: 65px;
 }
 .filters{
     grid-area: filters;
-    margin-left: 60px;
+    margin-left: 65px;
     
 }
 .cardsContainer{
     grid-area: cards;
     display: grid;
     row-gap: 18px;
+    
+}
+.row {
+    display: flex;
+   
+}
+.row__array{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.title__array{
+    margin-top: 50px;
+    margin-left: 65px;
 }
 .formArea{
     grid-area: form;
@@ -43,22 +57,34 @@
     }
 }
 @media (max-width: 1000px){
+    .title__array{
+        margin-top: 30px;
+        margin-left: 0px;
+    }
+    .filters {
+        margin-left: 0px;
+    }
+    .title{
+        margin-top:0px;
+        margin-left: 0px;
+    }
     .officeContainer{
         display: grid;
         grid-template-areas:
         'title'
         'form'
         'filters'
-        'cards'
+        'cards cards cards'
         ;
         grid-template-rows: unset;
-        grid-template-columns: 1.3fr;
+        grid-template-columns: 1fr 1fr 1fr;
   
     }
     .cardsContainer{
         grid-area: cards;
         display: grid;
         row-gap: 30px;
+        
     }
 }   
 @media (max-width: 500px){

@@ -79,22 +79,24 @@ useEffect(()=>{
 
     return (
         <div className={styles.officeContainer}> 
-            <Thin size='24' className={styles.title}>Предложения для офиса: </Thin>
-
+        <div>
+            <Thin size='24' className={styles.title}>Предложения для офиса </Thin>
+            {!form?<img src='/plus.png' onClick={()=>setForm(true)}></img>:<ProposeForm closeForm={()=>setForm(false)} />} 
+        </div>
             <div className={styles.filters}>
                 <FilterButton arrow={visibleArray.filter=='like'? true : false} reverse={reverse} onClick={()=>likeFIlter()}>Лайки</FilterButton>
                 <FilterButton arrow={visibleArray.filter=='date'? true : false} reverse={reverse} onClick={()=>dateFIlter()}>Дата</FilterButton>
             </div>
         
         <div className={styles.formArea}>
-            <div className={styles.formSticky}>
+            {/* <div className={styles.formSticky}>
                 {!form?
                     <Card className={styles.openForm} onClick={()=>setForm(true)}>
                         <Bold size='12' color='#3F496C'>Предложить свое...</Bold>
                     </Card>
                     :
                     <ProposeForm closeForm={()=>setForm(false)} />}  
-            </div>
+            </div> */}
         </div>
            
       

@@ -53,13 +53,13 @@ export default function(state = initialState, action) {
                     ...state,
                     msg: payload,
                     reload: !state.reload,
-
+                    findDep: payload.division,
                     error: ''
                 }
             case FIND_DEPARTMENT:
                 return {
                     ...state,
-                    findDep: payload,
+                    findDep: payload.division,
                     reload: !state.reload,
 
                     error:''
@@ -71,9 +71,9 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     msg: payload,
-                    findDep: null,
+                    
                     reload: !state.reload,
-
+                    findDep: payload.division,
 
                     error: ''
                 }

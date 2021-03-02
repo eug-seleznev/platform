@@ -3,11 +3,12 @@ import {Card,SmallCard, ModalContainer, ModalWind} from '../../../../Styles/comm
 import {Button} from '../../../../Styles/buttons'
 import { Bold, Light, Regular, Thin } from '../../../../Styles/typography'
 import ModalWindow from '../ModalWindow'
+import { useSelector } from 'react-redux'
 
 
 const ProjInfo = ({project}) => {
     // const [overCard, setOvercard] = useState(false)
-    
+    const user =  useSelector(state=> state.auth.user)
     return(
     <div className={styles.info__cont}>
       <div  className={styles.title__info} >
@@ -27,7 +28,7 @@ const ProjInfo = ({project}) => {
           <Bold className={styles.info__line} size='16'>Шифр</Bold>
           <Light className={styles.info__line} style={{marginLeft:'20px'}}>{project.crypter}</Light>
         </div>
-        <SmallCard style={{marginBottom:'20px'}}>
+        <SmallCard style={{marginBottom:'20px', display:`${user.permission!=='admin'?'none':'block'}`}} >
           <div className={styles.info__link}>
             <Light size='15'>Бюджет</Light>
             {project.budget!==undefined?<a href={project.budget.includes('https://')?project.budget:'https://'+project.budget} target='_blank' size='15'>{project.budget}</a>:''}

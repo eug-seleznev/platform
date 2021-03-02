@@ -1,4 +1,4 @@
-import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES, DATE_PROPOSES, LIKE_PROPOSE, DELETE_PROPOSE, IN_WORK,REVERSE_ARR, REVERSE_ARRDATE, CLEAR_ERROR, CLEAR_MSG } from "../types";
+import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES, DATE_PROPOSES, END_PROPOSE, LIKE_PROPOSE, DELETE_PROPOSE, IN_WORK,REVERSE_ARR, REVERSE_ARRDATE, CLEAR_ERROR, CLEAR_MSG } from "../types";
 
 
 
@@ -77,7 +77,7 @@ export default function(state = initialState, action) {
 
                     error:''
                 }
-
+                
             case DELETE_PROPOSE:
                 return {
                     ...state,
@@ -87,6 +87,15 @@ export default function(state = initialState, action) {
 
                     error: ''
                 }
+                case END_PROPOSE:
+                    return {
+                        ...state,
+                        msg: payload,
+                        reload: !state.reload,
+    
+    
+                        error: ''
+                    }
             case REVERSE_ARR:
                 return {
                     ...state,

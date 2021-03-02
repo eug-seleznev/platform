@@ -43,7 +43,7 @@ import Contractors from './components/Superadmin/contractors';
 import AllDepartments from './components/Department/allDepartments'
 import Partition from './components/User/partition';
 import PublicViewer from './components/Viewer/publicViewer';
-
+import OneDepartment from './components/Department/oneDepartment'
 
 //ОТБЕРИТЕ У МЕНЯ КОМПЬЮТЕР НАХУЙ
 import Sprint_New from './components/Projects/Project/Sprint/new'
@@ -134,11 +134,9 @@ const App = () => {
                 <Route exact path="/news" component={News} />
                 {/* depatrments */}
                 <Route exact path="/department" component={Department} />
-                <Route
-                  exact
-                  path="/departments/all"
-                  component={AllDepartments}
-                />
+                <Route exact path="/departments" component={AllDepartments}/>
+                <Route exact path="/departments/:id" component={OneDepartment}/>
+                
                 <Route exact path="/:id/viewer" component={PublicViewer} />
 
                 <Route exact path="/viewer" component={Helper} />

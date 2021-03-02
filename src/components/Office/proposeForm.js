@@ -3,7 +3,7 @@ import { useState} from 'react'
 import { useDispatch} from 'react-redux'
 import { newPropose, likedProposes, dateProposes} from '../../redux/actions/office'
 import {Regular} from '../../Styles/typography'
-import { Button } from '../../Styles/buttons'
+import { Button, CancelButton } from '../../Styles/buttons'
 import { Card } from '../../Styles/common'
 
 
@@ -47,8 +47,9 @@ const onSubmit = (e) => {
     return (
      
           
-       <Card>
+     <Card className={styles.formCard}>
         <form className={styles.formContainer} onSubmit={onSubmit}>
+        
             <Regular size='30'>Предложение</Regular>
            
             <input 
@@ -72,12 +73,13 @@ const onSubmit = (e) => {
                 onChange={e => onChange(e)}/>
             
 
-
-
-            <Button fontSize='16px' padding='50px' className={styles.createBtn}  type="submit">Создать</Button>
-
+            <div style={{display:'flex'}}>
+                <CancelButton fontSize='16px' padd='50px' grey onClick={closeForm}>Отмена</CancelButton>
+                <Button fontSize='16px' padding='50px' className={styles.createBtn}  type="submit">Создать</Button>
+            </div>
+            
         </form>
-        </Card>
+   </Card>
     )
 }
 
