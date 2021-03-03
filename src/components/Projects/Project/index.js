@@ -22,12 +22,10 @@ const Project = ({match, history}) => {
     const loaded = useSelector(state => state.projects.loadProject)
     const project = useSelector(state => state.projects.project)
 
-  console.log('tutuu',project)
 
 
     useEffect(() => {
         dispatch(getProject(id));
-     
     }, [])
 
     useEffect(() => {
