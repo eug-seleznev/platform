@@ -2,7 +2,6 @@ import { useEffect } from "react"
 
 
 import { useDispatch, useSelector } from "react-redux";
-import { Oauth } from "../../../redux/actions/models";
 import { getProject, allSprints} from "../../../redux/actions/projects";
 
 
@@ -10,8 +9,9 @@ import TitleOfProject from "../components/OneProject/titleOfProject";
 import AllSprintsOfProj from "../components/OneProject/allSprintsOfproj";
 import CalendSprint from "../components/OneProject/sprintCalend";
 import ProjectTeam from "../components/OneProject/ProjectTeam";
-import DeliteEnd from "../components/OneProject/deliteEnd";
+import style from '../../../Styles/modules/components/Project/oneproj.module.css'
 import Viewer from "../model";
+import ProjInfo from "../components/OneProject/projInfo";
 
 const Project = ({match, history}) => {
 
@@ -26,30 +26,40 @@ const Project = ({match, history}) => {
 
     useEffect(() => {
         dispatch(getProject(id));
+        
     }, [])
 
     useEffect(() => {
         if(loaded){
             dispatch(allSprints(project.crypt))
-            // dispatch(Oauth(project.crypt)); //3d viewer  oauth token
         }
     }, [loaded])
     return (
-        <div>
-          {!loaded ? (
-            <p> loading...</p>
-
-          ) : (
-            <>
-              <TitleOfProject hist={history}></TitleOfProject>
-              <AllSprintsOfProj status={project.status} match={match} hist={history}></AllSprintsOfProj>
-              <CalendSprint id={id} hist={history} project={project}></CalendSprint>
-              <ProjectTeam hist={history} id={id}></ProjectTeam>
-              <Viewer project={project} />  
-            </>
-                )}
-        </div>
-     
+      <div>
+        {!loaded ? (
+          <p> loading...</p>
+        ) : (
+          <>
+            <TitleOfProject hist={history} />
+            <AllSprintsOfProj
+              status={project.status}
+              match={match}
+              hist={history}
+            />
+            <div
+              style={{ width: "100%", display: "flex" }}
+              className={style.info__flex}
+            >
+              <div style={{ width: "100%" }}>
+                <ProjectTeam hist={history} id={id} />
+                <CalendSprint id={id} hist={history} project={project} />
+                <Viewer project={project} />
+              </div>
+              <ProjInfo project={project} />
+            </div>
+          </>
+        )}
+      </div>
     );
 }
 

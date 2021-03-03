@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES, DATE_PROPOSES, LIKE_PROPOSE, DELETE_PROPOSE, IN_WORK, REVERSE_ARR, REVERSE_ARRDATE } from "../types";
+import { NEW_PROPOSE, PROPOSE_FAIL, LIKED_PROPOSES, DATE_PROPOSES, LIKE_PROPOSE, DELETE_PROPOSE, IN_WORK, REVERSE_ARR, REVERSE_ARRDATE, ERROR_MSG, GREEN_MSG } from "../types";
 
 
 
@@ -15,13 +15,16 @@ export const newPropose = (formData) => async dispatch  => {
             type: NEW_PROPOSE,
             payload: res.data
         })
-
+        dispatch({
+            type: GREEN_MSG,
+            payload: res.data
+        })
         }
       catch (err) {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: PROPOSE_FAIL,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })            
@@ -47,7 +50,7 @@ export const likedProposes = () => async dispatch => {
         const errors = err.response.data.err
         errors.map(error => {
             return dispatch({
-             type: PROPOSE_FAIL,
+             type: ERROR_MSG,
              payload: error.msg
          })
          })            
@@ -70,7 +73,7 @@ export const dateProposes = () => async dispatch => {
         const errors = err.response.data.err
         errors.map(error => {
             return dispatch({
-             type: PROPOSE_FAIL,
+             type: ERROR_MSG,
              payload: error.msg
          })
          })            
@@ -93,7 +96,7 @@ export const likePropose = (id) => async dispatch => {
         const errors = err.response.data.err
         errors.map(error => {
             return dispatch({
-             type: PROPOSE_FAIL,
+             type: ERROR_MSG,
              payload: error.msg
          })
          })            
@@ -112,12 +115,16 @@ export const inWork = (id) => async dispatch => {
             type: IN_WORK,
             payload: res.data
         })
+        dispatch({
+            type: GREEN_MSG,
+            payload: res.data
+        })
     }
     catch (err) {
         const errors = err.response.data.errors
         errors.map(error => {
             return dispatch({
-             type: PROPOSE_FAIL,
+             type: ERROR_MSG,
              payload: error.msg
          })
          })            
@@ -141,7 +148,7 @@ export const deletePropose = (id) => async dispatch => {
         const errors = err.response.data.err
         errors.map(error => {
             return dispatch({
-             type: PROPOSE_FAIL,
+             type: ERROR_MSG,
              payload: error.msg
          })
          })            

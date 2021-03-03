@@ -36,3 +36,14 @@ export const Status = styled.div`
     margin-right: auto;
 
 `
+
+
+
+
+export const Circle = styled.div`
+  height: 15px;
+  width: 15px;
+  background-color: ${(props) => (props.red ? "#E04B4B" : "#68D286")};
+  border-radius: 50%;
+  display: inline-block;
+`;

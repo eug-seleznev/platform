@@ -1,4 +1,4 @@
-import { GET_STATUS, GET_URN, CLEAR_MODEL_DATA } from "../types";
+import { GET_STATUS, CLEAR_MODEL_DATA } from "../types";
 
 
 
@@ -16,11 +16,7 @@ export default function(state = initialState, action) {
     } = action;
 
     switch(type) {
-        case GET_URN:
-            return {
-                ...state,
-                status: 'started'
-            }
+
         case GET_STATUS:
             return {
               ...state,

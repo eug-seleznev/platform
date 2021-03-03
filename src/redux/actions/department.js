@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { NEW_DEPARTMENT, ALL_DEPARTMENTS, FIND_DEPARTMENT, JOIN_DEPARTMENT, LEAVE_DEPARTMENT, DEPARTMENT_FAIL,CLEAR_DEPS} from "../types";
+import { NEW_DEPARTMENT, ALL_DEPARTMENTS, FIND_DEPARTMENT, JOIN_DEPARTMENT, LEAVE_DEPARTMENT, DEPARTMENT_FAIL,CLEAR_DEPS, ERROR_MSG, GREEN_MSG} from "../types";
 
 
 
@@ -15,15 +15,20 @@ export const newDepartment = (formData) => async dispatch  => {
             type: NEW_DEPARTMENT,
             payload: res.data
         })
-
+        dispatch({
+            type: GREEN_MSG,
+            payload: res.data
+        })
         }
       catch (err) {
+        
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: DEPARTMENT_FAIL,
+            type: ERROR_MSG,
             payload: error.msg
         })
+        
         })            
       
     }
@@ -51,7 +56,7 @@ export const allDepartments = () => async dispatch  => {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: DEPARTMENT_FAIL,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })            
@@ -75,7 +80,7 @@ export const findDepartment = (divname) => async dispatch  => {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: DEPARTMENT_FAIL,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })            
@@ -102,7 +107,7 @@ export const joinDepartment = (id) => async dispatch  => {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: DEPARTMENT_FAIL,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })            
@@ -127,7 +132,7 @@ export const deleteDepartment = (divname) => async dispatch  => {
         const errors = err.response.data.err;
         errors.map(error => {
            return dispatch({
-            type: DEPARTMENT_FAIL,
+            type: ERROR_MSG,
             payload: error.msg
         })
         })            

@@ -101,7 +101,17 @@ background-color: white;
 `
 
 
-
+export const InfoCard = styled.div`
+padding: 10px;
+padding-left:20px;
+border: 1px solid #CECECE;
+border-radius: 15px;
+height:auto;
+@media(max-width:700px) {
+    padding: 10px;
+    padding-left:10px;   
+}
+`
 export const Card = styled.div`
 background: #FFFFFF;
 
@@ -114,7 +124,18 @@ border-radius: 15px;
     padding-left:10px;   
 }
 `
+export const SmallCard = styled.div`
+background: #FFFFFF;
 
+padding: 5px;
+padding-left:10px;
+border: 1px solid #CECECE;
+border-radius: 5px;
+@media(max-width:700px) {
+    padding: 10px;
+    padding-left:10px;   
+}
+`
 
 
 
