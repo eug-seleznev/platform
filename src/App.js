@@ -54,7 +54,7 @@ const App = () => {
   const history = createBrowserHistory();
   const auth = useSelector(state => state.auth.isAuthenticated)
   const loaded = useSelector(state => state.auth.loaded)
-
+  const background = useSelector(state => state.users.background)
 
   //chek auth token on render
   useEffect(() => {
@@ -63,7 +63,7 @@ const App = () => {
       dispatch(loadUser());
     }
   })
-
+   
 
   useEffect(() => {
     if (loaded) {
@@ -78,7 +78,7 @@ const App = () => {
 
 
   return (
-    <div className="App">
+    <div className="App"style={{backgroundColor:background}}>
       <Router history={history}>
         {!auth ? (
           <LoginContainer>
@@ -89,7 +89,7 @@ const App = () => {
           <>
             <Layout histCurrent={history} />
             <Switch>
-              <Container>
+              <Container background={background}>
                 {/* main */}
                 <Route exact path="/" component={Main} />
 

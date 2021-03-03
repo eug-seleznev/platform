@@ -5,7 +5,7 @@ import { allDepartments } from '../../redux/actions/department'
 
 import { useEffect, useState } from 'react'
 import DepartmentCard from './departmentCard'
-import { allUsers } from '../../redux/actions/user'
+import { allUsers, background } from '../../redux/actions/user'
 import { ButtonText } from '../../Styles/buttons'
 import { Bold, Regular } from '../../Styles/typography'
 import DepartmentSmallCard from './departmentSmallCard'
@@ -20,7 +20,13 @@ const AllDepartments = ({history}) => {
  useEffect(()=>{
     dispatch(allDepartments())
     dispatch(allUsers('name', true))
+    dispatch(background('#FAFAFA'))
  },[])
+  useEffect(()=>{ 
+    return () => {
+    dispatch(background('#ECECEC'))
+  }
+  }, [])
  useEffect (()=>{
     if(allDeps){
         console.log (allDeps)

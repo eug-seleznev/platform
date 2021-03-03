@@ -71,7 +71,7 @@ export const PERM_RETURN = 'permission_return'
 ///ERRORS with tickets
 export const NEW_ERROR = 'server_error'
 export const GREEN_MSG = 'some_msg'
-
+export const BACK_WHITE ='backgr_white'
 
 //////// proposes
 

@@ -136,7 +136,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
                       className={style.taskDescr}
                       name={`tasks[${index}].taskTitle`}
                       ref={register()}
-					  required
+					            required
                       placeholder="Описание задачи" // make sure to set up defaultValue
                     />
                     <input
@@ -159,7 +159,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
                       type="button"
                       style={{
                         display: `${
-                          fields.length === index + 1 ? "none" : "block"
+                          fields.length === 1?'none': "block"
                         }`,
                         color: "#3F496C",
                         backgroundColor: "white",

@@ -7,7 +7,7 @@ import style from '../../Styles/modules/components/Project/createPr.module.css'
 import {Container, Card, Title, ModalContainer,} from '../../Styles/common'
 import { Button, CancelButton } from '../../Styles/buttons';
 import { Bold, H1, H3, Light, Regular, Thin} from '../../Styles/typography'
-import { allUsers, searchUser } from '../../redux/actions/user';
+import { allUsers, searchUser, background } from '../../redux/actions/user';
 
 const ProjectNew = ({history,closeWindow}) => {
     const dispatch = useDispatch();
@@ -60,6 +60,18 @@ const ProjectNew = ({history,closeWindow}) => {
           setCurrentPos('')
           setUserStage(1)
       }
+      //смена фона
+      useEffect(()=>{ 
+       
+        dispatch(background('white'))
+      
+      }, [])
+      useEffect(()=>{ 
+        return () => {
+        dispatch(background('#ECECEC'))
+      }
+      }, [])
+     //
       const returnToSearch =()=>{
         setUserStage(1)
         idList.pop()
@@ -155,6 +167,7 @@ const ProjectNew = ({history,closeWindow}) => {
     return (
       <div className={style.container_new_proj}>
         <div className={style.stages}>
+          
           <div className={style.circle}>
             <div className={style.number} style={{borderColor: `${step===1?'#3F496C':'#B7B7B7'}`}}>1</div>
             <Regular >Информация о проекте</Regular>
@@ -452,6 +465,7 @@ const ProjectNew = ({history,closeWindow}) => {
              </div>
        
       </div>
+     
     );
 }
 
