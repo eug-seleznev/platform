@@ -1,5 +1,5 @@
 import { innerBackend, instance } from "../../components/utils/axios";
-import { ADD_SPRINT, SORT_PROJECTS, ADD_TASKS,CLEAR_URN,GREEN_MSG, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK, CREATE_FAIL, DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, PROJECT_ID, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT,CLEAR_MSG, CLEAR_ERROR, DELETE_SPRINT, PROJECTS_SORT, ERROR_MSG, CHANGE_DESCRIPTION, ADD_USER_TO_TASK  } from "../types";
+import { ADD_SPRINT, SORT_PROJECTS, ADD_TASKS,CLEAR_URN,GREEN_MSG, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK, CREATE_FAIL, DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, PROJECT_ID, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT,CLEAR_MSG, CLEAR_ERROR, DELETE_SPRINT, PROJECTS_SORT, ERROR_MSG, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG  } from "../types";
 
 
 
@@ -79,6 +79,28 @@ export const allProjects = () => async dispatch  => {
     }
 
 }
+export const searchTag = (tag, crypt) => async dispatch  => {
+    
+  try {
+      const res = await innerBackend.get(`/projects/tag/find?crypt=${crypt}&tag=${tag}`)
+      dispatch({
+          type: SEARCH_TAG,
+          payload: res.data
+      })
+
+      }
+    catch (err) {
+      const errors = err.response.data.err;
+      errors.map(error => {
+         return dispatch({
+          type: ERROR_MSG,
+          payload: error.msg
+      })
+      })            
+    
+  }
+
+}
 
 export const getProject = (id) => async dispatch  => {
     
@@ -104,14 +126,15 @@ export const getProject = (id) => async dispatch  => {
 }
 
 
-export const addSprint = (id,formData,data) => async dispatch  => {
+export const addSprint = (id,formData,data, tags) => async dispatch  => {
     try {
     
 
         let body = {
             description: formData.description,
             date: formData.date,
-            tasks: data.tasks[0].taskTitle==""?[]:data.tasks
+            tasks: data.tasks[0].taskTitle==""?[]:data.tasks,
+            tags: tags
         }
         // console.log(data)
         const res = await innerBackend.post(`/projects/sprints/new/${id}`,body)

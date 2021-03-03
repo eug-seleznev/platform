@@ -48,6 +48,7 @@ export const ADD_SPRINT_TO_CHOSEN = 'add_sprint_to_chosen'
 export const DELETE_SPRINT = 'delete_sprint'
 export const CHANGE_DESCRIPTION = 'change_sprint_description'
 export const ADD_USER_TO_TASK = 'add_user_to_task'
+export const SEARCH_TAG = 'search_tag'
 //teams
 export const JOIN_TEAM = 'join_to_team'
 //projects errors
