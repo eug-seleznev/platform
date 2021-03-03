@@ -1,11 +1,11 @@
 
-import { ADD_SPRINT,SORT_PROJECTS, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL, EDIT_TASK, CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR, GET_URN, DELETE_SPRINT, CLEAR_URN } from '../types'
+import { ADD_SPRINT,SORT_PROJECTS, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL, EDIT_TASK, CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR, GET_URN, DELETE_SPRINT, CLEAR_URN, CHANGE_DESCRIPTION, ADD_USER_TO_TASK } from '../types'
 
 
 
 const initialState = {
     projects: null,
-    project: null,
+    project: {},
     loadProject: false,
     loadedAllProj: false,
     sprints: [],
@@ -68,12 +68,22 @@ export default function(state = initialState, action) {
                         ...state,
                         sprint: payload.sprint
                     }
+                case CHANGE_DESCRIPTION:
+                    return {
+                        ...state,
+                        sprint: payload 
+                    }
                 case CLEAR_MSG:
                     return {
                         ...state,
                         msg:'',
                         sprint_msg:'',
                         hey:''
+                    }
+                case ADD_USER_TO_TASK:
+                    return {
+                        ...state,
+                        sprint: payload
                     }
                 case EDIT_PROJECT:
                     return {
@@ -129,6 +139,7 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     tasks: payload,
+                    sprint: payload,
                     error: '',
                     msg:payload.msg
                 }

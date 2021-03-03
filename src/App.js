@@ -62,18 +62,18 @@ const App = () => {
     if(localStorage.token){
       dispatch(loadUser());
     }
-  })
-   
+  }, [])
+
 
   useEffect(() => {
     if (loaded) {
 
       setAuthToken(localStorage.token)
       setTimeout(() => {
-        dispatch(loadUser());
+        // dispatch(loadUser());
       }, 1000);
     }
-  }, [loaded])
+  }, [])
 
 
 
