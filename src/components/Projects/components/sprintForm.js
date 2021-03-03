@@ -2,13 +2,17 @@ import { Button,CancelButton } from "../../../Styles/buttons"
 import { Bold, Regular, Thin } from "../../../Styles/typography"
 import{	useState, useEffect} from 'react'
 import { useForm, useFieldArray } from "react-hook-form";
-import {  addTasks,addInfoSprint,addSprint,getSprint, getProject} from "../../../redux/actions/projects";
+import {  addTasks,addInfoSprint,addSprint,getSprint, getProject, searchTag} from "../../../redux/actions/projects";
 import { useDispatch,useSelector} from "react-redux"
 import style from '../../../Styles/modules/components/Project/sprintForm.module.css'
+import TagSearch from "./tagSearch";
+
 
 const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 	// Отправка описания и даты окончания
 	const project = useSelector(state => state.projects.project)
+  const tagArr = useSelector(state => state.projects.tagSearch)
+  
 	const dispatch = useDispatch();
 	const { register, control, handleSubmit } = useForm({
         defaultValues: {
@@ -26,9 +30,10 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 			date:``
 			 
 		}
-	  )
-
+  )
+  const [arr, setArr] =useState([])
 	  const [enterWin,setEnterWin] =useState (false)
+
 	  const {description, date} = formData;
 	  //
 
@@ -64,11 +69,14 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 	 	const enter =()=>{
 			 setEnterWin(true)
 		 }
+     useEffect (()=>{
+      console.log(arr)
+     },[arr])
 		const onSubmit = (data)=> {
 			// console.log(data)
 					
 					setTimeout(() => {
-						dispatch(addSprint(project.crypt,formData,data))
+						dispatch(addSprint(project.crypt,formData,data,arr))
 						offWindow ()
 					}, 500);
 					setTimeout(() => {
@@ -77,11 +85,13 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 						}, 700);
 	
 			}
-	
-		const cancel =()=>{
-			offWindow()
-		}
-
+      const func = (val) => {
+        console.log(val)
+        setArr(val)
+      }
+      const cancel =()=>{
+        offWindow()
+      }
 
 	return (
     <>
@@ -118,7 +128,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
               </select>
             </div>
           </div>
-          <div>
+          <div style={{display:'flex'}}>
             <div
               style={{
                 overflowY: `${fields.length < 6 ? "hidden" : "scroll"}`,
@@ -159,7 +169,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
                       type="button"
                       style={{
                         display: `${
-                          fields.length === 1?'none': "block"
+                          fields.length === index + 1 ? "none" : "block"
                         }`,
                         color: "#3F496C",
                         backgroundColor: "white",
@@ -192,10 +202,12 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
                   </li>
                 ))}
               </ul>
+              
             </div>
+            <TagSearch func={func}/>
           </div>
         </div>
-
+        
         <div className={style.buttons}>
           <CancelButton
             className={style.button}
