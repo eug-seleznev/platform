@@ -16,10 +16,12 @@ const Sprint_New = ({match}) => {
     let {sprint_id, crypt} = match.params //get sprint and project id
     const sprint = useSelector((state) => state.projects.sprint);
     const project = useSelector((state) => state.projects.project);
+    const chosenSprints = useSelector(state => state.auth.user.sprints)
     
 //КОСТЫЛЬ ДЛЯ СТАРЫРХ СПРИНТОВ
     const [creator, setCeator] = useState(sprint.creator ? sprint.creator.fullname : 'someone')
     const [focusRow, setFocusRow] = useState(''); //focus table row
+    const [status, setStatus] = useState(false)
     const [editField, setEditField] = useState(false) 
     const [actualClose, setActualClose] = useState ('??')
     const [diff, setDiff] = useState ('??')
@@ -32,7 +34,13 @@ const Sprint_New = ({match}) => {
       if(sprint.dateClosePlan!==undefined) {
          setActualClose(sprint.dateClosePlan.slice(5, 10).split('-').reverse().join('.'))
       }
-     
+      {
+        chosenSprints
+          .filter((sprint) => sprint._id === sprint_id)
+          .map(() => {
+            setStatus(true);
+          });
+      }
     },[sprint])
     useEffect (()=> {
      
@@ -55,13 +63,15 @@ const Sprint_New = ({match}) => {
         ):<div>load</div>} */}
         <Card>
           <TaskManagment
-         
+            status={status}
+            setStatus={setStatus}
             id={sprint_id}
             creator={sprint.creator ? sprint.creator.fullname : " someone"}
             sprint_description={sprint.description}
             focusRow={focusRow}
             tasks={sprint.tasks}
             editebleRow={editebleRow}
+            tags={sprint.tags}
           />
 
           <TaskTable

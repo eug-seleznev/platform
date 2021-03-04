@@ -1,8 +1,15 @@
 .card__thing__full {
-
+	transition: 300ms all ease;
 	height: 10px;
 	
 	background-color: #5286D4;
+}
+.pointer  {
+	cursor: pointer;
+}
+.td{
+	border: none;
+	border-collapse: collapse;
 }
 .card__thing {
 	width: 150px;
@@ -10,6 +17,16 @@
 	border-radius: 5px;
 	background-color: #C4C4C4;
 	overflow-x: hidden;
-	margin-right: 10px;
+	
+	margin-left: 15px;
 	margin-top: 4px;
+}
+.changeDescr {
+	background-color: white;
+	margin-top: -1px;
+	font-family: SuisseIntlThin;
+	font-size: 16px;
+	border: none;
+	margin-left: -1px;
+	width: 100%;
 }

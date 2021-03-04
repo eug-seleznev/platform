@@ -219,7 +219,8 @@ export default function(state = initialState, action) {
                 case FINISH_TASK:
                     return {
                     ...state,
-                    hey: payload
+                    hey: payload.msg,
+                    sprint: payload.sprint
                 }   
             case SPRINT_ERROR:
                 return {

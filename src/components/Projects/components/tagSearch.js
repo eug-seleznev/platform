@@ -8,7 +8,7 @@ import { Thin } from "../../../Styles/typography";
 import Tag from "./OneProject/tag";
 
 			
-const TagSearch = ({func}) => {
+const TagSearch = ({func, tagCount}) => {
 	const project = useSelector(state => state.projects.project)
   	const tagArr = useSelector(state => state.projects.tagSearch)
 	const dispatch = useDispatch();
@@ -43,11 +43,11 @@ const TagSearch = ({func}) => {
     }
 	
 	return(
-		<div className={style.taskContain}>
-			<div className={style.tagTitle}><Thin >Тегов для добавления {tags.length}/3:</Thin><div style={{display:'flex', marginTop:'10px'}}>{tags.map((el,i)=>{return(<Tag tagText={el} key={i} tagColor={i==0?'#C8D9E9':i==1?'#E9E3C8':'#AAF8A8'}/>)})}</div></div>
+		<div className={style.tagContain}>
+			<div className={style.tagTitle} style={{display:`${tagCount?'flex':'none'}`}}><Thin >Тегов для добавления {tags.length}/3:</Thin><div style={{display:'flex', marginTop:'10px'}}>{tags.map((el,i)=>{return(<Tag tagText={el} key={i} tagColor={i==0?'#C8D9E9':i==1?'#E9E3C8':'#AAF8A8'}/>)})}</div></div>
 			<li style={{display:`${tags.length==3?"none":'flex'}`}}>
 			<div>
-			<div style={{ fontSize: "20px", marginRight: "10px", marginTop:'13px'}}></div>
+			<div style={{ fontSize: "20px", marginRight: "10px"}}></div>
 			<input
 				value={value}
 				name='tag'
@@ -73,7 +73,7 @@ const TagSearch = ({func}) => {
 					style={{
 						color: "#3F496C",
 						height:'10px',
-						marginTop:'11px',
+						marginTop:'-5px',
 						marginLeft:'10px',
 						backgroundColor: "white",
 						border: "none",

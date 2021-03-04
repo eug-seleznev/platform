@@ -52,6 +52,7 @@
 	border: 1px solid black;
 	padding: 10px;
 	border-radius: 5px;
+	background-color: white;
 }
 .searchTagRes {
 	cursor: pointer;
@@ -61,6 +62,14 @@
 .searchTagRes:last-child {
 	cursor: pointer;
 	margin-bottom: 0px;
+	
+}
+.tagContain {
+	list-style: none;
+	z-index: 10;
+	scrollbar-width: none;
+	
+	height: 60px;
 	
 }
 .taskContain {
