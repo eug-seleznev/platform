@@ -22,14 +22,19 @@ const TagSearch = ({func}) => {
       const confirmTag =()=>{
         if(!tags.includes(value)&&value!==''){
            tags.push (value)
-		
+		   console.log(tags)
+		   func(tags)
         }
 		
         setValue('')
         console.log(tags)
       }
 		useEffect(()=>{
-			func(tags)
+			console.log(tags)
+		
+				func(tags)
+			
+			
 		},[tags])
     const searchTags =(e)=> {
       e.preventDefault()
@@ -39,7 +44,7 @@ const TagSearch = ({func}) => {
 	
 	return(
 		<div className={style.taskContain}>
-			<div className={style.tagTitle}><Thin >Теги для добавления {tags.length}/3:</Thin><div style={{display:'flex', marginTop:'10px'}}>{tags.map((el,i)=>{return(<Tag tagText={el} tagColor={i==0?'#C8D9E9':i==1?'#E9E3C8':'#AAF8A8'}/>)})}</div></div>
+			<div className={style.tagTitle}><Thin >Тегов для добавления {tags.length}/3:</Thin><div style={{display:'flex', marginTop:'10px'}}>{tags.map((el,i)=>{return(<Tag tagText={el} key={i} tagColor={i==0?'#C8D9E9':i==1?'#E9E3C8':'#AAF8A8'}/>)})}</div></div>
 			<li style={{display:`${tags.length==3?"none":'flex'}`}}>
 			<div>
 			<div style={{ fontSize: "20px", marginRight: "10px", marginTop:'13px'}}></div>
@@ -47,13 +52,14 @@ const TagSearch = ({func}) => {
 				value={value}
 				name='tag'
 				autocomplete="off"
+				style={{fontFamily:'SuisseIntlThin', fontSize:'16px'}}
 				onFocus={()=>setFocus(true)}
 				onFucusOut={()=>setFocus(false)}
 				onClick={(e)=>searchTags(e)}
 				onChange={(e)=>searchTags(e)}
-				placeholder="Описание задачи" // make sure to set up defaultValue
+				placeholder="Введите тег спринта" // make sure to set up defaultValue
 			/>
-			<div className={style.searchTag}style={{display:`${focus?'block':'none'}`}}>
+			<div className={style.searchTag} style={{display:`${tagArr.filter(res=> !tags.includes(res)).length>0?'block':'none'}`}}>
 				{tagArr.filter(res=> !tags.includes(res)).map((result,i)=>{
 					return(
 					<Thin id={result} className={style.searchTagRes}  onClick={(e)=>addTag(e)} key={i}>{result}</Thin>

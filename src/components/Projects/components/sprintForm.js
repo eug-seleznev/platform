@@ -85,9 +85,12 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 						}, 700);
 	
 			}
-      const func = (val) => {
-        console.log(val)
-        setArr(val)
+
+      const func = (tags) => {
+        console.log(tags)
+        
+        setArr(tags)
+        console.log(arr)
       }
       const cancel =()=>{
         offWindow()
@@ -135,14 +138,16 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
               }}
               className={style.taskContain}
             >
+              <Thin >Задач для добавления: {fields.length}</Thin>
               <ul style={{ padding: 0, listStyleType: "none" }}>
                 {fields.map((item, index) => (
-                  <li key={item.id} style={{ display: "flex" }}>
+                  <li key={item.id} style={{ display: "flex", justifyContent:'space-between',width:'95%'}}>
+                    <div style={{ display: "flex"}}>
                     <div style={{ fontSize: "20px", marginRight: "10px" }}>
                       {index + 1}
                     </div>
                     <input
-                      style={{ marginRight: "40px" }}
+                      style={{ marginRight: "40px",width:'60%' }}
                       className={style.taskDescr}
                       name={`tasks[${index}].taskTitle`}
                       ref={register()}
@@ -164,12 +169,12 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
                       ref={register()}
                       style={{ display: "none" }}
                       placeholder="Стейт"
-                    />
+                    /></div>
                     <Button
                       type="button"
                       style={{
                         display: `${
-                          fields.length === index + 1 ? "none" : "block"
+                          fields.length === 1 ? "none" : "block"
                         }`,
                         color: "#3F496C",
                         backgroundColor: "white",

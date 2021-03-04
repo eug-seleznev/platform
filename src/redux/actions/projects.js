@@ -129,7 +129,7 @@ export const getProject = (id) => async dispatch  => {
 export const addSprint = (id,formData,data, tags) => async dispatch  => {
     try {
     
-
+      console.log(tags)
         let body = {
             description: formData.description,
             date: formData.date,
