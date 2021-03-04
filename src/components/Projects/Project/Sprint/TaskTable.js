@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUserToTask, EditTask, finishTask } from "../../../../redux/actions/projects";
-import { Sprint_Table } from "../../../../Styles/tables"
+import { Sprint_Table, TR } from "../../../../Styles/tables"
 
 
 //todo: handle no tasks state
@@ -99,7 +99,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
       {tasks.map((task) => {
 
         return (
-          <tr
+          <TR
             onMouseOver={() => handleHover(task)}
             onClick={() => doubleClickEdit(task)}
             style={{
@@ -177,7 +177,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
                 </>
               )}
             </td>
-          </tr>
+          </TR>
         );
       })}
     </Sprint_Table>

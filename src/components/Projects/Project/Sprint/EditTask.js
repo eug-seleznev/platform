@@ -66,7 +66,27 @@ return () => {
     <>
       <Bold> Задачи </Bold>
       <div>
-        <p> Создал: {creator} </p>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-around",
+            color: "#3F496C",
+          }}
+        >
+          <p>7/13</p>
+          <p> Создал: {creator} </p>
+          <p> Добавить тег </p>
+          <p> Добавить модель </p>
+
+          {focusRow !== "" && (
+            <>
+              <p onClick={editHandler}> edit task  </p>
+              <p onClick={deletehandler}> delete </p>
+            </>
+          )}
+        </div>
+
         <form onSubmit={onEditSubmit}>
           {!isSubmit ? (
             <input
@@ -78,21 +98,11 @@ return () => {
           ) : (
             <p onClick={() => setSubmit(false)}>
               {sprint_description !== ""
-                ? sprint_description + "  "
+                ? "Описание " + sprint_description + "  "
                 : "Добавить описание  "}{" "}
             </p>
           )}
         </form>
-
-        {focusRow !== "" && (
-          <div>
-            <p onClick={editHandler}> edit task  </p>
-            <p onClick={deletehandler} >
-              {" "}
-              delete{" "}
-            </p>
-          </div>
-        )}
       </div>
     </>
   );
