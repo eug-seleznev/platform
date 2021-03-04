@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { DeleteTask, EditDescription } from "../../../../redux/actions/projects";
-import { Bold } from "../../../../Styles/typography"
+import { Bold, Light, Regular } from "../../../../Styles/typography"
+import style from "../../../../Styles/modules/components/Project/newsprint.module.css"
 
 
 
 
 
-
-const TaskManagment = ({ id, sprint_description, focusRow, editebleRow, creator }) => {
+const TaskManagment = ({ id, sprint_description, focusRow, editebleRow, creator, tasks }) => {
   const dispatch = useDispatch();
 
   //description handler
@@ -38,6 +38,7 @@ const TaskManagment = ({ id, sprint_description, focusRow, editebleRow, creator 
 return () => {
   window.removeEventListener("keydown", handleUserKeyPress);
 };
+
   })
   const onEditSubmit = (e) => {
     e.preventDefault();
@@ -64,20 +65,31 @@ return () => {
 
   return (
     <>
-      <Bold> Задачи </Bold>
+      <Regular size='24'> Задачи </Regular>
       <div>
         <div
           style={{
             display: "flex",
-            width: "100%",
-            justifyContent: "space-around",
+            width: "50%",
+            justifyContent: "space-between",
             color: "#3F496C",
           }}
         >
-          <p>7/13</p>
-          <p> Создал: {creator} </p>
-          <p> Добавить тег </p>
-          <p> Добавить модель </p>
+           
+            {tasks!==undefined?
+              <div style={{display: "flex"}}>
+              <Light >{tasks.filter(task=>task.status).length}/{tasks.length}</Light>
+                <div className={style.card__thing}>
+                  <div style={{width:`${Math.trunc(7/13*100)}%`}} className={style.card__thing__full}></div>
+                </div>
+              </div>:''}
+            
+							
+             
+            
+          <Light color='#3F496C'> Создал: {creator} </Light>
+          <Light color='#A3A3A3'> Добавить тег </Light>
+          <Light color='#A3A3A3'> Добавить модель </Light>
 
           {focusRow !== "" && (
             <>
