@@ -4,7 +4,7 @@ import { NEW_DEPARTMENT, ALL_DEPARTMENTS, FIND_DEPARTMENT, JOIN_DEPARTMENT, LEAV
 
 const initialState = {
     departments: null,
-    findDep: null,
+    findDep: {divname:'',members:[]},
     loaded: false,
     reload: false,
     
@@ -53,13 +53,13 @@ export default function(state = initialState, action) {
                     ...state,
                     msg: payload,
                     reload: !state.reload,
-
+                    findDep: payload.division,
                     error: ''
                 }
             case FIND_DEPARTMENT:
                 return {
                     ...state,
-                    findDep: payload,
+                    findDep: payload.division,
                     reload: !state.reload,
 
                     error:''
@@ -70,10 +70,10 @@ export default function(state = initialState, action) {
 
                 return {
                     ...state,
-                    msg: payload,
-                    findDep: null,
+                    msg: payload.msg,
+                    
                     reload: !state.reload,
-
+                    findDep: payload.division,
 
                     error: ''
                 }

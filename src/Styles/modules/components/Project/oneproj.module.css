@@ -160,6 +160,13 @@ border-bottom: none;
 	padding-bottom: 10px;
 	margin-bottom: 10px;
 } 
+.tag {
+	border-radius: 25px;
+	width: fit-content;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-right: 15px;
+}
 .title__options {
 	margin-right: 10px;
 	transition: 200ms ease all;
@@ -173,7 +180,7 @@ border-bottom: none;
 .title__small {
 	align-items: center;
 	display: flex;
-	margin-bottom: 60px;
+	
 	
 }
 .title__2 {
@@ -186,6 +193,11 @@ border-bottom: none;
 	margin-top: 10px;
 	margin-right: 20px;
 	text-align: left;
+}
+.tag__row {
+	display: flex;
+	margin-bottom: 60px;
+	margin-top: 15px;
 }
 .sprintdescr__cont {
 	display: flex;

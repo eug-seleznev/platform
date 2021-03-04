@@ -48,6 +48,7 @@ export const ADD_SPRINT_TO_CHOSEN = 'add_sprint_to_chosen'
 export const DELETE_SPRINT = 'delete_sprint'
 export const CHANGE_DESCRIPTION = 'change_sprint_description'
 export const ADD_USER_TO_TASK = 'add_user_to_task'
+export const SEARCH_TAG = 'search_tag'
 //teams
 export const JOIN_TEAM = 'join_to_team'
 //projects errors
@@ -73,7 +74,7 @@ export const PERM_RETURN = 'permission_return'
 ///ERRORS with tickets
 export const NEW_ERROR = 'server_error'
 export const GREEN_MSG = 'some_msg'
-
+export const BACK_WHITE ='backgr_white'
 
 //////// proposes
 
@@ -84,7 +85,7 @@ export const LIKE_PROPOSE = 'like_propose'
 export const DELETE_PROPOSE = 'delete_propose'
 export const PROPOSE_FAIL = 'propose_fail'
 export const IN_WORK = 'in_work'
-
+export const END_PROPOSE = 'end_work'
 // departments
 export const NEW_DEPARTMENT = 'new_department'
 export const ALL_DEPARTMENTS = 'all_departments'

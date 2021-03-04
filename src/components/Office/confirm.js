@@ -10,9 +10,9 @@ const Confirm = ({accept, decline, title}) => {
     <div className={styles.bg} onClick={!overCard && decline}>
             <Card className={styles.card} onMouseEnter={()=>setOvercard(true)} onMouseLeave={()=>setOvercard(false)}>
                 
-                    <div>Вы уверенны что хотите удалить предложение "{title}"</div>
-                    <Button  type="submit" onClick={accept}>Удалить предложение</Button>
-                    <Button  type="submit" onClick={decline}>Отмена</Button>
+                    <div>Вы уверенны что хотите завершить предложение "{title}"</div>
+                    <Button  type="submit" onClick={accept}>Завершить</Button>
+                    <Button  type="submit" grey onClick={decline}>Отмена</Button>
                 
             </Card>
     </div>
