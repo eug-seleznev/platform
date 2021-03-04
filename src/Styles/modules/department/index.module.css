@@ -1,6 +1,20 @@
 .container{
 display: grid;
-row-gap: 100px;
+row-gap: 30px;
+}
+.small__card__contain {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.small__card {
+    width: 300px;
+    text-align: center;
+    background-color: #C4C4C4;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    height: 80px;
+    padding-top: 65px;
 }
 .createDep{
     height: 100px;

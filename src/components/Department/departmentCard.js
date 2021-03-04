@@ -19,37 +19,36 @@ import { allUsers } from '../../redux/actions/user';
 import { loadUser } from '../../redux/actions/auth';
 import ProjectsCard from '../Main/projectsCard';
 
-const DepartmentCard = ({itsAllDepsPage, department, user, history, users}) => {
+const DepartmentCard = ({button, itsAllDepsPage, department, user, history, users}) => {
 
 
 
 const dispatch = useDispatch()
-const content = user.division!==null?user.division:department
-const member = user.division && user.division.divname==content.divname
+const content = department
+//const member = user.division && user.division.divname==content.divname
 // const usersArr = users.filter(item => item.division? item.division.divname== content.divname : false)
-const usersArr = content.members
+//const usersArr = content.members
 
 
 let projArray = []
 const [newArr, setNewArr] = useState([])
 const [lastArr, setLastArr] = useState(null)
+
 const [pageStatus, setPageStatus] =useState(false)
 const [showConfirm, setShowConfirm] = useState(false)
-  
-    useEffect(()=>{
-        if(usersArr!=undefined) {
-            usersArr.concat(user.projects);
+
+    
+    // useEffect(()=>{
+    //     if(content!=undefined&&content!==null) {
+    //        dispatch(findDepartment(content.divname))
            
-        }
+    //     }
         
-    },[usersArr])
-    useEffect(()=>{
-        if(content!=undefined&&content!==null) {
-           dispatch(findDepartment(content.divname))
-           
-        }
-        
-    },[content])
+    // },[content])
+    const join =()=>{
+        dispatch(joinDepartment(department.divname))
+     
+    }
     const pushToArray =(el)=>{
         projArray = projArray.concat(el.projects)
         newA()
@@ -60,6 +59,7 @@ const [showConfirm, setShowConfirm] = useState(false)
        
         // console.log(newArr)
     }
+    
     useEffect(()=>{
         setLastArr (newArr[newArr.length-1])
     },[newArr])
@@ -79,12 +79,7 @@ const [showConfirm, setShowConfirm] = useState(false)
     useEffect(()=>{
         setPageStatus(itsAllDepsPage)
     },[itsAllDepsPage])
-    useEffect(()=>{
-        if(department!=null) {
-     
-           
-        }
-    },[department])
+   
     const deleteDep = () => {
         dispatch(deleteDepartment(content.divname))
         setShowConfirm(false)
@@ -100,11 +95,17 @@ const [showConfirm, setShowConfirm] = useState(false)
         }
     }
     return(
+        
         <div>
-       <div className={styles.container} style={{height: `${pageStatus?'60px':'auto'}`,overflowY: `${pageStatus?'hidden':'visible'}`}}>
+       
+            <div className={styles.container} style={{height: `${pageStatus?'60px':'auto'}`,overflowY: `${pageStatus?'hidden':'visible'}`}}>
             <Bold className={styles.title} title={pageStatus?'Открыть отдел':''} onClick={()=>departStatus()} style={{cursor: `${itsAllDepsPage?'pointer':'default'}`}} size='30'>{department!==null?department.divname:''}</Bold>
-            <Bold className={styles.joinBtn} style={{display:`${itsAllDepsPage?'none':'grid'}`}} size='16px' color='#3F496C' onClick={()=>setShowConfirm(true)}>Выйти из отдела</Bold>
-            <div className={styles.members}>
+            {button?
+                 <Bold className={styles.joinBtn}  size='16px' color='#3F496C' onClick={()=>setShowConfirm(true)}>Выйти из отдела</Bold>:
+                 <Bold className={styles.joinBtn}  size='16px' color='#3F496C' onClick={join}>Присоединиться к отделу</Bold>
+       
+            }
+                <div className={styles.members}>
             {department!==null?<div style={{display:`${department.members.length!==0?'none':'block'}`}}>В этом отделе нет сотрудников</div>:''}
            
             {department==null?'':department.members.map((el,i)=>{
@@ -120,13 +121,12 @@ const [showConfirm, setShowConfirm] = useState(false)
             </div>
             <Bold className={styles.activeTitle}  size='30'>Проекты отдела</Bold>
             <div className={styles.activeProjects}>
-            <div style={{display:`${lastArr!==null&&lastArr!==undefined&&lastArr.length!==0?'none':'block'}`}}>У этого отдела нет проектов</div>
-                {lastArr===null||lastArr===undefined?'':lastArr.map((el,i)=>{
+
+                {lastArr===null||lastArr===undefined||department.members.length==0?<div>У этого отдела нет проектов</div>:lastArr.map((el,i)=>{
                     
                     // if(el!=undefined){
                         return(
-                        
-                        <ProjectsCard key={i} project={el} history={history} sprints={user.sprints}/>
+                            <ProjectsCard key={i} project={el} history={history} sprints={user.sprints}/>
                     ) 
                     
                     // return(<div>loading..</div>)
@@ -139,6 +139,8 @@ const [showConfirm, setShowConfirm] = useState(false)
 
 
             </div>
+        
+      
         
        </div>
         

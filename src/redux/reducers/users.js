@@ -1,5 +1,6 @@
 
-import { ALL_USERS, CHANGE_PERMISSION,PERM_RETURN,ONE_USER, CLEAR_ERROR, CLEAR_MSG, SEARCH_USER, ADD_CONTRACTOR, ALL_CONTRACTORS, PARTITION_UPDATE} from '../types'
+import { backgroundWhite } from '../actions/user';
+import { ALL_USERS, CHANGE_PERMISSION,PERM_RETURN,ONE_USER, CLEAR_ERROR, CLEAR_MSG, SEARCH_USER, ADD_CONTRACTOR, ALL_CONTRACTORS, PARTITION_UPDATE, BACK_WHITE} from '../types'
 
 
 
@@ -11,7 +12,8 @@ const initialState = {
     userLoaded: false,
     error:'',
     searchResult:[],
-    contractors: []
+    contractors: [],
+    background:'#ECECEC'
 }
 
 export default function(state = initialState, action) {
@@ -30,6 +32,13 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 contractors: payload
+                
+              
+            }
+        case BACK_WHITE: 
+            return {
+                ...state,
+                background: payload
                 
               
             }
