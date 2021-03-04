@@ -20,11 +20,16 @@ const TagSearch = ({func, tagCount}) => {
         setValue(e.target.id)
       }
       const confirmTag =()=>{
-        if(!tags.includes(value)&&value!==''){
+        if(!tags.includes(value)&&value!==''&&tagCount){
            tags.push (value)
 		   console.log(tags)
 		   func(tags)
         }
+		else if(!tagCount) {
+			console.log(value)
+			func(value)
+			setValue('')
+		}
 		
         setValue('')
         console.log(tags)

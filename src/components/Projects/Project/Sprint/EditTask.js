@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { DeleteTask, EditDescription } from "../../../../redux/actions/projects";
+import { addTag, DeleteTask, EditDescription } from "../../../../redux/actions/projects";
 import { Bold, Light, Regular, Thin } from "../../../../Styles/typography"
 import style from "../../../../Styles/modules/components/Project/newsprint.module.css"
 import { addToChosen } from "../../../../redux/actions/auth";
@@ -35,7 +35,7 @@ const TaskManagment = ({tags, id,status, setStatus, sprint_description, focusRow
     }
   
  })
-
+ 
  useEffect(() => {
   setDescription(sprint_description)
 
@@ -80,8 +80,8 @@ return () => {
     }
     
   },[tasks])
- const func =()=>{
-
+ const func =(value)=>{
+  dispatch(addTag(id, value))
  }
   return (
     <>
@@ -119,19 +119,21 @@ return () => {
           
           {/* <Light color='#A3A3A3'> Добавить модель </Light> */}
 
-          {focusRow !== "" && (
-            <>
-              <Light onClick={editHandler} style={{cursor:'pointer',marginRight:"50px"}}> Редактировать задачу </Light>
-              <Light onClick={deletehandler} style={{cursor:'pointer',marginRight:"50px"}}> Удалить задачу </Light>
-            </>
-          )}
+          
           </div>
           <div style={{display: "flex", justifyContent:'flex-end',width:'13%',marginTop:'10px'}}>
             <Light color='#3F496C' style={{cursor:'pointer'}} onClick={()=>addCh()}> {!status?'Добавить в избранное':'Убрать из избранного'}</Light>
           </div>
          
         </div>
-
+        <div style={{height:'20px'}}>
+          {focusRow !== "" && (
+              <div className={style.edit__task}>
+                <Light color='#3F496C' onClick={editHandler} style={{cursor:'pointer',marginRight:"50px"}}> Редактировать задачу </Light>
+                <Light color='#3F496C' onClick={deletehandler} style={{cursor:'pointer'}}> Удалить задачу </Light>
+              </div>
+            )}
+          </div>
         <form onSubmit={onEditSubmit}>
           {!isSubmit ? (
             <div style={{display:'flex',marginBottom: '20px',marginTop: '20px'}}>

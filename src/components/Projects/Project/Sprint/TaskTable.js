@@ -24,6 +24,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
   }, [focusRow]);
 
   const onChange = (e) => {
+    console.log('change')
     let taskid = e.target.value;
     dispatch(finishTask({ taskid, id }));
   };
@@ -32,19 +33,24 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
     if (isEdit) {
       let task = tasks.filter((task) => task._id == focusRow);
       console.log(task);
-      setTaskTitle(task[0].taskTitle);
+      // setTaskTitle(task[0].taskTitle);
     }
   }, [isEdit]);
 
   //edit task
   const editHandler = (e) => {
-   setTaskTitle(e.target.value)
-      dispatch(EditTask({ taskTitle, id, focusRow }));
+    console.log('edit')
+      let taskTitle = e.target.value
+      dispatch(EditTask({  taskTitle, id, focusRow }));
+      setTaskTitle(e.target.value)
    //server call edit task
 
 
   };
-
+  const onFocus=(e)=>{
+    console.log('onFocus')
+    setTaskTitle(e.target.name)
+  }
   const submitEdit = (e) => {
     e.preventDefault();
     //server call edit task
@@ -55,7 +61,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
 
 
   const doubleClickEdit = (task) => {
-
+      setTaskTitle(task.taskTitle)
       setFocusRow(task._id)
       if(isDouble==0){
           setDouble(1);
@@ -97,17 +103,20 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
   return (
     <Sprint_Table onMouseLeave={() => setTaskId("")}>
       {tasks.map((task) => {
-
+        
         return (
           <TR
             onMouseOver={() => handleHover(task)}
             onClick={() => doubleClickEdit(task)}
+            
             style={{
               backgroundColor: (task._id === focusRow || task._id == taskId) ? "#F2F2F2" : "white",
+              userSelect: 'none'
             }}
           >
             <Sprint_Td style={{width:'25px'}}>
               <input
+              
                 type="checkbox"
                 defaultChecked={task.taskStatus}
                 value={task._id}
@@ -121,9 +130,12 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
               <Sprint_Td style={{width:'50%'}}>
                 <form onSubmit={submitEdit}>
                   <input
+                  className={style.input}
                     type="text"
                     value={taskTitle}
-                    onChange={editHandler}
+                    name={task.taskTitle}
+                    onClick={(e)=>onFocus(e)}
+                    onChange={(e)=>editHandler(e)}
                   ></input>
                 </form>
               </Sprint_Td>
@@ -137,9 +149,10 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
 
             <Sprint_Td >
               {task.user && team ? (
+               
                 <>
                   {team && (
-                      <Select defaultValue={team[0].user._id} onChange={(e) => teamHandle(e, task)}>
+                      <Select defaultValue={task.user.fullname} onChange={(e) => teamHandle(e, task)}>
                         {team.map((member) => {
                           return (
                             <>

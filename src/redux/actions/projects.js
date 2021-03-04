@@ -1,5 +1,5 @@
 import { innerBackend, instance } from "../../components/utils/axios";
-import { ADD_SPRINT, SORT_PROJECTS, ADD_TASKS,CLEAR_URN,GREEN_MSG, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK, CREATE_FAIL, DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, PROJECT_ID, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT,CLEAR_MSG, CLEAR_ERROR, DELETE_SPRINT, PROJECTS_SORT, ERROR_MSG, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG  } from "../types";
+import { ADD_SPRINT, SORT_PROJECTS,ADD_TAG, ADD_TASKS,CLEAR_URN,GREEN_MSG, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK, CREATE_FAIL, DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, PROJECT_ID, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT,CLEAR_MSG, CLEAR_ERROR, DELETE_SPRINT, PROJECTS_SORT, ERROR_MSG, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG  } from "../types";
 
 
 
@@ -161,10 +161,11 @@ export const addSprint = (id,formData,data, tags) => async dispatch  => {
 }
 
 export const EditTask = ({ taskTitle, id, focusRow }) => async (dispatch) => {
+  console.log(taskTitle)
   try {
 
     let body = {
-      taskTitle: taskTitle,
+      taskTitle: taskTitle!==''?taskTitle:' ',
       taskid: focusRow,
     };
 
@@ -195,7 +196,18 @@ export const addUserToTask = ({ userid, id, focusRow }) => async (dispatch) => {
   }
 }; 
 
-
+export const addTag = ( id,tag ) => async (dispatch) => {
+  try {
+    console.log(tag)
+    const res = await innerBackend.put(`projects/sprints/addTag/${id}`, tag);
+    dispatch({
+      type: ADD_TAG,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log(err.response.data);
+  }
+}; 
 
 
 

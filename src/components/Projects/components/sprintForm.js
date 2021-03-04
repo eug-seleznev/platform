@@ -209,7 +209,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
               </ul>
               
             </div>
-            <TagSearch func={func}/>
+            <TagSearch func={func} tagCount={true}/>
           </div>
         </div>
         

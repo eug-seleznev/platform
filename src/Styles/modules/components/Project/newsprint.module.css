@@ -11,6 +11,18 @@
 	border: none;
 	border-collapse: collapse;
 }
+.edit__task {
+	display: flex;
+	
+}
+.input {
+	height: 20px;
+	outline: none;
+	border-radius: 5px;
+	border: 1px solid black;
+	margin-right: 25px;
+	font-size: 16px;
+}
 .card__thing {
 	width: 150px;
 	height: 10px;
