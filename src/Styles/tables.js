@@ -11,8 +11,13 @@ border-bottom: 2px solid Black;
 export const Sprint_Table = styled.table`
   margin: 0;
   margin-bottom: 40px;
-  border-bottom: 1px solid blue;
+  border: none;
+  width: 100%;
 `;
+export const TR = styled.tr`
+    height: 28px;
+
+`
 
 
 
