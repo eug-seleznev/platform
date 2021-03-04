@@ -437,7 +437,7 @@ export const finishTask = ({taskid, id}) => async dispatch  => {
     }
     try {
         // console.log(tasks, 'tasks', id, 'id')
-        const res = await innerBackend.put(`projects/sprints/DAtask/${id}`, body)
+        const res = await innerBackend.put(`projects/sprints/DAtask/test`, body)
         dispatch({
             type: FINISH_TASK,
             payload: res.data
