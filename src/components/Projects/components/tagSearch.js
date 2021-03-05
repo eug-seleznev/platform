@@ -59,7 +59,7 @@ const TagSearch = ({func, tagCount}) => {
 				autocomplete="off"
 				style={{fontFamily:'SuisseIntlThin', fontSize:'16px'}}
 				onFocus={()=>setFocus(true)}
-				onFucusOut={()=>setFocus(false)}
+				onBlur={()=>setFocus(false)}
 				onClick={(e)=>searchTags(e)}
 				onChange={(e)=>searchTags(e)}
 				placeholder="Введите тег спринта" // make sure to set up defaultValue

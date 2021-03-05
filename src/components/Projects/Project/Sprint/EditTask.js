@@ -115,7 +115,7 @@ return () => {
           <div style={{marginLeft:"50px"}}>{tags!==undefined? tags.map((el,i)=>{
               return(<div style={{marginBottom:'10px'}}><Tag tagText={el} key={i} tagColor={i==0?'#C8D9E9':i==1?'#E9E3C8':'#AAF8A8'}/></div>)
             }):''}</div>
-          {tags!==undefined?<div style={{marginLeft:"50px",marginRight:"50px", display:`${tags.length<3?"block":"none"}`}}><TagSearch tagCount={false}  func={func}></TagSearch></div>:''}
+          {tags!==undefined?<TagSearch tagCount={false}  func={func}></TagSearch>:<div>biba</div>}
           
           {/* <Light color='#A3A3A3'> Добавить модель </Light> */}
 

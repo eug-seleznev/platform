@@ -54,14 +54,16 @@ const Sprint_New = ({match}) => {
     const editebleRow = () => {
         setEditField(!editField)
     }
-    
+    useEffect(()=>{
+        console.log(focusRow)
+    }, [focusRow])
     return (
       <SprintLoader sprint_id={sprint_id} sprint={sprint} project={project} crypt={crypt}>
         <SprintTitle diff={diff} prTitle={project.title} actualClose={actualClose}id={sprint_id} sprint={sprint}/>
 
         {/* {sprint.tags!==undefined? sprint.tags.map((el,i)=> {return(<Tag tagText={el} tagColor={i==0?'#C8D9E9':i==1?'#E9E3C8':'#AAF8A8'} key={i}></Tag>)}
         ):<div>load</div>} */}
-        <Card>
+        <Card >
           <TaskManagment
             status={status}
             setStatus={setStatus}
@@ -77,10 +79,12 @@ const Sprint_New = ({match}) => {
           <TaskTable
             tasks={sprint.tasks}
             id={sprint_id}
+            focusRowNew={focusRow}
             selectFocusRow={selectFocusRow}
             enableEdit={editebleRow}
             isEdit={editField}
             team={project.team2}
+            
           />
           <AddTask id={sprint_id} focusRow={focusRow} />
         </Card>

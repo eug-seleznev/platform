@@ -7,7 +7,7 @@ import style from "../../../../Styles/modules/components/Project/newsprint.modul
 //todo: handle no tasks state
 
 
-const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
+const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit, team }) => {
   const dispatch = useDispatch();
   const [taskId, setTaskId] = useState("");
   const [focusRow, setFocusRow] = useState("");
@@ -22,7 +22,12 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
     //todo 
     // disable edit fields
   }, [focusRow]);
-
+  // useEffect(()=>{
+  //   if(focusRowNew==='') {
+  //     setFocusRow('')
+  //     console.log('heyyyyyyyyy')
+  //   }
+  // },[focusRowNew])
   const onChange = (e) => {
     console.log('change')
     let taskid = e.target.value;
@@ -80,7 +85,11 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
   }
 
 
-
+  useEffect(()=>{
+    if(taskId=='') {
+      setFocusRow('')
+    }
+  },[taskId])
 
   const teamHandle = (e, task) => {
 
@@ -91,7 +100,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
 
 
   const handleHover = (task) => {
-    
+
       setTaskId(task._id);
     
   }
@@ -156,16 +165,13 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
                         {team.map((member) => {
                           return (
                             <>
-                              {task.user._id === member.user._id ? (
+                             
                                 <option value={member.user._id}>
                                   {" "}
                                   {member.user.fullname}
                                 </option>
-                              ) : (
-                                <option value={member.user._id} name={task._id}>
-                                  {member.user.fullname}
-                                </option>
-                              )}
+                            
+                              )
                             </>
                           );
                         })}
@@ -175,8 +181,8 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
               ) : (
                 <>
                   {taskId === task._id && !task.user && (
-                    <Select onChange={(e) => teamHandle(e, task)}>
-                      <option selected> Выбрать исполнителя</option>
+                    <Select defaultValue='Выбрать исполнителя' onChange={(e) => teamHandle(e, task)}>
+                      <option> Выбрать исполнителя</option>
                       {team.map((member) => {
                         return (
                           <option value={member.user._id} name={task._id}>
