@@ -89,15 +89,8 @@ return () => {
       <div>
         <div style={{
             display: "flex"}}>
-        <div
-          style={{
-            display: "flex",
-            flexWrap:'wrap',
-            width: "87%",
-            justifyContent: "flex-start",
-            color: "#3F496C",
-            marginTop:'10px',
-          }}
+        <div className={style.editList}
+         
         >
            
             {tasks!==undefined?
@@ -111,11 +104,11 @@ return () => {
 							
              
             
-          <Light color='#3F496C' style={{marginLeft:"50px"}}> Создал: {creator} </Light>
-          <div style={{marginLeft:"50px"}}>{tags!==undefined? tags.map((el,i)=>{
+          <div className={style.creator}><Light color='#3F496C' > Создал: {creator} </Light></div>
+          <div className={style.taglist}>{tags!==undefined? tags.map((el,i)=>{
               return(<div style={{marginBottom:'10px'}}><Tag tagText={el} key={i} tagColor={i==0?'#C8D9E9':i==1?'#E9E3C8':'#AAF8A8'}/></div>)
             }):''}</div>
-          {tags!==undefined?<TagSearch tagCount={false}  func={func}></TagSearch>:<div>biba</div>}
+          {tags!==undefined&&tags.length<2?<TagSearch tagCount={false}  func={func}></TagSearch>:''}
           
           {/* <Light color='#A3A3A3'> Добавить модель </Light> */}
 

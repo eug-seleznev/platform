@@ -34,13 +34,13 @@ const TagSearch = ({func, tagCount}) => {
         setValue('')
         console.log(tags)
       }
-		useEffect(()=>{
-			console.log(tags)
+		// useEffect(()=>{
+		// 	console.log(tags)
 		
-				func(tags)
+		// 		func(tags)
 			
 			
-		},[tags])
+		// },[tags])
     const searchTags =(e)=> {
       e.preventDefault()
       dispatch(searchTag(e.target.value, project.crypt))
@@ -49,8 +49,8 @@ const TagSearch = ({func, tagCount}) => {
 	
 	return(
 		<div className={style.tagContain}>
-			<div className={style.tagTitle} style={{display:`${tagCount?'flex':'none'}`}}><Thin >Тегов для добавления {tags.length}/3:</Thin><div style={{display:'flex', marginTop:'10px'}}>{tags.map((el,i)=>{return(<Tag tagText={el} key={i} tagColor={i==0?'#C8D9E9':i==1?'#E9E3C8':'#AAF8A8'}/>)})}</div></div>
-			<li style={{display:`${tags.length==3?"none":'flex'}`}}>
+			<div className={style.tagTitle} style={{display:`${tagCount?'flex':'none'}`}}><Thin >Тегов для добавления {tags.length}/2:</Thin><div style={{display:'flex',flexWrap:'wrap', marginTop:'10px'}}>{tags.map((el,i)=>{return(<Tag tagText={el} key={i} tagColor={i==0?'#C8D9E9':i==1?'#E9E3C8':'#AAF8A8'}/>)})}</div></div>
+			<li style={{display:`${tags.length==2?"none":'flex'}`}}>
 			<div>
 			<div style={{ fontSize: "20px", marginRight: "10px"}}></div>
 			<input

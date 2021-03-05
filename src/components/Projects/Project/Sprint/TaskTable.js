@@ -85,11 +85,11 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
   }
 
 
-  useEffect(()=>{
-    if(taskId=='') {
-      setFocusRow('')
-    }
-  },[taskId])
+  // useEffect(()=>{
+  //   if(taskId=='') {
+  //     setFocusRow('')
+  //   }
+  // },[taskId])
 
   const teamHandle = (e, task) => {
 
@@ -161,7 +161,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
                
                 <>
                   {team && (
-                      <Select  onChange={(e) => teamHandle(e, task)}>
+                      <Select className={style.select} onChange={(e) => teamHandle(e, task)}>
                       {team.map((member) => {
                         return (
                           <>
@@ -184,7 +184,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
               ) : (
                 <>
                   {taskId === task._id && !task.user && (
-                    <Select defaultValue='Выбрать исполнителя' onChange={(e) => teamHandle(e, task)}>
+                    <Select className={style.select}  defaultValue='Выбрать исполнителя' onChange={(e) => teamHandle(e, task)}>
                       <option> Выбрать исполнителя</option>
                       {team.map((member) => {
                         return (

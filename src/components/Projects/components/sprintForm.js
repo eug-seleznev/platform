@@ -147,7 +147,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
                       {index + 1}
                     </div>
                     <input
-                      style={{ marginRight: "40px",width:'60%' }}
+                      style={{ marginRight: "40px",width:'100%' }}
                       className={style.taskDescr}
                       name={`tasks[${index}].taskTitle`}
                       ref={register()}

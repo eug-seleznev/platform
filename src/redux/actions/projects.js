@@ -219,9 +219,12 @@ export const addUserToTask = ({ userid, id, focusRow }) => async (dispatch) => {
 }; 
 
 export const addTag = ( id,tag ) => async (dispatch) => {
+  let body = {
+    tag: tag
+  }
   try {
     console.log(tag)
-    const res = await innerBackend.put(`projects/sprints/addTag/${id}`, tag);
+    const res = await innerBackend.put(`projects/sprints/addTag/${id}`, body);
     dispatch({
       type: ADD_TAG,
       payload: res.data,

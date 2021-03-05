@@ -54,9 +54,9 @@ const Sprint_New = ({match}) => {
     const editebleRow = () => {
         setEditField(!editField)
     }
-    useEffect(()=>{
-        console.log(focusRow)
-    }, [focusRow])
+    // useEffect(()=>{
+    //     console.log(focusRow)
+    // }, [focusRow])
     return (
       <SprintLoader sprint_id={sprint_id} sprint={sprint} project={project} crypt={crypt}>
         <SprintTitle diff={diff} prTitle={project.title} actualClose={actualClose}id={sprint_id} sprint={sprint}/>
