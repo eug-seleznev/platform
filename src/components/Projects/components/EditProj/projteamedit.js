@@ -51,7 +51,7 @@ const ProjTeamEdit = ({project}) => {
 						
 					})}
 					<tr >
-						<CancelButton fontSize='14px' style={{paddingLeft:'20px',paddingBottom:'20px',backgroundColor:'white', color:'#397BB8', border:'none',marginTop:'10px', width:'fit-content'}}>Пригласить в команду</CancelButton>
+						<CancelButton fontSize='14px' style={{padding:'20px',paddingTop:'10px',backgroundColor:'white', color:'#397BB8', border:'none',marginTop:'10px', width:'fit-content'}}>Пригласить в команду</CancelButton>
 						</tr>
 					
 				</tbody>
