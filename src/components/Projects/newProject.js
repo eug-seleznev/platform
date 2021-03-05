@@ -197,7 +197,7 @@ const ProjectNew = ({history,closeWindow}) => {
              <div>
                <div className={style.row}>
                  <div className={style.input__mid}>
-                   <Thin className={style.title}>Название</Thin>
+                   <Thin className={style.title}>Название *</Thin>
                    <input
                      className={style.input__long}
                      type="text"
@@ -238,7 +238,7 @@ const ProjectNew = ({history,closeWindow}) => {
                    <div className={style.input__short}>
                      <Thin className={style.title}>Город</Thin>
                      <input
-                       required
+                       
                        type="text"
                        name="city"
                        value={city}
@@ -309,7 +309,7 @@ const ProjectNew = ({history,closeWindow}) => {
                        Общественное пространство
                      </option>
                      <option value="Частный дом">Частный дом</option>
-                     <option value="Визуализации">Визуализации</option>
+                     <option value="Визуализация">Визуализации</option>
                      <option value="Интерьер">Интерьер</option>
                      <option value="Другое">Другое</option>
                    </select>

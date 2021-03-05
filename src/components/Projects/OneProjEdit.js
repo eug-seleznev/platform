@@ -1,11 +1,9 @@
 import  {useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {  getProject, editProject } from '../../redux/actions/projects';
-import { newTicket } from '../../redux/actions/tikets';
 import './projects.css'
-import {Container, SmallContainer, Card, } from '../../Styles/common';
 import { Button } from '../../Styles/buttons';
-import { H1, H3, Regular} from '../../Styles/typography'
+import {  Regular} from '../../Styles/typography'
 
 const ProjectEdit = ({history, match}) => {
 	let {id} = match.params;
@@ -14,7 +12,7 @@ const ProjectEdit = ({history, match}) => {
 	const loadProject = useSelector(state => state.projects.loadProject)
     const [formData, setFormData ] = useState({
         
-        title: '',   
+        title: loadProject ? project.title : '',   
         dateStart: '', 
         city: '',  
         type: '',
@@ -29,19 +27,20 @@ const ProjectEdit = ({history, match}) => {
 	  useEffect(() => {
 		dispatch(getProject(id));
     }, [])
-	useEffect(() => {
-		if (loadProject ) {
-			setFormData ({...formData, title: project.title, 
-				dateStart: project.dateStart,
-				city: project.city,
-				type: project.type,
-				stage: project.stage,
-				dateFinish: project.dateFinish,
-				customer: project.customer
-				})
-		}
+
+	// useEffect(() => {
+	// 	if (loadProject) {
+	// 		setFormData ({...formData, title: project.title, 
+	// 			dateStart: project.dateStart,
+	// 			city: project.city,
+	// 			type: project.type,
+	// 			stage: project.stage,
+	// 			dateFinish: project.dateFinish,
+	// 			customer: project.customer
+	// 			})
+	// 	}
 		
-    }, [loadProject])
+    // }, [loadProject])
       const { title, dateStart, dateFinish, city, type, stage, customer} = formData;
 
   
@@ -63,25 +62,29 @@ const ProjectEdit = ({history, match}) => {
         dispatch(editProject(formData, id))
         setTimeout(() => Redirect(),100) 
         
-            // register({ name, email, password});
     
            
         }
 
+        if(!loadProject){
+            return <p>loading...</p> 
+        }
+
     return (
-		<div>
+		
         
-		{!loadProject?<div>loading...</div>:(
+	
 			<div style={{display:'flex',justifyContent:'center'}}>
             <div>
             <Regular size={'20'}> Тут можно редактировать данные проекта </Regular>
             <form className='form' onSubmit={onSubmit}>
+
             <input 
 
                 type='text'
                 placeholder={project.title}
                 name='title'
-                value={title}
+                value={formData.title}
                 onChange={e => onChange(e)}/>
 
            <input 
@@ -104,7 +107,7 @@ const ProjectEdit = ({history, match}) => {
                 placeholder='Город'
                 name='city'
                 value={city}
-                onChange={e => onChange(e)}/>
+                onChange={onChange}/>
 
             <input 
                 type='text'
@@ -135,10 +138,6 @@ const ProjectEdit = ({history, match}) => {
             </form>
 			</div>
         </div>
-
-		)}
-      
-		</div>
     )
 }
 
