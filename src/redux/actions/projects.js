@@ -48,6 +48,28 @@ export const sortProjects = ({ query, orderSort }) => async (dispatch) => {
 };
 
 
+
+export const sorType = ({ field, value }) => async (dispatch) => {
+  try {
+    const res = await innerBackend.get(
+      `/projects/q/search?field=${field}&value=${value}`
+    );
+    dispatch({
+      type: SORT_PROJECTS,
+      payload: res.data,
+    });
+  } catch (err) {
+    alert("hahaha classic");
+  }
+};
+
+
+
+
+
+
+
+
 export const clearUrn = () => async dispatch => {
     try {
         dispatch({
