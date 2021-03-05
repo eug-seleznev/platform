@@ -152,12 +152,12 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
                
                 <>
                   {team && (
-                      <Select defaultValue={task.user.fullname} onChange={(e) => teamHandle(e, task)}>
+                      <Select  onChange={(e) => teamHandle(e, task)}>
                         {team.map((member) => {
                           return (
                             <>
                               {task.user._id === member.user._id ? (
-                                <option value={member.user._id}>
+                                <option selected value={member.user._id}>
                                   {" "}
                                   {member.user.fullname}
                                 </option>
