@@ -161,21 +161,24 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
                
                 <>
                   {team && (
-                      <Select defaultValue={task.user.fullname} onChange={(e) => teamHandle(e, task)}>
-                        {team.map((member) => {
-                          return (
-                            <>
-                             
-                                <option value={member.user._id}>
-                                  {" "}
-                                  {member.user.fullname}
-                                </option>
-                            
-                              )
-                            </>
-                          );
-                        })}
-                      </Select>
+                      <Select  onChange={(e) => teamHandle(e, task)}>
+                      {team.map((member) => {
+                        return (
+                          <>
+                            {task.user._id === member.user._id ? (
+                              <option selected value={member.user._id}>
+                                {" "}
+                                {member.user.fullname}
+                              </option>
+                            ) : (
+                              <option value={member.user._id} name={task._id}>
+                                {member.user.fullname}
+                              </option>
+                            )}
+                          </>
+                        );
+                      })}
+                    </Select>
                     )}
                 </>
               ) : (
