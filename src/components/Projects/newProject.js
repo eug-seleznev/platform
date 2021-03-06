@@ -62,15 +62,12 @@ const ProjectNew = ({history,closeWindow}) => {
       }
       //смена фона
       useEffect(()=>{ 
-       
         dispatch(background('white'))
-      
-      }, [])
-      useEffect(()=>{ 
         return () => {
-        dispatch(background('#ECECEC'))
-      }
+          dispatch(background('#ECECEC'))
+        }
       }, [])
+     
      //
       const returnToSearch =()=>{
         setUserStage(1)
@@ -214,7 +211,6 @@ const ProjectNew = ({history,closeWindow}) => {
                      className={style.input__long}
                      type="text"
                      name="offTitle"
-                     
                      value={offTitle}
                      onChange={(e) => onChange(e)}
                    />
