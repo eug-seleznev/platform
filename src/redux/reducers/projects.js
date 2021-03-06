@@ -171,7 +171,7 @@ export default function(state = initialState, action) {
                     trick: true,
                     loadSprints: true,
                     sprintLoad: false,
-                    sprint: null,
+                    sprint: [],
                     error: ''
                 }
             case GET_SPRINT:

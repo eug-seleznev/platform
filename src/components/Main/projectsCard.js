@@ -40,7 +40,7 @@ const ProjectsCard = ({project}) => {
             {daysLeft} {daysLeft < 1 ? "день" : daysLeft < 5 ? "дня" : "дней"}
           </Light>
           <Light size="16" className={styles.filter}>
-            #{project.stage}
+            #{project.stage} #{project.type}
           </Light>
         </Card>
       </Link>
