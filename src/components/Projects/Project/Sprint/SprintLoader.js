@@ -5,15 +5,23 @@ import { getProject, getSprint } from "../../../../redux/actions/projects";
 export const SprintLoader = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log(props.sprint_id)
     dispatch(getSprint(props.sprint_id));
     dispatch(getProject(props.crypt))
   }, []);
 
-  if(props.sprint.length==0 && props.project.team ){
-      return <p> loading...</p>
+
+  useEffect(() => {
+    console.log(props.sprint, 'my sprint on loader')
+  }, [props.sprint])
+
+  if (props.sprint.length == 0 && !props.project.team ) {
+    return <p> loading...</p>;
   }
 
+
+  if(props.sprint==false){
+    return <p>loading...</p> 
+  }
   return <div>
       {props.children}
   </div>
