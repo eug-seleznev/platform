@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import style from '../../../../Styles/modules/components/Project/oneproj.module.css'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import SprintDescription from "../SprintDescrForOneProj";
 import { Button } from "../../../../Styles/buttons";
 import ModalWindow from "../ModalWindow";
@@ -17,13 +17,17 @@ const AllSprintsOfProj = ({hist, match, status}) => {
 		setModal(true)
 	   
    }
+   useEffect(()=>{
+    console.log(sprints)
+
+   },[])
    const offWindow =()=>{
 	setModal(false)
   }
     return (
       <>
-	        <div>
-              <Subtitle title='Активные спринты' src='/image 6.png'  subtwidth='100%' buttonFunc={openMod} buttonActive={true}></Subtitle>
+	        <div style={{width:'50%'}}>
+              <Subtitle title='Активные спринты' src='/image 6.png'  subtwidth='0%' buttonFunc={openMod} buttonActive={true}></Subtitle>
                 
                   {sprints.length == 0 ?<Thin size='22'>Нет активных спринтов</Thin> 
                      
@@ -32,7 +36,7 @@ const AllSprintsOfProj = ({hist, match, status}) => {
                      {sprints.filter((sprint)=> !sprint.status).map ((sprint, i) => {
                        return (
                          <SprintDescription projStatus={status} dateClosePlan={sprint.dateClosePlan} descr={sprint.description} history={hist} params={match.params} id={sprint._id} key={i} taskcomplite={sprint.tasks.filter((task) => task.taskStatus).length} 
-                         alltasks={sprint.tasks.length} index={i+1} key={i}sprintname={sprint.name} dateOpen={sprint.dateOpen}></SprintDescription>
+                         alltasks={sprint.tasks.length} tags={sprint.tags} index={i+1} key={i}sprintname={sprint.name} dateOpen={sprint.dateOpen} ></SprintDescription>
                        )
                      })}
                    </div>

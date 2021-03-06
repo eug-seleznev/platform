@@ -90,7 +90,7 @@ const ProjectTeam = ({id, hist}) => {
         
       </div>   
             <div className={style.sprintdescr__cont}>
-              <SmallCard style={{width:'90%'}}>
+              <SmallCard >
                
                 {project.team2!==undefined? project.team2.map((user, i) => {
                       return (
@@ -101,7 +101,9 @@ const ProjectTeam = ({id, hist}) => {
                           userName={user.user.fullname}
                           lastName={user.user.lastname} 
                           userAvatar={user.user.avatar} 
-                          userPos={user.position}>
+                          userPos={user.position}
+                          userTask={user.task}
+                          >
                         </ProjTeam>
                       );
                     }):''}

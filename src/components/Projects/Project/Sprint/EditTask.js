@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTag, DeleteTask, EditDescription } from "../../../../redux/actions/projects";
+import { addTag, DeleteTask, deliteTag, EditDescription } from "../../../../redux/actions/projects";
 import { Bold, Light, Regular, Thin } from "../../../../Styles/typography"
 import style from "../../../../Styles/modules/components/Project/newsprint.module.css"
 import { addToChosen } from "../../../../redux/actions/auth";
 import TagSearch from "../../components/tagSearch";
 import Tag from "../../components/OneProject/tag";
+import { Button } from "../../../../Styles/buttons";
 
 
 
@@ -83,6 +84,9 @@ return () => {
  const func =(value)=>{
   dispatch(addTag(id, value))
  }
+ const delTag =(tag)=>{
+  dispatch(deliteTag(9, tag))
+ }
   return (
     <>
       <Regular size='24'> Задачи </Regular>
@@ -106,7 +110,7 @@ return () => {
             
           <div className={style.creator}><Light color='#3F496C' > Создал: {creator} </Light></div>
           <div className={style.taglist}>{tags!==undefined? tags.map((el,i)=>{
-              return(<div style={{marginBottom:'10px'}}><Tag tagText={el} key={i} tagColor={i==0?'#C8D9E9':i==1?'#E9E3C8':'#AAF8A8'}/></div>)
+              return(<div style={{marginBottom:'10px', display:'flex',alignItems:'baseline'}}><Tag tagText={el} key={i} tagColor={i==0?'#C8D9E9':i==1?'#E9E3C8':'#AAF8A8'}/><div style={{cursor:'pointer'}} onClick={()=>delTag(el)}>x</div></div>)
             }):''}</div>
           {tags!==undefined&&tags.length<2?<TagSearch tagCount={false}  func={func}></TagSearch>:''}
           
