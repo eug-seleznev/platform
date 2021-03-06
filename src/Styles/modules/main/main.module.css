@@ -26,18 +26,16 @@
     .projects{
         grid-area: projects;
         display: grid;
-        grid-template-areas:
-        'myProj myProj myProj'
-        '. . .'
-        ;
-        grid-template-columns: 1fr 1fr 1fr;
-        column-gap: 35px;
-        row-gap: 35px;
+        grid-template-areas: 'myProj';
+        width: 50%;
+        grid-template-columns: 1fr;
+        column-gap: 15px;
+        row-gap: 15px;
     }
         .myProj{
             grid-area: myProj;
             padding-bottom: 18px;
-            border-bottom: 1px solid #000000;
+     
         }
 
 @media (max-width: 1500px){
