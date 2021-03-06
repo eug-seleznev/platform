@@ -253,6 +253,19 @@ export const addTag = ( id,tag ) => async (dispatch) => {
   }
 }; 
 
+export const deleteTag = (id, tag) => async dispatch => {
+  let body = {
+    tag: tag
+  }
+  try {
+      const res = await innerBackend.delete(`/projects/tag/${id}`, body);
+      console.log(res.data);  
+  } catch (err) {
+    alert('oops im sorry something is broken :(')
+  }
+  
+}
+
 
 
 

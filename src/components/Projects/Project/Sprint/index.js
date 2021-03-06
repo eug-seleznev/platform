@@ -56,10 +56,6 @@ const Sprint_New = ({match}) => {
     }
   
 
-    useEffect(() => {
-      console.log('test rendering')
-    }, [])
-
 
 
     return (
