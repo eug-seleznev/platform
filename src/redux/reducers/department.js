@@ -4,7 +4,7 @@ import { NEW_DEPARTMENT, ALL_DEPARTMENTS, FIND_DEPARTMENT, JOIN_DEPARTMENT, LEAV
 
 const initialState = {
     departments: null,
-    findDep: null,
+    findDep: {divname:'',members:[]},
     loaded: false,
     reload: false,
     
@@ -70,7 +70,7 @@ export default function(state = initialState, action) {
 
                 return {
                     ...state,
-                    msg: payload,
+                    msg: payload.msg,
                     
                     reload: !state.reload,
                     findDep: payload.division,

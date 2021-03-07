@@ -1,0 +1,84 @@
+.card__thing__full {
+	transition: 300ms all ease;
+	height: 10px;
+	
+	background-color: #5286D4;
+}
+.pointer  {
+	cursor: pointer;
+}
+.td{
+	border: none;
+	border-collapse: collapse;
+}
+.edit__task {
+	display: flex;
+	
+}
+.select{
+	position: absolute;
+	margin-left: -15vw;
+	margin-top: -7px;
+}
+.input {
+	height: 20px;
+	outline: none;
+	border-radius: 5px;
+	border: 1px solid black;
+	margin-right: 25px;
+	font-size: 16px;
+}
+.taglist{
+	margin-left:50px;
+	margin-right:30px
+}
+.editList {
+	display: flex;
+	flex-wrap:wrap;
+	width: 87%;
+	justify-content: flex-start;
+	color:#3F496C;
+	margin-top:10px;
+}
+.card__thing {
+	width: 150px;
+	height: 10px;
+	border-radius: 5px;
+	background-color: #C4C4C4;
+	overflow-x: hidden;
+	
+	margin-left: 15px;
+	margin-top: 4px;
+}
+.creator{
+	margin-left: 50px;
+
+}
+.changeDescr {
+	background-color: white;
+	margin-top: -1px;
+	font-family: SuisseIntlThin;
+	font-size: 16px;
+	border: none;
+	margin-left: -1px;
+	width: 100%;
+}
+@media(max-width:1100px) {
+	.creator{
+		margin-left: 0px;
+		margin-top: 20px;
+	}
+	.select {
+		display: none;
+	}
+	.taglist{
+		margin-left:0px;
+		margin-right:30px;
+		margin-top: 20px;
+	}
+	.editList {
+		display: flex;
+		flex-wrap:wrap;
+		flex-direction: column;	
+	}
+}

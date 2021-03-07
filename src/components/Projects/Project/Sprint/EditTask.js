@@ -1,20 +1,24 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { DeleteTask, EditDescription } from "../../../../redux/actions/projects";
-import { Bold } from "../../../../Styles/typography"
+import { addTag, deleteTag, DeleteTask, EditDescription } from "../../../../redux/actions/projects";
+import { Bold, Light, Regular, Thin } from "../../../../Styles/typography"
+import style from "../../../../Styles/modules/components/Project/newsprint.module.css"
+import { addToChosen } from "../../../../redux/actions/auth";
+import TagSearch from "../../components/tagSearch";
+import Tag from "../../components/OneProject/tag";
 
 
 
 
 
-
-const TaskManagment = ({ id, sprint_description, focusRow, editebleRow, creator }) => {
+const TaskManagment = ({tags, id,status, setStatus, sprint_description, focusRow, editebleRow, creator, tasks}) => {
   const dispatch = useDispatch();
 
   //description handler
-  const [descript, setDescription] = useState(sprint_description);
+  const [descript, setDescription] = useState('');
   const [isSubmit, setSubmit] = useState(true);
-
+  const [completeTasks, setCompleteTasks] = useState(0);
+  const [allTasks, setAllTasks] = useState(1);
   //add description to sprint
   const descriptionHandler = (e) => {
     setDescription(e.target.value);
@@ -31,13 +35,17 @@ const TaskManagment = ({ id, sprint_description, focusRow, editebleRow, creator 
     }
   
  })
-
+ 
+ useEffect(() => {
+  setDescription(sprint_description)
+},[allTasks])
 
   useEffect(() => {
         window.addEventListener("keydown", handleUserKeyPress);
 return () => {
   window.removeEventListener("keydown", handleUserKeyPress);
 };
+
   })
   const onEditSubmit = (e) => {
     e.preventDefault();
@@ -49,7 +57,10 @@ return () => {
   const editHandler = () => {
     editebleRow();
   };
-
+  const addCh = () => {
+    dispatch(addToChosen(id))
+    setStatus(!status)
+  };
 
   
 
@@ -60,39 +71,157 @@ return () => {
 
 
 
+  useEffect(()=>{
+    
+    if (tasks!==undefined){
+      console.log(tasks)
+      setCompleteTasks(tasks.filter(task=>task.taskStatus).length)
+      setAllTasks(tasks.length)
+    }
+    
+  },[tasks])
 
+
+ const AddTag =(value)=>{
+  dispatch(addTag(id, value))
+ }
+
+ 
+const TagDeleteHandle = (e, tag) => {
+  dispatch(deleteTag(id, tag))
+}
 
   return (
     <>
-      <Bold> Задачи </Bold>
+      <Regular size="24"> Задачи </Regular>
       <div>
-        <p> Создал: {creator} </p>
+        <div
+          style={{
+            display: "flex",
+          }}
+        >
+          <div className={style.editList}>
+            {tasks !== undefined ? (
+              <div style={{ display: "flex" }}>
+                <Light>
+                  {completeTasks}/{allTasks}
+                </Light>
+                <div className={style.card__thing}>
+                  <div
+                    style={{
+                      width: `${Math.trunc((completeTasks / allTasks) * 100)}%`,
+                    }}
+                    className={style.card__thing__full}
+                  ></div>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+
+            <div className={style.creator}>
+              <Light color="#3F496C"> Создал: {creator} </Light>
+            </div>
+            <div className={style.taglist}>
+              {tags !== undefined
+                ? tags.map((el, i) => {
+                  console.log(el)
+                  return  <div
+                      style={{ marginBottom: "10px" }}
+                      onClick={(e) => TagDeleteHandle(e, el)}
+                    >
+                      <Tag
+                        tagText={el}
+                        key={i}
+                        tagColor={
+                          i == 0 ? "#C8D9E9" : i == 1 ? "#E9E3C8" : "#AAF8A8"
+                        }
+                      />
+                    </div>
+                })
+                : ""}
+            </div>
+            {tags !== undefined && tags.length < 2 ? (
+              <TagSearch tagCount={false} func={AddTag}></TagSearch>
+            ) : (
+              ""
+            )}
+
+            {/* <Light color='#A3A3A3'> Добавить модель </Light> */}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              width: "13%",
+              marginTop: "10px",
+            }}
+          >
+            <Light
+              color="#3F496C"
+              style={{ cursor: "pointer" }}
+              onClick={() => addCh()}
+            >
+              {" "}
+              {!status ? "Добавить в избранное" : "Убрать из избранного"}
+            </Light>
+          </div>
+        </div>
+        <div style={{ height: "20px" }}>
+          {focusRow !== "" && (
+            <div className={style.edit__task}>
+              <Light
+                color="#3F496C"
+                onClick={editHandler}
+                style={{ cursor: "pointer", marginRight: "50px" }}
+              >
+                {" "}
+                Редактировать задачу 
+              </Light>
+              <Light
+                color="#3F496C"
+                onClick={deletehandler}
+                style={{ cursor: "pointer" }}
+              >
+                {" "}
+                Удалить задачу{" "}
+              </Light>
+            </div>
+          )}
+        </div>
         <form onSubmit={onEditSubmit}>
           {!isSubmit ? (
-            <input
-              type="text"
-              value={descript}
-              placeholder="Добавить описание"
-              onChange={descriptionHandler}
-            ></input>
+            <div
+              style={{
+                display: "flex",
+                marginBottom: "20px",
+                marginTop: "20px",
+              }}
+            >
+              <Thin size="16">Описание:</Thin>
+              <input
+                type="text"
+                value={descript}
+                placeholder="Добавить описание"
+                onChange={descriptionHandler}
+                className={style.changeDescr}
+              ></input>
+            </div>
           ) : (
-            <p onClick={() => setSubmit(false)}>
+            <Thin
+              style={{
+                marginBottom: "20px",
+                marginTop: "20px",
+                cursor: "pointer",
+              }}
+              onClick={() => setSubmit(false)}
+            >
               {sprint_description !== ""
-                ? sprint_description + "  "
+                ? "Описание: " + sprint_description + "  "
                 : "Добавить описание  "}{" "}
-            </p>
+            </Thin>
           )}
         </form>
-
-        {focusRow !== "" && (
-          <div>
-            <p onClick={editHandler}> edit task  </p>
-            <p onClick={deletehandler} >
-              {" "}
-              delete{" "}
-            </p>
-          </div>
-        )}
       </div>
     </>
   );

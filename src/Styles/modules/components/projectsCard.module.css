@@ -5,9 +5,8 @@
     'title leftt'
     'descr descr'
     'sprints sprints'
-    ' filter button'
     ;
-    height: max-content;
+    height:100px;
 }
   
   .title{
@@ -17,6 +16,7 @@
     .description{
         grid-area: descr;
         padding-bottom: 50px;
+        height: 0px;
         width: 75%;
     }
     .dates{
@@ -28,21 +28,8 @@
         text-align: right;
     }
     .filter{
-        grid-area: filter;
+       grid-area: sprints;
         display: grid;
-        justify-content: left;
-        align-content: center;
+        justify-content: right;
     }
-    .button{
-        grid-area: button;
-    }
-    .sprints{
-        grid-area: sprints;
-    }
-
-@media (max-width: 800px){
-
-    .projContainer{
-        
-    }
-}
+ 

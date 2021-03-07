@@ -16,7 +16,7 @@ const OneDepartment = ({history, match}) => {
     const user = useSelector(state => state.auth.user)
     const users = useSelector(state => state.users.users)
     const department = useSelector(state => state.departments.findDep)
-	const [load, setLoad] = useState (true)
+	const [button, setButton] = useState (false)
  useEffect(()=>{
 	console.log(user)
 	dispatch(allUsers('name', true))
@@ -24,9 +24,17 @@ const OneDepartment = ({history, match}) => {
 
  },[])
  useEffect(()=>{
-	setTimeout(()=>{
-		setLoad(true)
-	},5000)
+	 console.log(user.division)
+	 if(user.division===null) {
+		console.log('hi')
+	 }
+	else if(user.division!==undefined||user.division!==null||department!==undefined||department!==null) {
+		if(user.division.divname===department.divname){
+			setButton(true)
+		}
+		
+	}
+
 },[])
  const choseDivision =()=>{
 	 
@@ -36,9 +44,10 @@ const OneDepartment = ({history, match}) => {
 		
 	<>
 		{user!==null&&user!==undefined?
-        <div className={styles.container}>
-			<DepartmentCard load={load} department={department} user={user} history={history} users={users}/>
-        </div>:''}
+		
+        (<div className={styles.container}>
+			<DepartmentCard button={button}  department={department} user={user} history={history} users={users}/>
+        </div>):''}
     
 	</>
 	)

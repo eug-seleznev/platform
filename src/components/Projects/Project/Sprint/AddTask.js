@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTask, addTasks } from "../../../../redux/actions/projects";
-
-
+import { Button } from "../../../../Styles/buttons";
+import style from "../../../../Styles/modules/components/Project/newsprint.module.css"
 
 
 
@@ -36,10 +36,10 @@ const AddTask = ({id}) => {
     return (
       <div>
         <form onSubmit={onSubmit}>
-          {field && <input value={task}   onChange={onChange}></input>}
-          <button  type="submit" color="#3F496C" size="15px" onClick={formHandler}>
+          {field && <input value={task} className={style.input}  onChange={onChange}></input>}
+          <Button style={{backgroundColor:'white',border:'none', color:'#3F496C'}} type="submit"  fontSize="14px" onClick={formHandler}>
             Добавить задачу
-          </button>
+          </Button>
         </form>
       </div>
     );

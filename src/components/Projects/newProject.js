@@ -7,7 +7,7 @@ import style from '../../Styles/modules/components/Project/createPr.module.css'
 import {Container, Card, Title, ModalContainer,} from '../../Styles/common'
 import { Button, CancelButton } from '../../Styles/buttons';
 import { Bold, H1, H3, Light, Regular, Thin} from '../../Styles/typography'
-import { allUsers, searchUser } from '../../redux/actions/user';
+import { allUsers, searchUser, background } from '../../redux/actions/user';
 
 const ProjectNew = ({history,closeWindow}) => {
     const dispatch = useDispatch();
@@ -60,6 +60,15 @@ const ProjectNew = ({history,closeWindow}) => {
           setCurrentPos('')
           setUserStage(1)
       }
+      //смена фона
+      useEffect(()=>{ 
+        dispatch(background('white'))
+        return () => {
+          dispatch(background('#ECECEC'))
+        }
+      }, [])
+     
+     //
       const returnToSearch =()=>{
         setUserStage(1)
         idList.pop()
@@ -155,6 +164,7 @@ const ProjectNew = ({history,closeWindow}) => {
     return (
       <div className={style.container_new_proj}>
         <div className={style.stages}>
+          
           <div className={style.circle}>
             <div className={style.number} style={{borderColor: `${step===1?'#3F496C':'#B7B7B7'}`}}>1</div>
             <Regular >Информация о проекте</Regular>
@@ -184,7 +194,7 @@ const ProjectNew = ({history,closeWindow}) => {
              <div>
                <div className={style.row}>
                  <div className={style.input__mid}>
-                   <Thin className={style.title}>Название</Thin>
+                   <Thin className={style.title}>Название *</Thin>
                    <input
                      className={style.input__long}
                      type="text"
@@ -201,7 +211,6 @@ const ProjectNew = ({history,closeWindow}) => {
                      className={style.input__long}
                      type="text"
                      name="offTitle"
-                     
                      value={offTitle}
                      onChange={(e) => onChange(e)}
                    />
@@ -225,7 +234,7 @@ const ProjectNew = ({history,closeWindow}) => {
                    <div className={style.input__short}>
                      <Thin className={style.title}>Город</Thin>
                      <input
-                       required
+                       
                        type="text"
                        name="city"
                        value={city}
@@ -296,7 +305,7 @@ const ProjectNew = ({history,closeWindow}) => {
                        Общественное пространство
                      </option>
                      <option value="Частный дом">Частный дом</option>
-                     <option value="Визуализации">Визуализации</option>
+                     <option value="Визуализация">Визуализации</option>
                      <option value="Интерьер">Интерьер</option>
                      <option value="Другое">Другое</option>
                    </select>
@@ -452,6 +461,7 @@ const ProjectNew = ({history,closeWindow}) => {
              </div>
        
       </div>
+     
     );
 }
 

@@ -31,7 +31,7 @@
 	border-radius: 5px;
 }
 .taskDescr {
-	width: 48%;
+	width: 60%;
 	font-family:SuisseIntlThin;
 	font-size:16px;
 	height: 20px !important
@@ -48,14 +48,43 @@
 .formContain input {
 	height: 30px;
 }
+.searchTag {
+	border: 1px solid black;
+	padding: 10px;
+	border-radius: 5px;
+	background-color: white;
+}
+.searchTagRes {
+	cursor: pointer;
+	margin-bottom: 10px;
+	background-color: white;
+}
+.searchTagRes:last-child {
+	cursor: pointer;
+	margin-bottom: 0px;
+	
+}
+.tagContain {
+	list-style: none;
+	z-index: 100;
+	scrollbar-width: none;
+	
+	height: 60px;
+	
+}
 .taskContain {
+	list-style: none;
 	margin-top: 50px;
 	scrollbar-width: none;
-	width: 100%;
+	width: 53%;
 	height: 250px;
 	overflow-y: scroll;
+	margin-right: 1.3%;
 }
-
+.tagTitle {
+	display: flex;
+	flex-direction: column;
+}
 .button {
 	width: 200px
 }

@@ -19,7 +19,7 @@ import { allUsers } from '../../redux/actions/user';
 import { loadUser } from '../../redux/actions/auth';
 import ProjectsCard from '../Main/projectsCard';
 
-const DepartmentCard = ({load, itsAllDepsPage, department, user, history, users}) => {
+const DepartmentCard = ({button, itsAllDepsPage, department, user, history, users}) => {
 
 
 
@@ -33,7 +33,7 @@ const content = department
 let projArray = []
 const [newArr, setNewArr] = useState([])
 const [lastArr, setLastArr] = useState(null)
-const [button, setButton] = useState(false)
+
 const [pageStatus, setPageStatus] =useState(false)
 const [showConfirm, setShowConfirm] = useState(false)
 
@@ -79,22 +79,7 @@ const [showConfirm, setShowConfirm] = useState(false)
     useEffect(()=>{
         setPageStatus(itsAllDepsPage)
     },[itsAllDepsPage])
-    useEffect (()=>{
-        if(department!==null) {
-              if(user!==undefined&&user.division!==null&&department.divname!==undefined) {
-                buttonCheck(user.division.divname)
-        }
-        }
-      
-    },[load])
-    const buttonCheck =(divname)=>{
-        console.log(divname)
-        if (divname===department.divname){
-                setButton(true)
-          
-                
-            }
-    }
+   
     const deleteDep = () => {
         dispatch(deleteDepartment(content.divname))
         setShowConfirm(false)
@@ -116,7 +101,8 @@ const [showConfirm, setShowConfirm] = useState(false)
             <div className={styles.container} style={{height: `${pageStatus?'60px':'auto'}`,overflowY: `${pageStatus?'hidden':'visible'}`}}>
             <Bold className={styles.title} title={pageStatus?'Открыть отдел':''} onClick={()=>departStatus()} style={{cursor: `${itsAllDepsPage?'pointer':'default'}`}} size='30'>{department!==null?department.divname:''}</Bold>
             {button?
-                 <Bold className={styles.joinBtn} style={{display:`${itsAllDepsPage?'none':'grid'}`}} size='16px' color='#3F496C' onClick={()=>setShowConfirm(true)}>Выйти из отдела</Bold>:<Bold className={styles.joinBtn} style={{display:`${itsAllDepsPage?'none':'grid'}`}} size='16px' color='#3F496C' onClick={join}>Присоединиться к отделу</Bold>
+                 <Bold className={styles.joinBtn}  size='16px' color='#3F496C' onClick={()=>setShowConfirm(true)}>Выйти из отдела</Bold>:
+                 <Bold className={styles.joinBtn}  size='16px' color='#3F496C' onClick={join}>Присоединиться к отделу</Bold>
        
             }
                 <div className={styles.members}>

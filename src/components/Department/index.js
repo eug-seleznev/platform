@@ -39,7 +39,7 @@ useEffect(()=>{
 
         {user.division===null||department===null? <Regular size='16'>Вы не состоите ни в одном отделе, вступить можно на <ButtonText fontSize='18px' onClick={()=>history.replace('/edit')}>странице редактирования профиля</ButtonText> </Regular> :
 
-            <DepartmentCard load={load} itsAllDepsPage={false} department={department} user={user} history={history} users={users}/>
+            <DepartmentCard button={true}load={load} itsAllDepsPage={false} department={department} user={user} history={history} users={users}/>
   
         }
             

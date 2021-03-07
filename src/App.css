@@ -16,7 +16,8 @@
 
 input{
   border-radius: 7px;
-
+  font-family: SuisseIntlLight;
+  
 }
 
 @media (prefers-reduced-motion: no-preference) {

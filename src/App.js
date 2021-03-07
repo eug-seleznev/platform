@@ -46,7 +46,7 @@ import PublicViewer from './components/Viewer/publicViewer';
 import OneDepartment from './components/Department/oneDepartment'
 
 //ОТБЕРИТЕ У МЕНЯ КОМПЬЮТЕР НАХУЙ
-import Sprint_New from './components/Projects/Project/Sprint/new'
+// import Sprint_New from './components/Projects/Project/Sprint/new'
 
 
 const App = () => {
@@ -54,7 +54,7 @@ const App = () => {
   const history = createBrowserHistory();
   const auth = useSelector(state => state.auth.isAuthenticated)
   const loaded = useSelector(state => state.auth.loaded)
-
+  const background = useSelector(state => state.users.background)
 
   //chek auth token on render
   useEffect(() => {
@@ -78,7 +78,7 @@ const App = () => {
 
 
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundColor: background }}>
       <Router history={history}>
         {!auth ? (
           <LoginContainer>
@@ -89,7 +89,7 @@ const App = () => {
           <>
             <Layout histCurrent={history} />
             <Switch>
-              <Container>
+              <Container background={background}>
                 {/* main */}
                 <Route exact path="/" component={Main} />
 
@@ -103,9 +103,13 @@ const App = () => {
                 {/* projects */}
                 <Route exact path="/projects" component={Projects} />
                 <Route exact path="/myprojects" component={MyProjects} />
-                <Route exact path='/projects/:crypt/:sprint_id/new' component={Sprint_New} />
+                {/* <Route exact path='/projects/:crypt/:sprint_id/new' component={Sprint_New} /> */}
                 <Route exact path="/projects/:id" component={Project} />
-                <Route exact path="/projects/:id/:id" component={Sprint} />
+                <Route
+                  exact
+                  path="/projects/:crypt/:sprint_id"
+                  component={Sprint}
+                />
                 <Switch>
                   <Route
                     exact
@@ -134,9 +138,13 @@ const App = () => {
                 <Route exact path="/news" component={News} />
                 {/* depatrments */}
                 <Route exact path="/department" component={Department} />
-                <Route exact path="/departments" component={AllDepartments}/>
-                <Route exact path="/departments/:id" component={OneDepartment}/>
-                
+                <Route exact path="/departments" component={AllDepartments} />
+                <Route
+                  exact
+                  path="/departments/:id"
+                  component={OneDepartment}
+                />
+
                 <Route exact path="/:id/viewer" component={PublicViewer} />
 
                 <Route exact path="/viewer" component={Helper} />

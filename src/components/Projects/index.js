@@ -10,15 +10,15 @@ import { useDispatch, useSelector } from "react-redux"
 
 
 
-import { allProjects, sortProjects } from '../../redux/actions/projects';
+import { allProjects, sortProjects, sorType } from '../../redux/actions/projects';
 
 import style from '../../Styles/modules/components/Project/allproj.module.css'
-import { Table, Tr, Td } from '../../Styles/tables';
+import { Table, Tr, Td, Select } from '../../Styles/tables';
 import { Card, } from '../../Styles/common'
 import { H1} from '../../Styles/typography'
 import {Circle} from '../../Styles/project'
 
-let  types = ['все', "общественное пространство", "Частный дом", "Визуализация", "Интерьер", "ЖК"]
+let  types = ['Все', "общественное пространство", "Частный дом", "Визуализация", "Интерьер", "ЖК"]
 
 const Projects = ({history}) => {
     const dispatch = useDispatch();
@@ -43,7 +43,10 @@ const Projects = ({history}) => {
 
 
     const projectType = (e) => {
-      console.log(e.target.value)
+      let field = 'type'
+      let value = e.target.value;
+      dispatch(sorType({field, value}))
+
       //server call
     }
 
@@ -71,11 +74,11 @@ const Projects = ({history}) => {
               <Td className={style.turn__off}>Статус</Td>
               <Td className={style.turn__off}>
                 <form>
-                  <select onChange={projectType}>
+                  <Select onChange={projectType} style={{width:'50%'}}>
                     {types.map((type) => {
                       return <option value={type}>{type}</option>;
                     })}
-                  </select>
+                  </Select>
                 </form>
               </Td>
               <Td>Спринты</Td>

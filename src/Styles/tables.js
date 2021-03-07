@@ -11,9 +11,28 @@ border-bottom: 2px solid Black;
 export const Sprint_Table = styled.table`
   margin: 0;
   margin-bottom: 40px;
-  border-bottom: 1px solid blue;
+  border: none;
+  width: 100%;
+  border-collapse: collapse
 `;
-
+export const TR = styled.tr`
+    height: 28px;
+    border: none;
+  
+`
+export const Sprint_Td = styled.td`
+    height: 28px;
+    border: none;
+    font-family: SuisseIntlLight;
+    font-size:16px;
+`
+export const Select = styled.select`
+    outline: none;
+    background:none;
+    border: none;
+    font-family: SuisseIntlLight;
+    font-size:16px;
+`
 
 
 

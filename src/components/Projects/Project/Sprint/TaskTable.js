@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUserToTask, EditTask, finishTask } from "../../../../redux/actions/projects";
-import { Sprint_Table } from "../../../../Styles/tables"
-
+import { Sprint_Table, TR,Sprint_Td,Select } from "../../../../Styles/tables"
+import style from "../../../../Styles/modules/components/Project/newsprint.module.css"
 
 //todo: handle no tasks state
 
 
-const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
+const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit, team }) => {
   const dispatch = useDispatch();
   const [taskId, setTaskId] = useState("");
   const [focusRow, setFocusRow] = useState("");
@@ -22,8 +22,14 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
     //todo 
     // disable edit fields
   }, [focusRow]);
-
+  // useEffect(()=>{
+  //   if(focusRowNew==='') {
+  //     setFocusRow('')
+  //     console.log('heyyyyyyyyy')
+  //   }
+  // },[focusRowNew])
   const onChange = (e) => {
+    console.log('change')
     let taskid = e.target.value;
     dispatch(finishTask({ taskid, id }));
   };
@@ -32,19 +38,24 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
     if (isEdit) {
       let task = tasks.filter((task) => task._id == focusRow);
       console.log(task);
-      setTaskTitle(task[0].taskTitle);
+      // setTaskTitle(task[0].taskTitle);
     }
   }, [isEdit]);
 
   //edit task
   const editHandler = (e) => {
-   setTaskTitle(e.target.value)
-      dispatch(EditTask({ taskTitle, id, focusRow }));
+    console.log('edit')
+      let taskTitle = e.target.value
+      dispatch(EditTask({  taskTitle, id, focusRow }));
+      setTaskTitle(e.target.value)
    //server call edit task
 
 
   };
-
+  const onFocus=(e)=>{
+    console.log('onFocus')
+    setTaskTitle(e.target.name)
+  }
   const submitEdit = (e) => {
     e.preventDefault();
     //server call edit task
@@ -55,7 +66,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
 
 
   const doubleClickEdit = (task) => {
-
+      setTaskTitle(task.taskTitle)
       setFocusRow(task._id)
       if(isDouble==0){
           setDouble(1);
@@ -74,18 +85,22 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
   }
 
 
-
+  // useEffect(()=>{
+  //   if(taskId=='') {
+  //     setFocusRow('')
+  //   }
+  // },[taskId])
 
   const teamHandle = (e, task) => {
 
     let userid = e.target.value
     let focusRow = task._id
-    dispatch(addUserToTask({userid, id, focusRow}))
+    dispatch(addUserToTask({userid, id, focusRow, }))
   }
 
 
   const handleHover = (task) => {
-    
+
       setTaskId(task._id);
     
   }
@@ -97,73 +112,80 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
   return (
     <Sprint_Table onMouseLeave={() => setTaskId("")}>
       {tasks.map((task) => {
-
+        
         return (
-          <tr
+          <TR
             onMouseOver={() => handleHover(task)}
             onClick={() => doubleClickEdit(task)}
+            
             style={{
-              backgroundColor: (task._id === focusRow || task._id == taskId) ? "grey" : "white",
+              backgroundColor: (task._id === focusRow || task._id == taskId) ? "#F2F2F2" : "white",
+              userSelect: 'none'
             }}
           >
-            <td>
+            <Sprint_Td style={{width:'25px'}}>
               <input
+              
                 type="checkbox"
                 defaultChecked={task.taskStatus}
                 value={task._id}
                 onChange={onChange}
               ></input>
-            </td>
+            </Sprint_Td>
 
 
 
             {isEdit && task._id === focusRow  ? (
-              <td>
+              <Sprint_Td style={{width:'50%'}}>
                 <form onSubmit={submitEdit}>
                   <input
+                  className={style.input}
                     type="text"
                     value={taskTitle}
-                    onChange={editHandler}
+                    name={task.taskTitle}
+                    onClick={(e)=>onFocus(e)}
+                    onChange={(e)=>editHandler(e)}
                   ></input>
                 </form>
-              </td>
+              </Sprint_Td>
             ) : (
-              <td>{task.taskTitle}</td>
+              <Sprint_Td>{task.taskTitle}</Sprint_Td>
             )}
 
 
 
 
 
-            <td>
+            <Sprint_Td >
               {task.user && team ? (
+               
                 <>
                   {team && (
-                      <select onChange={(e) => teamHandle(e, task)}>
-                        {team.map((member) => {
-                          return (
-                            <>
-                              {task.user._id === member.user._id ? (
-                                <option selected value={member.user._id}>
-                                  {" "}
-                                  {member.user.fullname}
-                                </option>
-                              ) : (
-                                <option value={member.user._id} name={task._id}>
-                                  {member.user.fullname}
-                                </option>
-                              )}
-                            </>
-                          );
-                        })}
-                      </select>
+                      <Select className={style.select} onChange={(e) => teamHandle(e, task)}>
+                      {team.map((member) => {
+                        return (
+                          <>
+                            {task.user._id === member.user._id ? (
+                              <option selected value={member.user._id}>
+                                {" "}
+                                {member.user.fullname}
+                              </option>
+                            ) : (
+                              <option value={member.user._id} name={task._id}>
+                                {member.user.fullname}
+                              </option>
+                            )}
+                          </>
+                        );
+                      })}
+                    </Select>
                     )}
                 </>
               ) : (
                 <>
                   {taskId === task._id && !task.user && (
-                    <select onChange={(e) => teamHandle(e, task)}>
-                      <option selected> Выбрать исполнителя</option>
+                    <Select className={style.select}  defaultValue='Выбрать исполнителя' onChange={(e) => teamHandle(e, task)}>
+                      <option> Выбрать исполнителя</option>
                       {team.map((member) => {
                         return (
                           <option value={member.user._id} name={task._id}>
@@ -172,12 +194,12 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
                           </option>
                         );
                       })}
-                    </select>
+                    </Select>
                   )}{" "}
                 </>
               )}
-            </td>
-          </tr>
+            </Sprint_Td>
+          </TR>
         );
       })}
     </Sprint_Table>

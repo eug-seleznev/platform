@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 
 
-export const Container =  styled.div`
+export const Container = styled.div`
 padding-left:  250px;
 padding-right:  70px;
 width: 100%;
 height: 100%;
 padding-top: 200px;
 padding-bottom: 200px;
-background-color: #ECECEC;
+background-color:${props=> props.background};
 
 @media (max-width:1700px){
     width: 100vw;
