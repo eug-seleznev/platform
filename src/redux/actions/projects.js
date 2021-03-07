@@ -1,5 +1,5 @@
 import { innerBackend, instance } from "../../components/utils/axios";
-import { ADD_SPRINT, SORT_PROJECTS,ADD_TAG, ADD_TASKS,CLEAR_URN,GREEN_MSG,DELITE_USER, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK, CREATE_FAIL, DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, PROJECT_ID, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT,CLEAR_MSG, CLEAR_ERROR, DELETE_SPRINT, PROJECTS_SORT, ERROR_MSG, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG  } from "../types";
+import { ADD_SPRINT, SORT_PROJECTS,ADD_TAG, ADD_TASKS,CLEAR_URN,GREEN_MSG,DELITE_USER, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK, CREATE_FAIL, DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, PROJECT_ID, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT,CLEAR_MSG, CLEAR_ERROR, DELETE_SPRINT, PROJECTS_SORT, ERROR_MSG, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, DELITE_TAG  } from "../types";
 
 
 
@@ -252,20 +252,21 @@ export const addTag = ( id,tag ) => async (dispatch) => {
     console.log(err.response.data);
   }
 }; 
-
-export const deleteTag = (id, tag) => async dispatch => {
+export const deliteTag = ( id,tag ) => async (dispatch) => {
   let body = {
     tag: tag
   }
   try {
-      const res = await innerBackend.delete(`/projects/tag/${id}`, body);
-      console.log(res.data);  
+    console.log(tag, id)
+    const res = await innerBackend.delite(`projects/tag/${id}`, body);
+    dispatch({
+      type: DELITE_TAG,
+      payload: res.data,
+    });
   } catch (err) {
-    alert('oops im sorry something is broken :(')
+    console.log(err.response.data);
   }
-  
-}
-
+}; 
 
 
 

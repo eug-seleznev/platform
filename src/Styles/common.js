@@ -20,7 +20,7 @@ background-color:${props=> props.background};
 
 
 
-@media (max-width:700px){
+@media (max-width:1000px){
     width: 100vw;
     padding-left:5px;
     padding-top: 110px;
@@ -114,10 +114,8 @@ height:auto;
 `
 export const Card = styled.div`
 background: #FFFFFF;
-
 padding: 10px;
 padding-left:20px;
-border: 1px solid #CECECE;
 border-radius: 15px;
 @media(max-width:700px) {
     padding: 10px;

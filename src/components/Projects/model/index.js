@@ -70,7 +70,7 @@ const Viewer = ({ project }) => {
     setOpen(!open);
   };
   return (
-    <div style={{ height: `${!open ? "65px" : "auto"}`, overflowY: "hidden" }}>
+    <div style={{ height: `${!open ? "65px" : "auto"}`, overflowY: "hidden", marginBottom:'25px' }}>
       <Subtitle
         title="Модель проекта"
         openfunc={openfunc}
