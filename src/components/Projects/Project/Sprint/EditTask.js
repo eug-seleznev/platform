@@ -112,7 +112,7 @@ return () => {
                     className={style.card__thing__full}
                   ></div>
                 </div>
-              </div>:''}
+              </div>):''}
             
 							
              
@@ -121,7 +121,7 @@ return () => {
           <div className={style.taglist}>{tags!==undefined? tags.map((el,i)=>{
               return(<div style={{marginBottom:'10px', display:'flex',alignItems:'baseline'}}><Tag tagText={el} key={i} tagColor={i==0?'#C8D9E9':i==1?'#E9E3C8':'#AAF8A8'}/><div style={{cursor:'pointer'}} onClick={()=>delTag(el)}>x</div></div>)
             }):''}</div>
-          {tags!==undefined&&tags.length<2?<TagSearch tagCount={false}  func={func}></TagSearch>:''}
+          {tags!==undefined&&tags.length<2?<TagSearch tagCount={false}  func={addTag}></TagSearch>:''}
           
           {/* <Light color='#A3A3A3'> Добавить модель </Light> */}
 
