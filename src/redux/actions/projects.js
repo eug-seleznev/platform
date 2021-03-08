@@ -252,13 +252,11 @@ export const addTag = ( id,tag ) => async (dispatch) => {
     console.log(err.response.data);
   }
 }; 
-export const deliteTag = ( id,tag ) => async (dispatch) => {
-  let body = {
-    tag: tag
-  }
+export const deleteTag = ( id,tag ) => async (dispatch) => {
+ 
   try {
     console.log(tag, id)
-    const res = await innerBackend.delite(`projects/tag/${id}`, body);
+    const res = await innerBackend.delete(`projects/sprints/${id}/tag?tag=${tag}`);
     dispatch({
       type: DELITE_TAG,
       payload: res.data,

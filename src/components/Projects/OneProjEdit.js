@@ -8,6 +8,8 @@ import style from '../../Styles/modules/components/Project/editproj.module.css'
 import InfoInputs from './components/EditProj/infoInputs';
 import { background } from '../../redux/actions/user';
 import ProjTeamEdit from './components/EditProj/projteamedit';
+import LinkInputs from './components/EditProj/linkInputs';
+import CustomerInfo from './components/EditProj/customerInfo';
 const ProjectEdit = ({history, match}) => {
 	let {id} = match.params;
     const dispatch = useDispatch();
@@ -24,6 +26,19 @@ const ProjectEdit = ({history, match}) => {
         dateFinish: loadProject&&project.dateFinish!==undefined? project.dateFinish:'',
         customer: loadProject? project.customer:'',
         about: loadProject? project.about:'',
+        cusStorage: loadProject? project.cusStorage:'',
+        budget: loadProject? project.budget:'', 
+        schedule: loadProject? project.schedule:'', 
+        customerNew: loadProject? 
+            {
+                name: project.customerNew.name,
+                phone: project.customerNew.name,
+                email: project.customerNew.name,
+                other:['']
+            }
+            
+        
+        :'', 
       });
 	  
 	  useEffect(() => {
@@ -48,7 +63,7 @@ const ProjectEdit = ({history, match}) => {
 	// 	}
 		
     // }, [loadProject])
-      const { title, offTitle, dateStart, dateFinish, city, customer, about} = formData;
+      const { title, offTitle, dateStart, dateFinish, cusStorage, budget,schedule, city, customer, about} = formData;
 
       useEffect(()=>{ 
         dispatch(background('white'))
@@ -61,7 +76,29 @@ const ProjectEdit = ({history, match}) => {
 
         setFormData({ ...formData, [e.target.name]: e.target.value });
      }
-     
+     const onCustomerChange = e => {
+        e.preventDefault(); 
+        console.log(formData)
+        if(e.target.name==='name') {
+             setFormData({ ...formData, customerNew:{
+            ...formData.customerNew,
+            name: e.target.value,
+        }});
+        }
+        else if(e.target.name==='phone') {
+            setFormData({ ...formData, customerNew:{
+           ...formData.customerNew,
+           phone: e.target.value,
+        }});
+        }
+       else if(e.target.name==='email') {
+        setFormData({ ...formData, customerNew:{
+            ...formData.customerNew,
+            email: e.target.value,
+        }});
+        }
+       
+     }
 
      const Redirect = () => {
      
@@ -93,6 +130,7 @@ const ProjectEdit = ({history, match}) => {
                     <Regular className={style.info__row__point} onClick={()=> setEditStage(1)} color={editStage==1?'black':'#8B8B8B'} size={'14'}>Информация о проекте</Regular>
                     <Regular className={style.info__row__point} onClick={()=> setEditStage(2)} color={editStage==2?'black':'#8B8B8B'}  size={'14'}>Команда проекта</Regular>
                     <Regular className={style.info__row__point} onClick={()=> setEditStage(3)} color={editStage==3?'black':'#8B8B8B'}  size={'14'}>Ссылки на документацию</Regular>
+                    <Regular className={style.info__row__point} onClick={()=> setEditStage(4)} color={editStage==4?'black':'#8B8B8B'}  size={'14'}>Информация о заказчике</Regular>
                 </div>
             <form className='form' onSubmit={onSubmit}>
             <div style={{display:`${editStage===1?'block':'none'}`}}>
@@ -104,13 +142,28 @@ const ProjectEdit = ({history, match}) => {
                 onChange={onChange} 
                 dateFinish={dateFinish} 
                 dateStart={dateStart}
-                customer={customer}
+               
                 offTitle={offTitle}
                 />
             </div>
-            <div style={{display:`${editStage===2?'block':'none'}`}}>
+            <div style={{display:`${editStage===2?'block':'none'}`,width:'100%'}}>
             <ProjTeamEdit 
                 project={project}
+            />
+            </div>
+            <div style={{display:`${editStage===3?'block':'none'}`,width:'100%'}}>
+            <LinkInputs
+                project={project} 
+                cusStorage={cusStorage}
+                schedule={schedule}
+                onChange={onChange} 
+                budget={budget}
+            />
+            </div>
+            <div style={{display:`${editStage===4?'block':'none'}`,width:'100%'}}>
+            <CustomerInfo
+               customerNew={project.customerNew}
+               onCustomerChange={onCustomerChange}
             />
             </div>
             </form>

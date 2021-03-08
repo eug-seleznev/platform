@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react'
 import { ButtonText } from '../../Styles/buttons'
 import { loadUser } from '../../redux/actions/auth'
 import { Redirect } from 'react-router-dom'
+import ModalWindow from '../Projects/components/ModalWindow'
 
 const Main = ({history}) => {
 
@@ -26,7 +27,7 @@ const Main = ({history}) => {
         open: false,
         content: null,
     })
-
+    const [status, setStatus] = useState (false)
 
 useEffect(() => {
     dispatch(loadUser());
@@ -34,7 +35,9 @@ useEffect(() => {
     dispatch(allProjects());
     
 }, [])
-
+const closeWindow =()=>{
+  setStatus(false)
+}
 
 useEffect(()=>{  
     dispatch(loadUser())
@@ -77,9 +80,19 @@ if(!listNews){
         </div>
 
         <div className={styles.news}>
-          <Thin color="black" size="24">
-            Новости бюро:
-          </Thin>
+          <div className={styles.create__news}>
+            <Thin color="black" size="24">
+              Новости бюро
+            </Thin>
+            {user.permission==='admin'?<img className={styles.create__news__button} onClick={()=>{setStatus(true)}} src='/plus.png'></img>:''}
+          </div>
+          <ModalWindow 
+            bigTitle={'Создание новости'} 
+            histCurrent={history} 
+            customElements={'CreateNews'} 
+            status={status} 
+            closeWindow={closeWindow}
+        ></ModalWindow>
           {listNews.map((el, i) => {
             const amount = window.innerWidth < 1000 ? 2 : 3;
             return (

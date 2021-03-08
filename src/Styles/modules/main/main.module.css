@@ -18,6 +18,15 @@
         display: grid;
         row-gap: 20px;
     }
+    .create__news {
+        display: flex;
+        align-items: flex-end;
+    }
+    .create__news__button {
+        margin-left:10px;
+        height:23px;
+        cursor:pointer;
+    }
         .allNews{
             /* text-align: right; */
             margin-left: auto;

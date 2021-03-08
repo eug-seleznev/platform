@@ -25,7 +25,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 	margin-right: 50px;
-	width: 530px;
+	width: 100%;
  	border:1px solid #8FA7C6;
 	margin-top: 25px;
 	margin-bottom: 25px;
@@ -244,6 +244,7 @@ border-bottom: none;
 .title__info {
 	display: flex;
 	margin-bottom: 20px;
+	margin-top: 20px;
 }
 .calend {
 	padding-top:10px;

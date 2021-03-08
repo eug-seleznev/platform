@@ -26,7 +26,7 @@ const AllSprintsOfProj = ({hist, match, status}) => {
   }
     return (
       <>
-	        <div style={{width:'50%'}}>
+	        <div style={{width:'100%'}}>
               <Subtitle title='Активные спринты' src='/image 6.png'  subtwidth='0%' buttonFunc={openMod} buttonActive={true}></Subtitle>
                 
                   {sprints.length == 0 ?<Thin size='22'>Нет активных спринтов</Thin> 

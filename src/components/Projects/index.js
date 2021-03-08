@@ -74,7 +74,7 @@ const Projects = ({history}) => {
               <Td className={style.turn__off}>Статус</Td>
               <Td className={style.turn__off}>
                 <form>
-                  <Select onChange={projectType} style={{width:'50%'}}>
+                  <Select onChange={projectType} style={{width:'80%'}}>
                     {types.map((type) => {
                       return <option value={type}>{type}</option>;
                     })}
