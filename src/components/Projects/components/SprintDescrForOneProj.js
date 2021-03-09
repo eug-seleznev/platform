@@ -73,14 +73,14 @@ const SprintDescription = ({projStatus,tags, dateOpen,taskcomplite, alltasks, hi
 						<Thin>{taskcomplite}/{alltasks}</Thin>
 					</div>
 					<div className={style.tags}>
-						{tags.map((el,i)=>{
+						{tags.length!==0? tags.map((el,i)=>{
 						if(el!==null) {
 							return(<Tag tagText={el} tagColor={i==0?'#C8D9E9':i==1?'#E9E3C8':'#AAF8A8'} key={i} />)
 						}
 					
 					
 						
-					})}
+					}):<Thin>Тегов нет</Thin>}
 					</div>
 				</div>
 					

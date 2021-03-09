@@ -78,7 +78,7 @@ export default function(state = initialState, action) {
                 case DELITE_TAG:
                     return {
                         ...state,
-                        project: payload
+                        sprint: payload.sprint
                     } 
                 case EDIT_TASK: 
                     return {

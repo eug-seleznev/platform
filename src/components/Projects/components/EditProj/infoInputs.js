@@ -5,7 +5,7 @@ import { Select } from "../../../../Styles/tables"
 import { useEffect } from "react"
 
 
-const InfoInputs = ({onChange,project,offTitle, title, dateFinish, dateStart, city, customer, about}) => {
+const InfoInputs = ({onChange,project,offTitle, title, dateFinish, dateStart, city, about}) => {
     
 	useEffect(()=>{
 		console.log(city)	
@@ -66,16 +66,7 @@ const InfoInputs = ({onChange,project,offTitle, title, dateFinish, dateStart, ci
 					value={city}
 					onChange={onChange}/>
 				</div>
-				<div className={style.titles__point}>
-					<Thin className={style.one__title}>Заказчик</Thin>
-					<input 
-					type='text'
-					placeholder='Заказчик'
-					required
-					name='customer'
-					value={customer}
-					onChange={e => onChange(e)}/>
-				</div>
+				
 			</div>
 			<div className={style.titles}>
 				<div className={style.titles__point}>

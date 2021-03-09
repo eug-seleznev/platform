@@ -6,6 +6,7 @@ import { ButtonText } from '../../Styles/buttons'
 import { useEffect, useState } from 'react';
 import UserInfo from '../User/components/infoCard';
 import TopInfo from '../User/components/topInfo';
+import Tag from '../Projects/components/OneProject/tag';
 
 const ProfileComponent = ({user, history, change}) => {
   const me = useSelector(state => state.auth.user)
@@ -34,9 +35,15 @@ const ProfileComponent = ({user, history, change}) => {
             user != null ? (user != undefined ? user.avatar : "") : ""
           }`}
 			  />
+       
         <div className={styles.gap}>
-        <TopInfo user={user} url={url}></TopInfo>
-        
+          <TopInfo user={user} url={url}></TopInfo>
+          <div className={styles.parts}>
+            {user.partition!==undefined?user.partition.map((el,i)=>{
+              return(<Tag tagText={el} tagColor='#D3E1EE' />)
+          }):''}
+        </div>
+         
           <div className={styles.info__title}>
             <Bold size="18" color='#3F496C' className={styles.contacts}>
               Информация

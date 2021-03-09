@@ -45,19 +45,19 @@ const plusMenuClick = (callback) => {
                         Проблемы с компом
                     </StyledIn>
 
-                    {user.permission!='user' && <StyledIn onClick={()=>plusMenuClick(createNews)} className='menu__nav' to='/admin/news'>
+                    {user.permission!=='user' && <StyledIn onClick={()=>plusMenuClick(createNews)} className='menu__nav' to='/admin/news'>
                         Добавить новость
                     </StyledIn>}
 
-                    {user.permission!='user' &&  <StyledLink className='menu__nav' to='/admin/newproject'>
+                    {user.permission!=='user' &&  <StyledLink className='menu__nav' to='/admin/newproject'>
 
                         Создать проект
                     </StyledLink>}
 
-                    {user.permission!='user' && <StyledIn onClick={()=>plusMenuClick(()=>setDepForm(true))}>
+                    {user.permission!=='user' && <StyledIn onClick={()=>plusMenuClick(()=>setDepForm(true))}>
                         Создать отдел
                     </StyledIn>}
-                    {user.permission!='user' && <StyledIn onClick={()=>plusMenuClick(addPodsos)}>
+                    {user.permission!=='user' && <StyledIn onClick={()=>plusMenuClick(addPodsos)}>
                         Добавить субподрядчика
                     </StyledIn>}
             

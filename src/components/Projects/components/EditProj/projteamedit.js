@@ -34,7 +34,7 @@ const ProjTeamEdit = ({project}) => {
 					</tr>
 				</thead>
 				<tbody>
-					{project.team2.map((el,i)=>{
+					{project!==undefined?project.team2.map((el,i)=>{
 						return(
 						<tr key={i}>
 								<td  className={style.off__too}><Bold size='14'>{el.task}</Bold></td>
@@ -49,7 +49,7 @@ const ProjTeamEdit = ({project}) => {
 						
 						)
 						
-					})}
+					}):''}
 					<tr >
 						<CancelButton fontSize='14px' style={{padding:'20px',paddingTop:'10px',backgroundColor:'white', color:'#397BB8', border:'none',marginTop:'10px', width:'fit-content'}}>Пригласить в команду</CancelButton>
 						</tr>

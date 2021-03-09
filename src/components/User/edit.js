@@ -11,6 +11,8 @@ import { Card, SmallContainer } from "../../Styles/common";
 import { Input, LogForm } from "../../Styles/Forms";
 import styled from "styled-components";
 import { allDepartments, joinDepartment } from "../../redux/actions/department";
+import { Thin } from "../../Styles/typography";
+import Partition from "./partition";
 
 const Edit = ({match, history}) => {
 	
@@ -29,10 +31,11 @@ const Edit = ({match, history}) => {
 		report: user.report ? user.report : '', 
 		bday: user.bday ? user.bday : '', 
 		phone: user.phone ? user.phone : '', 
+		partition: user.partition ? user.partition : [], 
       });
      const [text, setText] = useState ('') 
 
-      const {name,lastname, position, email, report, bday, phone } = formData;
+      const {name,lastname, position, email, report, bday, phone,partition } = formData;
 
       const  [file, setFile] = useState(null) 
 
@@ -100,7 +103,7 @@ const Edit = ({match, history}) => {
 			  <div /*style={{display:'flex', flexDirection:'column', alignItems:'center'}}*/>
 		  <LogForm className={styles.editForm}  onSubmit={onSubmit}>
 
-		<p className={styles.p}>Имя</p>
+		<Thin className={styles.p}>Имя</Thin>
 		  <Input 
 		  required 
 			  	type='text'
@@ -111,7 +114,7 @@ const Edit = ({match, history}) => {
 			></Input>
 
 
-<p className={styles.p}>Фамилия</p>
+<Thin className={styles.p}>Фамилия</Thin>
 		  <Input 
 		  required 
 			  	type='text'
@@ -120,7 +123,7 @@ const Edit = ({match, history}) => {
 				value={lastname}
 			  	onChange={e => onChange(e)}
 			></Input>
-<p className={styles.p}>Отдел</p>
+<Thin className={styles.p}>Отдел</Thin>
 			<select
 			required 
 			onChange={e => divisionChange(e)}
@@ -146,7 +149,7 @@ const Edit = ({match, history}) => {
 			  value={position}
 			  onChange={e => onChange(e)}
 			></Input>
-			<p className={styles.p}>Сменить e-mail</p>
+			<Thin className={styles.p}>Сменить e-mail</Thin>
 		 <Input 
 		 required 
 			  type='text'
@@ -155,7 +158,7 @@ const Edit = ({match, history}) => {
 			  name="email"
 			  onChange={e => onChange(e)}
 			></Input>
-			<p className={styles.p}>Ссылка на отчетность</p>
+			<Thin className={styles.p}>Ссылка на отчетность</Thin>
 				<Input 
 				required 
 					type='text'
@@ -164,7 +167,7 @@ const Edit = ({match, history}) => {
 					name="report"
 					onChange={e => onChange(e)}
 					></Input>
-			<p className={styles.p}>Телефон</p>
+			<Thin className={styles.p}>Телефон</Thin>
 				<Input 
 				 
 					type='text'
@@ -173,7 +176,7 @@ const Edit = ({match, history}) => {
 					name="phone"
 					onChange={e => onChange(e)}
 					></Input>
-			<p className={styles.p}>День рождения</p>
+			<Thin className={styles.p}>День рождения</Thin>
 				<Input 
 					
 					type='date'
@@ -182,12 +185,13 @@ const Edit = ({match, history}) => {
 					name="bday"
 					onChange={e => onChange(e)}
 					></Input>
-			<p className={styles.p}>Сменить аватар</p>
+			<Thin className={styles.p}>Сменить аватар</Thin>
 			 <Input 
                 type='file'
                 placeholder='загрузите изображение'
 				onChange={handleFile}></Input>
-				
+			<Thin className={styles.p}>Добавить раздел</Thin>
+			 <Partition partition={partition} subcontr={true}></Partition>	
 			<CancelButton fontSize='16px' grey onClick={Redirect}  >Ничего не менять</CancelButton>
 				<Button fontSize='16px' onClick={changeMsg}  type="submit" value="Submit" >Сохранить</Button>
 				

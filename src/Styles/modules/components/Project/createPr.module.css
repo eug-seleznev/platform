@@ -5,6 +5,9 @@
 	padding-top: 40px;
 	width: 100%;
 }
+.editContractor {
+	width: 50%;
+}
 .form2 {
 	display: flex;
 	flex-direction: column;
@@ -109,6 +112,9 @@
 	margin-bottom: 5px;
 	height: 40px;
 }
+.partition label {
+	
+}
 .small__title {
 	margin-top: 40px;
 	margin-bottom:5px;
@@ -212,7 +218,16 @@
 	align-self: flex-end;
 	padding-top: 15px;
 } 
-
+.partition {
+	display:flex;
+	flex-direction:column;
+	margin-right:20px;
+	margin-top: 15px;
+	align-items:center
+}
+.partition input {
+	width: 15px;
+}
 
 .buttons2 {
 	display: flex;

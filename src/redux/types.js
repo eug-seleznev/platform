@@ -50,7 +50,7 @@ export const CHANGE_DESCRIPTION = 'change_sprint_description'
 export const ADD_USER_TO_TASK = 'add_user_to_task'
 export const SEARCH_TAG = 'search_tag'
 export const ADD_TAG = 'add_tag'
-export const DELITE_TAG = 'add_tag'
+export const DELITE_TAG = 'del_tag'
 export const DELITE_USER = 'delite_user'
 //teams
 export const JOIN_TEAM = 'join_to_team'
@@ -59,6 +59,8 @@ export const CREATE_FAIL= 'error_on_project_create';
 //contractors
 export const ADD_CONTRACTOR = 'add_contractor';
 export const ALL_CONTRACTORS = 'all_contractors';
+export const ONE_CONTRACTOR = 'one_contractor';
+export const EDIT_CONTRACTOR = 'edit_contractor'
 //news
 export const CREATE_NEWS = 'create_news';
 export const ALL_NEWS = 'all_news'
