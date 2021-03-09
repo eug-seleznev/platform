@@ -8,6 +8,7 @@ import { Button, CancelButton } from "../../../../Styles/buttons"
 import { useState } from "react"
 import { url } from "../../../utils/axios"
 import Search from "../../../User/Search"
+import UserTable from "../../../User/userTable"
 
 const ProjTeamEdit = ({project}) => {
     const dispatch = useDispatch()
@@ -61,8 +62,9 @@ const ProjTeamEdit = ({project}) => {
 			</table>
 			
 		</div>
-		<div className={style.table} style={{marginTop:'50px'}}>
+		<div className={style.table} style={{display:'flex',marginTop:'50px'}}>
 			<Search/>
+			<UserTable crypt={project.crypt}/>
 		</div>
 		
 		</div>

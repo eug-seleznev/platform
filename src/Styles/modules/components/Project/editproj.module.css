@@ -119,6 +119,34 @@
 .new__title__point input{
 	width: 150px
 }
+.people__table {
+	width: 300px;
+	margin-left: 30px;
+	margin-top: 30px;
+	border:1px solid #979797;
+	border-radius:5px
+}
+.people__table td  {
+	padding: 5px;
+	width: 50px;
+	border: none;
+}
+.people__table tr  {
+	width: 50px;
+}
+.people__table input  {
+	width: 80px;
+	height: 15px;
+}
+.people__table button  {
+	width: 40px;
+	height: 20px;
+	margin-top: 12px;
+}
+.people__table img {
+	width: 20px;
+	height: 20px;
+}
 @media(max-width:1350px) {
 	.table td {
 		padding-left: 10px;
