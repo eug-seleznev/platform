@@ -15,11 +15,11 @@ const UserInfo = ({user, change, link, me}) => {
 				<a
 					target="_blank"
 					href={`https://chat.buro82.ru/direct/${
-					user ? user.rocketchat : ""
+					user ? user.rocketname : ""
 					}`}
 				>
-					{" "}
-					{user.rocketchat && user.rocketchat}{" "}
+					{/* {" "}
+					{user.rocketname && user.rocketname}{" "} */}
 					<Contact text="Написать сообщение" src='/rocket.png'></Contact>
 				</a>
 			</div>
