@@ -44,7 +44,7 @@ import AllDepartments from './components/Department/allDepartments'
 import Partition from './components/User/partition';
 import PublicViewer from './components/Viewer/publicViewer';
 import OneDepartment from './components/Department/oneDepartment'
-
+import EditContractor from './components/Superadmin/editContractor'
 //ОТБЕРИТЕ У МЕНЯ КОМПЬЮТЕР НАХУЙ
 // import Sprint_New from './components/Projects/Project/Sprint/new'
 
@@ -149,6 +149,7 @@ const App = () => {
 
                 <Route exact path="/viewer" component={Helper} />
                 <Route exact path="/contractors" component={Contractors} />
+                <Route exact path="/contractors/:id" component={EditContractor} />
               </Container>
             </Switch>
           </>

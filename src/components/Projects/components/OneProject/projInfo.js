@@ -43,10 +43,28 @@ const ProjInfo = ({project}) => {
             {project.schedule!==undefined?<a href={project.schedule.includes('https://')?project.schedule:'https://'+project.schedule} target='_blank' size='15'>{project.schedule}</a>:''}
           </div>
         </SmallCard>
+        {project.customerNew[0]!==undefined?
+          <div className={styles.info__descr}>
+          <div style={{display:'flex'}}><Bold className={styles.info__line} size='16'>Заказчик</Bold><Light className={styles.info__line} style={{marginLeft:'20px'}}>{project.customerNew[0].name}</Light></div>
+          
+          <Light className={styles.info__line} style={{marginLeft:'20px'}}>Почта: {project.customerNew[0].email}</Light>
+          <Light className={styles.info__line} style={{marginLeft:'20px'}}>Телефон:{project.customerNew[0].phone}</Light>
+          {project.customerNew[0].other!==undefined?
+            project.customerNew[0].other.map((el,i)=>{
+              return(
+                <Light key={i} className={styles.info__line} style={{marginLeft:'20px'}}>{el}</Light>
+              )
+            }):''
+            
+       
+          }
+        </div>:
         <div className={styles.info__descr}>
-          <Bold className={styles.info__line} size='16'>Заказчик</Bold>
+          <Bold className={styles.info__line} size='16'>Заказчик: </Bold>
           <Light className={styles.info__line} style={{marginLeft:'20px'}}>{project.customer}</Light>
         </div>
+        }
+        
       </div>
     </div>
     )

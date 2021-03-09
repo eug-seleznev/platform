@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { ALL_USERS, USER_ERR, CHANGE_PERMISSION, PERM_RETURN, ONE_USER,SEARCH_USER,BACK_WHITE, CLEAR_ERROR, CLEAR_MSG,ADD_CONTRACTOR,ALL_CONTRACTORS, ERROR_MSG, GREEN_MSG,PARTITION_UPDATE} from "../types";
+import { ALL_USERS, USER_ERR, CHANGE_PERMISSION, PERM_RETURN,ONE_CONTRACTOR, ONE_USER,SEARCH_USER,BACK_WHITE, CLEAR_ERROR, CLEAR_MSG,ADD_CONTRACTOR,ALL_CONTRACTORS, ERROR_MSG, GREEN_MSG,PARTITION_UPDATE} from "../types";
 
 
 
@@ -8,7 +8,7 @@ import { ALL_USERS, USER_ERR, CHANGE_PERMISSION, PERM_RETURN, ONE_USER,SEARCH_US
 export const allContractors = () => async dispatch  => {
   try {
       // console.log('hello all users?')
-      const res = await innerBackend.get('/merc/find?name=all')
+      const res = await innerBackend.get('/merc/search?name=all')
       dispatch({
           type: ALL_CONTRACTORS,
           payload: res.data
@@ -95,6 +95,29 @@ export const searchUser = (request) => async dispatch  => {
   }
 
 }
+export const getContractor = (id) => async dispatch  => {
+  try {
+      // console.log('hello 1 user?')
+      const res = await innerBackend.get(`/merc/search?name=${id}`)
+      dispatch({
+          type: ONE_CONTRACTOR,
+          payload: res.data
+      })
+      // setAuthToken(localStorage.token);
+
+    }
+    catch (err) {
+      const errors = err.response.data.err;
+      errors.map(error => {
+         return dispatch({
+          type: ERROR_MSG,
+          payload: error.msg
+      })
+      })
+          
+    } 
+
+}
 export const getUser = (id) => async dispatch  => {
   try {
       // console.log('hello 1 user?')
@@ -128,15 +151,13 @@ export const addContractor = (formData) => async dispatch  => {
   let body = {
     name:formData.name,
     lastname: formData.lastname,
-    job: formData.job,
-    contacts: {
-      phone:formData.phone,
-      email:formData.email
-    }
+    partition:formData.partition,
+    phone:formData.phone,
+    email:formData.email
   }
   try {
       console.log(body)
-      const res = await innerBackend.post(`/merc`, body)
+      const res = await innerBackend.post(`/merc/new`, body)
       dispatch({
           type: ADD_CONTRACTOR,
           payload: res.data
@@ -149,17 +170,18 @@ export const addContractor = (formData) => async dispatch  => {
 
     }
     catch (err) {
-      const errors = err.response.data.err;
-      errors.map(error => {
-         return dispatch({
+      const error = err.response.data.err;
+      console.log(error)
+    
+         dispatch({
           type: ERROR_MSG,
-          payload: error.msg
-      })
-      })
+          payload: error
+         })
+    
           
-    } 
+    
 
-}
+}}
 export const permissionReturn = () =>  dispatch => {
   return dispatch({
     type: PERM_RETURN,

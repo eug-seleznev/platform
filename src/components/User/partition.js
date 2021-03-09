@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { usersPartition } from "../../redux/actions/user";
-
+import style from '../../Styles/modules/components/Project/createPr.module.css'
 
 
 //todo checklist for edit
@@ -9,22 +9,45 @@ import { usersPartition } from "../../redux/actions/user";
 
 
 
-const Partition = () => {
+const Partition = ({subcontr, partition, setPartitionList,checked}) => {
     const dispatch = useDispatch();
     const partitionDefault = useSelector(state => state.auth.user.partition) // [] for new user
-    const [list, setList] = useState(partitionDefault)
+    const [list, setList] = useState(subcontr?[]:partitionDefault)
 
+ 
 
+    const onSubcChange = (e) => {
 
+      if(partition.includes(e.target.value)){
+        partition.map((el, index) => 
+            {
+              if(el==e.target.value) 
+              partition.splice(index, 1)
+             
+              
+            })
+
+      } else {
+         partition.push(e.target.value)
+      
+      }
+     
+     console.log(partition)
+  }
     const onChange = (e) => {
 
         if(list.includes(e.target.value)){
-            list.map((el, index) => {if(el==e.target.value) list.splice(index, 1)})
+            list.map((el, index) => 
+              {
+                if(el==e.target.value) 
+                  list.splice(index, 1)
+              })
 
         } else {
             list.push(e.target.value)
         }
         console.log(list)
+       
     }
 
     const onSubmit = (e) => {
@@ -33,23 +56,27 @@ const Partition = () => {
         dispatch(usersPartition(list))    
     }
 
-     return (
-       <form onSubmit={onSubmit}>
+     return (<div>
+
+         <form onSubmit={onSubmit} style={{display:'flex', flexWrap:'wrap'}}>
          {partitionList.map(el => (
-           <div>
+           <div className={style.partition} >
              <input
                type="checkbox"
                key={el}
-               defaultChecked={partitionDefault.includes(el)}
+             
+               defaultChecked={subcontr?false:partitionDefault.includes(el)}
                value={el}
-               onChange={(e) => onChange(e)}
+               onChange={(e) => {subcontr? onSubcChange(e):onChange(e)}}
              />
              <label for="subscribeNews">{el}</label>
            </div>
          ))}
 
-         <button type="submit">Submit</button>
+         <button style={{display:`${subcontr?'none':'block'}`}} type="submit">Submit</button>
        </form>
+       
+       </div>
      );
 }
 

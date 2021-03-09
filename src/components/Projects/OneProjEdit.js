@@ -24,16 +24,15 @@ const ProjectEdit = ({history, match}) => {
         stage: loadProject? project.stage: '', 
         type: loadProject ? project.type: '',
         dateFinish: loadProject&&project.dateFinish!==undefined? project.dateFinish:'',
-        customer: loadProject? project.customer:'',
         about: loadProject? project.about:'',
         cusStorage: loadProject? project.cusStorage:'',
         budget: loadProject? project.budget:'', 
         schedule: loadProject? project.schedule:'', 
         customerNew: loadProject? 
             {
-                name: project.customerNew.name,
-                phone: project.customerNew.name,
-                email: project.customerNew.name,
+                name: project.customerNew[0].name!==undefined?project.customerNew[0].name:'',
+                phone: project.customerNew[0].phone!==undefined?project.customerNew[0].phone:'',
+                email: project.customerNew[0].email!==undefined?project.customerNew[0].email:'',
                 other:['']
             }
             
@@ -63,7 +62,7 @@ const ProjectEdit = ({history, match}) => {
 	// 	}
 		
     // }, [loadProject])
-      const { title, offTitle, dateStart, dateFinish, cusStorage, budget,schedule, city, customer, about} = formData;
+      const { title, offTitle, dateStart, dateFinish, cusStorage, budget,schedule, city, customer, about, customerNew} = formData;
 
       useEffect(()=>{ 
         dispatch(background('white'))
@@ -78,11 +77,12 @@ const ProjectEdit = ({history, match}) => {
      }
      const onCustomerChange = e => {
         e.preventDefault(); 
-        console.log(formData)
+        
         if(e.target.name==='name') {
              setFormData({ ...formData, customerNew:{
             ...formData.customerNew,
             name: e.target.value,
+            other:[]
         }});
         }
         else if(e.target.name==='phone') {
@@ -99,7 +99,9 @@ const ProjectEdit = ({history, match}) => {
         }
        
      }
-
+     useEffect(()=>{
+        console.log(formData)
+     },[formData])
      const Redirect = () => {
      
              return history.push(`/projects/${id}`)
@@ -162,7 +164,7 @@ const ProjectEdit = ({history, match}) => {
             </div>
             <div style={{display:`${editStage===4?'block':'none'}`,width:'100%'}}>
             <CustomerInfo
-               customerNew={project.customerNew}
+               customerNew={customerNew}
                onCustomerChange={onCustomerChange}
             />
             </div>

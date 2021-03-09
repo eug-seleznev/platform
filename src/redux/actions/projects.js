@@ -309,7 +309,7 @@ export const DeleteTask = ({ id, focusRow }) => async (dispatch) => {
 
 export const editProject = (formData, id) => async dispatch  => {
     try {
-        // console.log('hello edit', formData)
+        console.log('hello edit', formData)
         const res = await innerBackend.put(`/projects/${id}`, formData)
         dispatch({
             type: EDIT_PROJECT,
@@ -319,7 +319,7 @@ export const editProject = (formData, id) => async dispatch  => {
   
       }
       catch (err) {
-        const errors = err.response.data.err;
+        const errors = err.response.data.error;
         errors.map(error => {
            return dispatch({
             type: ERROR_MSG,
