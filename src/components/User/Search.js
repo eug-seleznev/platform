@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allDepartments } from "../../redux/actions/department";
+import { AddUserToTeam } from "../../redux/actions/projects";
 import { userSearch } from "../../redux/actions/user";
 import { Select } from "../../Styles/tables";
 import { Thin } from "../../Styles/typography";
@@ -75,8 +76,57 @@ export default Search
 
 
 
-const UserTable = () => {
+const UserTable = ({crypt}) => {
+    const dispatch = useDispatch();
+    const users = useSelector(state => state.users.searchResult)
+    const [formData, setFormData] = useState({
+      crypt: "29",
+      user: "",
+      position: "",
+      task: "",
+    });
+    const onChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value})
+
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+        // console.log(formData)
+        //server
+        dispatch(AddUserToTeam(formData))
+    }
+
     return (
-        <h1> hello world</h1>
-    )
+      <form onSubmit={onSubmit}>
+        <table>
+          {users.length == 0 ? (
+            <p>Пользователи</p>
+          ) : (
+            <>
+              {users.map((user, index) => {
+                return (
+                  <tr key={index}>
+                    <td>
+                      <p>{user.fullname}</p>
+                    </td>
+
+                    <td>
+                      <input type="text" name="position" onChange={onChange} placeholder="Должность"></input>
+                    </td>
+                    <td>
+                      <input type="text" name="task" onChange={onChange} placeholder="Раздел"></input>
+                    </td>
+
+                    <td>
+                      <button type="submit" onClick={() => setFormData({...formData, user: user._id})}> Добавить в команду</button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </>
+          )}
+        </table>
+      </form>
+    );
 }
