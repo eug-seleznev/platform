@@ -20,20 +20,34 @@ import {Circle} from '../../Styles/project'
 
 let  types = ['Все', "общественное пространство", "Частный дом", "Визуализация", "Интерьер", "ЖК"]
 
-const Projects = ({history}) => {
+const Projects = ({history, match, location}) => {
     const dispatch = useDispatch();
+
     const projects = useSelector(state => state.projects.projects)
     const [orderSort, setOrder] = useState(false)
+    const [activeField, setActiveField] = useState('Все')
     useEffect (()=>{
            dispatch(allProjects()) 
     }, [])
 
+  useEffect(() => {
+    if(location.search){
+      let value = location.search.split("?")[1];
+      // console.log(field);
+      setActiveField(value);
+      let field = "type";
+      console.log(field, activeField);
+      dispatch(sorType({ field, activeField }));
+    }
+    
 
+  }, []);
     
     if(!projects){
         return <p> loading...</p>
     }
 
+  
 
 
     const sortFunction = (query) => {
@@ -47,7 +61,6 @@ const Projects = ({history}) => {
       let value = e.target.value;
       dispatch(sorType({field, value}))
 
-      //server call
     }
 
 
