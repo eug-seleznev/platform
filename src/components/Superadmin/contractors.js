@@ -20,7 +20,7 @@ const Contractors = ({history}) => {
 		dispatch(allContractors())
 	},[])
     const pushToEdit =(id)=>{
-        history.push(`contractors/${id}`)
+        history.push(`/contractors/${id}`)
     }
     return (
         <div>

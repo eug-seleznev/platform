@@ -17,27 +17,25 @@ const ProjectEdit = ({history, match}) => {
 	const loadProject = useSelector(state => state.projects.loadProject)
     const [formData, setFormData ] = useState({
         
-        title: loadProject ? project.title : '',   
-        offTitle: loadProject ? project.offTitle : '',   
-        dateStart: loadProject? project.dateStart: '', 
-        city:loadProject? project.city:'', 
-        stage: loadProject? project.stage: '', 
-        type: loadProject ? project.type: '',
-        dateFinish: loadProject&&project.dateFinish!==undefined? project.dateFinish:'',
-        about: loadProject? project.about:'',
-        cusStorage: loadProject? project.cusStorage:'',
-        budget: loadProject? project.budget:'', 
-        schedule: loadProject? project.schedule:'', 
-        customerNew: loadProject? 
+        title: '',   
+        offTitle:'',   
+        dateStart: '', 
+        city:'', 
+        stage:'', 
+        type:'',
+        dateFinish:'',
+        about:'',
+        cusStorage:'',
+        budget:'', 
+        schedule:'', 
+        customerNew: 
             {
-                name: project.customerNew[0].name!==undefined?project.customerNew[0].name:'',
-                phone: project.customerNew[0].phone!==undefined?project.customerNew[0].phone:'',
-                email: project.customerNew[0].email!==undefined?project.customerNew[0].email:'',
+                name: '',
+                phone: '',
+                email: '',
                 other:['']
             }
-            
-        
-        :'', 
+
       });
 	  
 	  useEffect(() => {
@@ -49,19 +47,28 @@ const ProjectEdit = ({history, match}) => {
         
     }, [project])
     const [editStage, setEditStage] = useState(1)
-	// useEffect(() => {
-	// 	if (loadProject) {
-	// 		setFormData ({...formData, title: project.title, 
-	// 			dateStart: project.dateStart,
-	// 			city: project.city,
-	// 			type: project.type,
-	// 			stage: project.stage,
-	// 			dateFinish: project.dateFinish,
-	// 			customer: project.customer
-	// 			})
-	// 	}
+	useEffect(() => {
+		if (loadProject) {
+			setFormData ({...formData, title: project.title, 
+				dateStart: project.dateStart,
+                offTitle:project.offTitle,
+				city: project.city,
+				type: project.type,
+				stage: project.stage,
+				dateFinish: project.dateFinish,
+				about:project.about,
+                cusStorage:project.cusStorage,
+                budget:project.budget, 
+                schedule:project.schedule, 
+                customerNew: {
+                    name: project.customerNew[0].name!==undefined?project.customerNew[0].name:'',
+                    phone: project.customerNew[0].phone!==undefined?project.customerNew[0].phone:'',
+                    email: project.customerNew[0].email!==undefined?project.customerNew[0].email:'',
+                } 
+				})
+		}
 		
-    // }, [loadProject])
+    }, [loadProject])
       const { title, offTitle, dateStart, dateFinish, cusStorage, budget,schedule, city, customer, about, customerNew} = formData;
 
       useEffect(()=>{ 

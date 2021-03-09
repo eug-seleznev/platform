@@ -60,6 +60,7 @@ export const CREATE_FAIL= 'error_on_project_create';
 export const ADD_CONTRACTOR = 'add_contractor';
 export const ALL_CONTRACTORS = 'all_contractors';
 export const ONE_CONTRACTOR = 'one_contractor';
+export const EDIT_CONTRACTOR = 'edit_contractor'
 //news
 export const CREATE_NEWS = 'create_news';
 export const ALL_NEWS = 'all_news'

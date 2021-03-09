@@ -2,28 +2,44 @@
 //профиль пользователя по ID
 import './news.css'
 import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
-import {getContractor} from '../../redux/actions/user';
+import {editContractor, getContractor} from '../../redux/actions/user';
 import { Button, CancelButton } from '../../Styles/buttons';
 import {  Bold, Thin} from '../../Styles/typography'
 import style from '../../Styles/modules/components/Project/createPr.module.css'
+import Partition from '../User/partition';
 
 ///////////////
-const EditContractor = ({match}) => {
+const EditContractor = ({match,history}) => {
 	let {id} = match.params;
+	const contractor = useSelector(state=>state.users.contractor)
     const dispatch = useDispatch();
 	useEffect(()=>{
 		dispatch(getContractor(id))
 	}, [])
+	useEffect(()=>{
 
+	},[ contractor ])
     const [formData, setFormData ] = useState({ 
 		name:'',
-        lastname: '',   //title
-        phone: '', 
-        email: '',  
+        lastname:'',   //title
+        phone:'', 
+        email:'', 
+		partition:'',
       });
-  
+	  useEffect(() => {
+		if (contractor!==null ) {
+			setFormData ({...formData, 
+				name:contractor.name, 
+				lastname:contractor.lastname,
+				phone:contractor.phone,
+				email:contractor.email,
+				partition:contractor.partition
+				})
+		}
+		
+    }, [contractor])
       const { phone, email, name, lastname} = formData;
 
 
@@ -34,18 +50,21 @@ const EditContractor = ({match}) => {
 
     const onSubmit = async e => {
             e.preventDefault();
-            // dispatch(createNews(formData))
-
+            dispatch(editContractor(id,formData))
+			setTimeout(()=>{
+				history.replace('.')
+			},100)
         
 			
            
     }
 
     return (
-
+	
 	<div className={style.container}>
-		
-		<form className={style.form} onSubmit={onSubmit}>
+		{
+			contractor!==null?
+			<form className={style.form} onSubmit={onSubmit}>
 		<Bold size='24'>Редактировать информацию субподрядчика</Bold>
 			<div className={style.editContractor}>
 
@@ -79,15 +98,18 @@ const EditContractor = ({match}) => {
 					name='phone'
 					value={phone}
 					onChange={e => onChange(e)}/>
-				<Thin className={style.small__title}>Разделы</Thin>
+				
                 
 			</div>
 			<div className={style.row}>
 				
-				<Button style={{height:'40px'}} className={style.button} padd={'30px'} fontSize={'16px'} type="submit">Сохранить</Button>
+				<Button style={{height:'40px',marginTop:'30px'}} className={style.button} padd={'30px'} fontSize={'16px'} type="submit">Сохранить</Button>
 			</div>
             
         </form>
+			:<div>loading...</div>
+		}
+		
 	</div>
 
 )

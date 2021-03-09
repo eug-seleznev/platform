@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { ALL_USERS, USER_ERR, CHANGE_PERMISSION, PERM_RETURN,ONE_CONTRACTOR, ONE_USER,SEARCH_USER,BACK_WHITE, CLEAR_ERROR, CLEAR_MSG,ADD_CONTRACTOR,ALL_CONTRACTORS, ERROR_MSG, GREEN_MSG,PARTITION_UPDATE} from "../types";
+import { ALL_USERS, USER_ERR,EDIT_CONTRACTOR, CHANGE_PERMISSION, PERM_RETURN,ONE_CONTRACTOR, ONE_USER,SEARCH_USER,BACK_WHITE, CLEAR_ERROR, CLEAR_MSG,ADD_CONTRACTOR,ALL_CONTRACTORS, ERROR_MSG, GREEN_MSG,PARTITION_UPDATE} from "../types";
 
 
 
@@ -93,6 +93,29 @@ export const searchUser = (request) => async dispatch  => {
       })            
     
   }
+
+}
+export const editContractor = (id, formData) => async dispatch  => {
+  try {
+      console.log(formData)
+      const res = await innerBackend.put(`/merc/new/edit/${id}`,formData)
+      dispatch({
+          type: EDIT_CONTRACTOR,
+          payload: res.data
+      })
+      // setAuthToken(localStorage.token);
+
+    }
+    catch (err) {
+      const error = err.response.data.err;
+      
+         return dispatch({
+          type: ERROR_MSG,
+          payload: error
+    
+      })
+          
+    } 
 
 }
 export const getContractor = (id) => async dispatch  => {
