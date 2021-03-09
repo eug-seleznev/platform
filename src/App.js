@@ -47,7 +47,7 @@ import OneDepartment from './components/Department/oneDepartment'
 import EditContractor from './components/Superadmin/editContractor'
 //ОТБЕРИТЕ У МЕНЯ КОМПЬЮТЕР НАХУЙ
 // import Sprint_New from './components/Projects/Project/Sprint/new'
-
+import Search from './components/User/Search'
 
 const App = () => {
   const dispatch = useDispatch();
@@ -105,6 +105,8 @@ const App = () => {
                 <Route exact path="/myprojects" component={MyProjects} />
                 {/* <Route exact path='/projects/:crypt/:sprint_id/new' component={Sprint_New} /> */}
                 <Route exact path="/projects/:id" component={Project} />
+                {/* <Route exact path="/projects" component={Project} /> */}
+
                 <Route
                   exact
                   path="/projects/:crypt/:sprint_id"
@@ -146,6 +148,7 @@ const App = () => {
                 />
 
                 <Route exact path="/:id/viewer" component={PublicViewer} />
+                <Route exact path="/search/user" component={Search} />
 
                 <Route exact path="/viewer" component={Helper} />
                 <Route exact path="/contractors" component={Contractors} />

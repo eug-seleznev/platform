@@ -53,6 +53,20 @@ export const allUsers = ({query, sortOrder}) => async dispatch  => {
 }
 
 
+export const userSearch = (formData) => async dispatch => {
+  try {
+    ///users/usr/get?name=huila&division=govnoedi&partition=HUY
+    const res = await innerBackend.get(`users/usr/get?name=${formData.name}&division=${formData.division}&partition=${formData.partition}`)
+    dispatch({
+      type: SEARCH_USER,
+      payload: res.data
+    });
+  } catch (err) {
+    alert('aaaaaaaaaaaaaaa')
+  }
+}
+
+
 export const usersPartition = (partition) => async dispatch =>  {
   try {
     let body = {
