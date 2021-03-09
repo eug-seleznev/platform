@@ -115,7 +115,7 @@ const ProjectEdit = ({history, match}) => {
          
      }
 
-     const onSubmit = async e => {
+     const onSubmit = e => {
         e.preventDefault();
         dispatch(editProject(formData, id))
         setTimeout(() => Redirect(),100) 

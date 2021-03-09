@@ -696,6 +696,7 @@ export const AddUserToTeam = (formData) => async dispatch => {
     console.log(body, 'body', )
     const res = await innerBackend.put(`projects/updteam/${formData.crypt}`, body)
     console.log(res.data)
+    
   
   } catch (err) {
   alert('AAAAAAAAAAAAAAAAAAAAAA')    
