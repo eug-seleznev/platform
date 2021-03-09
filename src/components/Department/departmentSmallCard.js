@@ -9,7 +9,7 @@ const DepartmentSmallCard = ({department,func}) => {
 
     return(
 		console.log (department),
-            <Card className={styles.small__card} onClick={()=>func(department.divname)} onMouseLeave={()=>setEnter(false)} onMouseEnter={()=>setEnter(true)} style={{paddingTop:"65px",backgroundSize:'contain',  backgroundImage:`${enter?'url("/gachi.jpg")':'url("/grey.png")'}`,backgroundSize:'50%', cursor:'pointer'}}>
+            <Card className={styles.small__card} onClick={()=>func(department.divname)} onMouseLeave={()=>setEnter(false)} onMouseEnter={()=>setEnter(true)} style={{paddingTop:"65px",backgroundSize:'contain',  backgroundImage:`${enter?'url("/grey.png")':'url("/grey.png")'}`,backgroundSize:'50%', cursor:'pointer'}}>
 				<Bold color={enter?'white':'#3F496C'}>{department.divname.toUpperCase()}</Bold>
             </Card>
   
