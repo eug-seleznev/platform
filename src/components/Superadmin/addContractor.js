@@ -12,7 +12,7 @@ import Partition from '../User/partition';
 ///////////////
 const AddContractor = ({ closeWindow}) => {
     const dispatch = useDispatch();
-	const [checked, setChecked] = useState ([])
+	// const [partOn, setPartOn] = useState (false)
 
     const [formData, setFormData ] = useState({ 
         name: '',   //title
@@ -21,26 +21,30 @@ const AddContractor = ({ closeWindow}) => {
         phone: '', 
 		email:'' ,
       });
-  
+	  
       const {name,lastname,partition,phone,email} = formData;
 
 	
     const onChange = e => {
             setFormData({ ...formData, [e.target.name]: e.target.value });
     }
-	
+	// useEffect(()=>{
+	// 	return () => {
+	// 		setPartOn(false)
+	// 	  }
+	// },[])
 
     const onSubmit = async e => {
             e.preventDefault();
             dispatch(addContractor(formData))
-
+			// setPartOn(false)
             setTimeout(() => {
-				setChecked(!checked)
+				
 				closeWindow()
 			}, 100);  
 			
             setFormData({
-                name:'',lastname:'',phone:'',email:'',job:''
+                name:'',lastname:'',phone:'',email:'',partition:[],
             })
     }
    
@@ -102,8 +106,12 @@ const AddContractor = ({ closeWindow}) => {
 
 				</div>
 				<div style={{display:'flex',justifyContent:'space-between',flexDirection:'column'}}>
-					<Thin className={style.small__title}>Разделы</Thin>
-					<Partition checked={checked} partition={partition} subcontr={true}></Partition>
+					<div style={{marginTop:'15px',display:'flex'}}><Thin >Добавить раздел</Thin>
+						{/* <img src='/plus.png' onClick={()=>setPartOn(true)}></img> */}
+					</div>
+					{/* <div style={{display:`${partOn?'block':'none'}`}}> */}
+						<Partition  partition={partition} subcontr={true}></Partition>
+					{/* </div> */}
 					
 				</div>
 			</div>

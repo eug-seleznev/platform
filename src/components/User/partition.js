@@ -13,11 +13,12 @@ const Partition = ({subcontr, partition, setPartitionList,checked}) => {
     const dispatch = useDispatch();
     const partitionDefault = useSelector(state => state.auth.user.partition) // [] for new user
     const [list, setList] = useState(subcontr?[]:partitionDefault)
-
+    const [val, setVal]= useState(false)
+    const check = useRef()
  
 
     const onSubcChange = (e) => {
-
+      setVal(!val)
       if(partition.includes(e.target.value)){
         partition.map((el, index) => 
             {
@@ -28,14 +29,14 @@ const Partition = ({subcontr, partition, setPartitionList,checked}) => {
             })
 
       } else {
+        
          partition.push(e.target.value)
       
       }
-     
      console.log(partition)
   }
     const onChange = (e) => {
-
+     
         if(list.includes(e.target.value)){
             list.map((el, index) => 
               {
@@ -50,33 +51,34 @@ const Partition = ({subcontr, partition, setPartitionList,checked}) => {
        
     }
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        console.log(list)
-        dispatch(usersPartition(list))    
-    }
+    // const onSubmit = (e) => {
+    //     e.preventDefault();
+    //     console.log(list)
+    //     dispatch(usersPartition(list))    
+    // }
 
-     return (<div>
+     return (
 
-         <form onSubmit={onSubmit} style={{display:'flex', flexWrap:'wrap'}}>
-         {partitionList.map(el => (
-           <div className={style.partition} >
-             <input
-               type="checkbox"
-               key={el}
-             
-               defaultChecked={subcontr?false:partitionDefault.includes(el)}
-               value={el}
-               onChange={(e) => {subcontr? onSubcChange(e):onChange(e)}}
-             />
-             <label for="subscribeNews">{el}</label>
-           </div>
-         ))}
+         <div style={{display:'flex', flexWrap:'wrap'}}>
+          
+          {partition!==undefined?partitionList.map(el => (
+            <div className={style.partition} >
+              <input
+                type="checkbox"
+                key={el}
+                ref={check}
+                
+                 checked={partition.includes(el)?true:false}
+                value={el}
+                onChange={(e) => {subcontr? onSubcChange(e):onChange(e)}}
+              />
+              <label for="subscribeNews">{el}</label>
+            </div>
+          )):''}
 
-         <button style={{display:`${subcontr?'none':'block'}`}} type="submit">Submit</button>
-       </form>
-       
+         {/* <button style={{display:`${subcontr?'none':'block'}`}} type="submit">Submit</button> */}
        </div>
+      
      );
 }
 
