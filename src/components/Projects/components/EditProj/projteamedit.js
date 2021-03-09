@@ -7,6 +7,7 @@ import { Table, Td, Tr } from "../../../../Styles/tables"
 import { Button, CancelButton } from "../../../../Styles/buttons"
 import { useState } from "react"
 import { url } from "../../../utils/axios"
+import Search from "../../../User/Search"
 
 const ProjTeamEdit = ({project}) => {
     const dispatch = useDispatch()
@@ -18,6 +19,7 @@ const ProjTeamEdit = ({project}) => {
 	}
 
     return(
+		<div>
 		<div className={style.table} style={{marginTop:'50px'}}>
 			<table style={{borderCollapse:'collapse'}}>
 				<thead className={style.table__head}>
@@ -58,6 +60,11 @@ const ProjTeamEdit = ({project}) => {
 				
 			</table>
 			
+		</div>
+		<div className={style.table} style={{marginTop:'50px'}}>
+			<Search/>
+		</div>
+		
 		</div>
     )
 }

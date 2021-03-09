@@ -11,9 +11,12 @@ const CustomerInfo = ({onCustomerChange,customerNew}) => {
 	const [rerender, setRerender] =useState (false)
 	const addInfo =()=>{
 		setRerender (!rerender)
-		customerNew.other.push(firstInput.current.value+': '+secondInput.current.value)
-		firstInput.current.value=''
-		secondInput.current.value=''
+	
+			customerNew.other.push(firstInput.current.value+': '+secondInput.current.value)
+			firstInput.current.value=''
+			secondInput.current.value=''
+		
+		
 	}
     return(
 		<div className={style.inputs}>
@@ -52,13 +55,13 @@ const CustomerInfo = ({onCustomerChange,customerNew}) => {
 			<div className={style.titles}>
 				<div  className={style.titles__point}>
 				
-				{customerNew.other.map((el,i)=>{
+				{customerNew.other!==undefined?customerNew.other.map((el,i)=>{
 					return(
 						<div className={style.new__title__point} key={i}>
 							<Bold style={{marginBottom:'20px'}}>{el}</Bold>
 						</div>
 					)
-				})}
+				}):''}
 				</div>
 			</div>
 			<div className={style.titles}>

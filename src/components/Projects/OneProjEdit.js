@@ -61,9 +61,9 @@ const ProjectEdit = ({history, match}) => {
                 budget:project.budget, 
                 schedule:project.schedule, 
                 customerNew: {
-                    name: project.customerNew[0].name!==undefined?project.customerNew[0].name:'',
-                    phone: project.customerNew[0].phone!==undefined?project.customerNew[0].phone:'',
-                    email: project.customerNew[0].email!==undefined?project.customerNew[0].email:'',
+                    name: project.customerNew[0]!==undefined?project.customerNew[0].name:'',
+                    phone: project.customerNew[0]!==undefined?project.customerNew[0].phone:'',
+                    email: project.customerNew[0]!==undefined?project.customerNew[0].email:'',
                 } 
 				})
 		}

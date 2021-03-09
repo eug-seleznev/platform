@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allDepartments } from "../../redux/actions/department";
 import { userSearch } from "../../redux/actions/user";
+import { Select } from "../../Styles/tables";
+import { Thin } from "../../Styles/typography";
 
 
 
@@ -34,12 +36,12 @@ const Search = () => {
     }, [formData])
 
     return (
-      <div>
-        <form>
-          <label> Имя</label>
+      <div >
+        <form style={{marginLeft:'25px',marginTop:'25px'}}>
+          <Thin size='16'>Поиск по имени</Thin>
           <input type="text" name="name" onChange={onChange}></input>
 
-          <label> Отдел</label>
+          <Thin size='16' style={{marginTop:'20px'}}>Поиск по отделу</Thin>
           <select
             onClick={() => dispatch(allDepartments())}
             onChange={onChange}
@@ -57,7 +59,7 @@ const Search = () => {
             )}
           </select>
 
-          <label> Разедл проектной доки</label>
+          <Thin size='16'>Поиск по разделу</Thin>
           <input type="text" name="partition" onChange={onChange}></input>
         </form>
         <UserTable />
