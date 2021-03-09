@@ -40,7 +40,7 @@ const EditContractor = ({match,history}) => {
 		}
 		
     }, [contractor])
-      const { phone, email, name, lastname} = formData;
+      const { phone, email, name, lastname, partition} = formData;
 
 
     const onChange = e => {
@@ -98,7 +98,8 @@ const EditContractor = ({match,history}) => {
 					name='phone'
 					value={phone}
 					onChange={e => onChange(e)}/>
-				
+				<Thin className={style.small__title}>Раздел</Thin>
+                <Partition partition={partition} subcontr={true}></Partition>
                 
 			</div>
 			<div className={style.row}>
