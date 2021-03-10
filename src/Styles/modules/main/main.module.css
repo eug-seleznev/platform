@@ -37,7 +37,7 @@
         grid-area: projects;
         display: grid;
         grid-template-areas: 'myProj';
-        width: 50%;
+        width: 75%;
         grid-template-columns: 1fr;
         column-gap: 15px;
         row-gap: 15px;
