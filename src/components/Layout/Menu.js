@@ -85,9 +85,9 @@ const plusMenuClick = (callback) => {
                         {user.name}
                    </div>
                    
-                    <StyledLink to='/users/me' onClick={closeAll}>
+                    {/* <StyledLink to='/users/me' onClick={closeAll}>
                         Мой профиль
-                    </StyledLink>
+                    </StyledLink> */}
 
                     <StyledLink to='/myprojects' onClick={closeAll}>
                         Мои проекты
