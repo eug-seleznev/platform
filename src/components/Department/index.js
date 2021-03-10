@@ -28,7 +28,7 @@ const Department = ({history}) => {
 },[])
 useEffect(()=>{
     if(user!==null&&user!==undefined) {
-        if(user.division!==null) {
+        if(user.division!==null&&user.division!==undefined) {
             dispatch(findDepartment(user.division.divname))
         }
     }
