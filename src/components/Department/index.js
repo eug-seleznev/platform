@@ -37,7 +37,7 @@ useEffect(()=>{
         <div className={styles.container}>
             <Profile user={user} history={history}/>
 
-        {user.division===null&&user.division===undefined||department===null? <Regular size='16'>Вы не состоите ни в одном отделе, вступить можно на <ButtonText fontSize='18px' onClick={()=>history.replace('/edit')}>странице редактирования профиля</ButtonText> </Regular> :
+        {user.division===null||user.division===undefined||department===null? <Regular size='16'>Вы не состоите ни в одном отделе, вступить можно на <ButtonText fontSize='18px' onClick={()=>history.replace('/edit')}>странице редактирования профиля</ButtonText> </Regular> :
 
             <DepartmentCard button={true}load={load} itsAllDepsPage={false} department={department} user={user} history={history} users={users}/>
   
