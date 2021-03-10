@@ -37,8 +37,14 @@ user-select: none;
 	font-size: 16px;
 }
 .taglist{
+	display: flex;
 	margin-left:50px;
 	margin-right:30px
+}
+.taglist div{
+	
+	margin-right:15px;
+	
 }
 .editList {
 	display: flex;
@@ -72,6 +78,11 @@ user-select: none;
 	width: 100%;
 }
 @media(max-width:1100px) {
+	.taglist{
+		
+		flex-direction: column;
+	
+	}
 	.creator{
 		margin-left: 0px;
 		margin-top: 20px;
