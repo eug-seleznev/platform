@@ -19,11 +19,12 @@ const TagSearch = ({func, tagCount}) => {
         console.log(e.target.id)
         setValue(e.target.id)
       }
-      const confirmTag =()=>{
+      const confirmTag =(e)=>{
         if(!tags.includes(value)&&value!==''&&tagCount){
            tags.push (value)
 		   console.log(tags)
 		   func(tags)
+		   
         }
 		else if(!tagCount) {
 			console.log(value)
@@ -34,6 +35,7 @@ const TagSearch = ({func, tagCount}) => {
         setValue('')
         console.log(tags)
       }
+	
 		// useEffect(()=>{
 		// 	console.log(tags)
 		
@@ -62,6 +64,7 @@ const TagSearch = ({func, tagCount}) => {
 				onBlur={()=>setFocus(false)}
 				onClick={(e)=>searchTags(e)}
 				onChange={(e)=>searchTags(e)}
+				onKeyPress={(e)=>e.key=='Enter'?confirmTag(e):''}
 				placeholder="Введите тег спринта" // make sure to set up defaultValue
 			/>
 			<div className={style.searchTag} style={{display:`${tagArr.filter(res=> !tags.includes(res)).length>0?'block':'none'}`}}>

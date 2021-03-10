@@ -11,6 +11,9 @@
 	flex-direction: column;
 	
 }
+.ticket div {
+	margin-bottom: 15px;
+}
 .cont {
 	height: 47vh;
 	justify-content: space-between;

@@ -10,7 +10,7 @@ import './main.css'
 import { useSelector, useDispatch } from "react-redux"
 import { allNews } from '../../redux/actions/news';
 import { allProjects } from '../../redux/actions/projects';
-import { Bold, Light, Thin } from '../../Styles/typography'
+import { Bold, Light, Regular, Thin } from '../../Styles/typography'
 import { useEffect, useState } from 'react'
 import { ButtonText } from '../../Styles/buttons'
 import { loadUser } from '../../redux/actions/auth'
@@ -64,9 +64,13 @@ if(!listNews){
         />
 
         <div className={styles.projects}>
-          <Light color="#3F496C" size="24" className={styles.myProj}>
-            Мои проекты
-          </Light>
+          <div style={{display:'flex'}}>
+            <img src="/proj.png" style={{height:'34px'}}></img>
+            <Regular color="#3F496C" size="18" className={styles.myProj}>
+              Мои проекты
+            </Regular>
+          </div>
+          
 
           {user.projects.map((el, i) => 
               <ProjectsCard
