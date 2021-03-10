@@ -1,6 +1,6 @@
 import styles from '../../Styles/modules/components/proposesCard.module.css'
 import { useDispatch, useSelector} from 'react-redux'
-import { likedProposes, dateProposes, likePropose, endPropose, inWork} from '../../redux/actions/office'
+import { likedProposes, dateProposes, likePropose, endPropose, inWork, deletePropose} from '../../redux/actions/office'
 import {Card} from '../../Styles/common'
 import { Bold, Thin, Regular} from '../../Styles/typography'
 import {Button, FilterButton, ButtonText } from '../../Styles/buttons'
@@ -22,10 +22,14 @@ const likeButton =(id) =>{
     
 }
 const deleteButton =(id) =>{
-   dispatch(endPropose(id))
+   dispatch(deletePropose(id))
     setShowConfirm(false)
 }
-
+const endButton =(id) =>{
+    dispatch(endPropose(id))
+     setShowConfirm(false)
+ }
+ 
 useEffect(()=>{
     console.log(cardContent.executor) 
 
@@ -35,8 +39,12 @@ useEffect(()=>{
     return (
        <div className={styles.cardGrid}>
 
-            {cardContent.user._id==user.id ? <img src='/delete.png' className={styles.deleteBtn} style={{display:rip?'none':'grid'}} onClick={()=>setShowConfirm(true)} /> : 
-            user.permission=='admin' && <img src='/delete.png' style={{display:rip?'none':'grid'}} className={styles.deleteBtn} onClick={()=>setShowConfirm(true)} /> }
+            {cardContent.user._id==user.id ? <img src='/delete.png' className={styles.deleteBtn} style={{display:rip?'none':'grid'}} onClick={()=>setShowConfirm('Удалить')} /> : 
+            user.permission=='admin' && <img src='/delete.png' style={{display:rip?'none':'grid'}} className={styles.deleteBtn} onClick={()=>setShowConfirm('Удалить')} /> }
+
+
+            {cardContent.user._id==user.id ? <img src='/check.png' className={styles.inWork} style={{display:rip?'none':'grid',height:'30px',width:'30px'}} onClick={()=>setShowConfirm('Завершить')} /> : 
+            user.permission=='admin' && <img src='/check.png' style={{display:rip?'none':'grid',height:'30px',width:'30px'}} className={styles.inWork} onClick={()=>setShowConfirm('Завершить')} /> }
 
         <Card className={styles.cardContainer}>
             <Bold size='30px' className={styles.title}>{cardContent.title}</Bold>
@@ -58,7 +66,8 @@ useEffect(()=>{
         {/* <Bold size='12' color='#3F496C' className={styles.inWork} style={{opacity: cardContent.status? 1:0}}>в работе</Bold>  */}
         
 
-        {showConfirm && <Confirm accept={()=>deleteButton(cardContent._id)} decline={()=>setShowConfirm(false)} title={cardContent.title}/> }  
+        {showConfirm=='Удалить'? <Confirm accept={()=>deleteButton(cardContent._id)} decline={()=>setShowConfirm(false)} action={showConfirm} title={cardContent.title}/>:
+         showConfirm=='Завершить'?  <Confirm accept={()=>endButton(cardContent._id)} decline={()=>setShowConfirm(false)} action={showConfirm} title={cardContent.title}/>:'' }  
 
 
        </div>

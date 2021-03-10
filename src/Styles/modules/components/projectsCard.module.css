@@ -7,22 +7,29 @@
     '. sprints'
     ;
     height:100px;
+    border: 1px solid ;
 }
   
   .title{
         grid-area: title;
         padding-bottom: 10px;
         color: #3F496C;
+        border-bottom: 1px solid transparent;
+        cursor:pointer;
+        width: fit-content;
+        padding-bottom: 0px;
     }
     .title:hover {
-        color: #C8DDE9;
-        border-bottom: 1px solid;
+        color: #5286D4;
+	    border-bottom: 1px solid #8FA7C6;
+        
     }
     .description{
         grid-area: descr;
         padding-bottom: 50px;
         height: 0px;
         width: 75%;
+        margin-top: 15px;
     }
     .dates{
         grid-area: dates;
@@ -36,5 +43,6 @@
        grid-area: sprints;
         display: flex;
         justify-content: flex-end;
+        margin-top: -15px;
     }
  

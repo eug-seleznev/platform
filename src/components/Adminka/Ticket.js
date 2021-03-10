@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation} from "react-router";
 import { getTicket } from "../../redux/actions/tikets";
 import { url } from "../utils/axios";
-
+import style from '../../Styles/modules/components/Tickets/createTicket.module.css'
 
 import { Container, Card, } from '../../Styles/common';
 import { Button } from '../../Styles/buttons';
-import { H1, H3} from '../../Styles/typography'
+import { Bold, H1, H3, Regular, Thin} from '../../Styles/typography'
 
 
 const Ticket = ({match}) => {
@@ -21,6 +21,7 @@ const Ticket = ({match}) => {
 
     useEffect(() => {
         dispatch(getTicket(id));
+        
     }, [])
 
     
@@ -28,16 +29,15 @@ const Ticket = ({match}) => {
         <div>
             <Card>
             {!loaded ? <p> loading...</p>: (
-                <div>
-                    <h1>{ticket.problemname}</h1>
-                    <p>Описание проблемы: {ticket.text} </p>
-                    <p>Дата {ticket.date}</p>
-                    <p>Насоклько срочно: {ticket.emergency}</p>
-
-                    <p>Пароль от компа {ticket.pcpass}</p>
-                    <img width="100%"src={`${url}/${ticket.screenshot}`} />
-
-                    
+                console.log(ticket),
+                <div className={style.ticket}>
+                    <Regular>Название: {ticket.problemname}</Regular>
+                    <Thin>Кто прислал: {ticket.user.fullname} </Thin>
+                    <Thin>Описание проблемы: {ticket.text} </Thin>
+                    <Thin>Дата: {ticket.date}</Thin>
+                    <Thin>Насколько срочно: {ticket.emergency}</Thin>
+                    <Thin>Пароль от компа: {ticket.pcpass}</Thin>
+                    <img width="100%"src={`${url}/${ticket.screenshot}`} />  
                 </div>
             )}
             </Card>

@@ -44,7 +44,8 @@
         .myProj{
             grid-area: myProj;
             padding-bottom: 18px;
-     
+            margin-top: 7px;
+            margin-left: 15px;
         }
 
 @media (max-width: 1500px){

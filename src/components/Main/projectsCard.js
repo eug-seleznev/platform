@@ -28,9 +28,9 @@ const ProjectsCard = ({project}) => {
     return (
       <Link  style={{textDecoration: 'none'}}to={`projects/${project.crypt}`}>
         <Card className={styles.projContainer}>
-          <Bold size="24"  className={styles.title}>
+          <Light size="24" color='#3F496C' className={styles.title}>
             {project.title}
-          </Bold>
+          </Light>
           <Light size="16" className={styles.description}>
             {project.about != null
               ? project.about
