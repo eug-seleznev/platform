@@ -27,12 +27,14 @@ export const ALL_PROJECTS = 'all_projects';
 export const CREATE_PROJECT = 'create_project';
 export const GET_PROJECT = 'get_project';
 export const CLEAR_URN = 'clear_urn'
-export const SORT_PROJECTS = 'sort_projects' //PROJECTS SORT
+export const SORT_PROJECTS = 'sort_projects' 
+//PROJECTS SORT
 
 export const UPDATE_PROJECT = 'project_updated';
 export const PROJECT_ID = 'project_updated';
 export const DELETE_PROJECT = 'delete_project'
 export const FINISH_PROJECT = 'finish_project'
+export const ADD_USER_TO_TEAM = 'add_user_to_team'
     //sprints
 export const CREATE_SPRINT = "create_sprint";
 export const ADD_SPRINT = 'crate_new_sprint';
@@ -98,6 +100,7 @@ export const FIND_DEPARTMENT = 'find_department'
 export const JOIN_DEPARTMENT = 'join_department'
 export const LEAVE_DEPARTMENT = 'leave_department'
 export const DEPARTMENT_FAIL = 'department_fail'
+
 
 // msg catch
 export const CLEAR_MSG = 'clear_msg_field'

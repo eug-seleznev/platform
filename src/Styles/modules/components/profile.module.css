@@ -60,7 +60,9 @@
         }
         .parts{
             display: flex;
+            flex-direction: row;
             flex-wrap: wrap;
+            width: 400px;
             margin-top: 20px;
         }
 @media (max-width: 1500px){
@@ -113,6 +115,13 @@
     
 }
 @media (max-width: 600px){
+    .parts{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 300px;
+        margin-top: 20px;
+    }
     .row2 {
         width: 85vw;
     }

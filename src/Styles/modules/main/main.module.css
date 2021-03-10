@@ -17,6 +17,7 @@
         grid-area: news;
         display: grid;
         row-gap: 20px;
+        width: 100%;
     }
     .create__news {
         display: flex;
@@ -49,7 +50,8 @@
         }
 
 @media (max-width: 1500px){
-    .projects{
+   
+    /* .projects{
         grid-area: projects;
         display: grid;
         grid-template-areas:
@@ -59,7 +61,7 @@
         grid-template-columns: 1fr 1fr;
         column-gap: 35px;
         row-gap: 35px;
-    }
+    } */
 
 }
 
@@ -67,6 +69,11 @@
 
 
 @media (max-width: 1000px){
+    .news{
+       
+        width: 50%;
+     
+    }
     .mainContainer{
         display: grid;
         grid-template-areas: 
@@ -80,15 +87,15 @@
         row-gap: 40px;
         text-align: left;
     }
-    .projects{
+    /* .projects{
         grid-area: projects;
         display: grid;
         grid-template-areas:
-        'myProj '
+        'myProj myProj'
         '.'
         ;
         grid-template-columns: 1fr;
         column-gap: 35px;
         row-gap: 35px;
-    }
+    } */
 }
