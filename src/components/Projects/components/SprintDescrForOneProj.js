@@ -7,7 +7,7 @@ import { Bold, Light,Regular, Thin } from "../../../Styles/typography"
 import { useSelector,useDispatch} from "react-redux"
 import { addToChosen } from '../../../redux/actions/auth'
 import Tag from "./OneProject/tag"
-const SprintDescription = ({projStatus,tags, dateOpen,taskcomplite, alltasks, history, id, params,descr, dateClosePlan}) => {
+const SprintDescription = ({projStatus,tags, dateOpen,taskcomplite, alltasks, history, id, params,descr, title, dateClosePlan}) => {
 	
 	const dispatch = useDispatch();
 	const [loaded, setLoaded] = useState (0)
@@ -54,55 +54,87 @@ const SprintDescription = ({projStatus,tags, dateOpen,taskcomplite, alltasks, hi
 
 
 	return (
-	<>
-		{!loaded?<div>loading...</div>:(
-		<div>
-		
-			<div className={style.card}>
-				<div className={style.first__row}>
-					<div className={style.card__title}>
-						<Light size='24' color='#3F496C'  className={style.link} onClick={() => history.push(`/projects/${params.id}/${id}`)}>Спринт {dateOpen.slice(5,10).split('-').reverse().join('.')}
-						</Light>
-					</div>
-					
-					<img  src="/star.png" onClick={chosenSprint} style={{cursor:'pointer',backgroundColor:`${status?'#ff9800':'white'}`}} className={style.chosen}></img>
-				</div>
-				<div className={style.second__row}>
-					<div className={style.card__tasks}> 
-						<div className={style.card__thing}><div style={{width:`${Math.trunc(taskcomplite/alltasks*100)}%`}} className={style.card__thing__full}></div></div>
-						<Thin>{taskcomplite}/{alltasks}</Thin>
-					</div>
-					<div className={style.tags}>
-						{tags.length!==0? tags.map((el,i)=>{
-						if(el!==null) {
-							return(<Tag tagText={el} tagColor={i==0?'#C8D9E9':i==1?'#E9E3C8':'#AAF8A8'} key={i} />)
-						}
-					
-					
-						
-					}):<Thin>Тегов нет</Thin>}
-					</div>
-				</div>
-					
-				<div>
-					{/* <div className={style.card__date2}> <Light  size='16'>Дней до дедлайна: {diff.toString().slice(0,2)}</Light></div> */}
-					{/* <div className={style.card__tasks}> 
+    <>
+      {!loaded ? (
+        <div>loading...</div>
+      ) : (
+        <div>
+          <div className={style.card}>
+            <div className={style.first__row}>
+              <div className={style.card__title}>
+                <Light
+                  size="24"
+                  color="#3F496C"
+                  className={style.link}
+                  onClick={() => history.push(`/projects/${params.id}/${id}`)}
+                >
+				{title}
+                </Light>
+              </div>
+
+              <img
+                src="/star.png"
+                onClick={chosenSprint}
+                style={{
+                  cursor: "pointer",
+                  backgroundColor: `${status ? "#ff9800" : "white"}`,
+                }}
+                className={style.chosen}
+              ></img>
+            </div>
+            <div className={style.second__row}>
+              <div className={style.card__tasks}>
+                <div className={style.card__thing}>
+                  <div
+                    style={{
+                      width: `${Math.trunc((taskcomplite / alltasks) * 100)}%`,
+                    }}
+                    className={style.card__thing__full}
+                  ></div>
+                </div>
+                <Thin>
+                  {taskcomplite}/{alltasks}
+                </Thin>
+              </div>
+              <div className={style.tags}>
+                {tags.length !== 0 ? (
+                  tags.map((el, i) => {
+                    if (el !== null) {
+                      return (
+                        <Tag
+                          tagText={el}
+                          tagColor={
+                            i == 0 ? "#C8D9E9" : i == 1 ? "#E9E3C8" : "#AAF8A8"
+                          }
+                          key={i}
+                        />
+                      );
+                    }
+                  })
+                ) : (
+                  <Thin>Тегов нет</Thin>
+                )}
+              </div>
+            </div>
+
+            <div>
+              {/* <div className={style.card__date2}> <Light  size='16'>Дней до дедлайна: {diff.toString().slice(0,2)}</Light></div> */}
+              {/* <div className={style.card__tasks}> 
 						
 						
 						
 						
 					</div> */}
-					{/* <div className={style.card__buttons} style={{display:`${projStatus?'none':'flex'}`}} >
+              {/* <div className={style.card__buttons} style={{display:`${projStatus?'none':'flex'}`}} >
 						
 						<Button fontSize={'16px'}padd={'5px'}  onClick={chosenSprint} grey>{!status? 'Добавить в избранное': 'Убрать из избранного'}</Button>
 						<Button fontSize={'16px'}>Подробнее</Button>
 					</div> */}
-				</div>
-				</div>
-			</div>
-			
-		)}
-		</>
-	)
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
 }
 export default SprintDescription

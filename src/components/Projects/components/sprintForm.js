@@ -41,17 +41,17 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 	  
 
 	  const onChangeDate = (e) => {
-		console.log(e.target.value, 'value')
-		let today = new Date();
-		let chose = e.target.value == '2 недели'?14:7
-		let dd = String(today.getDate()+chose).padStart(2, '0');
-		let mm = String(today.getMonth() + 1).padStart(2, '0');
-		let yyyy = today.getFullYear();
-		let ddDiff = Number(dd)-31
-		let mmDiff = Number(mm)+1
-		let editedDD = dd> 31 ? '0' + ddDiff : dd >31&& ddDiff>10? ddDiff: dd
-		let editedMM = dd> 31 && mm>=9?mmDiff: dd > 31 && mm<9 ? '0'+mmDiff : dd> 31 && mm===12?'01':mm
-		let editedYY = dd> 31 && mm===12?yyyy+1:yyyy
+      console.log(e.target.value, 'value')
+      let today = new Date();
+      let chose = e.target.value == '2 недели'?14:7
+      let dd = String(today.getDate()+chose).padStart(2, '0');
+      let mm = String(today.getMonth() + 1).padStart(2, '0');
+      let yyyy = today.getFullYear();
+      let ddDiff = Number(dd)-31
+      let mmDiff = Number(mm)+1
+      let editedDD = dd> 31 ? '0' + ddDiff : dd >31&& ddDiff>10? ddDiff: dd
+      let editedMM = dd> 31 && mm>=9?mmDiff: dd > 31 && mm<9 ? '0'+mmDiff : dd> 31 && mm===12?'01':mm
+      let editedYY = dd> 31 && mm===12?yyyy+1:yyyy
 		setFormData({ ...formData, [e.target.name]:  e.target.value=='нет'?'':editedYY +'-'+editedMM+'-'+editedDD})
 		
 	 }
@@ -72,6 +72,8 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
      useEffect (()=>{
       console.log(arr)
      },[arr])
+
+     
 		const onSubmit = (data)=> {
 			// console.log(data)
 					

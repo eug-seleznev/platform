@@ -18,8 +18,7 @@ const Sprint_New = ({match}) => {
     const project = useSelector((state) => state.projects.project);
     const chosenSprints = useSelector(state => state.auth.user.sprints)
     
-//КОСТЫЛЬ ДЛЯ СТАРЫРХ СПРИНТОВ
-    // const [creator, setCeator] = useState(sprint.creator ? sprint.creator.fullname : 'someone')
+
     const [focusRow, setFocusRow] = useState(''); //focus table row
     const [status, setStatus] = useState(false)
     const [editField, setEditField] = useState(false) 
@@ -28,28 +27,27 @@ const Sprint_New = ({match}) => {
     const selectFocusRow = (id) => {
         setFocusRow(id)
     };
-    useEffect(()=>{
-      console.log(sprint)
+    // useEffect(()=>{
       
-      if(sprint.dateClosePlan!==undefined) {
-         setActualClose(sprint.dateClosePlan.slice(5, 10).split('-').reverse().join('.'))
-      }
-      {
-        chosenSprints
-          .filter((sprint) => sprint._id === sprint_id)
-          .map(() => {
-            setStatus(true);
-          });
-      }
-    },[sprint])
-    useEffect (()=> {
+    //   if(sprint.dateClosePlan!==undefined) {
+    //      setActualClose(sprint.dateClosePlan.slice(5, 10).split('-').reverse().join('.'))
+    //   }
+    //   {
+    //     chosenSprints
+    //       .filter((sprint) => sprint._id === sprint_id)
+    //       .map(() => {
+    //         setStatus(true);
+    //       });
+    //   }
+    // },[sprint])
+    // useEffect (()=> {
      
-      if (actualClose!=='??'){
-        let d1 = new Date ()
-        let d2 = new Date (sprint.dateClosePlan)
-        console.log(d2, d1)
-        setDiff (Math.abs(d2-d1)/86400000)}
-      },[actualClose])
+    //   if (actualClose!=='??'){
+    //     let d1 = new Date ()
+    //     let d2 = new Date (sprint.dateClosePlan)
+    //     console.log(d2, d1)
+    //     setDiff (Math.abs(d2-d1)/86400000)}
+    //   },[actualClose])
 
     const editebleRow = () => {
         setEditField(!editField)
@@ -60,10 +58,8 @@ const Sprint_New = ({match}) => {
 
     return (
       <SprintLoader sprint_id={sprint_id} sprint={sprint} project={project} crypt={crypt}>
-        <SprintTitle diff={diff} prTitle={project.title} actualClose={actualClose}id={sprint_id} sprint={sprint}/>
+        <SprintTitle diff={diff} title={sprint.title} prTitle={project.title} actualClose={actualClose}id={sprint_id} sprint={sprint}/>
 
-        {/* {sprint.tags!==undefined? sprint.tags.map((el,i)=> {return(<Tag tagText={el} tagColor={i==0?'#C8D9E9':i==1?'#E9E3C8':'#AAF8A8'} key={i}></Tag>)}
-        ):<div>load</div>} */}
         <Card >
           <TaskManagment
             status={status}
