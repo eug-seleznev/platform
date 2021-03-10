@@ -201,7 +201,7 @@ const ProjectNew = ({history,closeWindow}) => {
              <div>
                <div className={style.row}>
                  <div className={style.input__mid}>
-                   <Thin className={style.title}>Название *</Thin>
+                   <div className={style.input__mid__important}><Thin className={style.title}>Название</Thin><div className={style.important}>*</div></div>
                    <input
                      className={style.input__long}
                      type="text"
@@ -304,18 +304,19 @@ const ProjectNew = ({history,closeWindow}) => {
                  <div className={style.input__mid}>
                    <Thin className={style.title}>Тип проекта</Thin>
                    <select
-                     defaultValue="Концепт"
+                     defaultValue="Архитектура"
                      name="type"
                      onChange={(e) => onChange(e)}
                      className={style.select}
                    >
-                     <option value="ЖК">ЖК</option>
-                     <option value="Общественное пространство">
-                       Общественное пространство
-                     </option>
-                     <option value="Частный дом">Частный дом</option>
-                     <option value="Визуализация">Визуализации</option>
+                     <option value="Архитектура">Архитектура</option>
+                     
+                     <option value="Сети">Сети</option>
+                     <option value="Визуализации">Визуализации</option>
                      <option value="Интерьер">Интерьер</option>
+                     <option value="Экстерьер">Экстерьер</option>
+                     <option value="Конструкции">Конструкции</option>
+                     <option value="Ландшафт">Ландшафт</option>
                      <option value="Другое">Другое</option>
                    </select>
                  </div>

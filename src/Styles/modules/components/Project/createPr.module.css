@@ -193,6 +193,12 @@
 .input__mid{
 	width:45%
 }
+.input__mid__important{
+	display: flex;
+}
+.important{
+	color: red;
+}
 .input__short{
 	width:23%
 }
@@ -243,8 +249,16 @@
 	
 		margin-top: -30px;
 	}
+	.title3 {
+		height: 60px;
+		margin-bottom: 5px;
+	}
 }
 @media (max-width:1000px) {
+	.title3 {
+		height: 40px;
+		margin-bottom: 5px;
+	}
 	.container {
 	width: 100%;
 	margin-left: 0vw;

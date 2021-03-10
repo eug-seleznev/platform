@@ -26,11 +26,13 @@ const ProjectsCard = ({project}) => {
 
 
     return (
-      <Link  style={{textDecoration: 'none'}}to={`projects/${project.crypt}`}>
+      
         <Card className={styles.projContainer}>
-          <Light size="24" color='#3F496C' className={styles.title}>
-            {project.title}
-          </Light>
+          <Link  style={{textDecoration: 'none'}}to={`projects/${project.crypt}`}>
+            <Light size="24" color='#3F496C' className={styles.title}>
+              {project.title}
+            </Light>
+          </Link>
           <Light size="16" className={styles.description}>
             {project.about != null
               ? project.about
@@ -46,7 +48,7 @@ const ProjectsCard = ({project}) => {
           </div>
          
         </Card>
-      </Link>
+      
     );
 }
 export default ProjectsCard
