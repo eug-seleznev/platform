@@ -2,11 +2,11 @@ import styled from 'styled-components'
 
 
 export const Container = styled.div`
-padding-left:  250px;
+padding-left:  150px;
 padding-right:  70px;
 width: 100%;
 height: 100%;
-padding-top: 200px;
+padding-top: 110px;
 padding-bottom: 200px;
 background-color:${props=> props.background};
 

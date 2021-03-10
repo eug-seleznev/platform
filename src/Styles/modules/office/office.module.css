@@ -38,8 +38,11 @@
 }
 .row__array{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
+}
+.col__array{
+    margin-right: 20px;
 }
 .title__array{
     margin-top: 50px;
