@@ -167,17 +167,13 @@ export const getProject = (id) => async dispatch  => {
 }
 
 
-export const addSprint = (id,formData,data, tags) => async dispatch  => {
+export const addSprint = (id) => async dispatch  => {
     try {
-    
-      console.log(tags)
         let body = {
-            description: formData.description,
-            date: formData.date,
-            tasks: data.tasks[0].taskTitle==""?[]:data.tasks,
-            tags: tags
+            description: 'ввод',
+            title: 'Введите название'
         }
-        // console.log(data)
+        
         const res = await innerBackend.post(`/projects/sprints/new/${id}`,body)
         dispatch({
             type: ADD_SPRINT,
@@ -189,7 +185,8 @@ export const addSprint = (id,formData,data, tags) => async dispatch  => {
         })
         }
       catch (err) {
-        const errors = err.response.data.err;
+        const errors = err.response.data;
+        console.log(errors)
         errors.map(error => {
            return dispatch({
             type: ERROR_MSG,
@@ -467,16 +464,13 @@ export const addTask = ({ id, task }) => async (dispatch) => {
 
 
 
-export const EditDescription = (descript, id) => async (dispatch) => {
+export const EditSprint = (sprintInfo, id) => async (dispatch) => {
   try {
 
-    let body = {
-        description: descript
-    }
-    console.log(body)
+
     const res = await innerBackend.put(
-      `/projects/sprints/description/${id}`,
-      body
+      `/projects/sprints/edit/${id}`,
+      sprintInfo
     );
 
     dispatch({

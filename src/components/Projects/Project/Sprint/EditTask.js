@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTag, DeleteTask, deleteTag, EditDescription } from "../../../../redux/actions/projects";
+import { addTag, DeleteTask, deleteTag, EditSprint, EditTask } from "../../../../redux/actions/projects";
 import { Bold, Light, Regular, Thin } from "../../../../Styles/typography"
 import style from "../../../../Styles/modules/components/Project/newsprint.module.css"
 import { addToChosen } from "../../../../redux/actions/auth";
@@ -12,18 +12,21 @@ import { Button } from "../../../../Styles/buttons";
 
 
 
-const TaskManagment = ({tags, id,status, setStatus, sprint_description, focusRow, editebleRow, creator, tasks}) => {
+const TaskManagment = ({tags, id,status, title, setStatus, sprint_description, focusRow, editebleRow, creator, tasks}) => {
   const dispatch = useDispatch();
 
   //description handler
-  const [descript, setDescription] = useState('');
+  const [sprintInfo, setSprintInfo] = useState({
+    description: sprint_description,
+    title: title
+  });
   const [isSubmit, setSubmit] = useState(true);
   const [completeTasks, setCompleteTasks] = useState(0);
   const [allTasks, setAllTasks] = useState(1);
   //add description to sprint
   const descriptionHandler = (e) => {
-    setDescription(e.target.value);
-    dispatch(EditDescription(descript, id));
+    setSprintInfo({...sprintInfo, description: e.target.value});
+    dispatch(EditSprint(sprintInfo, id));
   };
 
 
@@ -37,9 +40,9 @@ const TaskManagment = ({tags, id,status, setStatus, sprint_description, focusRow
   
  })
  
- useEffect(() => {
-  setDescription(sprint_description)
-},[allTasks])
+//  useEffect(() => {
+//   setDescription(sprint_description)
+// },[allTasks])
 
   useEffect(() => {
         window.addEventListener("keydown", handleUserKeyPress);
@@ -50,7 +53,7 @@ return () => {
   })
   const onEditSubmit = (e) => {
     e.preventDefault();
-    dispatch(EditDescription(descript, id));
+    dispatch(EditSprint(sprintInfo, id));
     setSubmit(true);
   };
 
@@ -182,7 +185,7 @@ return () => {
               <Thin size="16">Описание:</Thin>
               <input
                 type="text"
-                value={descript}
+                value={sprintInfo.description}
                 placeholder="Добавить описание"
                 onChange={descriptionHandler}
                 className={style.changeDescr}

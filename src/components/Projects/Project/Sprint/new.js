@@ -14,9 +14,7 @@ const Sprint_New = ({match}) => {
     let {sprint_id, crypt} = match.params //get sprint and project id
     const sprint = useSelector((state) => state.projects.sprint);
     const project = useSelector((state) => state.projects.project);
-//КОСТЫЛЬ ДЛЯ СТАРЫРХ СПРИНТОВ
-    const [creator, setCeator] = useState(sprint.creator ? sprint.creator.fullname : 'someone')
-    ///////////////////
+
 
     
     const [focusRow, setFocusRow] = useState(''); //focus table row
@@ -32,10 +30,10 @@ const Sprint_New = ({match}) => {
     
     return (
       <SprintLoader sprint_id={sprint_id} sprint={sprint} project={project} crypt={crypt}>
-        <Title> {sprint._id}</Title>
+        {/* <Title> {'sprint._id'}</Title> */}
         <Card>
           <TaskManagment
-         
+            titile={sprint.title}
             id={sprint_id}
             creator={sprint.creator ? sprint.creator.fullname : " someone"}
             sprint_description={sprint.description}
