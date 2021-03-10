@@ -3,6 +3,7 @@ import { Card } from '../../Styles/common'
 import { Bold,Light } from '../../Styles/typography'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import Tag from '../Projects/components/OneProject/tag'
 
 
 
@@ -27,7 +28,7 @@ const ProjectsCard = ({project}) => {
     return (
       <Link  style={{textDecoration: 'none'}}to={`projects/${project.crypt}`}>
         <Card className={styles.projContainer}>
-          <Bold size="24" className={styles.title}>
+          <Bold size="24"  className={styles.title}>
             {project.title}
           </Bold>
           <Light size="16" className={styles.description}>
@@ -37,11 +38,13 @@ const ProjectsCard = ({project}) => {
           </Light>
           <Light size="18" className={styles.left}>
             {" "}
-            {daysLeft} {daysLeft < 1 ? "день" : daysLeft < 5 ? "дня" : "дней"}
+            {daysLeft>0?daysLeft:'?'} {daysLeft < 0?"?":daysLeft < 1 ? "день" : daysLeft < 5 ? "дня" : "дней"}
           </Light>
-          <Light size="16" className={styles.filter}>
-            #{project.stage} #{project.type}
-          </Light>
+          <div className={styles.filter}>
+             <Tag className={styles.filter} tagText={project.stage} tagColor='#E9E3C8'/>   
+              <Tag tagText={project.type} tagColor='#C8D9E9'/>
+          </div>
+         
         </Card>
       </Link>
     );
