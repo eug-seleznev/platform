@@ -23,19 +23,19 @@ const OneDepartment = ({history, match}) => {
     dispatch(findDepartment(match.params.id))
 
  },[])
- useEffect(()=>{
-	 console.log(user.division)
-	 if(user.division===null) {
-		console.log('hi')
-	 }
-	else if(user.division!==undefined||user.division!==null||department!==undefined||department!==null) {
-		if(user.division.divname===department.divname){
-			setButton(true)
-		}
+//  useEffect(()=>{
+// 	 console.log(user.division)
+// 	 if(user.division===null) {
+// 		console.log('hi')
+// 	 }
+// 	else if(user.division!==undefined||user.division!==null||department!==undefined||department!==null) {
+// 		if(user.division.divname===department.divname){
+// 			setButton(true)
+// 		}
 		
-	}
+// 	}
 
-},[])
+// },[])
  const choseDivision =()=>{
 	 
      history.replace(`./`)

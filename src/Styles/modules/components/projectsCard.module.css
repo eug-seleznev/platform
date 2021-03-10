@@ -4,7 +4,7 @@
     '. dates'
     'title leftt'
     'descr descr'
-    'sprints sprints'
+    '. sprints'
     ;
     height:100px;
 }
@@ -12,6 +12,11 @@
   .title{
         grid-area: title;
         padding-bottom: 10px;
+        color: #3F496C;
+    }
+    .title:hover {
+        color: #C8DDE9;
+        border-bottom: 1px solid;
     }
     .description{
         grid-area: descr;
@@ -29,7 +34,7 @@
     }
     .filter{
        grid-area: sprints;
-        display: grid;
-        justify-content: right;
+        display: flex;
+        justify-content: flex-end;
     }
  
