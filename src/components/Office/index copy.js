@@ -112,19 +112,19 @@ useEffect(()=>{
            
                   
             <div className={styles.row__array} >
-                <div >
+                <div className={styles.col__array}>
                     <Light size='24'className={styles.title__array} >На рассмотрении</Light>
                 {data && data.filter(el=>el.status==0).map((el, i) =>                  
                     <ProposeCard addExecutor={addExecutor} cardContent={el} key={i} className={styles.cardsContainer} user={user}/>
                 )}      
                 </div>
-                <div >
+                <div className={styles.col__array}>
                     <Light size='24' className={styles.title__array}>В работе</Light>
                     {data && data.filter(el=>el.status==1).map((el, i) =>                  
                         <ProposeCard cardContent={el} key={i} className={styles.cardsContainer} user={user}/>
                     )}      
                </div>
-               <div >
+               <div className={styles.col__array}>
                     <Light size='24' className={styles.title__array}>Завершенные</Light>
                     {data && data.filter(el=>el.status==2).map((el, i) =>                  
                         <ProposeCard rip={true} cardContent={el} key={i} className={styles.cardsContainer} user={user}/>
