@@ -55,7 +55,7 @@ user-select: none;
 	margin-top:10px;
 }
 .card__thing {
-	width: 150px;
+	width: 100px;
 	height: 10px;
 	border-radius: 5px;
 	background-color: #C4C4C4;
@@ -88,7 +88,7 @@ user-select: none;
 		margin-top: 20px;
 	}
 	.select {
-		display: none;
+		width: 15%;
 	}
 	.taglist{
 		margin-left:0px;
@@ -99,5 +99,10 @@ user-select: none;
 		display: flex;
 		flex-wrap:wrap;
 		flex-direction: column;	
+	}
+}
+@media(max-width:600px) {
+	.select {
+		display: none;
 	}
 }

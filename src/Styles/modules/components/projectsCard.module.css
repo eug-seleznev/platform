@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 90px;
-    border: 1px solid grey;
+    height: 105px;
+    border: 1px solid #8FA7C6;
 
 }
 .projtop {
@@ -14,27 +14,23 @@
     display: flex;
     justify-content: flex-end;
 }
+.title {
+    margin-top: 5px;
+}
 .title:hover {
     color: #445AAA;
     text-decoration: underline;
 }
 .tags {
     display: flex;
-    
-    
+  
+    transform: translateY(10px);
 }
 .tags div {
     margin-right: 20px;
 }
  @media(max-width:1000px) {
-    .projContainer {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 200px;
-        border: 1px solid #8FA7C6;
     
-    }
     .projtop {
         display: flex;
         flex-direction: column;

@@ -209,6 +209,7 @@ border-bottom: none;
 	margin-right: 15px;
 	margin-bottom: 15px;
 	height: fit-content;
+	border: #C4C4C4 solid 1px;
 }
 .title__options {
 	margin-right: 10px;
