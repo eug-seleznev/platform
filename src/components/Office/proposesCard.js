@@ -9,7 +9,7 @@ import Confirm from './confirm'
 import { url } from '../utils/axios'
 
 
-const ProposeCard = ({cardContent, rip, filters, addExecutor, reverse, user}) => {
+const ProposeCard = ({cardContent, rip, filters,off, addExecutor, reverse, user}) => {
 const dispatch = useDispatch()
 const reload = useSelector(state => state.office.reload)
 const likeTrue =  cardContent.likes.some(el => el.user == user._id)
@@ -39,12 +39,17 @@ useEffect(()=>{
     return (
        <div className={styles.cardGrid}>
 
-            {cardContent.user._id==user.id ? <img src='/delete.png' className={styles.deleteBtn} style={{display:rip?'none':'grid'}} onClick={()=>setShowConfirm('Удалить')} /> : 
-            user.permission=='admin' && <img src='/delete.png' style={{display:rip?'none':'grid'}} className={styles.deleteBtn} onClick={()=>setShowConfirm('Удалить')} /> }
+            {cardContent.user._id==user.id||user.permission=='admin' ? 
+                <img src='/delete.png' className={styles.deleteBtn} 
+                    style={{display:rip?'none':'grid'}} 
+                    onClick={()=>setShowConfirm('Удалить')} /> 
+                :''} 
 
-
-            {cardContent.user._id==user.id ? <img src='/check.png' className={styles.inWork} style={{display:rip?'none':'grid',height:'30px',width:'30px'}} onClick={()=>setShowConfirm('Завершить')} /> : 
-            user.permission=='admin' && <img src='/check.png' style={{display:rip?'none':'grid',height:'30px',width:'30px'}} className={styles.inWork} onClick={()=>setShowConfirm('Завершить')} /> }
+            {cardContent.user._id==user.id||user.permission=='admin' ? 
+                <img src='/check.png' className={styles.inWork} 
+                    style={{display:rip||off?'none':'grid',height:'30px',width:'30px'}} 
+                    onClick={()=>setShowConfirm('Завершить')} /> 
+                :'' }
 
         <Card className={styles.cardContainer}>
             <Bold size='30px' className={styles.title}>{cardContent.title}</Bold>
