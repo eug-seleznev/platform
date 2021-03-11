@@ -682,8 +682,8 @@ export const AddUserToTeam = (formData) => async dispatch => {
   try {
     let body = {
       user: formData.user,
-      position: formData.position,
-      task: formData.task
+      position: formData.position!==""?formData.position:"нет",
+      task: formData.task!==""?formData.task:"нет"
     }
 
 

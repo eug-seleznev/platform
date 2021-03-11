@@ -4,7 +4,7 @@ import { AddUserToTeam } from "../../redux/actions/projects";
 import style from '../../Styles/modules/components/Project/editproj.module.css'
 import { Light, Regular, Thin } from "../../Styles/typography";
 
-const UserTable = ({crypt}) => {
+const UserTable = ({crypt, project}) => {
     const dispatch = useDispatch();
     const users = useSelector(state => state.users.searchResult)
 	
@@ -20,6 +20,7 @@ const UserTable = ({crypt}) => {
     }
 
     const onSubmit = (e, id) => {
+      document.getElementById(id).style.display = "none"
         e.preventDefault()
 		console.log(id)
         setFormData({...formData, user: id})
@@ -42,13 +43,13 @@ const UserTable = ({crypt}) => {
             <>
               {users.map((user, index) => {
                 return (
-                  <tr key={index}>
+                  <tr key={index} id={user._id}>
                     <td>
                       <Light size='14'>{user.fullname}</Light>
                     </td>
 
                     <td>
-                      <input type="text"  name="position" onChange={onChange} placeholder="Должность"></input>
+                      <input type="text" name="position" onChange={onChange} placeholder="Должность"></input>
                     </td>
                     <td>
                       <input type="text" name="task" onChange={onChange} placeholder="Раздел"></input>
@@ -57,8 +58,8 @@ const UserTable = ({crypt}) => {
                     <td>
                       <button type="submit" 
 					//   onClick={() =>  setFormData({...formData, user: user._id})}
-					  onClick={(e) => onSubmit(e, user._id)}
-					  ><img src='/plus.png'></img></button>
+                      onClick={(e) => onSubmit(e, user._id)}
+                    ><img src='/plus.png'></img></button>
                     </td>
                   </tr>
                 );

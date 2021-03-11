@@ -16,6 +16,7 @@ import { ButtonText } from '../../Styles/buttons'
 import { loadUser } from '../../redux/actions/auth'
 import { Redirect } from 'react-router-dom'
 import ModalWindow from '../Projects/components/ModalWindow'
+import SprintCard from './sprintCard'
 
 const Main = ({history}) => {
 
@@ -23,6 +24,7 @@ const Main = ({history}) => {
     const listNews = useSelector(state => state.news.news)
     const user = useSelector(state => state.auth.user)
     const reloadSprints = useSelector(state => state.auth.chosenSprint)
+    const [showProj, setShowProj] = useState (1)
     const [newsOpen, setNewsOpen] = useState({
         open: false,
         content: null,
@@ -44,7 +46,9 @@ useEffect(()=>{
 },[reloadSprints])
 
 
-
+useEffect(()=>{
+  console.log(user)
+},[user])
 
 if(!user.name){
     return <Redirect to='edit' />
@@ -69,10 +73,16 @@ if(!listNews){
             <Regular color="#3F496C" size="18" className={styles.myProj}>
               Мои проекты
             </Regular>
+            <Bold color={showProj===1?'#3F496C':'#959595'} size="18" onClick={()=>{setShowProj(1)}} className={styles.myProjButton}>
+              активные
+            </Bold>
+            <Bold color={showProj===2?'#3F496C':'#959595'} size="18" onClick={()=>{setShowProj(2)}} className={styles.myProjButton}>
+              все
+            </Bold>
           </div>
           
 
-          {user.projects.map((el, i) => 
+          {showProj===1?user.projects.filter(proj=>!proj.status).map((el, i) => 
               <ProjectsCard
                 project={el}
                 key={i}
@@ -80,14 +90,24 @@ if(!listNews){
                 history={history}
               />
         
-          )}
+          ):
+          showProj===2?user.projects.map((el, i) => 
+          <ProjectsCard
+            project={el}
+            key={i}
+            sprints={user.sprints}
+            history={history}
+          />
+    
+      ):''}
         </div>
 
         <div className={styles.news}>
           <div className={styles.create__news}>
-            <Thin color="black" size="24">
+          <img className={styles.create__news__img}  src='/news.png'></img>
+            <Bold color="black" size="18">
               Новости бюро
-            </Thin>
+            </Bold>
             {user.permission==='admin'?<img className={styles.create__news__button} onClick={()=>{setStatus(true)}} src='/plus.png'></img>:''}
           </div>
           <ModalWindow 
@@ -110,14 +130,14 @@ if(!listNews){
               )
             );
           })}
-          <ButtonText
+          <Bold
             color="#3F496C"
             size="12"
             className={styles.allNews}
             onClick={() => history.replace(`/news`)}
           >
             Все новости
-          </ButtonText>
+          </Bold>
         </div>
 
         {newsOpen.open == true && (
@@ -126,6 +146,20 @@ if(!listNews){
             content={newsOpen.content}
           />
         )}
+        <div className={styles.my_sprints}>
+        <div className={styles.create__news}>
+          <img className={styles.create__news__img}  src='/starr.png'></img>
+            <Bold color="black" size="18">
+              Избранные спринты
+            </Bold>
+            
+          </div>
+        {user.sprints.map((sprint, i) => {
+
+            return (<SprintCard key={i} sprint={sprint} project />)
+          
+          })}
+        </div>
       </div>
     );
 
