@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {  useSelector } from "react-redux";
+import Project from "..";
 import { Card, Title } from "../../../../Styles/common"
 import Tag from "../../components/OneProject/tag";
 import AddTask from "./AddTask";
@@ -12,12 +13,12 @@ import TaskTable from "./TaskTable";
 
 
 
-const Sprint_New = ({match}) => {
+const Sprint_New = ({match, history}) => {
     let {sprint_id, crypt} = match.params //get sprint and project id
     const sprint = useSelector((state) => state.projects.sprint);
     const project = useSelector((state) => state.projects.project);
     const chosenSprints = useSelector(state => state.auth.user.sprints)
-    
+    const user = useSelector(state => state.auth.user)
 
     const [focusRow, setFocusRow] = useState(''); //focus table row
     const [status, setStatus] = useState(false)
@@ -27,19 +28,20 @@ const Sprint_New = ({match}) => {
     const selectFocusRow = (id) => {
         setFocusRow(id)
     };
-    // useEffect(()=>{
+    
+    useEffect(()=>{
       
     //   if(sprint.dateClosePlan!==undefined) {
     //      setActualClose(sprint.dateClosePlan.slice(5, 10).split('-').reverse().join('.'))
     //   }
-    //   {
-    //     chosenSprints
-    //       .filter((sprint) => sprint._id === sprint_id)
-    //       .map(() => {
-    //         setStatus(true);
-    //       });
-    //   }
-    // },[sprint])
+      {
+        chosenSprints
+          .filter((sprint) => sprint._id === sprint_id)
+          .map(() => {
+            setStatus(true);
+          });
+      }
+    },[sprint])
     // useEffect (()=> {
 
 
@@ -52,7 +54,7 @@ const Sprint_New = ({match}) => {
 
     return (
       <SprintLoader sprint_id={sprint_id} sprint={sprint} project={project} crypt={crypt}>
-        <SprintTitle diff={diff} title={sprint.title} prTitle={project.title} actualClose={actualClose}id={sprint_id} sprint={sprint}/>
+        <SprintTitle diff={diff} user={user} title={sprint.title} hist={history} prTitle={project.title} actualClose={actualClose}id={sprint_id}  sprint={sprint}/>
 
         <Card >
           <TaskManagment

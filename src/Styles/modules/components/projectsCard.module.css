@@ -6,7 +6,7 @@
     'descr descr'
     '. sprints'
     ;
-    height:150px;
+    height:120px;
     border: 1px solid ;
 }
   
@@ -28,7 +28,7 @@
         grid-area: descr;
         padding-bottom: 50px;
         height: 0px;
-        width: 75%;
+        width: 90%;
         
     }
     .dates{
@@ -44,7 +44,7 @@
        grid-area: sprints;
         display: flex;
         justify-content: flex-end;
-        margin-top: -15px;
+        margin-top: 15px;
     }
  @media(max-width:1500px) {
      .projContainer{
@@ -55,13 +55,13 @@
     'descr descr'
     'sprints .'
     ;
-    height:150px;
+    height:120px;
     border: 1px solid ;
 }
 .filter{
     grid-area: sprints;
      display: flex;
      justify-content: flex-start;
-     margin-top: -15px;
+     margin-top: 15px;
  }
  }

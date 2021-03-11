@@ -194,6 +194,13 @@ border-bottom: none;
 	padding-bottom: 10px;
 	margin-bottom: 10px;
 } 
+.titleChange{
+	font-size: 24px;
+	font-family: SuisseIntlSemibold;
+	border: none;
+	background-color: #ECECEC;
+	width: fit-content;
+}
 .tag {
 	border-radius: 25px;
 	width: fit-content;
@@ -212,6 +219,14 @@ border-bottom: none;
 .title__options:hover {
 	transition: 200ms ease all;
 	border-bottom: 1px solid black;
+}
+.link{
+	cursor:pointer;
+	border-bottom: 1px solid transparent;
+}
+.link:hover {
+	color: #5286D4;
+	border-bottom: 1px solid #5286D4;
 }
 .title__small {
 	align-items: center;

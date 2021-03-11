@@ -29,7 +29,7 @@ const dispatch = useDispatch();
 
      const onSubmit = async e => {
         e.preventDefault();
-        dispatch(register({formData}))
+         dispatch(register({formData}))
            
         }
 
