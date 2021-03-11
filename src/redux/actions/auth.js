@@ -1,30 +1,42 @@
 import {REGISTER, AUTH_ERROR, LOGIN, USER_LOADED,CHANGE_AVATAR,CLEAR_MSG,CLEAR_ERROR, CHANGE_USERDATA, CHANGE_LOADED, ADD_SPRINT_TO_CHOSEN, SPRINT_ERROR,ERROR_MSG, GREEN_MSG} from '../types'
 import {innerBackend, instance, setAuthToken} from '../../components/utils/axios'
+import Axios from 'axios';
 
 
 
 // LOAD USER 
 export const loadUser = () => async dispatch => {
+
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+      innerBackend(localStorage.token);
+    }
+
   try {
+
+        const res = await innerBackend.get("/users/me");
+        dispatch({
+          type: USER_LOADED,
+          payload: res.data,
+        });
+        dispatch({
+          type: GREEN_MSG,
+          payload: res.data,
+        });
+    
+
+
+
+     }
+
     
      
-     const res = await innerBackend.get("/users/me");
-
-    //  console.log(res, "/response???");
-    
-     dispatch({
-       type: USER_LOADED,
-       payload: res.data,
-     })
-     dispatch({
-      type: GREEN_MSG,
-      payload: res.data
-  })
-  } catch (err) {
-    // console.log(err.response.data, 'ERROR!!!')
+   catch (err) {
+    console.log(err.response.data, 'ERROR!!!')
   }
+}
    
-  };
+  
     
 export const msgAuthClear = ()=>dispatch => {
     
@@ -42,17 +54,14 @@ export const errorAuthClear = ()=>dispatch => {
 }
 export const login = (formData) => async dispatch  => {
     try {
-      // console.log(formData, 'data?')
         const res = await instance.post('/auth', formData)
-        // console.log(res, 'respond')
         dispatch({
             type: LOGIN,
             payload: res.data
         })
-      
                   setAuthToken(res.data.token);
-                  setTimeout(() =>{loadUser()
-                    },200)
+                  dispatch(loadUser())
+                 
                   
                   
 
@@ -82,7 +91,7 @@ export const register = ({formData}) => async dispatch  => {
             payload: res.data
         })
          setAuthToken(localStorage.token);
-        
+         dispatch(loadUser());
       }
       catch (err) {
         const errors = err.response.data
