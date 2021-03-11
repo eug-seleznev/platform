@@ -110,7 +110,7 @@ export const changeData = (formData) => async dispatch  => {
   // }
   //////////////////////
   try {
-      // console.log('hello change', formData)
+      console.log('hello change', formData)
       const res = await innerBackend.put(`/users/me`, formData)
       dispatch({
           type: CHANGE_USERDATA,
