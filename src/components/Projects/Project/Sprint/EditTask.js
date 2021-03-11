@@ -12,6 +12,7 @@ import { Button } from "../../../../Styles/buttons";
 
 
 
+
 const TaskManagment = ({tags, id,status, title, setStatus, sprint_description, focusRow, editebleRow, creator, tasks}) => {
   const dispatch = useDispatch();
 
@@ -65,7 +66,7 @@ return () => {
     dispatch(addToChosen(id))
     setStatus(!status)
   };
-
+ 
   
 
   const deletehandler = (e) => {
@@ -174,7 +175,7 @@ return () => {
           )}
         </div>
         <form onSubmit={onEditSubmit}>
-          {!isSubmit ? (
+          {/* {!isSubmit ? ( */}
             <div
               style={{
                 display: "flex",
@@ -182,7 +183,7 @@ return () => {
                 marginTop: "20px",
               }}
             >
-              <Thin size="16">Описание:</Thin>
+              <Thin size="16">Описание: </Thin>
               <input
                 type="text"
                 value={sprintInfo.description}
@@ -191,7 +192,7 @@ return () => {
                 className={style.changeDescr}
               ></input>
             </div>
-          ) : (
+          {/* ) : (
             <Thin
               style={{
                 marginBottom: "20px",
@@ -204,7 +205,7 @@ return () => {
                 ? "Описание: " + sprint_description + "  "
                 : "Добавить описание  "}{" "}
             </Thin>
-          )}
+          )} */}
         </form>
       </div>
     </>

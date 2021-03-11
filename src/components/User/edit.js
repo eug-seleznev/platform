@@ -26,7 +26,7 @@ const Edit = ({match, history}) => {
 		name: user.name ? user.name : '',
 		lastname: user.lastname ? user.lastname : '',  
 		position: user.position ? user.position : '',
-		division: user.division ? user.division : '',  
+		// division: user.division ? user.division : '',  
         email: user.email ? user.email : '', 
 		report: user.report ? user.report : '', 
 		bday: user.bday ? user.bday : '', 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTask, addTasks, EditSprint } from "../../../../redux/actions/projects";
+import { addTask, addTasks, deleteSprint, EditSprint, finishSprint } from "../../../../redux/actions/projects";
+import { Button } from "../../../../Styles/buttons";
 import style from "../../../../Styles/modules/components/Project/oneproj.module.css";
 import { Bold, Light } from "../../../../Styles/typography";
 
@@ -10,7 +11,7 @@ import { Bold, Light } from "../../../../Styles/typography";
 
 
 
-const SprintTitle = ({sprint, prTitle, title, id}) => {
+const SprintTitle = ({sprint,user, prTitle,hist, title, id}) => {
 	const dispatch = useDispatch()
 	// const [actualClose, setActualClose] = useState ('??')
     // const [diff, setDiff] = useState ('??')
@@ -19,7 +20,21 @@ const SprintTitle = ({sprint, prTitle, title, id}) => {
 	const [sprintInfo, setSprintTitle] = useState({
     	title: title,
   });
+  const handleSprint = (e) => {
+      
+	dispatch(finishSprint(id));
+	setTimeout(() => {
+	  return hist.push(`./`);
+}, 200);
+}
 
+
+const handleDelete = () => {
+	  setTimeout(() => hist.push(`./`), 50);
+		dispatch(deleteSprint(id))
+ 
+
+}
 	const [editTitle, setEditTitle] = useState(false)
 
 	const onChange = (e) => {
@@ -33,7 +48,9 @@ const SprintTitle = ({sprint, prTitle, title, id}) => {
 		dispatch(EditSprint(sprintInfo, id))
 		setEditTitle(false)
 	}
-
+	const toProj =()=>{
+		hist.push('./')
+	}
 
 	// useEffect(()=>{		
 	// 	if(sprint.dateClosePlan!==undefined) {
@@ -54,25 +71,54 @@ const SprintTitle = ({sprint, prTitle, title, id}) => {
     return (
       <div>
         <div className={style.title}>
-          {!editTitle ? (
+          {/* {!editTitle ? (
             <Bold size="24" onClick={() => setEditTitle(true)}>
               {sprintInfo.title}
             </Bold>
-          ) : (
+          ) : ( */}
+		  
             <form onSubmit={onSubmit}>
-              <input onChange={onChange} value={sprintInfo.title}></input>
+              <input className={style.titleChange} onChange={onChange} value={sprintInfo.title}></input>
             </form>
-          )}
-
-          <Bold color="#3F496C">{prTitle}</Bold>
+        {/* //   )} */}
+		
+          <Bold color="#3F496C" className={style.link} onClick={toProj}>{prTitle}</Bold>
         </div>
         <Light
           className={style.title__small}
           style={{ marginBottom: "70px" }}
           size="16"
         >
+			
           <div className={style.title__deadline}>
-            {/* Дней до дедлайна: {diff.toString().slice(0, 2)} */}
+		  <div style={{display:'flex'}}>
+				<Button
+                    fontSize={"12px"}
+                    style={{
+                      display: `${user.permission == "user" ? "none" : "flex"}`,
+					  background:'none',
+					  color:'black',
+					  border:'none'
+                    }}
+                    onClick={handleSprint}
+                  >
+                    Завершить спринт
+                  </Button>
+
+                  <Button
+                    fontSize={"12px"}
+                    style={{
+                      display: `${user.permission == "user" ? "none" : "flex"}`,
+					  background:'none',
+					  color:'black',
+					  border:'none',
+					  marginLeft:'20px'
+                    }}
+                    onClick={handleDelete}
+                  >
+                    Удалить спринт
+                  </Button>
+				</div>
           </div>
         </Light>
       </div>
