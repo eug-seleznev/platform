@@ -216,7 +216,7 @@ img{
    
 }
     img.sidebar__logo{
-        margin-bottom: 120px;
+        margin-bottom: 30px;
 
     }
 p{

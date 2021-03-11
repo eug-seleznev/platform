@@ -1,8 +1,9 @@
 import { Light, Bold } from "../../../Styles/typography"
 import styles from '../../../Styles/modules/components/profile.module.css'
+import { ButtonText } from "../../../Styles/buttons"
 
 
-const TopInfo = ({src, text, user, url}) =>{
+const TopInfo = ({src, text, user, url, change, history}) =>{
 	return (
 		<div className={styles.row2}> 
 			<img
@@ -17,6 +18,18 @@ const TopInfo = ({src, text, user, url}) =>{
 					{" "}
 					{user.name} {user.lastname}
 					</Bold>
+					{!change ? (
+                ''
+              ) : (
+                <ButtonText
+                  color="#445AAA"
+                  fontSize="12"
+                 
+                  onClick={() => history.replace(`/edit`)}
+                >
+                  изменить
+                </ButtonText>
+              )}
 				</div>
 				<Light color="#4B4B4B" size="16" className={styles.pos}>
 					Должность: {user.position}

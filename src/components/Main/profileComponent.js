@@ -37,30 +37,12 @@ const ProfileComponent = ({user, history, change}) => {
 			  />
        
         <div className={styles.gap}>
-          <TopInfo user={user} url={url}></TopInfo>
+          <TopInfo user={user} history={history} change={change} url={url}></TopInfo>
           <div className={styles.parts}>
             {user.partition!==undefined?user.partition.map((el,i)=>{
               return(<Tag tagText={el} tagColor='#D3E1EE' />)
           }):''}
         </div>
-         
-          <div className={styles.info__title}>
-            <Bold size="18" color='#3F496C' className={styles.contacts}>
-              Информация
-            </Bold>
-            {!change ? (
-                <div className={styles.change}></div>
-              ) : (
-                <ButtonText
-                  color="#445AAA"
-                  fontSize="12"
-                  
-                  onClick={() => history.replace(`/edit`)}
-                >
-                  изменить
-                </ButtonText>
-              )}
-            </div>
         <UserInfo user={user}me={me} change={change} link={link}></UserInfo></div>
       </div>
      

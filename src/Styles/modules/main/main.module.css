@@ -2,7 +2,7 @@
     display: grid;
     grid-template-areas: 
     'profile news'
-    'projects projects'
+    'projects sprints'
     ;
     grid-template-rows: min-content min-content;
     grid-template-columns:2fr 1fr;
@@ -23,6 +23,11 @@
         display: flex;
         align-items: flex-end;
     }
+    .create__news__img {
+        margin-right:10px;
+        height:23px;
+        
+    }
     .create__news__button {
         margin-left:10px;
         height:23px;
@@ -37,18 +42,36 @@
         grid-area: projects;
         display: grid;
         grid-template-areas: 'myProj';
-        width: 75%;
+        width: 70%;
+        height: max-content;
         grid-template-columns: 1fr;
         column-gap: 15px;
         row-gap: 15px;
+    }
+    .my_sprints{
+        grid-area: sprints;
+        display: grid;
+        grid-template-areas: 'myProj';
+        width: 100%;
+        grid-template-columns: 1fr;
+        column-gap: 15px;
+        row-gap: 15px;
+        
     }
         .myProj{
             grid-area: myProj;
             padding-bottom: 18px;
             margin-top: 7px;
             margin-left: 15px;
+            
         }
-
+        .myProjButton{
+            grid-area: myProj;
+            padding-bottom: 18px;
+            margin-top: 7px;
+            margin-left: 25px;
+            cursor: pointer;
+        }
 @media (max-width: 1500px){
    
     /* .projects{

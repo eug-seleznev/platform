@@ -103,9 +103,9 @@ background-color: white;
 
 export const InfoCard = styled.div`
 padding: 10px;
-padding-left:20px;
-border: 1px solid #CECECE;
-border-radius: 15px;
+padding-left:3px;
+border-top: 1px solid #CECECE;
+
 height:auto;
 @media(max-width:700px) {
     padding: 10px;

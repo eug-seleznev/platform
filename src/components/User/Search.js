@@ -3,20 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { allDepartments } from "../../redux/actions/department";
 import { AddUserToTeam } from "../../redux/actions/projects";
 import { userSearch } from "../../redux/actions/user";
+
 import { Select } from "../../Styles/tables";
 import { Thin } from "../../Styles/typography";
 import UserTable from './userTable'
 
 
 
-const Search = () => {
+const Search = ({project}) => {
     const dispatch = useDispatch()
     const departments = useSelector(state => state.departments.departments)
     const [submited, setSubmited] = useState(false)
     const [formData, setFormData] = useState({
         name: '',
         division: '',
-        partition: ''
+        partition: '',
+        crypt: project.crypt
     })
 
 

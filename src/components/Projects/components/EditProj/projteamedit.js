@@ -63,8 +63,8 @@ const ProjTeamEdit = ({project}) => {
 			
 		</div>
 		<div className={style.table} style={{display:'flex',marginTop:'50px'}}>
-			<Search/>
-			<UserTable crypt={project.crypt}/>
+			<Search project={project} />
+			<UserTable project={project} crypt={project.crypt}/>
 		</div>
 		
 		</div>

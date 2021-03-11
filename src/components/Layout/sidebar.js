@@ -15,13 +15,13 @@ const adminka = useRef(null)
          <SidebarContainer>
 
             <SidebarLink to='/' className="nav-link" >
-                    <img className='sidebar__logo' src='sidebarIcon.png' title="Главная" />
+                    <img className='sidebar__logo' src='/sidebarIcon.png' />
                     <p></p>
             </SidebarLink>
 
 
             <SidebarLink to='/' className="nav-link" >
-                    <img src='sidebarIcon.png' title="Главная" />
+                    <img src='/sidebarIcon.png'  />
                     <p>Главная</p>
             </SidebarLink>
         
