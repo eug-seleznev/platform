@@ -14,13 +14,18 @@ const AllSprintsOfProj = ({hist, match, status, id}) => {
   const dispatch = useDispatch();
 
 	const sprints = useSelector(state => state.projects.sprints) //нужно из пропсов достать, тут можно и без редакса
-  
+  const sprint = useSelector(state => state.projects.sprint)
 	const createSprint = () => {
     console.log(id)
     dispatch(addSprint(id));
     
   };
-
+  // useEffect(()=>{
+  //   console.log(sprint)
+  //   if(sprint._id!==undefined) {
+  //     hist.push(`/${sprint._id}`)
+  //   }
+  // },[sprint])
     return (
     
 	        <div style={{width:'100%'}}>

@@ -49,7 +49,7 @@ const Project = ({match, history}) => {
                   <CalendSprint id={id} hist={history} project={project} />
                   <Viewer project={project} />
                 </div>
-                <ProjInfo project={project} />
+                <ProjInfo history={history} project={project} />
             </div>
           </>
         )}

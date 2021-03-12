@@ -133,7 +133,7 @@ export default function(state = initialState, action) {
                     loadProject: false,
                     reload: true,
                     error: '',
-                    sprint_msg:payload.msg,
+                    // sprint_msg:payload.msg,
                 }
             case ADD_INFO_SPRINT: 
                 return {

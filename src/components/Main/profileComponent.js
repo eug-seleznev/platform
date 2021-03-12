@@ -42,7 +42,7 @@ const ProfileComponent = ({user, history, change}) => {
   
     return (
       <div className={styles.profile}>
-        <Bold className={styles.change__avatar}>Сменить аватар</Bold>
+        <Bold style={{opacity:enter?1:0}} className={styles.change__avatar}>Сменить аватар</Bold>
         <input className={styles.set__file}
           type='file'
           placeholder='загрузите изображение'
