@@ -47,7 +47,8 @@ const ProfileComponent = ({user, history, change}) => {
           type='file'
           placeholder='загрузите изображение'
           onChange={handleFile}
-          onMouseEnter={()=>setEnter(true)}
+          style={{display:`${user._id!==me._id?'none':'block'}`}}
+          onMouseEnter={()=>user._id!==me._id?'':setEnter(true)}
           onMouseLeave={()=>setEnter(false)}
           
         ></input>
