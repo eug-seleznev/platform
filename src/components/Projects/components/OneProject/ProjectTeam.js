@@ -16,7 +16,7 @@ const ProjectTeam = ({id, hist}) => {
 	const dispatch = useDispatch();
   const [idArray] = useState([])
   const [button,setButton] = useState(false)
-  const [open,setOpen] = useState(false)
+  const [open,setOpen] = useState(true)
   const [modal,setModal] = useState(false)
     const user = useSelector(state => state.auth.user) 
    	const project = useSelector(state => state.projects.project)

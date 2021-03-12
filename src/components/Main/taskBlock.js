@@ -7,7 +7,7 @@ const TaskBlock = ({user, history}) => {
   	const[activeSprints,setActiveSprints] = useState(0)	
 	useEffect(()=>{
 		user.projects.map((el,i)=>{
-			setActiveSprints(activeSprints+el.sprints.length)	
+			setActiveSprints(activeSprints+el.sprints.filter(sprint=>sprint.status).length)	
 		})
 	}, [])
 	
