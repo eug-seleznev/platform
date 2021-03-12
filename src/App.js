@@ -48,6 +48,8 @@ import EditContractor from './components/Superadmin/editContractor'
 //ОТБЕРИТЕ У МЕНЯ КОМПЬЮТЕР НАХУЙ
 // import Sprint_New from './components/Projects/Project/Sprint/new'
 import Search from './components/User/Search'
+import Models from './components/Projects/Models';
+import LoadModel from './components/Projects/Models/NewModel';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -112,6 +114,19 @@ const App = () => {
                   path="/projects/:crypt/:sprint_id"
                   component={Sprint}
                 />
+
+                <Route
+                  exact
+                  path="/projects/:crypt/m/view"
+                  component={Models}
+                />
+
+                <Route
+                  exact
+                  path="/projects/:crypt/m/view/new"
+                  component={LoadModel}
+                />
+
                 <Switch>
                   <Route
                     exact
@@ -152,7 +167,11 @@ const App = () => {
 
                 <Route exact path="/viewer" component={Helper} />
                 <Route exact path="/contractors" component={Contractors} />
-                <Route exact path="/contractors/:id" component={EditContractor} />
+                <Route
+                  exact
+                  path="/contractors/:id"
+                  component={EditContractor}
+                />
               </Container>
             </Switch>
           </>

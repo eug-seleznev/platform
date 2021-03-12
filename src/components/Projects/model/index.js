@@ -17,6 +17,7 @@ const Viewer = ({ project }) => {
   const [formData, setFormData] = useState({
     crypt: project.crypt,
     file: null,
+    title: 'default'
   });
 
   const [loaded, setLoad] = useState({
