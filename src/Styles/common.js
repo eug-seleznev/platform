@@ -127,8 +127,8 @@ background: #FFFFFF;
 
 padding: 5px;
 padding-left:10px;
-border: 1px solid #CECECE;
-border-radius: 5px;
+border: 1px solid #8FA7C6;
+border-radius: 8px;
 @media(max-width:700px) {
     padding: 10px;
     padding-left:10px;   

@@ -29,6 +29,17 @@ const ProjectsCard = ({project}) => {
     return (
       
         <Card className={styles.projContainer}>
+          <div>
+          <div className={styles.end}>
+            {
+            project.sprints.length==0?<Circle red />:<Circle green />
+          }
+          
+          <Bold size="12" color="#848484" style={{marginLeft:'20px'}} >
+            {" "}
+            {daysLeft>0?daysLeft:'?'} {daysLeft < 0?"дней до дедлайна":daysLeft < 1 ? "день до дедлайна" : daysLeft < 5 ? "дня до дедлайна" : "дней до дедлайна"}
+          </Bold>
+          </div>
           <div className={styles.projtop}>
           <Link  style={{textDecoration: 'none'}}to={`projects/${project.crypt}`}>
             <Light size="24" color='#3F496C' className={styles.title}>
@@ -40,17 +51,9 @@ const ProjectsCard = ({project}) => {
               ? project.about
               : "Короткое описание проекта"}
           </Light> */}
-          <div className={styles.end}>
-            {
-            project.sprints.length==0?<Circle red />:<Circle green />
-          }
           
-          <Bold size="12" color="#848484" style={{marginLeft:'20px'}} >
-            {" "}
-            {daysLeft>0?daysLeft:'?'} {daysLeft < 0?"дней до дедлайна":daysLeft < 1 ? "день до дедлайна" : daysLeft < 5 ? "дня до дедлайна" : "дней до дедлайна"}
-          </Bold>
+          
           </div>
-          
           </div>
           <div className={styles.tags}>
             <Tag  tagText={project.stage} tagColor='#E9E3C8'/>   

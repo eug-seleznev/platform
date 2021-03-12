@@ -5,10 +5,10 @@ import { ALL_USERS, USER_ERR,EDIT_CONTRACTOR, CHANGE_PERMISSION, PERM_RETURN,ONE
 
 
 
-export const allContractors = () => async dispatch  => {
+export const allContractors = ({query, sortOrder}) => async dispatch  => {
   try {
-      // console.log('hello all users?')
-      const res = await innerBackend.get('/merc/search?name=all')
+      console.log(query, sortOrder)
+      const res = await innerBackend.get(`/merc/search?name=all&field=${query}&order=${sortOrder}`)
       dispatch({
           type: ALL_CONTRACTORS,
           payload: res.data

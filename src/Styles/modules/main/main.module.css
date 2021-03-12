@@ -2,6 +2,7 @@
     display: grid;
     grid-template-areas: 
     'profile news'
+    'projects tasks'
     'projects sprints'
     ;
     grid-template-rows: min-content min-content;
@@ -35,6 +36,7 @@
     }
         .allNews{
             /* text-align: right; */
+            cursor: pointer;
             margin-left: auto;
             color: #3F496C;
         }
@@ -65,6 +67,16 @@
             margin-left: 15px;
             
         }
+        .tasks {
+            grid-area: tasks;
+            
+        }
+        .my_tasks{
+            margin-top: 15px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
         .myProjButton{
             grid-area: myProj;
             padding-bottom: 18px;
@@ -94,8 +106,18 @@
 @media (max-width: 1000px){
     .news{
        
-        width: 50%;
+        width: 100%;
      
+    }
+    .projects{
+        grid-area: projects;
+        display: grid;
+        grid-template-areas: 'myProj';
+        width: 100%;
+        height: max-content;
+        grid-template-columns: 1fr;
+        column-gap: 15px;
+        row-gap: 15px;
     }
     .mainContainer{
         display: grid;
@@ -103,6 +125,8 @@
         'profile'
         'news'
         'projects'
+        'sprints'
+        
         ;
         grid-template-rows: min-content min-content min-content;
         grid-template-columns:1fr;

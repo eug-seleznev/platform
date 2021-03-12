@@ -12,7 +12,7 @@ import UserTable from "../../../User/userTable"
 
 const ProjTeamEdit = ({project}) => {
     const dispatch = useDispatch()
-
+	const [invite,setInvite] = useState(false)
 	const deliteUser =(userId)=>{
 		console.log(project.crypt)
 		dispatch(addToProject (project.crypt,userId))
@@ -54,7 +54,7 @@ const ProjTeamEdit = ({project}) => {
 						
 					}):''}
 					<tr >
-						<CancelButton fontSize='14px' style={{padding:'20px',paddingTop:'10px',backgroundColor:'white', color:'#397BB8', border:'none',marginTop:'10px', width:'fit-content'}}>Пригласить в команду</CancelButton>
+						<CancelButton onClick={()=>{setInvite(true)}} fontSize='14px' style={{padding:'20px',paddingTop:'10px',backgroundColor:'white', color:'#397BB8', border:'none',marginTop:'10px', width:'fit-content',textAlign:'start'}}>Пригласить в команду</CancelButton>
 						</tr>
 					
 				</tbody>
@@ -62,7 +62,7 @@ const ProjTeamEdit = ({project}) => {
 			</table>
 			
 		</div>
-		<div className={style.table} style={{display:'flex',marginTop:'50px'}}>
+		<div className={style.table} style={{display:`${invite?'flex':'none'}`,marginTop:'50px'}}>
 			<Search project={project} />
 			<UserTable project={project} crypt={project.crypt}/>
 		</div>

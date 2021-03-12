@@ -209,6 +209,7 @@ border-bottom: none;
 	margin-right: 15px;
 	margin-bottom: 15px;
 	height: fit-content;
+	border: #C4C4C4 solid 1px;
 }
 .title__options {
 	margin-right: 10px;
@@ -261,6 +262,12 @@ border-bottom: none;
 	margin-bottom: 20px;
 	margin-top: 20px;
 }
+.change__info {
+	margin-left: 10px;
+	margin-top: 5px;
+	cursor: pointer;
+}
+
 .calend {
 	padding-top:10px;
 	font-size: 16px;

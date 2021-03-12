@@ -1,0 +1,85 @@
+.sprintContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 60px;
+    border: 1px solid #8FA7C6;
+
+}
+.sprinttop {
+    display: flex;
+    justify-content: space-between;
+}
+.second__row{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.tasks {
+    display: flex;
+    align-self: flex-end;
+}
+.card__thing__full {
+	transition: 300ms all ease;
+	height: 100%;
+	
+	background-color: #5286D4;
+}
+.card__thing {
+	width: 100px;
+	height: 10px;
+	border-radius: 5px;
+	background-color: #C4C4C4;
+	overflow-x: hidden;
+	margin-top: 4px;
+    margin-right: 15px;
+}
+.proj__title {
+	text-align: end;
+	width: 120px;
+	cursor: pointer;
+}
+.proj__title:hover {
+	color: #445AAA;
+    text-decoration: underline;
+	
+}
+.end {
+    display: flex;
+    justify-content: flex-end;
+}
+.title:hover {
+    color: #445AAA;
+    text-decoration: underline;
+}
+.tags {
+    display: flex;
+    align-self: flex-end;
+   
+}
+.tags div {
+    margin-right: 3px;
+    margin-bottom: 0px;
+}
+@media(max-width:1300px) {
+    .card__thing {
+        width: 60px;
+        height: 10px;
+        
+    }
+}
+ @media(max-width:1000px) {
+    .projContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 150px;
+        border: 1px solid #8FA7C6;
+    
+    }
+    .projtop {
+        display: flex;
+        flex-direction: column;
+    }
+    
+ }

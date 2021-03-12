@@ -13,6 +13,7 @@
     margin-bottom: auto;
 cursor: pointer;
     transition: all .3s ease-in-out;
+    opacity: 0.6;
 }
 .inWork:hover{
     transform: scale(1.2);

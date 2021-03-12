@@ -1,12 +1,12 @@
 import styles from '../../../../Styles/modules/components/Project/oneproj.module.css'
 import {Card,SmallCard, ModalContainer, ModalWind} from '../../../../Styles/common'
-import {Button} from '../../../../Styles/buttons'
+import {Button, ButtonText} from '../../../../Styles/buttons'
 import { Bold, Light, Regular, Thin } from '../../../../Styles/typography'
 import ModalWindow from '../ModalWindow'
 import { useSelector } from 'react-redux'
 
 
-const ProjInfo = ({project}) => {
+const ProjInfo = ({project,history}) => {
     // const [overCard, setOvercard] = useState(false)
     const user =  useSelector(state=> state.auth.user)
     return(
@@ -14,6 +14,14 @@ const ProjInfo = ({project}) => {
       <div  className={styles.title__info} >
            <img  src='/info.png' style={{marginRight:'10px'}}></img>
             <Thin size='22'>Общая информация о проекте</Thin>
+            <ButtonText
+                  color="#445AAA"
+                  fontSize="12"
+                  className={styles.change__info}
+                  onClick={() => history.replace(`/admin/editproj/${project.crypt}`)}
+                >
+                  изменить
+                </ButtonText>
       </div>
       <div className={styles.info__project} >
         <div className={styles.info__descr}>

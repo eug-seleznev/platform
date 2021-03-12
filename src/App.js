@@ -20,7 +20,7 @@ import { loadUser } from './redux/actions/auth';
 import Admin from './components/Adminka/Index';
 import DataBase from './components/DataBase';
 import Projects from './components/Projects';
-import Office from './components/Office/index copy';
+import Office from './components/Office/index';
 import Users from './components/User';
 import Dashboard from './components/Adminka/dashboard';
 import MyProfile from './components/User/me';

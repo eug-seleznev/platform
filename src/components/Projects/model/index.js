@@ -26,7 +26,7 @@ const Viewer = ({ project }) => {
     submit: false, // for form submit
     button: false, //render model load button
   });
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   useEffect(() => {
     if (loaded.submit) {
