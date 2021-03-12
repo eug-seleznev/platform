@@ -43,13 +43,7 @@ const Sprint_New = ({match, history}) => {
       }
     },[sprint])
     // useEffect (()=> {
-     
-    //   if (actualClose!=='??'){
-    //     let d1 = new Date ()
-    //     let d2 = new Date (sprint.dateClosePlan)
-    //     console.log(d2, d1)
-    //     setDiff (Math.abs(d2-d1)/86400000)}
-    //   },[actualClose])
+
 
     const editebleRow = () => {
         setEditField(!editField)
