@@ -1,9 +1,16 @@
+import { useEffect, useState } from 'react'
 import { SmallCard } from '../../Styles/common'
 import styles from '../../Styles/modules/main/main.module.css'
 import { Bold, Light } from '../../Styles/typography'
 
 const TaskBlock = ({user, history}) => {
-
+  	const[activeSprints,setActiveSprints] = useState(0)	
+	useEffect(()=>{
+		user.projects.map((el,i)=>{
+			setActiveSprints(activeSprints+el.sprints.length)	
+		})
+	}, [])
+	
     return(
 		<div className={styles.tasks}>
 			<div className={styles.create__news}>
@@ -19,7 +26,7 @@ const TaskBlock = ({user, history}) => {
 			</SmallCard>
 			<SmallCard className={styles.my_tasks}>
 				<Light size='16' color='#3F496C'>Активные спринты</Light>
-				<Light size='16' color='#3F496C'>{user.projects.length}</Light>
+				<Light size='16' color='#3F496C'>{activeSprints}</Light>
 			</SmallCard>
 	  	</div>
        

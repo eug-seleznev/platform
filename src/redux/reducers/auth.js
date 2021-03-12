@@ -64,8 +64,9 @@ export default function(state = initialState, action) {
                         return {
                             ...state,
                         
-                            loaded: false,
-                            msg: payload.msg
+                            
+                            msg: payload.msg,
+                            user: payload.user,
                         }
                 case ADD_SPRINT_TO_CHOSEN:
                     // console.log('here is payload',payload)    

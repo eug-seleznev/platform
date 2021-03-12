@@ -1,16 +1,20 @@
 import { url } from '../utils/axios';
 import styles from '../../Styles/modules/components/profile.module.css'
-import {useSelector} from  'react-redux'
+import {useDispatch, useSelector} from  'react-redux'
 import { Bold, Light } from '../../Styles/typography'
 import { ButtonText } from '../../Styles/buttons'
 import { useEffect, useState } from 'react';
 import UserInfo from '../User/components/infoCard';
 import TopInfo from '../User/components/topInfo';
 import Tag from '../Projects/components/OneProject/tag';
+import { changeAvatar } from '../../redux/actions/auth';
 
 const ProfileComponent = ({user, history, change}) => {
   const me = useSelector(state => state.auth.user)
   const [link,setLink] = useState ('')
+  const[file,setFile] = useState(null)
+  const[enter,setEnter] = useState(false)
+  const dispatch = useDispatch();
   useEffect(()=>{
     if(user!=null&&user!=undefined&&user.report!=undefined) {
        if (user.report.match(/https:/)){
@@ -24,26 +28,46 @@ const ProfileComponent = ({user, history, change}) => {
      
   
   },[user])
+  const handleFile = e => {
+    setFile(e.target.files[0])
+}
   useEffect(()=>{
-    console.log(link)
-  },[link])
+    if (file !== null && file !== undefined) {
+      
+        dispatch (changeAvatar(file))
+      
+    }
+  },[file])
+
+  
     return (
       <div className={styles.profile}>
+        <Bold className={styles.change__avatar}>Сменить аватар</Bold>
+        <input className={styles.set__file}
+          type='file'
+          placeholder='загрузите изображение'
+          onChange={handleFile}
+          onMouseEnter={()=>setEnter(true)}
+          onMouseLeave={()=>setEnter(false)}
+          
+        ></input>
         <img
-          className={styles.avatar}
+          style={{opacity:enter?0.5:1}}
+          className={user.avatar==='avatars/spurdo.png'?styles.no_avatar:styles.no_avatar}
           src={`${url}/${
-            user != null ? (user != undefined ? user.avatar : "") : ""
+            user !== null ? (user !== undefined ? user.avatar : "") : ""
           }`}
+          // onMouseEnter
 			  />
        
         <div className={styles.gap}>
-          <TopInfo user={user} history={history} change={change} url={url}></TopInfo>
+          <TopInfo user={user}  enter={enter} history={history} change={change} url={url}></TopInfo>
           <div className={styles.parts}>
             {user.partition!==undefined?user.partition.map((el,i)=>{
               return(<Tag tagText={el} tagColor='#D3E1EE' />)
           }):''}
         </div>
-        <UserInfo user={user}me={me} change={change} link={link}></UserInfo></div>
+        <UserInfo user={user}me={me}  change={change} link={link}></UserInfo></div>
       </div>
      
     );

@@ -23,7 +23,7 @@ const SprintCard = ({sprint}) => {
     }
     
   },[sprint.tasks])
-
+ 
 
     return (
       
@@ -34,7 +34,9 @@ const SprintCard = ({sprint}) => {
               {sprint.title}
             </Light>
           </Link>
-          <Bold size="12" color="#848484" className={styles.proj__title}>{sprint.project.title}</Bold>
+          <Link  style={{textDecoration: 'none'}}to={`projects/${sprint.project.crypt}`}>
+            <Bold size="12" color="#848484" className={styles.proj__title}>{sprint.project.title}</Bold>
+          </Link>
           </div>
           
           <div className={styles.second__row}>
