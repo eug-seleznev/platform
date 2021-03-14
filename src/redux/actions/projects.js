@@ -70,9 +70,13 @@ export const sortProjects = ({ query, orderSort }) => async (dispatch) => {
 
 export const sorType = ({ field, value }) => async (dispatch) => {
   try {
+
+    console.log(field, value)
     const res = await innerBackend.get(
       `/projects/q/search?field=${field}&value=${value}`
     );
+
+    console.log(res.data)
     dispatch({
       type: SORT_PROJECTS,
       payload: res.data,

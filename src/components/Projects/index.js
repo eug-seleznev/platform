@@ -12,12 +12,20 @@ import { useDispatch, useSelector } from "react-redux"
 
 import { allProjects, sortProjects, sorType } from '../../redux/actions/projects';
 
+
+
+
+
+
+
 import style from '../../Styles/modules/components/Project/allproj.module.css'
 import { Table, Tr, Td, Select } from '../../Styles/tables';
 import { Card, } from '../../Styles/common'
 import { H1} from '../../Styles/typography'
 import {Circle} from '../../Styles/project'
 
+
+let field = "type";
 let  types = ['Все', "общественное пространство", "Частный дом", "Визуализация", "Интерьер", "ЖК"]
 
 const Projects = ({history, match, location}) => {
@@ -25,19 +33,30 @@ const Projects = ({history, match, location}) => {
 
     const projects = useSelector(state => state.projects.projects)
     const [orderSort, setOrder] = useState(false)
-    const [activeField, setActiveField] = useState('Все')
+    const [value, setActiveField] = useState(
+      decodeURI(location.search).split("?")[1]
+    );
     useEffect (()=>{
-           dispatch(allProjects()) 
+           
     }, [])
 
   useEffect(() => {
     if(location.search){
-      let value = location.search.split("?")[1];
-      // console.log(field);
-      setActiveField(value);
-      let field = "type";
-      console.log(field, activeField);
-      dispatch(sorType({ field, activeField }));
+      // console.log(decodeURI(location.search))
+      // let value = location.search.split("?")[1];
+
+      // value = decodeURI(value);
+      // setActiveField(decodeURI(value));
+      console.log(value)
+      // console.log(field, activeField);
+      
+
+
+      dispatch(sorType({ field, value }));
+    } else {
+       
+         dispatch(allProjects());
+       
     }
     
 
