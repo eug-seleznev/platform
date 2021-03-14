@@ -37,25 +37,19 @@ const Project = ({match, history}) => {
         }
     }, [loaded])
     return (
-      <div>
+      <div className={style.contain}>
         {!loaded ? (
           <p> loading...</p>
         ) : (
           <>
             <TitleOfProject hist={history} />
-            <div className={style.info__flex}>
-                <div style={{width: "100%"}}>
-                  <AllSprintsOfProj status={project.status} id={project.crypt} match={match} hist={history}/>
-                  <ProjectTeam hist={history} id={id} />
-                  <CalendSprint id={id} hist={history} project={project} />
-                  <Viewer project={project} />
-                </div>
-                <div>
-                  <ProjInfo history={history} project={project} />
-                  <ProjHistory history={history} project={project} />
-                </div>
-                
-            </div>
+            <AllSprintsOfProj status={project.status} id={project.crypt} match={match} hist={history}/>
+            <ProjectTeam hist={history} id={id} />
+            <CalendSprint id={id} hist={history} project={project} />
+            <Viewer project={project} />
+            <ProjInfo history={history} project={project} />
+            <ProjHistory history={history} project={project} />
+              
           </>
         )}
       </div>

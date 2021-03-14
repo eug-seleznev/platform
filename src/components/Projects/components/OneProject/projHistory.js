@@ -14,14 +14,14 @@ const ProjHistory = ({project,history}) => {
 const tag = ['govno','mocha', 'huy']  
 
     return(
-   	 <div>
+   	 <div className={styles.history}>
 		<div className={styles.title__history}>
 			<div className={styles.title__info} >
 					<img  src='/info.png' style={{marginRight:'10px'}} ></img>
 					<Thin size='22'>История проекта</Thin>
 			</div>
 			
-			<div className={styles.title__info} >
+			<div className={styles.title__tags} >
 				<Thin size='22'></Thin>
 				{project.tags.map((tag,i)=>{
 					return(
@@ -35,10 +35,10 @@ const tag = ['govno','mocha', 'huy']
 			<table style={{borderCollapse:'collapse'}}>
 				<thead className={table.table__head}>
 					<tr>
-						<th className={table.off__too}><Thin size='16'>Название</Thin></th>
-						<th className={table.off__too}><Thin size='16'>Тег</Thin></th>
+						<th ><Thin size='16'>Название</Thin></th>
+						<th ><Thin size='16'>Тег</Thin></th>
 						<th className={table.off}><Thin size='16'>Создал</Thin></th>
-						<th className={table.off__too}><Thin size='16'>Прогресс</Thin></th>
+						<th ><Thin size='16'>Прогресс</Thin></th>
 						<th className={table.off}><Thin  size='16'>Дедлайн</Thin></th>
 					</tr>
 				</thead>
@@ -50,7 +50,7 @@ const tag = ['govno','mocha', 'huy']
 								<td  ><Thin size='16'>{sprint.title}</Thin></td>
 								<td className={table.tag}>{sprint.tags.map((tag)=>{return(<Tag tagText={tag}tagColor='#C8D9E9' size='13' key={i}></Tag>)})}</td>
 								<td  className={table.center}><Thin size='13'>{sprint.creator}</Thin></td>
-								<td style={{display:'flex'}} className={table.center}><Thin size='13'>{sprint.tasks.filter(task=>task.taskStatus).length+'/'+sprint.tasks.length}</Thin>
+								<td  className={table.center}><Thin size='13'>{sprint.tasks.filter(task=>task.taskStatus).length+'/'+sprint.tasks.length}</Thin>
 									<div className={sprintcss.card__thing}>
 										<div
 											style={{

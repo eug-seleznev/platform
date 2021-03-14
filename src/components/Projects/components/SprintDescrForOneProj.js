@@ -77,7 +77,7 @@ const SprintDescription = ({projStatus,tags, dateOpen,taskcomplite, alltasks, hi
                 onClick={chosenSprint}
                 style={{
                   cursor: "pointer",
-                  backgroundColor: `${status ? "#ff9800" : "#E1E1E1"}`,
+                  backgroundColor: `${status ? "#ff9800" : "#FFF3B6"}`,
                 }}
                 className={style.chosen}
               ></img>

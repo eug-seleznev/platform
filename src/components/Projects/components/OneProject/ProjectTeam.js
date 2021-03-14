@@ -70,7 +70,7 @@ const ProjectTeam = ({id, hist}) => {
       setOpen(!open)
     }
     return (<>
-      {project? <div style={{height:`${!open?'65px':'auto'}`, overflowY:'hidden'}}>    
+      {project? <div className={style.team} style={{height:`${!open?'65px':'auto'}`, overflowY:'hidden'}}>    
       <div style={{display:'flex', alignItems:'center'}}>
         <Subtitle title='Команда проекта' isopen={open}
             openfunc={openfunc} 
