@@ -12,6 +12,7 @@ import ProjectTeam from "../components/OneProject/ProjectTeam";
 import style from '../../../Styles/modules/components/Project/oneproj.module.css'
 import Viewer from "../model";
 import ProjInfo from "../components/OneProject/projInfo";
+import ProjHistory from "../components/OneProject/projHistory";
 
 const Project = ({match, history}) => {
 
@@ -49,7 +50,11 @@ const Project = ({match, history}) => {
                   <CalendSprint id={id} hist={history} project={project} />
                   <Viewer project={project} />
                 </div>
-                <ProjInfo history={history} project={project} />
+                <div>
+                  <ProjInfo history={history} project={project} />
+                  <ProjHistory history={history} project={project} />
+                </div>
+                
             </div>
           </>
         )}

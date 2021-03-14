@@ -177,7 +177,7 @@ const CalendSprint = ({hist, match, id}) => {
     return (
       <div style={{height:`${!open?'65px':'auto'}`, overflowY:'hidden'}}>
 				<div className={style.border__calend}></div>
-					<Subtitle title='История проекта' src='/history.png' openfunc={openfunc} isopen={open} open={true} subtwidth='90%' buttonActive={false}></Subtitle> 
+					<Subtitle title='Календарь проекта' src='/history.png' openfunc={openfunc} isopen={open} open={true} subtwidth='90%' buttonActive={false}></Subtitle> 
 					{!paint?<div>loading...</div>:(
 					//календарь со спринтами
 					<> 

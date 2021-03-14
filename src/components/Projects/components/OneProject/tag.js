@@ -3,11 +3,11 @@ import { Light } from '../../../../Styles/typography'
 
 
 
-const Tag = ({tagColor, tagText}) => {
+const Tag = ({tagColor, tagText, size}) => {
     // const [overCard, setOvercard] = useState(false)
 
     return(
-		<Light className={styles.tag} color='#3F496C'size='16' style={{backgroundColor:tagColor}}>
+		<Light className={styles.tag} color='#3F496C'size={size===undefined?'16':size} style={{backgroundColor:tagColor}}>
 			{tagText}
 	  	</Light>
     )

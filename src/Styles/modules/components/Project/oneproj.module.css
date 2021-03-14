@@ -121,6 +121,7 @@
 
 .info__line {
 	margin-bottom: 15px;
+	min-width: 50px;
 }
 .info__link {
 	border-bottom: 1px solid #C4C4C4;
@@ -257,10 +258,22 @@ border-bottom: none;
 	margin-bottom: 50px;
 	width: 90%;
 }
+.title__history {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
 .title__info {
 	display: flex;
 	margin-bottom: 20px;
 	margin-top: 20px;
+	align-items: flex-start; 
+	flex-wrap: wrap;
+}
+
+.title__img {
+	width: 30px;
+	height: 30px;
 }
 .change__info {
 	margin-left: 10px;
