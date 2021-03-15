@@ -35,7 +35,8 @@ const SprintTitle = ({sprint,user, prTitle,hist, title, id}) => {
 		setEditTitle(false)
 	}
 	const toProj =()=>{
-		hist.push('./')
+		console.log('hello')
+		// hist.replace(`/projects/26`)
 	}
 
 	// useEffect(()=>{		
