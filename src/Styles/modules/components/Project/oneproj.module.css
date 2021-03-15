@@ -1,7 +1,7 @@
 .contain {
 	display: grid;
 	
-	grid-template-rows: repeat (1fr, 6);
+	grid-template-rows: repeat (max-content, 5);
 	grid-template-columns: 1.2fr 0.8fr;
 	grid-template-areas: 
 
@@ -198,6 +198,9 @@ border-bottom: none;
 .title__cont {
 	grid-area: title;
 }
+.table2{
+	width: 100%;
+}
 .title {
 	
 	display: flex;
@@ -225,6 +228,7 @@ border-bottom: none;
 	margin-right: 15px;
 	margin-bottom: 15px;
 	height: fit-content;
+	text-align: center;
 	border: #C4C4C4 solid 1px;
 }
 .title__options {
@@ -281,6 +285,7 @@ border-bottom: none;
 }
 .history {
 	grid-area: history;
+	
 }
 .title__info {
 	display: flex;
@@ -386,6 +391,12 @@ border-bottom: none;
 	background-color:#C4C4C4;
 	border: 0px;
 }
+.tags {
+	display:flex;
+	 align-items:center;
+	 margin-top:4px;
+	 justify-content: flex-start;
+}
 .team__button:hover {
 	cursor: pointer;
 	background-color:white;
@@ -414,6 +425,12 @@ border-bottom: none;
 	
 }
 @media (max-width: 1000px) {
+	.off {
+		display: none;
+	}
+	.table2{
+		width: 100%;
+	}
 	.info__project {
 		width: 89vw;
 		height: auto;
@@ -425,7 +442,20 @@ border-bottom: none;
 	
 }
 @media (max-width:700px){
-	
+	.title__cont {
+		width: 90vw;
+	}
+	.team {
+		width: 90vw;
+	}
+	.off__too {
+		display: none;
+	}
+	.history{width: 80vw;}
+	.table2{display: none};
+	.tags {
+		display: none;
+	}
 	.info__cont {
 	
 		height: auto;
@@ -458,19 +488,21 @@ border-bottom: none;
 	.title__options {
 		display: none;
 	}
+	.history{display: none;}
 	.title {
 	
 			display: flex;
 			justify-content: space-between;
 			align-items: flex-end;
 			text-align: left;
-			width: 100vw;
+			width: 90vw;
 			border-bottom: 1px solid black;
 			font-size: 24px;
 			padding-bottom: 10px;
 			margin-bottom: 10px;
 
 	}
+	.info__project{width: 80vw;}
 	.calend {
 		padding-top:10px;
 		font-size: 16px;
@@ -479,7 +511,7 @@ border-bottom: none;
 		border-radius: 15px;
 		height: 180px;
 		margin:0;
-		width: 100%;
+		width: 90%;
 	}
 	.calend__title{
 		position: absolute;

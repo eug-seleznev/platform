@@ -13,6 +13,7 @@ import style from '../../../Styles/modules/components/Project/oneproj.module.css
 import Viewer from "../model";
 import ProjInfo from "../components/OneProject/projInfo";
 import ProjHistory from "../components/OneProject/projHistory";
+import { background } from "../../../redux/actions/user";
 
 const Project = ({match, history}) => {
 
@@ -25,10 +26,17 @@ const Project = ({match, history}) => {
 
   
 
+    useEffect(() => {
+      console.log(project);
+      
+  }, [project])
 
     useEffect(() => {
         dispatch(getProject(id));
-        
+        dispatch(background('#ECECEC'))
+        return () => {
+          dispatch(background('#ECECEC'))
+        }
     }, [])
 
     useEffect(() => {

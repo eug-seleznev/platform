@@ -7,12 +7,18 @@ import { Bold, Light, Regular, Thin } from '../../../../Styles/typography'
 
 import { useSelector } from 'react-redux'
 import Tag from './tag'
+import { Sprint_Td, Td, Tr, New_table,New_thead,New_tbody, New_Td, New_Th,New_Tr} from '../../../../Styles/tables'
+import { Circle } from '../../../../Styles/project'
+import { Link } from 'react-router-dom'
+import { url } from '../../../utils/axios'
+import { useEffect, useState } from 'react'
 
 
 const ProjHistory = ({project,history}) => {
     // const [overCard, setOvercard] = useState(false)
-const tag = ['govno','mocha', 'huy']  
 
+	const [green, setGreen] = useState(false)
+	
     return(
    	 <div className={styles.history}>
 		<div className={styles.title__history}>
@@ -22,54 +28,56 @@ const tag = ['govno','mocha', 'huy']
 			</div>
 			
 			<div className={styles.title__tags} >
-				<Thin size='22'></Thin>
+				{/* <Thin size='22'>Спринты: </Thin> */}
+				<Tag projectPage={true} tagColor='#E9E3C8'crypt={project.crypt}tagText='Все'></Tag>
 				{project.tags.map((tag,i)=>{
 					return(
-						<Tag tagText={tag}tagColor='#C8D9E9' key={i}></Tag>
+						<Tag projectPage={true} crypt={project.crypt} tagText={tag}tagColor='#C8D9E9' key={i}></Tag>
 					)
 					
 				})}
 			</div>
 		</div>
-		<div className={table.table__sprint}>
-			<table style={{borderCollapse:'collapse'}}>
-				<thead className={table.table__head}>
-					<tr>
-						<th ><Thin size='16'>Название</Thin></th>
-						<th ><Thin size='16'>Тег</Thin></th>
-						<th className={table.off}><Thin size='16'>Создал</Thin></th>
-						<th ><Thin size='16'>Прогресс</Thin></th>
-						<th className={table.off}><Thin  size='16'>Дедлайн</Thin></th>
-					</tr>
-				</thead>
+		<div >
+			<New_table className={styles.table2} >
+				<New_thead  >
+					<New_Tr >
+						<New_Th >Название</New_Th>
+						<New_Th className={styles.off__too}>Тег</New_Th>
+						<New_Th className={styles.off}>Создал</New_Th>
+						<New_Th >Прогресс</New_Th>
+						<New_Th className={styles.off}>Дедлайн</New_Th>
+					</New_Tr>
+				</New_thead>
 				
-				<tbody>
+				<New_tbody>
 				{project!==undefined?project.sprints.map((sprint,i)=>{
+					
 						return(
-						<tr key={i}>
-								<td  ><Thin size='16'>{sprint.title}</Thin></td>
-								<td className={table.tag}>{sprint.tags.map((tag)=>{return(<Tag tagText={tag}tagColor='#C8D9E9' size='13' key={i}></Tag>)})}</td>
-								<td  className={table.center}><Thin size='13'>{sprint.creator}</Thin></td>
-								<td  className={table.center}><Thin size='13'>{sprint.tasks.filter(task=>task.taskStatus).length+'/'+sprint.tasks.length}</Thin>
-									<div className={sprintcss.card__thing}>
-										<div
-											style={{
-											width: `${Math.trunc((sprint.tasks.filter(task=>task.taskStatus).length / sprint.tasks.length) * 100)}%`,
-											}}
-											className={sprintcss.card__thing__full}
-										></div>
-									</div>
-								</td>
-								<td   className={table.center}><Thin size='13'>hi</Thin></td>					
-
-						</tr>
+						
+						<New_Tr key={i}>
+							<New_Td size='14' >{sprint.tasks!==undefined?<Circle red={sprint.tasks.length===0?true:false} style={{marginRight:'10px'}}></Circle>:''}{sprint.title}</New_Td>
+							<New_Td className={styles.tags} size='14' >{sprint.tags!==undefined?sprint.tags.map((tag,i)=>{return(<Tag projectPage={true} crypt={project.crypt} tagText={tag}tagColor='#C8D9E9' size='13' key={i}></Tag>)}):''}</New_Td>
+							<New_Td className={styles.off} size='14' > {sprint.creator===undefined?'нет':sprint.creator.fullname}<img className={sprintcss.img__td} style={{opacity:sprint.creator===undefined?0:1}} src={sprint.creator===undefined?'/Ellipse 13.png':url+'/'+sprint.creator.avatar}></img></New_Td>
+							<New_Td  size='14' style={{display:'inline-flex', alignItems:'center'}}>{sprint.tasks!==undefined?sprint.tasks.filter(task=>task.taskStatus).length+'/'+sprint.tasks.length:''}
+								<div className={sprintcss.card__thing}>
+									<div
+										style={{
+										width: `${Math.trunc((sprint.tasks!==undefined?sprint.tasks.filter(task=>task.taskStatus).length / sprint.tasks.length:'') * 100)}%`,
+										}}
+										className={sprintcss.card__thing__full}
+									></div>
+								</div>
+							</New_Td>
+							<New_Td className={styles.off} size='14'>нет</New_Td>					
+						</New_Tr>
 						
 						)
 						
 					}):''}
-				</tbody>
+				</New_tbody>
 			
-			</table>
+			</New_table>
 		</div>
 		</div>
     )
