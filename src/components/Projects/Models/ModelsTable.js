@@ -11,27 +11,29 @@
 
 
 
-const ModelsTable = () => {
+const ModelsTable = ({models, history, location}) => {
     return (
       <table>
         <tr>
-          <th>header1</th>
-          <th>header2</th>
-          <th>header3</th>
+          <th>Название</th>
+          <th> Дата </th>
+          <th>Версия</th>
         </tr>
 
         {/* map models here */}
-        <tr>
-          <td>hey</td>
-          <td>hey 2</td>
-          <td>hey 3</td>
-        </tr>
 
-        <tr>
-          <td>hey</td>
-          <td>hey 2</td>
-          <td>hey 3</td>
-        </tr>
+        {models ? models.map(model => {
+          return (
+            <tr onClick={() => history.push(`${location.pathname}/${model._id}`)} >
+              <td>{model.title}</td>
+              <td>{model.date}</td>
+              <td>{model.version}</td>
+            </tr>
+          );
+        }) : <p> Моделей нет...</p>}
+        
+
+      
       </table>
     );
 }

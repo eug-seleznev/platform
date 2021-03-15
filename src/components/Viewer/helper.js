@@ -9,37 +9,46 @@ import Viewer from "./index"
 
 
 const Helper = ({match, history}) => {
+    let {name, crypt} = match.params
     const [loaded, setLoaded] = useState(false)
     const dispatch = useDispatch();
     const oauth = useSelector(state => state.projects.oauth);
     const project = useSelector((state) => state.projects.project);
 
 
-    useEffect(async () => {
+    const [urn, setUrn] = useState(null)
+
+    useEffect(() => {
      
-                let crypt = match.params.id;
                 dispatch(Oauth(crypt));
                 dispatch(getProject(crypt));
             
     }, [])
 
+    useEffect(() => {
+      if (project._id && oauth) {
+        //set currnet urn
+        setUrn(project.urnNew.filter((urn) => urn._id === name));
+      }
+    }, [project, oauth]);
+
 
     useEffect(() => {
-        if(oauth && project){
+        if(urn){
             setLoaded(true)
-
         }
-    }, [oauth, project])
+    }, [urn])
 
 
+    if(!loaded){
+        return <p>loading..</p>
+    }
     
 
     return (
-        <>
-        {!loaded ? <p> loading...</p> :(
-            <Viewer oauth={oauth} project={project} />
-        )}
-        </>
+
+            <Viewer oauth={oauth} projectTitle={project.title} urn={urn[0].urn} />
+      
     )
 }
 

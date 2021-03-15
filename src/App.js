@@ -50,6 +50,8 @@ import EditContractor from './components/Superadmin/editContractor'
 import Search from './components/User/Search'
 import Models from './components/Projects/Models';
 import LoadModel from './components/Projects/Models/NewModel';
+import EditUser from './components/User/editUser';
+import Viewer from './components/Projects/model';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -123,9 +125,15 @@ const App = () => {
 
                 <Route
                   exact
+                  path="/projects/:crypt/m/view/:name"
+                  component={Helper}
+                />
+
+                {/* <Route
+                  exact
                   path="/projects/:crypt/m/view/new"
                   component={LoadModel}
-                />
+                /> */}
 
                 <Switch>
                   <Route
@@ -151,6 +159,8 @@ const App = () => {
                 <Route exact path="/users/me/partition" component={Partition} />
 
                 <Route exact path="/users/:id" component={Employe} />
+                <Route exact path="/users/:id/edit" component={EditUser} />
+
                 <Route exact path="/edit" component={Edit} />
                 <Route exact path="/news" component={News} />
                 {/* depatrments */}
