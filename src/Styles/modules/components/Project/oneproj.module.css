@@ -17,6 +17,7 @@
 .sprints {
 	grid-area: sprints;
 	width: 100%;
+	height: max-content;
 }
 .team {
 	grid-area: team;
@@ -37,7 +38,7 @@
 	margin-right: 50px;
 	width: 100%;
  	border:1px solid #8FA7C6;
-	margin-top: 25px;
+	margin-top: 0px;
 	margin-bottom: 25px;
 }
 .hist__sprint {
@@ -206,6 +207,7 @@ border-bottom: none;
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-end;
+	flex-wrap: wrap;
 	text-align: left;
 	width: 100%;
 	border-bottom: 1px solid black;
@@ -216,6 +218,14 @@ border-bottom: none;
 .titleChange{
 	font-size: 24px;
 	font-family: SuisseIntlSemibold;
+	border: none;
+	background-color: #ECECEC;
+	width: fit-content;
+}
+.dateChange{
+	font-size: 16px;
+	margin-top: -4px;
+	font-family: SuisseIntlRegular;
 	border: none;
 	background-color: #ECECEC;
 	width: fit-content;
@@ -263,6 +273,7 @@ border-bottom: none;
 	
 }
 .title__deadline {
+	display: flex;
 	margin-top: 0px;
 	margin-right: 20px;
 	text-align: left;

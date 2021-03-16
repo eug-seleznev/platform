@@ -218,14 +218,16 @@ export const addSprint = (id) => async dispatch  => {
    
 }
 
-export const EditTask = ({ taskTitle, id, focusRow }) => async (dispatch) => {
-  console.log(taskTitle)
+export const EditTask = ({ value, id, focusRow, field }) => async (dispatch) => {
+  console.log(field,value,id)
   try {
 
     let body = {
-      taskTitle: taskTitle!==''?taskTitle:' ',
+      // taskTitle: taskTitle!==''?taskTitle:' ',
+      // deadline: deadline!==''?deadline:'',
       taskid: focusRow,
     };
+    body[field] = value
 
     const res = await innerBackend.put(`projects/sprints/taskedit/${id}`, body);
     dispatch({
@@ -567,14 +569,14 @@ export const finishSprint = (id) => async dispatch  => {
     }
 
 }
-export const addInfoSprint = (id, form) => async dispatch  => {
-    // console.log (form.description, form.date, id)
+export const addInfoSprint = (form, id) => async dispatch  => {
+    console.log (form.date, id)
     let body = {
-        description: form.description,
-        date: form.date,
+        // description: form.description,
+        dateClosePlan: form.date,
     }
     try {
-        const res = await innerBackend.put(`projects/sprints/dd/${id}`, body)
+        const res = await innerBackend.put(`projects/sprints/edit/${id}`, body)
         dispatch({
             type: ADD_INFO_SPRINT,
             payload: res.data
