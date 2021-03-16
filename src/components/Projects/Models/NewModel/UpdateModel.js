@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { postModel } from "../../../../redux/actions/models";
 import { Card } from "../../../../Styles/common";
 
-const UpdateModel = ({ crypt, model }) => {
+const UpdateModel = ({ crypt, model, setUpdate, setSubmited }) => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     crypt: crypt,
@@ -17,25 +17,20 @@ const UpdateModel = ({ crypt, model }) => {
     setFormData({ ...formData, [e.target.name]: e.target.files[0] });
   };
 
-
   useEffect(() => {
-    setFormData({...formData, title: model.title})
-  }, [model])
+    setFormData({ ...formData, title: model.title });
+  }, [model]);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formData)
     dispatch(postModel(formData));
+    setSubmited({ submit: true, loaded: true });
+    setUpdate(false);
   };
   return (
     <Card>
       <form onSubmit={onSubmit}>
-        <input
-          type="file"
-          name="file"
-          // style={{ opacity: 0, cursor: "pointer" }}
-          onChange={(e) => onChangeFile(e)}
-        />
+        <input type="file" name="file" onChange={(e) => onChangeFile(e)} />
         <button type="submit"> submit </button>
       </form>
     </Card>

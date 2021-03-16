@@ -22,12 +22,11 @@ export const postModel = (formData) => async (dispatch) => {
         "content-type": "multipart/form-data",
       },
     });
-
+    console.log(res.data)
     dispatch({
       type: GET_URN,
       payload: res.data,
     });
-    // dispatch(loadUser())
   } catch (err) {
     const errors = err.response.data.errors;
     errors.map((error) => {

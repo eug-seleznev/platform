@@ -21,7 +21,8 @@ const initialState = {
     msg:'',
     sprint_msg:'',
     hey:'', 
-    tagSearch:[]
+    tagSearch:[],
+    modelLoaded: false
 }
 
 export default function(state = initialState, action) {
@@ -204,7 +205,9 @@ export default function(state = initialState, action) {
             case GET_URN:
                 return {
                     ...state,
-                    msg: payload.msg
+                    msg: payload.msg,
+                    project: payload.project,
+                    modelLoaded: true,
                 }
                 case FINISH_PROJECT:
                     return {

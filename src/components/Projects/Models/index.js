@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Loader from './loader'
 import Managment from './Managment';
 import ModelsTable from './ModelsTable';
@@ -11,18 +11,30 @@ import UpdateModel from './NewModel/UpdateModel';
 //merge
 
 const Models = ({match, history, location}) => {
+    const dispatch = useDispatch();
     const {crypt} = match.params
     const project = useSelector(state => state.projects.project)
+    const loadingStatus = useSelector((state) => state.projects.modelLoaded);
+
 
     const [focusRow, setFocusRow] = useState(null) //id of choosen model
-    const [submitedModel, setSubmited] = useState(false) //load new model
+    const [submitedModel, setSubmited] = useState({
+      submit: false,
+      loaded: false
+    }) //load new model
+
 
     const [updateExistModel, setUpdate] = useState(false)
 
+    useEffect(() => {
+      if(loadingStatus){
 
+        setSubmited({...submitedModel, loaded: false, submit: false})
+      }
+    }, [project])
 
     const submitModel = () => {
-      setSubmited(!submitedModel)
+      setSubmited({ ...submitedModel, submit: !submitedModel.submit });
     }
 
 
@@ -41,7 +53,8 @@ const Models = ({match, history, location}) => {
             setUpdate={setUpdate}
           />
 
-          {!submitedModel ? (
+          {!submitedModel.submit ? (
+            // ВСЕ МОДЕЛИ ПРОЕКТА
             <ModelsTable
               focusRow={focusRow}
               setFocus={setFocusRow}
@@ -50,10 +63,17 @@ const Models = ({match, history, location}) => {
               location={location}
             />
           ) : (
-            <LoadModel crypt={crypt} />
+            // ЗАГРУЗКА НОВОЙ МОДЕЛИ
+            <div>
+              {!submitedModel.loaded ? (
+                <LoadModel crypt={crypt} setSubmited={setSubmited} />
+              ) : (
+                <p>Модель загружается</p>
+              )}
+            </div>
           )}
           {focusRow && updateExistModel && (
-            <UpdateModel crypt={crypt} model={focusRow} />
+            <UpdateModel crypt={crypt} model={focusRow} setUpdate={setUpdate} setSubmited={setSubmited} />
           )}
         </div>
       </Loader>
