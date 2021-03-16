@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Oauth } from "../../redux/actions/models"
+import { Oauth, Status } from "../../redux/actions/models"
 import { getProject } from "../../redux/actions/projects"
 import Viewer from "./index"
+import Loader from "./Loader"
 
 
 
@@ -16,28 +17,28 @@ const Helper = ({match, history}) => {
     const project = useSelector((state) => state.projects.project);
 
 
+    const status = useSelector(state => state.models.status)
+
     const [urn, setUrn] = useState(null)
 
     useEffect(() => {
      
                 dispatch(Oauth(crypt));
+                dispatch(Status({crypt, name}))
                 dispatch(getProject(crypt));
             
     }, [])
 
     useEffect(() => {
-      if (project._id && oauth) {
+      if (project._id && oauth &&status ) {
         //set currnet urn
         setUrn(project.urnNew.filter((urn) => urn._id === name));
+        setLoaded(true);
+
       }
-    }, [project, oauth]);
+    }, [project, oauth, status]);
 
 
-    useEffect(() => {
-        if(urn){
-            setLoaded(true)
-        }
-    }, [urn])
 
 
     if(!loaded){
@@ -46,10 +47,10 @@ const Helper = ({match, history}) => {
     
 
     return (
-
-            <Viewer oauth={oauth} projectTitle={project.title} urn={urn[0].urn} />
-      
-    )
+      <Loader status={status} crypt={crypt} name={name}>
+        <Viewer oauth={oauth} projectTitle={project.title} urn={urn[0].urn} />
+      </Loader>
+    );
 }
 
 

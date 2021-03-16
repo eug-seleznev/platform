@@ -88,6 +88,11 @@ const App = () => {
           <LoginContainer>
             <Route exact path="/" component={Auth} />
             <Route exact path="/:id/viewer" component={PublicViewer} />
+            <Route
+              exact
+              path="/projects/:crypt/m/view/:name/public"
+              component={Helper}
+            />
           </LoginContainer>
         ) : (
           <>
@@ -129,6 +134,11 @@ const App = () => {
                   component={Helper}
                 />
 
+                <Route
+                  exact
+                  path="/projects/:crypt/m/view/:name/public"
+                  component={Helper}
+                />
                 {/* <Route
                   exact
                   path="/projects/:crypt/m/view/new"

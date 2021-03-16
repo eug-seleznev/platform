@@ -5,7 +5,7 @@ import { GET_STATUS, CLEAR_MODEL_DATA } from "../types";
 
 const initialState = {
     urn: null,
-    status: ''
+    status: null
 }
 
 
