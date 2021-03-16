@@ -9,17 +9,19 @@ import Loader from "./Loader"
 
 
 
-const Helper = ({match, history}) => {
+const Helper = ({match}) => {
     let {name, crypt} = match.params
-    const [loaded, setLoaded] = useState(false)
     const dispatch = useDispatch();
+
     const oauth = useSelector(state => state.projects.oauth);
     const project = useSelector((state) => state.projects.project);
 
 
     const status = useSelector(state => state.models.status)
 
-    const [urn, setUrn] = useState(null)
+
+    const [loaded, setLoaded] = useState(false); //data loading from server
+    const [urn, setUrn] = useState(null) //urn from params
 
     useEffect(() => {
      
