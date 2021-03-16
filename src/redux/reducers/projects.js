@@ -1,5 +1,5 @@
 
-import { ADD_SPRINT,SORT_PROJECTS, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL, EDIT_TASK, CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR, GET_URN, DELETE_SPRINT, CLEAR_URN, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG } from '../types'
+import { ADD_SPRINT,SORT_PROJECTS, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL, EDIT_TASK, CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR, GET_URN, DELETE_SPRINT, CLEAR_URN, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, ADD_TAG, DELITE_USER, DELITE_TAG, ADD_USER_TO_TEAM } from '../types'
 
 
 
@@ -21,7 +21,8 @@ const initialState = {
     msg:'',
     sprint_msg:'',
     hey:'', 
-    tagSearch:[]
+    tagSearch:[],
+    modelLoaded: false
 }
 
 export default function(state = initialState, action) {
@@ -70,6 +71,16 @@ export default function(state = initialState, action) {
                             ...state,
                             tagSearch:payload
                         }
+                case DELITE_USER:
+                    return {
+                        ...state,
+                        project: payload
+                    }
+                case DELITE_TAG:
+                    return {
+                        ...state,
+                        sprint: payload.sprint
+                    } 
                 case EDIT_TASK: 
                     return {
                         ...state,
@@ -86,6 +97,11 @@ export default function(state = initialState, action) {
                         msg:'',
                         sprint_msg:'',
                         hey:''
+                    }
+                case ADD_USER_TO_TEAM:
+                    return {
+                        ...state,
+                        project: payload,
                     }
                 case ADD_USER_TO_TASK:
                     return {
@@ -118,7 +134,7 @@ export default function(state = initialState, action) {
                     loadProject: false,
                     reload: true,
                     error: '',
-                    sprint_msg:payload.msg,
+                    // sprint_msg:payload.msg,
                 }
             case ADD_INFO_SPRINT: 
                 return {
@@ -166,7 +182,7 @@ export default function(state = initialState, action) {
                     trick: true,
                     loadSprints: true,
                     sprintLoad: false,
-                    sprint: null,
+                    sprint: [],
                     error: ''
                 }
             case GET_SPRINT:
@@ -189,7 +205,9 @@ export default function(state = initialState, action) {
             case GET_URN:
                 return {
                     ...state,
-                    msg: payload.msg
+                    msg: payload.msg,
+                    project: payload.project,
+                    modelLoaded: true,
                 }
                 case FINISH_PROJECT:
                     return {
@@ -216,10 +234,16 @@ export default function(state = initialState, action) {
                     // loadProject: false,
                     // loadedAllProj: false
                 }
+            case ADD_TAG:
+                    return {
+                    ...state,
+                    sprint: payload
+                } 
                 case FINISH_TASK:
                     return {
                     ...state,
-                    hey: payload
+                    hey: payload.msg,
+                    sprint: payload.sprint
                 }   
             case SPRINT_ERROR:
                 return {

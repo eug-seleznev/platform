@@ -3,10 +3,11 @@ import { Button } from "../../../Styles/buttons"
 import { Card } from "../../../Styles/common"
 import './sprintdescr.css' //css испортируется тут глобальный. У нас глобальный уже создан ниже, и делать новый смысла нет - тут нужны modules
 import style from '../../../Styles/modules/components/Project/oneproj.module.css'
-import { Light,Regular } from "../../../Styles/typography"
+import { Bold, Light,Regular, Thin } from "../../../Styles/typography"
 import { useSelector,useDispatch} from "react-redux"
 import { addToChosen } from '../../../redux/actions/auth'
-const SprintDescription = ({projStatus, dateOpen,taskcomplite, alltasks, history, id, params,descr, dateClosePlan}) => {
+import Tag from "./OneProject/tag"
+const SprintDescription = ({projStatus,tags, dateOpen,taskcomplite, alltasks, history, id, params,descr, title, dateClosePlan}) => {
 	
 	const dispatch = useDispatch();
 	const [loaded, setLoaded] = useState (0)
@@ -32,6 +33,7 @@ const SprintDescription = ({projStatus, dateOpen,taskcomplite, alltasks, history
 		
 	},[actualClose])
 	useEffect (()=> {
+		console.log()
 		if (dateClosePlan!=null) {
 			let d2 = new Date (dateClosePlan.slice(0, 10).replace(/-/g, "/"))
 			
@@ -52,46 +54,87 @@ const SprintDescription = ({projStatus, dateOpen,taskcomplite, alltasks, history
 
 
 	return (
-	<>
-		{!loaded?<div>loading...</div>:(
-		<div>
-		
-			<Card className={style.card}style={{border:`${!status?'5px solid transparent':'5px solid green'}`}}>
-				<div>
-					<div className={style.card__date1}>
-						<Light size='20'>{dateOpen.slice(5,10).split('-').reverse().join('.')}-{dateClosePlan === null?'??': dateClosePlan.slice(5,10).split('-').reverse().join('.')}
-						</Light>
-					</div>
-					<div className={style.card__title}>
-						<Regular size='30'>Спринт {dateOpen.slice(5,10).split('-').reverse().join('.')}
-						</Regular>
-					</div>
-					<div className={style.card__descr}>
-						<Light size='16'>{descr}</Light>
-					</div>
-				</div>
-				<div>
-					<div className={style.card__date2}> <Light  size='16'>Дней до дедлайна: {diff.toString().slice(0,2)}</Light></div>
-					<div className={style.card__tasks}> 
-						<Regular>Задачи</Regular> 
-						<div className={style.card__tasks}> 
-							<div className={style.card__thing}><div style={{width:`${Math.trunc(taskcomplite/alltasks*100)}%`}} className={style.card__thing__full}></div></div>
-							<Regular>{taskcomplite}/{alltasks}</Regular>
-						</div>
+    <>
+      {!loaded ? (
+        <div>loading...</div>
+      ) : (
+        <div>
+          <div className={style.card}>
+            <div className={style.first__row}>
+              <div className={style.card__title}>
+                <Light
+                  size="24"
+                  color="#3F496C"
+                  className={style.link}
+                  onClick={() => history.push(`./${params.id}/${id}`)}
+                >
+				{title}
+                </Light>
+              </div>
+
+              <img
+                src="/star.png"
+                onClick={chosenSprint}
+                style={{
+                  cursor: "pointer",
+                  backgroundColor: `${status ? "#ff9800" : "white"}`,
+                }}
+                className={style.chosen}
+              ></img>
+            </div>
+            <div className={style.second__row}>
+              <div className={style.card__tasks}>
+                <div className={style.card__thing}>
+                  <div
+                    style={{
+                      width: `${Math.trunc((taskcomplite / alltasks) * 100)}%`,
+                    }}
+                    className={style.card__thing__full}
+                  ></div>
+                </div>
+                <Thin>
+                  {taskcomplite}/{alltasks}
+                </Thin>
+              </div>
+              <div className={style.tags}>
+                {tags.length !== 0 ? (
+                  tags.map((el, i) => {
+                    if (el !== null) {
+                      return (
+                        <Tag
+                          tagText={el}
+                          tagColor={
+                            i == 0 ? "#C8D9E9" : i == 1 ? "#E9E3C8" : "#AAF8A8"
+                          }
+                          key={i}
+                        />
+                      );
+                    }
+                  })
+                ) : (
+                  <Thin>Тегов нет</Thin>
+                )}
+              </div>
+            </div>
+
+            <div>
+              {/* <div className={style.card__date2}> <Light  size='16'>Дней до дедлайна: {diff.toString().slice(0,2)}</Light></div> */}
+              {/* <div className={style.card__tasks}> 
 						
 						
-					</div>
-					<div className={style.card__buttons} style={{display:`${projStatus?'none':'flex'}`}} >
+						
+						
+					</div> */}
+              {/* <div className={style.card__buttons} style={{display:`${projStatus?'none':'flex'}`}} >
 						
 						<Button fontSize={'16px'}padd={'5px'}  onClick={chosenSprint} grey>{!status? 'Добавить в избранное': 'Убрать из избранного'}</Button>
-						<Button fontSize={'16px'} onClick={() => history.push(`/projects/${params.id}/${id}`)}>Подробнее</Button>
-					</div>
-				</div>
-				</Card>
-			</div>
-			
-		)}
-		</>
-	)
+						<Button fontSize={'16px'}>Подробнее</Button>
+					</div> */}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
 }
 export default SprintDescription

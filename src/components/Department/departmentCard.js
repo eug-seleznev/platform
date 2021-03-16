@@ -100,11 +100,11 @@ const [showConfirm, setShowConfirm] = useState(false)
        
             <div className={styles.container} style={{height: `${pageStatus?'60px':'auto'}`,overflowY: `${pageStatus?'hidden':'visible'}`}}>
             <Bold className={styles.title} title={pageStatus?'Открыть отдел':''} onClick={()=>departStatus()} style={{cursor: `${itsAllDepsPage?'pointer':'default'}`}} size='30'>{department!==null?department.divname:''}</Bold>
-            {button?
+            {/* {button?
                  <Bold className={styles.joinBtn}  size='16px' color='#3F496C' onClick={()=>setShowConfirm(true)}>Выйти из отдела</Bold>:
                  <Bold className={styles.joinBtn}  size='16px' color='#3F496C' onClick={join}>Присоединиться к отделу</Bold>
        
-            }
+            } */}
                 <div className={styles.members}>
             {department!==null?<div style={{display:`${department.members.length!==0?'none':'block'}`}}>В этом отделе нет сотрудников</div>:''}
            

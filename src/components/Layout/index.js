@@ -77,7 +77,7 @@ const Layout = ({ histCurrent}) => {
         setStatus(true)
     }
     const addPodsos =()=>{
-        setCurrentTitle ('Добавить смежника')
+        setCurrentTitle ('Добавить субподрядчика')
         setCurrentElem ('addPodsos')
         setStatus(true)
     }

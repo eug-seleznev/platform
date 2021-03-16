@@ -10,30 +10,63 @@ import { useDispatch, useSelector } from "react-redux"
 
 
 
-import { allProjects, sortProjects } from '../../redux/actions/projects';
+import { allProjects, sortProjects, sorType } from '../../redux/actions/projects';
+
+
+
+
+
+
 
 import style from '../../Styles/modules/components/Project/allproj.module.css'
-import { Table, Tr, Td } from '../../Styles/tables';
+import { Table, Tr, Td, Select } from '../../Styles/tables';
 import { Card, } from '../../Styles/common'
 import { H1} from '../../Styles/typography'
 import {Circle} from '../../Styles/project'
 
-let  types = ['все', "общественное пространство", "Частный дом", "Визуализация", "Интерьер", "ЖК"]
 
-const Projects = ({history}) => {
+let field = "type";
+let  types = ['Все', "общественное пространство", "Частный дом", "Визуализация", "Интерьер", "ЖК"]
+
+const Projects = ({history, match, location}) => {
     const dispatch = useDispatch();
+
     const projects = useSelector(state => state.projects.projects)
     const [orderSort, setOrder] = useState(false)
+    const [value, setActiveField] = useState(
+      decodeURI(location.search).split("?")[1]
+    );
     useEffect (()=>{
-           dispatch(allProjects()) 
+           
     }, [])
 
+  useEffect(() => {
+    if(location.search){
+      // console.log(decodeURI(location.search))
+      // let value = location.search.split("?")[1];
 
+      // value = decodeURI(value);
+      // setActiveField(decodeURI(value));
+      console.log(value)
+      // console.log(field, activeField);
+      
+
+
+      dispatch(sorType({ field, value }));
+    } else {
+       
+         dispatch(allProjects());
+       
+    }
+    
+
+  }, []);
     
     if(!projects){
         return <p> loading...</p>
     }
 
+  
 
 
     const sortFunction = (query) => {
@@ -43,8 +76,10 @@ const Projects = ({history}) => {
 
 
     const projectType = (e) => {
-      console.log(e.target.value)
-      //server call
+      let field = 'type'
+      let value = e.target.value;
+      dispatch(sorType({field, value}))
+
     }
 
 
@@ -71,11 +106,11 @@ const Projects = ({history}) => {
               <Td className={style.turn__off}>Статус</Td>
               <Td className={style.turn__off}>
                 <form>
-                  <select onChange={projectType}>
+                  <Select onChange={projectType} style={{width:'80%'}}>
                     {types.map((type) => {
                       return <option value={type}>{type}</option>;
                     })}
-                  </select>
+                  </Select>
                 </form>
               </Td>
               <Td>Спринты</Td>

@@ -80,6 +80,30 @@ export const ButtonText =  styled.button`
 
 `
 
+export const ButtonTextDiv =  styled.div`
+  display: inline-block;
+  border: none;
+  background: none;
+  width: max-content;
+  padding: 0;
+
+  font-size:${props => props.fontSize};
+  font-family: SuisseIntlRegular;
+  
+ 
+  outline: none;
+  text-decoration: none;
+  color:  ${props => props.color || '#3F496C'};
+  ;
+
+  &:hover{
+  text-decoration: underline;
+
+
+}
+
+
+`
 export const FilterButton = styled.div`
 display: inline-block;
 outline:none;

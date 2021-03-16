@@ -11,11 +11,18 @@
     grid-area: inWork;
     margin-top: auto;
     margin-bottom: auto;
+cursor: pointer;
+    transition: all .3s ease-in-out;
+    opacity: 0.6;
+}
+.inWork:hover{
+    transform: scale(1.2);
 }
 .deleteBtn{
     grid-area: cross;
     margin-top: auto;
     margin-bottom: auto;
+    cursor: pointer;
     transition: all .3s ease-in-out;
 }
         .deleteBtn:hover{
@@ -36,9 +43,11 @@
     row-gap: 10px;
 }
 .title{
+    max-width: 350px;
     grid-area: title;
 }
 .text{
+    max-width: 350px;
     grid-area: texts;
 
 }

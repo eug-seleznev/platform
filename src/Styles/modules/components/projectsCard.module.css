@@ -1,48 +1,39 @@
-.projContainer{
-    display: grid;
-    grid-template-areas:
-    '. dates'
-    'title leftt'
-    'descr descr'
-    'sprints sprints'
-    ' filter button'
-    ;
-    height: max-content;
+.projContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 105px;
+    border: 1px solid #8FA7C6;
+
 }
+.projtop {
+    display: flex;
+    justify-content: space-between;
+}
+.end {
+    display: flex;
+    justify-content: flex-end;
+}
+.title {
+    margin-top: 5px;
+}
+.title:hover {
+    color: #445AAA;
+    text-decoration: underline;
+}
+.tags {
+    display: flex;
   
-  .title{
-        grid-area: title;
-        padding-bottom: 10px;
-    }
-    .description{
-        grid-area: descr;
-        padding-bottom: 50px;
-        width: 75%;
-    }
-    .dates{
-        grid-area: dates;
-        text-align: right;
-    }
-    .left{
-        grid-area: leftt;
-        text-align: right;
-    }
-    .filter{
-        grid-area: filter;
-        display: grid;
-        justify-content: left;
-        align-content: center;
-    }
-    .button{
-        grid-area: button;
-    }
-    .sprints{
-        grid-area: sprints;
-    }
-
-@media (max-width: 800px){
-
-    .projContainer{
-        
-    }
+    transform: translateY(10px);
 }
+.tags div {
+    margin-right: 20px;
+}
+ @media(max-width:1000px) {
+    
+    .projtop {
+        display: flex;
+        flex-direction: column;
+    }
+    
+ }

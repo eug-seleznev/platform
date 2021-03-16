@@ -2,11 +2,11 @@ import styled from 'styled-components'
 
 
 export const Container = styled.div`
-padding-left:  250px;
+padding-left:  150px;
 padding-right:  70px;
 width: 100%;
 height: 100%;
-padding-top: 200px;
+padding-top: 110px;
 padding-bottom: 200px;
 background-color:${props=> props.background};
 
@@ -20,7 +20,7 @@ background-color:${props=> props.background};
 
 
 
-@media (max-width:700px){
+@media (max-width:1000px){
     width: 100vw;
     padding-left:5px;
     padding-top: 110px;
@@ -103,9 +103,9 @@ background-color: white;
 
 export const InfoCard = styled.div`
 padding: 10px;
-padding-left:20px;
-border: 1px solid #CECECE;
-border-radius: 15px;
+padding-left:3px;
+border-top: 1px solid #CECECE;
+
 height:auto;
 @media(max-width:700px) {
     padding: 10px;
@@ -114,10 +114,8 @@ height:auto;
 `
 export const Card = styled.div`
 background: #FFFFFF;
-
 padding: 10px;
 padding-left:20px;
-border: 1px solid #CECECE;
 border-radius: 15px;
 @media(max-width:700px) {
     padding: 10px;
@@ -129,8 +127,8 @@ background: #FFFFFF;
 
 padding: 5px;
 padding-left:10px;
-border: 1px solid #CECECE;
-border-radius: 5px;
+border: 1px solid #8FA7C6;
+border-radius: 8px;
 @media(max-width:700px) {
     padding: 10px;
     padding-left:10px;   

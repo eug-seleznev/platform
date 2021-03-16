@@ -1,28 +1,21 @@
 import styles from '../../Styles/modules/components/projectsCard.module.css'
 import { Card } from '../../Styles/common'
-import { Button } from '../../Styles/buttons'
-import { Bold,Light,Thin, Regular } from '../../Styles/typography'
+import { Bold,Light } from '../../Styles/typography'
 import { useEffect, useState } from 'react'
-import  MySprint from './mySprint'
+import { Link } from 'react-router-dom'
+import Tag from '../Projects/components/OneProject/tag'
+import { Circle } from '../../Styles/project'
 
 
 
 
 
 
-const ProjectsCard = ({project,permission, sprints, history}) => {
+const ProjectsCard = ({project}) => {
 
-    const [filt, setFilt] = useState(null)
     const [daysLeft, setDaysLeft] = useState(null)
 
-        useEffect(()=>{
-            if (sprints!=undefined){
-                const filtered = sprints!=undefined && sprints.filter(item => filterAll(item._id))  
 
-                setFilt(filtered)
-                
-            } 
- },[])
  
  useEffect(()=>{
      const now = new Date()
@@ -32,52 +25,43 @@ const ProjectsCard = ({project,permission, sprints, history}) => {
     setDaysLeft(days)
  },[])
 
-        
-    let filterAll = (item) => {
-        return project.sprints.some((el) => el._id == item);
-    };
 
-
-    return(
+    return (
+      
         <Card className={styles.projContainer}>
-
-                
-                    <Bold size='24' className={styles.title} >{project.title}</Bold>
-                    <Light size='16' className={styles.description}>{project.about!=null? project.about: 'Короткое описание проекта'}</Light>
-                    <Light size='18' className={styles.dates} >
-                        {project.dateStart ? project.dateStart.slice(5,10).split('-').reverse().join('.') : '??' 
-                        +' \u2014 '+ 
-                        project.dateFinish ? project.dateFinish.slice(5,10).split('-').reverse().join('.') : '??'} 
-                    </Light>
-                    <Light size='18' className={styles.left}>Осталось: {daysLeft} {daysLeft<1?'день': daysLeft<5? 'дня': 'дней'}</Light>
-                    <Light size='16' className={styles.filter}>#ЭП</Light>
-                    <Button className={styles.button} onClick={() => history.replace(`/projects/${project.crypt}`)}>Подробнее</Button>
-                    <div className={styles.sprints}>
-                      
-                       
-                        {
-                            permission==='admin'&&project.sprints!=undefined
-                            ? 
-                            project.sprints.map((item, i)=>{
-                                    return(
-                                        <MySprint key={i} content={item}/>
-                                    )
-                            })
-                            :
-                        sprints!=undefined && filt !=null && filt.map((item,i)=>{
-                            return(
-                              <MySprint key={i} content={item}/>
-                            )
-                        })}
-                        
-                            
-                        
-                        
-                        
-                    </div>              
-                            
-            
+          <div>
+          <div className={styles.end}>
+            {
+            project.sprints.length==0?<Circle red />:<Circle green />
+          }
+          
+          <Bold size="12" color="#848484" style={{marginLeft:'20px'}} >
+            {" "}
+            {daysLeft>0?daysLeft:'?'} {daysLeft < 0?"дней до дедлайна":daysLeft < 1 ? "день до дедлайна" : daysLeft < 5 ? "дня до дедлайна" : "дней до дедлайна"}
+          </Bold>
+          </div>
+          <div className={styles.projtop}>
+          <Link  style={{textDecoration: 'none'}}to={`projects/${project.crypt}`}>
+            <Light size="24" color='#3F496C' className={styles.title}>
+              {project.title}
+            </Light>
+          </Link>
+          {/* <Light size="16" className={styles.description}>
+            {project.about != null
+              ? project.about
+              : "Короткое описание проекта"}
+          </Light> */}
+          
+          
+          </div>
+          </div>
+          <div className={styles.tags}>
+            <Tag  tagText={project.stage} tagColor='#E9E3C8'/>   
+            <Tag tagText={project.type} tagColor='#C8D9E9'/>
+          </div>
+         
         </Card>
-    )
+      
+    );
 }
 export default ProjectsCard

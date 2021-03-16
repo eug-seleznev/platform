@@ -33,29 +33,39 @@ const Employe = ({match, history}) => {
         } 
      },[myUser])
     return (
-        <div style={{display: history.location.pathname === '/users/me'? 'none' : 'block'}}>
-        {!loaded? (<div>loading...</div>):
-          ( 
-            <div className={styles.mainContainer}>
-
-            <ProfileComponent user={user} history={history}/>
-
+      <div
+        style={{
+          display: history.location.pathname === "/users/me" ? "none" : "block",
+        }}
+      >
+        {!loaded ? (
+          <div>loading...</div>
+        ) : (
+          <div className={styles.mainContainer}>
+            <ProfileComponent user={user} history={history} />
+            {myUser.permission === "admin" && (
+              <p onClick={() => history.push(`/users/${id}/edit`)}> Изменить</p>
+            )}
             <div className={styles.projects}>
-                    <Bold color='black' size='36' className={styles.myProj}>Проекты сотрудника</Bold>
+              <Bold color="black" size="36" className={styles.myProj}>
+                Проекты сотрудника
+              </Bold>
 
-                    {user.projects.map((el,i)=>{
-                        
-                        return(
-                            <ProjectsCard project={el} permission={permission} sprints={user.sprints} history={history}/>
-                        )
-                    })}
-                    
+              {user.projects.map((el, i) => {
+                return (
+                  <ProjectsCard
+                    project={el}
+                    permission={permission}
+                    sprints={user.sprints}
+                    history={history}
+                  />
+                );
+              })}
             </div>
           </div>
-            )
-        }
-        </div>
-    )
+        )}
+      </div>
+    );
 }
 
 

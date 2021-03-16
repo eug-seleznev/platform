@@ -1,14 +1,14 @@
 import { innerBackend } from "../../components/utils/axios";
-import { ALL_USERS, USER_ERR, CHANGE_PERMISSION, PERM_RETURN, ONE_USER,SEARCH_USER,BACK_WHITE, CLEAR_ERROR, CLEAR_MSG,ADD_CONTRACTOR,ALL_CONTRACTORS, ERROR_MSG, GREEN_MSG,PARTITION_UPDATE} from "../types";
+import { ALL_USERS, USER_ERR,EDIT_CONTRACTOR, CHANGE_PERMISSION, PERM_RETURN,ONE_CONTRACTOR, ONE_USER,SEARCH_USER,BACK_WHITE, CLEAR_ERROR, CLEAR_MSG,ADD_CONTRACTOR,ALL_CONTRACTORS, ERROR_MSG, GREEN_MSG,PARTITION_UPDATE} from "../types";
 
 
 
 
 
-export const allContractors = () => async dispatch  => {
+export const allContractors = ({query, sortOrder}) => async dispatch  => {
   try {
-      // console.log('hello all users?')
-      const res = await innerBackend.get('/merc/find?name=all')
+      console.log(query, sortOrder)
+      const res = await innerBackend.get(`/merc/search?name=all&field=${query}&order=${sortOrder}`)
       dispatch({
           type: ALL_CONTRACTORS,
           payload: res.data
@@ -53,6 +53,47 @@ export const allUsers = ({query, sortOrder}) => async dispatch  => {
 }
 
 
+export const userSearch = (formData) => async dispatch => {
+  try {
+    ///users/usr/get?name=huila&division=govnoedi&partition=HUY
+    const res = await innerBackend.get(`users/usr/get?name=${formData.name}&division=${formData.division}&partition=${formData.partition}&crypt=${formData.crypt}`)
+    dispatch({
+      type: SEARCH_USER,
+      payload: res.data
+    });
+  } catch (err) {
+    alert('aaaaaaaaaaaaaaa')
+  }
+}
+
+//PUT /users/edit/:id
+//edit another user profile 
+
+export const changeUserProfile = ({formData, id}) => async (dispatch) => {
+
+  try {
+    console.log("hello change", formData);
+    const res = await innerBackend.put(`/users/edit/${id}`, formData);
+    dispatch({
+      type: ONE_USER,
+      payload: res.data,
+    });
+    dispatch({
+      type: GREEN_MSG,
+      payload: res.data,
+    });
+  } catch (err) {
+    const errors = err.response.data.err;
+    errors.map((error) => {
+      return dispatch({
+        type: ERROR_MSG,
+        payload: error.msg,
+      });
+    });
+  }
+};
+
+
 export const usersPartition = (partition) => async dispatch =>  {
   try {
     let body = {
@@ -95,6 +136,52 @@ export const searchUser = (request) => async dispatch  => {
   }
 
 }
+export const editContractor = (id, formData) => async dispatch  => {
+  try {
+      console.log(formData)
+      const res = await innerBackend.put(`/merc/new/edit/${id}`,formData)
+      dispatch({
+          type: EDIT_CONTRACTOR,
+          payload: res.data
+      })
+      // setAuthToken(localStorage.token);
+
+    }
+    catch (err) {
+      const error = err.response.data.err;
+      
+         return dispatch({
+          type: ERROR_MSG,
+          payload: error
+    
+      })
+          
+    } 
+
+}
+export const getContractor = (id) => async dispatch  => {
+  try {
+      // console.log('hello 1 user?')
+      const res = await innerBackend.get(`/merc/search?name=${id}`)
+      dispatch({
+          type: ONE_CONTRACTOR,
+          payload: res.data
+      })
+      // setAuthToken(localStorage.token);
+
+    }
+    catch (err) {
+      const errors = err.response.data.err;
+      errors.map(error => {
+         return dispatch({
+          type: ERROR_MSG,
+          payload: error.msg
+      })
+      })
+          
+    } 
+
+}
 export const getUser = (id) => async dispatch  => {
   try {
       // console.log('hello 1 user?')
@@ -128,15 +215,13 @@ export const addContractor = (formData) => async dispatch  => {
   let body = {
     name:formData.name,
     lastname: formData.lastname,
-    job: formData.job,
-    contacts: {
-      phone:formData.phone,
-      email:formData.email
-    }
+    partition:formData.partition,
+    phone:formData.phone,
+    email:formData.email
   }
   try {
       console.log(body)
-      const res = await innerBackend.post(`/merc`, body)
+      const res = await innerBackend.post(`/merc/new`, body)
       dispatch({
           type: ADD_CONTRACTOR,
           payload: res.data
@@ -149,17 +234,18 @@ export const addContractor = (formData) => async dispatch  => {
 
     }
     catch (err) {
-      const errors = err.response.data.err;
-      errors.map(error => {
-         return dispatch({
+      const error = err.response.data.err;
+      console.log(error)
+    
+         dispatch({
           type: ERROR_MSG,
-          payload: error.msg
-      })
-      })
+          payload: error
+         })
+    
           
-    } 
+    
 
-}
+}}
 export const permissionReturn = () =>  dispatch => {
   return dispatch({
     type: PERM_RETURN,

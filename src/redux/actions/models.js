@@ -22,12 +22,11 @@ export const postModel = (formData) => async (dispatch) => {
         "content-type": "multipart/form-data",
       },
     });
-
+    console.log(res.data)
     dispatch({
       type: GET_URN,
       payload: res.data,
     });
-    // dispatch(loadUser())
   } catch (err) {
     const errors = err.response.data.errors;
     errors.map((error) => {
@@ -65,22 +64,24 @@ export const Oauth = (crypt) => async (dispatch) => {
 
 
 
-export const Status = (crypt) => async (dispatch) => {
+export const Status = ({crypt, name}) => async (dispatch) => {
   try {
      console.log('started')
      let date = new Date().getMilliseconds();
-    const res = await Axios.get(`/up/status/p/${crypt}`, {
-      baseURL:url,
+    const res = await Axios.get(`/up/status/p/${crypt}?id=${name}`, {
+      baseURL: url,
       headers: {
         "content-type": "application/json",
       },
     });
+    console.log(res.data, 'RES DATA HERE')
     dispatch({
       type: GET_STATUS,
       payload: res.data.progress +' '+ date,
     });
   } catch (err) {
     const errors = err.response.data.errors;
+    console.log(errors);
     errors.map((error) => {
       return dispatch({
         type: ERROR_MSG,

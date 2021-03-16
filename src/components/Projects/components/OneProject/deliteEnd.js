@@ -73,7 +73,7 @@ const DeliteEnd = ({id, hist}) => {
 				{" "}
 				{user.permission === "user" ? "" : "Удалить проект"}
 				<div style={{display:`${confirm?'block':'none'}`, zIndex:2222}}>
-					<Confirm buttonTitle={buttonTitle} handleEnd={handleEnd} handleDelete={handleDelete} openConfirm={openConfirm} title={project.title}></Confirm>
+					<Confirm type='проект' buttonTitle={buttonTitle} handleEnd={handleEnd} handleDelete={handleDelete} openConfirm={openConfirm} title={project.title}></Confirm>
 				</div>
 				</StyledIn>
 				

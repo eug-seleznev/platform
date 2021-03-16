@@ -1,6 +1,6 @@
 import style from '../../../../Styles/modules/components/Project/oneproj.module.css'
 import { useDispatch, useSelector } from "react-redux";
-import {Button} from '../../../../Styles/buttons'
+import {Button, CancelButton} from '../../../../Styles/buttons'
 import { Bold, H1} from '../../../../Styles/typography'
 import ProjTeam from './oneTeammate'
 import { getProject, joinTeam } from '../../../../redux/actions/projects';
@@ -16,7 +16,7 @@ const ProjectTeam = ({id, hist}) => {
 	const dispatch = useDispatch();
   const [idArray] = useState([])
   const [button,setButton] = useState(false)
-  const [open,setOpen] = useState(false)
+  const [open,setOpen] = useState(true)
   const [modal,setModal] = useState(false)
     const user = useSelector(state => state.auth.user) 
    	const project = useSelector(state => state.projects.project)
@@ -79,7 +79,7 @@ const ProjectTeam = ({id, hist}) => {
             srcplus={button} 
             buttonFunc={hadleTeam} 
             subtwidth='90%' 
-            buttonActive={true}
+            // buttonActive={true}
         >
         </Subtitle> 
         <div style={{display:`${modal?'block':'none'}`}}>
@@ -90,7 +90,7 @@ const ProjectTeam = ({id, hist}) => {
         
       </div>   
             <div className={style.sprintdescr__cont}>
-              <SmallCard style={{width:'90%'}}>
+              <SmallCard >
                
                 {project.team2!==undefined? project.team2.map((user, i) => {
                       return (
@@ -101,13 +101,15 @@ const ProjectTeam = ({id, hist}) => {
                           userName={user.user.fullname}
                           lastName={user.user.lastname} 
                           userAvatar={user.user.avatar} 
-                          userPos={user.position}>
+                          userPos={user.position}
+                          userTask={user.task}
+                          >
                         </ProjTeam>
                       );
                     }):''}
                     
                   
-                  <br />
+                    <CancelButton onClick={hadleTeam} fontSize='14px' style={{paddingBottom:'10px',paddingTop:'10px',backgroundColor:'white', color:'#397BB8', border:'none',marginTop:'10px',textAlign:'start'}}>{button?'Выйти из команды':'Вступить в команду'} </CancelButton>
                 
 {/*                     
                      {  

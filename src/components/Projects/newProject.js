@@ -13,6 +13,7 @@ const ProjectNew = ({history,closeWindow}) => {
     const dispatch = useDispatch();
     const project = useSelector(state => state.projects.project)
     const userList = useSelector(state => state.users.users)
+    const createMsg = useSelector (state => state.messages.msg)
     const searchResult = useSelector(state => state.users.searchResult)
     const [checked, setChecked] = useState (false)
     const [menu, setMenu] = useState (false)
@@ -62,15 +63,18 @@ const ProjectNew = ({history,closeWindow}) => {
       }
       //смена фона
       useEffect(()=>{ 
-       
         dispatch(background('white'))
-      
-      }, [])
-      useEffect(()=>{ 
         return () => {
-        dispatch(background('#ECECEC'))
-      }
+          dispatch(background('#ECECEC'))
+        }
       }, [])
+     useEffect(()=>{
+        if(createMsg.includes('Проект')){
+          setTimeout(() => {
+            history.replace('./../projects')
+          },100) 
+        }
+     },[createMsg])
      //
       const returnToSearch =()=>{
         setUserStage(1)
@@ -132,7 +136,9 @@ const ProjectNew = ({history,closeWindow}) => {
      
      
      const onSubmit = async e => {
+        setStep(1)
         e.preventDefault();
+        console.log('submit')
         dispatch(newProject(formData))
         setIdList([])
         setTimeout(() =>
@@ -141,7 +147,7 @@ const ProjectNew = ({history,closeWindow}) => {
           title: '',   
           dateStart: '', 
           city: '',  
-          type: '',
+          type: 'ЖК',
           stage: 'Концепт',
           par:'ХХ',
           dateFinish: '',
@@ -155,9 +161,7 @@ const ProjectNew = ({history,closeWindow}) => {
           cusStorage:''
         }),50) 
        
-        setTimeout(() => {
-          history.replace('./../projects')
-        },100) 
+        
         
          
     
@@ -197,7 +201,7 @@ const ProjectNew = ({history,closeWindow}) => {
              <div>
                <div className={style.row}>
                  <div className={style.input__mid}>
-                   <Thin className={style.title}>Название</Thin>
+                   <div className={style.input__mid__important}><Thin className={style.title}>Название</Thin><div className={style.important}>*</div></div>
                    <input
                      className={style.input__long}
                      type="text"
@@ -214,7 +218,7 @@ const ProjectNew = ({history,closeWindow}) => {
                      className={style.input__long}
                      type="text"
                      name="offTitle"
-                     
+                     required
                      value={offTitle}
                      onChange={(e) => onChange(e)}
                    />
@@ -223,14 +227,12 @@ const ProjectNew = ({history,closeWindow}) => {
                  
                </div>
                <div className={style.row}>
-                
-                
-               
                    <div className={style.input__short}>
                      <Thin className={style.title}>Начало</Thin>
                      <input
                        type="date"
                        name="dateStart"
+                       required
                        value={dateStart}
                        onChange={(e) => onChange(e)}
                      />
@@ -250,6 +252,7 @@ const ProjectNew = ({history,closeWindow}) => {
                      <input
                        type="date"
                        name="dateFinish"
+                       required
                        value={dateFinish}
                        onChange={(e) => onChange(e)}
                      />
@@ -265,6 +268,7 @@ const ProjectNew = ({history,closeWindow}) => {
                      defaultValue="Концепт"
                      name="stage"
                      onChange={(e) => onChange(e)}
+                     
                      className={style.select}
                    >
                      <option value="Концепт">Концепт</option>
@@ -292,6 +296,7 @@ const ProjectNew = ({history,closeWindow}) => {
                    <input
                      type="text"
                      name="customer"
+                     required
                      value={customer}
                      onChange={(e) => onChange(e)}
                    />
@@ -299,18 +304,19 @@ const ProjectNew = ({history,closeWindow}) => {
                  <div className={style.input__mid}>
                    <Thin className={style.title}>Тип проекта</Thin>
                    <select
-                     defaultValue="Концепт"
+                     defaultValue="Архитектура"
                      name="type"
                      onChange={(e) => onChange(e)}
                      className={style.select}
                    >
-                     <option value="ЖК">ЖК</option>
-                     <option value="Общественное пространство">
-                       Общественное пространство
-                     </option>
-                     <option value="Частный дом">Частный дом</option>
+                     <option value="Архитектура">Архитектура</option>
+                     
+                     <option value="Сети">Сети</option>
                      <option value="Визуализации">Визуализации</option>
                      <option value="Интерьер">Интерьер</option>
+                     <option value="Экстерьер">Экстерьер</option>
+                     <option value="Конструкции">Конструкции</option>
+                     <option value="Ландшафт">Ландшафт</option>
                      <option value="Другое">Другое</option>
                    </select>
                  </div>
@@ -335,19 +341,21 @@ const ProjectNew = ({history,closeWindow}) => {
                      className={style.input__long}
                      type="text"
                      name="budget"
-                     required
+                     
                      value={budget}
                      onChange={(e) => onChange(e)}
+                     required
                    />
                    
                  </div>
                  <div className={style.input__short}>
                    <Thin className={style.title3}>Ссылка на календарный график</Thin>
                    <input
+                   required
                      className={style.input__long}
                      type="text"
                      name="schedule"
-                     required
+            
                      value={schedule}
                      onChange={(e) => onChange(e)}
                    />
@@ -356,10 +364,10 @@ const ProjectNew = ({history,closeWindow}) => {
                  <div className={style.input__short}>
                    <Thin className={style.title3}>Ссылка на хранилице для заказчика</Thin>
                    <input
+                   required
                      className={style.input__long}
                      type="text"
                      name="cusStorage"
-                      required
                      value={cusStorage}
                      onChange={(e) => onChange(e)}
                    />
@@ -437,7 +445,7 @@ const ProjectNew = ({history,closeWindow}) => {
                           padd={"20px"}
                           type="submit"
                         >
-                          {" "}
+                          {/* {" "} */}
                           Создать новый проект
                         </Button>
                       </div>

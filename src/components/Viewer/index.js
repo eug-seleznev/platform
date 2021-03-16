@@ -8,88 +8,72 @@ var viewer;
 
 
 
-const Viewer = ({oauth, project}) => {
-    const dispatch = useDispatch();
-    let Autodesk = window.Autodesk;
-    const container = useRef();           
+const Viewer = ({ oauth, projectTitle, urn }) => {
+  const dispatch = useDispatch();
+  let Autodesk = window.Autodesk;
+  const container = useRef();
+  console.log(urn, 'myurn')
+  // let options = {
+  //   env: "AutodeskProduction",
+  //   api: "derivativeV2", // for models uploaded to EMEA change this option to 'derivativeV2_EU'
+  //   getAccessToken: function (onTokenReady) {
+  //     var token = oauth.token
+  //     var timeInSeconds = 3600; // Use value provided by Forge Authentication (OAuth) API
+  //     onTokenReady(token, timeInSeconds);
+  //   },
+  // };
 
+  var options = {
+    env: "AutodeskProduction",
+    accessToken: oauth.token,
+    api: "derivativeV2_EU", // for models uploaded to EMEA change this option to 'derivativeV2_EU'
+  };
 
-// let options = {
-//   env: "AutodeskProduction",
-//   api: "derivativeV2", // for models uploaded to EMEA change this option to 'derivativeV2_EU'
-//   getAccessToken: function (onTokenReady) {
-//     var token = oauth.token
-//     var timeInSeconds = 3600; // Use value provided by Forge Authentication (OAuth) API
-//     onTokenReady(token, timeInSeconds);
-//   },
-// };
+  useEffect(() => {
+    Autodesk.Viewing.Initializer(options, () => {
+      viewer = new Autodesk.Viewing.GuiViewer3D(container.current);
+      viewer.start();
+      let documentId = "urn:" + urn;
+      Autodesk.Viewing.Document.load(
+        documentId,
+        onDocumentLoadSuccess,
+        onDocumentLoadFailure
+      );
+    });
+  }, []);
 
+  function onDocumentLoadSuccess(doc) {
+    let viewables = doc.getRoot().getDefaultGeometry();
+    viewer.loadDocumentNode(doc, viewables).then((i) => {
+      console.log(Autodesk.Viewing.UI.ToolBar);
+    });
+  }
 
- var options = {
-   env: "AutodeskProduction",
-   accessToken: oauth.token,
-   api: "derivativeV2_EU", // for models uploaded to EMEA change this option to 'derivativeV2_EU'
- };
+  function onDocumentLoadFailure(viewerErrorCode) {
+    console.error("onDocumentLoadFailure() - errorCode:" + viewerErrorCode);
+  }
 
-
-
-
-    useEffect(()  =>  {
- 
-
-   Autodesk.Viewing.Initializer(options, () => {
-    viewer = new Autodesk.Viewing.GuiViewer3D(container.current);
-    viewer.start();
-    let documentId = 'urn:' + project.urn;
-    Autodesk.Viewing.Document.load(documentId, onDocumentLoadSuccess, onDocumentLoadFailure);
-  });
-
-    }, []);
-    
-function onDocumentLoadSuccess(doc) {
-
-  let viewables = doc.getRoot().getDefaultGeometry();
-  viewer.loadDocumentNode(doc, viewables).then((i) => {
-    console.log(Autodesk.Viewing.UI.ToolBar);
-
-  });
-}
-
-
-function onDocumentLoadFailure(viewerErrorCode) {
-  console.error("onDocumentLoadFailure() - errorCode:" + viewerErrorCode);
-}
-
-
-
-
-
-
-
-
-    return (
+  return (
     <>
-        <h1> model for: {project.title}</h1>
+      <h1> model for: {projectTitle}</h1>
+      <div
+        style={{
+          width: "80vw",
+          height: "80vh",
+          backgroundColor: "grey",
+          left: "0px",
+        }}
+      >
         <div
-          style={{
-            width: "80vw",
-            height: "80vh",
-            backgroundColor: "grey",
-            left: "0px",
-          }}
-        >
-          <div
-            id="forgeViewer" 
-            className="viewer-app"
-            style={{ position: "absolute", width: "80vw", height: "80vh" }}
-            ref={container}
-          ></div>
-
-
-        </div>
-      </>
-    );
-}
+          id="forgeViewer"
+          className="viewer-app"
+          style={{ position: "absolute", width: "80vw", height: "80vh" }}
+          ref={container}
+        ></div>
+      </div>
+    </>
+  );
+};
 
 
 

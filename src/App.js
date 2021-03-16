@@ -20,7 +20,7 @@ import { loadUser } from './redux/actions/auth';
 import Admin from './components/Adminka/Index';
 import DataBase from './components/DataBase';
 import Projects from './components/Projects';
-import Office from './components/Office/index copy';
+import Office from './components/Office/index';
 import Users from './components/User';
 import Dashboard from './components/Adminka/dashboard';
 import MyProfile from './components/User/me';
@@ -44,10 +44,14 @@ import AllDepartments from './components/Department/allDepartments'
 import Partition from './components/User/partition';
 import PublicViewer from './components/Viewer/publicViewer';
 import OneDepartment from './components/Department/oneDepartment'
-
+import EditContractor from './components/Superadmin/editContractor'
 //ОТБЕРИТЕ У МЕНЯ КОМПЬЮТЕР НАХУЙ
-import Sprint_New from './components/Projects/Project/Sprint/new'
-
+// import Sprint_New from './components/Projects/Project/Sprint/new'
+import Search from './components/User/Search'
+import Models from './components/Projects/Models';
+import LoadModel from './components/Projects/Models/NewModel';
+import EditUser from './components/User/editUser';
+import Viewer from './components/Projects/model';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -78,12 +82,17 @@ const App = () => {
 
 
   return (
-    <div className="App"style={{backgroundColor:background}}>
+    <div className="App" style={{ backgroundColor: background }}>
       <Router history={history}>
         {!auth ? (
           <LoginContainer>
             <Route exact path="/" component={Auth} />
             <Route exact path="/:id/viewer" component={PublicViewer} />
+            <Route
+              exact
+              path="/projects/:crypt/m/view/:name/public"
+              component={Helper}
+            />
           </LoginContainer>
         ) : (
           <>
@@ -103,9 +112,39 @@ const App = () => {
                 {/* projects */}
                 <Route exact path="/projects" component={Projects} />
                 <Route exact path="/myprojects" component={MyProjects} />
-                <Route exact path='/projects/:crypt/:sprint_id/new' component={Sprint_New} />
+                {/* <Route exact path='/projects/:crypt/:sprint_id/new' component={Sprint_New} /> */}
                 <Route exact path="/projects/:id" component={Project} />
-                <Route exact path="/projects/:id/:id" component={Sprint} />
+                {/* <Route exact path="/projects" component={Project} /> */}
+
+                <Route
+                  exact
+                  path="/projects/:crypt/:sprint_id"
+                  component={Sprint}
+                />
+
+                <Route
+                  exact
+                  path="/projects/:crypt/m/view"
+                  component={Models}
+                />
+
+                <Route
+                  exact
+                  path="/projects/:crypt/m/view/:name"
+                  component={Helper}
+                />
+
+                <Route
+                  exact
+                  path="/projects/:crypt/m/view/:name/public"
+                  component={Helper}
+                />
+                {/* <Route
+                  exact
+                  path="/projects/:crypt/m/view/new"
+                  component={LoadModel}
+                /> */}
+
                 <Switch>
                   <Route
                     exact
@@ -130,17 +169,29 @@ const App = () => {
                 <Route exact path="/users/me/partition" component={Partition} />
 
                 <Route exact path="/users/:id" component={Employe} />
+                <Route exact path="/users/:id/edit" component={EditUser} />
+
                 <Route exact path="/edit" component={Edit} />
                 <Route exact path="/news" component={News} />
                 {/* depatrments */}
                 <Route exact path="/department" component={Department} />
-                <Route exact path="/departments" component={AllDepartments}/>
-                <Route exact path="/departments/:id" component={OneDepartment}/>
-                
+                <Route exact path="/departments" component={AllDepartments} />
+                <Route
+                  exact
+                  path="/departments/:id"
+                  component={OneDepartment}
+                />
+
                 <Route exact path="/:id/viewer" component={PublicViewer} />
+                <Route exact path="/search/user" component={Search} />
 
                 <Route exact path="/viewer" component={Helper} />
                 <Route exact path="/contractors" component={Contractors} />
+                <Route
+                  exact
+                  path="/contractors/:id"
+                  component={EditContractor}
+                />
               </Container>
             </Switch>
           </>

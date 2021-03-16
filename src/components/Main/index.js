@@ -1,116 +1,57 @@
 import styles from '../../Styles/modules/main/main.module.css'
 import Profile from './profileComponent'
-import NewsCard from '../News/newsCard'
-import ProjectsCard from './projectsCard'
-import NewsOpen from '../News/openNews'
-
-
 //профиль пользователя по ID
 import './main.css'
 import { useSelector, useDispatch } from "react-redux"
 import { allNews } from '../../redux/actions/news';
 import { allProjects } from '../../redux/actions/projects';
-// import { allUsers } from "../../redux/actions/user";
-import { Container} from '../../Styles/common'
-import { Bold, Thin } from '../../Styles/typography'
-import { useEffect, useState } from 'react'
-import { ButtonText } from '../../Styles/buttons'
+import { useEffect } from 'react'
 import { loadUser } from '../../redux/actions/auth'
 import { Redirect } from 'react-router-dom'
+import ProjectsBlock from './projectsBlock'
+import NewsBlock from './newsBlock'
+import TaskBlock from './taskBlock'
+import SprintBlock from './sprintBlock'
 
-///////////////
 const Main = ({history}) => {
 
     const dispatch = useDispatch()
-    const loadedNews = useSelector(state => state.news.loaded)
-    const listNews = useSelector(state => state.news.news)
-    const loadedUser = useSelector(state => state.auth.loaded)
+    
     const user = useSelector(state => state.auth.user)
     const reloadSprints = useSelector(state => state.auth.chosenSprint)
-    const [newsOpen, setNewsOpen] = useState({
-        open: false,
-        content: null,
-    })
+    
 
 
-
-
-
-useEffect(()=>{
-        dispatch(loadUser());
-
- 
-
-},[])
 useEffect(() => {
-
-dispatch(allNews());
-dispatch(allProjects());
+    dispatch(loadUser());
+    dispatch(allNews());
+    dispatch(allProjects());
     
 }, [])
-useEffect(()=>{
-    
+
+
+
+useEffect(()=>{  
     dispatch(loadUser())
-
 },[reloadSprints])
-
-
-
 
 if(!user.name){
     return <Redirect to='edit' />
 }
-
     return (
-        <>
-        {!loadedUser ? <p> loading..</p> : (
-
-            <div className={styles.mainContainer}>
-
-                <Profile className={styles.profile} user={user} history={history} change/>
-            
-
-                <div className={styles.projects}>
-                    <Bold color='black' size='36' className={styles.myProj}>Мои проекты</Bold>
-
-                    {user.projects && user.projects.map((el,i)=>{
-                        
-                        return(
-                            <ProjectsCard project={el} key={i} sprints={user.sprints} history={history} />
-                        )
-                    })}
-                    
-                </div>
-
-
-                <div className={styles.news}>
-                    <Thin color='black' size='24'>Новости бюро:</Thin>
-
-                    {!loadedNews? <p>loading...</p> : 
-                        
-                        listNews.map((el,i)=>{
-                            const amount = window.innerWidth<1000? 2 : 3
-                                return(
-                                i<amount && <div key={i} onClick={()=>setNewsOpen({open:true, content: el})}><NewsCard el={el} /></div>
-                                )
-                            })
-                    }
-                    
-                    <ButtonText color='#3F496C' size='12' className={styles.allNews} onClick={() => history.replace(`/news`)}>Все новости</ButtonText>       
-                </div>
-
-                {newsOpen.open==true && <NewsOpen close={()=>setNewsOpen({open:false, content: null})} content={newsOpen.content} />}
-                
-                        
-            </div>)
-
-
-
-        }
-        </>
-    )
+      <div className={styles.mainContainer}>
+        <Profile
+          className={styles.profile}
+          user={user}
+          history={history}
+          change
+        />
+        <ProjectsBlock history={history} user={user}/>
+        <NewsBlock history={history} user={user}/>
+        <TaskBlock user={user} history={history}/>
+        <SprintBlock user={user}/>
+      </div>
+    );
 }
-
-
 
 export default Main

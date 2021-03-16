@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux"
 import { Card } from "../../Styles/common"
-import { H1, H3} from '../../Styles/typography'
+import { Bold, H1, H3} from '../../Styles/typography'
 import style from '../../Styles/modules/components/Project/allproj.module.css'
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import {useDispatch} from "react-redux"
 import { allContractors } from "../../redux/actions/user"
 const { Table, Tr, Td } = require("../../Styles/tables")
@@ -15,11 +15,18 @@ const { Table, Tr, Td } = require("../../Styles/tables")
 const Contractors = ({history}) => {
 	const dispatch = useDispatch ()
     const contractors = useSelector(state => state.users.contractors)
-
+    const [sortOrder, setOrder] = useState(false)
 	useEffect (()=>{
-		dispatch(allContractors())
+        let query = 'name'
+		dispatch(allContractors({query, sortOrder}))
 	},[])
-
+    const sortFunction = (query) => {
+        setOrder(!sortOrder)
+        dispatch(allContractors({query, sortOrder}))
+    }
+    const pushToEdit =(id)=>{
+        history.push(`/contractors/${id}`)
+    }
     return (
         <div>
             <Card>
@@ -28,21 +35,28 @@ const Contractors = ({history}) => {
 
             <Table>
                 <Tr className={style.contractors} top='top'> 
-                    <Td>Имя</Td>
-                    <Td>Вид деятельности</Td>
+                    <Td onClick={() => sortFunction("name")}>Имя &#8597;</Td>
+                    <Td>Разделы</Td>
                     <Td>Телефон</Td>
-                    <Td className={style.turn__off}>Почта</Td>
+                 <Td
+                  onClick={() => sortFunction("email")}
+                  className={style.turn__off}
+                >email &#8597;</Td>
                     {/* <Td>Спринты</Td> */}
                 </Tr>
           
                 {contractors.map((contractor,index) => {
                     return(  
-                    <Tr className={style.contractors} key={index}  title="Открыть проект">
+                    <Tr className={style.contractors} key={index} onClick={()=> pushToEdit(contractor._id)} title="Редактировать информацию">
                     
                         <Td>{contractor.fullname}</Td>
-                        <Td >{contractor.job}</Td>
-                        <Td>{contractor.contacts.phone}</Td>
-                        <Td className={style.turn__off}>{contractor.contacts.email}</Td>
+                        <Td style={{display:'flex',flexWrap:'wrap'}}>{contractor.partition.map((el,i)=>{
+                            return(<Bold style={{marginRight:'15px'}}>
+                                {el}
+                            </Bold>)
+                        })}</Td>
+                        <Td>{contractor.phone}</Td>
+                        <Td className={style.turn__off}>{contractor.email}</Td>
                         {/* <Td>{project.sprints.filter(sprint => sprint.status).length}/{project.sprints.length}</Td> */}
                     </Tr>
                     )

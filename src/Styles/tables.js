@@ -13,12 +13,26 @@ export const Sprint_Table = styled.table`
   margin-bottom: 40px;
   border: none;
   width: 100%;
+  border-collapse: collapse
 `;
 export const TR = styled.tr`
     height: 28px;
-
+    border: none;
+  
 `
-
+export const Sprint_Td = styled.td`
+    height: 28px;
+    border: none;
+    font-family: SuisseIntlLight;
+    font-size:16px;
+`
+export const Select = styled.select`
+    outline: none;
+    background:none;
+    border: none;
+    font-family: SuisseIntlLight;
+    font-size:16px;
+`
 
 
 

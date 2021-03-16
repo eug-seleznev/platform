@@ -1,5 +1,5 @@
 import { innerBackend, instance } from "../../components/utils/axios";
-import { ADD_SPRINT, SORT_PROJECTS, ADD_TASKS,CLEAR_URN,GREEN_MSG, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK, CREATE_FAIL, DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, PROJECT_ID, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT,CLEAR_MSG, CLEAR_ERROR, DELETE_SPRINT, PROJECTS_SORT, ERROR_MSG, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG  } from "../types";
+import { ADD_SPRINT,ADD_USER_TO_TEAM, SORT_PROJECTS,ADD_TAG, ADD_TASKS,CLEAR_URN,GREEN_MSG,DELITE_USER, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK, CREATE_FAIL, DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, PROJECT_ID, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT,CLEAR_MSG, CLEAR_ERROR, DELETE_SPRINT, PROJECTS_SORT, ERROR_MSG, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, DELITE_TAG  } from "../types";
 
 
 
@@ -32,6 +32,25 @@ export const newProject = (formData) => async dispatch  => {
     }
 
 }
+export const addToProject = ( crypt, userId) => async (dispatch) => {
+  console.log(crypt)
+  let body = {
+    user: userId,
+    position:"Работяга",
+    task:"работать"
+  }
+  try {
+    const res = await innerBackend.put(
+      `/projects/updteam/${crypt}`, body
+    );
+    dispatch({
+      type: DELITE_USER,
+      payload: res.data,
+    });
+  } catch (err) {
+    alert("hahaha classic");
+  }
+};
 
 export const sortProjects = ({ query, orderSort }) => async (dispatch) => {
   try {
@@ -46,6 +65,32 @@ export const sortProjects = ({ query, orderSort }) => async (dispatch) => {
     alert("hahaha classic");
   }
 };
+
+
+
+export const sorType = ({ field, value }) => async (dispatch) => {
+  try {
+
+    console.log(field, value)
+    const res = await innerBackend.get(
+      `/projects/q/search?field=${field}&value=${value}`
+    );
+
+    console.log(res.data)
+    dispatch({
+      type: SORT_PROJECTS,
+      payload: res.data,
+    });
+  } catch (err) {
+    alert("hahaha classic");
+  }
+};
+
+
+
+
+
+
 
 
 export const clearUrn = () => async dispatch => {
@@ -126,17 +171,13 @@ export const getProject = (id) => async dispatch  => {
 }
 
 
-export const addSprint = (id,formData,data, tags) => async dispatch  => {
+export const addSprint = (id) => async dispatch  => {
     try {
-    
-      console.log(tags)
         let body = {
-            description: formData.description,
-            date: formData.date,
-            tasks: data.tasks[0].taskTitle==""?[]:data.tasks,
-            tags: tags
+            description: 'ввод',
+            title: 'Введите название'
         }
-        // console.log(data)
+        
         const res = await innerBackend.post(`/projects/sprints/new/${id}`,body)
         dispatch({
             type: ADD_SPRINT,
@@ -148,7 +189,8 @@ export const addSprint = (id,formData,data, tags) => async dispatch  => {
         })
         }
       catch (err) {
-        const errors = err.response.data.err;
+        const errors = err.response.data;
+        console.log(errors)
         errors.map(error => {
            return dispatch({
             type: ERROR_MSG,
@@ -161,10 +203,11 @@ export const addSprint = (id,formData,data, tags) => async dispatch  => {
 }
 
 export const EditTask = ({ taskTitle, id, focusRow }) => async (dispatch) => {
+  console.log(taskTitle)
   try {
 
     let body = {
-      taskTitle: taskTitle,
+      taskTitle: taskTitle!==''?taskTitle:' ',
       taskid: focusRow,
     };
 
@@ -195,8 +238,34 @@ export const addUserToTask = ({ userid, id, focusRow }) => async (dispatch) => {
   }
 }; 
 
-
-
+export const addTag = ( id,tag ) => async (dispatch) => {
+  let body = {
+    tag: tag
+  }
+  try {
+    console.log(tag)
+    const res = await innerBackend.put(`projects/sprints/addTag/${id}`, body);
+    dispatch({
+      type: ADD_TAG,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log(err.response.data);
+  }
+}; 
+export const deleteTag = ( id,tag ) => async (dispatch) => {
+ 
+  try {
+    console.log(tag, id)
+    const res = await innerBackend.delete(`projects/sprints/${id}/tag?tag=${tag}`);
+    dispatch({
+      type: DELITE_TAG,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log(err.response.data);
+  }
+}; 
 
 
 
@@ -241,7 +310,7 @@ export const DeleteTask = ({ id, focusRow }) => async (dispatch) => {
 
 export const editProject = (formData, id) => async dispatch  => {
     try {
-        // console.log('hello edit', formData)
+        console.log('hello edit', formData)
         const res = await innerBackend.put(`/projects/${id}`, formData)
         dispatch({
             type: EDIT_PROJECT,
@@ -251,7 +320,7 @@ export const editProject = (formData, id) => async dispatch  => {
   
       }
       catch (err) {
-        const errors = err.response.data.err;
+        const errors = err.response.data.error;
         errors.map(error => {
            return dispatch({
             type: ERROR_MSG,
@@ -399,16 +468,13 @@ export const addTask = ({ id, task }) => async (dispatch) => {
 
 
 
-export const EditDescription = (descript, id) => async (dispatch) => {
+export const EditSprint = (sprintInfo, id) => async (dispatch) => {
   try {
 
-    let body = {
-        description: descript
-    }
-    console.log(body)
+
     const res = await innerBackend.put(
-      `/projects/sprints/description/${id}`,
-      body
+      `/projects/sprints/edit/${id}`,
+      sprintInfo
     );
 
     dispatch({
@@ -611,4 +677,30 @@ console.log(formData,id)
       
     }
 
+}
+
+
+
+
+export const AddUserToTeam = (formData) => async dispatch => {
+  try {
+    let body = {
+      user: formData.user,
+      position: formData.position!==""?formData.position:"нет",
+      task: formData.task!==""?formData.task:"нет"
+    }
+
+
+    console.log(body, 'body', )
+    const res = await innerBackend.put(`projects/updteam/${formData.crypt}`, body)
+    dispatch({
+      type: ADD_USER_TO_TEAM,
+      payload: res.data
+  })
+    console.log(res.data)
+    
+  
+  } catch (err) {
+  alert('AAAAAAAAAAAAAAAAAAAAAA')    
+  }
 }

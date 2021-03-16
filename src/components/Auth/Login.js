@@ -31,6 +31,7 @@ const Login = () => {
 
      const onSubmit = async e => {
         e.preventDefault();
+        console.log(formData)
         dispatch(login(formData))
     
             // register({ name, email, password});

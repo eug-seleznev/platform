@@ -1,12 +1,9 @@
 import { useDispatch, useSelector } from "react-redux"
 import './user.css'
 import styles from '../../Styles/modules/main/main.module.css'
-import { url } from '../utils/axios';
-import {Button} from '../../Styles/buttons'
-import styled from 'styled-components'
+
 import { useEffect, useState} from "react";
-import {changeLoaded, loadUser} from '../../redux/actions/auth'
-import { Card, SmallContainer, } from "../../Styles/common";
+import {loadUser} from '../../redux/actions/auth'
 import { Bold } from '../../Styles/typography'
 
 import  ProfileComponent  from '../Main/profileComponent'
@@ -14,9 +11,9 @@ import ProjectsCard from '../Main/projectsCard'
 
 
 const MyProfile = ({match, history}) => {
-    let {id} = match.params;
+    // let {id} = match.params;
     const dispatch = useDispatch ()
-    const loaded = useSelector(state => state.auth.loaded)
+    // const loaded = useSelector(state => state.auth.loaded)
     const user = useSelector(state => state.auth.user)
     const [permission, setPermission] = useState('')
     useEffect (()=> {

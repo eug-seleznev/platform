@@ -1,0 +1,167 @@
+.info__row {
+	display: flex;
+	border-bottom: 1px solid #B5B5B5;
+	padding-bottom: 10px;
+}
+.container {
+	padding-bottom: 60px;
+	border-bottom: 1px solid #B5B5B5;
+	margin-bottom: 20px;
+}
+.table {
+	border: 1px solid #B5B5B5;
+	border-radius: 5px;
+	width: 100%;
+}
+.table tr {
+	border: none;
+	padding: 10px;
+}
+.table th {
+	border-bottom: 1px solid #B5B5B5;
+	padding-bottom: 28px;
+	padding-top: 28px;
+	text-align: center;
+	width: 300px;
+}
+.table td {
+	padding-left: 30px;
+	padding-right: 30px;
+	border-bottom: 1px solid #B5B5B5;
+}
+.table input {
+	width: 235px;
+	margin-top: 5px;
+}
+.table select {
+	height: 35px;
+	margin-bottom: 20px;
+	margin-top: 5px;
+}
+.table__head {
+	border-bottom: 1px solid #B5B5B5;
+}
+.image {
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+	border-radius: 100%;
+}
+.delite__user{
+	border:solid 1px #B5B5B5;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-bottom: 15px;
+	margin-right: 20px;
+	margin-top: 20px;
+	border-radius: 10px;
+	width: 200px;
+	text-align: center;
+}
+
+.all__users {
+	display: flex;
+	
+}
+.main__title {
+	margin-bottom: 50px;
+}
+.info__row__point {
+	margin-right: 30px;
+	cursor: pointer;
+}
+.inputs {
+
+	margin-top: 45px;
+}
+.inputs select {
+	margin-top: 5px;
+	height: 34px;
+}
+.inputs input {
+	margin-bottom: 20px;
+	margin-top: 5px;
+	border: 1px solid #B5B5B5;
+	outline: none;
+}
+.titles {
+	display: flex;
+}
+.plus {
+	height: 30px;
+	width: 30px;
+	cursor: pointer;
+}
+.about{
+	outline: none;
+	border: 1px solid #B5B5B5;
+	max-width: 100%;
+	min-width: 100%;
+	max-height: 100px;
+	min-height: 100px;
+	border-radius: 3px;
+	font-size: 14px;
+	font-family: SuisseIntlLight;
+	margin-left: auto;
+	margin-right: 50px;
+}
+.titles__point {
+	width: 50%;
+	margin-right: 40px;
+}
+.new__title__point {
+	display: flex;
+	justify-content: space-between;
+	width: 60%;
+}
+.new__title__point input{
+	width: 150px
+}
+.people__table {
+	width: 300px;
+	margin-left: 30px;
+	margin-top: 30px;
+	border:1px solid #979797;
+	border-radius:5px
+}
+.people__table td  {
+	padding: 5px;
+	width: 50px;
+	border: none;
+}
+.people__table tr  {
+	width: 50px;
+}
+.people__table input  {
+	width: 80px;
+	height: 15px;
+}
+.people__table button  {
+	width: 40px;
+	height: 20px;
+	margin-top: 12px;
+}
+.people__table img {
+	width: 20px;
+	height: 20px;
+}
+@media(max-width:1350px) {
+	.table td {
+		padding-left: 10px;
+		padding-right: 10px;
+		border-bottom: 1px solid #B5B5B5;
+	}
+	
+}
+@media (max-width:1000px) {
+	.off {
+		display: none;
+	}
+}
+@media (max-width:930px) {
+	.off__too {
+		display: none;
+	}
+}

@@ -8,8 +8,9 @@
 	grid-template-columns: repeat(6,1fr);
 }
 .tr__inproj {
-	grid-template-columns: repeat(4,1fr);
+	grid-template-columns: 1fr 1fr 50px;
 	height: 50px;
+	
 }
 .tr__user{
 	grid-template-columns: repeat(4,1fr);
@@ -21,11 +22,9 @@
 	object-fit: cover;
 }
 @media(max-width:1000px){
-	.image {
-		display: none;
-	}
+	
 	.tr__inproj {
-		grid-template-columns: repeat(2,1fr);
+		grid-template-columns: 1fr 50px;
 		height: 50px;
 	}
 	.tr {

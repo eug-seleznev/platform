@@ -2,7 +2,8 @@
     display: grid;
     grid-template-areas: 
     'profile news'
-    'projects projects'
+    'projects tasks'
+    'projects sprints'
     ;
     grid-template-rows: min-content min-content;
     grid-template-columns:2fr 1fr;
@@ -17,31 +18,75 @@
         grid-area: news;
         display: grid;
         row-gap: 20px;
+        width: 100%;
+    }
+    .create__news {
+        display: flex;
+        align-items: flex-end;
+    }
+    .create__news__img {
+        margin-right:10px;
+        height:23px;
+        
+    }
+    .create__news__button {
+        margin-left:10px;
+        height:23px;
+        cursor:pointer;
     }
         .allNews{
             /* text-align: right; */
+            cursor: pointer;
             margin-left: auto;
             color: #3F496C;
         }
     .projects{
         grid-area: projects;
         display: grid;
-        grid-template-areas:
-        'myProj myProj myProj'
-        '. . .'
-        ;
-        grid-template-columns: 1fr 1fr 1fr;
-        column-gap: 35px;
-        row-gap: 35px;
+        grid-template-areas: 'myProj';
+        width: 70%;
+        height: max-content;
+        grid-template-columns: 1fr;
+        column-gap: 15px;
+        row-gap: 15px;
+    }
+    .my_sprints{
+        grid-area: sprints;
+        display: grid;
+        grid-template-areas: 'myProj';
+        width: 100%;
+        grid-template-columns: 1fr;
+        column-gap: 15px;
+        row-gap: 15px;
+        
     }
         .myProj{
             grid-area: myProj;
             padding-bottom: 18px;
-            border-bottom: 1px solid #000000;
+            margin-top: 7px;
+            margin-left: 15px;
+            
         }
-
+        .tasks {
+            grid-area: tasks;
+            
+        }
+        .my_tasks{
+            margin-top: 15px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .myProjButton{
+            grid-area: myProj;
+            padding-bottom: 18px;
+            margin-top: 7px;
+            margin-left: 25px;
+            cursor: pointer;
+        }
 @media (max-width: 1500px){
-    .projects{
+   
+    /* .projects{
         grid-area: projects;
         display: grid;
         grid-template-areas:
@@ -51,7 +96,7 @@
         grid-template-columns: 1fr 1fr;
         column-gap: 35px;
         row-gap: 35px;
-    }
+    } */
 
 }
 
@@ -59,12 +104,29 @@
 
 
 @media (max-width: 1000px){
+    .news{
+       
+        width: 100%;
+     
+    }
+    .projects{
+        grid-area: projects;
+        display: grid;
+        grid-template-areas: 'myProj';
+        width: 100%;
+        height: max-content;
+        grid-template-columns: 1fr;
+        column-gap: 15px;
+        row-gap: 15px;
+    }
     .mainContainer{
         display: grid;
         grid-template-areas: 
         'profile'
         'news'
         'projects'
+        'sprints'
+        
         ;
         grid-template-rows: min-content min-content min-content;
         grid-template-columns:1fr;
@@ -72,15 +134,15 @@
         row-gap: 40px;
         text-align: left;
     }
-    .projects{
+    /* .projects{
         grid-area: projects;
         display: grid;
         grid-template-areas:
-        'myProj '
+        'myProj myProj'
         '.'
         ;
         grid-template-columns: 1fr;
         column-gap: 35px;
         row-gap: 35px;
-    }
+    } */
 }

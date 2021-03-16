@@ -17,6 +17,7 @@ const Viewer = ({ project }) => {
   const [formData, setFormData] = useState({
     crypt: project.crypt,
     file: null,
+    title: 'default'
   });
 
   const [loaded, setLoad] = useState({
@@ -25,7 +26,7 @@ const Viewer = ({ project }) => {
     submit: false, // for form submit
     button: false, //render model load button
   });
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   useEffect(() => {
     if (loaded.submit) {
@@ -70,7 +71,7 @@ const Viewer = ({ project }) => {
     setOpen(!open);
   };
   return (
-    <div style={{ height: `${!open ? "65px" : "auto"}`, overflowY: "hidden" }}>
+    <div style={{ height: `${!open ? "65px" : "auto"}`, overflowY: "hidden", marginBottom:'25px' }}>
       <Subtitle
         title="Модель проекта"
         openfunc={openfunc}
