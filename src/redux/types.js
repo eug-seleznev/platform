@@ -39,6 +39,7 @@ export const PROJECT_ID = 'project_updated';
 export const DELETE_PROJECT = 'delete_project'
 export const FINISH_PROJECT = 'finish_project'
 export const ADD_USER_TO_TEAM = 'add_user_to_team'
+export const SEARCH_OBJECT ='SEARCH_OBJECT  '
     //sprints
 export const CREATE_SPRINT = "create_sprint";
 export const ADD_SPRINT = 'crate_new_sprint';

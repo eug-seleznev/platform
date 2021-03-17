@@ -52,10 +52,11 @@ const Contractors = ({history}) => {
                         <img src='/lupa.png' className={style.row__img}></img>
                         <SearchInput size='14' onChange={findContractor} name='partition' placeholder='По разделу'></SearchInput>
                     </div>
-                    <Thin size='14'>
-                        Всего субподрядчиков: {contractors.length}
-                    </Thin>
-                    
+                    <div className={style.row__in}>
+                        <Thin size='14'>
+                            Всего субподрядчиков: {contractors.length}
+                        </Thin>
+                    </div>
                 </div>
             {!contractors ? <p> проектов нет  </p>: (
 
