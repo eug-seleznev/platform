@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { cleardData } from '../../../redux/actions/models';
 import Loader from './loader'
 import Managment from './Managment';
 import ModelsTable from './ModelsTable';
@@ -25,11 +26,17 @@ const Models = ({match, history, location}) => {
 
 
     const [updateExistModel, setUpdate] = useState(false)
-
     useEffect(() => {
       if(loadingStatus){
-
+        
         setSubmited({...submitedModel, loaded: false, submit: false})
+        history.push(
+          `view/${
+            project.urnNew[project.urnNew.length - 1]._id
+          }`
+        );
+        dispatch(cleardData())
+
       }
     }, [project])
 

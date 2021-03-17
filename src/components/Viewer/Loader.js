@@ -31,6 +31,8 @@ const Loader = (props) => {
             
         } 
 
+        return () => clearInterval(new_interval)
+
 
     }, [loading]);
 
