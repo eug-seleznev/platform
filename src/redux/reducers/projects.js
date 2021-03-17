@@ -1,5 +1,5 @@
 
-import { ADD_SPRINT,SORT_PROJECTS, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL, EDIT_TASK, CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR, GET_URN, DELETE_SPRINT, CLEAR_URN, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, ADD_TAG, DELITE_USER, DELITE_TAG, ADD_USER_TO_TEAM, SORT_BY_TAGS } from '../types'
+import { ADD_SPRINT,SORT_PROJECTS,SORT_TITLE, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL, EDIT_TASK, CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR, GET_URN, DELETE_SPRINT, CLEAR_URN, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, ADD_TAG, DELITE_USER, DELITE_TAG, ADD_USER_TO_TEAM, SORT_BY_TAGS, CHANGE_ROCKET } from '../types'
 
 
 
@@ -46,7 +46,12 @@ export default function(state = initialState, action) {
 
                     error: ''
                 }
-                
+                case SORT_TITLE:
+                    return {
+                        ...state,
+                        projects: payload,
+                        
+                    }
                 case CREATE_PROJECT:
                 return {
                     ...state,
@@ -59,7 +64,11 @@ export default function(state = initialState, action) {
                     error: '',
                     msg: payload.msg
                 }
-                
+                case CHANGE_ROCKET:
+                    return {
+                        ...state,
+                        
+                    }
                 case CLEAR_ERROR:
                     return {
                         ...state,

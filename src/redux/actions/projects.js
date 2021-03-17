@@ -1,5 +1,5 @@
 import { innerBackend, instance } from "../../components/utils/axios";
-import { ADD_SPRINT,ADD_USER_TO_TEAM, SORT_PROJECTS,ADD_TAG,SORT_BY_TAGS, ADD_TASKS,CLEAR_URN,GREEN_MSG,DELITE_USER, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK, CREATE_FAIL, DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, PROJECT_ID, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT,CLEAR_MSG, CLEAR_ERROR, DELETE_SPRINT, PROJECTS_SORT, ERROR_MSG, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, DELITE_TAG  } from "../types";
+import { ADD_SPRINT,ADD_USER_TO_TEAM,SORT_TITLE, SORT_PROJECTS,CHANGE_ROCKET, ADD_TAG,SORT_BY_TAGS, ADD_TASKS,CLEAR_URN,GREEN_MSG,DELITE_USER, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK, CREATE_FAIL, DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, PROJECT_ID, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT,CLEAR_MSG, CLEAR_ERROR, DELETE_SPRINT, PROJECTS_SORT, ERROR_MSG, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, DELITE_TAG  } from "../types";
 
 
 
@@ -32,6 +32,23 @@ export const newProject = (formData) => async dispatch  => {
     }
 
 }
+export const changeRocket = (crypt, rocket) => async (dispatch) => {
+  console.log(crypt, rocket)
+  let body = {
+    rocketchat: rocket
+  }
+  try {
+    const res = await innerBackend.put(
+      `/projects/addrocket/${crypt}`, body
+    );
+    dispatch({
+      type: CHANGE_ROCKET,
+      payload: res.data,
+    });
+  } catch (err) {
+    alert("hahaha classic");
+  }
+};
 export const addToProject = ( crypt, userId) => async (dispatch) => {
   console.log(crypt)
   let body = {
@@ -81,7 +98,20 @@ export const sorType = ({ field, value }) => async (dispatch) => {
     alert("hahaha classic");
   }
 };
-
+export const sortTitle = ({ value }) => async (dispatch) => {
+  console.log(value)
+  try {
+    const res = await innerBackend.get(
+      `/projects/title/search?title=${value}`
+    );
+    dispatch({
+      type: SORT_TITLE,
+      payload: res.data,
+    });
+  } catch (err) {
+    alert("hahaha classic");
+  }
+};
 
 
 

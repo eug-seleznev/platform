@@ -16,7 +16,7 @@ export const GET_EMPLOYE = 'get_users';
 export const CHANGE_PERMISSION = 'change_permission';
 export const ONE_USER = 'get_one'
 export const PARTITION_UPDATE = 'update_user_partition';
-
+ 
 //user errors
 export const USER_ERR = 'get_all_users_error'
 //search user 
@@ -28,6 +28,8 @@ export const CREATE_PROJECT = 'create_project';
 export const GET_PROJECT = 'get_project';
 export const CLEAR_URN = 'clear_urn'
 export const SORT_PROJECTS = 'sort_projects' 
+export const CHANGE_ROCKET = 'CHANGE_ROCKET'
+export const SORT_TITLE = 'SORT_TITLE';
 //PROJECTS SORT
 
 export const UPDATE_PROJECT = 'project_updated';

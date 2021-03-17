@@ -34,8 +34,8 @@ export const Select = styled.select`
     font-size:16px;
 `
 export const New_table = styled.table`
-   
-   border: 1px solid #3F496C;
+border-collapse: collapse;
+  
    border-radius:5px;
     background-color: white;
 `
@@ -45,24 +45,33 @@ export const New_thead = styled.thead`
   
 `
 export const New_Tr = styled.tr`
-border: 1px solid black;
-padding:30px
 
+padding:30px;
+height:fit-content;
+cursor:pointer;
+
+&:hover {
+    background: #F1EFEF
+}
 `
+
 export const New_Th = styled.th`
 
 color: #8C8C8C;
 font-family: SuisseIntlThin;
-font-size: 16px;
+font-size: 14px;
 text-align: left;
-padding: 20px;
+padding-right: 10px;
+padding-top: 20px;
+padding-bottom: 20px
 `
 export const New_Td = styled.td`
-    font-size:${props=>props.size}px;
+    font-size: 14px;
     text-align: left;
     vertical-align: middle;
     font-family: SuisseIntlLight;
-    padding: 20px;
+    padding-right: 45px;
+    height: 40px!important;
     color: ${props=>props.color===undefined?'#3F496C':props.color};
     &:first-child {
         text-align: left;

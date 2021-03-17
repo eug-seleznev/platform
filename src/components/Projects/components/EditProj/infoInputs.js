@@ -2,14 +2,24 @@ import { Thin } from "../../../../Styles/typography"
 import style from '../../../../Styles/modules/components/Project/editproj.module.css'
 import create from '../../../../Styles/modules/components/Project/createPr.module.css'
 import { Select } from "../../../../Styles/tables"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { ButtonText, ButtonTextDiv, CancelButton } from "../../../../Styles/buttons"
+import { useDispatch } from "react-redux"
+import { changeRocket } from "../../../../redux/actions/projects"
 
 
-const InfoInputs = ({onChange,project,offTitle, title, dateFinish, dateStart, city, about}) => {
-    
-	useEffect(()=>{
-		console.log(city)	
-	})
+const InfoInputs = ({onChange,project,offTitle, title, dateFinish, dateStart, city, about, crypter}) => {
+  	const [oldRocket, setOldRocket] = useState (false)
+	const [currentRocket, setCurrentRocket] = useState ('')
+	const dispatch = useDispatch() 
+	const onRocketChange =(e)=>{
+		setCurrentRocket(e.target.value)
+	}
+	const addOldRocket =()=>{
+		dispatch(changeRocket(project.crypt, currentRocket))
+		setOldRocket (false)
+	}
+
     return(
 		<div className={style.inputs}>
 			<div className={style.titles}>
@@ -66,7 +76,16 @@ const InfoInputs = ({onChange,project,offTitle, title, dateFinish, dateStart, ci
 					value={city}
 					onChange={onChange}/>
 				</div>
-				
+				<div className={style.titles__point}>
+					<Thin className={style.one__title}>Шифр</Thin>
+					<input 
+					type='text'
+					placeholder='Шифр'
+					name='crypter'
+					required
+					value={crypter}
+					onChange={onChange}/>
+				</div>
 			</div>
 			<div className={style.titles}>
 				<div className={style.titles__point}>
@@ -76,11 +95,15 @@ const InfoInputs = ({onChange,project,offTitle, title, dateFinish, dateStart, ci
 						name="type"
 						onChange={(e) => onChange(e)}
 						className={create.select}
+						
 					>
-						<option value="ЖК">ЖК</option>
-						<option value="Общественное пространство">Общественное пространство</option>
-						<option value="Частный дом">Частный дом</option>
-						<option value="Визуализация">Визуализации</option>
+						
+						<option value="Архитектура">Архитектура</option>
+						<option value="Сети">Сети</option>
+						<option value="Экстерьер">Экстерьер</option>
+						<option value="Визуализация">Визуализация</option>
+						<option value="Ландшафт">Ландшафт</option>
+						<option value="Конструкции">Конструкции</option>
 						<option value="Интерьер">Интерьер</option>
 						<option value="Другое">Другое</option>
 					</select>
@@ -113,6 +136,9 @@ const InfoInputs = ({onChange,project,offTitle, title, dateFinish, dateStart, ci
 						onChange={(e) => onChange(e)}/>
 				</div>
 			</div>
+			<ButtonTextDiv style={{display:`${!oldRocket?'block':'none'}`}} onClick={()=>setOldRocket(true)} >Изменить комнату рокетчата</ButtonTextDiv>
+			<input placeholder='Введите название комнаты' style={{display:`${oldRocket?'block':'none'}`}} onChange={(e)=>onRocketChange(e)} onKeyPress={(e)=>e.key==='Enter'?addOldRocket(e):''} />
+			<ButtonTextDiv style={{display:`${oldRocket?'block':'none'}`}}  onClick={(e)=>addOldRocket(e)}>Сохранить</ButtonTextDiv>
 		</div>
     )
 }
