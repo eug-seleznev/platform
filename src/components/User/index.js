@@ -27,12 +27,14 @@ const Users = ({history}) => {
     
 
     useEffect(() => {
-      console.log(users)
+     
         let query = 'name'
         dispatch(allUsers({query, sortOrder}))
         dispatch(allDepartments())
     }, [])
-
+// useEffect(()=>{
+//  console.log(users)
+// },users)
     useEffect(()=>{ 
       dispatch(background('white'))
       return () => {
@@ -65,10 +67,11 @@ const Users = ({history}) => {
                <img src='/lupa.png' className={style.row__img}></img>
                <SearchInput size='14' name='position' onChange={findUserPos}  placeholder='По должности'></SearchInput>
              </div>
-             
-             <Thin size='14'>
-                Всего сотрудников: {users.length}
-             </Thin>
+             <div className={style.row__in}>
+                <Thin size='14'>
+                    Всего сотрудников: {users.length}
+                </Thin>
+             </div>
              <div className={style.row__in}>
                <Bold size='14'>По отделу: </Bold>
                <Select style={{fontSize:'14px'}}
@@ -103,7 +106,7 @@ const Users = ({history}) => {
                   </New_Th>
                   <New_Th>Отдел</New_Th>
                   <New_Th className={style.turn__off}>Проекты</New_Th>
-                  <New_Th className={style.turn__off}>Спринты</New_Th>
+                  {/* <New_Th className={style.turn__off}>Спринты</New_Th> */}
                 </New_Tr>
               </New_thead>
               <New_tbody>
@@ -122,7 +125,7 @@ const Users = ({history}) => {
                     <New_Td>{user.position}</New_Td>
                     <New_Td>{user.division && user.division.divname}</New_Td>
                     <New_Td className={style.turn__off}>{user.projects.length}</New_Td>
-                    <New_Td className={style.turn__off}>{user.sprints.length}</New_Td>
+                    {/* <New_Td className={style.turn__off}>{user.sprints.length}</New_Td> */}
                   </New_Tr>
                 );
               })}

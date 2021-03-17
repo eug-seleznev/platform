@@ -30,6 +30,18 @@
 .title {
 	margin-left: -60px;
 }
+.searchRes {
+	background-color:white;
+	padding:10px;
+}
+.input {
+	position:absolute;
+	background-color:white;
+	border:1px solid grey;
+	border-top:0px solid;
+	margin-top:12px;
+	width:160px;
+}
 .row__img {
 	height: 23px;
 	width: 23px;		

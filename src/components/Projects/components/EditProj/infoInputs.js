@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux"
 import { changeRocket } from "../../../../redux/actions/projects"
 
 
-const InfoInputs = ({onChange,project,offTitle, title, dateFinish, dateStart, city, about, crypter}) => {
+const InfoInputs = ({onChange,project,offTitle, title, dateFinish, dateStart,object, city, about, crypter}) => {
   	const [oldRocket, setOldRocket] = useState (false)
 	const [currentRocket, setCurrentRocket] = useState ('')
 	const dispatch = useDispatch() 
@@ -64,7 +64,6 @@ const InfoInputs = ({onChange,project,offTitle, title, dateFinish, dateStart, ci
 						onChange={e => onChange(e)}/>
 				</div>
 			</div>
-			
 			<div className={style.titles}>
 				<div className={style.titles__point}>
 					<Thin className={style.one__title}>Город</Thin>
@@ -122,7 +121,18 @@ const InfoInputs = ({onChange,project,offTitle, title, dateFinish, dateStart, ci
                      <option value="Рабочая">Рабочая</option>
                    </select>
 				</div>
-				
+			</div>
+			<div className={style.titles}>
+				<div className={style.titles__point}>
+					<Thin className={style.one__title} style={{marginTop:'20px'}}>Объект</Thin>
+					<input 
+					type='text'
+					placeholder='Объект'
+					name='object'
+					required
+					value={object}
+					onChange={onChange}/>
+				</div>
 			</div>
 			<div>
 				<div style={{marginRight:'50px'}}>

@@ -43,12 +43,13 @@ const ProjectNew = ({history,closeWindow}) => {
         offTitle:'',
         budget:'',
         schedule:'',
-        cusStorage:''
+        cusStorage:'',
+        object:'',
       });
    
 
 
-      const { title, dateStart, dateFinish, city, type, stage, customer, about, par, rcheck, offTitle, budget, schedule,cusStorage,userid2 } = formData;
+      const { title, dateStart, dateFinish, city, type, stage, customer, about, par, object, offTitle, budget, schedule,cusStorage,userid2 } = formData;
       const posCurrent =(e)=>{
         setCurrentPos (e.target.value)
         setWorkerDataList ({ ...workerDataList, position:e.target.value})
@@ -161,7 +162,8 @@ const ProjectNew = ({history,closeWindow}) => {
           offTitle:'',
           budget:'',
           schedule:'',
-          cusStorage:''
+          cusStorage:'',
+          object:'',
         }),50) 
        
         
@@ -294,7 +296,7 @@ const ProjectNew = ({history,closeWindow}) => {
                  </div>
                </div>
                <div className={style.row}>
-                 <div className={style.input__mid}>
+                 <div className={style.input__short}>
                    <Thin className={style.title}>Заказчик</Thin>
                    <input
                      type="text"
@@ -304,7 +306,17 @@ const ProjectNew = ({history,closeWindow}) => {
                      onChange={(e) => onChange(e)}
                    />
                  </div>
-                 <div className={style.input__mid}>
+                 <div className={style.input__short}>
+                   <Thin className={style.title}>Объект</Thin>
+                   <input
+                     type="text"
+                     name="object"
+                     required
+                     value={object}
+                     onChange={(e) => onChange(e)}
+                   />
+                 </div>
+                 <div className={style.input__short}>
                    <Thin className={style.title}>Тип проекта</Thin>
                    <select
                      defaultValue="Архитектура"
