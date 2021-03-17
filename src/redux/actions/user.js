@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { ALL_USERS, USER_ERR,EDIT_CONTRACTOR, CHANGE_PERMISSION, PERM_RETURN,ONE_CONTRACTOR, ONE_USER,SEARCH_USER,BACK_WHITE, CLEAR_ERROR, CLEAR_MSG,ADD_CONTRACTOR,ALL_CONTRACTORS, ERROR_MSG, GREEN_MSG,PARTITION_UPDATE} from "../types";
+import { ALL_USERS,FIND_CONTRACTOR, USER_ERR,SEARCH_TABLE_USER,EDIT_CONTRACTOR, CHANGE_PERMISSION, PERM_RETURN,ONE_CONTRACTOR, ONE_USER,SEARCH_USER,BACK_WHITE, CLEAR_ERROR, CLEAR_MSG,ADD_CONTRACTOR,ALL_CONTRACTORS, ERROR_MSG, GREEN_MSG,PARTITION_UPDATE} from "../types";
 
 
 
@@ -28,6 +28,31 @@ export const allContractors = ({query, sortOrder}) => async dispatch  => {
     } 
   }
 
+export const findContractorName = ({value, field}) => async dispatch  => {
+  console.log(value)
+  try {
+      // console.log('hello all users?')
+      const res = await innerBackend.get(`/merc/${field=='name'?'full'+field:field}/search?${field}=${field=='partition'?value.toUpperCase():value}`)
+      // console.log(res.data)
+      dispatch({
+          type: FIND_CONTRACTOR,
+          payload: res.data
+      })
+      // setAuthToken(localStorage.token);
+        
+    }
+    catch (err) {
+      const errors = err.response.data.err;
+      errors.map(error => {
+         return dispatch({
+          type: ERROR_MSG,
+          payload: error.msg
+      })
+      })
+          
+    } 
+
+}
 export const allUsers = ({query, sortOrder}) => async dispatch  => {
     try {
         // console.log('hello all users?')
@@ -51,8 +76,34 @@ export const allUsers = ({query, sortOrder}) => async dispatch  => {
       } 
 
 }
-
-
+export const userPosSearch = (value) => async dispatch => {
+  console.log(value)
+  try {
+    ///users/usr/get?name=huila&division=govnoedi&partition=HUY
+  
+    const res = await innerBackend.get(`users/usr/pos?position=${value}`)
+    dispatch({
+      type: SEARCH_TABLE_USER,
+      payload: res.data
+    });
+  } catch (err) {
+    alert('aaaaaaaaaaaaaaa')
+  }
+}
+export const userTableSearch = ({value, field}) => async dispatch => {
+  // console.log(value, field)
+  try {
+    ///users/usr/get?name=huila&division=govnoedi&partition=HUY
+  
+    const res = await innerBackend.get(`users/usr/get?${field}=${value}&merc=che-ugodno`)
+    dispatch({
+      type: SEARCH_TABLE_USER,
+      payload: res.data
+    });
+  } catch (err) {
+    alert('aaaaaaaaaaaaaaa')
+  }
+}
 export const userSearch = (formData) => async dispatch => {
   try {
     ///users/usr/get?name=huila&division=govnoedi&partition=HUY

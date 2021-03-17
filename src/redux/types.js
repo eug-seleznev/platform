@@ -15,13 +15,15 @@ export const ALL_USERS = 'users';
 export const GET_EMPLOYE = 'get_users';
 export const CHANGE_PERMISSION = 'change_permission';
 export const ONE_USER = 'get_one'
+export const FIND_CONTRACTOR ='FIND_CONTRACTOR'
 export const PARTITION_UPDATE = 'update_user_partition';
- 
+export const SEARCH_TABLE_USER ='SEARCH_TABLE_USER'
 //user errors
 export const USER_ERR = 'get_all_users_error'
 //search user 
 export const SEARCH_USER = 'search_user'
 //PROJECTS
+
 export const EDIT_PROJECT = 'edit_project';
 export const ALL_PROJECTS = 'all_projects';
 export const CREATE_PROJECT = 'create_project';

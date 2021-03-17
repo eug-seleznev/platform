@@ -71,7 +71,19 @@ export const New_Td = styled.td`
     vertical-align: middle;
     font-family: SuisseIntlLight;
     padding-right: 45px;
-    height: 40px!important;
+    min-height: 30px!important;
+    color: ${props=>props.color===undefined?'#3F496C':props.color};
+    &:first-child {
+        text-align: left;
+    }
+`
+export const Fr_Td = styled.td`
+    font-size: 14px;
+    text-align: left;
+    vertical-align: middle;
+    font-family: SuisseIntlLight;
+    padding-right: 45px;
+   
     color: ${props=>props.color===undefined?'#3F496C':props.color};
     &:first-child {
         text-align: left;

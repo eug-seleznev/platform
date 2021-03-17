@@ -2,6 +2,7 @@
 .row {
 	display: flex;	
 	justify-content: space-between;
+	flex-wrap: wrap;
 	align-items: flex-start;
 	border-bottom: 1px solid #939393;
 	margin-top: 60px;
@@ -13,13 +14,13 @@
 	margin-top: -25px;
 }
 .main td{
-	padding-top: 0px;
-	padding-bottom: 0px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	padding-left: 20px;
 }
 .row__in {
 	display: flex;
-
+	margin-top: 10px;
 }
 .first:hover {
 	background: none!important;
@@ -70,7 +71,13 @@
 	object-fit: cover;
 }
 @media(max-width:1000px){
-	
+	.title {
+		margin-left: 0px;
+	}
+	.row {
+
+		margin-left: 0px;
+	}
 	.tr__inproj {
 		grid-template-columns: 1fr 50px;
 		height: 50px;

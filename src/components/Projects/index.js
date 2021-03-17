@@ -89,7 +89,10 @@ const Projects = ({history, match, location}) => {
       <div className={style.main}>
           <Regular size='16' color='#3F496C' className={style.title}>Все проекты</Regular>
           <div className={style.row}>
-            {user.permission!=='user' && <Link to='/admin/newproject'><ButtonText fontSize='14px' style={{fontFamily:'SuisseIntlSemibold'}}>Создать новый проект</ButtonText></Link>}
+            {user.permission!=='user' && 
+             <div className={style.row__in}><Link to='/admin/newproject'>
+               <ButtonText fontSize='14px' style={{fontFamily:'SuisseIntlSemibold'}}>Создать новый проект</ButtonText></Link>
+              </div>}
              <div className={style.row__in}>
                <img src='/lupa.png' className={style.row__img}></img>
                <SearchInput size='14px' placeholder='Поиск по названию' name='title' onChange={projectTitle}></SearchInput>
@@ -98,10 +101,12 @@ const Projects = ({history, match, location}) => {
                <img src='/lupa.png' className={style.row__img}></img>
                <SearchInput size='14' placeholder='Объект'></SearchInput>
              </div>
-             <Thin size='14'>
-                Проектов в работе: {projects
-              .filter((project) => !project.status).length}
-             </Thin>
+             <div className={style.row__in}>
+              <Thin size='14'>
+                  Проектов в работе: {projects
+                .filter((project) => !project.status).length}
+              </Thin>
+             </div>
              <div className={style.row__in}>
                <Bold size='14'>Фильтр:</Bold>
                <Select style={{fontSize:'14px'}}
@@ -118,7 +123,7 @@ const Projects = ({history, match, location}) => {
                 <New_Th onClick={() => sortFunction("title")}>Название &#8597;</New_Th>
                 <New_Th
                   onClick={() => sortFunction("dateStart")}
-                  
+                  className={style.turn__off}
                 >
                   Начало проекта &#8597;
                 </New_Th>
@@ -129,7 +134,7 @@ const Projects = ({history, match, location}) => {
                   Дедлайн &#8597;
                 </New_Th>
                 <New_Th onClick={() => sortFunction("status")} >Статус &#8597;</New_Th>
-                <New_Th >
+                <New_Th  className={style.turn__off}>
                   <form>
                     <Select  onChange={projectType} defaultValue='Тип'name='type' style={{width:'100%'}}>
                       {types.map((type) => {
@@ -138,8 +143,8 @@ const Projects = ({history, match, location}) => {
                     </Select>
                   </form>
                 </New_Th>
-                <New_Th>Спринты</New_Th>
-              </New_Tr>
+                <New_Th className={style.turn__off}>Спринты</New_Th>
+            </New_Tr>
             </New_thead>
            
           <New_tbody>
@@ -162,10 +167,10 @@ const Projects = ({history, match, location}) => {
                     title="Открыть проект"
                   >
                     <New_Td>{project.title}</New_Td>
-                    <New_Td >
+                    <New_Td className={style.turn__off}>
                       {project.dateStart.slice(0, 10)}
                     </New_Td>
-                    <New_Td className={style.turn__off}>
+                    <New_Td >
                       {project.dateFinish !== undefined &&
                       project.dateFinish !== null
                         ? project.dateFinish.slice(0, 10)
@@ -174,14 +179,14 @@ const Projects = ({history, match, location}) => {
                     <New_Td style={{paddingTop:'10px'}}>
                       {project.status ? <Tag tagText="Завершен" tagColor="#F1EFEF" ></Tag> : <Tag tagText="В работе" tagColor="#AAF790" ></Tag>}
                     </New_Td>
-                    <New_Td style={{paddingTop:'10px'}}><Tag tagText={project.type}
+                    <New_Td className={style.turn__off} style={{paddingTop:'10px'}}><Tag tagText={project.type}
                             tagColor={project.type==="Архитектура"?"#C8DDE9":
                             project.type==="Конструкции" ?"#E9E3C8":
                             project.type==="Интерьер"?"#B4FAF6":
                             project.type==="Ландшафт"?"#68D286":
                             project.type==="Сети"?"#F1EFEF":"#C8DDE9"}></Tag></New_Td>
 
-                    <New_Td>
+                    <New_Td className={style.turn__off}>
                       {project.sprints.filter((sprint) => !sprint.status)
                         .length >= 1 ? (
                         <Circle green />
