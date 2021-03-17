@@ -54,6 +54,12 @@ user-select: none;
 	color:#3F496C;
 	margin-top:10px;
 }
+.img__td {
+	width:25px;
+	height:25px;
+	border-radius: 100%;
+	margin-left: 15px;
+}
 .card__thing {
 	width: 100px;
 	height: 10px;

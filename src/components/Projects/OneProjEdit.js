@@ -16,7 +16,7 @@ const ProjectEdit = ({history, match}) => {
 	const project = useSelector(state => state.projects.project)
 	const loadProject = useSelector(state => state.projects.loadProject)
     const [formData, setFormData ] = useState({
-        
+        crypter:'',
         title: '',   
         offTitle:'',   
         dateStart: '', 
@@ -60,6 +60,7 @@ const ProjectEdit = ({history, match}) => {
                 cusStorage:project.cusStorage,
                 budget:project.budget, 
                 schedule:project.schedule, 
+                crypter:project.crypter,
                 customerNew: {
                     name: project.customerNew[0]!==undefined?project.customerNew[0].name:'',
                     phone: project.customerNew[0]!==undefined?project.customerNew[0].phone:'',
@@ -69,7 +70,7 @@ const ProjectEdit = ({history, match}) => {
 		}
 		
     }, [loadProject])
-      const { title, offTitle, dateStart, dateFinish, cusStorage, budget,schedule, city, customer, about, customerNew} = formData;
+      const { title, offTitle, dateStart, dateFinish, cusStorage, budget, schedule, city, crypter, about, customerNew} = formData;
 
       useEffect(()=>{ 
         dispatch(background('white'))
@@ -144,6 +145,7 @@ const ProjectEdit = ({history, match}) => {
             <form className='form' onSubmit={onSubmit}>
             <div style={{display:`${editStage===1?'block':'none'}`}}>
             <InfoInputs 
+                crypter={crypter}
                 city={city}
                 about={about}
                 title={title} 

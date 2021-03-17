@@ -126,6 +126,7 @@
         'news'
         'projects'
         'sprints'
+        'tasks'
         
         ;
         grid-template-rows: min-content min-content min-content;

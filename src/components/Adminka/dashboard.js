@@ -6,10 +6,12 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { allTickets } from "../../redux/actions/tikets";
 
+import style from '../../Styles/modules/components/Project/allproj.module.css'
 //styled components
-import {Table, Tr, Td} from '../../Styles/tables'
+import {Table, Tr, Td, New_thead, New_Tr, New_Th, New_tbody, New_table, New_Td} from '../../Styles/tables'
 import {Container, Card, Title,} from '../../Styles/common'
-import { H1, H3} from '../../Styles/typography'
+import { H1, H3, Regular} from '../../Styles/typography'
+import { background } from "../../redux/actions/user";
 
 
 const Dashboard = ({history}) => {
@@ -20,40 +22,52 @@ const Dashboard = ({history}) => {
 
     useEffect(() => {
         dispatch(allTickets())
+            dispatch(background('white'))
+            return () => {
+              dispatch(background('#ECECEC'))
+            }
+         
+        
     }, [])
 
     
     return (
         <div> 
-            <Card>
-            <H1> Входящие тикеты</H1>
-                <p> количество проблем: {tickets.length} </p>
+           
+           <Regular size='16' color='#3F496C' className={style.title}> Входящие тикеты ({tickets.length})</Regular>
+            
+     
 
             {!loaded ? <p>loading...</p> : (
             
-                    <Table main>
-                      
-                            <Tr columns='1fr 5fr 1fr' top='top'>
-                                <Td>Номер</Td>
-                                <Td>Проблема</Td>
-                                <Td>Статус</Td>
-                            </Tr>
-                    
+                    <New_table>
+                        <New_thead>
+                            <New_Tr className={style.first}>
+                                <New_Th>Номер</New_Th>
+                                <New_Th>Проблема</New_Th>
+                                <New_Th>Статус</New_Th>
+                            </New_Tr>
+                        </New_thead>
+                            
+                        <New_tbody>
+                            
                             {tickets.map((ticket,index) => 
                                 
-                                <Tr columns='1fr 5fr 1fr' onClick={() => history.push(`/tickets/${ticket._id}`)}>
-                                    <Td>{index+1}</Td>
-                                    <Td>{ticket.problemname}</Td>
-                                    <Td>{ticket.status ? <p>ongoing</p>:<p>complete</p>}</Td>
+                                <New_Tr columns='1fr 5fr 1fr' onClick={() => history.push(`/tickets/${ticket._id}`)}>
+                                    <New_Td>{index+1}</New_Td>
+                                    <New_Td>{ticket.problemname}</New_Td>
+                                    <New_Td>{ticket.status ? <p>получен</p>:<p>выполнено</p>}</New_Td>
                                     
-                                </Tr>
+                                </New_Tr>
                                 
                             )}
+                        </New_tbody>
+                            
                      
-                    </Table>
+                    </New_table>
                 
             )}
-            </Card>
+           
         </div>
     )
 }

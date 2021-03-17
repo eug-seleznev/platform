@@ -69,11 +69,14 @@ const ProjectNew = ({history,closeWindow}) => {
         }
       }, [])
      useEffect(()=>{
-        if(createMsg.includes('Проект')){
+       if(createMsg!==undefined) {
+          if(createMsg.includes('Проект')){
           setTimeout(() => {
             history.replace('./../projects')
           },100) 
         }
+       }
+       
      },[createMsg])
      //
       const returnToSearch =()=>{

@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUserToTask, EditTask, finishTask } from "../../../../redux/actions/projects";
 import { Sprint_Table, TR,Sprint_Td,Select } from "../../../../Styles/tables"
 import style from "../../../../Styles/modules/components/Project/newsprint.module.css"
+import { Regular, Thin } from "../../../../Styles/typography";
+import { Input } from "../../../../Styles/Forms";
+import { ButtonText } from "../../../../Styles/buttons";
+import getDate from "../../getDate";
 
 //todo: handle no tasks state
 
 
 const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit, team }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.auth.user)
   const [taskId, setTaskId] = useState("");
   const [focusRow, setFocusRow] = useState("");
-
+  const [deadline, setDeadline] = useState(false);
   const [taskTitle, setTaskTitle] = useState("");
 
   const [isDouble, setDouble] = useState(0)
@@ -45,8 +50,9 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
   //edit task
   const editHandler = (e) => {
     console.log('edit')
-      let taskTitle = e.target.value
-      dispatch(EditTask({  taskTitle, id, focusRow }));
+     let field = 'taskTitle'
+      let value = e.target.value
+      dispatch(EditTask({ value, id, focusRow, field }));
       setTaskTitle(e.target.value)
    //server call edit task
 
@@ -59,11 +65,15 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
   const submitEdit = (e) => {
     e.preventDefault();
     //server call edit task
-
-    dispatch(EditTask({ taskTitle, id, focusRow }));
+    let field = 'taskTitle'
+    dispatch(EditTask({ taskTitle, id, focusRow, field}));
     enableEdit();
   }
-
+  const changeTaskDate =(e)=>{
+    let value = e.target.value
+    let field = 'deadline'
+    dispatch(EditTask({value, id, focusRow, field}))
+  }
 
   const doubleClickEdit = (task) => {
       setTaskTitle(task.taskTitle)
@@ -95,7 +105,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
 
     let userid = e.target.value
     let focusRow = task._id
-    dispatch(addUserToTask({userid, id, focusRow, }))
+    dispatch(addUserToTask({userid, id, focusRow }))
   }
 
 
@@ -132,7 +142,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
                 onChange={onChange}
               ></input>
             </Sprint_Td>
-
+           
 
 
             {isEdit && task._id === focusRow  ? (
@@ -148,11 +158,14 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
                   ></input>
                 </form>
               </Sprint_Td>
-            ) : (
+            ) : (<>
               <Sprint_Td>{task.taskTitle}</Sprint_Td>
+              
+              </>
+              
             )}
 
-
+            
 
 
 
@@ -198,6 +211,22 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
                   )}{" "}
                 </>
               )}
+            </Sprint_Td>
+            <Sprint_Td style={{width:'250px'}}>
+              <div style={{display:'flex'}}>
+                <Thin >Дедлайн: </Thin> 
+                <ButtonText onClick={()=>setDeadline(true)}
+                  style={{display:`${task._id !== focusRow||!deadline?'block':'none'}`}}>
+                  {task.deadline!==undefined?getDate(task.deadline):'указать'}
+                </ButtonText>
+                
+                <Input onKeyPress={(e)=>e.key==='Enter'? setDeadline(false):''} 
+                  type="date" 
+                  onChange={(e)=>changeTaskDate(e,task._id)}
+                  style={{display:`${task._id === focusRow&&deadline?'block':'none'}`}}>
+                </Input>
+              </div>
+              
             </Sprint_Td>
           </TR>
         );

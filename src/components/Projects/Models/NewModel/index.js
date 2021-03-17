@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { postModel } from "../../../../redux/actions/models";
+import { postModel, Status } from "../../../../redux/actions/models";
 
 
 
@@ -34,6 +34,7 @@ const LoadModel = ({crypt, setSubmited}) => {
 
    const onSubmit = (e) => {
      e.preventDefault();
+     dispatch(Status({crypt, name:''}))
      dispatch(postModel(formData));
      setSubmited({submit: true, loaded: true})
 

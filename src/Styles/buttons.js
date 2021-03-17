@@ -61,7 +61,7 @@ export const ButtonText =  styled.button`
   background: none;
   width: max-content;
   padding: 0;
-
+  cursor:pointer;
   font-size:${props => props.fontSize};
   font-family: SuisseIntlRegular;
   
@@ -86,7 +86,7 @@ export const ButtonTextDiv =  styled.div`
   background: none;
   width: max-content;
   padding: 0;
-
+  cursor: pointer;
   font-size:${props => props.fontSize};
   font-family: SuisseIntlRegular;
   

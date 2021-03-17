@@ -11,7 +11,7 @@ const Subtitle = ({title, src, buttonFunc, buttonActive, subtwidth, srcplus,open
 		<div className={styles.sprint__title} style={{width:subtwidth}}>
 			<div className={styles.sprint__in}>
 				<img className={styles.sprint__title__img} src={src}></img>
-				<Light size='22' style={{width:'200px'}}>{title}</Light>
+				<Light size='22' style={{width:'250px'}}>{title}</Light>
 				<img className={styles.sprint__title__plus} style={{display:`${buttonActive?'flex':'none'}`}} onClick={buttonFunc} src={srcplus?'/minus.png':'/plus.png'}></img>
 			</div>
 			

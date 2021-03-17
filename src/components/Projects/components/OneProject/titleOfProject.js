@@ -28,7 +28,7 @@ const TitleOfProject = ({hist}) => {
        setOpen (false)
      }
     return (
-      <>
+      <div className={style.title__cont}>
         <div className={style.title}>
           <H1 size="24">{project.title}</H1>
           <Bold size="16">
@@ -65,7 +65,7 @@ const TitleOfProject = ({hist}) => {
           <Tag tagColor='#C8D9E9' tagText={project.type} ></Tag>
         </div>
         
-      </>
+      </div>
     );
 }
 

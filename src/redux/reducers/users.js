@@ -1,6 +1,6 @@
 
 import { backgroundWhite } from '../actions/user';
-import { ALL_USERS, CHANGE_PERMISSION,EDIT_CONTRACTOR,ONE_CONTRACTOR,PERM_RETURN,ONE_USER, CLEAR_ERROR, CLEAR_MSG, SEARCH_USER, ADD_CONTRACTOR, ALL_CONTRACTORS, PARTITION_UPDATE, BACK_WHITE} from '../types'
+import { ALL_USERS,SEARCH_TABLE_USER,FIND_CONTRACTOR, CHANGE_PERMISSION,EDIT_CONTRACTOR,ONE_CONTRACTOR,PERM_RETURN,ONE_USER, CLEAR_ERROR, CLEAR_MSG, SEARCH_USER, ADD_CONTRACTOR, ALL_CONTRACTORS, PARTITION_UPDATE, BACK_WHITE} from '../types'
 
 
 
@@ -23,6 +23,18 @@ export default function(state = initialState, action) {
     } = action;
 
     switch(type){
+        case SEARCH_TABLE_USER: 
+            return {
+                ...state,
+                users:payload,
+                
+            }
+        case FIND_CONTRACTOR: 
+        return {
+            ...state,
+            contractors:payload,
+            
+        }
         case SEARCH_USER: 
             return {
                 ...state,

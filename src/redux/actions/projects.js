@@ -1,5 +1,5 @@
 import { innerBackend, instance } from "../../components/utils/axios";
-import { ADD_SPRINT,ADD_USER_TO_TEAM, SORT_PROJECTS,ADD_TAG, ADD_TASKS,CLEAR_URN,GREEN_MSG,DELITE_USER, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK, CREATE_FAIL, DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, PROJECT_ID, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT,CLEAR_MSG, CLEAR_ERROR, DELETE_SPRINT, PROJECTS_SORT, ERROR_MSG, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, DELITE_TAG  } from "../types";
+import { ADD_SPRINT,ADD_USER_TO_TEAM,SORT_TITLE, SORT_PROJECTS,CHANGE_ROCKET, ADD_TAG,SORT_BY_TAGS, ADD_TASKS,CLEAR_URN,GREEN_MSG,DELITE_USER, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK, CREATE_FAIL, DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, PROJECT_ID, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT,CLEAR_MSG, CLEAR_ERROR, DELETE_SPRINT, PROJECTS_SORT, ERROR_MSG, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, DELITE_TAG  } from "../types";
 
 
 
@@ -32,6 +32,23 @@ export const newProject = (formData) => async dispatch  => {
     }
 
 }
+export const changeRocket = (crypt, rocket) => async (dispatch) => {
+  console.log(crypt, rocket)
+  let body = {
+    rocketchat: rocket
+  }
+  try {
+    const res = await innerBackend.put(
+      `/projects/addrocket/${crypt}`, body
+    );
+    dispatch({
+      type: CHANGE_ROCKET,
+      payload: res.data,
+    });
+  } catch (err) {
+    alert("hahaha classic");
+  }
+};
 export const addToProject = ( crypt, userId) => async (dispatch) => {
   console.log(crypt)
   let body = {
@@ -85,7 +102,20 @@ export const sorType = ({ field, value }) => async (dispatch) => {
     alert("hahaha classic");
   }
 };
-
+export const sortTitle = ({ value }) => async (dispatch) => {
+  console.log(value)
+  try {
+    const res = await innerBackend.get(
+      `/projects/title/search?title=${value}`
+    );
+    dispatch({
+      type: SORT_TITLE,
+      payload: res.data,
+    });
+  } catch (err) {
+    alert("hahaha classic");
+  }
+};
 
 
 
@@ -123,6 +153,26 @@ export const allProjects = () => async dispatch  => {
       
     }
 
+}
+export const sortByTags = (crypt, tag) => async dispatch => {
+  try {
+    const res = await innerBackend.get(`/projects/sprint/tagsort?crypt=${crypt}&tag=${tag}`)
+    dispatch({
+        type: SORT_BY_TAGS,
+        payload: res.data
+    })
+
+    }
+  catch (err) {
+    const errors = err.response.data.err;
+    errors.map(error => {
+       return dispatch({
+        type: ERROR_MSG,
+        payload: error.msg
+    })
+    })            
+  
+}
 }
 export const searchTag = (tag, crypt) => async dispatch  => {
     
@@ -202,14 +252,16 @@ export const addSprint = (id) => async dispatch  => {
    
 }
 
-export const EditTask = ({ taskTitle, id, focusRow }) => async (dispatch) => {
-  console.log(taskTitle)
+export const EditTask = ({ value, id, focusRow, field }) => async (dispatch) => {
+  console.log(field,value,id)
   try {
 
     let body = {
-      taskTitle: taskTitle!==''?taskTitle:' ',
+      // taskTitle: taskTitle!==''?taskTitle:' ',
+      // deadline: deadline!==''?deadline:'',
       taskid: focusRow,
     };
+    body[field] = value
 
     const res = await innerBackend.put(`projects/sprints/taskedit/${id}`, body);
     dispatch({
@@ -551,14 +603,14 @@ export const finishSprint = (id) => async dispatch  => {
     }
 
 }
-export const addInfoSprint = (id, form) => async dispatch  => {
-    // console.log (form.description, form.date, id)
+export const addInfoSprint = (form, id) => async dispatch  => {
+    console.log (form.date, id)
     let body = {
-        description: form.description,
-        date: form.date,
+        // description: form.description,
+        dateClosePlan: form.date,
     }
     try {
-        const res = await innerBackend.put(`projects/sprints/dd/${id}`, body)
+        const res = await innerBackend.put(`projects/sprints/edit/${id}`, body)
         dispatch({
             type: ADD_INFO_SPRINT,
             payload: res.data

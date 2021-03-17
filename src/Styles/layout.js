@@ -13,6 +13,7 @@ export const Header =  styled.div`
     // flex-direction: row;
     // justify-content: flex-end;
     align-items: center;
+    border-bottom: 1px solid #C4C4C4;
     left:0;
     right:0;
     top: 0;

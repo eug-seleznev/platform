@@ -33,9 +33,65 @@ export const Select = styled.select`
     font-family: SuisseIntlLight;
     font-size:16px;
 `
+export const New_table = styled.table`
+border-collapse: collapse;
+  
+   border-radius:5px;
+    background-color: white;
+`
+export const New_thead = styled.thead`
+   width:100%;
 
+  
+`
+export const New_Tr = styled.tr`
 
+padding:30px;
+height:fit-content;
+cursor:pointer;
 
+&:hover {
+    background: #F1EFEF
+}
+`
+
+export const New_Th = styled.th`
+
+color: #8C8C8C;
+font-family: SuisseIntlThin;
+font-size: 14px;
+text-align: left;
+padding-right: 10px;
+padding-top: 20px;
+padding-bottom: 20px
+`
+export const New_Td = styled.td`
+    font-size: 14px;
+    text-align: left;
+    vertical-align: middle;
+    font-family: SuisseIntlLight;
+    padding-right: 45px;
+    min-height: 30px!important;
+    color: ${props=>props.color===undefined?'#3F496C':props.color};
+    &:first-child {
+        text-align: left;
+    }
+`
+export const Fr_Td = styled.td`
+    font-size: 14px;
+    text-align: left;
+    vertical-align: middle;
+    font-family: SuisseIntlLight;
+    padding-right: 45px;
+   
+    color: ${props=>props.color===undefined?'#3F496C':props.color};
+    &:first-child {
+        text-align: left;
+    }
+`
+export const New_tbody = styled.tbody`
+    width:100%;
+`
 export const Tr = styled.div` //need columns='...' on <Tr> and top='top' on sorting <Tr>
 display: grid;
 grid-template-columns: ${props => props.columns};     

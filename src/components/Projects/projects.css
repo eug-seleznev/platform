@@ -45,12 +45,3 @@
 	
 }
 
-th {
-	border-collapse:collapse;
-	border-bottom: 2px solid black;
-}
-td {
-	border-collapse:collapse;
-	border-bottom: 2px solid black;
-	cursor: pointer;
-}
