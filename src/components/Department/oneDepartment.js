@@ -36,10 +36,10 @@ const OneDepartment = ({history, match}) => {
 // 	}
 
 // },[])
- const choseDivision =()=>{
+//  const choseDivision =()=>{
 	 
-     history.replace(`./`)
- }
+//      history.replace(`./`)
+//  }
     return(
 		
 	<>

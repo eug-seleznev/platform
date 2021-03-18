@@ -18,7 +18,9 @@ const ProjHistory = ({project,history}) => {
     // const [overCard, setOvercard] = useState(false)
 
 	const [green, setGreen] = useState(false)
-	
+	const pushToSprint =(id)=>{
+		history.push(`/projects/${project.crypt+'/'+id}`)
+	}
     return(
    	 <div className={styles.history}>
 		<div className={styles.title__history}>
@@ -39,27 +41,27 @@ const ProjHistory = ({project,history}) => {
 			</div>
 		</div>
 		<div >
-			<New_table className={styles.table2} >
+			<New_table className={styles.history_table2} >
 				<New_thead  >
-					<New_Tr >
-						<New_Th >Название</New_Th>
-						<New_Th className={styles.off__too}>Тег</New_Th>
-						<New_Th className={styles.off}>Создал</New_Th>
+					<New_Tr className={styles.history_head}>
+						<New_Th className={styles.history_first}>Название</New_Th>
+						<New_Th className={styles.history_tags} >Тег</New_Th>
+						<New_Th className={styles.history_creator}>Создал</New_Th>
 						<New_Th >Прогресс</New_Th>
 						<New_Th className={styles.off}>Дедлайн</New_Th>
 					</New_Tr>
 				</New_thead>
 				
-				<New_tbody>
+				<New_tbody >
 				{project!==undefined?project.sprints.map((sprint,i)=>{
 					
 						return(
 						
-						<New_Tr key={i}>
-							<New_Td size='14' >{sprint.tasks!==undefined?<Circle red={sprint.tasks.length===0?true:false} style={{marginRight:'10px'}}></Circle>:''}{sprint.title}</New_Td>
-							<New_Td className={styles.tags} size='14' >{sprint.tags!==undefined?sprint.tags.map((tag,i)=>{return(<Tag projectPage={true} crypt={project.crypt} tagText={tag}tagColor='#C8D9E9' size='13' key={i}></Tag>)}):''}</New_Td>
-							<New_Td className={styles.off} size='14' > {sprint.creator===undefined?'нет':sprint.creator.fullname}<img className={sprintcss.img__td} style={{opacity:sprint.creator===undefined?0:1}} src={sprint.creator===undefined?'/Ellipse 13.png':url+'/'+sprint.creator.avatar}></img></New_Td>
-							<New_Td  size='14' style={{display:'inline-flex', alignItems:'center'}}>{sprint.tasks!==undefined?sprint.tasks.filter(task=>task.taskStatus).length+'/'+sprint.tasks.length:''}
+						<New_Tr onClick={()=>pushToSprint(sprint._id)}  key={i}>
+							<New_Td size='14' className={styles.tdd}>{sprint.tasks!==undefined?<Circle red={sprint.tasks.length===0?true:false} style={{marginRight:'10px'}}></Circle>:''}{sprint.title}</New_Td>
+							<New_Td className={styles.history_tags} size='14' >{sprint.tags!==undefined?sprint.tags.map((tag,i)=>{return(<Tag projectPage={true} crypt={project.crypt} tagText={tag}tagColor='#C8D9E9' size='13' key={i}></Tag>)}):''}</New_Td>
+							<New_Td className={styles.history_creator} size='14' > {sprint.creator===undefined?'нет':sprint.creator.fullname}<img className={sprintcss.img__td} style={{opacity:sprint.creator===undefined?0:1}} src={sprint.creator===undefined?'/Ellipse 13.png':url+'/'+sprint.creator.avatar}></img></New_Td>
+							<New_Td  size='14' >{sprint.tasks!==undefined?sprint.tasks.filter(task=>task.taskStatus).length+'/'+sprint.tasks.length:''}
 								<div className={sprintcss.card__thing}>
 									<div
 										style={{

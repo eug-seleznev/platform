@@ -45,6 +45,7 @@ if(!user.name){
           user={user}
           history={history}
           change
+          mainPage={true}
         />
         <ProjectsBlock history={history} user={user}/>
         <NewsBlock history={history} user={user}/>

@@ -9,7 +9,7 @@ import TopInfo from '../User/components/topInfo';
 import Tag from '../Projects/components/OneProject/tag';
 import { changeAvatar } from '../../redux/actions/auth';
 
-const ProfileComponent = ({user, history, change}) => {
+const ProfileComponent = ({user, history, change, mainPage}) => {
   const me = useSelector(state => state.auth.user)
   const [link,setLink] = useState ('')
   const[file,setFile] = useState(null)
@@ -44,6 +44,7 @@ const ProfileComponent = ({user, history, change}) => {
       <div className={styles.profile}>
         <Bold style={{opacity:enter?1:0}} className={styles.change__avatar}>Сменить аватар</Bold>
         <input className={styles.set__file}
+          style={{display:`${mainPage?'block':'none'}`}}
           type='file'
           placeholder='загрузите изображение'
           onChange={handleFile}

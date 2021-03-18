@@ -25,21 +25,23 @@ const SearchUser = ({func}) => {
     return(
 		<Card className={form.formCard2}>
                     <Thin size='28' className={form.title2}>Ответственный сотрудник</Thin>
-					<div>
+					          <div>
                      <input placeholder='введите имя' className={form.input__long} onChange={(e) => PeopleList(e)}/>
                      <div className={form.searchMenu} >
                        {searchResult.map((user,i)=>{
-                         console.log(searchResult)
+                       
+                        //  console.log(searchResult)
                          return (
-                           <div className={form.search}>
+                          <div className={form.selector}>
                              <div  key={i}>{user.fullname}</div>
-                             <CancelButton fontSize={"16px"} padd={"20px"} onClick={()=>func(user._id)}>Добавить</CancelButton>
+                             <CancelButton fontSize={"12px"} padd={"20px"} onClick={()=>func(user._id)}>Добавить</CancelButton>
                            </div>
                          )
                        })}
+                      </div>
                      </div>
 					 <CancelButton fontSize={"16px"} padd={"20px"} grey onClick={()=>func(null)} className={form.skip}>Пропустить</CancelButton>
-					 </div>
+					 
                     </Card>
     )
 }

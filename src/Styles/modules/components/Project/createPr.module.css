@@ -53,7 +53,7 @@
 	display: flex;
 	width: 50vw;
 	justify-content: space-between;
-	margin-top: -100px;
+	margin-top: -30px;
 }
 .line {
 	width: 100px;
@@ -111,6 +111,7 @@
 	font-size: 24px;
 	margin-bottom: 5px;
 	height: 40px;
+	background-color: white;
 }
 .partition label {
 	
@@ -159,6 +160,7 @@
 	height:37px;
 	font-size: 24px;
 	margin-top: 10px;
+	/* background-color: white; */
 }
 .form input{
 	width:100%;

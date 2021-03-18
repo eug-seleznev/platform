@@ -69,6 +69,9 @@ const ProjectNew = ({history,closeWindow}) => {
           dispatch(background('#ECECEC'))
         }
       }, [])
+      // const alertReq =()=>{
+      //   alert('yf[ blb')
+      // }
      useEffect(()=>{
        if(createMsg!==undefined) {
           if(createMsg.includes('Проект')){
@@ -268,7 +271,7 @@ const ProjectNew = ({history,closeWindow}) => {
                </div>
                <div className={style.row}>
                  <div className={style.input__mid}>
-                   <Thin className={style.title}>Фаза</Thin>
+                   <Thin className={style.title}>Стадия</Thin>
                    <select
                      defaultValue="Концепт"
                      name="stage"
@@ -414,7 +417,7 @@ const ProjectNew = ({history,closeWindow}) => {
                       <Thin size='28' className={style.title}>Введите должность сотрудника</Thin>
                       <div className={style.search__user}>
                         <div>{nameCurrent}</div> 
-                        <input className={style.position}  value={currentPos} onChange={(e) => posCurrent(e)} placeholder='должность'></input>
+                        <input className={style.position} defaultValue='нет' value={currentPos} onChange={(e) => posCurrent(e)} placeholder='должность'></input>
                         
                       </div>
                       <div className={style.buttons}>
@@ -480,7 +483,7 @@ const ProjectNew = ({history,closeWindow}) => {
                  fontSize={"16px"}
                  style={{ marginTop: "5px" }}
                  padd={"20px"}
-                 onClick={()=>nextStep(2)}
+                 onClick={()=>title==''?alert('Заполните обязательные поля'):nextStep(2)}
                >
                  {" "}
                  Перейти к следующему шагу

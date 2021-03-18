@@ -35,6 +35,12 @@
 }
 .searchMenu {
     display: flex;
+    flex-direction: column;
+}
+.selector{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 .search {
     display: flex;

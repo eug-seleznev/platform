@@ -108,7 +108,7 @@ const InfoInputs = ({onChange,project,offTitle, title, dateFinish, dateStart,obj
 					</select>
 				</div>
 				<div className={style.titles__point}>
-					<Thin className={style.one__title}>Фаза</Thin>
+					<Thin className={style.one__title}>Стадия</Thin>
 					<select
                      defaultValue={project.stage}
                      name="stage"

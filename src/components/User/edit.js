@@ -71,7 +71,7 @@ const Edit = ({match, history}) => {
 	 }
 	 const Redirect = () => {
      
-		return history.replace(`/users/me`)
+		return history.push(`/users/me`)
 	
 }
      const onSubmit = e => {
