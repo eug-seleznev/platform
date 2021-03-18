@@ -23,6 +23,10 @@ import { background } from '../../redux/actions/user';
 import Tag from './components/OneProject/tag';
 import { Link } from 'react-router-dom';
 
+
+
+let field = "type";
+
 let  types = ["Все",'Архитектура', "Визуализация", "Сети", "Экстерьер", "Интерьер", "Ландшафт", "Конструкции", 'Другое']
 
 const Projects = ({history, match, location}) => {
@@ -32,20 +36,36 @@ const Projects = ({history, match, location}) => {
     const projects = useSelector(state => state.projects.projects)
     const [orderSort, setOrder] = useState(false)
     const [search, setSearch] = useState('')
-    const [activeField, setActiveField] = useState('Все')
+    // const [activeField, setActiveField] = useState('Все')
     const [filter, setFilter] = useState('Все')
+
+    const [value, setActiveField] = useState(
+      decodeURI(location.search).split("?")[1]
+    );
+  
+           
+
     useEffect (()=>{
       dispatch(allProjects()) 
     }, [])
 
   useEffect(() => {
     if(location.search){
-      let value = location.search.split("?")[1];
-      // console.log(field);
-      setActiveField(value);
-      let field = "type";
-      console.log(field, activeField);
-      dispatch(sorType({ field, activeField }));
+      // console.log(decodeURI(location.search))
+      // let value = location.search.split("?")[1];
+
+      // value = decodeURI(value);
+      // setActiveField(decodeURI(value));
+      console.log(value)
+      // console.log(field, activeField);
+      
+
+
+      dispatch(sorType({ field, value }));
+    } else {
+       
+         dispatch(allProjects());
+       
     }
     
 

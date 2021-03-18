@@ -1,5 +1,5 @@
 
-import { ADD_SPRINT,SORT_PROJECTS,SEARCH_OBJECT,SORT_TITLE, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL, EDIT_TASK, CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR, GET_URN, DELETE_SPRINT, CLEAR_URN, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, ADD_TAG, DELITE_USER, DELITE_TAG, ADD_USER_TO_TEAM, SORT_BY_TAGS, CHANGE_ROCKET } from '../types'
+import { ADD_SPRINT,SORT_PROJECTS,SORT_TITLE, SEARCH_OBJECT, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL, EDIT_TASK, CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR, GET_URN, DELETE_SPRINT, CLEAR_URN, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, ADD_TAG, DELITE_USER, DELITE_TAG, ADD_USER_TO_TEAM, SORT_BY_TAGS, CHANGE_ROCKET, CLEAR_MODEL_DATA } from '../types'
 
 
 
@@ -22,6 +22,7 @@ const initialState = {
     sprint_msg:'',
     hey:'', 
     tagSearch:[],
+    modelLoaded: false,
     objectList:[]
 }
 
@@ -225,7 +226,14 @@ export default function(state = initialState, action) {
             case GET_URN:
                 return {
                     ...state,
-                    msg: payload.msg
+                    msg: payload.msg,
+                    project: payload.project,
+                    modelLoaded: true,
+                }
+            case CLEAR_MODEL_DATA:
+                return {
+                    ...state,
+                    modelLoaded: false
                 }
                 case FINISH_PROJECT:
                     return {

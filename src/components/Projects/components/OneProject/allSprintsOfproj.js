@@ -20,12 +20,7 @@ const AllSprintsOfProj = ({hist, match, status, id}) => {
     dispatch(addSprint(id));
     
   };
-  // useEffect(()=>{
-  //   console.log(sprint)
-  //   if(sprint._id!==undefined) {
-  //     hist.push(`/${sprint._id}`)
-  //   }
-  // },[sprint])
+
     return (
     
 	        <div className={style.sprints} >

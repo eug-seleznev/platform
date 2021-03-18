@@ -48,6 +48,10 @@ import EditContractor from './components/Superadmin/editContractor'
 //ОТБЕРИТЕ У МЕНЯ КОМПЬЮТЕР НАХУЙ
 // import Sprint_New from './components/Projects/Project/Sprint/new'
 import Search from './components/User/Search'
+import Models from './components/Projects/Models';
+import LoadModel from './components/Projects/Models/NewModel';
+import EditUser from './components/User/editUser';
+import Viewer from './components/Projects/model';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -84,6 +88,11 @@ const App = () => {
           <LoginContainer>
             <Route exact path="/" component={Auth} />
             <Route exact path="/:id/viewer" component={PublicViewer} />
+            <Route
+              exact
+              path="/projects/:crypt/m/view/:name/public"
+              component={Helper}
+            />
           </LoginContainer>
         ) : (
           <>
@@ -112,6 +121,30 @@ const App = () => {
                   path="/projects/:crypt/:sprint_id"
                   component={Sprint}
                 />
+
+                <Route
+                  exact
+                  path="/projects/:crypt/m/view"
+                  component={Models}
+                />
+
+                <Route
+                  exact
+                  path="/projects/:crypt/m/view/:name"
+                  component={Helper}
+                />
+
+                <Route
+                  exact
+                  path="/projects/:crypt/m/view/:name/public"
+                  component={Helper}
+                />
+                {/* <Route
+                  exact
+                  path="/projects/:crypt/m/view/new"
+                  component={LoadModel}
+                /> */}
+
                 <Switch>
                   <Route
                     exact
@@ -136,6 +169,8 @@ const App = () => {
                 <Route exact path="/users/me/partition" component={Partition} />
 
                 <Route exact path="/users/:id" component={Employe} />
+                <Route exact path="/users/:id/edit" component={EditUser} />
+
                 <Route exact path="/edit" component={Edit} />
                 <Route exact path="/news" component={News} />
                 {/* depatrments */}
@@ -152,7 +187,11 @@ const App = () => {
 
                 <Route exact path="/viewer" component={Helper} />
                 <Route exact path="/contractors" component={Contractors} />
-                <Route exact path="/contractors/:id" component={EditContractor} />
+                <Route
+                  exact
+                  path="/contractors/:id"
+                  component={EditContractor}
+                />
               </Container>
             </Switch>
           </>

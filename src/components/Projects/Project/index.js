@@ -23,7 +23,7 @@ const Project = ({match, history}) => {
     const dispatch = useDispatch();
     const loaded = useSelector(state => state.projects.loadProject)
     const project = useSelector(state => state.projects.project)
-
+    const sprint = useSelector(state => state.projects.sprint)
   
 
     useEffect(() => {
@@ -44,6 +44,20 @@ const Project = ({match, history}) => {
             dispatch(allSprints(project.crypt))
         }
     }, [loaded])
+
+  useEffect(() => {
+    console.log(sprint)
+    if (sprint._id) {
+      console.log("lololo");
+      history.push(`${id}/${sprint._id}`);
+    } else {
+      console.log(sprint, "my sprint else");
+    }
+  }, [sprint]);
+  
+
+
+
     return (
       <div className={style.contain}>
         {!loaded ? (

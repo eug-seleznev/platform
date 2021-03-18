@@ -117,6 +117,33 @@ export const userSearch = (formData) => async dispatch => {
   }
 }
 
+//PUT /users/edit/:id
+//edit another user profile 
+
+export const changeUserProfile = ({formData, id}) => async (dispatch) => {
+
+  try {
+    console.log("hello change", formData);
+    const res = await innerBackend.put(`/users/edit/${id}`, formData);
+    dispatch({
+      type: ONE_USER,
+      payload: res.data,
+    });
+    dispatch({
+      type: GREEN_MSG,
+      payload: res.data,
+    });
+  } catch (err) {
+    const errors = err.response.data.err;
+    errors.map((error) => {
+      return dispatch({
+        type: ERROR_MSG,
+        payload: error.msg,
+      });
+    });
+  }
+};
+
 
 export const usersPartition = (partition) => async dispatch =>  {
   try {

@@ -71,7 +71,8 @@ useEffect(()=>{
 		
 	}
 	const toProj =()=>{
-		hist.push('./')
+		console.log('hello')
+		// hist.replace(`/projects/26`)
 	}
 	const buttonR =()=>{
 		setChange (false)

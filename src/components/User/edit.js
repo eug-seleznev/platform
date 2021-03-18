@@ -21,8 +21,10 @@ const Edit = ({match, history}) => {
 	const departments = useSelector(state => state.departments.departments)
 	// const select = user.division.divname==el.divname && selected
 	const dispatch = useDispatch();
+
+
+
     const [formData, setFormData ] = useState({
-        
 		name: user.name ? user.name : '',
 		lastname: user.lastname ? user.lastname : '',  
 		position: user.position ? user.position : '',
@@ -32,6 +34,9 @@ const Edit = ({match, history}) => {
 		phone: user.phone ? user.phone : '', 
 		partition: user.partition ? user.partition : [], 
       });
+
+
+
      const [text, setText] = useState ('') 
 
       const {name,lastname, position, email, report, bday, phone,partition } = formData;
@@ -46,7 +51,7 @@ const Edit = ({match, history}) => {
 
 
 	useEffect (()=> {
-	dispatch(allDepartments())
+		dispatch(allDepartments())
 	},[])
 
 
@@ -76,15 +81,10 @@ const Edit = ({match, history}) => {
 }
      const onSubmit = e => {
 		e.preventDefault();
-
-
 		dispatch(changeData(formData))
-
-
+		
 		if (file !== null && file !== undefined) {
-		
 			dispatch (changeAvatar(file))
-		
 	}
     setTimeout(() => {
 		history.replace(`/users/me`)

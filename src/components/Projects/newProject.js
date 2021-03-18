@@ -20,7 +20,7 @@ const ProjectNew = ({history,closeWindow}) => {
     const [trick, setTrick] = useState (false)
     const [step, setStep] = useState (1)
     const [idCurrent, setIdCurrent] = useState (null)
-    const [currentPos, setCurrentPos] = useState (null)
+    const [currentPos, setCurrentPos] = useState ('')
     const [userStage, setUserStage] = useState (1)
     const [idList,setIdList] = useState ([])
     const [nameCurrent, setNameCurrent] = useState (null)
