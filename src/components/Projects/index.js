@@ -196,7 +196,7 @@ const Projects = ({history, match, location}) => {
                     
                     key={index}
                     onClick={() =>
-                      history.replace(`/projects/${project.crypt}`)
+                      history.push(`/projects/${project.crypt}`)
                     }
                     title="Открыть проект"
                   >
