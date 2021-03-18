@@ -87,7 +87,7 @@ const Edit = ({match, history}) => {
 		
 	}
     setTimeout(() => {
-		history.replace(`/users/me`)
+		history.push(`/users/me`)
 	}, 200);
            
         }

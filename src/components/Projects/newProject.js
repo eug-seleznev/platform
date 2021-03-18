@@ -76,7 +76,7 @@ const ProjectNew = ({history,closeWindow}) => {
        if(createMsg!==undefined) {
           if(createMsg.includes('Проект')){
           setTimeout(() => {
-            history.replace('./../projects')
+            history.push('./../projects')
           },100) 
         }
        }
@@ -474,7 +474,7 @@ const ProjectNew = ({history,closeWindow}) => {
                  grey
                  padd={"70px"}
                  style={{ marginTop: "5px" }}
-                 onClick={()=>history.replace('./../')}
+                 onClick={()=>history.push('./../')}
                >
                  {" "}
                  Отмена

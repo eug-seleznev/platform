@@ -42,7 +42,7 @@ const MyProjects = ({history}) => {
                     {projects.map((project,index) => {
                     
                     return(  
-                    <New_Tr className={style.tr} key={index} onClick={() => history.replace(`/projects/${project.crypt}`)} title="Открыть проект">
+                    <New_Tr className={style.tr} key={index} onClick={() => history.push(`/projects/${project.crypt}`)} title="Открыть проект">
                     
                         <New_Td>{project.title}</New_Td>
                         

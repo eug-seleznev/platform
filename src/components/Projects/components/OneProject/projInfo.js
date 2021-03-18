@@ -18,7 +18,7 @@ const ProjInfo = ({project,history}) => {
                   color="#445AAA"
                   fontSize="12"
                   className={styles.change__info}
-                  onClick={() => history.replace(`/admin/editproj/${project.crypt}`)}
+                  onClick={() => history.push(`/admin/editproj/${project.crypt}`)}
                 >
                   изменить
                 </ButtonText>
