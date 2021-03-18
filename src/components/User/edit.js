@@ -87,7 +87,7 @@ const Edit = ({match, history}) => {
 			dispatch (changeAvatar(file))
 	}
     setTimeout(() => {
-		history.replace(`/users/me`)
+		history.push(`/users/me`)
 	}, 200);
            
         }
