@@ -53,8 +53,8 @@ export const addToProject = ( crypt, userId) => async (dispatch) => {
   console.log(crypt)
   let body = {
     user: userId,
-    position:"Работяга",
-    task:"работать"
+    position:"Нет",
+    task:"Нет"
   }
   try {
     const res = await innerBackend.put(

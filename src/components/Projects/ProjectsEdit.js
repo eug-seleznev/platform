@@ -40,7 +40,7 @@ const ProjectsEdit = ({history}) => {
  
        {projects.map((project,index) => {
            return(  
-        <Tr className={style.tr} key={index} onClick={() => history.replace(`/admin/editproj/${project.crypt}`)} title="Открыть проект">
+        <Tr className={style.tr} key={index} onClick={() => history.push(`/admin/editproj/${project.crypt}`)} title="Открыть проект">
            
             <Td>{project.title}</Td>
             <Td className={style.turn__off}>{project.dateStart.slice(0, 10)}</Td>

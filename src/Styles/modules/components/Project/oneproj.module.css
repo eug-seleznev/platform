@@ -2,15 +2,14 @@
 	display: grid;
 	
 	grid-template-rows: repeat (max-content, 5);
-	grid-template-columns: 1.2fr 0.8fr;
+	grid-template-columns: 0.87fr 1.13fr;
 	grid-template-areas: 
 
 	'title title'
 	'sprints info'
-	'team info'
-	'calend .'
-	'model .'
-	'history history'
+	'team history'
+	'calend history'
+	'model history'
 	;
 	
 }
@@ -80,11 +79,17 @@
 	justify-content: space-between;
 	margin-top: 20px;
 }
-.tags {
+.tdd {
+	padding-left: 40px!important;
+	padding-right: 10px;
+}
+.history_tags{
+	
+	flex-direction: column;
 	display: flex;
-	justify-content: flex-end;
-	align-items: flex-end;
-	margin-top: 4px;
+	justify-content: flex-start;
+	
+	padding-top: 16px;
 }
 .card__tasks {
 	margin-top: 10px;
@@ -147,7 +152,7 @@ border-bottom: none;
 .info__cont {
 	grid-area: info;
 	width: 100%;
-	height: auto;
+	height: max-content;
 }
 .info__crypt {
 	display: flex;
@@ -199,8 +204,18 @@ border-bottom: none;
 .title__cont {
 	grid-area: title;
 }
-.table2{
+.history_table2{
 	width: 100%;
+	/* /* border: 1px solid #8FA7C6; */
+	border-radius: 15px; 
+}
+
+.history_head:hover {
+	background-color: white;
+	color: default;
+}
+.history_first {
+	padding-left: 40px;
 }
 .title {
 	
@@ -324,6 +339,7 @@ border-bottom: none;
 }
 .calend__contain {
 	grid-area: calend;
+	height: max-content;
 }
 .model__cont {
 	grid-area: model;
@@ -408,11 +424,16 @@ border-bottom: none;
 	 margin-top:4px;
 	 justify-content: flex-start;
 }
+
 .team__button:hover {
 	cursor: pointer;
 	background-color:white;
 }
-
+@media screen and (max-width: 1500px)  {
+	.history_creator {
+		display: none;
+	}
+}
 @media screen and (max-width: 1200px) {
 	.info__flex {
 		flex-wrap: wrap;
@@ -439,7 +460,7 @@ border-bottom: none;
 	.off {
 		display: none;
 	}
-	.table2{
+	.history_table2{
 		width: 100%;
 	}
 	.info__project {
@@ -463,7 +484,7 @@ border-bottom: none;
 		display: none;
 	}
 	.history{width: 80vw;}
-	.table2{display: none};
+	.history_table2{display: none};
 	.tags {
 		display: none;
 	}

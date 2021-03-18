@@ -115,7 +115,7 @@ const Users = ({history}) => {
                   <New_Tr
                     className={style.tr__user}
                     key={i}
-                    onClick={() => history.replace(`/users/${user._id}`)}
+                    onClick={() => history.push(`/users/${user._id}`)}
                   >
                     <New_Td className={style.row__name} >
                       <img className={style.img} src={url+'/'+user.avatar}></img>

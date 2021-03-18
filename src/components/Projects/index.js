@@ -77,10 +77,13 @@ const Projects = ({history, match, location}) => {
     }
   }, [])
   useEffect(()=>{
-    if(search!==''){
+    // if(search!==''){
        console.log(search)
       dispatch(searchObject(search))
-    }
+      let value = search;
+      let field = "object";
+      dispatch(sorType({field, value}))
+    // }
    
   },[search]) 
     if(!projects){
@@ -216,7 +219,7 @@ const Projects = ({history, match, location}) => {
                     
                     key={index}
                     onClick={() =>
-                      history.replace(`/projects/${project.crypt}`)
+                      history.push(`/projects/${project.crypt}`)
                     }
                     title="Открыть проект"
                   >
