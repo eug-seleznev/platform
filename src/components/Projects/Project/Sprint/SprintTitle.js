@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import {  addInfoSprint, EditSprint} from "../../../../redux/actions/projects";
+import {  addInfoSprint, clearSprint, EditSprint} from "../../../../redux/actions/projects";
 import { Button, ButtonText } from "../../../../Styles/buttons";
 
 import style from "../../../../Styles/modules/components/Project/oneproj.module.css";
@@ -13,7 +13,7 @@ import getDate from "../../getDate";
 
 
 
-const SprintTitle = ({sprint,user, prTitle,hist, title, id,date}) => {
+const SprintTitle = ({sprint,user, prTitle,hist, title, id,date, crypt}) => {
 	const dispatch = useDispatch()
 	// const [actualClose, setActualClose] = useState ('??')
     // const [diff, setDiff] = useState ('??')
@@ -71,9 +71,12 @@ useEffect(()=>{
 		
 	}
 	const toProj =()=>{
-		console.log('hello')
-		// hist.replace(`/projects/26`)
+		dispatch(clearSprint());
+		hist.push(`/projects/${crypt}`)	
+		
 	}
+
+
 	const buttonR =()=>{
 		setChange (false)
 	}

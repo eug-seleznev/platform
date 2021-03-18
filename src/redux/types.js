@@ -60,6 +60,7 @@ export const ADD_TAG = 'add_tag'
 export const DELITE_TAG = 'del_tag'
 export const DELITE_USER = 'delite_user'
 export const SORT_BY_TAGS ='sort_by_tags'
+export const CLEAR_SPRINT = 'clear_sprint'
 //teams
 export const JOIN_TEAM = 'join_to_team'
 //projects errors

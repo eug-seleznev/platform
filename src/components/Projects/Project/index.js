@@ -46,9 +46,7 @@ const Project = ({match, history}) => {
     }, [loaded])
 
   useEffect(() => {
-    console.log(sprint)
     if (sprint._id) {
-      console.log("lololo");
       history.push(`${id}/${sprint._id}`);
     } else {
       console.log(sprint, "my sprint else");

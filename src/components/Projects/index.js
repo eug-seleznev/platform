@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 
 
-import { allProjects, sortProjects,searchObject, sortTitle, sorType } from '../../redux/actions/projects';
+import { allProjects, sortProjects,searchObject, sortTitle, sorType, clearSprint } from '../../redux/actions/projects';
 import search from '../../Styles/modules/components/Project/createPr.module.css'
 import style from '../../Styles/modules/components/Project/allproj.module.css'
 import { Table, Tr, Td, Select, New_table, New_tbody, New_thead, New_Td, New_Th, New_Tr } from '../../Styles/tables';
@@ -43,10 +43,11 @@ const Projects = ({history, match, location}) => {
       decodeURI(location.search).split("?")[1]
     );
   
-           
 
     useEffect (()=>{
       dispatch(allProjects()) 
+      dispatch(clearSprint());
+      console.log('emm?')
     }, [])
 
   useEffect(() => {
