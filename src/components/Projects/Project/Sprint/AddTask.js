@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTask, addTasks, deleteSprint, finishSprint } from "../../../../redux/actions/projects";
+import { addTask, addTasks, clearSprint, deleteSprint, finishSprint } from "../../../../redux/actions/projects";
 import { Button, CancelButton } from "../../../../Styles/buttons";
 import style from "../../../../Styles/modules/components/Project/newsprint.module.css"
 import Confirm from "../../components/OneProject/confirm";
@@ -10,7 +10,7 @@ import Confirm from "../../components/OneProject/confirm";
 
 
 
-const AddTask = ({id, user, hist, sprint}) => {
+const AddTask = ({id, user, hist, sprint,crypt}) => {
     const dispatch = useDispatch();
     const [field, setField] = useState(false)
     const [open, setOpen] = useState(false)
@@ -28,7 +28,8 @@ const AddTask = ({id, user, hist, sprint}) => {
       
       dispatch(finishSprint(id));
       setTimeout(() => {
-        return hist.push(`./`);
+        dispatch(clearSprint());
+        return hist.push(`/projects/${crypt}`);
     }, 200);
     }
     const openConfirm =()=>{
@@ -36,7 +37,10 @@ const AddTask = ({id, user, hist, sprint}) => {
     }
     
     const handleDelete = () => {
-        setTimeout(() => hist.push(`./`), 50);
+        setTimeout(()=>{
+          dispatch(clearSprint());
+          hist.push(`/projects/${crypt}`)
+        },50)
         dispatch(deleteSprint(id))
      
     
