@@ -5,6 +5,7 @@ WORKDIR /app
 
 COPY package.json ./
 RUN yarn install --silent
+RUN mkdir build
 RUN yarn build
 RUN cd build
 

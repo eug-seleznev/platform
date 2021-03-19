@@ -27,6 +27,7 @@ export const postModel = (formData) => async (dispatch) => {
       type: GET_URN,
       payload: res.data,
     });
+    console.log(res.data)
   } catch (err) {
     const errors = err.response.data.errors;
     errors.map((error) => {

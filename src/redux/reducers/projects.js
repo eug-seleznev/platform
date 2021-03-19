@@ -23,7 +23,8 @@ const initialState = {
     hey:'', 
     tagSearch:[],
     modelLoaded: false,
-    objectList:[]
+    objectList:[],
+    newUrn: null
 }
 
 export default function(state = initialState, action) {
@@ -233,6 +234,7 @@ export default function(state = initialState, action) {
                     ...state,
                     msg: payload.msg,
                     project: payload.project,
+                    newUrn: payload.urn,
                     modelLoaded: true,
                 }
             case CLEAR_MODEL_DATA:

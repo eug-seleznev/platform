@@ -217,41 +217,57 @@ const Projects = ({history,location}) => {
               {
                 return (
                   <NEW_TR
-                    
                     key={index}
-                    onClick={() =>
-                      history.push(`/projects/${project.crypt}`)
-                    }
+                    onClick={() => history.push(`/projects/${project.crypt}`)}
                     title="Открыть проект"
                   >
                     <NEW_TD>{project.title}</NEW_TD>
                     <NEW_TD className={style.turn__off}>
                       {project.dateStart.slice(0, 10)}
                     </NEW_TD>
-                    <NEW_TD >
+                    <NEW_TD>
                       {project.dateFinish !== undefined &&
                       project.dateFinish !== null
                         ? project.dateFinish.slice(0, 10)
                         : "нет"}
                     </NEW_TD>
-                    <NEW_TD className={style.turn__off} style={{paddingTop:'10px'}}><Tag tagText={project.type}
-                            tagColor={project.type==="Архитектура"?"#C8DDE9":
-                            project.type==="Конструкции" ?"#E9E3C8":
-                            project.type==="Интерьер"?"#B4FAF6":
-                            project.type==="Ландшафт"?"#68D286":
-                            project.type==="Сети"?"#F1EFEF":"#C8DDE9"}></Tag></NEW_TD>
-                    <NEW_TD style={{paddingTop:'10px'}}>
-                      {project.status ? <Tag tagText="Завершен" tagColor="#F1EFEF" ></Tag> : <Tag tagText="В работе" tagColor="#AAF790" ></Tag>}
+                    <NEW_TD
+                      className={style.turn__off}
+                      style={{ paddingTop: "10px" }}
+                    >
+                      <Tag
+                        tagText={project.type}
+                        tagColor={
+                          project.type === "Архитектура"
+                            ? "#C8DDE9"
+                            : project.type === "Конструкции"
+                            ? "#E9E3C8"
+                            : project.type === "Интерьер"
+                            ? "#B4FAF6"
+                            : project.type === "Ландшафт"
+                            ? "#68D286"
+                            : project.type === "Сети"
+                            ? "#F1EFEF"
+                            : "#C8DDE9"
+                        }
+                      ></Tag>
                     </NEW_TD>
-                    <NEW_TD style={{paddingTop:'10px'}}>
+                    <NEW_TD style={{ paddingTop: "10px" }}>
+                      {project.status ? (
+                        <Tag tagText="Завершен" tagColor="#F1EFEF"></Tag>
+                      ) : (
+                        <Tag tagText="В работе" tagColor="#CCE9C8"></Tag>
+                      )}
+                    </NEW_TD>
+                    <NEW_TD style={{ paddingTop: "10px" }}>
                       {project.object}
                     </NEW_TD>
                     <NEW_TD className={style.turn__off}>
                       {project.sprints.filter((sprint) => !sprint.status)
                         .length >= 1 ? (
-                        <Circle color='green' />
+                        <Circle color="green" />
                       ) : (
-                        <Circle color='red' />
+                        <Circle color="red" />
                       )}
                     </NEW_TD>
                   </NEW_TR>

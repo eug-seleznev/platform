@@ -17,6 +17,8 @@ const ModelsTable = ({ models, history, location, setFocus, focusRow }) => {
       <tr>
         <th>Название</th>
         <th> Дата </th>
+        <th>Тип</th>
+        <th>Загрузил</th>
         <th>Версия</th>
       </tr>
       {models ? (
@@ -27,10 +29,16 @@ const ModelsTable = ({ models, history, location, setFocus, focusRow }) => {
               onDoubleClick={() =>
                 history.push(`${location.pathname}/${model._id}`)
               }
-              style={{ backgroundColor: focusRow && focusRow._id == model._id ? "grey" : "" }}
+              style={{
+                backgroundColor:
+                  focusRow && focusRow._id == model._id ? "grey" : "",
+              }}
             >
               <td>{model.title}</td>
               <td>{model.date}</td>
+              <td>{model.tags[0]}</td>
+              <td>{model.user ? model.user.fullname : '' }</td>
+
               <td>{model.version}</td>
               <td>опции</td>
             </tr>

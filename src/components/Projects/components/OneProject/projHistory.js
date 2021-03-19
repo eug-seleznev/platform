@@ -30,18 +30,18 @@ const ProjHistory = ({project,history}) => {
 			
 			<div className={styles.title__tags} >
 				{/* <Thin size='22'>Спринты: </Thin> */}
-				<Tag projectPage={true} tagColor='#E9E3C8'crypt={project.crypt}tagText='Все'></Tag>
+				{/* <Tag projectPage={true} tagColor='#E9E3C8'crypt={project.crypt}tagText='Все'></Tag>
 				{project.tags.map((tag,i)=>{
 					return(
 						<Tag projectPage={true} crypt={project.crypt} tagText={tag}tagColor='#C8D9E9' key={i}></Tag>
 					)
 					
-				})}
+				})} */}
 			</div>
 		</div>
 		<div >
 			<NEW_TABLE className={styles.history_table2} >
-				<NEW_THEAD  >
+				{/* <NEW_THEAD  >
 					<NEW_TR className={styles.history_head}>
 						<NEW_TH className={styles.history_first}>Название</NEW_TH>
 						<NEW_TH className={styles.history_tags} >Тег</NEW_TH>
@@ -49,39 +49,80 @@ const ProjHistory = ({project,history}) => {
 						<NEW_TH >Прогресс</NEW_TH>
 						<NEW_TH className={styles.off}>Дедлайн</NEW_TH>
 					</NEW_TR>
-				</NEW_THEAD>
+				</NEW_THEAD> */}
 				
 				<NEW_TBODY>
 				{project!==undefined?project.sprints.map((sprint,i)=>{
 					
-						return(
-						
-						<NEW_TR onClick={()=>pushToSprint(sprint._id)}  key={i}>
-							<NEW_TD size='14' className={styles.tdd}>
-							{sprint.tasks.length -
-                                        sprint.tasks.filter((task) => task.taskStatus)
-                                          .length === 0 ? (
-                                        <Circle color='#6DD66B' />
-                                      ) : (
-                                        <Circle color='red' />
-                                      )} {sprint.title}
-							</NEW_TD>
-							<NEW_TD className={styles.history_tags} size='14' >{sprint.tags!==undefined?sprint.tags.map((tag,i)=>{return(<Tag projectPage={true} crypt={project.crypt} tagText={tag}tagColor='#C8D9E9' size='13' key={i}></Tag>)}):''}</NEW_TD>
-							<NEW_TD className={styles.history_creator} size='14' > {sprint.creator===undefined?'нет':sprint.creator.fullname}<img  alt='lupa' className={sprintcss.img__td} style={{opacity:sprint.creator===undefined?0:1}} src={sprint.creator===undefined?'/Ellipse 13.png':url+'/'+sprint.creator.avatar}></img></NEW_TD>
-							<NEW_TD  size='14' >{sprint.tasks!==undefined?sprint.tasks.filter(task=>task.taskStatus).length+'/'+sprint.tasks.length:''}
-								<div className={sprintcss.card__thing}>
-									<div
-										style={{
-										width: `${Math.trunc((sprint.tasks!==undefined?sprint.tasks.filter(task=>task.taskStatus).length / sprint.tasks.length:'') * 100)}%`,
-										}}
-										className={sprintcss.card__thing__full}
-									></div>
-								</div>
-							</NEW_TD>
-							<NEW_TD className={styles.off} size='14'>нет</NEW_TD>					
-						</NEW_TR>
-						
-						)
+						return (
+              <NEW_TR onClick={() => pushToSprint(sprint._id)} key={i}>
+                <NEW_TD size="14" className={styles.tdd}>
+                  {sprint.tasks.length -
+                    sprint.tasks.filter((task) => task.taskStatus).length ===
+                  0 ? (
+                    <Circle color="#6DD66B" />
+                  ) : (
+                    <Circle color="#DD5757" />
+                  )}
+                   {sprint.title}
+                </NEW_TD>
+                <NEW_TD className={styles.history_tags} size="14">
+                  {sprint.tags !== undefined
+                    ? sprint.tags.map((tag, i) => {
+                        return (
+                          <Tag
+                            projectPage={true}
+                            crypt={project.crypt}
+                            tagText={tag}
+                            tagColor="#C8D9E9"
+                            size="13"
+                            key={i}
+                          ></Tag>
+                        );
+                      })
+                    : ""}
+                </NEW_TD>
+                <NEW_TD className={styles.history_creator} size="14">
+                  {" "}
+                  {sprint.creator === undefined
+                    ? "нет"
+                    : sprint.creator.fullname}
+                  <img
+                    alt="lupa"
+                    className={sprintcss.img__td}
+                    style={{ opacity: sprint.creator === undefined ? 0 : 1 }}
+                    src={
+                      sprint.creator === undefined
+                        ? "/Ellipse 13.png"
+                        : url + "/" + sprint.creator.avatar
+                    }
+                  ></img>
+                </NEW_TD>
+                <NEW_TD size="14">
+                  {sprint.tasks !== undefined
+                    ? sprint.tasks.filter((task) => task.taskStatus).length +
+                      "/" +
+                      sprint.tasks.length
+                    : ""}
+                  <div className={sprintcss.card__thing}>
+                    <div
+                      style={{
+                        width: `${Math.trunc(
+                          (sprint.tasks !== undefined
+                            ? sprint.tasks.filter((task) => task.taskStatus)
+                                .length / sprint.tasks.length
+                            : "") * 100
+                        )}%`,
+                      }}
+                      className={sprintcss.card__thing__full}
+                    ></div>
+                  </div>
+                </NEW_TD>
+                <NEW_TD className={styles.off} size="14">
+                  нет
+                </NEW_TD>
+              </NEW_TR>
+            );
 						
 					}):''}
 				</NEW_TBODY>

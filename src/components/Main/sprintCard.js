@@ -53,14 +53,14 @@ const SprintCard = ({sprint}) => {
                   {completeTasks}/{allTasks}
                 </Light>
               </div>
-              <div className={styles.tags}>
+              {/* <div className={styles.tags}>
             {sprint.tags.map((el, i)=>{
               return(
                 <Tag  tagText={el} key={i} tagColor={i===0?'#C8D9E9':'#E9E3C8'} />  
               )
             })}
              
-          </div>
+          </div> */}
           </div>
         </SmallCard>
       

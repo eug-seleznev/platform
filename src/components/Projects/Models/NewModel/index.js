@@ -10,13 +10,15 @@ import { postModel, Status } from "../../../../redux/actions/models";
 
 
 
-const LoadModel = ({crypt, setSubmited}) => {
+const LoadModel = ({crypt, setSubmited, user}) => {
   const dispatch = useDispatch();
 
    const [formData, setFormData] = useState({
      crypt: crypt,
      file: null,
      title: "default",
+     tags: ['b_loh'],
+     user_id: user,
    });
 
  const onChangeFile = (e) => {
@@ -34,6 +36,7 @@ const LoadModel = ({crypt, setSubmited}) => {
 
    const onSubmit = (e) => {
      e.preventDefault();
+     console.log(formData)
      dispatch(Status({crypt, name:''}))
      dispatch(postModel(formData));
      setSubmited({submit: true, loaded: true})
