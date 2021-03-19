@@ -49,12 +49,12 @@ const EditUser = ({ match, history }) => {
 
 
 
-  const [file, setFile] = useState(null);
+  // const [file, setFile] = useState(null);
 
 
-  const handleFile = (e) => {
-    setFile(e.target.files[0]);
-  };
+  // const handleFile = (e) => {
+  //   setFile(e.target.files[0]);
+  // };
 
   useEffect(() => {
     dispatch(allDepartments());
@@ -84,9 +84,9 @@ if (!user) {
     e.preventDefault();
     dispatch(changeUserProfile({formData, id}));
 
-    if (file != null && file != undefined) {
-      dispatch(changeAvatar(file));
-    }
+    // if (file != null && file != undefined) {
+    //   dispatch(changeAvatar(file));
+    // }
     setTimeout(() => {
       history.replace(`/users/me`);
     }, 200);
@@ -100,8 +100,9 @@ if (!user) {
         ) : (
           <div /*style={{display:'flex', flexDirection:'column', alignItems:'center'}}*/
           >
-            <Card className={styles.editForm} onSubmit={onSubmit}>
-              <Thin className={styles.p}>Имя</Thin>
+            <Card  >
+              <form className={styles.editForm} onSubmit={onSubmit}>
+                <Thin className={styles.p}>Имя</Thin>
               <Input
                 required
                 type="text"
@@ -177,6 +178,8 @@ if (!user) {
               >
                 Сохранить
               </Button>
+              </form>
+              
             </Card>
           </div>
         )}
