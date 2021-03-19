@@ -39,6 +39,8 @@ export const postModel = (formData) => async (dispatch) => {
 };
 
 
+
+
 export const Oauth = (crypt) => async (dispatch) => {
   try {
         const res = await Axios.get(`/up/tkn/p/${crypt}`,  {
@@ -66,19 +68,26 @@ export const Oauth = (crypt) => async (dispatch) => {
 
 export const Status = ({crypt, name}) => async (dispatch) => {
   try {
-     console.log('started')
-     let date = new Date().getMilliseconds();
-    const res = await Axios.get(`/up/status/p/${crypt}?id=${name}`, {
-      baseURL: url,
-      headers: {
-        "content-type": "application/json",
-      },
-    });
-    console.log(res.data, 'RES DATA HERE')
-    dispatch({
-      type: GET_STATUS,
-      payload: res.data.progress +' '+ date,
-    });
+    if(name !== ''){
+        let date = new Date().getMilliseconds();
+        const res = await Axios.get(`/up/status/p/${crypt}?id=${name}`, {
+          baseURL: url,
+          headers: {
+            "content-type": "application/json",
+          },
+        });
+        dispatch({
+          type: GET_STATUS,
+          payload: res.data.progress + " " + date,
+        });
+    } else {
+      //clear status on model submit
+      dispatch({
+        type: GET_STATUS,
+        payload: "not started",
+      });
+    }
+   
   } catch (err) {
     const errors = err.response.data.errors;
     console.log(errors);

@@ -26,7 +26,7 @@ const TopInfo = ({src, text, user, url, change, history, enter}) =>{
                   color="#445AAA"
                   fontSize="12"
                  
-                  onClick={() => history.replace(`/edit`)}
+                  onClick={() => history.push(`/edit`)}
                 >
                   изменить
                 </ButtonText>

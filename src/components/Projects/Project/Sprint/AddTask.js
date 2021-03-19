@@ -47,7 +47,7 @@ const AddTask = ({id, user, hist, sprint}) => {
     }
     const openEnd =()=>{
       setOpen(true)
-      setTitle('Завершить')
+      setTitle(sprint.status?'Восстановить':"Завершить")
     }
     const onSubmit = (e) => {
         e.preventDefault();
@@ -89,7 +89,7 @@ const AddTask = ({id, user, hist, sprint}) => {
                     onClick={openEnd}
                   >
                    
-                    Завершить спринт
+                   {sprint.status?'Восстановить':"Завершить"} спринт
                   </CancelButton>
 				</div>
         </form>

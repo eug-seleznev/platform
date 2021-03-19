@@ -108,7 +108,7 @@ return () => {
           <div className={style.editList}>
             {tasks !== undefined ? (
               <div style={{ display: "flex" }}>
-                <Light>
+                <Light style={{width:'40px'}}>
                   {completeTasks}/{allTasks}
                 </Light>
                 <div className={style.card__thing}>

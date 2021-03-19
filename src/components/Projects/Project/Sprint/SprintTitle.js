@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import {  EditSprint} from "../../../../redux/actions/projects";
+import {  addInfoSprint, clearSprint, EditSprint} from "../../../../redux/actions/projects";
+import { Button, ButtonText } from "../../../../Styles/buttons";
 
 import style from "../../../../Styles/modules/components/Project/oneproj.module.css";
-import { Bold, Light } from "../../../../Styles/typography";
+import { Bold, Light, Regular } from "../../../../Styles/typography";
+import getDate from "../../getDate";
 
 
 
@@ -11,34 +13,73 @@ import { Bold, Light } from "../../../../Styles/typography";
 
 
 
-const SprintTitle = ({sprint,user, prTitle,hist, title, id}) => {
+const SprintTitle = ({sprint,user, prTitle,hist, title, id,date, crypt}) => {
 	const dispatch = useDispatch()
 	// const [actualClose, setActualClose] = useState ('??')
     // const [diff, setDiff] = useState ('??')
 	
 	//sprint name handlers
+	const[dateIn, setDateIn] = useState ('нет')
 	const [sprintInfo, setSprintTitle] = useState({
     	title: title,
   });
- 
-	const [editTitle, setEditTitle] = useState(false)
+  const [sprintDate, setDate] = useState({
+	date:'',
+});
+useEffect(()=>{
+	console.log(sprint)
+},[sprintDate])
+useEffect(()=>{
+	if(sprint.dateClosePlan!==undefined){
+		let date = new Date (sprint.dateClosePlan)
+		
+	  	
+		setDateIn(getDate(date)) 
+	}
+},[sprint])
+	const [change, setChange] = useState(false)
 
 	const onChange = (e) => {
 		setSprintTitle({title: e.target.value})
 		dispatch(EditSprint(sprintInfo, id));
 
 	}
+	useEffect(()=>{
+		if(sprintInfo.title!=='') {
+			dispatch(EditSprint(sprintInfo, id));
+		}
+	},[sprintInfo])
+	const onChangeDate = (e) => {
+		setDate({date: new Date(e.target.value)})
+		
+		dispatch(addInfoSprint(sprintDate, id));
 
+	}
+	useEffect(()=>{
+		if(sprintDate.date!=='') {
+			dispatch(addInfoSprint(sprintDate, id));
+		}
+	},[sprintDate])
 	const onSubmit = (e) => {
 		e.preventDefault()
 		dispatch(EditSprint(sprintInfo, id))
-		setEditTitle(false)
+		
+	}
+	const onSubmitDate = (e) => {
+		e.preventDefault()
+		dispatch(addInfoSprint(sprintInfo, id))
+		
 	}
 	const toProj =()=>{
-		console.log('hello')
-		// hist.replace(`/projects/26`)
+		dispatch(clearSprint());
+		hist.push(`/projects/${crypt}`)	
+		
 	}
 
+
+	const buttonR =()=>{
+		setChange (false)
+	}
 	// useEffect(()=>{		
 	// 	if(sprint.dateClosePlan!==undefined) {
 	// 	   setActualClose(sprint.dateClosePlan.slice(5, 10).split('-').reverse().join('.'))
@@ -78,13 +119,19 @@ const SprintTitle = ({sprint,user, prTitle,hist, title, id}) => {
         >
 			
           <div className={style.title__deadline}>
-		  
+			<Regular>Дедлайн: </Regular>
+			<Regular style={{display:`${change?'none':'flex'}`}}>{dateIn}</Regular>
+			<ButtonText style={{display:`${change||user.permission==='user'?'none':'block'}`, marginLeft:'10px'}} onClick={()=>setChange (true)} >изменить</ButtonText>
+		  	<form onSubmit={onSubmitDate} style={{display:`${!change?'none':'flex'}`}}>
+              <input className={style.dateChange} onKeyPress={(e)=>e.key==='Enter'?buttonR():''} onChange={onChangeDate}  type='date'></input>
+            </form>
           </div>
         </Light>
       </div>
     );
 }
 
+// эй ЖЕня .!.
 
 
 export default SprintTitle

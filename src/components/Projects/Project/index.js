@@ -12,6 +12,8 @@ import ProjectTeam from "../components/OneProject/ProjectTeam";
 import style from '../../../Styles/modules/components/Project/oneproj.module.css'
 import Viewer from "../model";
 import ProjInfo from "../components/OneProject/projInfo";
+import ProjHistory from "../components/OneProject/projHistory";
+import { background } from "../../../redux/actions/user";
 
 const Project = ({match, history}) => {
 
@@ -24,10 +26,17 @@ const Project = ({match, history}) => {
     const sprint = useSelector(state => state.projects.sprint)
   
 
+    useEffect(() => {
+      console.log(project);
+      
+  }, [project])
 
     useEffect(() => {
         dispatch(getProject(id));
-        
+        dispatch(background('#ECECEC'))
+        return () => {
+          dispatch(background('#ECECEC'))
+        }
     }, [])
 
     useEffect(() => {
@@ -37,9 +46,7 @@ const Project = ({match, history}) => {
     }, [loaded])
 
   useEffect(() => {
-    console.log(sprint)
     if (sprint._id) {
-      console.log("lololo");
       history.push(`${id}/${sprint._id}`);
     } else {
       console.log(sprint, "my sprint else");
@@ -50,21 +57,18 @@ const Project = ({match, history}) => {
 
 
     return (
-      <div>
+      <div className={style.contain}>
         {!loaded ? (
           <p> loading...</p>
         ) : (
           <>
             <TitleOfProject hist={history} />
-            <div className={style.info__flex}>
-                <div style={{width: "100%"}}>
-                  <AllSprintsOfProj status={project.status} id={project.crypt} match={match} hist={history}/>
-                  <ProjectTeam hist={history} id={id} />
-                  <CalendSprint id={id} hist={history} project={project} />
-                  <Viewer project={project} />
-                </div>
-                <ProjInfo history={history} project={project} />
-            </div>
+            <AllSprintsOfProj status={project.status} id={project.crypt} match={match} hist={history}/>
+            <ProjectTeam hist={history} id={id} />
+            <CalendSprint id={id} hist={history} project={project} />
+            <Viewer project={project} />
+            <ProjInfo history={history} project={project} />
+            <ProjHistory history={history} project={project} />  
           </>
         )}
       </div>

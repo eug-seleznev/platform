@@ -24,7 +24,7 @@ const ProjTeamEdit = ({project}) => {
 		<div className={style.table} style={{marginTop:'50px'}}>
 			<table style={{borderCollapse:'collapse'}}>
 				<thead className={style.table__head}>
-					<tr>
+					<tr >
 						<th className={style.off__too}><Thin size='14'>Раздел</Thin></th>
 						<th className={style.off__too}><Thin size='14'>Имя</Thin></th>
 						<th className={style.off}><Thin size='14'>Отдел</Thin></th>

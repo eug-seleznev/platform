@@ -7,15 +7,15 @@ padding-right:  70px;
 width: 100%;
 height: 100%;
 padding-top: 110px;
-padding-bottom: 200px;
+padding-bottom: 80px;
 background-color:${props=> props.background};
-
+overflow-x: hidden;
 @media (max-width:1700px){
     width: 100vw;
     padding-left:135px;
-    padding-top: 110px;
+    padding-top: 100px;
     padding-right:70px;
-    padding-bottom: 100px;
+    padding-bottom: 80px;
 }
 
 

@@ -1,8 +1,8 @@
 import styles from '../../../../Styles/modules/components/Project/oneproj.module.css'
-import {Card,SmallCard, ModalContainer, ModalWind} from '../../../../Styles/common'
-import {Button, ButtonText} from '../../../../Styles/buttons'
+import {SmallCard} from '../../../../Styles/common'
+import {ButtonText} from '../../../../Styles/buttons'
 import { Bold, Light, Regular, Thin } from '../../../../Styles/typography'
-import ModalWindow from '../ModalWindow'
+
 import { useSelector } from 'react-redux'
 
 
@@ -12,13 +12,13 @@ const ProjInfo = ({project,history}) => {
     return(
     <div className={styles.info__cont}>
       <div  className={styles.title__info} >
-           <img  src='/info.png' style={{marginRight:'10px'}}></img>
+           <img  src='/info.png' style={{marginRight:'10px'}} ></img>
             <Thin size='22'>Общая информация о проекте</Thin>
             <ButtonText
                   color="#445AAA"
                   fontSize="12"
                   className={styles.change__info}
-                  onClick={() => history.replace(`/admin/editproj/${project.crypt}`)}
+                  onClick={() => history.push(`/admin/editproj/${project.crypt}`)}
                 >
                   изменить
                 </ButtonText>

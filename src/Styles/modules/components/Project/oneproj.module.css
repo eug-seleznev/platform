@@ -1,17 +1,27 @@
-.grid__container {
+.contain {
 	display: grid;
 	
-
-	grid-template-columns: 0px 1fr 0px;
+	grid-template-rows: repeat (max-content, 5);
+	grid-template-columns: 0.87fr 1.13fr;
 	grid-template-areas: 
 
-	'. main .';
+	'title title'
+	'sprints info'
+	'team history'
+	'calend history'
+	'model history'
+	;
 	
 }
-.main {
-	
-	grid-area: main;
+.sprints {
+	grid-area: sprints;
+	width: 100%;
+	height: max-content;
 }
+.team {
+	grid-area: team;
+}
+
 .first__row{
 	display: flex;
 	justify-content: space-between;
@@ -27,7 +37,7 @@
 	margin-right: 50px;
 	width: 100%;
  	border:1px solid #8FA7C6;
-	margin-top: 25px;
+	margin-top: 0px;
 	margin-bottom: 25px;
 }
 .hist__sprint {
@@ -69,11 +79,17 @@
 	justify-content: space-between;
 	margin-top: 20px;
 }
-.tags {
+.tdd {
+	padding-left: 40px!important;
+	padding-right: 10px;
+}
+.history_tags{
+	
+	flex-direction: column;
 	display: flex;
-	justify-content: flex-end;
-	align-items: flex-end;
-	margin-top: 4px;
+	justify-content: flex-start;
+	
+	padding-top: 16px;
 }
 .card__tasks {
 	margin-top: 10px;
@@ -121,6 +137,7 @@
 
 .info__line {
 	margin-bottom: 15px;
+	min-width: 50px;
 }
 .info__link {
 	border-bottom: 1px solid #C4C4C4;
@@ -133,8 +150,9 @@
 border-bottom: none;
 }
 .info__cont {
+	grid-area: info;
 	width: 100%;
-	height: auto;
+	height: max-content;
 }
 .info__crypt {
 	display: flex;
@@ -183,10 +201,28 @@ border-bottom: none;
 	margin-top: 65px;
 	margin-bottom: 35px;
 }
+.title__cont {
+	grid-area: title;
+}
+.history_table2{
+	width: 100%;
+	/* /* border: 1px solid #8FA7C6; */
+	border-radius: 15px; 
+}
+
+.history_head:hover {
+	background-color: white;
+	color: default;
+}
+.history_first {
+	padding-left: 40px;
+}
 .title {
+	
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-end;
+	flex-wrap: wrap;
 	text-align: left;
 	width: 100%;
 	border-bottom: 1px solid black;
@@ -201,6 +237,14 @@ border-bottom: none;
 	background-color: #ECECEC;
 	width: fit-content;
 }
+.dateChange{
+	font-size: 16px;
+	margin-top: -4px;
+	font-family: SuisseIntlRegular;
+	border: none;
+	background-color: #ECECEC;
+	width: fit-content;
+}
 .tag {
 	border-radius: 25px;
 	width: fit-content;
@@ -209,6 +253,7 @@ border-bottom: none;
 	margin-right: 15px;
 	margin-bottom: 15px;
 	height: fit-content;
+	text-align: center;
 	border: #C4C4C4 solid 1px;
 }
 .title__options {
@@ -230,6 +275,7 @@ border-bottom: none;
 	border-bottom: 1px solid #5286D4;
 }
 .title__small {
+	grid-area: title-small;
 	align-items: center;
 	display: flex;
 	
@@ -242,6 +288,7 @@ border-bottom: none;
 	
 }
 .title__deadline {
+	display: flex;
 	margin-top: 0px;
 	margin-right: 20px;
 	text-align: left;
@@ -257,17 +304,46 @@ border-bottom: none;
 	margin-bottom: 50px;
 	width: 90%;
 }
+.title__history {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+.history {
+	grid-area: history;
+	
+}
 .title__info {
 	display: flex;
 	margin-bottom: 20px;
 	margin-top: 20px;
+	align-items: flex-start; 
+	flex-wrap: wrap;
+}
+.title__tags {
+	display: flex;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	width: 50%;
+	flex-wrap: wrap;
+	
+}
+.title__img {
+	width: 30px;
+	height: 30px;
 }
 .change__info {
 	margin-left: 10px;
 	margin-top: 5px;
 	cursor: pointer;
 }
-
+.calend__contain {
+	grid-area: calend;
+	height: max-content;
+}
+.model__cont {
+	grid-area: model;
+}
 .calend {
 	padding-top:10px;
 	font-size: 16px;
@@ -275,7 +351,7 @@ border-bottom: none;
 	background-color: white;
 	border-radius: 15px;
 	height: 180px;
-	width: 560px;
+	width: 100%;
 	
 }
 .calend__title {
@@ -342,38 +418,82 @@ border-bottom: none;
 	background-color:#C4C4C4;
 	border: 0px;
 }
+.tags {
+	display:flex;
+	 align-items:center;
+	 margin-top:4px;
+	 justify-content: flex-start;
+}
+
 .team__button:hover {
 	cursor: pointer;
 	background-color:white;
 }
-@media (max-width: 1200px) {
+@media screen and (max-width: 1500px)  {
+	.history_creator {
+		display: none;
+	}
+}
+@media screen and (max-width: 1200px) {
 	.info__flex {
 		flex-wrap: wrap;
 	}
-}
-@media (max-width: 1200px) {
-	.info__project {
-		width: 80%;
-		padding: 5px;
+	.contain {
+		display: grid;
+		
+		grid-template-rows: repeat (1fr, 8);
+		grid-template-columns: 1fr;
+		grid-template-areas: 
+	
+		'title'
+		'sprints'
+		'team'
+		'calend'
+		'model'
+		'info'
+		'history'
+		;
 	}
+	
 }
 @media (max-width: 1000px) {
-	.card {
-		
-		width:70vw;
-		
-		margin-right:0;
-		
+	.off {
+		display: none;
 	}
+	.history_table2{
+		width: 100%;
+	}
+	.info__project {
+		width: 89vw;
+		height: auto;
+		border: 1px solid black;
+		border-radius: 10px;
+		
+		padding: 20px;
+	}
+	
 }
 @media (max-width:700px){
-	
+	.title__cont {
+		width: 90vw;
+	}
+	.team {
+		width: 90vw;
+	}
+	.off__too {
+		display: none;
+	}
+	.history{width: 80vw;}
+	.history_table2{display: none};
+	.tags {
+		display: none;
+	}
 	.info__cont {
 	
 		height: auto;
 	}
 	.sprintdescr__cont {
-		width: 86vw
+		width: 100%
 	}
 	.card {
 		width: 85vw;
@@ -400,19 +520,21 @@ border-bottom: none;
 	.title__options {
 		display: none;
 	}
+	.history{display: none;}
 	.title {
 	
 			display: flex;
 			justify-content: space-between;
 			align-items: flex-end;
 			text-align: left;
-			width: 97%;
+			width: 90vw;
 			border-bottom: 1px solid black;
 			font-size: 24px;
 			padding-bottom: 10px;
 			margin-bottom: 10px;
 
 	}
+	.info__project{width: 80vw;}
 	.calend {
 		padding-top:10px;
 		font-size: 16px;
@@ -421,7 +543,7 @@ border-bottom: none;
 		border-radius: 15px;
 		height: 180px;
 		margin:0;
-		width: 100%;
+		width: 90%;
 	}
 	.calend__title{
 		position: absolute;

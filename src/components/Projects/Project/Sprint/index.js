@@ -54,7 +54,7 @@ const Sprint_New = ({match, history}) => {
 
     return (
       <SprintLoader sprint_id={sprint_id} sprint={sprint} project={project} crypt={crypt}>
-        <SprintTitle diff={diff} user={user} title={sprint.title} hist={history} prTitle={project.title} actualClose={actualClose}id={sprint_id}  sprint={sprint}/>
+        <SprintTitle crypt={crypt} diff={diff} user={user} title={sprint.title}date={sprint.dateClosePlan} hist={history} prTitle={project.title} actualClose={actualClose}id={sprint_id}  sprint={sprint}/>
 
         <Card >
           <TaskManagment

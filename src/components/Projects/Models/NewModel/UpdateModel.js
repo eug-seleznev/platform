@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { postModel } from "../../../../redux/actions/models";
+import { postModel, Status } from "../../../../redux/actions/models";
 import { Card } from "../../../../Styles/common";
 
 const UpdateModel = ({ crypt, model, setUpdate, setSubmited }) => {
@@ -24,6 +24,7 @@ const UpdateModel = ({ crypt, model, setUpdate, setSubmited }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(postModel(formData));
+    dispatch(Status({crypt, name:''}))
     setSubmited({ submit: true, loaded: true });
     setUpdate(false);
   };

@@ -16,7 +16,7 @@ const ProjectEdit = ({history, match}) => {
 	const project = useSelector(state => state.projects.project)
 	const loadProject = useSelector(state => state.projects.loadProject)
     const [formData, setFormData ] = useState({
-        
+        crypter:'',
         title: '',   
         offTitle:'',   
         dateStart: '', 
@@ -28,6 +28,7 @@ const ProjectEdit = ({history, match}) => {
         cusStorage:'',
         budget:'', 
         schedule:'', 
+        object:'',
         customerNew: 
             {
                 name: '',
@@ -60,6 +61,8 @@ const ProjectEdit = ({history, match}) => {
                 cusStorage:project.cusStorage,
                 budget:project.budget, 
                 schedule:project.schedule, 
+                crypter:project.crypter,
+                object: project.object,
                 customerNew: {
                     name: project.customerNew[0]!==undefined?project.customerNew[0].name:'',
                     phone: project.customerNew[0]!==undefined?project.customerNew[0].phone:'',
@@ -69,7 +72,7 @@ const ProjectEdit = ({history, match}) => {
 		}
 		
     }, [loadProject])
-      const { title, offTitle, dateStart, dateFinish, cusStorage, budget,schedule, city, customer, about, customerNew} = formData;
+      const { title, offTitle, dateStart, dateFinish, cusStorage, budget, schedule, city, crypter, about, customerNew, object} = formData;
 
       useEffect(()=>{ 
         dispatch(background('white'))
@@ -144,6 +147,7 @@ const ProjectEdit = ({history, match}) => {
             <form className='form' onSubmit={onSubmit}>
             <div style={{display:`${editStage===1?'block':'none'}`}}>
             <InfoInputs 
+                crypter={crypter}
                 city={city}
                 about={about}
                 title={title} 
@@ -151,7 +155,7 @@ const ProjectEdit = ({history, match}) => {
                 onChange={onChange} 
                 dateFinish={dateFinish} 
                 dateStart={dateStart}
-               
+                object={object}
                 offTitle={offTitle}
                 />
             </div>

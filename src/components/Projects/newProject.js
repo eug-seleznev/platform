@@ -20,7 +20,7 @@ const ProjectNew = ({history,closeWindow}) => {
     const [trick, setTrick] = useState (false)
     const [step, setStep] = useState (1)
     const [idCurrent, setIdCurrent] = useState (null)
-    const [currentPos, setCurrentPos] = useState (null)
+    const [currentPos, setCurrentPos] = useState ('')
     const [userStage, setUserStage] = useState (1)
     const [idList,setIdList] = useState ([])
     const [nameCurrent, setNameCurrent] = useState (null)
@@ -43,12 +43,13 @@ const ProjectNew = ({history,closeWindow}) => {
         offTitle:'',
         budget:'',
         schedule:'',
-        cusStorage:''
+        cusStorage:'',
+        object:'',
       });
    
 
 
-      const { title, dateStart, dateFinish, city, type, stage, customer, about, par, rcheck, offTitle, budget, schedule,cusStorage,userid2 } = formData;
+      const { title, dateStart, dateFinish, city, type, stage, customer, about, par, object, offTitle, budget, schedule,cusStorage,userid2 } = formData;
       const posCurrent =(e)=>{
         setCurrentPos (e.target.value)
         setWorkerDataList ({ ...workerDataList, position:e.target.value})
@@ -68,12 +69,18 @@ const ProjectNew = ({history,closeWindow}) => {
           dispatch(background('#ECECEC'))
         }
       }, [])
+      // const alertReq =()=>{
+      //   alert('yf[ blb')
+      // }
      useEffect(()=>{
-        if(createMsg.includes('Проект')){
+       if(createMsg!==undefined) {
+          if(createMsg.includes('Проект')){
           setTimeout(() => {
-            history.replace('./../projects')
+            history.push('./../projects')
           },100) 
         }
+       }
+       
      },[createMsg])
      //
       const returnToSearch =()=>{
@@ -158,7 +165,8 @@ const ProjectNew = ({history,closeWindow}) => {
           offTitle:'',
           budget:'',
           schedule:'',
-          cusStorage:''
+          cusStorage:'',
+          object:'',
         }),50) 
        
         
@@ -263,7 +271,7 @@ const ProjectNew = ({history,closeWindow}) => {
                </div>
                <div className={style.row}>
                  <div className={style.input__mid}>
-                   <Thin className={style.title}>Фаза</Thin>
+                   <Thin className={style.title}>Стадия</Thin>
                    <select
                      defaultValue="Концепт"
                      name="stage"
@@ -291,7 +299,7 @@ const ProjectNew = ({history,closeWindow}) => {
                  </div>
                </div>
                <div className={style.row}>
-                 <div className={style.input__mid}>
+                 <div className={style.input__short}>
                    <Thin className={style.title}>Заказчик</Thin>
                    <input
                      type="text"
@@ -301,7 +309,17 @@ const ProjectNew = ({history,closeWindow}) => {
                      onChange={(e) => onChange(e)}
                    />
                  </div>
-                 <div className={style.input__mid}>
+                 <div className={style.input__short}>
+                   <Thin className={style.title}>Объект</Thin>
+                   <input
+                     type="text"
+                     name="object"
+                     required
+                     value={object}
+                     onChange={(e) => onChange(e)}
+                   />
+                 </div>
+                 <div className={style.input__short}>
                    <Thin className={style.title}>Тип проекта</Thin>
                    <select
                      defaultValue="Архитектура"
@@ -399,7 +417,7 @@ const ProjectNew = ({history,closeWindow}) => {
                       <Thin size='28' className={style.title}>Введите должность сотрудника</Thin>
                       <div className={style.search__user}>
                         <div>{nameCurrent}</div> 
-                        <input className={style.position}  value={currentPos} onChange={(e) => posCurrent(e)} placeholder='должность'></input>
+                        <input className={style.position} defaultValue='нет' value={currentPos} onChange={(e) => posCurrent(e)} placeholder='должность'></input>
                         
                       </div>
                       <div className={style.buttons}>
@@ -456,7 +474,7 @@ const ProjectNew = ({history,closeWindow}) => {
                  grey
                  padd={"70px"}
                  style={{ marginTop: "5px" }}
-                 onClick={()=>history.replace('./../')}
+                 onClick={()=>history.push('./../')}
                >
                  {" "}
                  Отмена
@@ -465,7 +483,7 @@ const ProjectNew = ({history,closeWindow}) => {
                  fontSize={"16px"}
                  style={{ marginTop: "5px" }}
                  padd={"20px"}
-                 onClick={()=>nextStep(2)}
+                 onClick={()=>title==''?alert('Заполните обязательные поля'):nextStep(2)}
                >
                  {" "}
                  Перейти к следующему шагу

@@ -71,7 +71,15 @@ const Viewer = ({ project }) => {
     setOpen(!open);
   };
   return (
-    <div style={{ height: `${!open ? "65px" : "auto"}`, overflowY: "hidden", marginBottom:'25px' }}>
+    <div
+      className={style.model__cont}
+      style={{
+        height: `${!open ? "65px" : "auto"}`,
+        overflowY: "hidden",
+        paddingBottom: "30px",
+        marginBottom: "25px",
+      }}
+    >
       <Subtitle
         title="Модель проекта"
         openfunc={openfunc}
@@ -81,60 +89,46 @@ const Viewer = ({ project }) => {
         open={true}
       ></Subtitle>
       <div style={{ width: "80%" }}>
-        {loaded.model ? (
-          <Link to={`${project.crypt}/model/view`}>
-            <Thin
-              style={{
-                backgroundColor: "#EBF5FF",
-                width: "243px",
-                textAlign: "center",
-                padding: "2px",
-                cursor: "pointer",
-                transform: "translateY(23px)",
-                borderRadius: "5px",
-                marginBottom: "10px",
-                height: "35px",
-                border: "1px solid #C4C4C4",
-              }}
-            >
-              Модель проекта
-            </Thin>
-          </Link>
-        ) : loaded.submit ? (
-          <p>
-            {" "}
-            модель загружается, это займет некоторое время, status:{" "}
-            {model_status.split(" ")[0]}
-          </p>
-        ) : (
-          <p>Модели в проекте пока что нет, но можно загрузить</p>
-        )}
-        {!loaded.submit && (
-          <form onSubmit={onSubmit}>
-            <Thin
-              style={{
-                backgroundColor: "white",
-                width: "243px",
-                textAlign: "center",
-                padding: "2px",
-                cursor: "pointer",
-                transform: "translateY(23px)",
-                borderRadius: "5px",
-                height: "35px",
-                border: "1px solid #C4C4C4",
-              }}
-            >
-              Загрузить новую модель
-            </Thin>
-            <input
-              type="file"
-              name="file"
-              style={{ opacity: 0, cursor: "pointer" }}
-              onChange={(e) => onChange(e)}
-            />
-            {loaded.button && <Button type="submit"> Загрузка модели</Button>}
-          </form>
-        )}
+        <Link
+          to={`${project.crypt}/model/view`}
+          style={{ textDecoration: "none" }}
+        >
+          <Thin
+            style={{
+              backgroundColor: "#EBF5FF",
+              width: "243px",
+              textAlign: "center",
+              padding: "2px",
+              cursor: "pointer",
+              transform: "translateY(23px)",
+              borderRadius: "5px",
+              marginBottom: "10px",
+              height: "35px",
+              border: "1px solid #C4C4C4",
+            }}
+          >
+            Сводная модель
+          </Thin>
+        </Link>
+
+        <Link to={`${project.crypt}/m/view`} style={{ textDecoration: "none" }}>
+          <Thin
+            style={{
+              backgroundColor: "#EBF5FF",
+              width: "243px",
+              textAlign: "center",
+              padding: "2px",
+              cursor: "pointer",
+              transform: "translateY(23px)",
+              borderRadius: "5px",
+              marginBottom: "10px",
+              height: "35px",
+              border: "1px solid #C4C4C4",
+            }}
+          >
+            Все модели проекта
+          </Thin>
+        </Link>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 
-import { ADD_SPRINT,SORT_PROJECTS, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL, EDIT_TASK, CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR, GET_URN, DELETE_SPRINT, CLEAR_URN, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, ADD_TAG, DELITE_USER, DELITE_TAG, ADD_USER_TO_TEAM } from '../types'
+import { ADD_SPRINT,SORT_PROJECTS,SORT_TITLE, SEARCH_OBJECT, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL, EDIT_TASK, CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR, GET_URN, DELETE_SPRINT, CLEAR_URN, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, ADD_TAG, DELITE_USER, DELITE_TAG, ADD_USER_TO_TEAM, SORT_BY_TAGS, CHANGE_ROCKET, CLEAR_MODEL_DATA, CLEAR_SPRINT } from '../types'
 
 
 
@@ -22,7 +22,8 @@ const initialState = {
     sprint_msg:'',
     hey:'', 
     tagSearch:[],
-    modelLoaded: false
+    modelLoaded: false,
+    objectList:[]
 }
 
 export default function(state = initialState, action) {
@@ -47,7 +48,18 @@ export default function(state = initialState, action) {
 
                     error: ''
                 }
-                
+                case SEARCH_OBJECT: 
+                    console.log(payload)
+                    return {
+                        ...state,
+                        objectList: payload
+                    }
+                case SORT_TITLE:
+                    return {
+                        ...state,
+                        projects: payload,
+                        
+                    }
                 case CREATE_PROJECT:
                 return {
                     ...state,
@@ -60,7 +72,11 @@ export default function(state = initialState, action) {
                     error: '',
                     msg: payload.msg
                 }
-                
+                case CHANGE_ROCKET:
+                    return {
+                        ...state,
+                        
+                    }
                 case CLEAR_ERROR:
                     return {
                         ...state,
@@ -124,6 +140,11 @@ export default function(state = initialState, action) {
                     sprintLoad: false,
                     reload: false,
                     error: ''
+                }
+            case SORT_BY_TAGS:
+                return {
+                    ...state,
+                    project: payload
                 }
             case ADD_SPRINT:
                 // console.log(payload)
@@ -195,6 +216,11 @@ export default function(state = initialState, action) {
                     loadSprints: true,
                     error: ''
                 }
+            case CLEAR_SPRINT:
+                return {
+                    ...state,
+                    sprint: []
+                }
             case UPDATE_PROJECT:
                 return {
                     ...state,
@@ -208,6 +234,11 @@ export default function(state = initialState, action) {
                     msg: payload.msg,
                     project: payload.project,
                     modelLoaded: true,
+                }
+            case CLEAR_MODEL_DATA:
+                return {
+                    ...state,
+                    modelLoaded: false
                 }
                 case FINISH_PROJECT:
                     return {
