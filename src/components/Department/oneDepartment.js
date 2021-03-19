@@ -15,7 +15,7 @@ const OneDepartment = ({history, match}) => {
     const department = useSelector(state => state.departments.findDep)
 	// const [button, setButton] = useState (false)
  useEffect(()=>{
-	console.log(user)
+	// console.log(user)
 	dispatch(allUsers('name', true))
     dispatch(findDepartment(match.params.id))
 
