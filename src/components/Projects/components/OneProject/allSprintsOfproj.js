@@ -1,20 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
 import style from '../../../../Styles/modules/components/Project/oneproj.module.css'
-import { useEffect, useState } from "react"
+
 import SprintDescription from "../SprintDescrForOneProj";
-import { Button } from "../../../../Styles/buttons";
-import ModalWindow from "../ModalWindow";
-import { Light, Thin } from "../../../../Styles/typography";
+
+import {  Thin } from "../../../../Styles/typography";
 import Subtitle from "./subtitle";
 import { addSprint } from "../../../../redux/actions/projects";
-import { Redirect } from "react-router-dom";
+
 
 
 const AllSprintsOfProj = ({hist, match, status, id}) => {
   const dispatch = useDispatch();
 
 	const sprints = useSelector(state => state.projects.sprints) //нужно из пропсов достать, тут можно и без редакса
-  const sprint = useSelector(state => state.projects.sprint)
+  
 	const createSprint = () => {
     console.log(id)
     dispatch(addSprint(id));

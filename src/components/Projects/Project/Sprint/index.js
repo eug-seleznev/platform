@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import {  useSelector } from "react-redux";
-import Project from "..";
-import { Card, Title } from "../../../../Styles/common"
-import Tag from "../../components/OneProject/tag";
+import { Card } from "../../../../Styles/common"
 import AddTask from "./AddTask";
 import TaskManagment from "./EditTask";
 
@@ -19,12 +17,10 @@ const Sprint_New = ({match, history}) => {
     const project = useSelector((state) => state.projects.project);
     const chosenSprints = useSelector(state => state.auth.user.sprints)
     const user = useSelector(state => state.auth.user)
-
     const [focusRow, setFocusRow] = useState(''); //focus table row
     const [status, setStatus] = useState(false)
     const [editField, setEditField] = useState(false) 
-    const [actualClose, setActualClose] = useState ('??')
-    const [diff, setDiff] = useState ('??')
+  
     const selectFocusRow = (id) => {
         setFocusRow(id)
     };
@@ -34,6 +30,7 @@ const Sprint_New = ({match, history}) => {
     //   if(sprint.dateClosePlan!==undefined) {
     //      setActualClose(sprint.dateClosePlan.slice(5, 10).split('-').reverse().join('.'))
     //   }
+    
       {
         chosenSprints
           .filter((sprint) => sprint._id === sprint_id)
@@ -54,7 +51,7 @@ const Sprint_New = ({match, history}) => {
 
     return (
       <SprintLoader sprint_id={sprint_id} sprint={sprint} project={project} crypt={crypt}>
-        <SprintTitle crypt={crypt} diff={diff} user={user} title={sprint.title}date={sprint.dateClosePlan} hist={history} prTitle={project.title} actualClose={actualClose}id={sprint_id}  sprint={sprint}/>
+        <SprintTitle crypt={crypt}user={user} title={sprint.title}date={sprint.dateClosePlan} hist={history} prTitle={project.title} id={sprint_id}  sprint={sprint}/>
 
         <Card >
           <TaskManagment

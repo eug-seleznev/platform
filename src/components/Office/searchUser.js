@@ -14,7 +14,7 @@ const SearchUser = ({func}) => {
 		let request = e.target.value
 		if(request.length>=3){
 		
-		  console.log(e.target.value)
+		//  console.log(e.target.value)
 		  dispatch(searchUser(request))
 		}
 		

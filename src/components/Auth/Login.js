@@ -3,8 +3,8 @@ import  {useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/actions/auth';
 // import Login from './Login copy';
-import {Input, LogForm} from '../../Styles/Forms'
-import {Button, LoginButton} from '../../Styles/buttons'
+import {Input} from '../../Styles/Forms'
+import {LoginButton} from '../../Styles/buttons'
 import {Bold} from '../../Styles/typography'
 const Login = () => {
     const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const Login = () => {
 
      const onSubmit = async e => {
         e.preventDefault();
-        console.log(formData)
+        // console.log(formData)
         dispatch(login(formData))
     
             // register({ name, email, password});

@@ -1,10 +1,8 @@
-import { url } from '../utils/axios';
-import styles from '../../Styles/modules/components/News/newsModal.module.css'
 
-import { Bold, Light,Thin, Regular } from '../../Styles/typography'
-import { ButtonText } from '../../Styles/buttons'
+import styles from '../../Styles/modules/components/News/newsModal.module.css'
+import { Light,Thin} from '../../Styles/typography'
 import { Card } from '../../Styles/common'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const NewsOpen = ({close, content}) => {
 

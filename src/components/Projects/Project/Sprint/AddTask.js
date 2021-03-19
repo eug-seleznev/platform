@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTask, addTasks, clearSprint, deleteSprint, finishSprint } from "../../../../redux/actions/projects";
+import { addTask, clearSprint, deleteSprint, finishSprint } from "../../../../redux/actions/projects";
 import { Button, CancelButton } from "../../../../Styles/buttons";
 import style from "../../../../Styles/modules/components/Project/newsprint.module.css"
 import Confirm from "../../components/OneProject/confirm";
@@ -73,7 +73,7 @@ const AddTask = ({id, user, hist, sprint,crypt}) => {
 				<CancelButton
                     fontSize={"12px"}
                     style={{
-                      display: `${user.permission == "user" ? "none" : "flex"}`,
+                      display: `${user.permission === "user" ? "none" : "flex"}`,
 					  background:'none',
 					  color:'#3F496C',
 					  border:'none'
@@ -87,7 +87,7 @@ const AddTask = ({id, user, hist, sprint,crypt}) => {
                   padd='30px'
                     fontSize={"16px"}
                     style={{
-                      display: `${user.permission == "user" ? "none" : "flex"}`, border:'none',marginLeft:'20px'
+                      display: `${user.permission === "user" ? "none" : "flex"}`, border:'none',marginLeft:'20px'
                     }}
                     
                     onClick={openEnd}

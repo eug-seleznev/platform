@@ -41,7 +41,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 	  
 
 	  const onChangeDate = (e) => {
-      console.log(e.target.value, 'value')
+      // console.log(e.target.value, 'value')
       let today = new Date();
       let chose = e.target.value == '2 недели'?14:7
       let dd = String(today.getDate()+chose).padStart(2, '0');
@@ -69,9 +69,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 	 	const enter =()=>{
 			 setEnterWin(true)
 		 }
-     useEffect (()=>{
-      console.log(arr)
-     },[arr])
+  
 
      
 		const onSubmit = (data)=> {
@@ -89,10 +87,10 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 			}
 
       const func = (tags) => {
-        console.log(tags)
+       
         
         setArr(tags)
-        console.log(arr)
+       
       }
       const cancel =()=>{
         offWindow()

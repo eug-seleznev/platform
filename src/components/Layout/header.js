@@ -37,19 +37,19 @@ const HeaderL = ({addPodsos, createProj, createNews, createTicket}) => {
 
             <ItemHead className='mobile__menu' onClick={() => mobClick()}>
                 <Bold size='14' color='white'>меню</Bold>
-                <img className='arrow' src='/headerArrow.png'/>
+                <img alt='arrow' className='arrow' src='/headerArrow.png'/>
             </ItemHead>
 
             <ItemHead onClick={() => setOpen({...open, menuProfile:false , menu: !open.menu})}>
-                <img className='invert' src='/headerPlus.png'/>
-                <img className='arrow' src='/headerArrow.png'/>
+                <img alt='plus' className='invert' src='/headerPlus.png'/>
+                <img alt='arrow' className='arrow' src='/headerArrow.png'/>
             </ItemHead>
             
             <ItemHead onClick={() => setOpen({...open, menu:false, menuProfile: !open.menuProfile})}>
                 <div className='avatar' >
-                    <img  height="100%"  src={`${url}/${user != null? (user!= undefined? user.avatar:''):''}`}/>
+                    <img alt='avatar'  height="100%"  src={`${url}/${user !== null? (user!= undefined? user.avatar:''):''}`}/>
                 </div>
-                <img className='arrow' src='/headerArrow.png'/>
+                <img alt='arrow'  className='arrow' src='/headerArrow.png'/>
             </ItemHead>
             
            

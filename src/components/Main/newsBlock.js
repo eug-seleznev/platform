@@ -22,11 +22,11 @@ const NewsBlock = ({user, history}) => {
     return(
 		<div className={styles.news}>
           <div className={styles.create__news}>
-          <img className={styles.create__news__img}  src='/news.png'></img>
+          <img alt='news' className={styles.create__news__img}  src='/news.png'></img>
             <Bold color="black" size="18">
               Новости бюро
             </Bold>
-            {user.permission==='admin'?<img className={styles.create__news__button} onClick={()=>{setStatus(true)}} src='/plus.png'></img>:''}
+            {user.permission==='admin'?<img alt='news' className={styles.create__news__button} onClick={()=>{setStatus(true)}} src='/plus.png'></img>:''}
           </div>
           <ModalWindow 
             bigTitle={'Создание новости'} 

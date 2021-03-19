@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import {Button} from '../../../../Styles/buttons'
+
 import Confirm from "./confirm";
 import { deleteProject, finishProject } from '../../../../redux/actions/projects';
 import { StyledIn } from "../../../../Styles/layout";
-import styles from '../../../../Styles/modules/components/headerMenu.module.css'
+
 
 const DeliteEnd = ({id, hist}) => {
 	const dispatch = useDispatch();

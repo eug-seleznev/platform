@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeData, changeAvatar } from "../../redux/actions/auth";
-import { url } from "../utils/axios";
+import {changeAvatar } from "../../redux/actions/auth";
+
 
 import styles from "../../Styles/modules/components/user/edit.module.css";
 //styled components
 import { Button, CancelButton } from "../../Styles/buttons";
-import { Card, SmallContainer } from "../../Styles/common";
-import { Input, LogForm } from "../../Styles/Forms";
-import styled from "styled-components";
-import { allDepartments, joinDepartment } from "../../redux/actions/department";
+import { Card} from "../../Styles/common";
+import { Input} from "../../Styles/Forms";
+
+import { allDepartments } from "../../redux/actions/department";
 import { Thin } from "../../Styles/typography";
-import Partition from "./partition";
+
 import { changeUserProfile } from "../../redux/actions/user";
 
 const EditUser = ({ match, history }) => {
     const {id} = match.params;
   const loaded = useSelector((state) => state.auth.loaded);
   const user = useSelector((state) => state.users.user);
-  const departments = useSelector((state) => state.departments.departments);
+
   // const select = user.division.divname==el.divname && selected
   const dispatch = useDispatch();
 
@@ -33,7 +33,7 @@ const EditUser = ({ match, history }) => {
     partition: user.partition ? user.partition : [],
   });
 
-  const [text, setText] = useState("");
+  
 
   const {
     name,
@@ -43,7 +43,7 @@ const EditUser = ({ match, history }) => {
     report,
     bday,
     phone,
-    partition,
+   
   } = formData;
 
 
@@ -69,11 +69,7 @@ if (!user) {
     e.preventDefault();
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const divisionChange = (e) => {
-    e.preventDefault();
 
-    dispatch(joinDepartment(e.target.value));
-  };
 
   const changeMsg = () => {
     // setText ('Данные были изменены')
@@ -88,7 +84,7 @@ if (!user) {
     e.preventDefault();
     dispatch(changeUserProfile({formData, id}));
 
-    if (file !== null && file !== undefined) {
+    if (file != null && file != undefined) {
       dispatch(changeAvatar(file));
     }
     setTimeout(() => {
@@ -104,7 +100,7 @@ if (!user) {
         ) : (
           <div /*style={{display:'flex', flexDirection:'column', alignItems:'center'}}*/
           >
-            <LogForm className={styles.editForm} onSubmit={onSubmit}>
+            <Card className={styles.editForm} onSubmit={onSubmit}>
               <Thin className={styles.p}>Имя</Thin>
               <Input
                 required
@@ -126,7 +122,7 @@ if (!user) {
               ></Input>
             
 
-              <p className={styles.p}>Сменить должность</p>
+              <Thin className={styles.p}>Сменить должность</Thin>
               <Input
                 required
                 type="text"
@@ -181,7 +177,7 @@ if (!user) {
               >
                 Сохранить
               </Button>
-            </LogForm>
+            </Card>
           </div>
         )}
       </Card>

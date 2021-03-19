@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {  addInfoSprint, clearSprint, EditSprint} from "../../../../redux/actions/projects";
-import { Button, ButtonText } from "../../../../Styles/buttons";
+import {  ButtonText } from "../../../../Styles/buttons";
 
 import style from "../../../../Styles/modules/components/Project/oneproj.module.css";
 import { Bold, Light, Regular } from "../../../../Styles/typography";
@@ -21,7 +21,7 @@ const SprintTitle = ({sprint,user, prTitle,hist, title, id,date, crypt}) => {
 	//sprint name handlers
 	const[dateIn, setDateIn] = useState ('нет')
 	const [sprintInfo, setSprintTitle] = useState({
-    	title: title,
+    	title: sprint.title,
   });
   const [sprintDate, setDate] = useState({
 	date:'',
@@ -106,7 +106,7 @@ useEffect(()=>{
           ) : ( */}
 		  
             <form onSubmit={onSubmit}>
-              <input className={style.titleChange} onChange={onChange} value={sprintInfo.title}></input>
+               <input className={style.titleChange} onChange={onChange} value={sprintInfo.title}></input>
             </form>
         {/* //   )} */}
 		

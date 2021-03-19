@@ -43,7 +43,7 @@ export const Status = styled.div`
 export const Circle = styled.div`
   height: 15px;
   width: 15px ;
-  background-color: ${(props) => (props.red ? "#E04B4B" : "#68D286")};
+  background-color: ${props => props.color};
   border-radius: 50%;
   display: inline-block;
 `;

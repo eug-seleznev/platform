@@ -1,9 +1,8 @@
 import { Thin } from "../../../../Styles/typography"
 import style from '../../../../Styles/modules/components/Project/editproj.module.css'
 import create from '../../../../Styles/modules/components/Project/createPr.module.css'
-import { Select } from "../../../../Styles/tables"
-import { useEffect, useState } from "react"
-import { ButtonText, ButtonTextDiv, CancelButton } from "../../../../Styles/buttons"
+import { useState } from "react"
+import {  ButtonTextDiv } from "../../../../Styles/buttons"
 import { useDispatch } from "react-redux"
 import { changeRocket } from "../../../../redux/actions/projects"
 

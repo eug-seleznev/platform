@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, } from "react-redux";
 import { addUserToTask, EditTask, finishTask } from "../../../../redux/actions/projects";
-import { Sprint_Table, TR,Sprint_Td,Select } from "../../../../Styles/tables"
+import { SPRINT_TABLE, TR,Select, SPRINT_TD } from "../../../../Styles/tables"
 import style from "../../../../Styles/modules/components/Project/newsprint.module.css"
-import { Regular, Thin } from "../../../../Styles/typography";
+import { Thin } from "../../../../Styles/typography";
 import { Input } from "../../../../Styles/Forms";
 import { ButtonText } from "../../../../Styles/buttons";
 import getDate from "../../getDate";
@@ -11,9 +11,9 @@ import getDate from "../../getDate";
 //todo: handle no tasks state
 
 
-const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit, team }) => {
+const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
   const dispatch = useDispatch()
-  const user = useSelector(state => state.auth.user)
+
   const [taskId, setTaskId] = useState("");
   const [focusRow, setFocusRow] = useState("");
   const [deadline, setDeadline] = useState(false);
@@ -34,22 +34,22 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
   //   }
   // },[focusRowNew])
   const onChange = (e) => {
-    console.log('change')
+    // console.log('change')
     let taskid = e.target.value;
     dispatch(finishTask({ taskid, id }));
   };
 
   useEffect(() => {
     if (isEdit) {
-      let task = tasks.filter((task) => task._id == focusRow);
-      console.log(task);
+      let task = tasks.filter((task) => task._id === focusRow);
+      // console.log(task);
       // setTaskTitle(task[0].taskTitle);
     }
   }, [isEdit]);
 
   //edit task
   const editHandler = (e) => {
-    console.log('edit')
+    // console.log('edit')
      let field = 'taskTitle'
       let value = e.target.value
       dispatch(EditTask({ value, id, focusRow, field }));
@@ -59,7 +59,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
 
   };
   const onFocus=(e)=>{
-    console.log('onFocus')
+    // console.log('onFocus')
     setTaskTitle(e.target.name)
   }
   const submitEdit = (e) => {
@@ -78,17 +78,17 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
   const doubleClickEdit = (task) => {
       setTaskTitle(task.taskTitle)
       setFocusRow(task._id)
-      if(isDouble==0){
+      if(isDouble===0){
           setDouble(1);
           setD(true)
           setTimeout(() => setD(false), 300 )
       }
 
-       if (isDouble == 1 && double) {
+       if (isDouble === 1 && double) {
          enableEdit();
        } 
        
-       if(isDouble==1 && !double) {
+       if(isDouble===1 && !double) {
          setDouble(0);
        }
       
@@ -120,7 +120,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
   }
 
   return (
-    <Sprint_Table onMouseLeave={() => setTaskId("")}>
+    <SPRINT_TABLE onMouseLeave={() => setTaskId("")}>
       {tasks.map((task) => {
         
         return (
@@ -129,11 +129,11 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
             onClick={() => doubleClickEdit(task)}
             
             style={{
-              backgroundColor: (task._id === focusRow || task._id == taskId) ? "#F2F2F2" : "white",
+              backgroundColor: (task._id === focusRow || task._id === taskId) ? "#F2F2F2" : "white",
               userSelect: 'none'
             }}
           >
-            <Sprint_Td style={{width:'25px'}}>
+            <SPRINT_TD style={{width:'25px'}}>
               <input
               
                 type="checkbox"
@@ -141,12 +141,12 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
                 value={task._id}
                 onChange={onChange}
               ></input>
-            </Sprint_Td>
+            </SPRINT_TD>
            
 
 
             {isEdit && task._id === focusRow  ? (
-              <Sprint_Td style={{width:'50%'}}>
+              <SPRINT_TD style={{width:'50%'}}>
                 <form onSubmit={submitEdit}>
                   <input
                   className={style.input}
@@ -157,9 +157,9 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
                     onChange={(e)=>editHandler(e)}
                   ></input>
                 </form>
-              </Sprint_Td>
+              </SPRINT_TD>
             ) : (<>
-              <Sprint_Td>{task.taskTitle}</Sprint_Td>
+              <SPRINT_TD>{task.taskTitle}</SPRINT_TD>
               
               </>
               
@@ -169,7 +169,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
 
 
 
-            <Sprint_Td >
+            <SPRINT_TD >
               {task.user && team ? (
                
                 <>
@@ -211,8 +211,8 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
                   )}{" "}
                 </>
               )}
-            </Sprint_Td>
-            <Sprint_Td style={{width:'250px'}}>
+            </SPRINT_TD>
+            <SPRINT_TD style={{width:'250px'}}>
               <div style={{display:'flex'}}>
                 <Thin >Дедлайн: </Thin> 
                 <ButtonText onClick={()=>setDeadline(true)}
@@ -227,11 +227,11 @@ const TaskTable = ({ tasks, id, selectFocusRow, focusRowNew, isEdit, enableEdit,
                 </Input>
               </div>
               
-            </Sprint_Td>
+            </SPRINT_TD>
           </TR>
         );
       })}
-    </Sprint_Table>
+    </SPRINT_TABLE>
   );
 };
 

@@ -41,7 +41,7 @@ const TitleOfProject = ({hist}) => {
               <div className={style.title__options} onClick={openMenu}>
                 Настройки
               </div>
-              <img src="/image 1.png" onClick={openMenu}></img>
+              <img alt='open' src="/image 1.png" onClick={openMenu}></img>
               <SetMenu
                 closeAll={closeAll}
                 project={project}

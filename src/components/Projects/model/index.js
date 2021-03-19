@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Card } from "../../../Styles/common";
-import { cleardData, postModel, Status } from "../../../redux/actions/models";
+import { postModel, Status } from "../../../redux/actions/models";
 import { Link } from "react-router-dom";
 import { clearUrn } from "../../../redux/actions/projects";
-import { Button } from "../../../Styles/buttons";
 import Subtitle from "../components/OneProject/subtitle";
 import style from "../../../Styles/modules/components/Project/oneproj.module.css";
 import { Thin } from "../../../Styles/typography";
@@ -31,7 +29,7 @@ const Viewer = ({ project }) => {
   useEffect(() => {
     if (loaded.submit) {
       let new_status = model_status.split(" ");
-      console.log("first useEffect if submit true", model_status);
+      // console.log("first useEffect if submit true", model_status);
       if (new_status[0] == "complete") {
         setLoad({ model: true, status: true, submit: false });
       } else {
@@ -45,7 +43,7 @@ const Viewer = ({ project }) => {
   useEffect(() => {
     if (loaded.submit) {
       setTimeout(() => {
-        console.log("trying to dispatch value");
+        // console.log("trying to dispatch value");
         dispatch(Status(project.crypt));
       }, 5000);
     }

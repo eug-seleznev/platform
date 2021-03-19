@@ -14,7 +14,6 @@ const Department = ({history}) => {
     const user = useSelector(state => state.auth.user)
     const users = useSelector(state => state.users.users)
     const department = useSelector(state => state.departments.findDep)
-    const allDeps = useSelector(state => state.departments.departments)
     const [load, setLoad] = useState (true)
  useEffect(()=>{
     dispatch(allDepartments())

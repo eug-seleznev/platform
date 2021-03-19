@@ -8,9 +8,8 @@ import { allTickets } from "../../redux/actions/tikets";
 
 import style from '../../Styles/modules/components/Project/allproj.module.css'
 //styled components
-import {Table, Tr, Td, New_thead, New_Tr, New_Th, New_tbody, New_table, New_Td} from '../../Styles/tables'
-import {Container, Card, Title,} from '../../Styles/common'
-import { H1, H3, Regular} from '../../Styles/typography'
+import {NEW_THEAD, NEW_TR, NEW_TH, NEW_TBODY, NEW_TABLE,NEW_TD} from '../../Styles/tables'
+import {  Regular} from '../../Styles/typography'
 import { background } from "../../redux/actions/user";
 
 
@@ -40,31 +39,31 @@ const Dashboard = ({history}) => {
 
             {!loaded ? <p>loading...</p> : (
             
-                    <New_table>
-                        <New_thead>
-                            <New_Tr className={style.first}>
-                                <New_Th>Номер</New_Th>
-                                <New_Th>Проблема</New_Th>
-                                <New_Th>Статус</New_Th>
-                            </New_Tr>
-                        </New_thead>
+                    <NEW_TABLE>
+                        <NEW_THEAD>
+                            <NEW_TR className={style.first}>
+                                <NEW_TH>Номер</NEW_TH>
+                                <NEW_TH>Проблема</NEW_TH>
+                                <NEW_TH>Статус</NEW_TH>
+                            </NEW_TR>
+                        </NEW_THEAD>
                             
-                        <New_tbody>
+                        <NEW_TBODY>
                             
                             {tickets.map((ticket,index) => 
                                 
-                                <New_Tr columns='1fr 5fr 1fr' onClick={() => history.push(`/tickets/${ticket._id}`)}>
-                                    <New_Td>{index+1}</New_Td>
-                                    <New_Td>{ticket.problemname}</New_Td>
-                                    <New_Td>{ticket.status ? <p>получен</p>:<p>выполнено</p>}</New_Td>
+                                <NEW_TR columns='1fr 5fr 1fr' onClick={() => history.push(`/tickets/${ticket._id}`)}>
+                                    <NEW_TD>{index+1}</NEW_TD>
+                                    <NEW_TD>{ticket.problemname}</NEW_TD>
+                                    <NEW_TD>{ticket.status ? <p>получен</p>:<p>выполнено</p>}</NEW_TD>
                                     
-                                </New_Tr>
+                                </NEW_TR>
                                 
                             )}
-                        </New_tbody>
+                        </NEW_TBODY>
                             
                      
-                    </New_table>
+                    </NEW_TABLE>
                 
             )}
            
