@@ -1,8 +1,7 @@
 import  {useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {  getProject, editProject } from '../../redux/actions/projects';
-import './projects.css'
-import { Button, CancelButton } from '../../Styles/buttons';
+import { Button } from '../../Styles/buttons';
 import {  Bold, Regular} from '../../Styles/typography'
 import style from '../../Styles/modules/components/Project/editproj.module.css'
 import InfoInputs from './components/EditProj/infoInputs';
@@ -43,10 +42,7 @@ const ProjectEdit = ({history, match}) => {
 		dispatch(getProject(id));
         
     }, [])
-    useEffect(() => {
-		console.log(project)
-        
-    }, [project])
+   
     const [editStage, setEditStage] = useState(1)
 	useEffect(() => {
 		if (loadProject) {

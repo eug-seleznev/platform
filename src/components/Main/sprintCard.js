@@ -57,7 +57,7 @@ const SprintCard = ({sprint}) => {
               <div className={styles.tags}>
             {sprint.tags.map((el, i)=>{
               return(
-                <Tag  tagText={el} tagColor={i===0?'#C8D9E9':'#E9E3C8'} />  
+                <Tag  tagText={el} key={i} tagColor={i===0?'#C8D9E9':'#E9E3C8'} />  
               )
             })}
              

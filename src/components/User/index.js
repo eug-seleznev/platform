@@ -7,10 +7,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { allUsers, background, userPosSearch, userTableSearch } from "../../redux/actions/user";
 import style from '../../Styles/modules/components/Project/allproj.module.css'
 //styled components
-import { Container, Card } from "../../Styles/common";
-import { Table, Tr, Td, New_table, New_thead, New_Tr, New_Th, New_Td, New_tbody, Select } from "../../Styles/tables";
-import { Bold, H1, H3, Regular, Thin} from '../../Styles/typography'
-import { Link } from "react-router-dom";
+import { Select, NEW_TABLE, NEW_THEAD, NEW_TR, NEW_TH, NEW_TBODY, NEW_TD } from "../../Styles/tables";
+import { Bold,  Regular, Thin} from '../../Styles/typography'
 import { url } from "../utils/axios";
 import { SearchInput } from "../../Styles/Forms";
 import { allDepartments } from "../../redux/actions/department";
@@ -60,11 +58,11 @@ const Users = ({history}) => {
         <Regular size='16' color='#3F496C' className={style.title}> Все сотрудники</Regular>
         <div className={style.row}>
          <div className={style.row__in}>
-               <img src='/lupa.png' className={style.row__img}></img>
+               <img src='/lupa.png' alt='lupa' className={style.row__img}></img>
                <SearchInput size='14px' onChange={findUser} placeholder='Поиск сотрудника' name='name' ></SearchInput>
              </div>
              <div className={style.row__in}>
-               <img src='/lupa.png' className={style.row__img}></img>
+               <img src='/lupa.png' alt='lupa' className={style.row__img}></img>
                <SearchInput size='14' name='position' onChange={findUserPos}  placeholder='По должности'></SearchInput>
              </div>
              <div className={style.row__in}>
@@ -91,46 +89,46 @@ const Users = ({history}) => {
           {!users ? (
             <p>loading...</p>
           ) : (
-            <New_table className={style.table}>
-              <New_thead>
-                <New_Tr  className={style.first} top="top">
-                  <New_Th onClick={() => sortFunction("name")}>Имя &#8597;</New_Th>
-                  <New_Th
+            <NEW_TABLE className={style.table}>
+              <NEW_THEAD>
+                <NEW_TR  className={style.first} top="top">
+                  <NEW_TH onClick={() => sortFunction("name")}>Имя &#8597;</NEW_TH>
+                  <NEW_TH
                     onClick={() => sortFunction("email")}
                     className={style.turn__off}
                   >
                     email &#8597;
-                  </New_Th>
-                  <New_Th onClick={() => sortFunction("position")}>
+                  </NEW_TH>
+                  <NEW_TH onClick={() => sortFunction("position")}>
                     Должность &#8597;
-                  </New_Th>
-                  <New_Th>Отдел</New_Th>
-                  <New_Th className={style.turn__off}>Проекты</New_Th>
+                  </NEW_TH>
+                  <NEW_TH>Отдел</NEW_TH>
+                  <NEW_TH className={style.turn__off}>Проекты</NEW_TH>
                   {/* <New_Th className={style.turn__off}>Спринты</New_Th> */}
-                </New_Tr>
-              </New_thead>
-              <New_tbody>
+                </NEW_TR>
+              </NEW_THEAD>
+              <NEW_TBODY>
               {users.map((user, i) => {
                 return (
-                  <New_Tr
+                  <NEW_TR
                     className={style.tr__user}
                     key={i}
                     onClick={() => history.push(`/users/${user._id}`)}
                   >
-                    <New_Td className={style.row__name} >
-                      <img className={style.img} src={url+'/'+user.avatar}></img>
+                    <NEW_TD className={style.row__name} >
+                      <img alt='ava' className={style.img} src={url+'/'+user.avatar}></img>
                       <Regular>{user.name} {user.lastname}</Regular>
-                    </New_Td>
-                    <New_Td className={style.turn__off}>{user.email}</New_Td>
-                    <New_Td>{user.position}</New_Td>
-                    <New_Td>{user.division && user.division.divname}</New_Td>
-                    <New_Td className={style.turn__off}>{user.projects.length}</New_Td>
+                    </NEW_TD>
+                    <NEW_TD className={style.turn__off}>{user.email}</NEW_TD>
+                    <NEW_TD>{user.position}</NEW_TD>
+                    <NEW_TD>{user.division && user.division.divname}</NEW_TD>
+                    <NEW_TD className={style.turn__off}>{user.projects.length}</NEW_TD>
                     {/* <New_Td className={style.turn__off}>{user.sprints.length}</New_Td> */}
-                  </New_Tr>
+                  </NEW_TR>
                 );
               })}
-              </New_tbody>
-            </New_table>
+              </NEW_TBODY>
+            </NEW_TABLE>
           )}
         
       </div>

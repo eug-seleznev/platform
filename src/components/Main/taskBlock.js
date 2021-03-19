@@ -14,7 +14,7 @@ const TaskBlock = ({user, history}) => {
     return(
 		<div className={styles.tasks}>
 			<div className={styles.create__news}>
-				<img className={styles.create__news__img}  src='/tasks.png'></img>
+				<img className={styles.create__news__img}alt='tasks' src='/tasks.png'></img>
 				<Bold color="black" size="18">
 					Задачи
 				</Bold>

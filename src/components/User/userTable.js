@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AddUserToTeam } from "../../redux/actions/projects";
 import style from '../../Styles/modules/components/Project/editproj.module.css'
-import { Light, Regular, Thin } from "../../Styles/typography";
+import { Light, Thin } from "../../Styles/typography";
 
 const UserTable = ({crypt, project}) => {
     const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const UserTable = ({crypt, project}) => {
     const onSubmit = (e, id) => {
       document.getElementById(id).style.display = "none"
         e.preventDefault()
-		console.log(id)
+		// console.log(id)
         setFormData({...formData, user: id})
 		setTimeout(() => {
 			setFormData({...formData, user:""})
@@ -36,8 +36,8 @@ const UserTable = ({crypt, project}) => {
 	},[formData])
     return (
    
-        <table className={style.people__table} style={{borderWidth:`${users.length == 0?'0px':'1px'}`}}>
-          {users.length == 0 ? (
+        <table className={style.people__table} style={{borderWidth:`${users.length === 0?'0px':'1px'}`}}>
+          {users.length === 0 ? (
             <Thin style={{marginTop:'25px', marginLeft:'20px'}}>Пользователей не найдено</Thin>
           ) : (
             <>
@@ -59,7 +59,7 @@ const UserTable = ({crypt, project}) => {
                       <button type="submit" 
 					//   onClick={() =>  setFormData({...formData, user: user._id})}
                       onClick={(e) => onSubmit(e, user._id)}
-                    ><img src='/plus.png'></img></button>
+                    ><img alt='plus'  src='/plus.png'></img></button>
                     </td>
                   </tr>
                 );

@@ -3,10 +3,8 @@ import { useDispatch } from 'react-redux';
 import { newTicket } from '../../redux/actions/tikets';
 import './tickets.css'
 import style from '../../Styles/modules/components/Tickets/createTicket.module.css'
-import {Table, Tr, Td} from '../../Styles/tables'
-import {Container, Card, Title,} from '../../Styles/common'
 import { Button, CancelButton } from '../../Styles/buttons';
-import { H1, H3, Light, Regular, Thin} from '../../Styles/typography'
+import {  Light, Thin} from '../../Styles/typography'
 
 const Admin = ({closeWindow}) => {
     const dispatch = useDispatch();
@@ -22,7 +20,7 @@ const Admin = ({closeWindow}) => {
       });
       
 
-      const { problemname, text, emergency, pcpass} = formData;
+      const { problemname, text, pcpass} = formData;
 
       const  [file, setFile] = useState(null) 
 

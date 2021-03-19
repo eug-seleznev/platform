@@ -29,7 +29,7 @@ import Edit from './components/User/edit';
 import Ticket from './components/Adminka/Ticket';
 import Project from './components/Projects/Project';
 import Sprint from './components/Projects/Project/Sprint';
-import ProjectsEdit from './components/Projects/ProjectsEdit';
+// import ProjectsEdit from './components/Projects/ProjectsEdit';
 import OneProjEdit from './components/Projects/OneProjEdit';
 import Main from './components/Main/index'
 import Department from './components/Department/index'
@@ -49,9 +49,9 @@ import EditContractor from './components/Superadmin/editContractor'
 // import Sprint_New from './components/Projects/Project/Sprint/new'
 import Search from './components/User/Search'
 import Models from './components/Projects/Models';
-import LoadModel from './components/Projects/Models/NewModel';
+
 import EditUser from './components/User/editUser';
-import Viewer from './components/Projects/model';
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -152,7 +152,7 @@ const App = () => {
                     component={Helper}
                   />
                 </Switch>
-                <Route exact path="/admin/editproj" component={ProjectsEdit} />
+                {/* <Route exact path="/admin/editproj" component={ProjectsEdit} /> */}
                 <Route
                   exact
                   path="/admin/editproj/:id"

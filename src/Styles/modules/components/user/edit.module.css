@@ -4,6 +4,10 @@
     row-gap: 20px;
     column-gap: 30px;
 }
+
+.editForm {
+
+}
 .avaForm{
     display: grid;
     grid-template-columns: max-content 1fr;

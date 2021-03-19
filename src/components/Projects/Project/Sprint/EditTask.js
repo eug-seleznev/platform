@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTag, DeleteTask, deleteTag, EditSprint, EditTask } from "../../../../redux/actions/projects";
-import { Bold, Light, Regular, Thin } from "../../../../Styles/typography"
+import { addTag, DeleteTask, deleteTag, EditSprint } from "../../../../redux/actions/projects";
+import {  Light, Regular, Thin } from "../../../../Styles/typography"
 import style from "../../../../Styles/modules/components/Project/newsprint.module.css"
 import { addToChosen } from "../../../../redux/actions/auth";
 import TagSearch from "../../components/tagSearch";
 import Tag from "../../components/OneProject/tag";
-import { Button } from "../../../../Styles/buttons";
+
 
 
 
@@ -21,7 +21,7 @@ const TaskManagment = ({tags, id,status, title, setStatus, sprint_description, f
     description: sprint_description,
     title: title
   });
-  const [isSubmit, setSubmit] = useState(true);
+ 
   const [completeTasks, setCompleteTasks] = useState(0);
   const [allTasks, setAllTasks] = useState(1);
   //add description to sprint
@@ -55,7 +55,7 @@ return () => {
   const onEditSubmit = (e) => {
     e.preventDefault();
     dispatch(EditSprint(sprintInfo, id));
-    setSubmit(true);
+   
   };
 
   //edit task
@@ -70,7 +70,7 @@ return () => {
   
 
   const deletehandler = (e) => {
-        console.log(e.key)
+        // console.log(e.key)
         dispatch(DeleteTask({id, focusRow}))
   }
 
@@ -79,7 +79,7 @@ return () => {
   useEffect(()=>{
     
     if (tasks!==undefined){
-      console.log(tasks)
+      // console.log(tasks)
       setCompleteTasks(tasks.filter(task=>task.taskStatus).length)
       setAllTasks(tasks.length)
     }
@@ -126,7 +126,7 @@ return () => {
             
           <div className={style.creator}><Light color='#3F496C' > Создал: {creator} </Light></div>
           <div className={style.taglist}>{tags!==undefined? tags.map((el,i)=>{
-              return(<div style={{marginBottom:'10px', display:'flex',alignItems:'baseline'}}><Tag tagText={el} key={i} tagColor={i==0?'#C8D9E9':i==1?'#E9E3C8':'#AAF8A8'}/><div  className={style.cross} onClick={()=>delTag(el)}>x</div></div>)
+              return(<div style={{marginBottom:'10px', display:'flex',alignItems:'baseline'}}><Tag tagText={el} key={i} tagColor={i===0?'#C8D9E9':i===1?'#E9E3C8':'#AAF8A8'}/><div  className={style.cross} onClick={()=>delTag(el)}>x</div></div>)
             }):''}</div>
           {tags!==undefined&&tags.length<2?<TagSearch tagCount={false}  func={AddTag}></TagSearch>:''}
           

@@ -3,7 +3,7 @@ import styles from '../../Styles/modules/login/register.module.css'
 import  {useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { register } from '../../redux/actions/auth';
-import {Input, LogForm} from '../../Styles/Forms'
+import {Input} from '../../Styles/Forms'
 import {LoginButton} from '../../Styles/buttons'
 import {Bold} from '../../Styles/typography'
 

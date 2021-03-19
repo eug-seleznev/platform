@@ -2,19 +2,12 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 
 import style from '../../../../Styles/modules/components/Project/oneproj.module.css'
-
 import { allSprints} from "../../../../redux/actions/projects";
-
-
-import { Bold } from '../../../../Styles/typography'
-import { Oauth } from "../../../../redux/actions/models";
-import SprintHistory from "./sprintHistory";
 import Subtitle from "./subtitle";
-
 let months = ['янв','фев',"мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"]
 let count = [1,2,3,4]
 
-const CalendSprint = ({hist, match, id}) => {
+const CalendSprint = ({id}) => {
 
     const dispatch = useDispatch();
     const loaded = useSelector(state => state.projects.loadProject);
@@ -25,7 +18,7 @@ const CalendSprint = ({hist, match, id}) => {
     const sprints = useSelector(state => state.projects.sprints)
     const trick = useSelector(state => state.projects.trick)
 
-    const [status, setStatus] = useState (false)
+
     const [sprintDays, setSprintDays] = useState([]);
     const [calendLoader, setCalendLoader] = useState (false);
     const [paint, setPaint] = useState(false);
@@ -91,20 +84,20 @@ const CalendSprint = ({hist, match, id}) => {
                     if ((index+i/4) <13){
 						// console.log('hi')
                       conditionalWeeks.push([i, Math.trunc((i/4)+index),
-                        i%4==1?2:
-                        i%4==2?3:
-                        i%4==3?4:
-                        i%4==4?0:1])
+                        i%4===1?2:
+                        i%4===2?3:
+                        i%4===3?4:
+                        i%4===4?0:1])
                      
                     }
               // елс иф для адекватной отрисовки первого месяца как стартового для проекта  
                     else if (index+i/4>=13){
 						// console.log('hi')
                       conditionalWeeks.push([i, Math.trunc((i/4)+index-12),
-                        i%4==1?2:
-                        i%4==2?3:
-                        i%4==3?4:
-                        i%4==4?0:1])}}
+                        i%4===1?2:
+                        i%4===2?3:
+                        i%4===3?4:
+                        i%4===4?0:1])}}
               }
 
                resolve()
@@ -139,7 +132,7 @@ const CalendSprint = ({hist, match, id}) => {
                         sprintArray.push ([body[0],body[1],body[2],int])  
           
                         setpr(true)
-						
+                           return(body)
                })
                
                 setPaintSprint(sprintArray)
@@ -165,10 +158,7 @@ const CalendSprint = ({hist, match, id}) => {
     }, [loaded])
     
    
-    const openModHistory = () => {
-      setStatus(!status)
-     
- }
+  
   
  const openfunc=()=>{
   setOpen(!open)
@@ -199,7 +189,7 @@ const CalendSprint = ({hist, match, id}) => {
 							key={i} className={style.one__week}>
 								<div className={style.months}> 
 								{body[0]%4===0&&body[1]<=12?months[body[1]-1]: //это отрисовка месяцев
-								body[0]==0?months[1]:
+								body[0]===0?months[1]:
 								''}</div></div>
 						
 						})}

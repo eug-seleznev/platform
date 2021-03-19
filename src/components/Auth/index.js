@@ -3,13 +3,13 @@ import { useState,useEffect } from "react"
 import Login from './Login'
 import Register from './Register'
 import RegisterCustomer from './RegisterCustomer'
-import { Card, Container} from '../../Styles/common'
+
 import {LoginButton} from '../../Styles/buttons'
 import {Bold, Regular, Light} from '../../Styles/typography'
 import {useDispatch, useSelector} from 'react-redux'
 import { BackendMsg }  from '../../Styles/layout'
 import {errorAuthClear, msgAuthClear}  from "../../redux/actions/auth";
-const Auth = ({ match }) => {
+const Auth = () => {
 
 const [error, setError] = useState(0)
 const [page, setPage] = useState(0)
@@ -27,13 +27,13 @@ useEffect(()=>{
 },[errorAll])
 useEffect(()=>{
     if(msgAll!==""&&msgAll!==undefined){
-        console.log(msgAll)
+        // console.log(msgAll)
         setMsg(msgAll)
         setColor('red')
     }
 },[msgAll])
 useEffect(()=>{
-    if(error!=''){
+    if(error!==''){
         setMsgTiming(true)
             setTimeout(()=>{
                 setMsgTiming(false)
@@ -46,7 +46,7 @@ useEffect(()=>{
     }
 },[error])
 useEffect(()=>{
-    if(msg!=''){
+    if(msg!==''){
         setMsgTiming(true)
             setTimeout(()=>{
                 setMsgTiming(false)
@@ -96,9 +96,9 @@ useEffect(()=>{
                 color="#3F496C"
                 bgColor="white"
                 className={styles.register}
-                onClick={() => (page == 0 ? setPage(1) : setPage(0))}
+                onClick={() => (page === 0 ? setPage(1) : setPage(0))}
               >
-                {page == 0 ? "Регистрация" : "Логин"}
+                {page === 0 ? "Регистрация" : "Логин"}
               </LoginButton>
               <LoginButton
                 color="white"
@@ -117,9 +117,9 @@ useEffect(()=>{
         </div>
 
         <div className={styles.forms}>
-          {page == 0 && <Login />}
-          {page == 1 && <Register />}
-          {page == 2 && <RegisterCustomer />}
+          {page === 0 && <Login />}
+          {page === 1 && <Register />}
+          {page === 2 && <RegisterCustomer />}
         </div>
       </div>
     </div>

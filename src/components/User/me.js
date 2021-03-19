@@ -20,8 +20,8 @@ const MyProfile = ({match, history}) => {
         dispatch (loadUser())
     },[])
     useEffect(()=>{
-        if (user!=undefined){
-            console.log(user)
+        if (user!==undefined){
+            // console.log(user)
            setPermission(user.permission)
         } 
      },[user])

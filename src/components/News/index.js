@@ -11,7 +11,7 @@ import Confirm from './confirm'
 
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { allNews, createNews, deleteNews, updateNews} from '../../redux/actions/news';
+import { allNews,deleteNews} from '../../redux/actions/news';
 // import { allUsers } from "../../redux/actions/user";
 import {  Card, } from '../../Styles/common';
 import {  ButtonText } from '../../Styles/buttons';
@@ -38,13 +38,13 @@ const News = () => {
         post:'',
     })
 
-    const [formData, setFormData ] = useState({
+    // const [formData, setFormData ] = useState({
         
-        title: '',   //title
-        subtitle: '', 
-        text: '',  
+    //     title: '',   //title
+    //     subtitle: '', 
+    //     text: '',  
       
-      });
+    //   });
   
 
 

@@ -12,7 +12,7 @@ const ProjInfo = ({project,history}) => {
     return(
     <div className={styles.info__cont}>
       <div  className={styles.title__info} >
-           <img  src='/info.png' style={{marginRight:'10px'}} ></img>
+           <img alt='info' src='/info.png' style={{marginRight:'10px'}} ></img>
             <Thin size='22'>Общая информация о проекте</Thin>
             <ButtonText
                   color="#445AAA"

@@ -1,23 +1,19 @@
 import  {useState,useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { allProjects, getProject, newProject } from '../../redux/actions/projects';
-import { newTicket } from '../../redux/actions/tikets';
+import {  newProject } from '../../redux/actions/projects';
+
 import style from '../../Styles/modules/components/Project/createPr.module.css'
-
-import {Container, Card, Title, ModalContainer,} from '../../Styles/common'
 import { Button, CancelButton } from '../../Styles/buttons';
-import { Bold, H1, H3, Light, Regular, Thin} from '../../Styles/typography'
-import { allUsers, searchUser, background } from '../../redux/actions/user';
+import { Bold, Light, Regular, Thin} from '../../Styles/typography'
+import { searchUser, background } from '../../redux/actions/user';
 
-const ProjectNew = ({history,closeWindow}) => {
+const ProjectNew = ({history}) => {
     const dispatch = useDispatch();
-    const project = useSelector(state => state.projects.project)
-    const userList = useSelector(state => state.users.users)
+
     const createMsg = useSelector (state => state.messages.msg)
     const searchResult = useSelector(state => state.users.searchResult)
     const [checked, setChecked] = useState (false)
     const [menu, setMenu] = useState (false)
-    const [trick, setTrick] = useState (false)
     const [step, setStep] = useState (1)
     const [idCurrent, setIdCurrent] = useState (null)
     const [currentPos, setCurrentPos] = useState ('')
@@ -49,11 +45,11 @@ const ProjectNew = ({history,closeWindow}) => {
    
 
 
-      const { title, dateStart, dateFinish, city, type, stage, customer, about, par, object, offTitle, budget, schedule,cusStorage,userid2 } = formData;
+      const { title, dateStart, dateFinish, city,  customer, about, object, offTitle, budget, schedule,cusStorage, } = formData;
       const posCurrent =(e)=>{
         setCurrentPos (e.target.value)
         setWorkerDataList ({ ...workerDataList, position:e.target.value})
-        console.log (workerDataList)
+        // console.log (workerDataList)
       }
       const pushUserToForm =(e)=>{
           formData.userid2.push(workerDataList)
@@ -87,20 +83,20 @@ const ProjectNew = ({history,closeWindow}) => {
         setUserStage(1)
         idList.pop()
         setIdCurrent (null)
-        console.log(idList)
+        // console.log(idList)
       }
       const onChangeCheckbox = () => {
         setChecked(!checked)
      }
      useEffect(()=>{
         setFormData({ ...formData, rcheck: checked });
-        console.log(checked)
+        // console.log(checked)
      },[checked])
      useEffect(()=>{
       setWorkerDataList ({ ...workerDataList, user:idCurrent, fullname:nameCurrent})
       if(idCurrent!==null) {
          idList.push(idCurrent)
-          console.log (idList)
+          // console.log (idList)
       }
      
    },[idCurrent])
@@ -483,7 +479,7 @@ const ProjectNew = ({history,closeWindow}) => {
                  fontSize={"16px"}
                  style={{ marginTop: "5px" }}
                  padd={"20px"}
-                 onClick={()=>title==''?alert('Заполните обязательные поля'):nextStep(2)}
+                 onClick={()=>title===''?alert('Заполните обязательные поля'):nextStep(2)}
                >
                  {" "}
                  Перейти к следующему шагу

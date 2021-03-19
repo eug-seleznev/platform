@@ -16,24 +16,24 @@ const TagSearch = ({func, tagCount}) => {
 	const [value,setValue] =useState ('')
     const [focus,setFocus] =useState (false)
 	const addTag =(e)=>{
-        console.log(e.target.id)
+        
         setValue(e.target.id)
       }
       const confirmTag =(e)=>{
         if(!tags.includes(value)&&value!==''&&tagCount){
            tags.push (value)
-		   console.log(tags)
+		  
 		   func(tags)
 		   
         }
 		else if(!tagCount) {
-			console.log(value)
+	
 			func(value)
 			setValue('')
 		}
 		
         setValue('')
-        console.log(tags)
+       
       }
 	
 		// useEffect(()=>{

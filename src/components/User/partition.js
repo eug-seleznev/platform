@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react"
-import { useDispatch, useSelector } from "react-redux";
-import { usersPartition } from "../../redux/actions/user";
+import {useRef, useState } from "react"
+import {  useSelector } from "react-redux";
+
 import style from '../../Styles/modules/components/Project/createPr.module.css'
 
 
@@ -9,10 +9,10 @@ import style from '../../Styles/modules/components/Project/createPr.module.css'
 
 
 
-const Partition = ({subcontr, partition, setPartitionList,checked}) => {
-    const dispatch = useDispatch();
+const Partition = ({subcontr, partition}) => {
+ 
     const partitionDefault = useSelector(state => state.auth.user.partition) // [] for new user
-    const [list, setList] = useState(subcontr?[]:partitionDefault)
+    const [list] = useState(subcontr?[]:partitionDefault)
     const [val, setVal]= useState(false)
     const check = useRef()
  
@@ -22,7 +22,7 @@ const Partition = ({subcontr, partition, setPartitionList,checked}) => {
       if(partition.includes(e.target.value)){
         partition.map((el, index) => 
             {
-              if(el==e.target.value) 
+              if(el===e.target.value) 
               partition.splice(index, 1)
              
               
@@ -33,21 +33,21 @@ const Partition = ({subcontr, partition, setPartitionList,checked}) => {
          partition.push(e.target.value)
       
       }
-     console.log(partition)
+    //  console.log(partition)
   }
     const onChange = (e) => {
      
         if(list.includes(e.target.value)){
             list.map((el, index) => 
               {
-                if(el==e.target.value) 
+                if(el===e.target.value) 
                   list.splice(index, 1)
               })
 
         } else {
             list.push(e.target.value)
         }
-        console.log(list)
+        
        
     }
 

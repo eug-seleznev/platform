@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { innerBackend } from "../../components/utils/axios";
-import { ALL_TICKETS, NEW_ERROR,CLEAR_MSG,CLEAR_ERROR, NEW_TICKET, GET_TICKET, ERROR_MSG, GREEN_MSG } from "../types";
+import { ALL_TICKETS, NEW_TICKET, GET_TICKET, ERROR_MSG, GREEN_MSG } from "../types";
 import {url} from '../../components/utils/axios'
 
 
@@ -21,7 +21,7 @@ export const newTicket = ({formData, file}) => async dispatch  => {
     }
     
 
-    Object.keys(formData).map((el, index) => {
+    Object.keys(formData).map((el) => {
         form.append(
             `${el}`, formData[el]
         )

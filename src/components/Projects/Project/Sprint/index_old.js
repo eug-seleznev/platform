@@ -60,7 +60,7 @@ const Sprint = ({match, history}) => {
 
 	useEffect(() => {
     setSprintId(match.params.id);
-    console.log('hello sprint update')
+    // console.log('hello sprint update')
     if (loading) {
       setDateOpenIn(sprint.dateOpen);
       if (sprint.dateClosePlan != null && sprint.dateClosePlan != undefined) {
@@ -238,9 +238,9 @@ const Sprint = ({match, history}) => {
                 <div className={sprintCss.time}>
                   <Light>Продолжительность:   </Light>
                   <Regular>
-                    {duration == 7
+                    {duration === 7
                       ? "1 неделя"
-                      : duration == 14
+                      : duration === 14
                       ? "2 недели"
                       : "??"}
                   </Regular>
@@ -516,7 +516,7 @@ const Sprint = ({match, history}) => {
                   <Button
                     fontSize={"16px"}
                     style={{
-                      display: `${user.permission == "user" ? "none" : "flex"}`,
+                      display: `${user.permission === "user" ? "none" : "flex"}`,
                     }}
                     onClick={handleSprint}
                   >
@@ -526,7 +526,7 @@ const Sprint = ({match, history}) => {
                   <Button
                     fontSize={"16px"}
                     style={{
-                      display: `${user.permission == "user" ? "none" : "flex"}`,
+                      display: `${user.permission === "user" ? "none" : "flex"}`,
                     }}
                     onClick={handleDelete}
                   >

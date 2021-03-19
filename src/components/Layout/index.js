@@ -21,7 +21,7 @@ const Layout = ({ histCurrent}) => {
     const [status, setStatus] = useState (false)
 
     useEffect(()=>{
-        if(errorAll !=""){
+        if(errorAll !==""){
             setError(errorAll)
             setColor('red')
         }
@@ -35,7 +35,7 @@ const Layout = ({ histCurrent}) => {
     
     useEffect(()=>{
         if(msg!==''&&msg!==undefined&&msg!==false){
-            console.log(msg)
+            // console.log(msg)
             setMsgTiming(true)
                 setTimeout(()=>{ 
                     setMsgTiming(false)

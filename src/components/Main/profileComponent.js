@@ -55,6 +55,7 @@ const ProfileComponent = ({user, history, change, mainPage}) => {
         ></input>
         <img
           style={{opacity:enter?0.5:1}}
+          alt='avatar'
           className={user.avatar==='avatars/spurdo.png'?styles.no_avatar:styles.no_avatar}
           src={`${url}/${
             user !== null ? (user !== undefined ? user.avatar : "") : ""

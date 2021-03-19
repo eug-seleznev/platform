@@ -97,7 +97,7 @@ const plusMenuClick = (callback) => {
                         Отдел
                     </StyledLink>
 
-                    <StyledLink style={{display:`${user.permission=='user'?'none':'block'}`}} to='/news' onClick={closeAll}>
+                    <StyledLink style={{display:`${user.permission==='user'?'none':'block'}`}} to='/news' onClick={closeAll}>
                         Новости
                     </StyledLink>
 
