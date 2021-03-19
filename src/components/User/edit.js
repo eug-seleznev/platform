@@ -37,7 +37,7 @@ const Edit = ({match, history}) => {
 
 
 
-     const [text, setText] = useState ('') 
+    //  const [text, setText] = useState ('') 
 
       const {name,lastname, position, email, report, bday, phone,partition } = formData;
 
