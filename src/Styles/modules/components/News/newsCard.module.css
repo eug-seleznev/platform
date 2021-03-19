@@ -6,12 +6,14 @@
     'title  title'
     'filter . '
     ;
+    
     cursor: pointer;
     grid-template-columns: 1fr max-content;
     border: 1px solid #8FA7C6;
 }
 .name{
     grid-area: name;
+    
 }
 .title{
     grid-area: title;

@@ -1,7 +1,7 @@
 import styles from '../../../../Styles/modules/components/Project/oneproj.module.css'
 import {SmallCard} from '../../../../Styles/common'
 import {ButtonText} from '../../../../Styles/buttons'
-import { Bold, Light, Regular, Thin } from '../../../../Styles/typography'
+import { Bold, Light, Thin } from '../../../../Styles/typography'
 
 import { useSelector } from 'react-redux'
 
@@ -39,16 +39,16 @@ const ProjInfo = ({project,history}) => {
         <SmallCard style={{marginBottom:'20px', display:`${user.permission!=='admin'?'none':'block'}`}} >
           <div className={styles.info__link}>
             <Light size='15'>Бюджет</Light>
-            {project.budget!==undefined?<a href={project.budget.includes('https://')?project.budget:'https://'+project.budget} target='_blank' size='15'>{project.budget}</a>:''}
+            {project.budget!==undefined?<a href={project.budget.includes('https://')?project.budget:'https://'+project.budget} rel="noreferrer" target='_blank' size='15'>{project.budget}</a>:''}
           </div>
           <div className={styles.info__link}>
             <Light size='15'>Хранилище документации для заказчика</Light>
-            {project.cusStorage!==undefined?<a href={project.cusStorage.includes('https://')?project.cusStorage:'https://'+project.cusStorage} target='_blank' size='15'>{project.cusStorage}</a>:''}
+            {project.cusStorage!==undefined?<a href={project.cusStorage.includes('https://')?project.cusStorage:'https://'+project.cusStorage} target='_blank' rel="noreferrer" size='15'>{project.cusStorage}</a>:''}
 
           </div>
           <div className={styles.info__link}>
             <Light size='15'>График проекта</Light>
-            {project.schedule!==undefined?<a href={project.schedule.includes('https://')?project.schedule:'https://'+project.schedule} target='_blank' size='15'>{project.schedule}</a>:''}
+            {project.schedule!==undefined?<a href={project.schedule.includes('https://')?project.schedule:'https://'+project.schedule} target='_blank' rel="noreferrer" size='15'>{project.schedule}</a>:''}
           </div>
         </SmallCard>
         {project.customerNew[0]!==undefined?

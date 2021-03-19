@@ -1,6 +1,4 @@
 import styles from '../../../../Styles/modules/components/Project/oneproj.module.css'
-import {Card} from '../../../../Styles/common'
-import {Button} from '../../../../Styles/buttons'
 import { Light } from '../../../../Styles/typography'
 
 

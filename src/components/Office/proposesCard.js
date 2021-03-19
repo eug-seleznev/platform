@@ -1,5 +1,5 @@
 import styles from '../../Styles/modules/components/proposesCard.module.css'
-import { useDispatch, useSelector} from 'react-redux'
+import { useDispatch} from 'react-redux'
 import { likePropose, endPropose, inWork, deletePropose} from '../../redux/actions/office'
 import {Card} from '../../Styles/common'
 import { Bold, Thin, Regular} from '../../Styles/typography'
@@ -12,7 +12,7 @@ import { url } from '../utils/axios'
 const ProposeCard = ({cardContent, rip,off, addExecutor,  user}) => {
 const dispatch = useDispatch()
 
-const likeTrue =  cardContent.likes.some(el => el.user == user._id)
+const likeTrue =  cardContent.likes.some(el => el.user === user._id)
 
 
 const [showConfirm, setShowConfirm] = useState(false)

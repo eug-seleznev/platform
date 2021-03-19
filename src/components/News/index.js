@@ -92,13 +92,13 @@ useEffect(()=>{
                     {listNews.map((el,i)=>{
                         
                         return(
-                            <div className={styles.newsContainer} >
+                            <div className={styles.newsContainer} key={i}>
                                 <div className={styles.newsCard} onClick={()=>setNewsOpen({open:true, content: el})}>
                                     <NewsCard el={el} />
                                 </div>
                                 <div className={styles.buttons}>
-                                    {user.permission!='user' && <ButtonText onClick={(e)=>onUpdate(e, el)}>Редактировать</ButtonText>}
-                                    {user.permission!='user' && <ButtonText onClick={(e)=>onDelete(e, el)}>Удалить</ButtonText>}
+                                    {user.permission!=='user' && <ButtonText onClick={(e)=>onUpdate(e, el)}>Редактировать</ButtonText>}
+                                    {user.permission!=='user' && <ButtonText onClick={(e)=>onDelete(e, el)}>Удалить</ButtonText>}
                                 </div>
                             </div>
                         )
@@ -109,7 +109,7 @@ useEffect(()=>{
 
             <div className={styles.formArea}>
                 <div className={styles.formSticky}>
-                {user.permission!='user' && (!createForm?
+                {user.permission!=='user' && (!createForm?
                     <Card className={styles.openForm} onClick={()=>setCreateForm(true)}>
                         <Bold size='12' color='#3F496C'>Создать новость</Bold>
                     </Card>
@@ -122,7 +122,7 @@ useEffect(()=>{
 
 {/* modals */}
 
-{newsOpen.open==true && <NewsOpen close={()=>setNewsOpen({open:false, content: null})} content={newsOpen.content} />}
+{newsOpen.open===true && <NewsOpen close={()=>setNewsOpen({open:false, content: null})} content={newsOpen.content} />}
 
 {updateOpen.status && <UpdateNews content={updateOpen.post} close={()=>setUpdateOpen({status:false, post:''})}/>}
          

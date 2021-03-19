@@ -11,7 +11,7 @@ const TopInfo = ({ user, url, change, history, enter}) =>{
 				style={{opacity:enter?0.5:1}}
 				className={styles.small__avatar}
 				src={`${url}/${
-				user != null ? (user != undefined ? user.avatar : "") : ""
+				user !== null ? (user !== undefined ? user.avatar : "") : ""
 				}`}
 			/>
 			<div className={styles.gap_img}>

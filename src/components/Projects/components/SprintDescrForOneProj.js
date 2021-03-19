@@ -15,7 +15,7 @@ const SprintDescription = ({tags, dateOpen,taskcomplite, alltasks, history, id, 
 	useEffect (()=> {
 
 			if (actualClose!=null){
-				let d1 = new Date ()
+				
 				// console.log(actualClose, d1)
 				// setDiff (Math.abs(actualClose-d1)/86400000)
 				
@@ -101,7 +101,7 @@ const SprintDescription = ({tags, dateOpen,taskcomplite, alltasks, history, id, 
                         <Tag
                           tagText={el}
                           tagColor={
-                            i == 0 ? "#C8D9E9" : i == 1 ? "#E9E3C8" : "#AAF8A8"
+                            i === 0 ? "#C8D9E9" : i === 1 ? "#E9E3C8" : "#AAF8A8"
                           }
                           key={i}
                         />

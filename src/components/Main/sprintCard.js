@@ -1,11 +1,10 @@
 import styles from '../../Styles/modules/components/sprintCard.module.css'
-import { Card, SmallCard } from '../../Styles/common'
+import { SmallCard } from '../../Styles/common'
 import { Bold,Light } from '../../Styles/typography'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Tag from '../Projects/components/OneProject/tag'
-import { Circle } from '../../Styles/project'
-import style from "../../Styles/modules/components/Project/newsprint.module.css"
+
 
 
 

@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allDepartments } from "../../redux/actions/department";
-import { AddUserToTeam } from "../../redux/actions/projects";
 import { userSearch } from "../../redux/actions/user";
-
-import { Select } from "../../Styles/tables";
 import { Thin } from "../../Styles/typography";
-import UserTable from './userTable'
-
 
 
 const Search = ({project}) => {

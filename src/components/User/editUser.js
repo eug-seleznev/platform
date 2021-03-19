@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {changeAvatar } from "../../redux/actions/auth";
-
-
+// import {changeAvatar } from "../../redux/actions/auth";
 import styles from "../../Styles/modules/components/user/edit.module.css";
 //styled components
 import { Button, CancelButton } from "../../Styles/buttons";
 import { Card} from "../../Styles/common";
 import { Input} from "../../Styles/Forms";
-
 import { allDepartments } from "../../redux/actions/department";
 import { Thin } from "../../Styles/typography";
-
 import { changeUserProfile } from "../../redux/actions/user";
 
 const EditUser = ({ match, history }) => {

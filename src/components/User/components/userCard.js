@@ -2,7 +2,7 @@ import { url } from '../../utils/axios';
 import styles from '../../../Styles/modules/components/user/userCard.module.css'
 
 import { Bold, Light } from '../../../Styles/typography'
-import { Button, ButtonText } from '../../../Styles/buttons'
+import { Button } from '../../../Styles/buttons'
 import { Card } from '../../../Styles/common';
 
 
