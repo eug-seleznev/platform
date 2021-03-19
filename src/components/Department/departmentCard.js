@@ -45,10 +45,10 @@ const [showConfirm, setShowConfirm] = useState(false)
     //     }
         
     // },[content])
-    const join =()=>{
-        dispatch(joinDepartment(department.divname))
+    // const join =()=>{
+    //     dispatch(joinDepartment(department.divname))
      
-    }
+    // }
     const pushToArray =(el)=>{
         projArray = projArray.concat(el.projects)
         newA()

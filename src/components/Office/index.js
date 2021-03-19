@@ -33,7 +33,7 @@ const Office = () => {
 
 
 const likeButton = ()=>{
-    if (filter!='like'){
+    if (filter!=='like'){
         isInitial = true
         setFilter('like')
         setArrowReverse(false)
@@ -64,11 +64,11 @@ const workDispatch =(user)=>{
 useEffect(()=>{
 
 
-    if (filter=='like'){
+    if (filter==='like'){
         isInitial = true
         
         return dispatch(Reverse({isInitial}))
-    } if (filter=='date'){
+    } if (filter==='date'){
         isInitial = true
 
         return dispatch(ReverseDate({isInitial}))
@@ -97,8 +97,8 @@ useEffect(()=>{
             </div>
 
             <div className={styles.filters}>
-                <FilterButton arrow={filter=='like'? true : false} reverse={arrowReverse} onClick={() => likeButton()} >Лайки</FilterButton>
-                <FilterButton arrow={filter=='date'? true : false} reverse={arrowReverse} onClick={() => dateButton()} >Дата</FilterButton>
+                <FilterButton arrow={filter==='like'? true : false} reverse={arrowReverse} onClick={() => likeButton()} >Лайки</FilterButton>
+                <FilterButton arrow={filter==='date'? true : false} reverse={arrowReverse} onClick={() => dateButton()} >Дата</FilterButton>
             </div>
         
         {/* <div className={styles.formArea}>
@@ -114,19 +114,19 @@ useEffect(()=>{
             <div className={styles.row__array} >
                 <div className={styles.col__array}>
                     <Light size='24'className={styles.title__array} >На рассмотрении</Light>
-                {data && data.filter(el=>el.status==0).map((el, i) =>                  
+                {data && data.filter(el=>el.status===0).map((el, i) =>                  
                     <ProposeCard addExecutor={addExecutor} cardContent={el} key={i} off={true} className={styles.cardsContainer} user={user}/>
                 )}      
                 </div>
                 <div className={styles.col__array}>
                     <Light size='24' className={styles.title__array}>В работе</Light>
-                    {data && data.filter(el=>el.status==1).map((el, i) =>                  
+                    {data && data.filter(el=>el.status===1).map((el, i) =>                  
                         <ProposeCard cardContent={el} key={i} className={styles.cardsContainer} user={user}/>
                     )}      
                </div>
                <div className={styles.col__array}>
                     <Light size='24' className={styles.title__array}>Завершенные</Light>
-                    {data && data.filter(el=>el.status==2).map((el, i) =>                  
+                    {data && data.filter(el=>el.status===2).map((el, i) =>                  
                         <ProposeCard rip={true} cardContent={el} key={i} className={styles.cardsContainer} user={user}/>
                     )}      
                </div>

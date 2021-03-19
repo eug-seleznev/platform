@@ -39,7 +39,7 @@ const Projects = ({history,location}) => {
     // const [activeField, setActiveField] = useState('Все')
     const [filter, setFilter] = useState('Все')
 
-    const [value, setActiveField] = useState(
+    const [value] = useState(
       decodeURI(location.search).split("?")[1]
     );
   

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+
 import styles from '../../Styles/modules/main/main.module.css'
 import { Bold } from '../../Styles/typography'
 import SprintCard from './sprintCard'

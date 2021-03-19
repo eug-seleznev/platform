@@ -1,8 +1,8 @@
 import { url } from '../utils/axios';
 import styles from '../../Styles/modules/components/profile.module.css'
 import {useDispatch, useSelector} from  'react-redux'
-import { Bold, Light } from '../../Styles/typography'
-import { ButtonText } from '../../Styles/buttons'
+import { Bold  } from '../../Styles/typography'
+
 import { useEffect, useState } from 'react';
 import UserInfo from '../User/components/infoCard';
 import TopInfo from '../User/components/topInfo';
@@ -44,11 +44,11 @@ const ProfileComponent = ({user, history, change, mainPage}) => {
       <div className={styles.profile}>
         <Bold style={{opacity:enter?1:0}} className={styles.change__avatar}>Сменить аватар</Bold>
         <input className={styles.set__file}
-          style={{display:`${mainPage?'block':'none'}`}}
+          // style={{display:`${mainPage?'block':'none'}`}}
           type='file'
           placeholder='загрузите изображение'
           onChange={handleFile}
-          style={{display:`${user._id!==me._id?'none':'block'}`}}
+          style={{display:`${user._id!==me._id&&!mainPage?'none':'block'}`}}
           onMouseEnter={()=>user._id!==me._id?'':setEnter(true)}
           onMouseLeave={()=>setEnter(false)}
           
@@ -67,7 +67,7 @@ const ProfileComponent = ({user, history, change, mainPage}) => {
           <TopInfo user={user}  enter={enter} history={history} change={change} url={url}></TopInfo>
           <div className={styles.parts}>
             {user.partition!==undefined?user.partition.map((el,i)=>{
-              return(<Tag tagText={el} tagColor='#D3E1EE' />)
+              return(<Tag  key={i}tagText={el} tagColor='#D3E1EE' />)
           }):''}
         </div>
         <UserInfo user={user}me={me}  change={change} link={link}></UserInfo></div>

@@ -27,11 +27,11 @@ const AllDepartments = ({history}) => {
     dispatch(background('#ECECEC'))
   }
   }, [])
- useEffect (()=>{
-    if(allDeps){
-        console.log (allDeps)
-    }
- },[allDeps])
+//  useEffect (()=>{
+//     if(allDeps){
+//         console.log (allDeps)
+//     }
+//  },[allDeps])
  const choseDivision =(click)=>{
      
      history.push(`/departments/${click}`)

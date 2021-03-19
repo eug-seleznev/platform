@@ -1,14 +1,13 @@
 import style from '../../../../Styles/modules/components/Project/oneproj.module.css'
 import { useDispatch, useSelector } from "react-redux";
-import {Button, CancelButton} from '../../../../Styles/buttons'
-import { Bold, H1} from '../../../../Styles/typography'
+import {CancelButton} from '../../../../Styles/buttons'
 import ProjTeam from './oneTeammate'
-import { getProject, joinTeam } from '../../../../redux/actions/projects';
+import { joinTeam } from '../../../../redux/actions/projects';
 import { useEffect, useState } from 'react';
 import Subtitle from './subtitle';
 import UserForm from './infoForm';
 import { SmallCard} from '../../../../Styles/common';
-import { Table } from '../../../../Styles/tables';
+
 
 
 
@@ -22,9 +21,8 @@ const ProjectTeam = ({id, hist}) => {
    	const project = useSelector(state => state.projects.project)
     useEffect(()=>{
       console.log(project.team2, 'asdasdasdasdasdqwdzxcxz')
-      if(project!=undefined&&project.team2!==undefined) {
-        console.log(project.team2)
-        console.log(user)
+      if(project!==undefined&&project.team2!==undefined) {
+       
         project.team2.map((el)=>{
           idArray.push(el._id)
         })

@@ -3,7 +3,7 @@ import styles from '../../Styles/modules/department/index.module.css'
 import {useSelector, useDispatch} from 'react-redux'
 import {findDepartment } from '../../redux/actions/department'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import DepartmentCard from './departmentCard'
 import { allUsers } from '../../redux/actions/user'
 

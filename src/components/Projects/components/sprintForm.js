@@ -1,8 +1,8 @@
 import { Button,CancelButton } from "../../../Styles/buttons"
-import { Bold, Regular, Thin } from "../../../Styles/typography"
-import{	useState, useEffect} from 'react'
+import { Bold, Thin } from "../../../Styles/typography"
+import{	useState} from 'react'
 import { useForm, useFieldArray } from "react-hook-form";
-import {  addTasks,addInfoSprint,addSprint,getSprint, getProject, searchTag} from "../../../redux/actions/projects";
+import { addSprint,getProject} from "../../../redux/actions/projects";
 import { useDispatch,useSelector} from "react-redux"
 import style from '../../../Styles/modules/components/Project/sprintForm.module.css'
 import TagSearch from "./tagSearch";
@@ -11,7 +11,7 @@ import TagSearch from "./tagSearch";
 const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 	// Отправка описания и даты окончания
 	const project = useSelector(state => state.projects.project)
-  const tagArr = useSelector(state => state.projects.tagSearch)
+
   
 	const dispatch = useDispatch();
 	const { register, control, handleSubmit } = useForm({
@@ -32,9 +32,9 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 		}
   )
   const [arr, setArr] =useState([])
-	  const [enterWin,setEnterWin] =useState (false)
+	  // const [enterWin,setEnterWin] =useState (false)
 
-	  const {description, date} = formData;
+	  const {description} = formData;
 	  //
 
 	  
@@ -43,7 +43,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 	  const onChangeDate = (e) => {
       // console.log(e.target.value, 'value')
       let today = new Date();
-      let chose = e.target.value == '2 недели'?14:7
+      let chose = e.target.value === '2 недели'?14:7
       let dd = String(today.getDate()+chose).padStart(2, '0');
       let mm = String(today.getMonth() + 1).padStart(2, '0');
       let yyyy = today.getFullYear();
@@ -52,7 +52,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
       let editedDD = dd> 31 ? '0' + ddDiff : dd >31&& ddDiff>10? ddDiff: dd
       let editedMM = dd> 31 && mm>=9?mmDiff: dd > 31 && mm<9 ? '0'+mmDiff : dd> 31 && mm===12?'01':mm
       let editedYY = dd> 31 && mm===12?yyyy+1:yyyy
-		setFormData({ ...formData, [e.target.name]:  e.target.value=='нет'?'':editedYY +'-'+editedMM+'-'+editedDD})
+		setFormData({ ...formData, [e.target.name]:  e.target.value==='нет'?'':editedYY +'-'+editedMM+'-'+editedDD})
 		
 	 }
 	 	// useEffect(()=>{
@@ -66,9 +66,9 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
 		// console.log (e.target.value)
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	 }
-	 	const enter =()=>{
-			 setEnterWin(true)
-		 }
+	 	// const enter =()=>{
+		// 	 setEnterWin(true)
+		//  }
   
 
      
@@ -100,7 +100,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
     <>
       {/* {!loaded?<div>loading...</div>:( */}
       <form className={style.formContain} onSubmit={handleSubmit(onSubmit)}>
-        <div onMouseEnter={enter}>
+        <div>
           <div className={style.row}>
             <div className={style.line}>
               <Bold className={style.small__title} size={16}>
@@ -190,7 +190,7 @@ const SprintForm = ({smallTitles, buttonTitle, offWindow}) => {
                       style={{
                         color: "#3F496C",
                         display: `${
-                          fields.length != index + 1 ? "none" : "block"
+                          fields.length !== index + 1 ? "none" : "block"
                         }`,
                         backgroundColor: "white",
                         border: "none",

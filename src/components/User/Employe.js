@@ -1,14 +1,9 @@
 import { useEffect, useState } from "react"
 import {useDispatch, useSelector} from 'react-redux'
 import { getUser } from "../../redux/actions/user";
-import { url } from '../utils/axios';
+import { ButtonText } from "../../Styles/buttons";
 import styles from '../../Styles/modules/main/main.module.css'
-
-import { Table, Td, Tr } from "../../Styles/tables";
-import { Status } from "../../Styles/project";
-import { Container, Card, } from "../../Styles/common";
 import { Bold } from '../../Styles/typography'
-
 import  ProfileComponent  from '../Main/profileComponent'
 import ProjectsCard from '../Main/projectsCard'
 
@@ -28,7 +23,7 @@ const Employe = ({match, history}) => {
         // console.log(history, 'aaaaaaaaaaaaaaaaaaaaaaaaaa')
     },[])
     useEffect(()=>{
-        if (myUser!=undefined){
+        if (myUser!==undefined){
            setPermission(myUser.permission)
         } 
      },[myUser])
@@ -44,7 +39,7 @@ const Employe = ({match, history}) => {
           <div className={styles.mainContainer}>
             <ProfileComponent user={user} history={history} />
             {myUser.permission === "admin" && (
-              <p onClick={() => history.push(`/users/${id}/edit`)}> Изменить</p>
+              <ButtonText onClick={() => history.push(`/users/${id}/edit`)}> Изменить</ButtonText>
             )}
             <div className={styles.projects}>
               <Bold color="black" size="36" className={styles.myProj}>
@@ -54,6 +49,7 @@ const Employe = ({match, history}) => {
               {user.projects.map((el, i) => {
                 return (
                   <ProjectsCard
+                  key={i}
                     project={el}
                     permission={permission}
                     sprints={user.sprints}

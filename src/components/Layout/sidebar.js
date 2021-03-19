@@ -1,6 +1,6 @@
-import { useSelector } from 'react-redux'
+
 import './sidebar.css'
-import { useRef } from "react";
+
 import {SidebarContainer, SidebarLink} from '../../Styles/layout'
 
 
