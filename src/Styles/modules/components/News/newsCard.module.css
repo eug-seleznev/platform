@@ -4,6 +4,7 @@
     '.      date'
     'name   . '
     'title  title'
+    'subtitle  subtitle'
     'filter . '
     ;
     
@@ -13,12 +14,25 @@
 }
 .name{
     grid-area: name;
-    
+   
+}
+.subtitle{
+    grid-area: subtitle;
+    margin-bottom: 30px;
+   
+    text-overflow: ellipsis; /* will make [...] at the end */
+    /* change to your preferences */
+       /* paragraph to one line */
+      overflow:hidden;
 }
 .title{
     grid-area: title;
     margin-top: 5px;
     margin-bottom: 30px;
+    text-overflow: ellipsis; /* will make [...] at the end */
+    /* change to your preferences */
+       /* paragraph to one line */
+      overflow:hidden;
 }
 .date{
     grid-area: date;

@@ -18,7 +18,10 @@ const Ticket = ({match}) => {
         
     }, [])
 
-    
+    useEffect(()=>{
+        if(ticket!==null)
+        console.log(ticket.screenshot)
+    },[ticket])
     return (
         <div>
             <Card>
@@ -31,7 +34,7 @@ const Ticket = ({match}) => {
                     <Thin>Дата: {ticket.date}</Thin>
                     <Thin>Насколько срочно: {ticket.emergency}</Thin>
                     <Thin>Пароль от компа: {ticket.pcpass}</Thin>
-                    <img alt='screen' width="100%"src={`${url}/${ticket.screenshot}`} />  
+                    <img alt='screen' style={{display:`${ticket.screenshot!==undefined?'block':'none'}`}} width="100%"src={`${url}/${ticket.screenshot}`} />  
                 </div>
             )}
             </Card>

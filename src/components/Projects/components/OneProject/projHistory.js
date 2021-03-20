@@ -42,13 +42,13 @@ const ProjHistory = ({project,history}) => {
 		<div >
 			<NEW_TABLE className={styles.history_table2} >
 				<NEW_THEAD  >
-					<NEW_TR className={styles.history_head}>
+					{/* <NEW_TR className={styles.history_head}>
 						<NEW_TH className={styles.history_first}>Название</NEW_TH>
 						<NEW_TH className={styles.history_tags} >Тег</NEW_TH>
 						<NEW_TH className={styles.history_creator}>Создал</NEW_TH>
 						<NEW_TH >Прогресс</NEW_TH>
 						<NEW_TH className={styles.off}>Дедлайн</NEW_TH>
-					</NEW_TR>
+					</NEW_TR> */}
 				</NEW_THEAD>
 				
 				<NEW_TBODY>

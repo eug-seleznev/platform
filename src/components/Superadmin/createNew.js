@@ -71,6 +71,7 @@ useEffect(()=>{
                 <textarea 
                 // required
 					name='text'
+					style={{resize:"none"}}
 					value={text}
 					onChange={e => onChange(e)}/>
 			</div>
