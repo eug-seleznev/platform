@@ -16,8 +16,8 @@ const Models = ({match, history, location}) => {
     const {crypt} = match.params
     const project = useSelector(state => state.projects.project)
     const loadingStatus = useSelector((state) => state.projects.modelLoaded);
-
-
+    const user = useSelector(state => state.auth.user)
+    const newUrn = useSelector(state => state.projects.newUrn);
     const [focusRow, setFocusRow] = useState(null) //id of choosen model
     const [submitedModel, setSubmited] = useState({
       submit: false,
@@ -30,11 +30,8 @@ const Models = ({match, history, location}) => {
       if(loadingStatus){
         
         setSubmited({...submitedModel, loaded: false, submit: false})
-        history.push(
-          `view/${
-            project.urnNew[project.urnNew.length - 1]._id
-          }`
-        );
+        let new_id = project.urnNew.filter((el) => el.urn === newUrn);
+        history.push(`view/${new_id[0]._id}`);
         dispatch(cleardData())
 
       }
@@ -73,14 +70,14 @@ const Models = ({match, history, location}) => {
             // ЗАГРУЗКА НОВОЙ МОДЕЛИ
             <div>
               {!submitedModel.loaded ? (
-                <LoadModel crypt={crypt} setSubmited={setSubmited} />
+                <LoadModel crypt={crypt} setSubmited={setSubmited} user={user._id} />
               ) : (
                 <p>Модель загружается</p>
               )}
             </div>
           )}
           {focusRow && updateExistModel && (
-            <UpdateModel crypt={crypt} model={focusRow} setUpdate={setUpdate} setSubmited={setSubmited} />
+            <UpdateModel crypt={crypt} model={focusRow} setUpdate={setUpdate} setSubmited={setSubmited} user={user._id} />
           )}
         </div>
       </Loader>

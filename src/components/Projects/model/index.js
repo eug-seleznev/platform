@@ -72,7 +72,7 @@ const Viewer = ({ project }) => {
     <div
       className={style.model__cont}
       style={{
-        height: `${!open ? "65px" : "auto"}`,
+        height: `${!open ? "25px" : "auto"}`,
         overflowY: "hidden",
         paddingBottom: "30px",
         marginBottom: "25px",
@@ -87,7 +87,7 @@ const Viewer = ({ project }) => {
         open={true}
       ></Subtitle>
       <div style={{ width: "80%" }}>
-        <Link
+        {/* <Link
           to={`${project.crypt}/model/view`}
           style={{ textDecoration: "none" }}
         >
@@ -107,7 +107,7 @@ const Viewer = ({ project }) => {
           >
             Сводная модель
           </Thin>
-        </Link>
+        </Link> */}
 
         <Link to={`${project.crypt}/m/view`} style={{ textDecoration: "none" }}>
           <Thin

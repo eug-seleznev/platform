@@ -5,12 +5,14 @@ import { useDispatch } from "react-redux";
 import { postModel, Status } from "../../../../redux/actions/models";
 import { Card } from "../../../../Styles/common";
 
-const UpdateModel = ({ crypt, model, setUpdate, setSubmited }) => {
+const UpdateModel = ({ crypt, model, setUpdate, setSubmited, user }) => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     crypt: crypt,
     file: null,
     title: model.title,
+    user_id: user
+
   });
 
   const onChangeFile = (e) => {

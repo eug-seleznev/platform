@@ -76,7 +76,7 @@ const Sprint_New = ({match, history}) => {
             team={project.team2}
             
           />
-          <AddTask crypt={crypt} sprint={sprint} user={user} hist={history}  id={sprint_id} focusRow={focusRow} />
+          <AddTask crypt={crypt}  sprint={sprint} user={user} hist={history}  id={sprint_id}  focusRow={focusRow} />
         </Card>
       </SprintLoader>
     );
