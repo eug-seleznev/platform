@@ -134,7 +134,9 @@
 	
 	padding: 20px;
 }
-
+.info__descr__laptop {
+	display: none;
+}
 .info__line {
 	margin-bottom: 15px;
 	min-width: 50px;
@@ -217,6 +219,9 @@ border-bottom: none;
 .history_first {
 	padding-left: 40px;
 }
+.title__row {
+	display: flex;
+}
 .title {
 	
 	display: flex;
@@ -297,6 +302,10 @@ border-bottom: none;
 	display: flex;
 	margin-bottom: 60px;
 	margin-top: 15px;
+}
+.tag__row__laptop {
+	display: none;
+	margin-left: 20px;
 }
 .sprintdescr__cont {
 	display: flex;
@@ -430,6 +439,39 @@ border-bottom: none;
 	background-color:white;
 }
 @media screen and (max-width: 1500px)  {
+	.info__descr__laptop {
+		display: block;
+	}
+	.contain {
+		display: grid;
+		
+		grid-template-rows: repeat (max-content, 5);
+		
+		grid-template-columns: 0.5fr 0.45fr;
+		grid-template-areas: 
+		'title title'
+		'sprints info'
+		'team history'
+		'calend history'
+		'model history'
+		;
+		column-gap: 70px;
+	}
+	.title {
+		
+		margin-bottom: 50px;
+	}
+	.tag__row {
+		display: none;
+	}
+	.tag__row__laptop {
+		display: flex;
+		transform: translateY(5px);
+	
+	}
+	.title__deadline {
+		display: none;
+	}
 	.history_creator {
 		display: none;
 	}

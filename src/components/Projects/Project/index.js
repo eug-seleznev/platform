@@ -27,7 +27,7 @@ const Project = ({match, history}) => {
 
     useEffect(() => {
         dispatch(getProject(id));
-        dispatch(background('#ECECEC'))
+        dispatch(background('white'))
         return () => {
           dispatch(background('#ECECEC'))
         }

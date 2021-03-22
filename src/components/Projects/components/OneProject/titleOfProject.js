@@ -30,17 +30,22 @@ const TitleOfProject = ({hist}) => {
     return (
       <div className={style.title__cont}>
         <div className={style.title}>
-          <H1 size="24">{project.title}</H1>
-          <Bold size="16">
+          <div  className={style.title__row}><Bold size="24">{project.title}</Bold>
+            <div className={style.tag__row__laptop}>
+              <Tag tagColor='#E9E3C8' tagText='Открытый' ></Tag>
+              <Tag tagColor='#C8D9E9' tagText={project.type} ></Tag>
+            </div>
+          </div>
+          
             <div
               className={style.title__2}
               style={{
                 display: `${user.permission === "user" ? "none" : "flex"}`,
               }}
             >
-              <div className={style.title__options} onClick={openMenu}>
+              <Bold  size="16" className={style.title__options} onClick={openMenu}>
                 Настройки
-              </div>
+              </Bold>
               <img alt='open' src="/image 1.png" onClick={openMenu}></img>
               <SetMenu
                 closeAll={closeAll}
@@ -49,7 +54,7 @@ const TitleOfProject = ({hist}) => {
                 state={open}
               ></SetMenu>
             </div>
-          </Bold>
+         
         </div>
 
         <Light className={style.title__small} size="16">

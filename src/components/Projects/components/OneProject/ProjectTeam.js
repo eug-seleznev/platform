@@ -20,7 +20,7 @@ const ProjectTeam = ({id, hist}) => {
     const user = useSelector(state => state.auth.user) 
    	const project = useSelector(state => state.projects.project)
     useEffect(()=>{
-      console.log(project.team2, 'asdasdasdasdasdqwdzxcxz')
+      // console.log(project.team2, 'asdasdasdasdasdqwdzxcxz')
       if(project!==undefined&&project.team2!==undefined) {
        
         project.team2.map((el)=>{
@@ -32,7 +32,7 @@ const ProjectTeam = ({id, hist}) => {
       console.log(project.team2.map(member=>{
         if (member.user._id===user._id) {
           setButton(true)
-          console.log('hi')
+          // console.log('hi')
         }
         
         

@@ -4,11 +4,19 @@ import {ButtonText} from '../../../../Styles/buttons'
 import { Bold, Light, Thin } from '../../../../Styles/typography'
 
 import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
 
 
 const ProjInfo = ({project,history}) => {
-    // const [overCard, setOvercard] = useState(false)
+    const [deadline, setDeadline] = useState(0)
     const user =  useSelector(state=> state.auth.user)
+    useEffect(()=>{
+      if(project!==undefined) {
+        if(Math.abs(new Date(project.dateFinish))>=Math.abs(Date.now())) {
+          setDeadline (Math.trunc(Math.abs(new Date(project.dateFinish) - Date.now())/(60*60*24*1000)))
+        }
+      }
+    },[project])
     return(
     <div className={styles.info__cont}>
       <div  className={styles.title__info} >
@@ -71,8 +79,12 @@ const ProjInfo = ({project,history}) => {
           <Bold className={styles.info__line} size='16'>Заказчик: </Bold>
           <Light className={styles.info__line} style={{marginLeft:'20px'}}>{project.customer}</Light>
         </div>
-        }
         
+        }
+        <div className={styles.info__descr__laptop}>
+          <Bold className={styles.info__line} size='16'>Дедлайн: </Bold>
+          <Light className={styles.info__line} style={{marginLeft:'20px'}}>{deadline} дней</Light>
+        </div>
       </div>
     </div>
     )
