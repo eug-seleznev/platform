@@ -135,7 +135,6 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
           >
             <SPRINT_TD style={{width:'25px'}}>
               <input
-              
                 type="checkbox"
                 defaultChecked={task.taskStatus}
                 value={task._id}
@@ -149,7 +148,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
               <SPRINT_TD style={{width:'50%'}}>
                 <form onSubmit={submitEdit}>
                   <input
-                  className={style.input}
+                    className={style.input}
                     type="text"
                     value={taskTitle}
                     name={task.taskTitle}

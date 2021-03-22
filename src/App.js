@@ -49,7 +49,7 @@ import EditContractor from './components/Superadmin/editContractor'
 // import Sprint_New from './components/Projects/Project/Sprint/new'
 import Search from './components/User/Search'
 import Models from './components/Projects/Models';
-
+import MyTasks from './components/MyTasks/index'
 import EditUser from './components/User/editUser';
 
 
@@ -173,6 +173,8 @@ const App = () => {
 
                 <Route exact path="/edit" component={Edit} />
                 <Route exact path="/news" component={News} />
+
+                <Route exact path="/mytasks" component={MyTasks}/>
                 {/* depatrments */}
                 <Route exact path="/department" component={Department} />
                 <Route exact path="/departments" component={AllDepartments} />

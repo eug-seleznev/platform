@@ -9,7 +9,7 @@ const Managment = ({submited, focusRow, location, history, setUpdate, updateMode
       <div className={modelsCss.managment} >
         <div className={modelsCss.managment__first}>
           <div style={{display:'flex'}} onClick={() => submited()}>
-           <ButtonText fontSize='16px' >Загрузить новую модель</ButtonText> 
+              <ButtonText fontSize='16px' >Загрузить новую модель</ButtonText> 
           </div>
           {focusRow && (
             <div className={modelsCss.managment__buttons}>

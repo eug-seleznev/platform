@@ -10,7 +10,9 @@ const TaskBlock = ({user, history}) => {
 			setActiveSprints(activeSprints+el.sprints.filter(sprint=>sprint.status).length)	
 		})
 	}, [])
-	
+	const pushToTasks =()=>{
+		history.push('/mytasks')
+	}
     return(
 		<div className={styles.tasks}>
 			<div className={styles.create__news}>
@@ -20,7 +22,7 @@ const TaskBlock = ({user, history}) => {
 				</Bold>
 			
 			</div>
-			<SmallCard className={styles.my_tasks}>
+			<SmallCard className={styles.my_tasks} onClick={pushToTasks}>
 				<Light size='16' color='#3F496C'>Мои задачи</Light>
 				<Light size='16' color='#3F496C'>{user.tasks.length}</Light>
 			</SmallCard>

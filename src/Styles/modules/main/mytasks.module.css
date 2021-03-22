@@ -1,0 +1,16 @@
+.options {
+	margin-left: -60px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	border-bottom: 1px solid #939393;
+	padding-bottom: 5px;
+}
+.options__button {
+	margin-left: 30px;
+	padding-bottom: 15px;
+}
+.options__button:first-child {
+	margin-left: 0px;
+	
+}
