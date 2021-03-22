@@ -5,7 +5,7 @@ import { Bold } from "../../../Styles/typography";
 import Tag from "../components/OneProject/tag";
 
 const Managment = ({submited, focusRow, location, history, setUpdate, updateModel,models}) => {
-  
+
     return (
       <div className={modelsCss.managment} >
         <div className={modelsCss.managment__first}>
@@ -29,7 +29,7 @@ const Managment = ({submited, focusRow, location, history, setUpdate, updateMode
         
         <div className={modelsCss.managment__type}>
           <Bold size='14'>Тип модели: </Bold>
-          {models.map((el,i)=>{
+          {models && models.map((el,i)=>{
             return(<Tag key={i} tagColor='#C8DDE9' tagText={el.tags[0]}/>)
           })}
         </div>
