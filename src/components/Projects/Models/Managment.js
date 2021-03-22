@@ -5,6 +5,7 @@ import { Bold } from "../../../Styles/typography";
 import Tag from "../components/OneProject/tag";
 
 const Managment = ({submited, focusRow, location, history, setUpdate, updateModel,models}) => {
+  
     return (
       <div className={modelsCss.managment} >
         <div className={modelsCss.managment__first}>
