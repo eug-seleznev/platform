@@ -153,7 +153,7 @@ export default function(state = initialState, action) {
                     ...state,
                     sprint: payload,
                     sprint_load: true,
-                    loadProject: false,
+                    loadProject: true,
                     reload: true,
                     error: '',
                     // sprint_msg:payload.msg,
