@@ -18,7 +18,8 @@ const getDate = (date) =>{
 			  date11.getMonth()+1===10?'октября':
 			  date11.getMonth()+1===11?'ноября':
 			  date11.getMonth()+1===12?'декабря':'')
-			return (date22) 
+		let date33 = date11.getFullYear()
+			return (date22+" "+date33) 
 }
 }
 

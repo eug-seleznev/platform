@@ -39,8 +39,8 @@ const ProjHistory = ({project,history}) => {
 				})} */}
 			</div>
 		</div>
-		<div >
-			<NEW_TABLE className={styles.history_table2} >
+		<div className={styles.history_table2}>
+			<NEW_TABLE style={{width:'100%'}} >
 				{/* <NEW_THEAD  >
 					<NEW_TR className={styles.history_head}>
 						<NEW_TH className={styles.history_first}>Название</NEW_TH>

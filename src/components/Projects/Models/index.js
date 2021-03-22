@@ -2,11 +2,16 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cleardData } from '../../../redux/actions/models';
+
+import { background } from '../../../redux/actions/user';
+import { ButtonText } from '../../../Styles/buttons';
+import { Regular, Thin } from '../../../Styles/typography';
 import Loader from './loader'
 import Managment from './Managment';
 import ModelsTable from './ModelsTable';
 import LoadModel from './NewModel';
 import UpdateModel from './NewModel/UpdateModel';
+import modelsCss from '../../../Styles/modules/components/Project/models.module.css'
 
 //project and models loader
 //merge
@@ -27,14 +32,23 @@ const Models = ({match, history, location}) => {
 
     const [updateExistModel, setUpdate] = useState(false)
     useEffect(() => {
+     
+      dispatch(background('white'))
+      return () => {
+        dispatch(background('#ECECEC'))
+      }
+  }, [])
+    useEffect(() => {
       if(loadingStatus){
         
         setSubmited({...submitedModel, loaded: false, submit: false})
         let new_id = project.urnNew.filter((el) => el.urn === newUrn);
         history.push(`view/${new_id[0]._id}`);
         dispatch(cleardData())
-
+       
       }
+      
+      
     }, [project])
 
     const submitModel = () => {
@@ -45,8 +59,12 @@ const Models = ({match, history, location}) => {
 
     return (
       <Loader crypt={crypt}>
-        <div>
-          <p>{project.title} / models </p>
+        <div className={modelsCss.main}>
+          <div className={modelsCss.row} >
+            <ButtonText fontSize='16px'  onClick={() => history.push(`/projects/${crypt}`)}>{project.title} </ButtonText>
+            <Regular size='16'>/ модели</Regular>
+          </div>
+         
           <Managment
             history={history}
             location={location}
@@ -55,6 +73,7 @@ const Models = ({match, history, location}) => {
             urnArr={project.urnNew}
             updateModel={updateExistModel}
             setUpdate={setUpdate}
+            models={project.urnNew}
           />
 
           {!submitedModel.submit ? (
@@ -72,7 +91,7 @@ const Models = ({match, history, location}) => {
               {!submitedModel.loaded ? (
                 <LoadModel crypt={crypt} setSubmited={setSubmited} user={user._id} />
               ) : (
-                <p>Модель загружается</p>
+                <Thin>Модель загружается</Thin>
               )}
             </div>
           )}
