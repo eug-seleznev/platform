@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { ALL_USERS,FIND_CONTRACTOR, SEARCH_TABLE_USER,EDIT_CONTRACTOR, CHANGE_PERMISSION, PERM_RETURN,ONE_CONTRACTOR, ONE_USER,SEARCH_USER,BACK_WHITE,ADD_CONTRACTOR,ALL_CONTRACTORS, ERROR_MSG, GREEN_MSG,PARTITION_UPDATE} from "../types";
+import { ALL_USERS, EDIT_USER_TASK, FINISH_USER_TASK,ADD_USER_TASK,FIND_CONTRACTOR, SEARCH_TABLE_USER,EDIT_CONTRACTOR, CHANGE_PERMISSION, PERM_RETURN,ONE_CONTRACTOR, ONE_USER,SEARCH_USER,BACK_WHITE,ADD_CONTRACTOR,ALL_CONTRACTORS, ERROR_MSG, GREEN_MSG,PARTITION_UPDATE, EDIT_TASK} from "../types";
 
 
 
@@ -95,7 +95,7 @@ export const userTableSearch = ({value, field}) => async dispatch => {
   try {
     ///users/usr/get?name=huila&division=govnoedi&partition=HUY
   
-    const res = await innerBackend.get(`users/usr/get?${field}=${value}&merc=che-ugodno`)
+    const res = await innerBackend.get(`users/usr/get?${field}=${encodeURIComponent(value)}&merc=che-ugodno`)
     dispatch({
       type: SEARCH_TABLE_USER,
       payload: res.data
@@ -104,6 +104,7 @@ export const userTableSearch = ({value, field}) => async dispatch => {
     alert('aaaaaaaaaaaaaaa')
   }
 }
+
 export const userSearch = (formData) => async dispatch => {
   try {
     ///users/usr/get?name=huila&division=govnoedi&partition=HUY
@@ -143,8 +144,73 @@ export const changeUserProfile = ({formData, id}) => async (dispatch) => {
     });
   }
 };
+export const addUserTask = (formData) => async (dispatch) => {
 
+  try {
+    console.log("hello change", formData);
+    const res = await innerBackend.put (`/users/me/addtask`, formData);
+    dispatch({
+      type: ADD_USER_TASK,
+      payload: res.data,
+    });
+    dispatch({
+      type: GREEN_MSG,
+      payload: res.data,
+    });
+  } catch (err) {
+    const errors = err.response.data.err;
+    errors.map((error) => {
+      return dispatch({
+        type: ERROR_MSG,
+        payload: error.msg,
+      });
+    });
+  }
+};
+export const editUserTask = ({ value, id, field }) => async (dispatch) => {
+  // console.log(field,value,id)
+  try {
 
+    let body = {
+     
+    };
+    body[field] = value
+
+    const res = await innerBackend.put(`users/me/task/edit/${id}`, body);
+    dispatch({
+      type: EDIT_USER_TASK,
+      payload: res.data,
+    });
+  } catch (err) {
+      console.log(err.response.data)
+  }
+}; 
+export const finishUserTask = ({taskid}) => async dispatch  => {
+
+  try {
+      // console.log(tasks, 'tasks', id, 'id')
+      const res = await innerBackend.put(`users/me/task/status/${taskid}`)
+      dispatch({
+          type: FINISH_USER_TASK,
+          payload: res.data
+      })
+      dispatch({
+          type: GREEN_MSG,
+          payload: res.data
+      })
+      }
+    catch (err) {
+      const errors = err.response.data.err;
+      errors.map(error => {
+         return dispatch({
+          type: ERROR_MSG,
+          payload: error.msg
+      })
+      })            
+    
+  }
+
+}
 export const usersPartition = (partition) => async dispatch =>  {
   try {
     let body = {

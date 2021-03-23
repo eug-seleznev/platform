@@ -69,6 +69,7 @@
 	margin-bottom: 50px;
 	display: flex;
 }
+
 @media (max-width:1000px) {
 	.managment__first {
 		display: flex;

@@ -6,6 +6,21 @@
 	border-bottom: 1px solid #939393;
 	padding-bottom: 5px;
 }
+.user__td {
+	display:flex;
+	align-items:center;
+}
+.mytask__tr:hover{
+	background: none!important;
+	cursor: default;
+}
+.mytask__img {
+	height: 25px;
+	width: 25px;
+	object-fit: cover;
+	border-radius: 100%;	
+	margin-left: 20px;
+}
 .options__button {
 	margin-left: 30px;
 	padding-bottom: 15px;
@@ -13,4 +28,31 @@
 .options__button:first-child {
 	margin-left: 0px;
 	
+}
+@media(max-width:1000px) {
+	.options {
+		margin-left: 0px;
+		
+	}
+	.mobile__resize{
+		display: none;
+	}
+	.user__td {
+		display: none;
+	}
+}
+@media(max-width:550px) {
+	.options {
+		flex-direction: column;
+		
+	}
+	.options__button {
+		margin-left: 0px;
+		padding-bottom: 15px;
+	}
+}
+@media(max-width:400px) {
+	.deadline {
+		display: none;
+	}
 }

@@ -24,7 +24,7 @@ const TaskBlock = ({user, history}) => {
 			</div>
 			<SmallCard className={styles.my_tasks} onClick={pushToTasks}>
 				<Light size='16' color='#3F496C'>Мои задачи</Light>
-				<Light size='16' color='#3F496C'>{user.tasks.length}</Light>
+				<Light size='16' color='#3F496C'>{user.tasks[0].taskStatus!==undefined && user.tasks.filter(task=>task.taskStatus).length}</Light>
 			</SmallCard>
 			<SmallCard className={styles.my_tasks}>
 				<Light size='16' color='#3F496C'>Активные спринты</Light>
