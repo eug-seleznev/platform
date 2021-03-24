@@ -30,7 +30,7 @@ const SprintCard = ({sprint}) => {
           <div className={styles.sprinttop}>
           <Link  style={{textDecoration: 'none'}}to={`projects/${sprint.project.crypt}/${sprint._id}`}>
             <Light size="16" color='#3F496C' className={styles.title}>
-              {sprint.title}
+              {sprint.title!==''?sprint.title:'Нет названия'}
             </Light>
           </Link>
           <Link  style={{textDecoration: 'none'}}to={`projects/${sprint.project.crypt}`}>
