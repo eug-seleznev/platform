@@ -10,9 +10,46 @@
 	display:flex;
 	align-items:center;
 }
+.addTask {
+	margin-top: 15px;
+}
+.addTask input {
+	width: 50%;
+	height: 20px;
+	outline: none;
+	border-radius: 5px;
+	border: 1px solid black;
+}
+.deadlineInput{
+	width: 25%!important;
+	height: 20px;
+	outline: none;
+	border-radius: 5px;
+	border: 1px solid black;
+	
+}
+
+.deadlineInputDate{
+	margin-left: 15px;
+	height: 25px;
+	border-radius: 0px!important;
+	width: 140px!important;
+	border: 0px !important;
+	border-bottom: 1px solid grey!important;
+	color: grey;
+}
 .mytask__tr:hover{
 	background: none!important;
 	cursor: default;
+}
+.date {
+	margin:23px;
+}
+.date2 {
+	margin:10px;
+}
+.date:first-child {
+	margin-top: 0px;
 }
 .mytask__img {
 	height: 25px;
@@ -29,6 +66,21 @@
 	margin-left: 0px;
 	
 }
+@media(max-width:1400px) {
+	.type {
+		display: none;
+	}
+}
+@media(max-width:1300px) {
+	.creator {
+		display: none;
+	}
+}
+@media(max-width:1200px) {
+	.project {
+		display: none;
+	}
+}
 @media(max-width:1000px) {
 	.options {
 		margin-left: 0px;
@@ -40,12 +92,16 @@
 	.user__td {
 		display: none;
 	}
+	.deadlineHistory {
+		display: none;
+	}
 }
 @media(max-width:550px) {
 	.options {
 		flex-direction: column;
 		
 	}
+	
 	.options__button {
 		margin-left: 0px;
 		padding-bottom: 15px;

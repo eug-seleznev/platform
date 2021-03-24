@@ -21,6 +21,8 @@ export const SEARCH_TABLE_USER ='SEARCH_TABLE_USER'
 export const ADD_USER_TASK='ADD_USER_TASK'
 export const FINISH_USER_TASK='FINISH_USER_TASK'
 export const EDIT_USER_TASK='EDIT_USER_TASK'
+export const USER_TASKS='USER_TASKS'
+export const SORT_USER_TASKS ='SORT_USER_TASKS'
 //user errors
 export const USER_ERR = 'get_all_users_error'
 //search user 

@@ -1,4 +1,4 @@
-import {REGISTER, LOGIN, USER_LOADED,CHANGE_AVATAR,CLEAR_MSG,CLEAR_ERROR, CHANGE_USERDATA, CHANGE_LOADED, ADD_SPRINT_TO_CHOSEN, ERROR_MSG, GREEN_MSG} from '../types'
+import {REGISTER, USER_TASKS, LOGIN, USER_LOADED,CHANGE_AVATAR,CLEAR_MSG,CLEAR_ERROR, CHANGE_USERDATA, CHANGE_LOADED, ADD_SPRINT_TO_CHOSEN, ERROR_MSG, GREEN_MSG} from '../types'
 import {innerBackend, instance, setAuthToken} from '../../components/utils/axios'
 
 
@@ -182,7 +182,29 @@ export const changeAvatar = (file) => async dispatch  => {
 
 }
 
+export const getUserTasks = () => async dispatch  => {
+  try {
+      // console.log('hello 1 user?')
+      const res = await innerBackend.get(`/users/me?tasks=true`)
+      dispatch({
+          type: USER_TASKS,
+          payload: res.data
+      })
+      // setAuthToken(localStorage.token);
 
+    }
+    catch (err) {
+      const errors = err.response.data.err;
+      errors.map(error => {
+         return dispatch({
+          type: ERROR_MSG,
+          payload: error.msg
+      })
+      })
+          
+    } 
+
+}
 export const addToChosen = (id) => async dispatch  => {
   // console.log ('hi sprint', id)
   try {

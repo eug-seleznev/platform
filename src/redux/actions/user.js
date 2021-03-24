@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { ALL_USERS, EDIT_USER_TASK, FINISH_USER_TASK,ADD_USER_TASK,FIND_CONTRACTOR, SEARCH_TABLE_USER,EDIT_CONTRACTOR, CHANGE_PERMISSION, PERM_RETURN,ONE_CONTRACTOR, ONE_USER,SEARCH_USER,BACK_WHITE,ADD_CONTRACTOR,ALL_CONTRACTORS, ERROR_MSG, GREEN_MSG,PARTITION_UPDATE, EDIT_TASK} from "../types";
+import { ALL_USERS,SORT_USER_TASKS, EDIT_USER_TASK, FINISH_USER_TASK,ADD_USER_TASK,FIND_CONTRACTOR, SEARCH_TABLE_USER,EDIT_CONTRACTOR, CHANGE_PERMISSION, PERM_RETURN,ONE_CONTRACTOR, ONE_USER,SEARCH_USER,BACK_WHITE,ADD_CONTRACTOR,ALL_CONTRACTORS, ERROR_MSG, GREEN_MSG,PARTITION_UPDATE, EDIT_TASK} from "../types";
 
 
 
@@ -211,6 +211,22 @@ export const finishUserTask = ({taskid}) => async dispatch  => {
   }
 
 }
+export const sortUserTasks =(val) => async dispatch => {
+  console.log(val)
+  try {
+    const res = await innerBackend.get(`users/me?tasks=true&project=${val}`)
+
+    dispatch({
+      type: SORT_USER_TASKS,
+      payload: res.data
+    })
+
+  } catch (err) {
+    console.log('lol')
+
+
+  }
+}
 export const usersPartition = (partition) => async dispatch =>  {
   try {
     let body = {
@@ -322,6 +338,7 @@ export const getUser = (id) => async dispatch  => {
     } 
 
 }
+
 export const background = (value) =>  dispatch => {
   return dispatch({
     type: BACK_WHITE,
