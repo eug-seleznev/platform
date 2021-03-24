@@ -8,12 +8,10 @@ import { useDispatch} from "react-redux"
 import { addUserTask, editUserTask } from "../../redux/actions/user"
 import { Light } from "../../Styles/typography"
 
-const MyTasks =({tasks,onChange,currentDate})=>{
+const DeadlineTasks =({tasks, onChange,currentDate})=>{
 	const dispatch = useDispatch()
-	
 	const [id, setId] = useState('')
 	const [addTask, setAddTask] = useState(false)
-
 	const [formData, setFormData] = useState({
 		taskTitle:'',
 		deadline: null
@@ -55,8 +53,8 @@ const MyTasks =({tasks,onChange,currentDate})=>{
 		<div className={style.addTask}>
 			<ButtonTextDiv style={{display:`${!addTask?'block':'none'}`}} onClick={()=>{setAddTask(true)}}>Добавить задачу</ButtonTextDiv>
 			<div style={{display:`${addTask?'flex':'none'}`}}>
-				<input placeholder="Добавить задачу" name="taskTitle" type="text"value={formData.taskTitle} onChange={(e)=>{onTaskChange(e)}}></input>
-				{/* <input placeholder="Дедлайн" name="deadline" type="date" onChange={(e)=>{onTaskChange(e)}}></input> */}
+				<input className={style.deadlineInput} placeholder="Добавить задачу" name="taskTitle" type="text"value={formData.taskTitle} onChange={(e)=>{onTaskChange(e)}}></input>
+				<input className={style.deadlineInputDate} placeholder="Дедлайн" name="deadline" type="date" onChange={(e)=>{onTaskChange(e)}}></input>
 				<ButtonTextDiv style={{marginLeft:'15px',marginTop:'5px'}} onClick={()=>addNewTask()}>Добавить</ButtonTextDiv>
 			</div>
 		</div>
@@ -66,6 +64,7 @@ const MyTasks =({tasks,onChange,currentDate})=>{
 			<NEW_THEAD>
 				<NEW_TR className={style.mytask__tr}>
 					<NEW_TH>Задача</NEW_TH>
+					<NEW_TH>Дедлайн</NEW_TH>
 				</NEW_TR>
 			</NEW_THEAD>
 			<NEW_TBODY>
@@ -73,8 +72,8 @@ const MyTasks =({tasks,onChange,currentDate})=>{
 						{tasks.map((day)=>{
 							return(
 								<>
-								<Light size='14' className={style.date} color='#8C8C8C'>{currentDate===getDate(day.date)?'Сегодня':getDate(day.date)}</Light>
-								{day.tasks.filter(task=>!task.deadline).map((task)=>{
+								{day.tasks.filter(task=>task.deadline&&!task.taskStatus).length!==0?<Light size='14' className={style.date} color='#8C8C8C'>{currentDate===getDate(day.date)?'Сегодня':getDate(day.date)}</Light>:''}
+								{day.tasks.filter(task=>task.deadline).map((task)=>{
 									return(
 										<NEW_TR key={task._id} className={style.mytask__tr}>
 									<NEW_TD>
@@ -98,38 +97,13 @@ const MyTasks =({tasks,onChange,currentDate})=>{
 											onChange={(e)=>onTextChange(e)}
 										></input>
 									</NEW_TD>
+									<NEW_TD>
+										{task.deadline && getDate(task.deadline)}
+									</NEW_TD>
 								</NEW_TR>
 									)
 								})}
-								
 								</>
-								
-								// <NEW_TR key={task._id} className={style.mytask__tr}>
-								// 	<NEW_TD>
-								// 	<input
-								// 		type="checkbox"
-								// 		defaultChecked={task.taskStatus}
-								// 		value={task._id}
-								// 		onChange={onChange}
-								// 	></input>
-								// 		<input
-								// 			style={{
-								// 				width:'80%',
-								// 				background:`${id===task._id?'white':'none'}`,
-								// 				border:`${id===task._id?'1px solid black':'1px solid transparent'}`
-								// 			}}
-								// 			className={newsp.input}
-								// 			type="text"
-								// 			defaultValue={task.taskTitle}
-								// 			name="taskTitle"
-								// 			onClick={()=>setId(task._id)}
-								// 			onChange={(e)=>onTextChange(e)}
-								// 		></input>
-								// 	</NEW_TD>
-								// 	<NEW_TD>
-								// 		{task.deadline && getDate(task.deadline)}
-								// 	</NEW_TD>
-								// </NEW_TR>
 							)
 						})}
 				
@@ -141,4 +115,4 @@ const MyTasks =({tasks,onChange,currentDate})=>{
 		
 	)
 }
-export default MyTasks
+export default DeadlineTasks
