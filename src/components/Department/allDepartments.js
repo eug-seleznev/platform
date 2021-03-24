@@ -1,21 +1,21 @@
 import styles from '../../Styles/modules/department/index.module.css'
-import Profile from '../Main/profileComponent'
+
 import {useSelector, useDispatch} from 'react-redux'
 import { allDepartments } from '../../redux/actions/department'
 
-import { useEffect, useState } from 'react'
-import DepartmentCard from './departmentCard'
+import { useEffect } from 'react'
+
 import { allUsers, background } from '../../redux/actions/user'
-import { ButtonText } from '../../Styles/buttons'
-import { Bold, Regular } from '../../Styles/typography'
+
+import { Bold} from '../../Styles/typography'
 import DepartmentSmallCard from './departmentSmallCard'
-import { Title } from '../../Styles/common'
+
 
 const AllDepartments = ({history}) => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.auth.user)
-    const users = useSelector(state => state.users.users)
-    const [id, setId] = useState ('')
+    // const users = useSelector(state => state.users.users)
+    // const [id, setId] = useState ('')
     const allDeps = useSelector(state => state.departments.departments)
  useEffect(()=>{
     dispatch(allDepartments())
@@ -27,11 +27,11 @@ const AllDepartments = ({history}) => {
     dispatch(background('#ECECEC'))
   }
   }, [])
- useEffect (()=>{
-    if(allDeps){
-        console.log (allDeps)
-    }
- },[allDeps])
+//  useEffect (()=>{
+//     if(allDeps){
+//         console.log (allDeps)
+//     }
+//  },[allDeps])
  const choseDivision =(click)=>{
      
      history.push(`/departments/${click}`)

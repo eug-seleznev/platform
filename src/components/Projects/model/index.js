@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Card } from "../../../Styles/common";
-import { cleardData, postModel, Status } from "../../../redux/actions/models";
+import {  Status } from "../../../redux/actions/models";
 import { Link } from "react-router-dom";
-import { clearUrn } from "../../../redux/actions/projects";
-import { Button } from "../../../Styles/buttons";
+
 import Subtitle from "../components/OneProject/subtitle";
 import style from "../../../Styles/modules/components/Project/oneproj.module.css";
 import { Thin } from "../../../Styles/typography";
@@ -14,11 +12,11 @@ const Viewer = ({ project }) => {
 
   const model_status = useSelector((state) => state.models.status);
 
-  const [formData, setFormData] = useState({
-    crypt: project.crypt,
-    file: null,
-    title: 'default'
-  });
+  // const [formData, setFormData] = useState({
+  //   crypt: project.crypt,
+  //   file: null,
+  //   title: 'default'
+  // });
 
   const [loaded, setLoad] = useState({
     model: project.urn ? true : false, //initial check of model's availability
@@ -31,8 +29,8 @@ const Viewer = ({ project }) => {
   useEffect(() => {
     if (loaded.submit) {
       let new_status = model_status.split(" ");
-      console.log("first useEffect if submit true", model_status);
-      if (new_status[0] == "complete") {
+      // console.log("first useEffect if submit true", model_status);
+      if (new_status[0] === "complete") {
         setLoad({ model: true, status: true, submit: false });
       } else {
         setTimeout(() => {
@@ -45,28 +43,28 @@ const Viewer = ({ project }) => {
   useEffect(() => {
     if (loaded.submit) {
       setTimeout(() => {
-        console.log("trying to dispatch value");
+        // console.log("trying to dispatch value");
         dispatch(Status(project.crypt));
       }, 5000);
     }
   }, [loaded.submit, loaded.status]);
 
   //form for model loading
-  const onChange = (e) => {
-    e.preventDefault();
-    setFormData({ ...formData, [e.target.name]: e.target.files[0] });
-    setLoad({
-      ...loaded,
-      button: true,
-    });
-  };
+  // const onChange = (e) => {
+  //   e.preventDefault();
+  //   setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+  //   setLoad({
+  //     ...loaded,
+  //     button: true,
+  //   });
+  // };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    setLoad({ model: false, submit: true });
-    dispatch(postModel(formData));
-    dispatch(clearUrn());
-  };
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+  //   setLoad({ model: false, submit: true });
+  //   dispatch(postModel(formData));
+  //   dispatch(clearUrn());
+  // };
   const openfunc = () => {
     setOpen(!open);
   };
@@ -74,7 +72,7 @@ const Viewer = ({ project }) => {
     <div
       className={style.model__cont}
       style={{
-        height: `${!open ? "65px" : "auto"}`,
+        height: `${!open ? "25px" : "auto"}`,
         overflowY: "hidden",
         paddingBottom: "30px",
         marginBottom: "25px",
@@ -89,7 +87,7 @@ const Viewer = ({ project }) => {
         open={true}
       ></Subtitle>
       <div style={{ width: "80%" }}>
-        <Link
+        {/* <Link
           to={`${project.crypt}/model/view`}
           style={{ textDecoration: "none" }}
         >
@@ -109,7 +107,7 @@ const Viewer = ({ project }) => {
           >
             Сводная модель
           </Thin>
-        </Link>
+        </Link> */}
 
         <Link to={`${project.crypt}/m/view`} style={{ textDecoration: "none" }}>
           <Thin

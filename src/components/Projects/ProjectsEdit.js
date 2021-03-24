@@ -1,11 +1,11 @@
-import './projects.css'
+
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import { allProjects } from '../../redux/actions/projects';
 import { Table, Tr, Td } from '../../Styles/tables';
-import { Container, Card,  } from '../../Styles/common';
-import { H1, H3} from '../../Styles/typography'
+import {  Card,  } from '../../Styles/common';
+import { H1} from '../../Styles/typography'
 import style from '../../Styles/modules/components/Project/allproj.module.css'
 
 const ProjectsEdit = ({history}) => {

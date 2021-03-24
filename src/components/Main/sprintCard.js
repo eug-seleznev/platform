@@ -1,11 +1,10 @@
 import styles from '../../Styles/modules/components/sprintCard.module.css'
-import { Card, SmallCard } from '../../Styles/common'
+import { SmallCard } from '../../Styles/common'
 import { Bold,Light } from '../../Styles/typography'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Tag from '../Projects/components/OneProject/tag'
-import { Circle } from '../../Styles/project'
-import style from "../../Styles/modules/components/Project/newsprint.module.css"
+
 
 
 
@@ -57,7 +56,7 @@ const SprintCard = ({sprint}) => {
               <div className={styles.tags}>
             {sprint.tags.map((el, i)=>{
               return(
-                <Tag  tagText={el} tagColor={i===0?'#C8D9E9':'#E9E3C8'} />  
+                <Tag size='12' tagText={el} key={i} tagColor={i===0?'#C8D9E9':'#E9E3C8'} />  
               )
             })}
              

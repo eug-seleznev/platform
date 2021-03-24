@@ -1,5 +1,5 @@
 
-import { ADD_SPRINT,SORT_PROJECTS,SORT_TITLE, SEARCH_OBJECT, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL, EDIT_TASK, CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,ADD_SPRINT_TO_CHOSEN,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR, GET_URN, DELETE_SPRINT, CLEAR_URN, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, ADD_TAG, DELITE_USER, DELITE_TAG, ADD_USER_TO_TEAM, SORT_BY_TAGS, CHANGE_ROCKET, CLEAR_MODEL_DATA, CLEAR_SPRINT } from '../types'
+import { ADD_SPRINT,SORT_PROJECTS,SORT_TITLE, SEARCH_OBJECT, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL, EDIT_TASK, CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR, GET_URN, DELETE_SPRINT, CLEAR_URN, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, ADD_TAG, DELITE_USER, DELITE_TAG, ADD_USER_TO_TEAM, SORT_BY_TAGS, CHANGE_ROCKET, CLEAR_MODEL_DATA, CLEAR_SPRINT } from '../types'
 
 
 
@@ -23,7 +23,8 @@ const initialState = {
     hey:'', 
     tagSearch:[],
     modelLoaded: false,
-    objectList:[]
+    objectList:[],
+    newUrn: null
 }
 
 export default function(state = initialState, action) {
@@ -49,7 +50,7 @@ export default function(state = initialState, action) {
                     error: ''
                 }
                 case SEARCH_OBJECT: 
-                    console.log(payload)
+                    // console.log(payload)
                     return {
                         ...state,
                         objectList: payload
@@ -152,7 +153,7 @@ export default function(state = initialState, action) {
                     ...state,
                     sprint: payload,
                     sprint_load: true,
-                    loadProject: false,
+                    loadProject: true,
                     reload: true,
                     error: '',
                     // sprint_msg:payload.msg,
@@ -233,6 +234,7 @@ export default function(state = initialState, action) {
                     ...state,
                     msg: payload.msg,
                     project: payload.project,
+                    newUrn: payload.urn,
                     modelLoaded: true,
                 }
             case CLEAR_MODEL_DATA:

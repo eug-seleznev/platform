@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { ALL_USERS,FIND_CONTRACTOR, USER_ERR,SEARCH_TABLE_USER,EDIT_CONTRACTOR, CHANGE_PERMISSION, PERM_RETURN,ONE_CONTRACTOR, ONE_USER,SEARCH_USER,BACK_WHITE, CLEAR_ERROR, CLEAR_MSG,ADD_CONTRACTOR,ALL_CONTRACTORS, ERROR_MSG, GREEN_MSG,PARTITION_UPDATE} from "../types";
+import { ALL_USERS,FIND_CONTRACTOR, SEARCH_TABLE_USER,EDIT_CONTRACTOR, CHANGE_PERMISSION, PERM_RETURN,ONE_CONTRACTOR, ONE_USER,SEARCH_USER,BACK_WHITE,ADD_CONTRACTOR,ALL_CONTRACTORS, ERROR_MSG, GREEN_MSG,PARTITION_UPDATE} from "../types";
 
 
 
@@ -7,7 +7,7 @@ import { ALL_USERS,FIND_CONTRACTOR, USER_ERR,SEARCH_TABLE_USER,EDIT_CONTRACTOR, 
 
 export const allContractors = ({query, sortOrder}) => async dispatch  => {
   try {
-      console.log(query, sortOrder)
+      // console.log(query, sortOrder)
       const res = await innerBackend.get(`/merc/search?name=all&field=${query}&order=${sortOrder}`)
       dispatch({
           type: ALL_CONTRACTORS,
@@ -29,10 +29,10 @@ export const allContractors = ({query, sortOrder}) => async dispatch  => {
   }
 
 export const findContractorName = ({value, field}) => async dispatch  => {
-  console.log(value)
+  // console.log(value)
   try {
       // console.log('hello all users?')
-      const res = await innerBackend.get(`/merc/${field=='name'?'full'+field:field}/search?${field}=${field=='partition'?value.toUpperCase():value}`)
+      const res = await innerBackend.get(`/merc/${field==='name'?'full'+field:field}/search?${field}=${field==='partition'?value.toUpperCase():value}`)
       // console.log(res.data)
       dispatch({
           type: FIND_CONTRACTOR,
@@ -77,7 +77,7 @@ export const allUsers = ({query, sortOrder}) => async dispatch  => {
 
 }
 export const userPosSearch = (value) => async dispatch => {
-  console.log(value)
+  // console.log(value)
   try {
     ///users/usr/get?name=huila&division=govnoedi&partition=HUY
   
@@ -150,7 +150,7 @@ export const usersPartition = (partition) => async dispatch =>  {
     let body = {
       partition: partition
     }
-    console.log(body);
+    // console.log(body);
 
     const res = await innerBackend.put('users/part', body)
 
@@ -189,7 +189,7 @@ export const searchUser = (request) => async dispatch  => {
 }
 export const editContractor = (id, formData) => async dispatch  => {
   try {
-      console.log(formData)
+      // console.log(formData)
       const res = await innerBackend.put(`/merc/new/edit/${id}`,formData)
       dispatch({
           type: EDIT_CONTRACTOR,
@@ -271,7 +271,7 @@ export const addContractor = (formData) => async dispatch  => {
     email:formData.email
   }
   try {
-      console.log(body)
+      // console.log(body)
       const res = await innerBackend.post(`/merc/new`, body)
       dispatch({
           type: ADD_CONTRACTOR,

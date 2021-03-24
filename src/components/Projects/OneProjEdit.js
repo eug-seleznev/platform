@@ -1,8 +1,7 @@
 import  {useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {  getProject, editProject } from '../../redux/actions/projects';
-import './projects.css'
-import { Button, CancelButton } from '../../Styles/buttons';
+import { Button } from '../../Styles/buttons';
 import {  Bold, Regular} from '../../Styles/typography'
 import style from '../../Styles/modules/components/Project/editproj.module.css'
 import InfoInputs from './components/EditProj/infoInputs';
@@ -43,10 +42,7 @@ const ProjectEdit = ({history, match}) => {
 		dispatch(getProject(id));
         
     }, [])
-    useEffect(() => {
-		console.log(project)
-        
-    }, [project])
+   
     const [editStage, setEditStage] = useState(1)
 	useEffect(() => {
 		if (loadProject) {
@@ -109,9 +105,9 @@ const ProjectEdit = ({history, match}) => {
         }
        
      }
-     useEffect(()=>{
-        console.log(formData)
-     },[formData])
+    //  useEffect(()=>{
+    //     console.log(formData)
+    //  },[formData])
      const Redirect = () => {
      
              return history.push(`/projects/${id}`)
@@ -139,10 +135,10 @@ const ProjectEdit = ({history, match}) => {
             <div className={style.container}>
                 <Bold size='24' className={style.main__title}>Изменить проект</Bold>
                 <div className={style.info__row}>
-                    <Regular className={style.info__row__point} onClick={()=> setEditStage(1)} color={editStage==1?'black':'#8B8B8B'} size={'14'}>Информация о проекте</Regular>
-                    <Regular className={style.info__row__point} onClick={()=> setEditStage(2)} color={editStage==2?'black':'#8B8B8B'}  size={'14'}>Команда проекта</Regular>
-                    <Regular className={style.info__row__point} onClick={()=> setEditStage(3)} color={editStage==3?'black':'#8B8B8B'}  size={'14'}>Ссылки на документацию</Regular>
-                    <Regular className={style.info__row__point} onClick={()=> setEditStage(4)} color={editStage==4?'black':'#8B8B8B'}  size={'14'}>Информация о заказчике</Regular>
+                    <Regular className={style.info__row__point} onClick={()=> setEditStage(1)} color={editStage===1?'black':'#8B8B8B'} size={'14'}>Информация о проекте</Regular>
+                    <Regular className={style.info__row__point} onClick={()=> setEditStage(2)} color={editStage===2?'black':'#8B8B8B'}  size={'14'}>Команда проекта</Regular>
+                    <Regular className={style.info__row__point} onClick={()=> setEditStage(3)} color={editStage===3?'black':'#8B8B8B'}  size={'14'}>Ссылки на документацию</Regular>
+                    <Regular className={style.info__row__point} onClick={()=> setEditStage(4)} color={editStage===4?'black':'#8B8B8B'}  size={'14'}>Информация о заказчике</Regular>
                 </div>
             <form className='form' onSubmit={onSubmit}>
             <div style={{display:`${editStage===1?'block':'none'}`}}>

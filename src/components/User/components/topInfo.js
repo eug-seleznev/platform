@@ -3,14 +3,15 @@ import styles from '../../../Styles/modules/components/profile.module.css'
 import { ButtonText } from "../../../Styles/buttons"
 
 
-const TopInfo = ({src, text, user, url, change, history, enter}) =>{
+const TopInfo = ({ user, url, change, history, enter}) =>{
 	return (
 		<div className={styles.row2}> 
 			<img
+			alt='ava' 
 				style={{opacity:enter?0.5:1}}
 				className={styles.small__avatar}
 				src={`${url}/${
-				user != null ? (user != undefined ? user.avatar : "") : ""
+				user !== null ? (user !== undefined ? user.avatar : "") : ""
 				}`}
 			/>
 			<div className={styles.gap_img}>

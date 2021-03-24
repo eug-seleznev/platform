@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { GET_TOKEN, GET_URN, NEW_ERROR, GET_STATUS, CLEAR_MODEL_DATA, ERROR_MSG } from "../types";
+import { GET_TOKEN, GET_URN, GET_STATUS, CLEAR_MODEL_DATA, ERROR_MSG } from "../types";
 let url = process.env.REACT_APP_IP_MODELS;
 
 
@@ -22,11 +22,12 @@ export const postModel = (formData) => async (dispatch) => {
         "content-type": "multipart/form-data",
       },
     });
-    console.log(res.data)
+    // console.log(res.data)
     dispatch({
       type: GET_URN,
       payload: res.data,
     });
+    console.log(res.data)
   } catch (err) {
     const errors = err.response.data.errors;
     errors.map((error) => {

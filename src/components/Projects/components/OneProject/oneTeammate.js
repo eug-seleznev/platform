@@ -1,8 +1,7 @@
-import { Button } from "../../../../Styles/buttons"
-import { Card } from "../../../../Styles/common"
+
 import table from '../../../../Styles/modules/components/Project/allproj.module.css'
-import { Table, Td, Tr } from "../../../../Styles/tables";
-import { Bold, Light} from "../../../../Styles/typography"
+import { Td, Tr } from "../../../../Styles/tables";
+import { Bold} from "../../../../Styles/typography"
 export const url = process.env.REACT_APP_IP;
 
 
@@ -19,7 +18,7 @@ const ProjTeam = ({userName,userPos,userAvatar,userId,histProp, lastName, userMa
 						
 						<Td style={{display:'flex'}}><Bold>{userTask}</Bold>  {userName}</Td>
 						<Td style={{textAlign:'center'}} className={table.turn__off}>{userPos}</Td>
-						<Td style={{display:'flex', justifyContent:'flex-end',padding:0,margin:0,width:'50px'}}> <img  style={{width:'50px'}} className={table.image} src={url+'/'+userAvatar}></img></Td>
+						<Td style={{display:'flex', justifyContent:'flex-end',padding:0,margin:0,width:'50px'}}> <img alt='нет' style={{width:'50px'}} className={table.image} src={url+'/'+userAvatar}></img></Td>
 			  		</Tr>
 					{/* <div className={style.image_info}>
 						<img  className={style.image} src={url+'/'+userAvatar}></img>

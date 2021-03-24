@@ -1,12 +1,10 @@
-import { url } from '../utils/axios';
-import styles from '../../Styles/modules/components/News/updateNews.module.css'
 
-import { Bold, Light,Thin, Regular } from '../../Styles/typography'
-import { ButtonText, Button } from '../../Styles/buttons'
+import styles from '../../Styles/modules/components/News/updateNews.module.css'
+import {Button } from '../../Styles/buttons'
 import { Card } from '../../Styles/common'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { allNews, createNews, deleteNews, updateNews} from '../../redux/actions/news';
+import { allNews, updateNews} from '../../redux/actions/news';
 
 
 const UpdateNews = ({close, content}) => {

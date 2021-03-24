@@ -25,7 +25,7 @@ const Viewer = () => {
      
     const onSubmit =(e) => {
         e.preventDefault();
-        console.log(formData)
+        // console.log(formData)
         dispatch(postModel(formData))
     }
 

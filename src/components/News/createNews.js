@@ -71,7 +71,7 @@ const CreateNews = ({closeForm}) => {
                         onChange={e => onChange(e)}/>
 
                     <textarea 
-                        className={styles.text}
+                        style={{resize:'none'}}
                         
                         placeholder='Текст'
                         name='text'

@@ -8,10 +8,10 @@ import { useDispatch } from "react-redux";
 import styles from '../../Styles/modules/department/departmentCard.module.css'
 
 
-import { Bold, Light } from '../../Styles/typography'
-import { ButtonText } from '../../Styles/buttons'
+import { Bold} from '../../Styles/typography'
 
-import { allDepartments, deleteDepartment, joinDepartment, findDepartment } from '../../redux/actions/department';
+
+import {deleteDepartment, joinDepartment} from '../../redux/actions/department';
 import Confirm from './confirm'
 import { useEffect, useState } from 'react';
 import UserCard from '../User/components/userCard'
@@ -19,7 +19,7 @@ import { allUsers } from '../../redux/actions/user';
 import { loadUser } from '../../redux/actions/auth';
 import ProjectsCard from '../Main/projectsCard';
 
-const DepartmentCard = ({button, itsAllDepsPage, department, user, history, users}) => {
+const DepartmentCard = ({itsAllDepsPage, department, user, history}) => {
 
 
 
@@ -45,10 +45,10 @@ const [showConfirm, setShowConfirm] = useState(false)
     //     }
         
     // },[content])
-    const join =()=>{
-        dispatch(joinDepartment(department.divname))
+    // const join =()=>{
+    //     dispatch(joinDepartment(department.divname))
      
-    }
+    // }
     const pushToArray =(el)=>{
         projArray = projArray.concat(el.projects)
         newA()
@@ -108,7 +108,7 @@ const [showConfirm, setShowConfirm] = useState(false)
                 <div className={styles.members}>
             {department!==null?<div style={{display:`${department.members.length!==0?'none':'block'}`}}>В этом отделе нет сотрудников</div>:''}
            
-            {department==null?'':department.members.map((el,i)=>{
+            {department===null?'':department.members.map((el,i)=>{
                
                         return(
                             
@@ -122,7 +122,7 @@ const [showConfirm, setShowConfirm] = useState(false)
             <Bold className={styles.activeTitle}  size='30'>Проекты отдела</Bold>
             <div className={styles.activeProjects}>
 
-                {lastArr===null||lastArr===undefined||department.members.length==0?<div>У этого отдела нет проектов</div>:lastArr.map((el,i)=>{
+                {lastArr===null||lastArr===undefined||department.members.length===0?<div>У этого отдела нет проектов</div>:lastArr.map((el,i)=>{
                     
                     // if(el!=undefined){
                         return(

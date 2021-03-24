@@ -1,26 +1,23 @@
-import { useEffect, useState } from "react"
-import { Button } from "../../../Styles/buttons"
-import { Card } from "../../../Styles/common"
-import './sprintdescr.css' //css испортируется тут глобальный. У нас глобальный уже создан ниже, и делать новый смысла нет - тут нужны modules
+import { useEffect, useState } from "react" 
 import style from '../../../Styles/modules/components/Project/oneproj.module.css'
-import { Bold, Light,Regular, Thin } from "../../../Styles/typography"
+import { Light, Thin } from "../../../Styles/typography"
 import { useSelector,useDispatch} from "react-redux"
 import { addToChosen } from '../../../redux/actions/auth'
 import Tag from "./OneProject/tag"
-const SprintDescription = ({projStatus,tags, dateOpen,taskcomplite, alltasks, history, id, params,descr, title, dateClosePlan}) => {
+const SprintDescription = ({tags, dateOpen,taskcomplite, alltasks, history, id, params,descr, title, dateClosePlan}) => {
 	
 	const dispatch = useDispatch();
 	const [loaded, setLoaded] = useState (0)
-	const [diff, setDiff] = useState (0)
+	// const [diff, setDiff] = useState (0)
 	const [actualClose, setActualClose] = useState (0)
 	const [status, setStatus] = useState (false)
 	const chosenSprints = useSelector(state => state.auth.user.sprints)
 	useEffect (()=> {
 
 			if (actualClose!=null){
-				let d1 = new Date ()
+				
 				// console.log(actualClose, d1)
-				setDiff (Math.abs(actualClose-d1)/86400000)
+				// setDiff (Math.abs(actualClose-d1)/86400000)
 				
 				setTimeout (()=>{
 					{chosenSprints.filter(sprint => sprint._id===id).map(()=>{
@@ -33,7 +30,6 @@ const SprintDescription = ({projStatus,tags, dateOpen,taskcomplite, alltasks, hi
 		
 	},[actualClose])
 	useEffect (()=> {
-		console.log()
 		if (dateClosePlan!=null) {
 			let d2 = new Date (dateClosePlan.slice(0, 10).replace(/-/g, "/"))
 			
@@ -74,6 +70,7 @@ const SprintDescription = ({projStatus,tags, dateOpen,taskcomplite, alltasks, hi
 
               <img
                 src="/star.png"
+                alt='star'
                 onClick={chosenSprint}
                 style={{
                   cursor: "pointer",
@@ -104,7 +101,7 @@ const SprintDescription = ({projStatus,tags, dateOpen,taskcomplite, alltasks, hi
                         <Tag
                           tagText={el}
                           tagColor={
-                            i == 0 ? "#C8D9E9" : i == 1 ? "#E9E3C8" : "#AAF8A8"
+                            i === 0 ? "#C8D9E9" : i === 1 ? "#E9E3C8" : "#AAF8A8"
                           }
                           key={i}
                         />

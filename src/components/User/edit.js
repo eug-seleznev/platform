@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react"
 import {useDispatch, useSelector} from 'react-redux'
 import {changeData, changeAvatar} from '../../redux/actions/auth'
-import { url } from '../utils/axios';
+
 
 
 import styles from '../../Styles/modules/components/user/edit.module.css'
 //styled components
 import {Button, CancelButton} from '../../Styles/buttons'
-import { Card, SmallContainer } from "../../Styles/common";
+import { Card } from "../../Styles/common";
 import { Input, LogForm } from "../../Styles/Forms";
-import styled from "styled-components";
+
 import { allDepartments, joinDepartment } from "../../redux/actions/department";
 import { Thin } from "../../Styles/typography";
 import Partition from "./partition";
 
-const Edit = ({match, history}) => {
+const Edit = ({ history}) => {
 	
 	const loaded = useSelector(state => state.auth.loaded)
 	const user = useSelector(state => state.auth.user)
@@ -37,7 +37,7 @@ const Edit = ({match, history}) => {
 
 
 
-     const [text, setText] = useState ('') 
+    //  const [text, setText] = useState ('') 
 
       const {name,lastname, position, email, report, bday, phone,partition } = formData;
 
@@ -132,7 +132,7 @@ const Edit = ({match, history}) => {
 				{departments && departments.map((el,i)=>{
 
 					return(
-						<option selected={user.division&& (user.division.divname==el.divname ? true : false)} value={el.divname}>{el.divname}</option>
+						<option selected={user.division&& (user.division.divname===el.divname ? true : false)} value={el.divname}>{el.divname}</option>
 					)
 				})}
 				

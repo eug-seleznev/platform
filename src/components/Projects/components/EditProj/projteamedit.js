@@ -1,10 +1,9 @@
 import { Bold, Thin } from "../../../../Styles/typography"
 import style from '../../../../Styles/modules/components/Project/editproj.module.css'
-import styles from '../../../../Styles/modules/components/proposesCard.module.css'
 import { useDispatch } from "react-redux"
 import { addToProject } from "../../../../redux/actions/projects"
-import { Table, Td, Tr } from "../../../../Styles/tables"
-import { Button, CancelButton } from "../../../../Styles/buttons"
+
+import {CancelButton } from "../../../../Styles/buttons"
 import { useState } from "react"
 import { url } from "../../../utils/axios"
 import Search from "../../../User/Search"
@@ -14,7 +13,7 @@ const ProjTeamEdit = ({project}) => {
     const dispatch = useDispatch()
 	const [invite,setInvite] = useState(false)
 	const deliteUser =(userId)=>{
-		console.log(project.crypt)
+		
 		dispatch(addToProject (project.crypt,userId))
 	
 	}
@@ -47,7 +46,7 @@ const ProjTeamEdit = ({project}) => {
 								<td   className={style.off}><Thin size='14'>{el.user.email}</Thin></td>					
 								<td   className={style.off__too}><Thin size='14'>{el.position}</Thin></td>	
 								<td><CancelButton style={{backgroundColor:'white', border:'none',color:'black'}} size='20' onClick={()=>deliteUser(el.user._id)} key={i}>Удалить из команды</CancelButton></td>
-								<td className={style.off}><img src={url+'/'+el.user.avatar} className={style.image}></img></td>
+								<td className={style.off}><img alt='нет' src={url+'/'+el.user.avatar} className={style.image}></img></td>
 						</tr>
 						
 						)

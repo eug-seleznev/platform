@@ -1,11 +1,10 @@
 import { useDispatch, useSelector } from "react-redux"
-import { Card } from "../../Styles/common"
-import { H1, H3, Regular} from '../../Styles/typography'
+import { Regular} from '../../Styles/typography'
 import style from '../../Styles/modules/components/Project/allproj.module.css'
 import { useEffect } from "react"
 import { background } from "../../redux/actions/user"
-const { Container, Title,} = require("../../Styles/common")
-const { Table, Tr, Td, New_table, New_Tr, New_thead, New_Th, New_Td, New_tbody } = require("../../Styles/tables")
+
+const {NEW_TBODY, NEW_TABLE, NEW_THEAD, NEW_TH, NEW_TR, NEW_TD } = require("../../Styles/tables")
 
 
 
@@ -27,36 +26,35 @@ const MyProjects = ({history}) => {
            <Regular size='16' color='#3F496C' className={style.title}>Мои проекты</Regular>
             {!projects ? <p> проектов нет  </p>: (
 
-            <New_table>
-                <New_thead>
-                    <New_Tr className={style.first} top='top'> 
-                        <New_Th>Название</New_Th>
+            <NEW_TABLE>
+                <NEW_THEAD>
+                    <NEW_TR className={style.first} top='top'> 
+                        <NEW_TH>Название</NEW_TH>
                         
-                        <New_Th>Дедлайн</New_Th>
-                        <New_Th className={style.turn__off}>Статус</New_Th>
-                        <New_Th>Спринты</New_Th>
-                    </New_Tr>
-                </New_thead>
+                        <NEW_TH>Дедлайн</NEW_TH>
+                        <NEW_TH className={style.turn__off}>Статус</NEW_TH>
+                        <NEW_TH>Спринты</NEW_TH>
+                    </NEW_TR>
+                </NEW_THEAD>
                 
-                <New_tbody>
+                <NEW_TBODY>
                     {projects.map((project,index) => {
                     
                     return(  
-                    <New_Tr className={style.tr} key={index} onClick={() => history.push(`/projects/${project.crypt}`)} title="Открыть проект">
+                    <NEW_TR className={style.tr} key={index} onClick={() => history.push(`/projects/${project.crypt}`)} title="Открыть проект">
                     
-                        <New_Td>{project.title}</New_Td>
-                        
-                        <New_Td>{project.dateFinish!==undefined&&project.dateFinish!==null?project.dateFinish.slice(0, 10):'нет'}</New_Td>
-                        <New_Td className={style.turn__off}>{project.status ? <p>Завершен</p>:<p>В работе</p>}</New_Td>
-                        <New_Td>{project.sprints.filter(sprint => sprint.status).length}/{project.sprints.length}</New_Td>
-                    </New_Tr>
+                        <NEW_TD>{project.title}</NEW_TD>
+                        <NEW_TD>{project.dateFinish!==undefined&&project.dateFinish!==null?project.dateFinish.slice(0, 10):'нет'}</NEW_TD>
+                        <NEW_TD className={style.turn__off}>{project.status ? <p>Завершен</p>:<p>В работе</p>}</NEW_TD>
+                        <NEW_TD>{project.sprints.filter(sprint => sprint.status).length}/{project.sprints.length}</NEW_TD>
+                    </NEW_TR>
                     )
                 })}
-                </New_tbody>
+                </NEW_TBODY>
                 
                 
            
-            </New_table>
+            </NEW_TABLE>
                         )}
          
         </div> 

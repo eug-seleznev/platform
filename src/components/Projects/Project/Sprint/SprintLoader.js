@@ -11,10 +11,10 @@ export const SprintLoader = (props) => {
 
 
   useEffect(() => {
-    console.log(props.sprint, 'my sprint on loader')
+    // console.log(props.sprint, 'my sprint on loader')
   }, [props.sprint])
 
-  if (props.sprint.length == 0 && !props.project.team ) {
+  if (props.sprint.length === 0 && !props.project.team ) {
     return <p> loading...</p>;
   }
 

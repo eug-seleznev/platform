@@ -84,7 +84,7 @@ position: fixed;
 top:2vh;
 left:20vw;
 width:60vw;
-background-color:${props => props.color=='green'?'rgba(0,255,0,0.1)':props => props.color=='red'?'rgba(255,0,0,0.1)':''};
+background-color:${props => props.color==='green'?'rgba(0,255,0,0.1)':props => props.color==='red'?'rgba(255,0,0,0.1)':''};
 border: solid ${props => props.color} 1px;
 font-family: SuisseIntlThin;
 padding-top: 10px;
@@ -95,7 +95,7 @@ padding-top:10px;
 padding-left:10px;
 @media(max-width:1000px){
     font-family: SuisseIntlSemibold;
-    background-color:${props => props.color=='green'?'rgba(0,208,86,1)':props => props.color=='red'?'rgba(255,0,0,1)':''};
+    background-color:${props => props.color==='green'?'rgba(0,208,86,1)':props => props.color==='red'?'rgba(255,0,0,1)':''};
 }
 `
 

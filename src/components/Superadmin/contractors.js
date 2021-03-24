@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux"
-import { Card } from "../../Styles/common"
-import { Bold, H1, H3, Regular, Thin} from '../../Styles/typography'
+
+import { Bold, Regular, Thin} from '../../Styles/typography'
 import style from '../../Styles/modules/components/Project/allproj.module.css'
 import { useEffect, useState } from "react"
 import {useDispatch} from "react-redux"
 import { allContractors, background, findContractorName } from "../../redux/actions/user"
 import { SearchInput } from "../../Styles/Forms"
-const { Table, Tr, Td, New_table, Select, New_thead, New_Tr, New_Th, New_Td, New_tbody } = require("../../Styles/tables")
+const { NEW_TD, NEW_TR, NEW_TBODY, NEW_TH, NEW_THEAD, NEW_TABLE } = require("../../Styles/tables")
 
 
 
@@ -45,11 +45,11 @@ const Contractors = ({history}) => {
             <Regular size='16' color='#3F496C' className={style.title}> Все субподрядчики</Regular>
             <div className={style.row}>
                 <div className={style.row__in}>
-                        <img src='/lupa.png' className={style.row__img}></img>
+                        <img src='/lupa.png' alt='lupa' className={style.row__img}></img>
                         <SearchInput size='14px' onChange={findContractor} name='name' placeholder='Поиск субподрядчика'  ></SearchInput>
                     </div>
                     <div className={style.row__in}>
-                        <img src='/lupa.png' className={style.row__img}></img>
+                        <img src='/lupa.png'alt='lupa' className={style.row__img}></img>
                         <SearchInput size='14' onChange={findContractor} name='partition' placeholder='По разделу'></SearchInput>
                     </div>
                     <div className={style.row__in}>
@@ -60,42 +60,42 @@ const Contractors = ({history}) => {
                 </div>
             {!contractors ? <p> проектов нет  </p>: (
 
-            <New_table>
-                <New_thead>
-                    <New_Tr className={style.first} top='top'> 
-                    <New_Th onClick={() => sortFunction("name")}>Имя &#8597;</New_Th>
-                    <New_Th>Разделы</New_Th>
-                    <New_Th>Телефон</New_Th>
-                    <New_Th
+            <NEW_TABLE>
+                <NEW_THEAD>
+                    <NEW_TR className={style.first} top='top'> 
+                    <NEW_TH onClick={() => sortFunction("name")}>Имя &#8597;</NEW_TH>
+                    <NEW_TH>Разделы</NEW_TH>
+                    <NEW_TH>Телефон</NEW_TH>
+                    <NEW_TH
                     onClick={() => sortFunction("email")}
                     className={style.turn__off}
-                    >email &#8597;</New_Th>
+                    >email &#8597;</NEW_TH>
                         {/* <Td>Спринты</Td> */}
-                    </New_Tr>
-                </New_thead>
+                    </NEW_TR>
+                </NEW_THEAD>
                 
-                <New_tbody>
+                <NEW_TBODY>
                     {contractors.map((contractor,index) => {
                     return(  
-                    <New_Tr className={style.contractors} key={index} onClick={()=> pushToEdit(contractor._id)} title="Редактировать информацию">
+                    <NEW_TR className={style.contractors} key={index} onClick={()=> pushToEdit(contractor._id)} title="Редактировать информацию">
                     
-                        <New_Td>{contractor.fullname}</New_Td>
-                        <New_Td style={{display:'flex',flexWrap:'wrap',alignItems:'center', maxWidth:'200px'}}>{contractor.partition.map((el,i)=>{
+                        <NEW_TD>{contractor.fullname}</NEW_TD>
+                        <NEW_TD style={{display:'flex',flexWrap:'wrap',alignItems:'center', maxWidth:'200px'}}>{contractor.partition.map((el,i)=>{
                             return(<Bold style={{marginRight:'15px'}}>
                                 {el}
                             </Bold>)
-                        })}</New_Td>
-                        <New_Td>{contractor.phone}</New_Td>
-                        <New_Td className={style.turn__off}>{contractor.email}</New_Td>
+                        })}</NEW_TD>
+                        <NEW_TD>{contractor.phone}</NEW_TD>
+                        <NEW_TD className={style.turn__off}>{contractor.email}</NEW_TD>
                         {/* <Td>{project.sprints.filter(sprint => sprint.status).length}/{project.sprints.length}</Td> */}
-                    </New_Tr>
+                    </NEW_TR>
                     )
                 })}
-                </New_tbody>
+                </NEW_TBODY>
                
                 
            
-            </New_table>
+            </NEW_TABLE>
                         )}
            
         </div> 

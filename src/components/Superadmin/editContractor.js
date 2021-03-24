@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import {editContractor, getContractor} from '../../redux/actions/user';
-import { Button, CancelButton } from '../../Styles/buttons';
+import { Button} from '../../Styles/buttons';
 import {  Bold, Thin} from '../../Styles/typography'
 import style from '../../Styles/modules/components/Project/createPr.module.css'
 import Partition from '../User/partition';

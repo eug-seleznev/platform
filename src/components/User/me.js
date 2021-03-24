@@ -10,7 +10,7 @@ import  ProfileComponent  from '../Main/profileComponent'
 import ProjectsCard from '../Main/projectsCard'
 
 
-const MyProfile = ({match, history}) => {
+const MyProfile = ({ history}) => {
     // let {id} = match.params;
     const dispatch = useDispatch ()
     // const loaded = useSelector(state => state.auth.loaded)
@@ -20,8 +20,8 @@ const MyProfile = ({match, history}) => {
         dispatch (loadUser())
     },[])
     useEffect(()=>{
-        if (user!=undefined){
-            console.log(user)
+        if (user!==undefined){
+            // console.log(user)
            setPermission(user.permission)
         } 
      },[user])
@@ -36,7 +36,7 @@ const MyProfile = ({match, history}) => {
                     {user.projects.map((el,i)=>{
                         
                         return(
-                            <ProjectsCard project={el} permission={permission} sprints={user.sprints} history={history}/>
+                            <ProjectsCard project={el} key={i} permission={permission} sprints={user.sprints} history={history}/>
                         )
                     })}
                     

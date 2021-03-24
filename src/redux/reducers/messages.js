@@ -10,7 +10,7 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case ERROR_MSG:
-      console.log(payload)
+      // console.log(payload)
 
       return {
         ...state,
@@ -18,7 +18,7 @@ export default function (state = initialState, action) {
         
       };
       case GREEN_MSG:
-        console.log(payload)
+        // console.log(payload)
       return {
         ...state,
         msg: payload.msg,

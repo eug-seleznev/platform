@@ -1,7 +1,7 @@
 import { Bold, Thin } from "../../../../Styles/typography"
 import style from '../../../../Styles/modules/components/Project/editproj.module.css'
 import { useRef, useState } from "react"
-import { Button, ButtonText, ButtonTextDiv } from "../../../../Styles/buttons"
+import { ButtonTextDiv } from "../../../../Styles/buttons"
 
 
 

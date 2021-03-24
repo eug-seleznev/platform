@@ -1,8 +1,6 @@
 import './news.css'
-import { useEffect, useState } from "react"
+import {  useState } from "react"
 import { useDispatch } from "react-redux"
-
-import { allNews, createNews} from '../../redux/actions/news';
 import { Button, CancelButton } from '../../Styles/buttons';
 import {  Thin} from '../../Styles/typography'
 import style from '../../Styles/modules/components/Project/createPr.module.css'

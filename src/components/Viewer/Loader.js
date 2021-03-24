@@ -22,7 +22,7 @@ const Loader = (props) => {
         if(loading){
             let {crypt, name} = props;
              new_interval = setInterval(() => {
-                 if (props.status.split(" ")[0] == "complete" ) {
+                 if (props.status.split(" ")[0] === "complete" ) {
                         setLoading(false);
                  }
                 dispatch(Status({ crypt, name }));
@@ -37,7 +37,7 @@ const Loader = (props) => {
     }, [loading]);
 
 useEffect(() => {
-    if (props.status.split(" ")[0] == "complete" ) {
+    if (props.status.split(" ")[0] === "complete" ) {
         setLoading(false);
         clearInterval(new_interval);
     }

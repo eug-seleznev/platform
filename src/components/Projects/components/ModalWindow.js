@@ -2,8 +2,8 @@
 import { ModalContainer,ModalWind } from "../../../Styles/common"
 import SprintForm from './sprintForm'
 
-import style from '../../../Styles/modules/components/Project/modWindow.module.css'
-import {H1, Bold } from "../../../Styles/typography"
+
+import { Bold } from "../../../Styles/typography"
 import ProjectNew from "../newProject";
 import AddContractor from "../../Superadmin/addContractor";
 import CreateNew from "../../Superadmin/createNew";

@@ -8,7 +8,7 @@ border-bottom: 2px solid Black;
 
 `
 
-export const Sprint_Table = styled.table`
+export const SPRINT_TABLE = styled.table`
   margin: 0;
   margin-bottom: 40px;
   border: none;
@@ -20,7 +20,7 @@ export const TR = styled.tr`
     border: none;
   
 `
-export const Sprint_Td = styled.td`
+export const SPRINT_TD = styled.td`
     height: 28px;
     border: none;
     font-family: SuisseIntlLight;
@@ -33,18 +33,18 @@ export const Select = styled.select`
     font-family: SuisseIntlLight;
     font-size:16px;
 `
-export const New_table = styled.table`
+export const NEW_TABLE = styled.table`
 border-collapse: collapse;
   
    border-radius:5px;
     background-color: white;
 `
-export const New_thead = styled.thead`
+export const NEW_THEAD = styled.thead`
    width:100%;
 
   
 `
-export const New_Tr = styled.tr`
+export const NEW_TR = styled.tr`
 
 padding:30px;
 height:fit-content;
@@ -55,7 +55,7 @@ cursor:pointer;
 }
 `
 
-export const New_Th = styled.th`
+export const NEW_TH = styled.th`
 
 color: #8C8C8C;
 font-family: SuisseIntlThin;
@@ -65,7 +65,7 @@ padding-right: 10px;
 padding-top: 20px;
 padding-bottom: 20px
 `
-export const New_Td = styled.td`
+export const NEW_TD = styled.td`
     font-size: 14px;
     text-align: left;
     vertical-align: middle;
@@ -89,7 +89,7 @@ export const Fr_Td = styled.td`
         text-align: left;
     }
 `
-export const New_tbody = styled.tbody`
+export const NEW_TBODY = styled.tbody`
     width:100%;
 `
 export const Tr = styled.div` //need columns='...' on <Tr> and top='top' on sorting <Tr>

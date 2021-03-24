@@ -4,18 +4,18 @@
 
 
 //профиль пользователя по ID
-import './projects.css'
+
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 
 
 import { allProjects, sortProjects,searchObject, sortTitle, sorType, clearSprint } from '../../redux/actions/projects';
-import search from '../../Styles/modules/components/Project/createPr.module.css'
+
 import style from '../../Styles/modules/components/Project/allproj.module.css'
-import { Table, Tr, Td, Select, New_table, New_tbody, New_thead, New_Td, New_Th, New_Tr } from '../../Styles/tables';
-import { Card, } from '../../Styles/common'
-import { Bold, H1, Light, Regular, Thin} from '../../Styles/typography'
+import { Select, NEW_TABLE, NEW_TBODY, NEW_THEAD, NEW_TD, NEW_TH, NEW_TR } from '../../Styles/tables';
+
+import { Bold, Regular, Thin} from '../../Styles/typography'
 import {Circle} from '../../Styles/project'
 import { SearchInput } from '../../Styles/Forms';
 import { ButtonText } from '../../Styles/buttons';
@@ -29,7 +29,7 @@ let field = "type";
 
 let  types = ["Все",'Архитектура', "Визуализация", "Сети", "Экстерьер", "Интерьер", "Ландшафт", "Конструкции", 'Другое']
 
-const Projects = ({history, match, location}) => {
+const Projects = ({history,location}) => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.auth.user)
     const objectList = useSelector(state => state.projects.objectList)
@@ -39,7 +39,7 @@ const Projects = ({history, match, location}) => {
     // const [activeField, setActiveField] = useState('Все')
     const [filter, setFilter] = useState('Все')
 
-    const [value, setActiveField] = useState(
+    const [value] = useState(
       decodeURI(location.search).split("?")[1]
     );
   
@@ -47,7 +47,7 @@ const Projects = ({history, match, location}) => {
     useEffect (()=>{
       dispatch(allProjects()) 
       dispatch(clearSprint());
-      console.log('emm?')
+      // console.log('emm?')
     }, [])
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const Projects = ({history, match, location}) => {
 
       // value = decodeURI(value);
       // setActiveField(decodeURI(value));
-      console.log(value)
+      // console.log(value)
       // console.log(field, activeField);
       
 
@@ -79,7 +79,7 @@ const Projects = ({history, match, location}) => {
   }, [])
   useEffect(()=>{
     // if(search!==''){
-       console.log(search)
+      //  console.log(search)
       dispatch(searchObject(search))
       let value = search;
       let field = "object";
@@ -105,12 +105,12 @@ const Projects = ({history, match, location}) => {
       dispatch(sortTitle({value}))
 
     }
-    const getSearchRes =()=>{
-      let value = search;
-      let field = "object";
-      dispatch(sorType({field, value}))
-      setSearch('')
-    }
+    // const getSearchRes =()=>{
+    //   let value = search;
+    //   let field = "object";
+    //   dispatch(sorType({field, value}))
+    //   setSearch('')
+    // }
    
       
       
@@ -138,11 +138,11 @@ const Projects = ({history, match, location}) => {
                <ButtonText fontSize='14px' style={{fontFamily:'SuisseIntlSemibold'}}>Создать новый проект</ButtonText></Link>
               </div>}
              <div className={style.row__in}>
-               <img src='/lupa.png' className={style.row__img}></img>
+               <img alt='lupa'  src='/lupa.png' className={style.row__img}></img>
                <SearchInput size='14px' placeholder='Поиск по названию' name='title' onChange={projectTitle}></SearchInput>
              </div>
              <div className={style.row__in}>
-               <img src='/lupa.png' className={style.row__img}></img>
+               <img alt='lupa' src='/lupa.png' className={style.row__img}></img>
                <div>
                 <SearchInput size='14px' placeholder='Поиск по объекту' value={search} onChange={(e)=>{setSearch(e.target.value)}}></SearchInput>
                 <div className={style.input} style={{display:`${search===''?'none':'block'}`}} >
@@ -152,7 +152,7 @@ const Projects = ({history, match, location}) => {
                     )
                   })}
                 </div>
-                <ButtonText style={{marginLeft:'10px'}} onClick={getSearchRes}>Искать</ButtonText>
+                {/* <ButtonText style={{marginLeft:'10px'}} onClick={getSearchRes}>Искать</ButtonText> */}
                </div>
               
              </div>
@@ -172,40 +172,40 @@ const Projects = ({history, match, location}) => {
                </Select>
              </div>
           </div>
-          <New_table style={{border:'none'}}>
-            <New_thead>
-              <New_Tr className={style.first} top="top">
-                <New_Th onClick={() => sortFunction("title")}>Название &#8597;</New_Th>
+          <NEW_TABLE style={{border:'none'}}>
+            <NEW_THEAD>
+              <NEW_TR className={style.first} top="top">
+                <NEW_TH onClick={() => sortFunction("title")}>Название &#8597;</NEW_TH>
                 
-                <New_Th
+                <NEW_TH
                   onClick={() => sortFunction("dateStart")}
                   className={style.turn__off}
                 >
                   Начало проекта &#8597;
-                </New_Th>
-                <New_Th
+                </NEW_TH>
+                <NEW_TH
                   onClick={() => sortFunction("dateFinish")}
                 
                 >
                   Дедлайн &#8597;
-                </New_Th>
-                <New_Th  className={style.turn__off}>
+                </NEW_TH>
+                <NEW_TH className={style.turn__off}>
                   <form>
                     <Select  onChange={projectType} defaultValue='Тип'name='type' style={{width:'100%'}}>
-                      {types.map((type) => {
-                        return <option value={type}>{type}</option>;
+                      {types.map((type,i) => {
+                        return <option key={i} value={type}>{type}</option>;
                       })}
                     </Select>
                   </form>
-                </New_Th>
-                <New_Th onClick={() => sortFunction("status")} >Статус &#8597;</New_Th>
-                <New_Th>Объект </New_Th>
+                </NEW_TH>
+                <NEW_TH  onClick={() => sortFunction("status")} >Статус &#8597;</NEW_TH>
+                <NEW_TH >Объект </NEW_TH>
                 
-                <New_Th className={style.turn__off}>Спринты</New_Th>
-            </New_Tr>
-            </New_thead>
+                <NEW_TH className={style.turn__off}>Спринты</NEW_TH>
+            </NEW_TR>
+            </NEW_THEAD>
            
-          <New_tbody>
+          <NEW_TBODY>
             {projects
               .filter((project) =>  filter==='В работе'? !project.status: 
               filter==='Завершенные'?project.status: project)
@@ -216,49 +216,65 @@ const Projects = ({history, match, location}) => {
 
               {
                 return (
-                  <New_Tr
-                    
+                  <NEW_TR
                     key={index}
-                    onClick={() =>
-                      history.push(`/projects/${project.crypt}`)
-                    }
+                    onClick={() => history.push(`/projects/${project.crypt}`)}
                     title="Открыть проект"
                   >
-                    <New_Td>{project.title}</New_Td>
-                    <New_Td className={style.turn__off}>
+                    <NEW_TD>{project.title}</NEW_TD>
+                    <NEW_TD className={style.turn__off}>
                       {project.dateStart.slice(0, 10)}
-                    </New_Td>
-                    <New_Td >
+                    </NEW_TD>
+                    <NEW_TD>
                       {project.dateFinish !== undefined &&
                       project.dateFinish !== null
                         ? project.dateFinish.slice(0, 10)
                         : "нет"}
-                    </New_Td>
-                    <New_Td className={style.turn__off} style={{paddingTop:'10px'}}><Tag tagText={project.type}
-                            tagColor={project.type==="Архитектура"?"#C8DDE9":
-                            project.type==="Конструкции" ?"#E9E3C8":
-                            project.type==="Интерьер"?"#B4FAF6":
-                            project.type==="Ландшафт"?"#68D286":
-                            project.type==="Сети"?"#F1EFEF":"#C8DDE9"}></Tag></New_Td>
-                    <New_Td style={{paddingTop:'10px'}}>
-                      {project.status ? <Tag tagText="Завершен" tagColor="#F1EFEF" ></Tag> : <Tag tagText="В работе" tagColor="#AAF790" ></Tag>}
-                    </New_Td>
-                    <New_Td style={{paddingTop:'10px'}}>
+                    </NEW_TD>
+                    <NEW_TD
+                      className={style.turn__off}
+                      style={{ paddingTop: "10px" }}
+                    >
+                      <Tag
+                        tagText={project.type}
+                        tagColor={
+                          project.type === "Архитектура"
+                            ? "#C8DDE9"
+                            : project.type === "Конструкции"
+                            ? "#E9E3C8"
+                            : project.type === "Интерьер"
+                            ? "#B4FAF6"
+                            : project.type === "Ландшафт"
+                            ? "#68D286"
+                            : project.type === "Сети"
+                            ? "#F1EFEF"
+                            : "#C8DDE9"
+                        }
+                      ></Tag>
+                    </NEW_TD>
+                    <NEW_TD style={{ paddingTop: "10px" }}>
+                      {project.status ? (
+                        <Tag tagText="Завершен" tagColor="#F1EFEF"></Tag>
+                      ) : (
+                        <Tag tagText="В работе" tagColor="#CCE9C8"></Tag>
+                      )}
+                    </NEW_TD>
+                    <NEW_TD style={{ paddingTop: "10px" }}>
                       {project.object}
-                    </New_Td>
-                    <New_Td className={style.turn__off}>
+                    </NEW_TD>
+                    <NEW_TD className={style.turn__off}>
                       {project.sprints.filter((sprint) => !sprint.status)
                         .length >= 1 ? (
-                        <Circle green />
+                        <Circle color="green" />
                       ) : (
-                        <Circle red />
+                        <Circle color="red" />
                       )}
-                    </New_Td>
-                  </New_Tr>
+                    </NEW_TD>
+                  </NEW_TR>
                 );
               })}
-              </New_tbody>
-          </New_table>
+              </NEW_TBODY>
+          </NEW_TABLE>
         
 
        

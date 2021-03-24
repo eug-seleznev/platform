@@ -1,15 +1,7 @@
-import { useEffect, useRef, useState } from "react"
-import { useDispatch, useSelector } from "react-redux";
-import { Oauth } from "../../redux/actions/models";
-
-
+import { useEffect, useRef, } from "react"
 var viewer;
-
-
-
-
 const Viewer = ({ oauth, projectTitle, urn }) => {
-  const dispatch = useDispatch();
+ 
   let Autodesk = window.Autodesk;
   const container = useRef();
   console.log(urn, 'myurn')

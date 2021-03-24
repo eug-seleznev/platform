@@ -67,7 +67,7 @@ const App = () => {
 
   useEffect(() => {
     if (loaded) {
-      console.log(localStorage.token, 'FOR POSTMAN'); //for postman tests
+      // console.log(localStorage.token, 'FOR POSTMAN'); //for postman tests
       // innerBackend(localStorage.token);
       setAuthToken(localStorage.token)
       setTimeout(() => {
@@ -84,7 +84,7 @@ const App = () => {
   useEffect(() => {
     const handleResize = () => {
     setDimensions ({width: window.innerWidth, height: window.innerHeight})  
-    console.log (dimensions, 'uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu')
+    // console.log (dimensions, 'uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu')
   }
   
     window.addEventListener('resize', handleResize)

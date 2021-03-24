@@ -1,6 +1,6 @@
-import {REGISTER, AUTH_ERROR, LOGIN, USER_LOADED,CHANGE_AVATAR,CLEAR_MSG,CLEAR_ERROR, CHANGE_USERDATA, CHANGE_LOADED, ADD_SPRINT_TO_CHOSEN, SPRINT_ERROR,ERROR_MSG, GREEN_MSG} from '../types'
+import {REGISTER, LOGIN, USER_LOADED,CHANGE_AVATAR,CLEAR_MSG,CLEAR_ERROR, CHANGE_USERDATA, CHANGE_LOADED, ADD_SPRINT_TO_CHOSEN, ERROR_MSG, GREEN_MSG} from '../types'
 import {innerBackend, instance, setAuthToken} from '../../components/utils/axios'
-import Axios from 'axios';
+
 
 
 // LOAD USER 
@@ -118,7 +118,7 @@ export const changeData = (formData) => async dispatch  => {
   // }
   //////////////////////
   try {
-      console.log('hello change', formData)
+      // console.log('hello change', formData)
       const res = await innerBackend.put(`/users/me`, formData)
       dispatch({
           type: CHANGE_USERDATA,
