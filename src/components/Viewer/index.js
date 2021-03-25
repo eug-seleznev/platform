@@ -1,19 +1,12 @@
 import { useEffect, useRef, } from "react"
+import './Extensions/setup'
+import pdf from './pdf/test2.pdf'
+let env = 'prod';
 var viewer;
-const Viewer = ({ oauth, projectTitle, urn }) => {
+const Viewer = ({ oauth, projectTitle, urn, oldUrn }) => {
  
   let Autodesk = window.Autodesk;
   const container = useRef();
-  console.log(urn, 'myurn')
-  // let options = {
-  //   env: "AutodeskProduction",
-  //   api: "derivativeV2", // for models uploaded to EMEA change this option to 'derivativeV2_EU'
-  //   getAccessToken: function (onTokenReady) {
-  //     var token = oauth.token
-  //     var timeInSeconds = 3600; // Use value provided by Forge Authentication (OAuth) API
-  //     onTokenReady(token, timeInSeconds);
-  //   },
-  // };
 
   var options = {
     env: "AutodeskProduction",
@@ -21,24 +14,138 @@ const Viewer = ({ oauth, projectTitle, urn }) => {
     api: "derivativeV2_EU", // for models uploaded to EMEA change this option to 'derivativeV2_EU'
   };
 
+
+  var config3d = {
+    extensions: [
+      "Autodesk.PDF",
+      "Autodesk.DocumentBrowser",
+      "MyAwesomeExtension",
+    ],
+  };
+
+
+
+      const options_load = {
+        keepCurrentModels: true,
+      };
+
+
+    var extensionConfig = {};
+
+
+
+
+
+
+
+
+
+
+
   useEffect(() => {
+
+
+
+
+
+    console.log(oldUrn, 'old ')
+
+      if(env==='dev'){
+          Autodesk.Viewing.Initializer(options, function() {
+          var viewer = new Autodesk.Viewing.GuiViewer3D(container.current, {}); 
+          viewer.start();
+         if (!pdf) return;
+         viewer
+           .loadExtension("Autodesk.PDF", "Autodesk.DocumentBrowser")
+           .then(() => {
+             viewer.loadModel(window.location.origin + "/pdf/test.pdf", {});
+           });
+
+});
+      
+      
+      
+      
+      }
+
+
+      
+       
+
+      if(env == 'prod'){
+
+
     Autodesk.Viewing.Initializer(options, () => {
-      viewer = new Autodesk.Viewing.GuiViewer3D(container.current);
+      viewer = new Autodesk.Viewing.GuiViewer3D(container.current, config3d);
       viewer.start();
       let documentId = "urn:" + urn;
+      let oldV = "urn:" + oldUrn[oldUrn.length - 2].urn;
+
+
+  
+
       Autodesk.Viewing.Document.load(
-        documentId,
+        oldV,
         onDocumentLoadSuccess,
         onDocumentLoadFailure
       );
-    });
+
+       Autodesk.Viewing.Document.load(
+         documentId,
+         onDocumentLoadSuccess,
+         onDocumentLoadFailure
+       );
+
+      })
+    }
+   
+
+
+
+     
   }, []);
 
+
+
   function onDocumentLoadSuccess(doc) {
-    let viewables = doc.getRoot().getDefaultGeometry();
-    viewer.loadDocumentNode(doc, viewables).then((i) => {
-      console.log(Autodesk.Viewing.UI.ToolBar);
-    });
+
+        viewer.loadModel(
+      "https://developer.api.autodesk.com/derivativeservice/v2/derivatives/urn%dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6emdzazR4b3o0OWFicXdrb2JldG9pbmwyb2hobDRka2xfYnVyb19tb2RlbF9idWNrZXQvYTRmNGQ1ZTVmODQ1OWQzMjA0ZGYyNWU1OTE3ZTFiNTcucnZ0.svf",
+      {}, () => {
+        console.log( "new");
+      }
+    );
+
+        let viewables = doc.getRoot().getDefaultGeometry();
+        // console.log(doc.getRoot().getDefaultGeometry());
+        
+        viewer.loadDocumentNode(doc, viewables, options_load).then((i) => {
+          extensionConfig.mimeType = "application/vnd.autodesk.revit";
+          extensionConfig.primaryModels = [viewer.getVisibleModels()[1]];
+          extensionConfig.diffModels = [viewer.getVisibleModels()[0]];
+          extensionConfig.diffMode = "overlay";
+          extensionConfig.versionA = "2";
+          extensionConfig.versionB = "1";
+        }).then(() => {
+         viewer
+           .loadExtension("Autodesk.DiffTool", extensionConfig)
+           .then(function (res) {
+             window.DIFF_EXT = viewer.getExtension("Autodesk.DiffTool");
+             console.log(window.DIFF_EXT);
+           })
+           .catch(function (err) {
+             console.log(err);
+           });
+
+        });
+
+
+        
+    
+
+
+ 
+
   }
 
   function onDocumentLoadFailure(viewerErrorCode) {
@@ -50,8 +157,8 @@ const Viewer = ({ oauth, projectTitle, urn }) => {
       <h1> model for: {projectTitle}</h1>
       <div
         style={{
-          width: "80vw",
-          height: "80vh",
+          width: "90vw",
+          height: "90vh",
           backgroundColor: "grey",
           left: "0px",
         }}
@@ -59,9 +166,11 @@ const Viewer = ({ oauth, projectTitle, urn }) => {
         <div
           id="forgeViewer"
           className="viewer-app"
-          style={{ position: "absolute", width: "80vw", height: "80vh" }}
+          style={{ position: "absolute", width: "90vw", height: "90vh" }}
           ref={container}
         ></div>
+        <button id="MyAwesomeLockButton">Extension</button>
+     
       </div>
     </>
   );
