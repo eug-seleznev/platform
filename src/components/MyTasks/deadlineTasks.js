@@ -11,7 +11,6 @@ import { Light } from "../../Styles/typography"
 const DeadlineTasks =({tasks, onChange,currentDate, delTask})=>{
 	const dispatch = useDispatch()
 	const [id, setId] = useState('')
-	const [addTask, setAddTask] = useState(false)
 	const [formData, setFormData] = useState({
 		taskTitle:'',
 		deadline: null
@@ -30,7 +29,7 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask})=>{
 	const addNewTask =()=>{
 		if(formData.taskTitle!==''){
 			dispatch(addUserTask(formData))
-			setAddTask(false)
+		
 			setFormData ({
 			taskTitle:'',
 			deadline: null
@@ -90,7 +89,7 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask})=>{
 											onClick={()=>setId(task._id)}
 											onChange={(e)=>onTextChange(e)}
 										></input>
-										<ButtonTextDiv onClick={()=>delTask(task._id)} style={{visibility: `${id===task._id?'visible':'hidden'}`}}>Удалить</ButtonTextDiv>
+										<ButtonTextDiv  onClick={()=>delTask(task._id)} style={{visibility: `${id===task._id?'visible':'hidden'}`}}>Удалить</ButtonTextDiv>
 									</NEW_TD>
 									<NEW_TD>
 										{task.deadline && getDate(task.deadline)}
