@@ -1,7 +1,7 @@
 import { useEffect, useRef, } from "react"
 import './Extensions/setup'
 import pdf from './pdf/test2.pdf'
-
+import { DangerButton } from "./Extensions/setup";
 
 let env = 'prod';
 var viewer;
@@ -28,26 +28,11 @@ const Viewer = ({ oauth, projectTitle, urn, oldUrn }) => {
         keepCurrentModels: true,
       };
 
-
-    var extensionConfig = {};
-
-
-
-
-
-
-
-
+      var extensionConfig = {};
 
 
 
   useEffect(() => {
-
-
-
-
-
-    console.log(oldUrn, 'old ')
 
       if(env==='dev'){
           Autodesk.Viewing.Initializer(options, function() {
@@ -103,7 +88,6 @@ const Viewer = ({ oauth, projectTitle, urn, oldUrn }) => {
 
      
   }, []);
-
 
 
   function onDocumentLoadSuccess(doc) {

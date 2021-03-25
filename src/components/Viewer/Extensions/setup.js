@@ -1,13 +1,25 @@
+import { connect } from "react-redux";
+
 let Autodesk = window.Autodesk;
 
-class VersionExtension extends Autodesk.Viewing.Extension {
-  constructor(viewer, options) {
-    super(viewer, options);
+export class VersionExtension extends Autodesk.Viewing.Extension {
+  constructor(viewer, options, urn) {
+    super(viewer, options, urn);
     this._group = null;
     this._button = null;
   }
 
+  // handleVersions(){
+  //    this.props.addTodo(this.state.input);
+  //    this.setState({ input: "" });
+  // }
+
+  TestMethode(props) {
+    console.log(props, 'heuuu')
+  }
+
   load() {
+    console.log(this.viewer, 'test redux')
     console.log("MyAwesomeExtensions has been loaded");
     return true;
   }
@@ -25,9 +37,7 @@ class VersionExtension extends Autodesk.Viewing.Extension {
 
   onToolbarCreated() {
     // Create a new toolbar group if it doesn't exist
-    this._group = this.viewer.toolbar.getControl(
-      "VersionToolBar"
-    );
+    this._group = this.viewer.toolbar.getControl("VersionToolBar");
     if (!this._group) {
       this._group = new Autodesk.Viewing.UI.ControlGroup("VersionToolBar");
       this.viewer.toolbar.addControl(this._group);
@@ -36,7 +46,6 @@ class VersionExtension extends Autodesk.Viewing.Extension {
     // Add a new button to the toolbar group
     this._button = new Autodesk.Viewing.UI.Button("VersionButton");
     this._button.onClick = (ev) => {
-      console.log('hello world')
       // Execute an action here
       // Get current selection
       const selection = this.viewer.getSelection();
@@ -51,7 +60,9 @@ class VersionExtension extends Autodesk.Viewing.Extension {
             // Output properties to console
             console.log(props);
             // Ask if want to isolate
-            if (window.confirm(`Isolate ${props.name} (${props.externalId})?`)) {
+            if (
+              window.confirm(`Isolate ${props.name} (${props.externalId})?`)
+            ) {
               isolated.push(dbId);
               this.viewer.isolate(isolated);
             }
@@ -72,3 +83,15 @@ Autodesk.Viewing.theExtensionManager.registerExtension(
   "VersionExtension",
   VersionExtension
 );
+
+const mapStateToProps = (state) => {
+  const { urn } = state.projects.project;
+  return  urn;
+
+};
+
+
+
+
+// export default Todo;
+export default connect(mapStateToProps)(VersionExtension);
