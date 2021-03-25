@@ -51,9 +51,9 @@ const MyTasks =({tasks,onChange,currentDate, delTask})=>{
 	return(
 		<>
 		<div className={style.addTask}>
-			<ButtonTextDiv style={{display:`${!addTask?'block':'none'}`}} onClick={()=>{setAddTask(true)}}>Добавить задачу</ButtonTextDiv>
-			<div style={{display:`${addTask?'flex':'none'}`}}>
-				<input placeholder="Добавить задачу" name="taskTitle" type="text"value={formData.taskTitle} onChange={(e)=>{onTaskChange(e)}}></input>
+			
+			<div>
+				<input placeholder="Добавить задачу"  onKeyDown={(e)=>e.key==='Enter'?addNewTask(e):''}name="taskTitle" type="text"value={formData.taskTitle} onChange={(e)=>{onTaskChange(e)}}></input>
 				{/* <input placeholder="Дедлайн" name="deadline" type="date" onChange={(e)=>{onTaskChange(e)}}></input> */}
 				<ButtonTextDiv style={{marginLeft:'15px',marginTop:'5px'}} onClick={()=>addNewTask()}>Добавить</ButtonTextDiv>
 			</div>
