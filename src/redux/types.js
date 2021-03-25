@@ -23,6 +23,7 @@ export const FINISH_USER_TASK='FINISH_USER_TASK'
 export const EDIT_USER_TASK='EDIT_USER_TASK'
 export const USER_TASKS='USER_TASKS'
 export const SORT_USER_TASKS ='SORT_USER_TASKS'
+export const MY_TASK_DELITE ="MY_TASK_DELITE"
 //user errors
 export const USER_ERR = 'get_all_users_error'
 //search user 

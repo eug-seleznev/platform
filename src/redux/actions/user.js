@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { ALL_USERS,SORT_USER_TASKS, EDIT_USER_TASK, FINISH_USER_TASK,ADD_USER_TASK,FIND_CONTRACTOR, SEARCH_TABLE_USER,EDIT_CONTRACTOR, CHANGE_PERMISSION, PERM_RETURN,ONE_CONTRACTOR, ONE_USER,SEARCH_USER,BACK_WHITE,ADD_CONTRACTOR,ALL_CONTRACTORS, ERROR_MSG, GREEN_MSG,PARTITION_UPDATE, EDIT_TASK} from "../types";
+import { ALL_USERS,SORT_USER_TASKS,MY_TASK_DELITE, EDIT_USER_TASK, FINISH_USER_TASK,ADD_USER_TASK,FIND_CONTRACTOR, SEARCH_TABLE_USER,EDIT_CONTRACTOR, CHANGE_PERMISSION, PERM_RETURN,ONE_CONTRACTOR, ONE_USER,SEARCH_USER,BACK_WHITE,ADD_CONTRACTOR,ALL_CONTRACTORS, ERROR_MSG, GREEN_MSG,PARTITION_UPDATE, EDIT_TASK} from "../types";
 
 
 
@@ -218,6 +218,22 @@ export const sortUserTasks =(val) => async dispatch => {
 
     dispatch({
       type: SORT_USER_TASKS,
+      payload: res.data
+    })
+
+  } catch (err) {
+    console.log('lol')
+
+
+  }
+}
+export const myTaskDelite = (id) => async dispatch =>  {
+  try {
+
+    const res = await innerBackend.delete(`users/me/task/delete/${id}`)
+
+    dispatch({
+      type: MY_TASK_DELITE,
       payload: res.data
     })
 

@@ -5,10 +5,11 @@ import { NEW_TABLE, NEW_TBODY, NEW_TD, NEW_TH, NEW_THEAD, NEW_TR } from "../../S
 import { ButtonTextDiv} from "../../Styles/buttons"
 import getDate from "../Projects/getDate"
 import { useDispatch} from "react-redux"
-import { addUserTask, editUserTask } from "../../redux/actions/user"
+import { addUserTask, editUserTask, myTaskDelite } from "../../redux/actions/user"
 import { Light } from "../../Styles/typography"
 
-const MyTasks =({tasks,onChange,currentDate})=>{
+
+const MyTasks =({tasks,onChange,currentDate, delTask})=>{
 	const dispatch = useDispatch()
 	
 	const [id, setId] = useState('')
@@ -93,10 +94,12 @@ const MyTasks =({tasks,onChange,currentDate})=>{
 											className={newsp.input}
 											type="text"
 											defaultValue={task.taskTitle}
+											onKeyDown={(e)=>e.key==='Delete'?delTask(task._id):''}
 											name="taskTitle"
 											onClick={()=>setId(task._id)}
 											onChange={(e)=>onTextChange(e)}
 										></input>
+										<ButtonTextDiv onClick={()=>delTask(task._id)} style={{visibility: `${id===task._id?'visible':'hidden'}`}}>Удалить</ButtonTextDiv>
 									</NEW_TD>
 								</NEW_TR>
 									)

@@ -6,7 +6,7 @@ import myTasks from '../../Styles/modules/main/mytasks.module.css'
 import { useEffect, useState } from 'react'
 import ProjTasks from './projTasks'
 import { useDispatch, useSelector } from 'react-redux'
-import { background } from '../../redux/actions/user'
+import { background, myTaskDelite } from '../../redux/actions/user'
 import getCurrentMonth from './getCurrentMonth'
 import { finishUserTask } from "../../redux/actions/user"
 import getDate from '../Projects/getDate'
@@ -52,6 +52,9 @@ const [projList,setProjList] =useState([])
 	},[projList])
 	const pushBack =()=>{
 		history.push(`./`)
+	}
+	const delTask =(id)=>{
+		dispatch(myTaskDelite(id))
 	}
 	const pushToProject =(link)=>{
 		history.push(`./projects/${link}`)
@@ -99,10 +102,10 @@ const [projList,setProjList] =useState([])
 							<ProjTasks projList={projList} onChange={onChange} pushToProject={pushToProject} month={currentMonth} history={history} tasks={user.tasks}></ProjTasks>
 						</div>
 						<div style={{display:`${pages==='/today'?'block':'none'}`}}>
-							<UserTasks onChange={onChange} currentDate={currentDate} history={history} tasks={user.activeTasks}></UserTasks>
+							<UserTasks delTask={delTask} onChange={onChange} currentDate={currentDate} history={history} tasks={user.activeTasks}></UserTasks>
 						</div>
 						<div style={{display:`${pages==='/deferred'?'block':'none'}`}}>
-							<DeadlineTasks onChange={onChange} currentDate={currentDate} history={history} tasks={user.activeTasks}></DeadlineTasks>
+							<DeadlineTasks delTask={delTask} onChange={onChange} currentDate={currentDate} history={history} tasks={user.activeTasks}></DeadlineTasks>
 						</div>
 						<div style={{display:`${pages==='/history'?'block':'none'}`}}>
 							<TaskHistory onChange={onChange} pushToProject={pushToProject}  history={history} tasks={user.taskHistory}></TaskHistory>

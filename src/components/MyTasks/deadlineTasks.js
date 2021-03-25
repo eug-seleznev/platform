@@ -8,7 +8,7 @@ import { useDispatch} from "react-redux"
 import { addUserTask, editUserTask } from "../../redux/actions/user"
 import { Light } from "../../Styles/typography"
 
-const DeadlineTasks =({tasks, onChange,currentDate})=>{
+const DeadlineTasks =({tasks, onChange,currentDate, delTask})=>{
 	const dispatch = useDispatch()
 	const [id, setId] = useState('')
 	const [addTask, setAddTask] = useState(false)
@@ -93,9 +93,11 @@ const DeadlineTasks =({tasks, onChange,currentDate})=>{
 											type="text"
 											defaultValue={task.taskTitle}
 											name="taskTitle"
+											onKeyDown={(e)=>e.key==='Delete'?delTask(task._id):''}
 											onClick={()=>setId(task._id)}
 											onChange={(e)=>onTextChange(e)}
 										></input>
+										<ButtonTextDiv onClick={()=>delTask(task._id)} style={{visibility: `${id===task._id?'visible':'hidden'}`}}>Удалить</ButtonTextDiv>
 									</NEW_TD>
 									<NEW_TD>
 										{task.deadline && getDate(task.deadline)}
