@@ -19,9 +19,6 @@ const MyTasks =({tasks,onChange,currentDate, delTask})=>{
 		taskTitle:'',
 		deadline: null
 	})
-	useEffect(()=>{
-		console.log(tasks)
-	},[])
 	
 	const onTaskChange = (e) =>{
 		let input = e.target.value;

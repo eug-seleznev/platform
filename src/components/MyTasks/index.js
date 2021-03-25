@@ -35,7 +35,6 @@ const [projList,setProjList] =useState([])
 		
 	  }, [])
 	  useEffect(()=>{
-		  console.log(user.tasks)
 		user.tasks.filter(task=>task.project)
 		.map((task)=>{
 			
@@ -45,11 +44,6 @@ const [projList,setProjList] =useState([])
 		
 	   },[user.tasks])
 	
-	useEffect(()=>{
-	
-		console.log(projList)	
-		
-	},[projList])
 	const pushBack =()=>{
 		history.push(`./`)
 	}

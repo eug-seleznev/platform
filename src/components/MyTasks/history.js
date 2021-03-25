@@ -7,9 +7,6 @@ import { ButtonTextLight } from "../../Styles/buttons"
 
 
 const TaskHistory = ({tasks,onChange, pushToProject}) => {
-	// useEffect(()=>{
-	// 	console.log(tasks)
-	// },[tasks])
 	return (
 		<NEW_TABLE style={{width:'100%'}} >
 			

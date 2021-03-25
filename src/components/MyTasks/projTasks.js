@@ -25,7 +25,7 @@ const ProjTasks =({tasks, month,onChange,pushToProject, projList})=>{
 					<option>Все</option>
 					{projList.map((el, i)=>{
 						if(el!==''){
-							console.log(el)
+					
 							return(
 							<option key={i}>
 								{el}

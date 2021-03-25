@@ -147,7 +147,6 @@ export const changeUserProfile = ({formData, id}) => async (dispatch) => {
 export const addUserTask = (formData) => async (dispatch) => {
 
   try {
-    console.log("hello change", formData);
     const res = await innerBackend.put (`/users/me/addtask`, formData);
     dispatch({
       type: ADD_USER_TASK,

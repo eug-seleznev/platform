@@ -16,9 +16,6 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask})=>{
 		taskTitle:'',
 		deadline: null
 	})
-	useEffect(()=>{
-		console.log(tasks)
-	},[])
 	
 	const onTaskChange = (e) =>{
 		let input = e.target.value;
@@ -29,8 +26,6 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask})=>{
 		let field = e.target.name;
 		let value = e.target.value;
 		dispatch(editUserTask({value, id,field}))
-
-
 	  };
 	const addNewTask =()=>{
 		if(formData.taskTitle!==''){
@@ -44,8 +39,6 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask})=>{
 		else if (formData.taskTitle==='') {
 			alert("Заполните поле задачи")
 		}
-		
-		
 	}
 	
 	return(
