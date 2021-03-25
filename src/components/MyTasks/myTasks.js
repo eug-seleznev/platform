@@ -30,6 +30,7 @@ const MyTasks =({tasks,onChange,currentDate, delTask})=>{
 		e.preventDefault()
 		let field = e.target.name;
 		let value = e.target.value;
+		console.log(field, value)
 		dispatch(editUserTask({value, id,field}))
 		setDeadline(false)
 
@@ -82,7 +83,7 @@ const MyTasks =({tasks,onChange,currentDate, delTask})=>{
 								<>
 								{day.tasks.filter(task=>!task.deadline).length>0?
 								<Light size='14' className={style.date} color='#8C8C8C'>{currentDate===getDate(day.date)?'Сегодня':getDate(day.date)}</Light>:''}
-								{day.tasks.filter(task=>!task.deadline||task.deadline===null).map((task)=>{
+								{day.tasks.filter(task=>!task.deadline).map((task)=>{
 									return(
 										<NEW_TR key={task._id} className={style.mytask__tr}>
 									<NEW_TD>
@@ -121,13 +122,13 @@ const MyTasks =({tasks,onChange,currentDate, delTask})=>{
 											</ButtonTextDiv>
 											
 											<Input 
-											type="date"
-											name="deadline" 
-										
-											onKeyDown={(e)=>e.key==='Enter'?onTextChange(e):''}
-											style={{display:`${task._id === id&&deadline?'block':'none'}`}}>
+											
+												type="date"
+												name="deadline" 
+												onKeyDown={(e)=>e.key==='Enter'?onTextChange(e):''}
+												style={{display:`${task._id === id&&deadline?'block':'none'}`}}>
 											</Input>
-											<ButtonText type="submit" style={{display:`${task._id !== id||deadline?'block':'none'}`, marginLeft:'15px'}}>Добавить</ButtonText>
+											
 										</form>
 									</NEW_TD>
 								</NEW_TR>

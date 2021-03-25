@@ -89,7 +89,7 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask})=>{
 											onClick={()=>setId(task._id)}
 											onChange={(e)=>onTextChange(e)}
 										></input>
-										<ButtonTextDiv  onClick={()=>delTask(task._id)} style={{visibility: `${id===task._id?'visible':'hidden'}`}}>Удалить</ButtonTextDiv>
+										<ButtonTextDiv name="taskTitle" onClick={()=>delTask(task._id)} style={{visibility: `${id===task._id?'visible':'hidden'}`}}>Удалить</ButtonTextDiv>
 									</NEW_TD>
 									<NEW_TD>
 										{task.deadline && getDate(task.deadline)}

@@ -190,8 +190,7 @@ const App = () => {
                 <Route exact path="/viewer" component={Helper} />
                 <Route exact path="/contractors" component={Contractors} />
                 <Route
-                  exact
-                  path="/contractors/:id"
+                  exact path="/contractors/:id"
                   component={EditContractor}
                 />
               </Container>
