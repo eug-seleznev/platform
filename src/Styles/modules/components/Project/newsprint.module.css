@@ -35,6 +35,14 @@ user-select: none;
 	border: 1px solid black;
 	margin-right: 25px;
 	font-size: 16px;
+	-webkit-user-select: none;
+}
+.input[type="text"]{
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 .taglist{
 	display: flex;

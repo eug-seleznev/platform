@@ -10,10 +10,11 @@ import { Light, Thin } from "../../Styles/typography"
 import { Input } from "../../Styles/Forms"
 
 
-const MyTasks =({tasks,onChange,currentDate, delTask})=>{
+const MyTasks =({tasks,onChange,currentDate, delTask,onPressEnter})=>{
 	const dispatch = useDispatch()
 	
 	const [id, setId] = useState('')
+	const [actualInput, setActualInput] = useState('')
 	const [deadline, setDeadline] = useState(false)
 
 	const [formData, setFormData] = useState({
@@ -35,12 +36,18 @@ const MyTasks =({tasks,onChange,currentDate, delTask})=>{
 		setDeadline(false)
 
 	  };
-	  
+	useEffect(()=>{
+		setActualInput('')
+	},[id])
 	const onSubmit=(e)=>{
 
 		e.target.blur()
 		
 		setId('')
+	}
+	const onPressEscape =()=>{
+		setId('')
+	
 	}
 	const addNewTask =()=>{
 		if(formData.taskTitle!==''){
@@ -64,7 +71,7 @@ const MyTasks =({tasks,onChange,currentDate, delTask})=>{
 			
 			<div>
 				<input placeholder="Добавить задачу"  onKeyDown={(e)=>e.key==='Enter'?addNewTask(e):''}name="taskTitle" type="text"value={formData.taskTitle} onChange={(e)=>{onTaskChange(e)}}></input>
-				{/* <input placeholder="Дедлайн" name="deadline" type="date" onChange={(e)=>{onTaskChange(e)}}></input> */}
+				<input placeholder="Дедлайн" name="deadline" type="date" className={style.deadlineInputDate}  onChange={(e)=>{onTaskChange(e)}}></input>
 				<ButtonTextDiv style={{marginLeft:'15px',marginTop:'5px'}} onClick={()=>addNewTask()}>Добавить</ButtonTextDiv>
 			</div>
 		</div>
@@ -72,7 +79,7 @@ const MyTasks =({tasks,onChange,currentDate, delTask})=>{
 		<NEW_TABLE style={{width:'100%'}} >
 			
 			<NEW_THEAD>
-				<NEW_TR className={style.mytask__tr}>
+				<NEW_TR className={style.mytask__tr__nohover}>
 					<NEW_TH>Задача</NEW_TH>
 				</NEW_TR>
 			</NEW_THEAD>
@@ -85,27 +92,42 @@ const MyTasks =({tasks,onChange,currentDate, delTask})=>{
 								<Light size='14' className={style.date} color='#8C8C8C'>{currentDate===getDate(day.date)?'Сегодня':getDate(day.date)}</Light>:''}
 								{day.tasks.filter(task=>!task.deadline).map((task)=>{
 									return(
-										<NEW_TR key={task._id} className={style.mytask__tr}>
-									<NEW_TD>
+										<NEW_TR onClick={()=>setId(task._id)} key={task._id} 
+										style={{outline:'none',backgroundColor:`${id===task._id?'#F1EFEF':''}`}} 
+										className={style.mytask__tr}
+										tabIndex="0"
+										onKeyDown={(e)=>e.key==='Delete'?delTask(task._id):e.key==='Enter'?onPressEnter(task._id):e.key==='Escape'?onPressEscape():''}
+										
+										>
 									
-									<input
+									
+								
+									<NEW_TD 
+										
+									>
+										<input
+										
 										type="checkbox"
 										defaultChecked={task.taskStatus}
 										value={task._id}
 										onChange={onChange}
 									></input>
+
 										<input
 											style={{
 												width:'65%',
-												background:`${id===task._id?'white':'none'}`,
-												border:`${id===task._id?'1px solid black':'1px solid transparent'}`
+												background:`${actualInput===task._id?'white':'none'}`,
+												pointerEvents:`${id===task._id?'auto':'none'}`,
+												WebkitUserSelect:`${id===task._id?'none':'none'}`,
+												border:`${actualInput===task._id?'1px solid black':'1px solid transparent'}`
 											}}
 											className={newsp.input}
-											type="text"
+											
 											defaultValue={task.taskTitle}
 											onKeyDown={(e)=>e.key==='Delete'?delTask(task._id):e.key==='Enter'?onSubmit(e):''}
 											name="taskTitle"
-											onClick={()=>setId(task._id)}
+											onClick={()=>setActualInput(task._id)}
+											
 											onChange={(e)=>onTextChange(e)}
 										></input>
 										<ButtonTextDiv onClick={()=>delTask(task._id)} style={{visibility: `${id===task._id?'visible':'hidden'}`}}>Удалить</ButtonTextDiv>
@@ -131,6 +153,8 @@ const MyTasks =({tasks,onChange,currentDate, delTask})=>{
 											
 										</form>
 									</NEW_TD>
+
+									
 								</NEW_TR>
 									)
 								})}

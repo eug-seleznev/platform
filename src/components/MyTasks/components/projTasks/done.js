@@ -16,13 +16,13 @@ const TaskDone =({tasks, pushToProject,month, onChange})=>{
 	
 	return(
 		<NEW_TBODY>
-				<NEW_TR className={style.mytask__tr}>
+				<NEW_TR className={style.mytask__tr__nohover}>
 					<NEW_TD > </NEW_TD>
 				</NEW_TR>
-				<NEW_TR className={style.mytask__tr}>
+				<NEW_TR className={style.mytask__tr__nohover}>
 					<NEW_TD >{tasks.filter(task=>task.project&&task.taskStatus&&getCurrentMonth(task.date)===month).length!==0?'Готово. '+month:''}</NEW_TD>
 				</NEW_TR>
-				<NEW_TR className={style.mytask__tr}>
+				<NEW_TR className={style.mytask__tr__nohover}>
 					<NEW_TD > </NEW_TD>
 				</NEW_TR>
 				{tasks.filter(task=>task.project&&task.taskStatus&&getCurrentMonth(task.date)===month).map((task)=>{

@@ -21,7 +21,7 @@ const ProjTasks =({tasks, month,onChange,pushToProject})=>{
 			
 		<NEW_TABLE style={{width:'100%'}}>
 			<NEW_THEAD>
-				<NEW_TR className={style.mytask__tr}>
+				<NEW_TR className={style.mytask__tr__nohover}>
 					<NEW_TH>Задача</NEW_TH>
 					<NEW_TH className={style.deadline}>Дедлайн</NEW_TH>
 					<NEW_TH className={style.mobile__resize}>Проект</NEW_TH>

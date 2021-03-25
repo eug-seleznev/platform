@@ -59,8 +59,10 @@ const MyTasks = ({history})=>{
 		dispatch(sortUserTasks(val))
 	}
 	const onChange = (e) => {
-		
 		let taskid = e.target.value;
+		dispatch(finishUserTask({ taskid }));
+	  };
+	const onPressEnter = (taskid) => {
 		dispatch(finishUserTask({ taskid }));
 	  };
 	return(
@@ -74,7 +76,8 @@ const MyTasks = ({history})=>{
 					<div className={myTasks.options}>
 						<ButtonTextLight fontSize='16px'
 							style={{fontWeight:`${pages==='/all'?'bold':''}`}}
-							className={myTasks.options__button} onClick={()=>{setPages('/all')}}>
+							className={myTasks.options__button} 
+							onClick={()=>{setPages('/all')}}>
 							Задачи на проекте
 						</ButtonTextLight>
 						<ButtonTextLight fontSize='16px' 
@@ -89,26 +92,24 @@ const MyTasks = ({history})=>{
 							onClick={()=>{setPages('/deferred')}}>
 							Задачи с дедлайном
 						</ButtonTextLight>
-						<ButtonText fontSize='16px'
+						<ButtonTextLight fontSize='16px'
 							style={{fontWeight:`${pages==='/history'?'bold':''}`}}
 							className={myTasks.options__button}
 							onClick={()=>{setPages('/history')}}>
 							История	
-						</ButtonText>
+						</ButtonTextLight>
 						<div style={{display:`${pages==='/all'?'flex':'none'}`, alignItems:'center', marginLeft:'30px'}}>
 						<Regular>Поиск по проектам: </Regular>
 							<Select onChange={(e)=>sortTasks(e)}>
 								<option>Все</option>
 								{projList.map((el, i)=>{
 									if(el!==''){
-								
 										return(
 										<option key={i}>
 											{el}
 										</option>
-									)
+										)
 									}
-									
 								})}
 							</Select>
 						
@@ -128,13 +129,13 @@ const MyTasks = ({history})=>{
 							<ProjTasks projList={projList} onChange={onChange} pushToProject={pushToProject} month={currentMonth} history={history} tasks={user.tasks}></ProjTasks>
 						</div>
 						<div style={{display:`${pages==='/today'?'block':'none'}`}}>
-							<UserTasks delTask={delTask} onChange={onChange} currentDate={currentDate} history={history} tasks={user.activeTasks}></UserTasks>
+							<UserTasks onPressEnter={onPressEnter} delTask={delTask} onChange={onChange} currentDate={currentDate} history={history} tasks={user.activeTasks}></UserTasks>
 						</div>
 						<div style={{display:`${pages==='/deferred'?'block':'none'}`}}>
-							<DeadlineTasks delTask={delTask} onChange={onChange} currentDate={currentDate} history={history} tasks={user.activeTasks}></DeadlineTasks>
+							<DeadlineTasks onPressEnter={onPressEnter} delTask={delTask} onChange={onChange} currentDate={currentDate} history={history} tasks={user.deadlineTasks}></DeadlineTasks>
 						</div>
 						<div style={{display:`${pages==='/history'?'block':'none'}`}}>
-							<TaskHistory typeFilter={typeFilter} onChange={onChange} pushToProject={pushToProject}  history={history} tasks={user.taskHistory}></TaskHistory>
+							<TaskHistory  delTask={delTask}onPressEnter={onPressEnter} typeFilter={typeFilter} onChange={onChange} pushToProject={pushToProject}  history={history} tasks={user.taskHistory}></TaskHistory>
 						</div>
 					</div>
 				</div>

@@ -3,15 +3,21 @@ import style from "../../Styles/modules/main/mytasks.module.css"
 import getDate from "../Projects/getDate"
 import { Bold, Light, Regular } from "../../Styles/typography"
 
-import { ButtonTextLight } from "../../Styles/buttons"
+import { ButtonTextDiv, ButtonTextLight } from "../../Styles/buttons"
+import { useState } from "react"
 
 
-const TaskHistory = ({tasks, pushToProject, typeFilter}) => {
+const TaskHistory = ({tasks, pushToProject, typeFilter, delTask,onPressEnter}) => {
+	const [id, setId] = useState('')
+	const onPressEscape =()=>{
+		setId('')
+	
+	}
 	return (
 		<NEW_TABLE style={{width:'100%'}} >
 			
 			<NEW_THEAD>
-				<NEW_TR className={style.mytask__tr}>
+				<NEW_TR  className={style.mytask__tr__nohover}>
 					<NEW_TH>Задача</NEW_TH>
 					<NEW_TH className={style.deadlineHistory}>Дата завершения <div>(план)</div></NEW_TH>
 					<NEW_TH className={style.deadline}>Дата завершения <div className={style.deadlineHistory}>(фактическая)</div></NEW_TH>
@@ -37,9 +43,17 @@ const TaskHistory = ({tasks, pushToProject, typeFilter}) => {
 									.map((task, i)=>{
 									
 									return(
-										<NEW_TR className={style.mytask__tr} key={i}>
+										<NEW_TR 
+											key={i} 
+											onClick={()=>setId(task._id)}
+											style={{outline:'none',backgroundColor:`${id===task._id?'#F1EFEF':''}`}}
+										 	className={style.mytask__tr}
+											tabIndex="0"
+											onKeyDown={(e)=>e.key==='Delete'?delTask(task._id):e.key==='Enter'?onPressEnter(task._id):e.key==='Escape'?onPressEscape():''}>
 											
-											<NEW_TD style={{display:'flex',alignItems:'center'}}>
+											<NEW_TD style={{display:'flex',alignItems:'center'}}
+											
+												>
 											{/* <input
 												type="checkbox"
 												
@@ -49,6 +63,8 @@ const TaskHistory = ({tasks, pushToProject, typeFilter}) => {
 												onChange={onChange}
 											></input> */}
 												<Regular style={{marginLeft:'10px'}}>{task.taskTitle}</Regular>
+												<ButtonTextDiv onClick={()=>onPressEnter(task._id)} style={{visibility: `${id===task._id?'visible':'hidden'}`, marginLeft:'10px'}}  fontSize="12px">Восстановить</ButtonTextDiv>
+												<ButtonTextDiv onClick={()=>onPressEnter(task._id)} style={{visibility: `${id===task._id&&!task.project?'visible':'hidden'}`, marginLeft:'10px'}}  fontSize="12px">Удалить</ButtonTextDiv>
 											</NEW_TD>
 											<NEW_TD className={style.deadlineHistory}>{getDate(task.deadline)!="1 января 1970"?getDate(task.deadline):'нет'}</NEW_TD>
 											<NEW_TD className={style.deadline}>{getDate(task.dateClose)}</NEW_TD>
