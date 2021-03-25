@@ -1,11 +1,14 @@
 import { useEffect, useRef, } from "react"
 import './Extensions/setup'
 import pdf from './pdf/test2.pdf'
+
+
 let env = 'prod';
 var viewer;
+let Autodesk = window.Autodesk;
+
 const Viewer = ({ oauth, projectTitle, urn, oldUrn }) => {
  
-  let Autodesk = window.Autodesk;
   const container = useRef();
 
   var options = {
@@ -16,11 +19,7 @@ const Viewer = ({ oauth, projectTitle, urn, oldUrn }) => {
 
 
   var config3d = {
-    extensions: [
-      "Autodesk.PDF",
-      "Autodesk.DocumentBrowser",
-      "MyAwesomeExtension",
-    ],
+    extensions: ["Autodesk.DocumentBrowser", "VersionExtension"],
   };
 
 
@@ -84,11 +83,11 @@ const Viewer = ({ oauth, projectTitle, urn, oldUrn }) => {
 
   
 
-      Autodesk.Viewing.Document.load(
-        oldV,
-        onDocumentLoadSuccess,
-        onDocumentLoadFailure
-      );
+      // Autodesk.Viewing.Document.load(
+      //   oldV,
+      //   onDocumentLoadSuccess,
+      //   onDocumentLoadFailure
+      // );
 
        Autodesk.Viewing.Document.load(
          documentId,
@@ -119,25 +118,31 @@ const Viewer = ({ oauth, projectTitle, urn, oldUrn }) => {
         let viewables = doc.getRoot().getDefaultGeometry();
         // console.log(doc.getRoot().getDefaultGeometry());
         
-        viewer.loadDocumentNode(doc, viewables, options_load).then((i) => {
-          extensionConfig.mimeType = "application/vnd.autodesk.revit";
-          extensionConfig.primaryModels = [viewer.getVisibleModels()[1]];
-          extensionConfig.diffModels = [viewer.getVisibleModels()[0]];
-          extensionConfig.diffMode = "overlay";
-          extensionConfig.versionA = "2";
-          extensionConfig.versionB = "1";
-        }).then(() => {
-         viewer
-           .loadExtension("Autodesk.DiffTool", extensionConfig)
-           .then(function (res) {
-             window.DIFF_EXT = viewer.getExtension("Autodesk.DiffTool");
-             console.log(window.DIFF_EXT);
-           })
-           .catch(function (err) {
-             console.log(err);
-           });
+        viewer.loadDocumentNode(doc, viewables).then(el => {
+          console.log('loaded')
+        })
 
-        });
+
+
+        // viewer.loadDocumentNode(doc, viewables, options_load).then((i) => {
+        //   extensionConfig.mimeType = "application/vnd.autodesk.revit";
+        //   extensionConfig.primaryModels = [viewer.getVisibleModels()[1]];
+        //   extensionConfig.diffModels = [viewer.getVisibleModels()[0]];
+        //   extensionConfig.diffMode = "overlay";
+        //   extensionConfig.versionA = "2";
+        //   extensionConfig.versionB = "1";
+        // }).then(() => {
+        //  viewer
+        //    .loadExtension("Autodesk.DiffTool", extensionConfig)
+        //    .then(function (res) {
+        //      window.DIFF_EXT = viewer.getExtension("Autodesk.DiffTool");
+        //      console.log(window.DIFF_EXT);
+        //    })
+        //    .catch(function (err) {
+        //      console.log(err);
+        //    });
+
+        // });
 
 
         
@@ -153,26 +158,23 @@ const Viewer = ({ oauth, projectTitle, urn, oldUrn }) => {
   }
 
   return (
-    <>
-      <h1> model for: {projectTitle}</h1>
-      <div
-        style={{
-          width: "90vw",
-          height: "90vh",
-          backgroundColor: "grey",
-          left: "0px",
-        }}
-      >
+      <div>
         <div
           id="forgeViewer"
           className="viewer-app"
-          style={{ position: "absolute", width: "90vw", height: "90vh" }}
+          style={{
+            position: "absolute",
+            top: "3vh",
+            left: "0",
+            width: "98vw",
+            height: "96vh",
+          }}
           ref={container}
-        ></div>
-        <button id="MyAwesomeLockButton">Extension</button>
-     
+        >
+          
+        </div>
       </div>
-    </>
+
   );
 };
 
