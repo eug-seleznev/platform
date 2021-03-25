@@ -1,41 +1,21 @@
 
-import { useDispatch} from "react-redux"
-import { NEW_TABLE, NEW_TH, NEW_THEAD, NEW_TR, Select } from "../../Styles/tables"
+// import { useDispatch} from "react-redux"
+import { NEW_TABLE, NEW_TH, NEW_THEAD, NEW_TR} from "../../Styles/tables"
 
 import TaskDone from "./components/projTasks/done"
 import InWork from "./components/projTasks/inWork"
 import style from "../../Styles/modules/main/mytasks.module.css"
-import { sortUserTasks } from "../../redux/actions/user"
-import { Regular } from "../../Styles/typography"
 
 
 
-const ProjTasks =({tasks, month,onChange,pushToProject, projList})=>{
- 	const dispatch = useDispatch()
-	const sortTasks =(e)=>{
-		let val = e.target.value
-		dispatch(sortUserTasks(val))
-	}
+
+const ProjTasks =({tasks, month,onChange,pushToProject})=>{
+ 	// const dispatch = useDispatch()
+	
 
 	return(
 		<>
-		<div style={{display:'flex', alignItems:'center',marginTop:'15px'}}>
-			<Regular>Поиск по проектам: </Regular>
-				<Select onChange={(e)=>sortTasks(e)}>
-					<option>Все</option>
-					{projList.map((el, i)=>{
-						if(el!==''){
-					
-							return(
-							<option key={i}>
-								{el}
-							</option>
-						)
-						}
-						
-					})}
-				</Select>
-		</div>
+		
 			
 		
 			

@@ -1,27 +1,28 @@
-import { ButtonText } from '../../Styles/buttons'
+import { ButtonText, ButtonTextLight } from '../../Styles/buttons'
 import modelsCss from '../../Styles/modules/components/Project/models.module.css'
-import { Light } from '../../Styles/typography'
+import { Light, Regular } from '../../Styles/typography'
 import UserTasks from './myTasks.js'
 import myTasks from '../../Styles/modules/main/mytasks.module.css'
 import { useEffect, useState } from 'react'
 import ProjTasks from './projTasks'
 import { useDispatch, useSelector } from 'react-redux'
-import { background, myTaskDelite } from '../../redux/actions/user'
+import { background, myTaskDelite, sortUserTasks } from '../../redux/actions/user'
 import getCurrentMonth from './getCurrentMonth'
 import { finishUserTask } from "../../redux/actions/user"
 import getDate from '../Projects/getDate'
 import DeadlineTasks from './deadlineTasks'
 import TaskHistory from './history'
 import TaskLoader from './loader'
+import { Select } from '../../Styles/tables'
 // import { Route, Router, Switch } from 'react-router'
 
 // import {Link, NavLink } from 'react-router-dom'
-const MyTasks = ({history, match})=>{
+const MyTasks = ({history})=>{
 	const [pages, setPages]= useState('/all')
 	const [currentMonth, setCurrentMonth] =useState('')
 	const [currentDate, setCurrentDate] =useState('')
-const [projList,setProjList] =useState([])
- 
+	const [projList,setProjList] =useState([])
+	const [typeFilter, setTypeFilter] = useState ('Все')
 
 	const dispatch = useDispatch();
 	const user = useSelector(state=>state.auth.user)
@@ -53,6 +54,10 @@ const [projList,setProjList] =useState([])
 	const pushToProject =(link)=>{
 		history.push(`./projects/${link}`)
 	}
+	const sortTasks =(e)=>{
+		let val = e.target.value
+		dispatch(sortUserTasks(val))
+	}
 	const onChange = (e) => {
 		
 		let taskid = e.target.value;
@@ -63,33 +68,60 @@ const [projList,setProjList] =useState([])
 			<TaskLoader>
 				<div className={modelsCss.main}>	
 					<div className={modelsCss.row} >
-						<ButtonText fontSize='16px' onClick={pushBack}>Главная</ButtonText>
+						<ButtonTextLight fontSize='16px' onClick={pushBack}>Главная</ButtonTextLight>
 						<Light size='16'> / мои задачи</Light>
 					</div>
 					<div className={myTasks.options}>
-						<ButtonText fontSize='16px'
-							style={{textDecoration:`${pages==='/all'?'underline':''}`,fontWeight:`${pages==='/all'?'bold':''}`}}
+						<ButtonTextLight fontSize='16px'
+							style={{fontWeight:`${pages==='/all'?'bold':''}`}}
 							className={myTasks.options__button} onClick={()=>{setPages('/all')}}>
 							Задачи на проекте
-						</ButtonText>
-						<ButtonText fontSize='16px' 
-							style={{textDecoration:`${pages==='/today'?'underline':''}`,fontWeight:`${pages==='/today'?'bold':''}`}}
+						</ButtonTextLight>
+						<ButtonTextLight fontSize='16px' 
+							style={{fontWeight:`${pages==='/today'?'bold':''}`}}
 							className={myTasks.options__button} 
 							onClick={()=>{setPages('/today')}}>
 							Мои задачи
-						</ButtonText>
-						<ButtonText fontSize='16px'
-							style={{textDecoration:`${pages==='/deferred'?'underline':''}`,fontWeight:`${pages==='/deferred'?'bold':''}`}}
+						</ButtonTextLight>
+						<ButtonTextLight fontSize='16px'
+							style={{fontWeight:`${pages==='/deferred'?'bold':''}`}}
 							className={myTasks.options__button}
 							onClick={()=>{setPages('/deferred')}}>
 							Задачи с дедлайном
-						</ButtonText>
+						</ButtonTextLight>
 						<ButtonText fontSize='16px'
-							style={{textDecoration:`${pages==='/history'?'underline':''}`,fontWeight:`${pages==='/history'?'bold':''}`}}
+							style={{fontWeight:`${pages==='/history'?'bold':''}`}}
 							className={myTasks.options__button}
 							onClick={()=>{setPages('/history')}}>
 							История	
 						</ButtonText>
+						<div style={{display:`${pages==='/all'?'flex':'none'}`, alignItems:'center', marginLeft:'30px'}}>
+						<Regular>Поиск по проектам: </Regular>
+							<Select onChange={(e)=>sortTasks(e)}>
+								<option>Все</option>
+								{projList.map((el, i)=>{
+									if(el!==''){
+								
+										return(
+										<option key={i}>
+											{el}
+										</option>
+									)
+									}
+									
+								})}
+							</Select>
+						
+						</div>
+						<div style={{display:`${pages==='/history'?'flex':'none'}`, alignItems:'center', marginLeft:'30px'}}>
+						<Regular>Фильтр по типу: </Regular>
+							<Select onChange={(e)=>{setTypeFilter(e.target.value)}}>
+								<option>Все</option>
+								<option>Мои задачи</option>
+								<option>Проектные задачи</option>
+							</Select>
+						
+						</div>
 					</div>
 					<div>
 						<div style={{display:`${pages==='/all'?'block':'none'}`}}>
@@ -102,7 +134,7 @@ const [projList,setProjList] =useState([])
 							<DeadlineTasks delTask={delTask} onChange={onChange} currentDate={currentDate} history={history} tasks={user.activeTasks}></DeadlineTasks>
 						</div>
 						<div style={{display:`${pages==='/history'?'block':'none'}`}}>
-							<TaskHistory onChange={onChange} pushToProject={pushToProject}  history={history} tasks={user.taskHistory}></TaskHistory>
+							<TaskHistory typeFilter={typeFilter} onChange={onChange} pushToProject={pushToProject}  history={history} tasks={user.taskHistory}></TaskHistory>
 						</div>
 					</div>
 				</div>

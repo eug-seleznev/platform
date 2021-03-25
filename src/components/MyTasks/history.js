@@ -6,7 +6,7 @@ import { Bold, Light, Regular } from "../../Styles/typography"
 import { ButtonTextLight } from "../../Styles/buttons"
 
 
-const TaskHistory = ({tasks,onChange, pushToProject}) => {
+const TaskHistory = ({tasks, pushToProject, typeFilter}) => {
 	return (
 		<NEW_TABLE style={{width:'100%'}} >
 			
@@ -30,20 +30,24 @@ const TaskHistory = ({tasks,onChange, pushToProject}) => {
 								<>
 								{task.tasks.length!==0?<Light size='14' key={i} className={style.date2} color='#8C8C8C'>{task.month}</Light>:''}
 								<NEW_TBODY>
-								{task.tasks.filter(task=>task.taskStatus).map((task, i)=>{
+								{task.tasks.filter(task=>task.taskStatus && 
+									typeFilter==='Все'?task.taskTitle:
+									typeFilter==='Мои задачи'?!task.project:
+									typeFilter==='Проектные задачи'?task.project:'')
+									.map((task, i)=>{
 									
 									return(
 										<NEW_TR className={style.mytask__tr} key={i}>
 											
 											<NEW_TD style={{display:'flex',alignItems:'center'}}>
-											<input
+											{/* <input
 												type="checkbox"
 												
 												checked={true}
 												value={task._id}
 												name={task.sprint}
 												onChange={onChange}
-											></input>
+											></input> */}
 												<Regular style={{marginLeft:'10px'}}>{task.taskTitle}</Regular>
 											</NEW_TD>
 											<NEW_TD className={style.deadlineHistory}>{getDate(task.deadline)!="1 января 1970"?getDate(task.deadline):'нет'}</NEW_TD>
