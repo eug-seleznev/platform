@@ -43,8 +43,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
   useEffect(() => {
     if (isEdit) {
       let task = tasks.filter((task) => task._id === focusRow);
-      // console.log(task);
-      // setTaskTitle(task[0].taskTitle);
+  
     }
   }, [isEdit]);
 
