@@ -1,4 +1,4 @@
-import { useEffect, useRef, } from "react"
+import { useEffect, useRef, useState, } from "react"
 import './Extensions/setup'
 import pdf from './pdf/test2.pdf'
 import { DangerButton } from "./Extensions/setup";
@@ -7,19 +7,27 @@ let env = 'prod';
 var viewer;
 let Autodesk = window.Autodesk;
 
-const Viewer = ({ oauth, projectTitle, urn, oldUrn }) => {
+const Viewer = ({ oauth, urn, oldUrn }) => {
  
   const container = useRef();
+  const [value, setValue] = useState(false)
 
-  var options = {
-    env: "AutodeskProduction",
-    accessToken: oauth.token,
-    api: "derivativeV2_EU", // for models uploaded to EMEA change this option to 'derivativeV2_EU'
-  };
+  const [versions, setVersions] = useState({
+    loaded: false,
+    urn: null
+  })
+
+
+ const Test = () => {
+   console.log("test me");
+ };
 
 
   var config3d = {
     extensions: ["Autodesk.DocumentBrowser", "VersionExtension"],
+    metadata: oldUrn,
+    test: value,
+    setTest: setValue
   };
 
 
@@ -29,8 +37,20 @@ const Viewer = ({ oauth, projectTitle, urn, oldUrn }) => {
       };
 
       var extensionConfig = {};
+    
+  var options = {
+    env: "AutodeskProduction",
+    accessToken: oauth.token,
+    api: "derivativeV2_EU", // for models uploaded to EMEA change this option to 'derivativeV2_EU'
+  };
+
+      let documentId = "urn:" + urn;
 
 
+  useEffect(( ) => {
+    console.log(value, 'value use effect')
+  }, [value])
+ 
 
   useEffect(() => {
 
@@ -62,24 +82,24 @@ const Viewer = ({ oauth, projectTitle, urn, oldUrn }) => {
     Autodesk.Viewing.Initializer(options, () => {
       viewer = new Autodesk.Viewing.GuiViewer3D(container.current, config3d);
       viewer.start();
-      let documentId = "urn:" + urn;
-      let oldV = "urn:" + oldUrn[oldUrn.length - 2].urn;
+      // let oldV = "urn:" + oldUrn[oldUrn.length - 2].urn;
 
 
-  
+      console.log(oldUrn)
 
-      // Autodesk.Viewing.Document.load(
-      //   oldV,
-      //   onDocumentLoadSuccess,
-      //   onDocumentLoadFailure
-      // );
-
+      // 
        Autodesk.Viewing.Document.load(
          documentId,
          onDocumentLoadSuccess,
          onDocumentLoadFailure
        );
-
+        if(versions.loaded){
+                 Autodesk.Viewing.Document.load(
+                   'urn:'+versions.urn,
+                   onDocumentLoadSuccess,
+                   onDocumentLoadFailure
+                 );
+        }
       })
     }
    
@@ -87,78 +107,125 @@ const Viewer = ({ oauth, projectTitle, urn, oldUrn }) => {
 
 
      
-  }, []);
+  }, [versions.loaded]);
 
 
   function onDocumentLoadSuccess(doc) {
 
-        viewer.loadModel(
-      "https://developer.api.autodesk.com/derivativeservice/v2/derivatives/urn%dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6emdzazR4b3o0OWFicXdrb2JldG9pbmwyb2hobDRka2xfYnVyb19tb2RlbF9idWNrZXQvYTRmNGQ1ZTVmODQ1OWQzMjA0ZGYyNWU1OTE3ZTFiNTcucnZ0.svf",
-      {}, () => {
-        console.log( "new");
-      }
-    );
-
         let viewables = doc.getRoot().getDefaultGeometry();
-        // console.log(doc.getRoot().getDefaultGeometry());
-        
-        viewer.loadDocumentNode(doc, viewables).then(el => {
-          console.log('loaded')
-        })
+
+
+        console.log(versions, 'VBERSIONS HERE')
+
+
+        if(!versions.loaded){
+              viewer.loadDocumentNode(doc, viewables).then((el) => {
+                console.log("loaded");
+              });
+
+        } else {
+          
+
+          console.log(viewables, 'view!!!!!!!!!')
+
+            viewer
+              .loadDocumentNode(doc, viewables, options_load)
+              .then((i) => {
+                extensionConfig.mimeType = "application/vnd.autodesk.revit";
+                extensionConfig.primaryModels = [viewer.getVisibleModels()[1]];
+                extensionConfig.diffModels = [viewer.getVisibleModels()[0]];
+                extensionConfig.diffMode = "overlay";
+                extensionConfig.versionA = "2";
+                extensionConfig.versionB = "1";
+              })
+              .then(() => {
+                viewer
+                  .loadExtension("Autodesk.DiffTool", extensionConfig)
+                  .then(function (res) {
+                    window.DIFF_EXT = viewer.getExtension("Autodesk.DiffTool");
+                    console.log(window.DIFF_EXT);
+                  })
+                  .catch(function (err) {
+                    console.log(err);
+                  });
+              });
 
 
 
-        // viewer.loadDocumentNode(doc, viewables, options_load).then((i) => {
-        //   extensionConfig.mimeType = "application/vnd.autodesk.revit";
-        //   extensionConfig.primaryModels = [viewer.getVisibleModels()[1]];
-        //   extensionConfig.diffModels = [viewer.getVisibleModels()[0]];
-        //   extensionConfig.diffMode = "overlay";
-        //   extensionConfig.versionA = "2";
-        //   extensionConfig.versionB = "1";
-        // }).then(() => {
-        //  viewer
-        //    .loadExtension("Autodesk.DiffTool", extensionConfig)
-        //    .then(function (res) {
-        //      window.DIFF_EXT = viewer.getExtension("Autodesk.DiffTool");
-        //      console.log(window.DIFF_EXT);
-        //    })
-        //    .catch(function (err) {
-        //      console.log(err);
-        //    });
 
-        // });
-
-
-        
-    
-
-
+        }
  
 
   }
 
-  function onDocumentLoadFailure(viewerErrorCode) {
+  const  onDocumentLoadFailure = (viewerErrorCode) => {
     console.error("onDocumentLoadFailure() - errorCode:" + viewerErrorCode);
   }
 
-  return (
-      <div>
-        <div
-          id="forgeViewer"
-          className="viewer-app"
-          style={{
-            position: "absolute",
-            top: "3vh",
-            left: "0",
-            width: "98vw",
-            height: "96vh",
-          }}
-          ref={container}
-        >
-          
-        </div>
-      </div>
 
+  const EnableVersionPlugin = (urn) => {
+    if(!versions.urn){
+        setVersions({ urn: urn, loaded: true });
+    } else {
+      setVersions({ urn: null, loaded: false})
+    }
+  }
+
+
+
+  return (
+    <div>
+      <div
+        id="forgeViewer"
+        className="viewer-app"
+        style={{
+          position: "absolute",
+          top: "6vh",
+          left: "5vw",
+          width: "95vw",
+          height: "94vh",
+        }}
+        ref={container}
+      ></div>
+      {value && (
+        <div
+          style={{
+            backgroundColor: "grey",
+            position: "absolute",
+            top: "0",
+            height: "100vh",
+            width: "15vw",
+            left: "85vw",
+            zIndex: "99999",
+            display: "flex",
+            flexDirection: "column",
+            color: "white",
+            alignContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {oldUrn.map(element => {
+            return (
+              <div
+                style={{
+                  display: "flex",
+                  backgroundColor: "red",
+                  justifyContent: "space-between",
+                  width: "80%",
+                }}
+                onClick={() =>EnableVersionPlugin(element.urn)}
+              >
+                <p> {element.date.split("T")[0]}</p>
+                <p> version: {element.version}</p>
+              </div>
+            );
+          })}
+         
+
+
+        </div>
+      )}
+    </div>
   );
 };
 
