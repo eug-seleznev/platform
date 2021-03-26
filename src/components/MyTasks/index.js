@@ -14,7 +14,7 @@ import DeadlineTasks from './deadlineTasks'
 import TaskHistory from './history'
 import TaskLoader from './loader'
 import { Select } from '../../Styles/tables'
-// import { Route, Router, Switch } from 'react-router'
+import { editUserTask} from "../../redux/actions/user"
 
 // import {Link, NavLink } from 'react-router-dom'
 const MyTasks = ({history})=>{
@@ -44,7 +44,8 @@ const MyTasks = ({history})=>{
 		)
 		
 	   },[user.tasks])
-	
+
+
 	const pushBack =()=>{
 		history.push(`./`)
 	}
@@ -135,7 +136,7 @@ const MyTasks = ({history})=>{
 							<DeadlineTasks onPressEnter={onPressEnter} delTask={delTask} onChange={onChange} currentDate={currentDate} history={history} tasks={user.deadlineTasks}></DeadlineTasks>
 						</div>
 						<div style={{display:`${pages==='/history'?'block':'none'}`}}>
-							<TaskHistory  delTask={delTask}onPressEnter={onPressEnter} typeFilter={typeFilter} onChange={onChange} pushToProject={pushToProject}  history={history} tasks={user.taskHistory}></TaskHistory>
+							<TaskHistory delTask={delTask} onPressEnter={onPressEnter} typeFilter={typeFilter} onChange={onChange} pushToProject={pushToProject}  history={history} tasks={user.taskHistory}></TaskHistory>
 						</div>
 					</div>
 				</div>

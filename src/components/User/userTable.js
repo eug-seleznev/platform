@@ -21,12 +21,12 @@ const UserTable = ({crypt, project}) => {
 
     const onSubmit = (e, id) => {
       document.getElementById(id).style.display = "none"
-        e.preventDefault()
-		// console.log(id)
-        setFormData({...formData, user: id})
-		setTimeout(() => {
-			setFormData({...formData, user:""})
-		}, 500);
+      e.preventDefault()
+  // console.log(id)
+      setFormData({...formData, user: id})
+      setTimeout(() => {
+        setFormData({...formData, user:""})
+      }, 500);
        
     }
 	useEffect(()=>{
@@ -40,7 +40,7 @@ const UserTable = ({crypt, project}) => {
           {users.length === 0 ? (
             <Thin style={{marginTop:'25px', marginLeft:'20px'}}>Пользователей не найдено</Thin>
           ) : (
-            <>
+            <tbody>
               {users.map((user, index) => {
                 return (
                   <tr key={index} id={user._id}>
@@ -64,7 +64,7 @@ const UserTable = ({crypt, project}) => {
                   </tr>
                 );
               })}
-            </>
+            </tbody>
           )}
         </table>
     

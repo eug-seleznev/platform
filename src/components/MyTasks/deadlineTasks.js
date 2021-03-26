@@ -12,21 +12,13 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask, onPressEnter})=>{
 	const dispatch = useDispatch()
 	const [id, setId] = useState('')
 	const [actualInput, setActualInput] = useState('')
-	const [formData, setFormData] = useState({
-		taskTitle:'',
-		deadline: null
-	})
-	
-	const onTaskChange = (e) =>{
-		let input = e.target.value;
-		let field = e.target.name;
-		setFormData ({ ...formData, [field]: input })
-	}
-	const onTextChange = (e) => {
-		let field = e.target.name;
-		let value = e.target.value;
-		dispatch(editUserTask({value, id,field}))
-	  };
+	const [debounced, setDebouced] = useState('')
+	const [timeout , updateTimeout] = useState(undefined)
+	// const onTextChange = (e) => {
+	// 	let field = e.target.name;
+	// 	let value = e.target.value;
+	// 	dispatch(editUserTask({value, id,field}))
+	//   };
 	useEffect(()=>{
 		setActualInput('')
 	},[id])
@@ -34,19 +26,24 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask, onPressEnter})=>{
 		setId('')
 	
 	}
-	const addNewTask =()=>{
-		if(formData.taskTitle!==''){
-			dispatch(addUserTask(formData))
-		
-			setFormData ({
-			taskTitle:'',
-			deadline: null
-		})
+	const debounce =(fn,ms)=>{
+		const huy=()=> {
+				clearTimeout(timeout)
+				updateTimeout(setTimeout(fn, ms)) 
 		}
-		else if (formData.taskTitle==='') {
-			alert("Заполните поле задачи")
-		}
+		return huy()
 	}
+	const onTextChange =()=>{
+		let value = debounced
+		let field = 'taskTitle'
+		console.log(value,id,field)
+		dispatch(editUserTask({value, id,field}))
+	};
+	useEffect(()=>{
+		if(debounced!==''){
+			debounce(onTextChange,500)
+		}
+	},[debounced])
 	
 	return(
 		<>
@@ -99,10 +96,10 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask, onPressEnter})=>{
 											type="text"
 											defaultValue={task.taskTitle}
 											name="taskTitle"
-											onKeyDown={(e)=>e.key==='Delete'?delTask(task._id):''}
+											// onKeyDown={(e)=>e.key==='Delete'?delTask(task._id):''}
 											
 											onClick={()=>setActualInput(task._id)}
-											onChange={(e)=>onTextChange(e)}
+											onChange={(e)=>setDebouced(e.target.value)}
 										></input>
 										<ButtonTextDiv name="taskTitle" onClick={()=>delTask(task._id)} style={{visibility: `${id===task._id?'visible':'hidden'}`}}>Удалить</ButtonTextDiv>
 									</NEW_TD>

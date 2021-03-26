@@ -4,19 +4,23 @@ import newsp from "../../Styles/modules/components/Project/newsprint.module.css"
 import { NEW_TABLE, NEW_TBODY, NEW_TD, NEW_TH, NEW_THEAD, NEW_TR } from "../../Styles/tables"
 import { ButtonText, ButtonTextDiv} from "../../Styles/buttons"
 import getDate from "../Projects/getDate"
+
 import { useDispatch} from "react-redux"
 import { addUserTask, editUserTask, myTaskDelite } from "../../redux/actions/user"
 import { Light, Thin } from "../../Styles/typography"
 import { Input } from "../../Styles/Forms"
+// import debounce from "./debounce"
+
 
 
 const MyTasks =({tasks,onChange,currentDate, delTask,onPressEnter})=>{
 	const dispatch = useDispatch()
-	
 	const [id, setId] = useState('')
+	const [debounced, setDebouced] = useState('')
 	const [actualInput, setActualInput] = useState('')
 	const [deadline, setDeadline] = useState(false)
-
+	const [deadlineEnter, setDeadlineEnter] = useState(false)
+	const [timeout , updateTimeout] = useState(undefined)
 	const [formData, setFormData] = useState({
 		taskTitle:'',
 		deadline: null
@@ -27,18 +31,36 @@ const MyTasks =({tasks,onChange,currentDate, delTask,onPressEnter})=>{
 		let field = e.target.name;
 		setFormData ({ ...formData, [field]: input })
 	}
-	const onTextChange = (e) => {
-		e.preventDefault()
-		let field = e.target.name;
-		let value = e.target.value;
-		console.log(field, value)
+	
+	const onDeadlineChange =(e)=>{
+		let value = e.target.value
+		let field = 'deadline'
+		console.log(value,id,field)
 		dispatch(editUserTask({value, id,field}))
 		setDeadline(false)
-
-	  };
+		setDeadlineEnter(false)
+	};
+	const debounce =(fn,ms)=>{
+		const huy=()=> {
+				clearTimeout(timeout)
+				updateTimeout(setTimeout(fn, ms)) 
+		}
+		return huy()
+	}
+	const onTextChange =()=>{
+		let value = debounced
+		let field = 'taskTitle'
+		console.log(value,id,field)
+		dispatch(editUserTask({value, id,field}))
+	};
 	useEffect(()=>{
-		setActualInput('')
-	},[id])
+		if(debounced!==''){
+			debounce(onTextChange,500)
+		}
+	},[debounced])
+	
+		// onTextChange = debounce(onTextChange,500)
+
 	const onSubmit=(e)=>{
 
 		e.target.blur()
@@ -52,7 +74,6 @@ const MyTasks =({tasks,onChange,currentDate, delTask,onPressEnter})=>{
 	const addNewTask =()=>{
 		if(formData.taskTitle!==''){
 			dispatch(addUserTask(formData))
-			
 			setFormData ({
 			taskTitle:'',
 			deadline: null
@@ -96,7 +117,7 @@ const MyTasks =({tasks,onChange,currentDate, delTask,onPressEnter})=>{
 										style={{outline:'none',backgroundColor:`${id===task._id?'#F1EFEF':''}`}} 
 										className={style.mytask__tr}
 										tabIndex="0"
-										onKeyDown={(e)=>e.key==='Delete'?delTask(task._id):e.key==='Enter'?onPressEnter(task._id):e.key==='Escape'?onPressEscape():''}
+										onKeyDown={(e)=>e.key==='Delete'?delTask(task._id):e.key=='Enter'&&deadlineEnter==false?onPressEnter(task._id):e.key==='Escape'?onPressEscape():''}
 										
 										>
 									
@@ -106,12 +127,11 @@ const MyTasks =({tasks,onChange,currentDate, delTask,onPressEnter})=>{
 										
 									>
 										<input
-										
-										type="checkbox"
-										defaultChecked={task.taskStatus}
-										value={task._id}
-										onChange={onChange}
-									></input>
+											type="checkbox"
+											defaultChecked={task.taskStatus}
+											value={task._id}
+											onChange={onChange}
+										></input>
 
 										<input
 											style={{
@@ -127,8 +147,7 @@ const MyTasks =({tasks,onChange,currentDate, delTask,onPressEnter})=>{
 											onKeyDown={(e)=>e.key==='Delete'?delTask(task._id):e.key==='Enter'?onSubmit(e):''}
 											name="taskTitle"
 											onClick={()=>setActualInput(task._id)}
-											
-											onChange={(e)=>onTextChange(e)}
+											onChange={(e)=>{setDebouced(e.target.value)}}
 										></input>
 										<ButtonTextDiv onClick={()=>delTask(task._id)} style={{visibility: `${id===task._id?'visible':'hidden'}`}}>Удалить</ButtonTextDiv>
 								
@@ -136,7 +155,7 @@ const MyTasks =({tasks,onChange,currentDate, delTask,onPressEnter})=>{
 										
 									</NEW_TD>
 									<NEW_TD style={{width:'250px'}}>
-										<form onSubmit={(e)=>onTextChange(e)} style={{display:`${task._id === id?'flex':'none'}`}}>
+										<form onSubmit={(e)=>onDeadlineChange(e)} style={{display:`${task._id === id?'flex':'none'}`}}>
 											<Thin >Дедлайн: </Thin> 
 											<ButtonTextDiv onClick={()=>setDeadline(true)}
 											style={{display:`${task._id !== id||!deadline?'block':'none'}`}}>
@@ -144,10 +163,10 @@ const MyTasks =({tasks,onChange,currentDate, delTask,onPressEnter})=>{
 											</ButtonTextDiv>
 											
 											<Input 
-											
 												type="date"
-												name="deadline" 
-												onKeyDown={(e)=>e.key==='Enter'?onTextChange(e):''}
+												name="deadline"
+												onChange={(()=>{setDeadlineEnter(true)})}
+												onKeyDown={(e)=>e.key==='Enter'?onDeadlineChange(e):''}
 												style={{display:`${task._id === id&&deadline?'block':'none'}`}}>
 											</Input>
 											

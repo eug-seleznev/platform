@@ -18,7 +18,8 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
   const [focusRow, setFocusRow] = useState("");
   const [deadline, setDeadline] = useState(false);
   const [taskTitle, setTaskTitle] = useState("");
-
+  const [timeout , updateTimeout] = useState(undefined)
+  const [debounced, setDebouced] = useState('')
   const [isDouble, setDouble] = useState(0)
     const [double, setD] = useState(0);
 
@@ -48,16 +49,34 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
   }, [isEdit]);
 
   //edit task
-  const editHandler = (e) => {
-    // console.log('edit')
-     let field = 'taskTitle'
-      let value = e.target.value
-      dispatch(EditTask({ value, id, focusRow, field }));
-      setTaskTitle(e.target.value)
-   //server call edit task
+  const debounce =(fn,ms)=>{
+		const huy=()=> {
+				clearTimeout(timeout)
+				updateTimeout(setTimeout(fn, ms)) 
+		}
+		return huy()
+	}
+	const onTextChange =()=>{
+		let value = debounced
+		let field = 'taskTitle'
+		console.log(value,id,field)
+		dispatch(EditTask({value, id,focusRow,field}))
+	};
+	useEffect(()=>{
+		if(debounced!==''){
+			debounce(onTextChange,500)
+		}
+	},[debounced])
+  // const editHandler = (e) => {
+  //   // console.log('edit')
+  //    let field = 'taskTitle'
+  //     let value = e.target.value
+  //     dispatch(EditTask({ value, id, focusRow, field }));
+  //     setTaskTitle(e.target.value)
+  //  //server call edit task
 
 
-  };
+  // };
   const onFocus=(e)=>{
     // console.log('onFocus')
     setTaskTitle(e.target.name)
@@ -150,10 +169,10 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
                   <input
                     className={style.input}
                     type="text"
-                    value={taskTitle}
+                    defaultValue={taskTitle}
                     name={task.taskTitle}
                     onClick={(e)=>onFocus(e)}
-                    onChange={(e)=>editHandler(e)}
+                    onChange={(e)=>{setDebouced(e.target.value)}}
                   ></input>
                 </form>
               </SPRINT_TD>
