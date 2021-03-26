@@ -36,7 +36,6 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask, onPressEnter})=>{
 	const onTextChange =()=>{
 		let value = debounced
 		let field = 'taskTitle'
-		console.log(value,id,field)
 		dispatch(editUserTask({value, id,field}))
 	};
 	useEffect(()=>{

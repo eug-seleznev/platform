@@ -35,7 +35,6 @@ const MyTasks =({tasks,onChange,currentDate, delTask,onPressEnter})=>{
 	const onDeadlineChange =(e)=>{
 		let value = e.target.value
 		let field = 'deadline'
-		console.log(value,id,field)
 		dispatch(editUserTask({value, id,field}))
 		setDeadline(false)
 		setDeadlineEnter(false)

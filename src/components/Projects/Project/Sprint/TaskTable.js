@@ -59,7 +59,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
 	const onTextChange =()=>{
 		let value = debounced
 		let field = 'taskTitle'
-		console.log(value,id,field)
+		// console.log(value,id,field)
 		dispatch(EditTask({value, id,focusRow,field}))
 	};
 	useEffect(()=>{
