@@ -151,9 +151,9 @@ export default function(state = initialState, action) {
                 // console.log(payload)
                 return {
                     ...state,
-                    sprint: payload,
+                    sprint: payload.sprint,
                     sprint_load: true,
-                    loadProject: false,
+                    loadProject: true,
                     reload: true,
                     error: '',
                     // sprint_msg:payload.msg,

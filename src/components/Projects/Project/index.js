@@ -2,7 +2,7 @@ import { useEffect } from "react"
 
 
 import { useDispatch, useSelector } from "react-redux";
-import { getProject, allSprints} from "../../../redux/actions/projects";
+import { getProject, allSprints, clearSprint} from "../../../redux/actions/projects";
 
 
 import TitleOfProject from "../components/OneProject/titleOfProject";
@@ -15,7 +15,7 @@ import ProjInfo from "../components/OneProject/projInfo";
 import ProjHistory from "../components/OneProject/projHistory";
 import { background } from "../../../redux/actions/user";
 
-const Project = ({match, history}) => {
+const Project = ({match, history, location}) => {
 
 
   
@@ -28,6 +28,7 @@ const Project = ({match, history}) => {
     useEffect(() => {
         dispatch(getProject(id));
         dispatch(background('white'))
+   
         return () => {
           dispatch(background('#ECECEC'))
         }
@@ -38,13 +39,15 @@ const Project = ({match, history}) => {
             dispatch(allSprints(project.crypt))
         }
     }, [loaded])
-    useEffect(() => {
-      if (sprint._id) {
-        history.push(`${id}/${sprint._id}`);
-      } else {
-        console.log(sprint, "my sprint else");
-      }
-    }, [sprint]);
+    // useEffect(() => {
+    //   if (sprint._id) {
+    //     history.push(`${id}/${sprint._id}`);
+    //   } else {
+    //     console.log(sprint, "my sprint else");
+    //   }
+    // }, [sprint]);
+
+
     return (
       <div className={style.contain}>
         {!loaded ? (
@@ -52,7 +55,7 @@ const Project = ({match, history}) => {
         ) : (
           <>
             <TitleOfProject hist={history} />
-            <AllSprintsOfProj status={project.status} id={project.crypt} match={match} hist={history}/>
+            <AllSprintsOfProj status={project.status} id={project.crypt} match={match} hist={history} sprint={sprint} location={location} history={history}/>
             <ProjectTeam hist={history} id={id} />
             <CalendSprint id={id} hist={history} project={project} />
             <Viewer project={project} />
