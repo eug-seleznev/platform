@@ -51,6 +51,7 @@ import Search from './components/User/Search'
 import Models from './components/Projects/Models';
 
 import EditUser from './components/User/editUser';
+import ProjectHelper from "./components/Projects/Project/Helper";
 
 
 const App = () => {
@@ -110,13 +111,15 @@ const App = () => {
                 <Route exact path="/db" component={DataBase} />
                 <Route exact path="/office" component={Office} />
                 {/* projects */}
-                <Route exact path="/projects" component={Projects} />
                 <Route exact path="/myprojects" component={MyProjects} />
                 {/* <Route exact path='/projects/:crypt/:sprint_id/new' component={Sprint_New} /> */}
-                <Route exact path="/projects/:id" component={Project} />
+
+                <Route exact path="/projects" component={Projects} />
+                <Route  path="/projects/:crypt" component={ProjectHelper} />
+
                 {/* <Route exact path="/projects" component={Project} /> */}
 
-                <Route
+                {/* <Route
                   exact
                   path="/projects/:crypt/:sprint_id"
                   component={Sprint}
@@ -138,21 +141,29 @@ const App = () => {
                   exact
                   path="/projects/:crypt/m/view/:name/public"
                   component={Helper}
-                />
+                /> */}
                 {/* <Route
                   exact
                   path="/projects/:crypt/m/view/new"
                   component={LoadModel}
                 /> */}
 
-                <Switch>
+                {/* <Switch>
                   <Route
                     exact
                     path="/projects/:id/model/view"
                     component={Helper}
                   />
-                </Switch>
+                </Switch> */}
                 {/* <Route exact path="/admin/editproj" component={ProjectsEdit} /> */}
+
+                {/* NEW ROUTING FOR PROJECT PAGE */}
+                {/* <Route 
+                  exact
+                  path='/projects/:crypt'
+                  component={}
+                  /> */}
+
                 <Route
                   exact
                   path="/admin/editproj/:id"

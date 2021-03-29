@@ -12,23 +12,26 @@ const SprintDescription = ({tags, dateOpen,taskcomplite, alltasks, history, id, 
 	const [actualClose, setActualClose] = useState (0)
 	const [status, setStatus] = useState (false)
 	const chosenSprints = useSelector(state => state.auth.user.sprints)
+
+
+
 	useEffect (()=> {
 
-			if (actualClose!=null){
-				
-				// console.log(actualClose, d1)
-				// setDiff (Math.abs(actualClose-d1)/86400000)
-				
-				setTimeout (()=>{
-					{chosenSprints.filter(sprint => sprint._id===id).map(()=>{
-						setStatus(true)
-					})}
-					setLoaded (true)
-				},500)
-			}
-			
+
+					chosenSprints
+          .filter(sprint => sprint._id===id)
+          .map(()=>setStatus(true))
+
+          
+
+
 		
-	},[actualClose])
+
+	},  [actualClose])
+
+
+
+
 	useEffect (()=> {
 		if (dateClosePlan!=null) {
 			let d2 = new Date (dateClosePlan.slice(0, 10).replace(/-/g, "/"))
@@ -51,9 +54,7 @@ const SprintDescription = ({tags, dateOpen,taskcomplite, alltasks, history, id, 
 
 	return (
     <>
-      {!loaded ? (
-        <div>loading...</div>
-      ) : (
+
         <div>
           <div className={style.card}>
             <div className={style.first__row}>
@@ -67,7 +68,7 @@ const SprintDescription = ({tags, dateOpen,taskcomplite, alltasks, history, id, 
 				{title}
                 </Light>
               </div>
-
+ 
               <img
                 src="/star.png"
                 alt='star'
@@ -77,7 +78,8 @@ const SprintDescription = ({tags, dateOpen,taskcomplite, alltasks, history, id, 
                   backgroundColor: `${status ? "#ff9800" : "white"}`,
                 }}
                 className={style.chosen}
-              ></img>
+              />
+  
             </div>
             <div className={style.second__row}>
               <div className={style.card__tasks}>
@@ -93,6 +95,8 @@ const SprintDescription = ({tags, dateOpen,taskcomplite, alltasks, history, id, 
                   {taskcomplite}/{alltasks}
                 </Thin>
               </div>
+
+
               <div className={style.tags}>
                 {tags.length !== 0 ? (
                   tags.map((el, i) => {
@@ -115,22 +119,10 @@ const SprintDescription = ({tags, dateOpen,taskcomplite, alltasks, history, id, 
             </div>
 
             <div>
-              {/* <div className={style.card__date2}> <Light  size='16'>Дней до дедлайна: {diff.toString().slice(0,2)}</Light></div> */}
-              {/* <div className={style.card__tasks}> 
-						
-						
-						
-						
-					</div> */}
-              {/* <div className={style.card__buttons} style={{display:`${projStatus?'none':'flex'}`}} >
-						
-						<Button fontSize={'16px'}padd={'5px'}  onClick={chosenSprint} grey>{!status? 'Добавить в избранное': 'Убрать из избранного'}</Button>
-						<Button fontSize={'16px'}>Подробнее</Button>
-					</div> */}
             </div>
           </div>
         </div>
-      )}
+    
     </>
   );
 }

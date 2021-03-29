@@ -5,7 +5,7 @@ import { ADD_SPRINT,SORT_PROJECTS,SORT_TITLE, SEARCH_OBJECT, ALL_PROJECTS,EDIT_P
 
 const initialState = {
     projects: null,
-    project: {},
+    project: null,
     loadProject: false,
     loadedAllProj: false,
     sprints: [],

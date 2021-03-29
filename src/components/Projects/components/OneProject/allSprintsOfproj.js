@@ -10,34 +10,19 @@ import { useEffect, useState } from "react";
 
 
 
-const AllSprintsOfProj = ({hist, match, status, id, sprint, location, history}) => {
+const AllSprintsOfProj = ({hist, sprints, match, status, id, sprint, location, history}) => {
   const dispatch = useDispatch();
-
-	const sprints = useSelector(state => state.projects.sprints) //нужно из пропсов достать, тут можно и без редакса
-  
-  const [sprintId, setSprintId] = useState(null)
   const [submited, setSubmited] = useState(false)
-
-  // useEffect(() => {
-  //   console.log(sprintId)
-  //   if(sprintId) {
-  //       history.push(`${location.pathname}/${sprintId}`);
-  //   }
-  // }, [sprintId])
-
 
 
 
   useEffect(() => {
-    console.log(sprint, submited)
-          console.log("hello");
 
     if(submited && sprint._id){
              return history.push(`${location.pathname}/${sprint._id}`);
     }
-
-    // return () => setSubmited(false)
   }, [submited, sprint])
+
 
 
 
@@ -68,7 +53,6 @@ const AllSprintsOfProj = ({hist, match, status, id, sprint, location, history}) 
               .filter((sprint) => !sprint.status)
               .map((sprint, i) => {
                 return (
-                  <div>
                     <SprintDescription
                       projStatus={status}
                       dateClosePlan={sprint.dateClosePlan}
@@ -87,8 +71,8 @@ const AllSprintsOfProj = ({hist, match, status, id, sprint, location, history}) 
                       key={i}
                       sprintname={sprint.name}
                       dateOpen={sprint.dateOpen}
-                    ></SprintDescription>
-                  </div>
+                    />
+                  
                 );
               })}
           </div>

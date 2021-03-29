@@ -21,49 +21,32 @@ const Project = ({match, history, location}) => {
   
     let {id} = match.params;
     const dispatch = useDispatch();
-    const loaded = useSelector(state => state.projects.loadProject)
     const project = useSelector(state => state.projects.project)
     const sprint = useSelector(state => state.projects.sprint)    
 
+
+
     useEffect(() => {
-        dispatch(getProject(id));
         dispatch(background('white'))
-   
         return () => {
           dispatch(background('#ECECEC'))
         }
     }, [])
 
-    useEffect(() => {
-        if(loaded){
-            dispatch(allSprints(project.crypt))
-        }
-    }, [loaded])
-    // useEffect(() => {
-    //   if (sprint._id) {
-    //     history.push(`${id}/${sprint._id}`);
-    //   } else {
-    //     console.log(sprint, "my sprint else");
-    //   }
-    // }, [sprint]);
 
 
     return (
       <div className={style.contain}>
-        {!loaded ? (
-          <p> loading...</p>
-        ) : (
-          <>
+
             <TitleOfProject hist={history} />
-            <AllSprintsOfProj status={project.status} id={project.crypt} match={match} hist={history} sprint={sprint} location={location} history={history}/>
+            <AllSprintsOfProj status={project.status} id={project.crypt} match={match} hist={history} sprint={sprint} location={location} history={history} sprints={project.sprints}/>
             <ProjectTeam hist={history} id={id} />
             <CalendSprint id={id} hist={history} project={project} />
             <Viewer project={project} />
             <ProjInfo history={history} project={project} />
             <ProjHistory history={history} project={project} />
-              
-          </>
-        )}
+    
+      
       </div>
     );
 }
