@@ -35,6 +35,7 @@ const Helper = ({match}) => {
       if (project._id && oauth &&status ) {
         //set currnet urn
         setUrn(project.urnNew.filter((urn) => urn._id === name));
+        console.log(urn, 'urn????')
         setLoaded(true);
 
       }
@@ -50,7 +51,7 @@ const Helper = ({match}) => {
 
     return (
       <Loader status={status} crypt={crypt} name={name}>
-        <Viewer oauth={oauth} projectTitle={project.title} urn={urn[0].urn} />
+        <Viewer oauth={oauth} projectTitle={project.title} urn={urn[0].urn} oldUrn={urn[0].old} />
       </Loader>
     );
 }

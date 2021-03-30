@@ -12,7 +12,7 @@ import Confirm from "../../components/OneProject/confirm";
 
 const AddTask = ({id, user, hist, sprint,crypt}) => {
     const dispatch = useDispatch();
-    const [field, setField] = useState(false)
+    const [field, setField] = useState(true)
     const [open, setOpen] = useState(false)
     const [task, setTask] = useState('');
     const [title, setTitle] = useState('');
@@ -64,9 +64,9 @@ const AddTask = ({id, user, hist, sprint,crypt}) => {
     }
     return (
       <div>
-        <form onSubmit={onSubmit} style={{display:'flex', justifyContent:'space-between'}}>
-          {field && <input value={task} className={style.input}  onChange={onChange}></input>}
-          <Button style={{backgroundColor:'white',border:'none', color:'#3F496C'}} type="submit"  fontSize="14px" onClick={formHandler}>
+        <form onSubmit={onSubmit} style={{display:'flex',  justifyContent:'space-between', width: "95%"}}>
+          {field && <input value={task} className={style.input} placeholder="Задача.." style={{marginTop: "10px"}}  onChange={onChange}></input>}
+          <Button style={{backgroundColor:'white',border:'none', color:'#3F496C', marginRight: "40vw"}} type="submit"  fontSize="14px" onClick={formHandler}>
             Добавить задачу
           </Button>
           <div style={{display:'flex'}}>
@@ -84,7 +84,7 @@ const AddTask = ({id, user, hist, sprint,crypt}) => {
                   </CancelButton>
 
                   <CancelButton
-                  padd='30px'
+                  padd='36px'
                     fontSize={"16px"}
                     style={{
                       display: `${user.permission === "user" ? "none" : "flex"}`, border:'none',marginLeft:'20px'
