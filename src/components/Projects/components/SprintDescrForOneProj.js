@@ -65,7 +65,7 @@ const SprintDescription = ({tags, dateOpen,taskcomplite, alltasks, history, cryp
                   className={style.link}
                   onClick={() => history.push(`tasks/${id}`)}
                 >
-				{title}
+				{title!==''&&title!==''?title:'Нет названия'}
                 </Light>
               </div>
  

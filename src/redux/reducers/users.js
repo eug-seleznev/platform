@@ -35,6 +35,7 @@ export default function(state = initialState, action) {
             contractors:payload,
             
         }
+       
         case SEARCH_USER: 
             return {
                 ...state,

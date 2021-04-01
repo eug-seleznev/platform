@@ -1,5 +1,5 @@
 
-import {REGISTER, AUTH_ERROR, LOGIN, USER_LOADED, CHANGE_USERDATA, CHANGE_AVATAR, CHANGE_LOADED, ADD_SPRINT_TO_CHOSEN, CLEAR_MSG, CLEAR_ERROR} from '../types'
+import {REGISTER,EDIT_USER_TASK,MY_TASK_DELITE,USER_TASKS, AUTH_ERROR,SORT_USER_TASKS,FINISH_USER_TASK, LOGIN, USER_LOADED, CHANGE_USERDATA, CHANGE_AVATAR, CHANGE_LOADED, ADD_SPRINT_TO_CHOSEN, CLEAR_MSG, CLEAR_ERROR, ADD_USER_TASK} from '../types'
 
 
 
@@ -30,6 +30,36 @@ export default function(state = initialState, action) {
                 error: payload.err,
             
             }
+            case MY_TASK_DELITE:
+                return {
+                    ...state,
+                    user: payload
+                }
+            case SORT_USER_TASKS: 
+            return {
+                ...state,
+                user: payload,
+            } 
+            case EDIT_USER_TASK: 
+            return {
+                ...state,
+                user: payload,
+            }
+            case USER_TASKS: 
+            return {
+                ...state,
+                user: payload,
+            }
+            case ADD_USER_TASK: 
+            return {
+                ...state,
+                user: payload,
+            }
+            case FINISH_USER_TASK:
+                return {
+                    ...state,
+                    user: payload,
+                }
             case CLEAR_ERROR:
                 return {
                     ...state,

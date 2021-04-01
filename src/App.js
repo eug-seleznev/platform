@@ -48,7 +48,8 @@ import EditContractor from './components/Superadmin/editContractor'
 //ОТБЕРИТЕ У МЕНЯ КОМПЬЮТЕР НАХУЙ
 // import Sprint_New from './components/Projects/Project/Sprint/new'
 import Search from './components/User/Search'
-
+import Models from './components/Projects/Models';
+import MyTasks from './components/MyTasks/index'
 import EditUser from './components/User/editUser';
 import ProjectHelper from "./components/Projects/Project/Helper";
 
@@ -181,6 +182,8 @@ const App = () => {
 
                 <Route exact path="/edit" component={Edit} />
                 <Route exact path="/news" component={News} />
+
+                <Route exact path="/mytasks" component={MyTasks}/>
                 {/* depatrments */}
                 <Route exact path="/department" component={Department} />
                 <Route exact path="/departments" component={AllDepartments} />
@@ -196,8 +199,7 @@ const App = () => {
                 <Route exact path="/viewer" component={Helper} />
                 <Route exact path="/contractors" component={Contractors} />
                 <Route
-                  exact
-                  path="/contractors/:id"
+                  exact path="/contractors/:id"
                   component={EditContractor}
                 />
               </Container>

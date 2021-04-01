@@ -83,7 +83,6 @@ export const sortProjects = ({ query, orderSort }) => async (dispatch) => {
   }
 };
 
-
 export const clearSprint = () =>  dispatch =>  {
   try {
     dispatch({
@@ -94,8 +93,6 @@ export const clearSprint = () =>  dispatch =>  {
       console.log('lol error')
   } 
 }
-
-
 
 export const sorType = ({ field, value }) => async (dispatch) => {
   try {
@@ -145,11 +142,6 @@ export const searchObject = (value) => async (dispatch) => {
   }
 };
 
-
-
-
-
-
 export const clearUrn = () => async dispatch => {
     try {
         dispatch({
@@ -158,7 +150,6 @@ export const clearUrn = () => async dispatch => {
     } catch (error) {
     }
 }
-
 
 export const allProjects = () => async dispatch  => {
     
@@ -300,6 +291,7 @@ export const EditTask = ({ value, id, focusRow, field }) => async (dispatch) => 
   }
 }; 
 
+
 export const addUserToTask = ({ userid, id, focusRow }) => async (dispatch) => {
   try {
     let body = {
@@ -346,12 +338,6 @@ export const deleteTag = ( id,tag ) => async (dispatch) => {
   }
 }; 
 
-
-
-
-
-
-
 export const DeleteTask = ({ id, focusRow }) => async (dispatch) => {
   try {
     let body = {
@@ -372,18 +358,6 @@ export const DeleteTask = ({ id, focusRow }) => async (dispatch) => {
     console.log(err.response.data);
   }
 }; 
-
-///projects/sprints/task/adduser/🇮🇩
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -546,9 +520,6 @@ export const addTask = ({ id, task }) => async (dispatch) => {
 };
 
 
-
-
-
 export const EditSprint = (sprintInfo, id) => async (dispatch) => {
   try {
 
@@ -564,17 +535,6 @@ export const EditSprint = (sprintInfo, id) => async (dispatch) => {
     });
   } catch (err) {}
 };
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -733,9 +693,6 @@ export const deleteProject = (crypt) => async dispatch  => {
 
 }
 
-
-
-
 export const joinTeam = (id,formData) => async dispatch  => {
 // console.log(formData,id)
     try {
@@ -759,9 +716,6 @@ export const joinTeam = (id,formData) => async dispatch  => {
     }
 
 }
-
-
-
 
 export const AddUserToTeam = (formData) => async dispatch => {
   try {
