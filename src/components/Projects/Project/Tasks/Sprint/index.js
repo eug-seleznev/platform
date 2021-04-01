@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {  useSelector } from "react-redux";
-import { Card } from "../../../../Styles/common"
+import { Card } from "../../../../../Styles/common"
 import AddTask from "./AddTask";
 import TaskManagment from "./EditTask";
 

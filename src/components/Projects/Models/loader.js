@@ -12,9 +12,9 @@ import { getProject } from "../../../redux/actions/projects";
 
 
 const Loader = (props) => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getProject(props.crypt))
+        // dispatch(getProject(props.crypt))
     }, [])
     return props.children
     

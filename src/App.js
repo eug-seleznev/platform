@@ -28,9 +28,9 @@ import Employe from './components/User/Employe';
 import Edit from './components/User/edit';
 import Ticket from './components/Adminka/Ticket';
 import Project from './components/Projects/Project';
-import Sprint from './components/Projects/Project/Sprint';
+import Sprint from './components/Projects/Project/Tasks/Sprint';
 // import ProjectsEdit from './components/Projects/ProjectsEdit';
-import OneProjEdit from './components/Projects/OneProjEdit';
+// import OneProjEdit from './components/Projects/Project/Edit';
 import Main from './components/Main/index'
 import Department from './components/Department/index'
 import MyProjects from './components/Projects/My';
@@ -48,7 +48,6 @@ import EditContractor from './components/Superadmin/editContractor'
 //ОТБЕРИТЕ У МЕНЯ КОМПЬЮТЕР НАХУЙ
 // import Sprint_New from './components/Projects/Project/Sprint/new'
 import Search from './components/User/Search'
-import Models from './components/Projects/Models';
 
 import EditUser from './components/User/editUser';
 import ProjectHelper from "./components/Projects/Project/Helper";
@@ -74,16 +73,14 @@ const App = () => {
     if (loaded) {
 
       setAuthToken(localStorage.token)
-      setTimeout(() => {
-        // dispatch(loadUser());
-      }, 1000);
+
     }
   }, [])
 
 
 
   return (
-    <div className="App" style={{ backgroundColor: background }}>
+    <div className="App" style={{ backgroundColor: 'white' }}>
       <Router history={history}>
         {!auth ? (
           <LoginContainer>
@@ -164,11 +161,11 @@ const App = () => {
                   component={}
                   /> */}
 
-                <Route
+                {/* <Route
                   exact
                   path="/admin/editproj/:id"
                   component={OneProjEdit}
-                />
+                /> */}
                 <Route
                   exact
                   path="/admin/newproject"

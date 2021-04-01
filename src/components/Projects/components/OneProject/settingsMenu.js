@@ -14,7 +14,7 @@ const SetMenu = ({closeAll, state, hist, project}) => {
 
 
 const repl =()=>{
-	hist.replace(`/admin/editproj/${project.crypt}`)
+	hist.push(`edit`)
 }
 
 

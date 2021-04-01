@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTag, DeleteTask, deleteTag, EditSprint } from "../../../../redux/actions/projects";
-import {  Light, Regular, Thin } from "../../../../Styles/typography"
-import style from "../../../../Styles/modules/components/Project/newsprint.module.css"
-import { addToChosen } from "../../../../redux/actions/auth";
-import TagSearch from "../../components/tagSearch";
-import Tag from "../../components/OneProject/tag";
+import { addTag, DeleteTask, deleteTag, EditSprint } from "../../../../../redux/actions/projects";
+import {  Light, Regular, Thin } from "../../../../../Styles/typography"
+import style from "../../../../../Styles/modules/components/Project/newsprint.module.css"
+import { addToChosen } from "../../../../../redux/actions/auth";
+import TagSearch from "../../../components/tagSearch";
+import Tag from "../../../components/OneProject/tag";
 
 
 

@@ -27,7 +27,9 @@ const Helper = ({match}) => {
      
                 dispatch(Oauth(crypt));
                 dispatch(Status({crypt, name}))
-                dispatch(getProject(crypt));
+                if(!project){
+                  dispatch(getProject(crypt));
+                }
             
     }, [])
 
@@ -35,7 +37,6 @@ const Helper = ({match}) => {
       if (project._id && oauth &&status ) {
         //set currnet urn
         setUrn(project.urnNew.filter((urn) => urn._id === name));
-        console.log(urn, 'urn????')
         setLoaded(true);
 
       }

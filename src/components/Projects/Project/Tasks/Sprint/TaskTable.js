@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, } from "react-redux";
-import { addUserToTask, EditTask, finishTask } from "../../../../redux/actions/projects";
-import { SPRINT_TABLE, TR,Select, SPRINT_TD } from "../../../../Styles/tables"
-import style from "../../../../Styles/modules/components/Project/newsprint.module.css"
-import { Thin } from "../../../../Styles/typography";
-import { Input } from "../../../../Styles/Forms";
-import { ButtonText } from "../../../../Styles/buttons";
-import getDate from "../../getDate";
+import { addUserToTask, EditTask, finishTask } from "../../../../../redux/actions/projects";
+import { SPRINT_TABLE, TR,Select, SPRINT_TD } from "../../../../../Styles/tables"
+import style from "../../../../../Styles/modules/components/Project/newsprint.module.css"
+import { Thin } from "../../../../../Styles/typography";
+import { Input } from "../../../../../Styles/Forms";
+import { ButtonText } from "../../../../../Styles/buttons";
+import getDate from "../../../getDate";
 
 //todo: handle no tasks state
 

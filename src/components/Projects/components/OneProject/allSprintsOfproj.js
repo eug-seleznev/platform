@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 
 
-const AllSprintsOfProj = ({hist, sprints, match, status, id, sprint, location, history}) => {
+const AllSprintsOfProj = ({hist, sprints, match, status, crypt, sprint, location, history}) => {
   const dispatch = useDispatch();
   const [submited, setSubmited] = useState(false)
 
@@ -19,7 +19,7 @@ const AllSprintsOfProj = ({hist, sprints, match, status, id, sprint, location, h
   useEffect(() => {
 
     if(submited && sprint._id){
-             return history.push(`${location.pathname}/${sprint._id}`);
+             return history.push(`projects/${crypt}/sprint/${sprint._id}`);
     }
   }, [submited, sprint])
 
@@ -28,7 +28,7 @@ const AllSprintsOfProj = ({hist, sprints, match, status, id, sprint, location, h
 
 
 	const createSprint = () => {
-    dispatch(addSprint(id));
+    dispatch(addSprint(crypt));
     };
 
 
@@ -58,6 +58,7 @@ const AllSprintsOfProj = ({hist, sprints, match, status, id, sprint, location, h
                       dateClosePlan={sprint.dateClosePlan}
                       descr={sprint.description}
                       history={hist}
+                      crypt={crypt}
                       params={match.params}
                       id={sprint._id}
                       key={i}

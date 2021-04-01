@@ -395,6 +395,8 @@ export const editProject = (formData, id) => async dispatch  => {
             type: EDIT_PROJECT,
             payload: res.data
         })
+
+        console.log(res.data)
     
   
       }

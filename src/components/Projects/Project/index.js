@@ -19,19 +19,11 @@ const Project = ({match, history, location}) => {
 
 
   
-    let {id} = match.params;
-    const dispatch = useDispatch();
+    let {crypt} = match.params;
     const project = useSelector(state => state.projects.project)
     const sprint = useSelector(state => state.projects.sprint)    
 
 
-
-    useEffect(() => {
-        dispatch(background('white'))
-        return () => {
-          dispatch(background('#ECECEC'))
-        }
-    }, [])
 
 
 
@@ -39,9 +31,9 @@ const Project = ({match, history, location}) => {
       <div className={style.contain}>
 
             <TitleOfProject hist={history} />
-            <AllSprintsOfProj status={project.status} id={project.crypt} match={match} hist={history} sprint={sprint} location={location} history={history} sprints={project.sprints}/>
-            <ProjectTeam hist={history} id={id} />
-            <CalendSprint id={id} hist={history} project={project} />
+            <AllSprintsOfProj status={project.status} crypt={project.crypt} match={match} hist={history} sprint={sprint} location={location} history={history} sprints={project.sprints}/>
+            <ProjectTeam hist={history} id={crypt} />
+            <CalendSprint id={crypt} hist={history} project={project} />
             <Viewer project={project} />
             <ProjInfo history={history} project={project} />
             <ProjHistory history={history} project={project} />

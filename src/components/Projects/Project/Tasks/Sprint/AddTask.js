@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTask, clearSprint, deleteSprint, finishSprint } from "../../../../redux/actions/projects";
-import { Button, CancelButton } from "../../../../Styles/buttons";
-import style from "../../../../Styles/modules/components/Project/newsprint.module.css"
-import Confirm from "../../components/OneProject/confirm";
+import { addTask, clearSprint, deleteSprint, finishSprint } from "../../../../../redux/actions/projects";
+import { Button, CancelButton } from "../../../../../Styles/buttons";
+import style from "../../../../../Styles/modules/components/Project/newsprint.module.css"
+import Confirm from "../../../components/OneProject/confirm";
 
 
 

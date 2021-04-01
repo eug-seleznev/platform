@@ -31,13 +31,7 @@ const Models = ({match, history, location}) => {
 
 
     const [updateExistModel, setUpdate] = useState(false)
-    useEffect(() => {
-     
-      dispatch(background('white'))
-      return () => {
-        dispatch(background('#ECECEC'))
-      }
-  }, [])
+
     useEffect(() => {
       if(loadingStatus){
         
@@ -60,10 +54,13 @@ const Models = ({match, history, location}) => {
     return (
       <Loader crypt={crypt}>
         <div className={modelsCss.main}>
-          <div className={modelsCss.row} >
+          {/* <div className={modelsCss.row} >
             <ButtonText fontSize='16px'  onClick={() => history.push(`/projects/${crypt}`)}>{project.title} </ButtonText>
             <Regular size='16'>/ модели</Regular>
-          </div>
+          </div> */}
+          <br />
+          <br />
+          <br />
          
           <Managment
             history={history}

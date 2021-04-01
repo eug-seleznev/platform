@@ -4,7 +4,7 @@ import { Light, Thin } from "../../../Styles/typography"
 import { useSelector,useDispatch} from "react-redux"
 import { addToChosen } from '../../../redux/actions/auth'
 import Tag from "./OneProject/tag"
-const SprintDescription = ({tags, dateOpen,taskcomplite, alltasks, history, id, params,descr, title, dateClosePlan}) => {
+const SprintDescription = ({tags, dateOpen,taskcomplite, alltasks, history, crypt, id, title, dateClosePlan}) => {
 	
 	const dispatch = useDispatch();
 	const [loaded, setLoaded] = useState (0)
@@ -63,7 +63,7 @@ const SprintDescription = ({tags, dateOpen,taskcomplite, alltasks, history, id, 
                   size="24"
                   color="#3F496C"
                   className={style.link}
-                  onClick={() => history.push(`/projects/${params.id}/${id}`)}
+                  onClick={() => history.push(`tasks/${id}`)}
                 >
 				{title}
                 </Light>
