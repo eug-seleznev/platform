@@ -1,14 +1,13 @@
 .contain {
 	display: grid;
-	
-	grid-template-rows: repeat (max-content, 5);
+	margin-top: 5vh;
+	grid-template-rows: repeat (max-content, 3);
 	grid-template-columns: 0.87fr 1.13fr;
 	grid-template-areas: 
 
-	'title title'
+	
 	'sprints info'
 	'team history'
-	'calend history'
 	'model history'
 	;
 	

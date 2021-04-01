@@ -14,7 +14,7 @@ const Subtitle = ({title, src, buttonFunc, buttonActive, subtwidth, srcplus,open
 			</div>
 			
 			<div>
-				<img alt='sprint' style={{display:`${open?'block':'none'}`,cursor:'pointer', transform:`${isopen?'rotate(180deg)':'rotate(0deg)'}`}} onClick={openfunc} src='/openicon.png'></img>
+				{/* <img alt='sprint' style={{display:`${open?'block':'none'}`,cursor:'pointer', transform:`${isopen?'rotate(180deg)':'rotate(0deg)'}`}} onClick={openfunc} src='/openicon.png'></img> */}
 			</div>
 	  	</div>
     )

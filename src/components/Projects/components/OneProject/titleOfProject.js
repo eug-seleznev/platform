@@ -10,6 +10,9 @@ const TitleOfProject = ({hist}) => {
 
     const user = useSelector(state => state.auth.user) 
     const [open,setOpen] = useState(false)
+
+
+    
     const [deadline,setDeadline] = useState(0)
     const project = useSelector(state => state.projects.project)
     useEffect(()=>{
@@ -47,12 +50,12 @@ const TitleOfProject = ({hist}) => {
                 Настройки
               </Bold>
               <img alt='open' src="/image 1.png" onClick={openMenu}></img>
-              <SetMenu
+              {/* <SetMenu
                 closeAll={closeAll}
                 project={project}
                 hist={hist}
                 state={open}
-              ></SetMenu>
+              ></SetMenu> */}
             </div>
          
         </div>

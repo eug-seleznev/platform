@@ -12,25 +12,13 @@ import EditProject from '../Edit'
 import Viewer from '../../../Viewer/helper'
 
 const Helper = ({match, history}) => {
-
-  let value_from_back = '25-15-10'
-  let settings = {
-    settings: true,
-    hello: false
-  };
-
-  let obj = {};
-
-  obj[value_from_back] = settings;
-
-  console.log(obj);
+  
 
   let {crypt} = match.params;
     return (
       <div>
-        <Header crypt={crypt} history={history} />
-
         <Loader crypt={match.params.crypt}>
+          <Header crypt={crypt} history={history} />
           {/* {'ROUTING FOR PROJECTS'} */}
           <Route exact path={`${match.path}/main`} component={Project} />
           {/* SPRINTS PAGES */}

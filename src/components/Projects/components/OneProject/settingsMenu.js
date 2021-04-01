@@ -8,7 +8,7 @@ import DeliteEnd from './deliteEnd'
 
 
 
-const SetMenu = ({closeAll, state, hist, project}) => {
+const SetMenu = ({setOpen, state, hist, project}) => {
 
 
 
@@ -31,7 +31,7 @@ const repl =()=>{
 				}}
 				unmountOnExit
 			>
-        		<div className={styles.menu} onMouseLeave={closeAll}>
+        		<div className={styles.menu} onMouseLeave={() =>setOpen(false)}>
 
                     <StyledIn onClick={()=>repl()} className='menu__nav' to='/help'>
                         Изменить проект
