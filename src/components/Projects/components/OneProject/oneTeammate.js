@@ -5,23 +5,23 @@ import { Bold} from "../../../../Styles/typography"
 export const url = process.env.REACT_APP_IP;
 
 
-const ProjTeam = ({userName,userPos,userAvatar,userId,histProp, lastName, userMail, userTask}) => {
+const ProjTeam = ({userName,userPos,userAvatar,userId,histProp, userTask}) => {
 	
 	return (
-    <NEW_TABLE>
-      <NEW_TR
-        className={table.tr__inproj}
-        onClick={() => histProp.push(`/users/${userId}`)}
-      >
-
-        <NEW_TD style={{ display: "flex" }}>
-          <Bold>{userTask}</Bold>  {userName}
+    <NEW_TABLE style={{width: "100%"}}>
+      <NEW_TR onClick={() => histProp.push(`/users/${userId}`)}>
+        <NEW_TD>{userTask}</NEW_TD>
+        <NEW_TD>
+          {userName}
+          <img
+            alt="нет"
+            style={{marginLeft: "5px", width: "35px", height: "35px" }}
+            className={table.image}
+            src={url + "/" + userAvatar}
+          />
         </NEW_TD>
 
-        <NEW_TD style={{ textAlign: "center" }} className={table.turn__off}>
-          {userPos}
-        </NEW_TD>
-
+        <NEW_TD >{userPos}</NEW_TD>
       </NEW_TR>
     </NEW_TABLE>
   );

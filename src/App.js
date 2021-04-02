@@ -1,9 +1,7 @@
 
 import { useDispatch, useSelector } from 'react-redux';
 import { createBrowserHistory } from "history";
-
 import './App.css';
-
 import Auth from './components/Auth/index'
 
 import {
@@ -27,8 +25,6 @@ import MyProfile from './components/User/me';
 import Employe from './components/User/Employe';
 import Edit from './components/User/edit';
 import Ticket from './components/Adminka/Ticket';
-import Project from './components/Projects/Project';
-import Sprint from './components/Projects/Project/Tasks/Sprint';
 // import ProjectsEdit from './components/Projects/ProjectsEdit';
 // import OneProjEdit from './components/Projects/Project/Edit';
 import Main from './components/Main/index'
@@ -48,10 +44,10 @@ import EditContractor from './components/Superadmin/editContractor'
 //ОТБЕРИТЕ У МЕНЯ КОМПЬЮТЕР НАХУЙ
 // import Sprint_New from './components/Projects/Project/Sprint/new'
 import Search from './components/User/Search'
-import Models from './components/Projects/Models';
 import MyTasks from './components/MyTasks/index'
 import EditUser from './components/User/editUser';
 import ProjectHelper from "./components/Projects/Project/Helper";
+import IdeaaHelper from "./components/Roadmap/Routing";
 
 
 const App = () => {
@@ -114,7 +110,7 @@ const App = () => {
 
                 <Route exact path="/projects" component={Projects} />
                 <Route  path="/projects/:crypt" component={ProjectHelper} />
-
+                <Route  path='/idea' component={IdeaaHelper} />
                 {/* <Route exact path="/projects" component={Project} /> */}
 
                 {/* <Route
