@@ -87,7 +87,7 @@ export const ButtonText =  styled.button`
   padding: 0;
   cursor:pointer;
   font-size:${props => props.fontSize};
-  font-family: SuisseIntlRegular;
+  font-family: SuisseIntlLight;
   
  
   outline: none;

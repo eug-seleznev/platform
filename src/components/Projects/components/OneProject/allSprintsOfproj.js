@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import style from '../../../../Styles/modules/components/Project/oneproj.module.css'
 
 import SprintDescription from "../SprintDescrForOneProj";
@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 
 
 const AllSprintsOfProj = ({hist, sprints, match, status, crypt, sprint, location, history}) => {
+  
   const dispatch = useDispatch();
   const [submited, setSubmited] = useState(false)
 
@@ -19,7 +20,7 @@ const AllSprintsOfProj = ({hist, sprints, match, status, crypt, sprint, location
   useEffect(() => {
 
     if(submited && sprint._id){
-             return history.push(`projects/${crypt}/sprint/${sprint._id}`);
+             return history.push(`tasks/${sprint._id}`);
     }
   }, [submited, sprint])
 

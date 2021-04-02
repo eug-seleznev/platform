@@ -2,14 +2,14 @@ import styles from '../../../../Styles/modules/components/Project/oneproj.module
 import { Light } from '../../../../Styles/typography'
 
 
-const Subtitle = ({title, src, buttonFunc, buttonActive, subtwidth, srcplus,open, isopen, openfunc}) => {
+const Subtitle = ({title, src, buttonFunc, buttonActive, subtwidth, srcplus}) => {
     // const [overCard, setOvercard] = useState(false)
 
     return(
 		<div className={styles.sprint__title} style={{width:subtwidth}}>
 			<div className={styles.sprint__in}>
 				<img alt='sprint' className={styles.sprint__title__img} src={src}></img>
-				<Light size='22' style={{width:'250px'}}>{title}</Light>
+				<Light size='18' style={{width:'250px'}}>{title}</Light>
 				<img alt='sprint' className={styles.sprint__title__plus} style={{display:`${buttonActive?'flex':'none'}`}} onClick={buttonFunc} src={srcplus?'/minus.png':'/plus.png'}></img>
 			</div>
 			

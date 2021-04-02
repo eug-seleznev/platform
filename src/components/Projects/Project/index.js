@@ -4,7 +4,6 @@ import {  useSelector } from "react-redux";
 
 
 import AllSprintsOfProj from "../components/OneProject/allSprintsOfproj";
-import CalendSprint from "../components/OneProject/sprintCalend";
 import ProjectTeam from "../components/OneProject/ProjectTeam";
 import style from '../../../Styles/modules/components/Project/oneproj.module.css'
 import Viewer from "../model";
@@ -25,16 +24,30 @@ const Project = ({match, history, location}) => {
 
     return (
       <div className={style.contain}>
+        <div style={{
+          marginLeft: "20%",
+          width: "80%"
+        }}> 
+          <AllSprintsOfProj
+            status={project.status}
+            crypt={project.crypt}
+            match={match}
+            hist={history}
+            sprint={sprint}
+            location={location}
+            history={history}
+            sprints={project.sprints}
+          />
+          <ProjectTeam hist={history} id={crypt} />
+          <Viewer project={project} />
+        </div>
 
+        <div>
+          <ProjInfo history={history} project={project} />
+          <ProjHistory history={history} project={project} />
+        </div>
 
-            <AllSprintsOfProj status={project.status} crypt={project.crypt} match={match} hist={history} sprint={sprint} location={location} history={history} sprints={project.sprints}/>
-            <ProjectTeam hist={history} id={crypt} />
-            {/* <CalendSprint id={crypt} hist={history} project={project} /> */}
-            <Viewer project={project} />
-            <ProjInfo history={history} project={project} />
-            <ProjHistory history={history} project={project} />
-    
-      
+        {/* <CalendSprint id={crypt} hist={history} project={project} /> */}
       </div>
     );
 }

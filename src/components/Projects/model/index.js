@@ -17,10 +17,9 @@ const Viewer = ({ project }) => {
     <div
       className={style.model__cont}
       style={{
-        height: `${!open ? "25px" : "auto"}`,
         overflowY: "hidden",
         paddingBottom: "30px",
-        marginBottom: "25px",
+        marginBottom: "0px",
       }}
     >
       <Subtitle
@@ -31,15 +30,33 @@ const Viewer = ({ project }) => {
         src="/model.png"
         open={true}
       ></Subtitle>
-      <div style={{ width: "80%" }}>
-
-        <Link to={`${project.crypt}/m/view`} style={{ textDecoration: "none" }}>
+      <div style={{ width: "80%", marginTop: "-27px" }}>
+        <Link to={`models`} style={{ textDecoration: "none" }}>
           <Thin
             style={{
               backgroundColor: "#EBF5FF",
-              width: "243px",
+              width: "240px",
               textAlign: "center",
-              padding: "2px",
+              padding: "0px",
+              cursor: "pointer",
+              transform: "translateY(23px)",
+              borderRadius: "5px",
+              marginBottom: "10px",
+              height: "35px",
+              border: "1px solid #C4C4C4",
+            }}
+          >
+            Сводная модель
+          </Thin>
+        </Link>
+
+        <Link to={`models`} style={{ textDecoration: "none" }}>
+          <Thin
+            style={{
+              backgroundColor: "white",
+              width: "240px",
+              textAlign: "center",
+              padding: "0px",
               cursor: "pointer",
               transform: "translateY(23px)",
               borderRadius: "5px",

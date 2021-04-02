@@ -9,7 +9,6 @@ const Tag = ({tagColor, tagText, size, projectPage, crypt}) => {
     // const [overCard, setOvercard] = useState(false)
 	const dispatch = useDispatch()
 	const sortSprints =()=>{
-		console.log('hi')
 		if(tagText!=='Все') {
 			dispatch(sortByTags(crypt,tagText))
 		}
