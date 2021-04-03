@@ -138,3 +138,21 @@ export const CLEAR_DEPS = 'clear_deps'
 ///errors
 
 export const ERROR_MSG ='error_msg'
+
+
+
+export const GET_IDEAS = 'get_all_ideas'; //all arrays
+export const GET_NEW_IDEAS = 'get_new_ideas'; //new array
+export const GET_WORK_IDEAS = 'get_ideas_in_progress'; // work array
+export const GET_DONE_IDEAS = 'get_done_ideas'; //done array
+
+export const LIKE_IDEA = 'like_new_idea'; //new array and msg 
+
+export const MOVE_IDEA = 'change_idea_status' //тут можно сделать одним роутом.
+//я буду отправлять в квери куда именно передвинуть её - в work или done; 
+//если говно идея то отдельно 2 роута new => work => done
+//второй вариант логичнее, потому что понятно что отправлять обратно на фронт. 
+//типа двинули идею с new => work - нужны новые массивы new / work
+
+
+

@@ -50,7 +50,7 @@ const Sidebar = () => {
           <img alt="deps" src="/sidebarIcon.png" title="Все отделы" />
           <p>Все отделы</p>
         </SidebarLink>
-        <SidebarLink to="/idea" className="nav-link">
+        <SidebarLink to="/idea/new" className="nav-link">
           <img alt="deps" src="/sidebarIcon.png" title="Идеи на платформу" />
           <p>Идеи</p>
         </SidebarLink>

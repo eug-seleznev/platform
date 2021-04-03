@@ -1,7 +1,7 @@
 import { Route } from "react-router"
 import Done from "./Done";
 import Loader from "./Loader";
-import New from "./new";
+import New from "./New/index";
 import Work from "./Work";
 import Header from './Header'
 

@@ -111,58 +111,7 @@ const App = () => {
                 <Route exact path="/projects" component={Projects} />
                 <Route  path="/projects/:crypt" component={ProjectHelper} />
                 <Route  path='/idea' component={IdeaaHelper} />
-                {/* <Route exact path="/projects" component={Project} /> */}
 
-                {/* <Route
-                  exact
-                  path="/projects/:crypt/:sprint_id"
-                  component={Sprint}
-                />
-
-                <Route
-                  exact
-                  path="/projects/:crypt/m/view"
-                  component={Models}
-                />
-
-                <Route
-                  exact
-                  path="/projects/:crypt/m/view/:name"
-                  component={Helper}
-                />
-
-                <Route
-                  exact
-                  path="/projects/:crypt/m/view/:name/public"
-                  component={Helper}
-                /> */}
-                {/* <Route
-                  exact
-                  path="/projects/:crypt/m/view/new"
-                  component={LoadModel}
-                /> */}
-
-                {/* <Switch>
-                  <Route
-                    exact
-                    path="/projects/:id/model/view"
-                    component={Helper}
-                  />
-                </Switch> */}
-                {/* <Route exact path="/admin/editproj" component={ProjectsEdit} /> */}
-
-                {/* NEW ROUTING FOR PROJECT PAGE */}
-                {/* <Route 
-                  exact
-                  path='/projects/:crypt'
-                  component={}
-                  /> */}
-
-                {/* <Route
-                  exact
-                  path="/admin/editproj/:id"
-                  component={OneProjEdit}
-                /> */}
                 <Route
                   exact
                   path="/admin/newproject"
@@ -204,9 +153,7 @@ const App = () => {
         )}
       </Router>
 
-      {/* <Router history={history}>
-        <Route exact path="models/:id/viewer" component={PublicViewer} />
-      </Router> */}
+  
     </div>
   );
 }
