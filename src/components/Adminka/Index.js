@@ -27,6 +27,7 @@ const Admin = ({closeWindow}) => {
 
       const handleFile = e => {
         setFile(e.target.files[0])
+        
     }
     const onChange = e => {
         e.preventDefault(); 
