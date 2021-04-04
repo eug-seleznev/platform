@@ -8,7 +8,7 @@ import models from './models'
 import office from './office'
 import departments from './department'
 import messages from './messages'
-
+import ideas from './ideas'
 
 export default combineReducers({
     users,
@@ -19,6 +19,7 @@ export default combineReducers({
     models,
     office,
     departments,
-    messages
+    messages,
+    ideas
 
 });

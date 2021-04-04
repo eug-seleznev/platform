@@ -147,6 +147,7 @@ export const GET_WORK_IDEAS = 'get_ideas_in_progress'; // work array
 export const GET_DONE_IDEAS = 'get_done_ideas'; //done array
 
 export const LIKE_IDEA = 'like_new_idea'; //new array and msg 
+export const POST_IDEA = 'create_new_idea'; //all arrays
 
 export const MOVE_IDEA = 'change_idea_status' //тут можно сделать одним роутом.
 //я буду отправлять в квери куда именно передвинуть её - в work или done; 

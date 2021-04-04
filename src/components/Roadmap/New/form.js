@@ -1,5 +1,7 @@
 import { useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { postNew } from "../../../redux/actions/ideas"
+import { Button } from "../../../Styles/buttons"
 
 
 
@@ -10,12 +12,10 @@ import { useSelector } from "react-redux"
 
 
 const Form = () => {
-    const user = useSelector(state => state.auth.user)
+  const dispatch = useDispatch()
     const [formData, setFormData]  = useState({
         title: '',
-        description: '',
-        user: user._id,
-        
+        description: ''        
     })
 
     const handleChange = (e) => {
@@ -24,8 +24,11 @@ const Form = () => {
     
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        //server requast
+      e.preventDefault();
+      //server requast
+
+      dispatch(postNew(formData));
+      setFormData({ title: "", description: "" });
     }
 
     return (
@@ -33,9 +36,7 @@ const Form = () => {
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            
-
+            flexDirection: "column"
           }}
         >
           <input
@@ -45,18 +46,27 @@ const Form = () => {
             required
             type="text"
             name="title"
-            placeholder="Название идеи"
+            value={formData.title}
+            placeholder="Я хочу..."
             onChange={handleChange}
           />
+          
           <textarea
+            required
             rows="5"
             cols="35"
+            value={formData.description}
             name="description"
-            placeholder="Описание идеи"
+            placeholder="Описание функционала.."
             onChange={handleChange}
-          ></textarea>
+          />
         </div>
-        <button type="submit"> Отправить</button>
+        <Button style={{
+          marginRight: "20px",
+          position: "absolute",
+          zIndex: '20',
+          marginTop: "-38px"
+        }} type="submit">Отправить</Button>
       </form>
     );
 }

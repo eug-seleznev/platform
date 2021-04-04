@@ -1,38 +1,61 @@
 import { useDispatch } from "react-redux";
+import { likeIdea } from "../../../redux/actions/ideas";
 import { Card } from "../../../Styles/modules/Roadmap";
+import { Light } from "../../../Styles/typography";
 
 
 
 
 
 
-const Ideas = ({idea}) => {
+const Ideas = ({idea, setSelected}) => {
       const dispatch = useDispatch();
 
-      const handleRequest = (data) => {
-        // dispatch()
-        console.log(data);
+      const handleRequest = () => {
+        let id = idea._id
+        dispatch(likeIdea({id}))
+
       };
     return (
       <Card
         style={{
           display: "flex",
           flexDirection: "row",
-          alignItems: "center"
+          alignItems: "center",
+          height: "50px",
         }}
+        onClick={() => setSelected(idea.title)}
       >
         <img
           src="/heart.svg"
-          style={{ width: "25px", height: "25px" }}
+          style={{ width: "30px", height: "30px", marginLeft: "5px" }}
           onClick={() => handleRequest(idea.title)}
         />
 
-        <p>{idea.title}</p>
+        <Light
+          style={{
+            marginLeft: "15px",
+            marginTop: "-3px",
+          }}
+          size="22"
+        >
+          {idea.title}
+        </Light>
 
-        <p style={{
-          marginLeft: "auto",
-          marginRight: "20px"
-        }}>/ likes {idea.like}</p>
+        <div
+          style={{
+            width: "30px",
+            height: "20px",
+            background: "#EEEEEE",
+            borderRadius: "30%",
+            marginLeft: "auto",
+            marginRight: "20px",
+          }}
+        >
+          <Light style={{ position: "absolute", marginLeft: "10px" }}>
+            <b> {idea.likeCount}</b>
+          </Light>
+        </div>
       </Card>
     );
 }
