@@ -66,7 +66,8 @@ const AddTask = ({id, user, hist, sprint,crypt}) => {
       <div>
         <form onSubmit={onSubmit} style={{display:'flex',  justifyContent:'space-between', width: "95%"}}>
           {field && <input value={task} className={style.input} placeholder="Задача.." style={{marginTop: "10px"}}  onChange={onChange}></input>}
-          <Button style={{backgroundColor:'white',border:'none', color:'#3F496C', marginRight: "40vw"}} type="submit"  fontSize="14px" onClick={formHandler}>
+          <Button style={{backgroundColor:'white', whiteSpace: "nowrap",border:'none', color:'#3F496C', marginRight: "40vw",
+        marginTop: "-15px"}} type="submit"  fontSize="14px" onClick={formHandler}>
             Добавить задачу
           </Button>
           <div style={{display:'flex'}}>
@@ -76,7 +77,9 @@ const AddTask = ({id, user, hist, sprint,crypt}) => {
                       display: `${user.permission === "user" ? "none" : "flex"}`,
 					  background:'none',
 					  color:'#3F496C',
-					  border:'none'
+					  border:'none',
+            marginLeft: "-50px",
+            whiteSpace: "nowrap"
                     }}
                     onClick={openDelite}
                   >

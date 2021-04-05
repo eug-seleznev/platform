@@ -109,7 +109,10 @@ const App = () => {
                 {/* <Route exact path='/projects/:crypt/:sprint_id/new' component={Sprint_New} /> */}
 
                 <Route exact path="/projects" component={Projects} />
+
+
                 <Route  path="/projects/:crypt" component={ProjectHelper} />
+                
                 <Route  path='/idea' component={IdeaaHelper} />
 
                 <Route

@@ -1,52 +1,14 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Form from './form'
 import Ideas from "./Ideas";
-
-
-
-let ideas_arr = {
-  new:[],
-  progress: [],
-  done: []
-}
-
-
-
-
-// let ideas = [
-//   {
-//     title: "hahah lol",
-//     like: 3,
-//     description: "lololo",
-//     user: "fullname",
-//   },
-
-//   {
-//     title: "hahah nooo",
-//     like: 1,
-//     description: "123",
-//     user: "hah mda",
-//   },
-//   {
-//     title: "hahah nooo",
-//     like: 1,
-//     description: "lololo",
-//     user: "hah mda",
-//   },
-//   {
-//     title: "фичу мне запили",
-//     like: 5,
-//     description: "lololo",
-//     user: "gawr gura",
-//   },
-// ];
 
 
 
 const New = () => {
 
   const [selectedIdea, setSelectedIdea] = useState(null)
+
   const new_ideas = useSelector(state => state.ideas.new)
 
 
@@ -81,10 +43,15 @@ const New = () => {
             padding: "20px",
           }}
         >
+
+
           {/* new idea form */}
           <div>
             <Form />
           </div>
+
+
+
 
           {/* ideas card */}
           <div

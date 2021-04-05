@@ -9,10 +9,12 @@
 }
 .sprints {
 	grid-area: sprints;
-	width: 80%;
+	width: 100%;
 
 }
 .team {
+	width: 100%;
+	overflow-x: hidden;
 	grid-area: team;
 	margin-top: -45px;
 }
@@ -71,7 +73,7 @@
 }
 .second__row {
 	display: flex;
-	margin-top: 10px;
+	margin-top: 15px;
 }
 .tdd {
 	padding-left: 40px!important;
@@ -146,7 +148,7 @@ border-bottom: none;
 }
 .info__cont {
 	grid-area: info;
-	width: 80%;
+	width: 90%;
 	
 	height: max-content!important;
 }
@@ -321,10 +323,19 @@ border-bottom: none;
 	flex-wrap: wrap;
 }
 .history {
-	width: 69%;
+	width: 79%;
 	grid-area: history;
 	
 }
+@media screen and (max-width: 1400px)  {
+	.history {
+		width: 100%;
+		grid-area: history;
+	}
+}
+
+
+
 .title__info {
 	display: flex;
 	margin-bottom: 20px;
@@ -526,7 +537,7 @@ border-bottom: none;
 	.off__too {
 		display: none;
 	}
-	.history{width: 80vw;}
+	.history{width: 90vw;}
 	.history_table2{display: none};
 	.tags {
 		display: none;

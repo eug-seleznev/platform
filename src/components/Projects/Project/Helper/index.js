@@ -11,6 +11,9 @@ import EditProject from '../Edit'
 
 import Viewer from '../../../Viewer/helper'
 
+import Development from './Development'
+
+
 const Helper = ({match, history}) => {
   
 
@@ -22,7 +25,7 @@ const Helper = ({match, history}) => {
           {/* {'ROUTING FOR PROJECTS'} */}
           <Route exact path={`${match.path}/main`} component={Project} />
           {/* SPRINTS PAGES */}
-          <Route exact path={`${match.path}/tasks`} component={Sprints} />
+          <Route exact path={`${match.path}/tasks`} component={Development} />
           <Route
             exact
             path={`${match.path}/tasks/:sprint_id`}
@@ -34,7 +37,8 @@ const Helper = ({match, history}) => {
           <Route exact path={`${match.path}/models/:name`} component={Viewer} />
 
           <Route exact path={`${match.path}/edit`} component={EditProject} />
-          <Route exact path={`${match.path}/event`} component={Events} />
+          <Route exact path={`${match.path}/event`} component={Development} />
+          <Route exact path={`${match.path}/info`} component={Development} />
         </Loader>
       </div>
     );

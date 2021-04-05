@@ -110,9 +110,9 @@ useEffect(()=>{
             </form>
         {/* //   )} */}
 		
-          <Bold color="#3F496C" className={style.link} onClick={toProj}>{prTitle}</Bold>
+          {/* <Bold color="#3F496C" className={style.link} onClick={toProj}>{prTitle}</Bold> */}
         </div>
-        <Light
+        {/* <Light
           className={style.title__small}
           style={{ marginBottom: "70px" }}
           size="16"
@@ -126,7 +126,7 @@ useEffect(()=>{
               <input className={style.dateChange} onKeyPress={(e)=>e.key==='Enter'?buttonR():''} onChange={onChangeDate}  type='date'></input>
             </form>
           </div>
-        </Light>
+        </Light> */}
       </div>
     );
 }

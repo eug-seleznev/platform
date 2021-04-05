@@ -74,6 +74,7 @@ const SprintDescription = ({tags, dateOpen,taskcomplite, alltasks, history, cryp
               onClick={chosenSprint}
               style={{
                 cursor: "pointer",
+                marginTop: "-5px",
                 backgroundColor: `${status ? "#ff9800" : "white"}`,
               }}
               className={style.chosen}

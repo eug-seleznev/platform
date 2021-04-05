@@ -18,7 +18,10 @@ const Tag = ({tagColor, tagText, size, projectPage, crypt}) => {
 		}
 	}
     return(
-		<Light className={styles.tag} color='#3F496C'size={size===undefined?'16':size} onClick={()=>projectPage?sortSprints():''} style={{backgroundColor:tagColor, cursor:`${projectPage?'pointer':'default'}`}}>
+		<Light className={styles.tag} color='#3F496C'size={size===undefined?'16':size} onClick={()=>projectPage?sortSprints():''} style={{
+			backgroundColor:tagColor,
+			 cursor:`${projectPage?'pointer':'default'}`,
+			 whiteSpace: "nowrap"}}>
 			{tagText}
 	  	</Light>
     )

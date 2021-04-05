@@ -17,10 +17,11 @@ const ProjectTeam = ({id, hist}) => {
   const [button,setButton] = useState(false)
   const [open,setOpen] = useState(true)
   const [modal,setModal] = useState(false)
-    // const user = useSelector(state => state.auth.user) 
-   	const project = useSelector(state => state.projects.project)
+  const project = useSelector(state => state.projects.project)
+
+
+
     useEffect(()=>{
-      // console.log(project.team2, 'asdasdasdasdasdqwdzxcxz')
       if(project!==undefined&&project.team2!==undefined) {
        
         project.team2.map((el)=>{
@@ -28,25 +29,7 @@ const ProjectTeam = ({id, hist}) => {
         })
       }
     },[project])
-    // useEffect (()=>{
-    //   console.log(project.team2.map(member=>{
-    //     if (member.user._id===user._id) {
-    //       setButton(true)
-    //       // console.log('hi')
-    //     }
-        
-        
-    //   }), 'asdasdasdsad')
-    // },[project])
-    // useEffect (()=>{
-      
-    //   if(idArray.includes(user._id)) {
-    //     setButton(true)
-    //   }
-    //   else{
-    //     setButton(false)
-    //   }
-    // },[idArray])
+
     const hadleTeam =()=>{
       if(button) { 
         dispatch(joinTeam(id))
@@ -60,13 +43,13 @@ const ProjectTeam = ({id, hist}) => {
     const teamInfo = (formData) => {
         dispatch(joinTeam(id,formData))
         setModal(false)
-        setButton(!button)
-        
-        
+        setButton(!button)  
     }
+
     const openfunc=()=>{
       setOpen(!open)
     }
+
     return (
       <div className={style.team} style={{ overflowY:'hidden'}}>    
       <div style={{display:'flex', alignItems:'center'}}>
@@ -77,7 +60,6 @@ const ProjectTeam = ({id, hist}) => {
             srcplus={button} 
             buttonFunc={hadleTeam} 
             subtwidth='90%' 
-            // buttonActive={true}
         >
         </Subtitle> 
         <div style={{display:`${modal?'block':'none'}`}}>
@@ -88,7 +70,7 @@ const ProjectTeam = ({id, hist}) => {
         
       </div>   
             <div className={style.sprintdescr__cont}>
-              <SmallCard >
+              <div >
                
                 {project.team2!==undefined? project.team2.map((user, i) => {
                       return (
@@ -107,11 +89,11 @@ const ProjectTeam = ({id, hist}) => {
                     }):<p> В комнаде проекта никого нет</p>}
                     
                   
-                    <CancelButton onClick={hadleTeam} fontSize='14px' style={{paddingBottom:'10px',paddingTop:'10px',backgroundColor:'white', color:'#397BB8', border:'none',marginTop:'10px',textAlign:'start'}}>{button?'Выйти из команды':'Вступить в команду'} </CancelButton>
+                    <CancelButton onClick={hadleTeam} fontSize='14px' style={{paddingBottom:'10px',paddingTop:'10px',backgroundColor:'white', color:'#397BB8', border:'none',marginTop:'10px',textAlign:'end', marginLeft: "60%"}}>{button?'Выйти из команды':'Вступить в команду'} </CancelButton>
                 
 
                    
-                  </SmallCard>      
+                  </div>      
                    
               </div>
 

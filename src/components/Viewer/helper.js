@@ -24,17 +24,15 @@ const Helper = ({match}) => {
     const [urn, setUrn] = useState(null) //urn from params
 
     useEffect(() => {
-     
                 dispatch(Oauth(crypt));
                 dispatch(Status({crypt, name}))
-                if(!project){
                   dispatch(getProject(crypt));
-                }
+                
             
     }, [])
 
     useEffect(() => {
-      if (project._id && oauth &&status ) {
+      if (project && oauth &&status ) {
         //set currnet urn
         setUrn(project.urnNew.filter((urn) => urn._id === name));
         setLoaded(true);
