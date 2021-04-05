@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 
 
-
+import Dev from '../../../Illustration/dev.svg'
 
 
 
@@ -20,7 +20,7 @@ const Development = () => {
             width: "50vw",
             height: "50vh",
           }}
-          src="/illustration/dev.svg"
+          src={Dev}
         />
 
         <div style={{
