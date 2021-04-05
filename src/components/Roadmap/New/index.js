@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import Form from './form'
 import Ideas from "./Ideas";
-
+import Boat from "../../Illustration/boat.png";
 
 
 const New = () => {
@@ -16,16 +16,20 @@ const New = () => {
       <div>
         {/* header */}
         <div style={{ textAlign: "center" }}>
-          <img src="/illustration/boat.png" />
-          <div style={{
-            marginTop: "-50px"
-          }}>
+          <img src={Boat} />
+          <div
+            style={{
+              marginTop: "-50px",
+            }}
+          >
             <h2> Помогите нам улучшить платформу</h2>
 
-            <p style={{
-              marginTop: "-10px",
-              marginBottom: "40px"
-            }}>
+            <p
+              style={{
+                marginTop: "-10px",
+                marginBottom: "40px",
+              }}
+            >
               Тут можно создавать и голосовать за функционал, который вы хотите
               увидеть в следующем релизе
             </p>
@@ -43,15 +47,10 @@ const New = () => {
             padding: "20px",
           }}
         >
-
-
           {/* new idea form */}
           <div>
             <Form />
           </div>
-
-
-
 
           {/* ideas card */}
           <div
