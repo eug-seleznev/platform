@@ -25,15 +25,9 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
 
   useEffect(() => {
     selectFocusRow(focusRow);
-    //todo 
-    // disable edit fields
+
   }, [focusRow]);
-  // useEffect(()=>{
-  //   if(focusRowNew==='') {
-  //     setFocusRow('')
-  //     console.log('heyyyyyyyyy')
-  //   }
-  // },[focusRowNew])
+
   const onChange = (e) => {
     // console.log('change')
     let taskid = e.target.value;
@@ -66,18 +60,10 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
 			debounce(onTextChange,500)
 		}
 	},[debounced])
-  // const editHandler = (e) => {
-  //   // console.log('edit')
-  //    let field = 'taskTitle'
-  //     let value = e.target.value
-  //     dispatch(EditTask({ value, id, focusRow, field }));
-  //     setTaskTitle(e.target.value)
-  //  //server call edit task
 
 
   // };
   const onFocus=(e)=>{
-    // console.log('onFocus')
     setTaskTitle(e.target.name)
   }
   const submitEdit = (e) => {
@@ -91,6 +77,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
     let value = e.target.value
     let field = 'deadline'
     dispatch(EditTask({value, id, focusRow, field}))
+    setDeadline(false)
   }
 
   const doubleClickEdit = (task) => {
@@ -113,14 +100,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
   }
 
 
-  // useEffect(()=>{
-  //   if(taskId=='') {
-  //     setFocusRow('')
-  //   }
-  // },[taskId])
-
   const teamHandle = (e, task) => {
-
     let userid = e.target.value
     let focusRow = task._id
     dispatch(addUserToTask({userid, id, focusRow }))
@@ -138,7 +118,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
   }
 
   return (
-    <SPRINT_TABLE onMouseLeave={() => setTaskId("")}>
+    <SPRINT_TABLE onMouseLeave={() => setTaskId("")} >
       {tasks.map((task) => {
         
         return (

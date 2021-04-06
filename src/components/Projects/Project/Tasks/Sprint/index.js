@@ -5,7 +5,7 @@ import AddTask from "./AddTask";
 import TaskManagment from "./EditTask";
 
 import {SprintLoader} from './SprintLoader'
-import SprintTitle from "./SprintTitle";
+// import SprintTitle from "./SprintTitle";
 import TaskTable from "./TaskTable";
 
 

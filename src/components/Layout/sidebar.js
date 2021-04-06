@@ -14,7 +14,7 @@ const Sidebar = () => {
     return (
       <SidebarContainer>
         <SidebarLink to="/" className="nav-link">
-          <img alt="logo" className="sidebar__logo" src="/sidebarIcon.png" />
+          <img alt="logo" style={{width: "60px", height: "60px", marginTop: "-10px"}} className="sidebar__logo" src="/logo3.svg" />
           <p></p>
         </SidebarLink>
 

@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { GET_IDEAS, LIKE_IDEA, POST_IDEA } from "../types";
+import { GET_IDEAS, LIKE_IDEA, MOVE_IDEA, POST_IDEA } from "../types";
 
 
 
@@ -70,3 +70,19 @@ export const likeIdea = ({id}) => async (dispatch) => {
   }
 };
 
+
+
+
+export const moveIdea = ({id, type}) => async (dispatch) => {
+  
+  try {
+    const res = await innerBackend.put(`/ideas/typechange?id=${id}&type=${type}`);
+    dispatch({
+      type: MOVE_IDEA,
+      payload: res.data
+    })
+    console.log(res.data)
+  } catch (err) {
+    alert('nope')  
+  }
+}

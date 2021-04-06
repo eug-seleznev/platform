@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTag, DeleteTask, deleteTag, EditSprint, getProject } from "../../../../../redux/actions/projects";
-import {  Light, Regular, Thin } from "../../../../../Styles/typography"
+import {  Bold, Light, Regular, Thin } from "../../../../../Styles/typography"
 import style from "../../../../../Styles/modules/components/Project/newsprint.module.css"
 import { addToChosen } from "../../../../../redux/actions/auth";
 import TagSearch from "../../../components/tagSearch";
@@ -121,28 +121,29 @@ const onChange = (e) => {
 
  }
   return (
-    <div style={{
-      marginTop: "50px"
-    }}>
+    <div
+      style={{
+        marginTop: "50px",
+        marginBottom: "50px"
+      }}
+    >
       <form onSubmit={onSubmit}>
-    
-          {!isSubmit ? <p onClick={() => setSubmited(true)}>{title}</p> : (
-
-
-               <input
-                  style={{
-                    border: "none",
-                    fontSize: "20px"
-                  }}
-                  className={style.titleChange}
-                  onChange={onChange}
-                  value={sprintInfo.title}
-         />
-          )}
-   
-      
+        {!isSubmit ? (
+          <Bold size="28" onClick={() => setSubmited(true)}>
+            {title}
+          </Bold>
+        ) : (
+          <input
+            style={{
+              border: "none",
+              fontSize: "20px",
+            }}
+            className={style.titleChange}
+            onChange={onChange}
+            value={sprintInfo.title}
+          />
+        )}
       </form>
-      {/* <Regular size="24"> Задачи </Regular> */}
       <div>
         <div
           style={{
@@ -228,14 +229,13 @@ const onChange = (e) => {
           </div>
         </div>
         <div style={{ height: "20px" }}>
-          {focusRow !== "" && (
+          {focusRow !== "" ? (
             <div className={style.edit__task}>
               <Light
                 color="#3F496C"
                 onClick={editHandler}
                 style={{ cursor: "pointer", marginRight: "50px" }}
               >
-                {" "}
                 Редактировать задачу 
               </Light>
               <Light
@@ -243,45 +243,50 @@ const onChange = (e) => {
                 onClick={deletehandler}
                 style={{ cursor: "pointer" }}
               >
-                {" "}
-                Удалить задачу{" "}
+                Удалить задачу
               </Light>
+              <form onSubmit={onEditSubmit}>
+                <div
+                  style={{
+                    display: "flex",
+                    paddingLeft: "40px",
+                    width: "40vw",
+                    whiteSpace: "initial"
+                  }}
+                >
+                  <Thin size="16">Описание: </Thin>
+                  <input
+                    type="text"
+                    value={sprintInfo.description}
+                    placeholder="Добавить описание"
+                    onChange={descriptionHandler}
+                    className={style.changeDescr}
+                  ></input>
+                </div>
+              </form>
+            </div>
+          ) : (
+            <div>
+              <form onSubmit={onEditSubmit}>
+                <div
+                  style={{
+                    display: "flex",
+                    // paddingLeft: "40px",
+                  }}
+                >
+                  <Thin size="16">Описание: </Thin>
+                  <input
+                    type="text"
+                    value={sprintInfo.description}
+                    placeholder="Добавить описание"
+                    onChange={descriptionHandler}
+                    className={style.changeDescr}
+                  ></input>
+                </div>
+              </form>
             </div>
           )}
         </div>
-        <form onSubmit={onEditSubmit}>
-          {/* {!isSubmit ? ( */}
-          <div
-            style={{
-              display: "flex",
-              marginBottom: "20px",
-              marginTop: "20px",
-            }}
-          >
-            <Thin size="16">Описание: </Thin>
-            <input
-              type="text"
-              value={sprintInfo.description}
-              placeholder="Добавить описание"
-              onChange={descriptionHandler}
-              className={style.changeDescr}
-            ></input>
-          </div>
-          {/* ) : (
-            <Thin
-              style={{
-                marginBottom: "20px",
-                marginTop: "20px",
-                cursor: "pointer",
-              }}
-              onClick={() => setSubmit(false)}
-            >
-              {sprint_description !== ""
-                ? "Описание: " + sprint_description + "  "
-                : "Добавить описание  "}{" "}
-            </Thin>
-          )} */}
-        </form>
       </div>
     </div>
   );

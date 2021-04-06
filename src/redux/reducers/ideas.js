@@ -1,4 +1,4 @@
-import { GET_IDEAS, LIKE_IDEA, POST_IDEA } from "../types";
+import { GET_IDEAS, LIKE_IDEA, MOVE_IDEA, POST_IDEA } from "../types";
 
 
 
@@ -17,6 +17,7 @@ export default function(state = initialState, action) {
 
     switch (type) {
       case GET_IDEAS:
+      case MOVE_IDEA:
         return {
           ...state,
           new: payload.unapproved,
@@ -29,7 +30,6 @@ export default function(state = initialState, action) {
           ...state,
           new: payload,
         };
-      
 
       default:
         return state;
