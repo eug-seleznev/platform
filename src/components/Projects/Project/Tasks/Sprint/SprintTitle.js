@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import {  addInfoSprint, clearSprint, EditSprint} from "../../../../redux/actions/projects";
-import {  ButtonText } from "../../../../Styles/buttons";
+import {  addInfoSprint, clearSprint, EditSprint} from "../../../../../redux/actions/projects";
+import {  ButtonText } from "../../../../../Styles/buttons";
 
-import style from "../../../../Styles/modules/components/Project/oneproj.module.css";
-import { Bold, Light, Regular } from "../../../../Styles/typography";
-import getDate from "../../getDate";
-
-
+import style from "../../../../../Styles/modules/components/Project/oneproj.module.css";
+import { Bold, Light, Regular } from "../../../../../Styles/typography";
+import getDate from "../../../getDate";
 
 
 
 
 
-const SprintTitle = ({sprint,user, prTitle,hist, title, id,date, crypt}) => {
+
+
+const SprintTitle = ({sprint,user, prTitle,hist, id, crypt}) => {
 	const dispatch = useDispatch()
 	// const [actualClose, setActualClose] = useState ('??')
     // const [diff, setDiff] = useState ('??')
@@ -72,7 +72,7 @@ useEffect(()=>{
 	}
 	const toProj =()=>{
 		dispatch(clearSprint());
-		hist.push(`/projects/${crypt}`)	
+		hist.push(`/projects/${crypt}/main`)	
 		
 	}
 
@@ -110,9 +110,9 @@ useEffect(()=>{
             </form>
         {/* //   )} */}
 		
-          <Bold color="#3F496C" className={style.link} onClick={toProj}>{prTitle}</Bold>
+          {/* <Bold color="#3F496C" className={style.link} onClick={toProj}>{prTitle}</Bold> */}
         </div>
-        <Light
+        {/* <Light
           className={style.title__small}
           style={{ marginBottom: "70px" }}
           size="16"
@@ -126,7 +126,7 @@ useEffect(()=>{
               <input className={style.dateChange} onKeyPress={(e)=>e.key==='Enter'?buttonR():''} onChange={onChangeDate}  type='date'></input>
             </form>
           </div>
-        </Light>
+        </Light> */}
       </div>
     );
 }

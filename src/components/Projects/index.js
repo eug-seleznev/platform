@@ -218,7 +218,7 @@ const Projects = ({history,location}) => {
                 return (
                   <NEW_TR
                     key={index}
-                    onClick={() => history.push(`/projects/${project.crypt}`)}
+                    onClick={() => history.push(`/projects/${project.crypt}/main`)}
                     title="Открыть проект"
                   >
                     <NEW_TD>{project.title}</NEW_TD>

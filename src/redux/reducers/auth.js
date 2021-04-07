@@ -7,7 +7,7 @@ const initialState = {
     user: null,
     isAuthenticated: false,
     token: false,
-    msg:'',
+    msg:null,
     error: '',
     loaded: false,
     chosenSprint: false
@@ -28,7 +28,7 @@ export default function(state = initialState, action) {
                 loaded: true,
                 token: true,
                 error: payload.err,
-                msg:''
+            
             }
             case MY_TASK_DELITE:
                 return {

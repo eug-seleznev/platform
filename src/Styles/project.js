@@ -41,8 +41,8 @@ export const Status = styled.div`
 
 
 export const Circle = styled.div`
-  height: 15px;
-  width: 15px ;
+  height: 9px;
+  width: 9px ;
   background-color: ${props => props.color};
   border-radius: 50%;
   display: inline-block;

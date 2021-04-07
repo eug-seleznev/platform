@@ -1,9 +1,7 @@
 
 import { useDispatch, useSelector } from 'react-redux';
 import { createBrowserHistory } from "history";
-
 import './App.css';
-
 import Auth from './components/Auth/index'
 
 import {
@@ -27,10 +25,8 @@ import MyProfile from './components/User/me';
 import Employe from './components/User/Employe';
 import Edit from './components/User/edit';
 import Ticket from './components/Adminka/Ticket';
-import Project from './components/Projects/Project';
-import Sprint from './components/Projects/Project/Sprint';
 // import ProjectsEdit from './components/Projects/ProjectsEdit';
-import OneProjEdit from './components/Projects/OneProjEdit';
+// import OneProjEdit from './components/Projects/Project/Edit';
 import Main from './components/Main/index'
 import Department from './components/Department/index'
 import MyProjects from './components/Projects/My';
@@ -48,9 +44,13 @@ import EditContractor from './components/Superadmin/editContractor'
 //ОТБЕРИТЕ У МЕНЯ КОМПЬЮТЕР НАХУЙ
 // import Sprint_New from './components/Projects/Project/Sprint/new'
 import Search from './components/User/Search'
-import Models from './components/Projects/Models';
 import MyTasks from './components/MyTasks/index'
 import EditUser from './components/User/editUser';
+import ProjectHelper from "./components/Projects/Project/Helper";
+import IdeaaHelper from "./components/Roadmap/Routing";
+import KPI from './components/KPI';
+import DailyUsers from './components/KPI/chart/users';
+import { getStat } from './redux/actions/stat';
 
 
 const App = () => {
@@ -65,6 +65,8 @@ const App = () => {
     setAuthToken(localStorage.token)
     if(localStorage.token){
       dispatch(loadUser());
+      dispatch(getStat());
+
     }
   }, [])
 
@@ -72,17 +74,14 @@ const App = () => {
   useEffect(() => {
     if (loaded) {
 
-      setAuthToken(localStorage.token)
-      setTimeout(() => {
-        // dispatch(loadUser());
-      }, 1000);
+
     }
-  }, [])
+  }, [loaded])
 
 
 
   return (
-    <div className="App" style={{ backgroundColor: background }}>
+    <div className="App" style={{ backgroundColor: 'white' }}>
       <Router history={history}>
         {!auth ? (
           <LoginContainer>
@@ -110,54 +109,16 @@ const App = () => {
                 <Route exact path="/db" component={DataBase} />
                 <Route exact path="/office" component={Office} />
                 {/* projects */}
-                <Route exact path="/projects" component={Projects} />
                 <Route exact path="/myprojects" component={MyProjects} />
                 {/* <Route exact path='/projects/:crypt/:sprint_id/new' component={Sprint_New} /> */}
-                <Route exact path="/projects/:id" component={Project} />
-                {/* <Route exact path="/projects" component={Project} /> */}
 
-                <Route
-                  exact
-                  path="/projects/:crypt/:sprint_id"
-                  component={Sprint}
-                />
+                <Route exact path="/projects" component={Projects} />
 
-                <Route
-                  exact
-                  path="/projects/:crypt/m/view"
-                  component={Models}
-                />
 
-                <Route
-                  exact
-                  path="/projects/:crypt/m/view/:name"
-                  component={Helper}
-                />
+                <Route  path="/projects/:crypt" component={ProjectHelper} />
+                
+                <Route  path='/idea' component={IdeaaHelper} />
 
-                <Route
-                  exact
-                  path="/projects/:crypt/m/view/:name/public"
-                  component={Helper}
-                />
-                {/* <Route
-                  exact
-                  path="/projects/:crypt/m/view/new"
-                  component={LoadModel}
-                /> */}
-
-                <Switch>
-                  <Route
-                    exact
-                    path="/projects/:id/model/view"
-                    component={Helper}
-                  />
-                </Switch>
-                {/* <Route exact path="/admin/editproj" component={ProjectsEdit} /> */}
-                <Route
-                  exact
-                  path="/admin/editproj/:id"
-                  component={OneProjEdit}
-                />
                 <Route
                   exact
                   path="/admin/newproject"
@@ -193,15 +154,18 @@ const App = () => {
                   exact path="/contractors/:id"
                   component={EditContractor}
                 />
+
+
+                <Route
+                    exact path='/kpi'
+                    component={KPI} />
               </Container>
             </Switch>
           </>
         )}
       </Router>
 
-      {/* <Router history={history}>
-        <Route exact path="models/:id/viewer" component={PublicViewer} />
-      </Router> */}
+  
     </div>
   );
 }

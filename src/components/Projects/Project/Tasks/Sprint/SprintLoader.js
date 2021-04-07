@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getProject, getSprint } from "../../../../redux/actions/projects";
+import { getProject, getSprint } from "../../../../../redux/actions/projects";
 
 export const SprintLoader = (props) => {
   const dispatch = useDispatch();

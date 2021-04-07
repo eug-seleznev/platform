@@ -31,36 +31,68 @@ const HeaderL = ({addPodsos, createProj, createNews, createTicket}) => {
     }
 
     return (
-        <>
-        {!loaded? <div>loading...</div> :(
-        <Header>
+      <>
+        {!loaded ? (
+          <div>loading...</div>
+        ) : (
+          <div>
+              
+            <Header>
+              <ItemHead className="mobile__menu" onClick={() => mobClick()}>
+                <Bold size="14" color="white">
+                  меню
+                </Bold>
+                <img alt="arrow" className="arrow" src="/headerArrow.png" />
+              </ItemHead>
 
-            <ItemHead className='mobile__menu' onClick={() => mobClick()}>
-                <Bold size='14' color='white'>меню</Bold>
-                <img alt='arrow' className='arrow' src='/headerArrow.png'/>
-            </ItemHead>
+              <ItemHead
+                onClick={() =>
+                  setOpen({ ...open, menuProfile: false, menu: !open.menu })
+                }
+              >
+                <img alt="plus" className="invert" src="/headerPlus.png" />
+                <img alt="arrow" className="arrow" src="/headerArrow.png" />
+              </ItemHead>
 
-            <ItemHead onClick={() => setOpen({...open, menuProfile:false , menu: !open.menu})}>
-                <img alt='plus' className='invert' src='/headerPlus.png'/>
-                <img alt='arrow' className='arrow' src='/headerArrow.png'/>
-            </ItemHead>
-            
-            <ItemHead onClick={() => setOpen({...open, menu:false, menuProfile: !open.menuProfile})}>
-                <div className='avatar' >
-                    <img alt='avatar'  height="100%"  src={`${url}/${user !== null? (user!= undefined? user.avatar:''):''}`}/>
+              <ItemHead
+                onClick={() =>
+                  setOpen({
+                    ...open,
+                    menu: false,
+                    menuProfile: !open.menuProfile,
+                  })
+                }
+              >
+                <div className="avatar">
+                  <img
+                    alt="avatar"
+                    height="100%"
+                    src={`${url}/${
+                      user !== null
+                        ? user != undefined
+                          ? user.avatar
+                          : ""
+                        : ""
+                    }`}
+                  />
                 </div>
-                <img alt='arrow'  className='arrow' src='/headerArrow.png'/>
-            </ItemHead>
-            
-           
-
-        </Header>
-)}
-        <Menu addPodsos={addPodsos} createTicket={createTicket} createNews={createNews} createProj={createProj} closeAll={()=>allFalse()}  state={open} user={user}/>
-        <MenuMobile open={open.mobile} closeAll={()=>allFalse()} />
-
-          </>
-    )
+                <img alt="arrow" className="arrow" src="/headerArrow.png" />
+              </ItemHead>
+            </Header>
+          </div>
+        )}
+        <Menu
+          addPodsos={addPodsos}
+          createTicket={createTicket}
+          createNews={createNews}
+          createProj={createProj}
+          closeAll={() => allFalse()}
+          state={open}
+          user={user}
+        />
+        <MenuMobile open={open.mobile} closeAll={() => allFalse()} />
+      </>
+    );
 }
 
 

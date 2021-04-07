@@ -5,7 +5,7 @@ import { ADD_SPRINT,SORT_PROJECTS,SORT_TITLE, SEARCH_OBJECT, ALL_PROJECTS,EDIT_P
 
 const initialState = {
     projects: null,
-    project: {},
+    project: null,
     loadProject: false,
     loadedAllProj: false,
     sprints: [],
@@ -129,7 +129,8 @@ export default function(state = initialState, action) {
                     return {
                         ...state,
                         loadProject: false,
-                        msg: payload.msg
+                        project: payload,
+                        // msg: payload.msg
                     }
             case GET_PROJECT:
                 return {
@@ -140,7 +141,6 @@ export default function(state = initialState, action) {
                     sprint_load: false,
                     sprintLoad: false,
                     reload: false,
-                    error: ''
                 }
             case SORT_BY_TAGS:
                 return {

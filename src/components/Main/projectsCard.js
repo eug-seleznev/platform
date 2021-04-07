@@ -41,7 +41,7 @@ const ProjectsCard = ({project}) => {
           </Bold>
           </div>
           <div className={styles.projtop}>
-          <Link  style={{textDecoration: 'none'}}to={`../projects/${project.crypt}`}>
+          <Link  style={{textDecoration: 'none'}}to={`../projects/${project.crypt}/main`}>
             <Light size="24" color='#3F496C' className={styles.title}>
               {project.title}
             </Light>

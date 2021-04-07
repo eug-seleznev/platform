@@ -1,19 +1,18 @@
 import  {useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import {  getProject, editProject } from '../../redux/actions/projects';
-import { Button } from '../../Styles/buttons';
-import {  Bold, Regular} from '../../Styles/typography'
-import style from '../../Styles/modules/components/Project/editproj.module.css'
-import InfoInputs from './components/EditProj/infoInputs';
-import { background } from '../../redux/actions/user';
-import ProjTeamEdit from './components/EditProj/projteamedit';
-import LinkInputs from './components/EditProj/linkInputs';
-import CustomerInfo from './components/EditProj/customerInfo';
+import {  getProject, editProject } from '../../../redux/actions/projects';
+import { Button } from '../../../Styles/buttons';
+import {  Bold, Regular} from '../../../Styles/typography'
+import style from '../../../Styles/modules/components/Project/editproj.module.css'
+import InfoInputs from '../components/EditProj/infoInputs';
+import { background } from '../../../redux/actions/user';
+import ProjTeamEdit from '../components/EditProj/projteamedit';
+import LinkInputs from '../components/EditProj/linkInputs';
+import CustomerInfo from '../components/EditProj/customerInfo';
 const ProjectEdit = ({history, match}) => {
-	let {id} = match.params;
+	let {crypt} = match.params;
     const dispatch = useDispatch();
 	const project = useSelector(state => state.projects.project)
-	const loadProject = useSelector(state => state.projects.loadProject)
     const [formData, setFormData ] = useState({
         crypter:'',
         title: '',   
@@ -39,13 +38,15 @@ const ProjectEdit = ({history, match}) => {
       });
 	  
 	  useEffect(() => {
-		dispatch(getProject(id));
+          if(!project){
+		        dispatch(getProject(crypt));
+          }
         
     }, [])
    
     const [editStage, setEditStage] = useState(1)
 	useEffect(() => {
-		if (loadProject) {
+		if (project) {
 			setFormData ({...formData, title: project.title, 
 				dateStart: project.dateStart,
                 offTitle:project.offTitle,
@@ -68,15 +69,9 @@ const ProjectEdit = ({history, match}) => {
 				})
 		}
 		
-    }, [loadProject])
+    }, [project])
       const { title, offTitle, dateStart, dateFinish, cusStorage, budget, schedule, city, crypter, about, customerNew, object} = formData;
 
-      useEffect(()=>{ 
-        dispatch(background('white'))
-        return () => {
-          dispatch(background('#ECECEC'))
-        }
-      }, [])
     const onChange = e => {
         e.preventDefault(); 
 
@@ -111,20 +106,20 @@ const ProjectEdit = ({history, match}) => {
     //  },[formData])
      const Redirect = () => {
      
-             return history.push(`/projects/${id}`)
+             return history.push(`/projects/${crypt}/main`)
          
      }
 
      const onSubmit = e => {
         e.preventDefault();
-        dispatch(editProject(formData, id))
+        dispatch(editProject(formData, crypt))
         setTimeout(() => Redirect(),100) 
         
     
            
         }
 
-        if(!loadProject){
+        if(!project){
             return <p>loading...</p> 
         }
 

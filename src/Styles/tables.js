@@ -49,7 +49,7 @@ export const NEW_TR = styled.tr`
 padding:30px;
 height:fit-content;
 cursor:pointer;
-
+text-align: center;
 &:hover {
     background: #F1EFEF
 }
@@ -60,14 +60,14 @@ export const NEW_TH = styled.th`
 color: #8C8C8C;
 font-family: SuisseIntlThin;
 font-size: 14px;
-text-align: left;
+text-align: center;
 padding-right: 10px;
 padding-top: 20px;
 padding-bottom: 20px
 `
 export const NEW_TD = styled.td`
     font-size: 14px;
-    text-align: left;
+    text-align: center;
     vertical-align: middle;
     font-family: SuisseIntlLight;
     padding-right: 45px;
