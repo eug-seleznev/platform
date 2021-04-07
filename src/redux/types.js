@@ -157,3 +157,7 @@ export const MOVE_IDEA = 'change_idea_status' //тут можно сделать
 
 
 
+//statistic
+
+
+export const GET_STAT = 'get_user_stat';
