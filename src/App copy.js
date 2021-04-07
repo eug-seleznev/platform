@@ -35,7 +35,7 @@ import Superadmin from './components/Superadmin/index.js';
 import { createBrowserHistory } from "history";
 import MyProjects from './components/Projects/My';
 import News from './components/Superadmin/newsAdm';
-import { innerBackend, setAuthToken } from './components/utils/axios';
+import { setAuthToken } from './components/utils/axios';
 
 
 
