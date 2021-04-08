@@ -1,11 +1,12 @@
-import { GET_STAT } from "../types";
+import { GET_STAT, GET_WEEKLY_TASK } from "../types";
 
 
 
 
 const initialState = {
-
-}
+  dailyusers: null,
+  weeklyTask: null
+};
 
 
 
@@ -20,11 +21,15 @@ export default function(state = initialState, action) {
             case GET_STAT:
                 return {
                     ...state,
-                    newPropose: payload,
+                    dailyusers: payload,
                     reload: !state.reload,
-                    
-                    
                     error: ''
+                }
+            case GET_WEEKLY_TASK:
+                return {
+                    ...state,
+                    weeklyTask: payload
+
                 }
              default:
                 return {...state}

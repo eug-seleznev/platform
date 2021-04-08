@@ -161,3 +161,5 @@ export const MOVE_IDEA = 'change_idea_status' //тут можно сделать
 
 
 export const GET_STAT = 'get_user_stat';
+
+export const GET_WEEKLY_TASK = 'get_all_tasks_of_week'

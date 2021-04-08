@@ -252,6 +252,7 @@ export default function(state = initialState, action) {
                 return {
                     ...state,
                     msg: payload.msg,
+                    project: payload.project,
                     error: ''
                 }
                 // case ADD_SPRINT_TO_CHOSEN:

@@ -50,7 +50,7 @@ import ProjectHelper from "./components/Projects/Project/Helper";
 import IdeaaHelper from "./components/Roadmap/Routing";
 import KPI from './components/KPI';
 import DailyUsers from './components/KPI/chart/users';
-import { getStat } from './redux/actions/stat';
+import { getStat, WeeklyTask } from './redux/actions/stat';
 
 
 const App = () => {
@@ -66,17 +66,18 @@ const App = () => {
     if(localStorage.token){
       dispatch(loadUser());
       dispatch(getStat());
+      dispatch(WeeklyTask())
 
     }
   }, [])
 
 
-  useEffect(() => {
-    if (loaded) {
+  // useEffect(() => {
+  //   if (loaded) {
 
 
-    }
-  }, [loaded])
+  //   }
+  // }, [loaded])
 
 
 

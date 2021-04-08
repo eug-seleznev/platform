@@ -155,9 +155,9 @@ export const changeAvatar = (file) => async dispatch  => {
           file
         )
   }
-  
+    console.log(form, 'form?')
 
-      // console.log(form.get('file'), 'file HERE')
+      console.log(form.get('file'), 'file HERE')
    
 
 

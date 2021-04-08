@@ -29,7 +29,7 @@ const AddTask = ({id, user, hist, sprint,crypt}) => {
       dispatch(finishSprint(id));
       setTimeout(() => {
         dispatch(clearSprint());
-        return hist.push(`/projects/${crypt}`);
+        return hist.push(`/projects/${crypt}/main`);
     }, 200);
     }
     const openConfirm =()=>{
