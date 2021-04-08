@@ -5,6 +5,7 @@ export const USER_LOADED = 'user_loaded'
 export const CHANGE_USERDATA = 'change_user_data';
 export const CHANGE_AVATAR = 'change_avatar'
 export const CHANGE_LOADED = 'change_loaded'
+
 //auth errors
 export const AUTH_ERROR ='auth_error';
 /////////////////////////////
@@ -24,6 +25,7 @@ export const EDIT_USER_TASK='EDIT_USER_TASK'
 export const USER_TASKS='USER_TASKS'
 export const SORT_USER_TASKS ='SORT_USER_TASKS'
 export const MY_TASK_DELITE ="MY_TASK_DELITE"
+export const CHANGE_CONTAINER ="CHANGE_CONTAINER"
 //user errors
 export const USER_ERR = 'get_all_users_error'
 //search user 

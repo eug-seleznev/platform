@@ -54,6 +54,10 @@ const Sidebar = () => {
           <img alt="deps" src="/sidebarIcon.png" title="Идеи на платформу" />
           <p>Идеи</p>
         </SidebarLink>
+        <SidebarLink to="/docs" className="nav-link">
+          <img alt="deps" src="/sidebarIcon.png" title="Документация" />
+          <p>Документ ация</p>
+        </SidebarLink>
       </SidebarContainer>
     );
 }
