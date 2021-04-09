@@ -175,7 +175,7 @@ const Projects = ({history,location}) => {
           <NEW_TABLE style={{border:'none'}}>
             <NEW_THEAD>
               <NEW_TR className={style.first} top="top">
-                <NEW_TH onClick={() => sortFunction("title")}>Название &#8597;</NEW_TH>
+                <NEW_TH style={{textAlign:'left'}} onClick={() => sortFunction("title")}>Название &#8597;</NEW_TH>
                 
                 <NEW_TH
                   onClick={() => sortFunction("dateStart")}
