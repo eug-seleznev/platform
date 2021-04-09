@@ -18,7 +18,7 @@ const ProjHistory = ({project,history}) => {
 
 
 	const pushToSprint =(id)=>{
-		history.push(`/projects/${project.crypt+'/'+id}`)
+		history.push(`/projects/${project.crypt+'/tasks/'+id}`)
 	}
     return(
    	 <div className={styles.history}>
