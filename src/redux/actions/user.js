@@ -61,7 +61,7 @@ export const findContractorName = ({value, field}) => async dispatch  => {
 export const allUsers = ({query, sortOrder}) => async dispatch  => {
     try {
         // console.log('hello all users?')
-        const res = await innerBackend.get(`/users/all?field=${query}&order=${sortOrder}`)
+        const res = await innerBackend.get(`/users/all?field=${query}&order=${!sortOrder}`)
         dispatch({
             type: ALL_USERS,
             payload: res.data

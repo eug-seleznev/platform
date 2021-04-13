@@ -1,5 +1,5 @@
 import { innerBackend, } from "../../components/utils/axios";
-import { ADD_SPRINT,ADD_USER_TO_TEAM,SEARCH_OBJECT,SORT_TITLE, SORT_PROJECTS,CHANGE_ROCKET, ADD_TAG,SORT_BY_TAGS, ADD_TASKS,CLEAR_URN,GREEN_MSG,DELITE_USER, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK,DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT, DELETE_SPRINT,ERROR_MSG, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, DELITE_TAG,CLEAR_SPRINT  } from "../types";
+import { ADD_SPRINT,ADD_USER_TO_TEAM,CHANGE_USER_PROJ,SEARCH_OBJECT,SORT_TITLE, SORT_PROJECTS,CHANGE_ROCKET, ADD_TAG,SORT_BY_TAGS, ADD_TASKS,CLEAR_URN,GREEN_MSG,DELITE_USER, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK,DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT, DELETE_SPRINT,ERROR_MSG, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, DELITE_TAG,CLEAR_SPRINT  } from "../types";
 
 
 
@@ -237,7 +237,34 @@ export const getProject = (id) => async dispatch  => {
     }
 
 }
+export const changeUserPropertiesProj = (ready,prop,crypt,userId,val) => async dispatch  => {
+  
+  let body = {
+            position: prop==='position'?val:ready,
+            task: prop==='task'?val:ready,
+        }
 
+  try {
+    console.log(body, crypt)
+      const res = await innerBackend.put(`/projects/team2/${crypt}/${userId}`,body)
+      dispatch({
+          type: CHANGE_USER_PROJ,
+          payload: res.data
+      })
+      }
+    catch (err) {
+      const errors = err.response.data;
+      // console.log(errors)
+      errors.map(error => {
+         return dispatch({
+          type: ERROR_MSG,
+          payload: error.msg
+      })
+      })            
+    
+  }
+ 
+}
 
 export const addSprint = (id) => async dispatch  => {
     try {

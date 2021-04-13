@@ -9,13 +9,17 @@ import Tag from './tag'
 import {  NEW_TD, NEW_TR, NEW_TBODY, NEW_THEAD, NEW_TH,NEW_TABLE} from '../../../../Styles/tables'
 import { Circle } from '../../../../Styles/project'
 
-import { url } from '../../../utils/axios'
+
+import { useEffect } from 'react'
+import getDate from '../../getDate'
 
 
 
 const ProjHistory = ({project,history}) => {
     // const [overCard, setOvercard] = useState(false)
-
+	useEffect(()=>{
+		console.log(project)
+	},[project])
 
 	const pushToSprint =(id)=>{
 		history.push(`/projects/${project.crypt+'/tasks/'+id}`)
@@ -60,9 +64,9 @@ const ProjHistory = ({project,history}) => {
                   {sprint.tasks.length -
                     sprint.tasks.filter((task) => task.taskStatus).length ===
                   0 ? (
-                    <Circle color="#6DD66B" />
+                    <Circle color="#6DD66B"style={{marginRight:'5px'}} />
                   ) : (
-                    <Circle color="#DD5757" />
+                    <Circle color="#DD5757" style={{marginRight:'5px'}} />
                   )}
                    {sprint.title}
                 </NEW_TD>
@@ -77,14 +81,15 @@ const ProjHistory = ({project,history}) => {
                             tagColor="#C8D9E9"
                             size="13"
                             key={i}
+							style={{marginRight:`${i===0?'20px':'0px'}`}}
                           ></Tag>
                         );
                       })
                     : ""}
                 </NEW_TD>
                 
-                <NEW_TD className={styles.off} size="14">
-                  дата
+                <NEW_TD className={styles.sprintDateHist} size="14">
+                  {getDate(sprint.dateOpen)}
                 </NEW_TD>
               </NEW_TR>
             );

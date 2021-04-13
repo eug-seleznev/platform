@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Bold } from "../../../Styles/typography";
+import { Bold, Thin } from "../../../Styles/typography";
 import SetMenu from "../components/OneProject/settingsMenu";
 
 
@@ -10,10 +10,9 @@ import SetMenu from "../components/OneProject/settingsMenu";
 
 const Header = ({history, crypt}) => {
       const [open, setOpen] = useState(false);
-
     const project = useSelector(state => state.projects.project)
-
     const handleRedirect = (name) => {
+        
         console.log(name);
         history.push(`/projects/${crypt}/${name}`)
     }
@@ -27,11 +26,13 @@ const Header = ({history, crypt}) => {
             backgroundColor: "black",
             width: "120vw",
             marginLeft: "-8vw",
-            marginTop: "-4.3vh",
+            height:'30px',
+            marginTop: "-33px",
+            paddingTop: '15px'
           }}
         >
           <div
-            style={{
+              style={{
               display: "flex",
               flexDirection: "row",
               justifyContent: "space-between",
@@ -42,28 +43,32 @@ const Header = ({history, crypt}) => {
           >
             <Bold size="20" color="white"
              style={{
-               marginTop: '13px'
+              cursor:'pointer',
+               marginTop: '-4px'
              }} name="main" value="123" onClick={(e) => handleRedirect("main")}>
               <b>{project.title} </b>
             </Bold>
-            <p
+            <Thin
+              style={{cursor:'pointer'}}
+              color='white'
               name="main"
               value="123"
               onClick={(e) => handleRedirect("info")}
-            >Информация </p>
+            >Информация </Thin>
 
-            <p name="models" onClick={(e) => handleRedirect("models")}>
+            <Thin style={{cursor:'pointer'}} color='white' name="models" onClick={(e) => handleRedirect("models")}>
               Модели
-            </p>
-            <p name="tasks" onClick={(e) => handleRedirect("tasks")}>
+            </Thin>
+            <Thin style={{cursor:'pointer'}}style={{cursor:'pointer'}} color='white' name="tasks" onClick={(e) => handleRedirect("tasks")}>
               Спринты
-            </p>
-            <p name="event" onClick={(e) => handleRedirect("event")}>
+            </Thin>
+            <Thin style={{cursor:'pointer'}} color='white' name="event" onClick={(e) => handleRedirect("event")}>
               События
-            </p>
-            <p onClick={() => setOpen(!open)}> Настройки</p>
+            </Thin>
+            <Thin style={{cursor:'pointer'}} color='white' onClick={() => setOpen(!open)}> Настройки</Thin>
           </div>
           <SetMenu
+          style={{cursor:'pointer'}}
             setOpen={setOpen}
             project={project}
             hist={history}

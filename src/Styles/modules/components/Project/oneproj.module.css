@@ -7,6 +7,12 @@
 
 	
 }
+.first__col{
+
+		margin-left: 8%;
+		width: 92%
+
+}
 .sprints {
 	grid-area: sprints;
 	width: 100%;
@@ -32,7 +38,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 	margin-right: 50px;
-	width: 100%;
+	width: 90%;
  	border:1px solid #8FA7C6;
 	margin-top: 0px;
 	margin-bottom: 15px;
@@ -76,14 +82,19 @@
 	margin-top: 15px;
 }
 .tdd {
-	padding-left: 40px!important;
-	padding-right: 10px;
+	min-width:150px;
+}
+.sprintDateHist {
+	text-align:end;
+	width:120px; 
+	padding-right: 0;
 }
 .history_tags{
 	
 	flex-direction: row;
 	display: flex;
-	justify-content: flex-start;
+	justify-content: flex-end;
+	padding-right: 0px;
 	
 	padding-top: 16px;
 }
@@ -315,7 +326,7 @@ border-bottom: none;
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 0px;
-	width: 90%;
+	width: 100%;
 }
 .title__history {
 	display: flex;
@@ -511,6 +522,10 @@ border-bottom: none;
 	
 }
 @media (max-width: 1000px) {
+	.first__col{
+		margin-left: 0;
+		width: 100%;
+	}
 	.off {
 		display: none;
 	}

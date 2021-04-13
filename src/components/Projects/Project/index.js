@@ -24,10 +24,7 @@ const Project = ({match, history, location}) => {
 
     return (
       <div className={style.contain}>
-        <div style={{
-          marginLeft: "20%",
-          width: "80%"
-        }}> 
+        <div className={style.first__col}> 
           <AllSprintsOfProj
             status={project.status}
             crypt={project.crypt}
