@@ -211,6 +211,7 @@ const Projects = ({history,location}) => {
               filter==='Завершенные'?project.status: project)
               .map((project, index) =>
 
+              
 
 
 
