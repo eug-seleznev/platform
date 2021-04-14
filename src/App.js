@@ -74,13 +74,6 @@ const App = () => {
   }, [])
 
 
-  // useEffect(() => {
-  //   if (loaded) {
-
-
-  //   }
-  // }, [loaded])
-
 
 
   return (
