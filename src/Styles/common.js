@@ -8,7 +8,7 @@ width: 100%;
 height: 100%;
 padding-top: 110px;
 padding-bottom: 80px;
-background-color:${props=> props.background};
+background-color:white;
 overflow-x: hidden;
 @media (max-width:1700px){
     width: 100vw;

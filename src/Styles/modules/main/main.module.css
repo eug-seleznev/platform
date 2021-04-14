@@ -78,6 +78,11 @@
             padding: 10px;
             display: flex;
             justify-content: space-between;
+            cursor: pointer;
+        }
+        .my_tasks:hover {
+            background-color: whitesmoke;
+            text-decoration: underline;
         }
         .myProjButton{
             grid-area: myProj;

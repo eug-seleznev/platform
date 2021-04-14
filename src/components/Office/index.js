@@ -101,20 +101,12 @@ useEffect(()=>{
                 <FilterButton arrow={filter==='date'? true : false} reverse={arrowReverse} onClick={() => dateButton()} >Дата</FilterButton>
             </div>
         
-        {/* <div className={styles.formArea}>
-                 {!form?
-                    <Card className={styles.openForm} onClick={()=>setForm(true)}>
-                        <Bold size='12' color='#3F496C'>Предложить свое...</Bold>
-                    </Card>
-                    :
-                    <ProposeForm closeForm={()=>setForm(false)} />}   
-        </div> */}
-           
+     
                   
             <div className={styles.row__array} >
                 <div className={styles.col__array}>
                     <Light size='24'className={styles.title__array} >На рассмотрении</Light>
-                {data && data.filter(el=>el.status===0).map((el, i) =>                  
+                {data && data.filter(el=>el.status==0).map((el, i) =>                  
                     <ProposeCard addExecutor={addExecutor} cardContent={el} key={i} off={true} className={styles.cardsContainer} user={user}/>
                 )}      
                 </div>

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import {  useSelector } from "react-redux";
-import { Card } from "../../../../Styles/common"
+import { Card } from "../../../../../Styles/common"
 import AddTask from "./AddTask";
 import TaskManagment from "./EditTask";
 
 import {SprintLoader} from './SprintLoader'
-import SprintTitle from "./SprintTitle";
+// import SprintTitle from "./SprintTitle";
 import TaskTable from "./TaskTable";
 
 
@@ -51,7 +51,7 @@ const Sprint_New = ({match, history}) => {
 
     return (
       <SprintLoader sprint_id={sprint_id} sprint={sprint} project={project} crypt={crypt}>
-        <SprintTitle crypt={crypt}user={user} title={sprint.title}date={sprint.dateClosePlan} hist={history} prTitle={project.title} id={sprint_id}  sprint={sprint}/>
+        {/* <SprintTitle crypt={crypt}user={user} title={sprint.title}date={sprint.dateClosePlan} hist={history} prTitle={project.title} id={sprint_id}  sprint={sprint}/> */}
 
         <Card >
           <TaskManagment
@@ -60,10 +60,12 @@ const Sprint_New = ({match, history}) => {
             id={sprint_id}
             creator={sprint.creator ? sprint.creator.fullname : " someone"}
             sprint_description={sprint.description}
+            title={sprint.title}
             focusRow={focusRow}
             tasks={sprint.tasks}
             editebleRow={editebleRow}
             tags={sprint.tags}
+            crypt={crypt}
           />
 
           <TaskTable

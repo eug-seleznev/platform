@@ -1,25 +1,22 @@
 .contain {
 	display: grid;
-	
-	grid-template-rows: repeat (max-content, 5);
+	margin-top: 5vh;
+	grid-template-rows: repeat (max-content, 3);
 	grid-template-columns: 0.87fr 1.13fr;
-	grid-template-areas: 
+	
 
-	'title title'
-	'sprints info'
-	'team history'
-	'calend history'
-	'model history'
-	;
 	
 }
 .sprints {
 	grid-area: sprints;
 	width: 100%;
-	height: max-content;
+
 }
 .team {
+	width: 100%;
+	overflow-x: hidden;
 	grid-area: team;
+	margin-top: -45px;
 }
 
 .first__row{
@@ -30,7 +27,7 @@
 	padding: 7px;
 	padding-left: 13px;
 	background-color: white;
-	border-radius: 10px;
+	border-radius: 7px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -38,7 +35,7 @@
 	width: 100%;
  	border:1px solid #8FA7C6;
 	margin-top: 0px;
-	margin-bottom: 25px;
+	margin-bottom: 15px;
 }
 .hist__sprint {
 	color:#171F65;
@@ -63,8 +60,8 @@
 	border-bottom: 1px solid #5286D4;
 }
 .chosen{
-	height: 30px;
-	width: 30px;
+	height: 25px;
+	width: 25px;
 }
 .card__descr {
 	text-align: left;
@@ -76,8 +73,7 @@
 }
 .second__row {
 	display: flex;
-	justify-content: space-between;
-	margin-top: 20px;
+	margin-top: 15px;
 }
 .tdd {
 	padding-left: 40px!important;
@@ -85,22 +81,22 @@
 }
 .history_tags{
 	
-	flex-direction: column;
+	flex-direction: row;
 	display: flex;
 	justify-content: flex-start;
 	
 	padding-top: 16px;
 }
 .card__tasks {
-	margin-top: 10px;
+	margin-top: -10px;
 	margin-bottom: 10px;
 	display: flex;
 	justify-content: flex-start;
 }
 
 .card__thing {
-	width: 150px;
-	height: 13px;
+	width: 100px;
+	height: 10px;
 	border-radius: 15px;
 	background-color: #C4C4C4;
 	overflow-x: hidden;
@@ -108,7 +104,7 @@
 }
 .card__thing__full {
 
-	height: 13px;
+	height: 10px;
 	
 	background-color: #5286D4;
 }
@@ -118,7 +114,6 @@
 }
 .sprint__title {
 	
-	border-top:1px solid #B5B5B5;
 	display: flex;
 	padding-top: 15px;
 	padding-bottom: 25px;
@@ -127,9 +122,9 @@
 }
 
 .info__project {
-	width: 100%;
+	width: 80%;
 	height: auto;
-	border: 1px solid black;
+	border: 1px solid #8FA7C6;
 	border-radius: 10px;
 	
 	padding: 20px;
@@ -153,8 +148,9 @@ border-bottom: none;
 }
 .info__cont {
 	grid-area: info;
-	width: 100%;
-	height: max-content;
+	width: 90%;
+	
+	height: max-content!important;
 }
 .info__crypt {
 	display: flex;
@@ -167,6 +163,7 @@ border-bottom: none;
 .sprint__title__plus {
 	margin-left: 5px;
 	margin-top: 2px;
+	margin-left: -25%;
 	cursor: pointer;
 }
 .special__button {
@@ -208,7 +205,7 @@ border-bottom: none;
 }
 .history_table2{
 	
-	border: 1px solid #8FA7C6;
+	/* border: 1px solid #8FA7C6; */
 	border-radius: 10px; 
 }
 .history_table2 table{
@@ -317,7 +314,7 @@ border-bottom: none;
 .sprintdescr__cont {
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 50px;
+	margin-bottom: 0px;
 	width: 90%;
 }
 .title__history {
@@ -326,9 +323,19 @@ border-bottom: none;
 	flex-wrap: wrap;
 }
 .history {
+	width: 79%;
 	grid-area: history;
 	
 }
+@media screen and (max-width: 1400px)  {
+	.history {
+		width: 100%;
+		grid-area: history;
+	}
+}
+
+
+
 .title__info {
 	display: flex;
 	margin-bottom: 20px;
@@ -358,6 +365,7 @@ border-bottom: none;
 	height: max-content;
 }
 .model__cont {
+	align-self: start;
 	grid-area: model;
 }
 .calend {
@@ -437,8 +445,9 @@ border-bottom: none;
 .tags {
 	display:flex;
 	 align-items:center;
-	 margin-top:4px;
-	 justify-content: flex-start;
+	 margin-top: -15px;
+	 margin-left: 20px;
+	 
 }
 
 .team__button:hover {
@@ -456,10 +465,8 @@ border-bottom: none;
 		
 		grid-template-columns: 0.5fr 0.45fr;
 		grid-template-areas: 
-		'title title'
 		'sprints info'
 		'team history'
-		'calend history'
 		'model history'
 		;
 		column-gap: 70px;
@@ -494,10 +501,8 @@ border-bottom: none;
 		grid-template-columns: 1fr;
 		grid-template-areas: 
 	
-		'title'
 		'sprints'
 		'team'
-		'calend'
 		'model'
 		'info'
 		'history'
@@ -532,7 +537,7 @@ border-bottom: none;
 	.off__too {
 		display: none;
 	}
-	.history{width: 80vw;}
+	.history{width: 90vw;}
 	.history_table2{display: none};
 	.tags {
 		display: none;
@@ -552,7 +557,8 @@ border-bottom: none;
 		justify-content: flex-start;
 	}
 	.tags {
-		justify-content: flex-start;
+		
+		
 	}
 	.team__button {
 		width: 100%;

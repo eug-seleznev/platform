@@ -17,6 +17,7 @@ const ProjectNew = ({history}) => {
     const [step, setStep] = useState (1)
     const [idCurrent, setIdCurrent] = useState (null)
     const [currentPos, setCurrentPos] = useState ('')
+    const [currentPart, setCurrentPart] = useState ('')
     const [userStage, setUserStage] = useState (1)
     const [idList,setIdList] = useState ([])
     const [nameCurrent, setNameCurrent] = useState (null)
@@ -32,10 +33,10 @@ const ProjectNew = ({history}) => {
         stage: 'Концепт',
         par:'ХХ',
         dateFinish: '',
-        customer: '',
+        customerNew: [],
         about: '',
         rcheck: false,
-        userid2: [],
+        team2: [],
         offTitle:'',
         budget:'',
         schedule:'',
@@ -45,14 +46,19 @@ const ProjectNew = ({history}) => {
    
 
 
-      const { title, dateStart, dateFinish, city,  customer, about, object, offTitle, budget, schedule,cusStorage, } = formData;
+      const { title, dateStart, dateFinish, city,  customerNew, about, object, offTitle, budget, schedule,cusStorage, } = formData;
       const posCurrent =(e)=>{
         setCurrentPos (e.target.value)
         setWorkerDataList ({ ...workerDataList, position:e.target.value})
         // console.log (workerDataList)
       }
+      const partCurrent =(e)=>{
+        setCurrentPart (e.target.value)
+        setWorkerDataList ({ ...workerDataList, task:e.target.value})
+        // console.log (workerDataList)
+      }
       const pushUserToForm =(e)=>{
-          formData.userid2.push(workerDataList)
+          formData.team2.push(workerDataList)
           setWorkerDataList({task:'работать'})
           setNameCurrent(null)
           setCurrentPos('')
@@ -111,6 +117,10 @@ const ProjectNew = ({history}) => {
    const nextStep =(step)=>{
      setStep(step)
    }
+     const onChangeCustomer = e =>{
+       let name = e.target.value
+      setFormData({ ...formData, [e.target.name]: [{name: name}] });
+     }
     const onChange = e => {
         e.preventDefault(); 
        
@@ -154,10 +164,10 @@ const ProjectNew = ({history}) => {
           stage: 'Концепт',
           par:'ХХ',
           dateFinish: '',
-          customer: '',
+          customerNew: [],
           about: '',
           rcheck: false,
-          userid2: [],
+          team2: [],
           offTitle:'',
           budget:'',
           schedule:'',
@@ -299,10 +309,10 @@ const ProjectNew = ({history}) => {
                    <Thin className={style.title}>Заказчик</Thin>
                    <input
                      type="text"
-                     name="customer"
+                     name="customerNew"
                      required
-                     value={customer}
-                     onChange={(e) => onChange(e)}
+                     value={customerNew.name}
+                     onChange={(e) => onChangeCustomer(e)}
                    />
                  </div>
                  <div className={style.input__short}>
@@ -324,7 +334,6 @@ const ProjectNew = ({history}) => {
                      className={style.select}
                    >
                      <option value="Архитектура">Архитектура</option>
-                     
                      <option value="Сети">Сети</option>
                      <option value="Визуализации">Визуализации</option>
                      <option value="Интерьер">Интерьер</option>
@@ -413,8 +422,18 @@ const ProjectNew = ({history}) => {
                       <Thin size='28' className={style.title}>Введите должность сотрудника</Thin>
                       <div className={style.search__user}>
                         <div>{nameCurrent}</div> 
-                        <input className={style.position} defaultValue='нет' value={currentPos} onChange={(e) => posCurrent(e)} placeholder='должность'></input>
-                        
+                            <input className={style.position} 
+                                defaultValue='нет' 
+                                value={currentPos} 
+                                onChange={(e) => posCurrent(e)} 
+                                placeholder='должность'>
+                                </input>
+                            <input className={style.position} 
+                                defaultValue='нет' 
+                                value={currentPart} 
+                                onChange={(e) => partCurrent(e)} 
+                                placeholder='раздел'>
+                                </input>
                       </div>
                       <div className={style.buttons}>
                         <CancelButton fontSize={"16px"} padd={"20px"} grey onClick={returnToSearch}>Вернуться к поиску</CancelButton>
@@ -424,15 +443,15 @@ const ProjectNew = ({history}) => {
                      </div>
                     
                      <div className={style.users__list} >
-                       <Thin size='28'  className={style.title}>Список сотрудников для добавления</Thin>
-                       {formData.userid2.map((user,i)=>{
+                       <Thin size='28' className={style.title}>Список сотрудников для добавления</Thin>
+                       {formData.team2.map((user,i)=>{
                          
                          return (
                            <div key={i} className={style.search__user}>
                              <div >{user.fullname}</div>
                              <div className={style.place}>
                                <Thin size='24'>{user.position}</Thin>
-                               
+                               <Thin size='24'>    {user.task}</Thin>
                              </div>
                              {/* <Button grey style={{display:`${formData.userid.includes(user._id)||idCurrent===user._id?'none':'block'}`}} onClick={()=>addUser(user)}>Добавить</Button> */}
                            </div>

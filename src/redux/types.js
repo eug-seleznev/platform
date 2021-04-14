@@ -18,6 +18,12 @@ export const ONE_USER = 'get_one'
 export const FIND_CONTRACTOR ='FIND_CONTRACTOR'
 export const PARTITION_UPDATE = 'update_user_partition';
 export const SEARCH_TABLE_USER ='SEARCH_TABLE_USER'
+export const ADD_USER_TASK='ADD_USER_TASK'
+export const FINISH_USER_TASK='FINISH_USER_TASK'
+export const EDIT_USER_TASK='EDIT_USER_TASK'
+export const USER_TASKS='USER_TASKS'
+export const SORT_USER_TASKS ='SORT_USER_TASKS'
+export const MY_TASK_DELITE ="MY_TASK_DELITE"
 //user errors
 export const USER_ERR = 'get_all_users_error'
 //search user 
@@ -132,3 +138,28 @@ export const CLEAR_DEPS = 'clear_deps'
 ///errors
 
 export const ERROR_MSG ='error_msg'
+
+
+
+export const GET_IDEAS = 'get_all_ideas'; //all arrays
+export const GET_NEW_IDEAS = 'get_new_ideas'; //new array
+export const GET_WORK_IDEAS = 'get_ideas_in_progress'; // work array
+export const GET_DONE_IDEAS = 'get_done_ideas'; //done array
+
+export const LIKE_IDEA = 'like_new_idea'; //new array and msg 
+export const POST_IDEA = 'create_new_idea'; //all arrays
+
+export const MOVE_IDEA = 'change_idea_status' //тут можно сделать одним роутом.
+//я буду отправлять в квери куда именно передвинуть её - в work или done; 
+//если говно идея то отдельно 2 роута new => work => done
+//второй вариант логичнее, потому что понятно что отправлять обратно на фронт. 
+//типа двинули идею с new => work - нужны новые массивы new / work
+
+
+
+//statistic
+
+
+export const GET_STAT = 'get_user_stat';
+
+export const GET_WEEKLY_TASK = 'get_all_tasks_of_week'

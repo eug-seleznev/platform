@@ -81,7 +81,7 @@ const Contractors = ({history}) => {
                     
                         <NEW_TD>{contractor.fullname}</NEW_TD>
                         <NEW_TD style={{display:'flex',flexWrap:'wrap',alignItems:'center', maxWidth:'200px'}}>{contractor.partition.map((el,i)=>{
-                            return(<Bold style={{marginRight:'15px'}}>
+                            return(<Bold key={i} style={{marginRight:'15px'}}>
                                 {el}
                             </Bold>)
                         })}</NEW_TD>

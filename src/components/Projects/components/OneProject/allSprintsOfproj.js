@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import style from '../../../../Styles/modules/components/Project/oneproj.module.css'
 
 import SprintDescription from "../SprintDescrForOneProj";
@@ -10,40 +10,26 @@ import { useEffect, useState } from "react";
 
 
 
-const AllSprintsOfProj = ({hist, match, status, id, sprint, location, history}) => {
-  const dispatch = useDispatch();
-
-	const sprints = useSelector(state => state.projects.sprints) //нужно из пропсов достать, тут можно и без редакса
+const AllSprintsOfProj = ({hist, sprints, match, status, crypt, sprint, location, history}) => {
   
-  const [sprintId, setSprintId] = useState(null)
+  const dispatch = useDispatch();
   const [submited, setSubmited] = useState(false)
-
-  // useEffect(() => {
-  //   console.log(sprintId)
-  //   if(sprintId) {
-  //       history.push(`${location.pathname}/${sprintId}`);
-  //   }
-  // }, [sprintId])
-
 
 
 
   useEffect(() => {
-    console.log(sprint, submited)
-          console.log("hello");
 
     if(submited && sprint._id){
-             return history.push(`${location.pathname}/${sprint._id}`);
+             return history.push(`tasks/${sprint._id}`);
     }
-
-    // return () => setSubmited(false)
   }, [submited, sprint])
 
 
 
 
+
 	const createSprint = () => {
-    dispatch(addSprint(id));
+    dispatch(addSprint(crypt));
     };
 
 
@@ -68,12 +54,12 @@ const AllSprintsOfProj = ({hist, match, status, id, sprint, location, history}) 
               .filter((sprint) => !sprint.status)
               .map((sprint, i) => {
                 return (
-                  <div>
                     <SprintDescription
                       projStatus={status}
                       dateClosePlan={sprint.dateClosePlan}
                       descr={sprint.description}
                       history={hist}
+                      crypt={crypt}
                       params={match.params}
                       id={sprint._id}
                       key={i}
@@ -87,8 +73,8 @@ const AllSprintsOfProj = ({hist, match, status, id, sprint, location, history}) 
                       key={i}
                       sprintname={sprint.name}
                       dateOpen={sprint.dateOpen}
-                    ></SprintDescription>
-                  </div>
+                    />
+                  
                 );
               })}
           </div>

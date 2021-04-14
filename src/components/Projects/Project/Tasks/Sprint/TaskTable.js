@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, } from "react-redux";
-import { addUserToTask, EditTask, finishTask } from "../../../../redux/actions/projects";
-import { SPRINT_TABLE, TR,Select, SPRINT_TD } from "../../../../Styles/tables"
-import style from "../../../../Styles/modules/components/Project/newsprint.module.css"
-import { Thin } from "../../../../Styles/typography";
-import { Input } from "../../../../Styles/Forms";
-import { ButtonText } from "../../../../Styles/buttons";
-import getDate from "../../getDate";
+import { addUserToTask, EditTask, finishTask } from "../../../../../redux/actions/projects";
+import { SPRINT_TABLE, TR,Select, SPRINT_TD } from "../../../../../Styles/tables"
+import style from "../../../../../Styles/modules/components/Project/newsprint.module.css"
+import { Thin } from "../../../../../Styles/typography";
+import { Input } from "../../../../../Styles/Forms";
+import { ButtonText } from "../../../../../Styles/buttons";
+import getDate from "../../../getDate";
 
 //todo: handle no tasks state
 
@@ -18,21 +18,16 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
   const [focusRow, setFocusRow] = useState("");
   const [deadline, setDeadline] = useState(false);
   const [taskTitle, setTaskTitle] = useState("");
-
+  const [timeout , updateTimeout] = useState(undefined)
+  const [debounced, setDebouced] = useState('')
   const [isDouble, setDouble] = useState(0)
     const [double, setD] = useState(0);
 
   useEffect(() => {
     selectFocusRow(focusRow);
-    //todo 
-    // disable edit fields
+
   }, [focusRow]);
-  // useEffect(()=>{
-  //   if(focusRowNew==='') {
-  //     setFocusRow('')
-  //     console.log('heyyyyyyyyy')
-  //   }
-  // },[focusRowNew])
+
   const onChange = (e) => {
     // console.log('change')
     let taskid = e.target.value;
@@ -42,24 +37,33 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
   useEffect(() => {
     if (isEdit) {
       let task = tasks.filter((task) => task._id === focusRow);
-      // console.log(task);
-      // setTaskTitle(task[0].taskTitle);
+  
     }
   }, [isEdit]);
 
   //edit task
-  const editHandler = (e) => {
-    // console.log('edit')
-     let field = 'taskTitle'
-      let value = e.target.value
-      dispatch(EditTask({ value, id, focusRow, field }));
-      setTaskTitle(e.target.value)
-   //server call edit task
+  const debounce =(fn,ms)=>{
+		const huy=()=> {
+				clearTimeout(timeout)
+				updateTimeout(setTimeout(fn, ms)) 
+		}
+		return huy()
+	}
+	const onTextChange =()=>{
+		let value = debounced
+		let field = 'taskTitle'
+		// console.log(value,id,field)
+		dispatch(EditTask({value, id,focusRow,field}))
+	};
+	useEffect(()=>{
+		if(debounced!==''){
+			debounce(onTextChange,500)
+		}
+	},[debounced])
 
 
-  };
+  // };
   const onFocus=(e)=>{
-    // console.log('onFocus')
     setTaskTitle(e.target.name)
   }
   const submitEdit = (e) => {
@@ -73,6 +77,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
     let value = e.target.value
     let field = 'deadline'
     dispatch(EditTask({value, id, focusRow, field}))
+    setDeadline(false)
   }
 
   const doubleClickEdit = (task) => {
@@ -95,14 +100,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
   }
 
 
-  // useEffect(()=>{
-  //   if(taskId=='') {
-  //     setFocusRow('')
-  //   }
-  // },[taskId])
-
   const teamHandle = (e, task) => {
-
     let userid = e.target.value
     let focusRow = task._id
     dispatch(addUserToTask({userid, id, focusRow }))
@@ -120,7 +118,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
   }
 
   return (
-    <SPRINT_TABLE onMouseLeave={() => setTaskId("")}>
+    <SPRINT_TABLE onMouseLeave={() => setTaskId("")} >
       {tasks.map((task) => {
         
         return (
@@ -135,7 +133,6 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
           >
             <SPRINT_TD style={{width:'25px'}}>
               <input
-              
                 type="checkbox"
                 defaultChecked={task.taskStatus}
                 value={task._id}
@@ -149,12 +146,12 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
               <SPRINT_TD style={{width:'50%'}}>
                 <form onSubmit={submitEdit}>
                   <input
-                  className={style.input}
+                    className={style.input}
                     type="text"
-                    value={taskTitle}
+                    defaultValue={taskTitle}
                     name={task.taskTitle}
                     onClick={(e)=>onFocus(e)}
-                    onChange={(e)=>editHandler(e)}
+                    onChange={(e)=>{setDebouced(e.target.value)}}
                   ></input>
                 </form>
               </SPRINT_TD>

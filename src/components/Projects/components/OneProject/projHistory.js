@@ -2,7 +2,7 @@ import styles from '../../../../Styles/modules/components/Project/oneproj.module
 
 import sprintcss from "../../../../Styles/modules/components/Project/newsprint.module.css"
 
-import { Thin } from '../../../../Styles/typography'
+import { Light, Thin } from '../../../../Styles/typography'
 
 
 import Tag from './tag'
@@ -18,14 +18,14 @@ const ProjHistory = ({project,history}) => {
 
 
 	const pushToSprint =(id)=>{
-		history.push(`/projects/${project.crypt+'/'+id}`)
+		history.push(`/projects/${project.crypt+'/tasks/'+id}`)
 	}
     return(
    	 <div className={styles.history}>
 		<div className={styles.title__history}>
 			<div className={styles.title__info} >
 					<img alt='info'  src='/info.png' style={{marginRight:'10px'}} ></img>
-					<Thin size='22'>История проекта</Thin>
+					<Light size='18'>История проекта</Light>
 			</div>
 			
 			<div className={styles.title__tags} >
@@ -53,7 +53,7 @@ const ProjHistory = ({project,history}) => {
 				
 				<NEW_TBODY>
 				{project!==undefined?project.sprints.map((sprint,i)=>{
-					
+            if(sprint.status == false) return;
 						return (
               <NEW_TR onClick={() => pushToSprint(sprint._id)} key={i}>
                 <NEW_TD size="14" className={styles.tdd}>
@@ -82,44 +82,9 @@ const ProjHistory = ({project,history}) => {
                       })
                     : ""}
                 </NEW_TD>
-                <NEW_TD className={styles.history_creator} size="14">
-                  {" "}
-                  {sprint.creator === undefined
-                    ? "нет"
-                    : sprint.creator.fullname}
-                  <img
-                    alt="lupa"
-                    className={sprintcss.img__td}
-                    style={{ opacity: sprint.creator === undefined ? 0 : 1 }}
-                    src={
-                      sprint.creator === undefined
-                        ? "/Ellipse 13.png"
-                        : url + "/" + sprint.creator.avatar
-                    }
-                  ></img>
-                </NEW_TD>
-                <NEW_TD size="14">
-                  {sprint.tasks !== undefined
-                    ? sprint.tasks.filter((task) => task.taskStatus).length +
-                      "/" +
-                      sprint.tasks.length
-                    : ""}
-                  <div className={sprintcss.card__thing}>
-                    <div
-                      style={{
-                        width: `${Math.trunc(
-                          (sprint.tasks !== undefined
-                            ? sprint.tasks.filter((task) => task.taskStatus)
-                                .length / sprint.tasks.length
-                            : "") * 100
-                        )}%`,
-                      }}
-                      className={sprintcss.card__thing__full}
-                    ></div>
-                  </div>
-                </NEW_TD>
+                
                 <NEW_TD className={styles.off} size="14">
-                  нет
+                  дата
                 </NEW_TD>
               </NEW_TR>
             );

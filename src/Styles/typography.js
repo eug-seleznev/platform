@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 
 export const Bold = styled.div`
-
+margin-top: 0px;
 font-family: SuisseIntlSemiBold;
 font-size: ${props => props.size}px;
 color: ${props => props.color || 'black'};

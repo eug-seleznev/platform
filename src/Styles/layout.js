@@ -187,18 +187,18 @@ font-size: 16px;
 
 
 export const SidebarContainer = styled.div`
-display: block;
-position: fixed;
-width: 67px;
-min-height: 100vh;
-padding-top: 18px;
-z-index: 9999;
-background-color: #3F496C;
-text-align: center;
-@media (max-width: 1000px){
-    display:none;
-}
-`
+  display: block;
+  position: fixed;
+  width: 67px;
+  min-height: 100vh;
+  padding-top: 18px;
+  z-index: 9999;
+  background-color: #1c1e23;
+  text-align: center;
+  @media (max-width: 1000px) {
+    display: none;
+  }
+`;
 
 export const SidebarLink = styled(NavLink)`
 // display:block;

@@ -26,7 +26,7 @@ const TopInfo = ({ user, url, change, history, enter}) =>{
                 <ButtonText
                   color="#445AAA"
                   fontSize="12"
-                 
+				style={{transform:'translateY(-7px)'}}
                   onClick={() => history.push(`/edit`)}
                 >
                   изменить

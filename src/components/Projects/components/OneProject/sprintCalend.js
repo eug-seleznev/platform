@@ -152,7 +152,7 @@ const CalendSprint = ({id}) => {
 
     useEffect(() => {
         if(loaded){
-            dispatch(allSprints(project.crypt))
+            // dispatch(allSprints(project.crypt))
         }
     
     }, [loaded])
