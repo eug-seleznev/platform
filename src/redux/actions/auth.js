@@ -144,8 +144,8 @@ export const changeData = (formData) => async dispatch  => {
 }
 export const changeAvatar = (file) => async dispatch  => {
 
-
   try {
+    console.log('file is here::::::',file)
   
   const form = new FormData()
   if(file){
@@ -154,13 +154,16 @@ export const changeAvatar = (file) => async dispatch  => {
           file
         )
   }
+console.log('form is here::::::',form)
   
 
-      // console.log(form.get('file'), 'file HERE')
+      console.log(form.get('file'), 'file HERE')
    
 
 
       const res = await innerBackend.put(`/users/me/a`, form)
+console.log('res is here::::::',res.data)
+
       dispatch({
           type: CHANGE_AVATAR,
           payload: res.data
