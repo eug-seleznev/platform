@@ -33,6 +33,11 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask, onPressEnter})=>{
 		}
 		return huy()
 	}
+	const ready =(e)=>{
+		e.target.blur()
+		setActualInput('')
+		setId('')
+	};
 	const onTextChange =()=>{
 		let value = debounced
 		let field = 'taskTitle'
@@ -75,7 +80,7 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask, onPressEnter})=>{
 											style={{outline:'none',backgroundColor:`${id===task._id?'#F1EFEF':''}`}}
 										 	className={style.mytask__tr}
 											tabIndex="0"
-											onKeyDown={(e)=>e.key==='Delete'?delTask(task._id):e.key==='Enter'?onPressEnter(task._id):e.key==='Escape'?onPressEscape():''}>
+											onKeyDown={(e)=>e.key==='Delete'?delTask(task._id):e.key==='Enter'?ready(e):e.key==='Escape'?onPressEscape():''}>
 									<NEW_TD>
 									<input
 										type="checkbox"

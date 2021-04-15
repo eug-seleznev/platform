@@ -19,6 +19,9 @@ const ProjectsBlock = ({user, history}) => {
 		  <Bold color={showProj===2?'#3F496C':'#959595'} size="18" onClick={()=>{setShowProj(2)}} className={styles.myProjButton}>
 			все
 		  </Bold>
+		  <Bold color={showProj===3?'#3F496C':'#959595'} size="18" onClick={()=>{setShowProj(3)}} className={styles.myProjButton}>
+			избранные
+		  </Bold>
 		</div>
 		
 
@@ -39,7 +42,15 @@ const ProjectsBlock = ({user, history}) => {
 		  history={history}
 		/>
   
-	):''}
+	): showProj===3?user.fav_proj.map((el, i) => 
+	<ProjectsCard
+	  project={el}
+	  key={i}
+	  sprints={user.sprints}
+	  history={history}
+	/>
+
+):''}
 	  </div>
     )
 }

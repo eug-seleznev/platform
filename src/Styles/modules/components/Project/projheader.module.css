@@ -1,0 +1,21 @@
+.container {
+    background-color: black;
+    width: 105vw;
+    padding-left: 90px;
+    height:30px;
+    margin-top: -42px;
+    padding-top: 15px;
+    margin-left: -130px
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90vw;
+    color: white;
+}
+@media (max-width:1000px) {
+    .container {
+        margin-top: -48px;
+    }
+}

@@ -28,7 +28,7 @@ const Ideas = ({idea, setSelected}) => {
       >
         <img
           src="/heart.svg"
-          style={{ width: "30px", height: "30px", marginLeft: "5px" }}
+          style={{ width: "30px", height: "30px", marginLeft: "5px",cursor:'pointer' }}
           onClick={() => handleRequest(idea.title)}
         />
 

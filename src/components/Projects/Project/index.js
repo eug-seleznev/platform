@@ -35,7 +35,7 @@ const Project = ({match, history, location}) => {
             history={history}
             sprints={project.sprints}
           />
-          <ProjectTeam hist={history} id={crypt} />
+          {/* <ProjectTeam hist={history} id={crypt} /> */}
           <Viewer project={project} />
         </div>
 
