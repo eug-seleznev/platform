@@ -14,8 +14,27 @@
     width: 90vw;
     color: white;
 }
-@media (max-width:1000px) {
+@media (max-width:1400px) {
     .container {
-        margin-top: -48px;
+        margin-top: -43px;
+        margin-left: -75px;
+    }
+    .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 82vw;
+        color: white;
+    }
+}
+
+@media (max-width:700px) {
+    .container {
+        margin-left: -45px;
+        height:130px;
+    }
+    .row {
+        flex-direction: column;
+        justify-content: space-between;
     }
 }
