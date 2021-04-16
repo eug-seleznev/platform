@@ -10,7 +10,7 @@ import UserForm from './infoForm';
 
 
 
-const ProjectTeam = ({id, hist}) => {
+const ProjectTeam = ({history}) => {
 	const dispatch = useDispatch();
 
   const [idArray] = useState([])
@@ -19,7 +19,7 @@ const ProjectTeam = ({id, hist}) => {
   const [modal,setModal] = useState(false)
   const project = useSelector(state => state.projects.project)
   const userId = useSelector(state => state.auth.user._id)
-
+  const id = useSelector(state => state.projects.project.crypt)
 
     useEffect(()=>{
 
@@ -27,7 +27,7 @@ const ProjectTeam = ({id, hist}) => {
     
         
         project.team2.map((el)=>{
-          console.log(el.user._id,userId)
+          // console.log(el.user._id,userId)
           setButton(el.user._id===userId)
           idArray.push(el._id)
         })
@@ -75,7 +75,7 @@ const ProjectTeam = ({id, hist}) => {
                 {project.team2!==undefined ? project.team2.map((user, i) => {
                       return (
                         <ProjTeam key={i} id={id}
-                          histProp={hist}
+                          histProp={history}
                           userMail={user.user.email}
                           userId={user.user._id} 
                           userName={user.user.fullname}

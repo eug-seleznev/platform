@@ -13,6 +13,8 @@ import Viewer from '../../../Viewer/helper'
 
 import Development from './Development'
 
+import Info from "../Info";
+
 
 const Helper = ({match, history}) => {
   
@@ -38,7 +40,7 @@ const Helper = ({match, history}) => {
 
           <Route exact path={`${match.path}/edit`} component={EditProject} />
           <Route exact path={`${match.path}/event`} component={Development} />
-          <Route exact path={`${match.path}/info`} component={Development} />
+          <Route exact path={`${match.path}/info`} component={Info} />
         </Loader>
       </div>
     );

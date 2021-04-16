@@ -26,9 +26,6 @@ import getDate from "../../getDate";
 
 const Sprints = () => {
     const project = useSelector(state => state.projects.project)
-    useEffect(()=>{
-        console.log(project)
-    },[])
 
     return (
       <div className={style.main}>

@@ -20,7 +20,6 @@ const Header = ({history, crypt}) => {
     const dispatch = useDispatch();
     const handleRedirect = (name) => {
         setNameV(name)
-        console.log(nameV);
         history.push(`/projects/${crypt}/${name}`)
     }
     useEffect (()=> {
@@ -68,7 +67,7 @@ const Header = ({history, crypt}) => {
               name="main"
               value="123"
               onClick={(e) => handleRedirect("info")}
-            >Информация </Thin>
+            >Команда </Thin>
 
             <Thin style={{cursor:'pointer',borderBottom:`${nameV==="models"?'2px solid white':'2px solid transparent'}`,width:'40px', fontFamily:`${nameV==="models"?'SuisseIntlRegular':'SuisseIntlThin'}`}} color='white' name="models" onClick={(e) => handleRedirect("models")}>
               Модели
