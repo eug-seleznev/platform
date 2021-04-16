@@ -6,8 +6,10 @@ import { Bold, Light } from '../../Styles/typography'
 const TaskBlock = ({user, history}) => {
   	const[activeSprints,setActiveSprints] = useState(0)	
 	useEffect(()=>{
-		user.projects.map((el,i)=>{
-			setActiveSprints(activeSprints+el.sprints.filter(sprint=>sprint.status).length)	
+
+		user.projects.filter(proj=>!proj.status).map((el,i)=>{
+			let res = el.sprints.filter(sprint=>!sprint.status).length
+			setActiveSprints(activeSprints => activeSprints+res)	
 		})
 	}, [])
 	const pushToTasks =()=>{
