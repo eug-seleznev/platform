@@ -31,9 +31,9 @@ const ProjectsCard = ({project}) => {
         <Card className={styles.projContainer}>
           <div>
           <div className={styles.end}>
-            {
+            {/* {
             project.sprints.length==0?<Circle red />:<Circle green />
-          }
+          } */}
           
           <Bold size="12" color="#848484" style={{marginLeft:'20px'}} >
             {" "}

@@ -7,7 +7,7 @@ import Tag from "./OneProject/tag"
 const SprintDescription = ({tags, dateOpen,taskcomplite, alltasks, history, crypt, id, title, dateClosePlan}) => {
 	
 	const dispatch = useDispatch();
-	const [loaded, setLoaded] = useState (0)
+	// const [loaded, setLoaded] = useState (0)
 	// const [diff, setDiff] = useState (0)
 	const [actualClose, setActualClose] = useState (0)
 	const [status, setStatus] = useState (false)

@@ -91,7 +91,7 @@ const MyTasks =({tasks,onChange,currentDate, delTask,onPressEnter})=>{
 			
 			<div>
 				<input placeholder="Добавить задачу"  onKeyDown={(e)=>e.key==='Enter'?addNewTask(e):''}name="taskTitle" type="text"value={formData.taskTitle} onChange={(e)=>{onTaskChange(e)}}></input>
-				<input placeholder="Дедлайн" name="deadline" type="date" className={style.deadlineInputDate}  onChange={(e)=>{onTaskChange(e)}}></input>
+				{/* <input placeholder="Дедлайн" name="deadline" type="date" className={style.deadlineInputDate}  onChange={(e)=>{onTaskChange(e)}}></input> */}
 				<ButtonTextDiv style={{marginLeft:'15px',marginTop:'5px'}} onClick={()=>addNewTask()}>Добавить</ButtonTextDiv>
 			</div>
 		</div>
@@ -100,7 +100,7 @@ const MyTasks =({tasks,onChange,currentDate, delTask,onPressEnter})=>{
 			
 			<NEW_THEAD>
 				<NEW_TR className={style.mytask__tr__nohover}>
-					<NEW_TH>Задача</NEW_TH>
+					<NEW_TH></NEW_TH>
 				</NEW_TR>
 			</NEW_THEAD>
 			<NEW_TBODY>
@@ -116,7 +116,7 @@ const MyTasks =({tasks,onChange,currentDate, delTask,onPressEnter})=>{
 										style={{outline:'none',backgroundColor:`${id===task._id?'#F1EFEF':''}`}} 
 										className={style.mytask__tr}
 										tabIndex="0"
-										onKeyDown={(e)=>e.key==='Delete'?delTask(task._id):e.key=='Enter'&&deadlineEnter==false?onPressEnter(task._id):e.key==='Escape'?onPressEscape():''}
+										onKeyDown={(e)=>e.key==='Delete'?delTask(task._id):e.key=='Enter'&&deadlineEnter==false?setActualInput(''):e.key==='Escape'?onPressEscape():''}
 										
 										>
 									

@@ -9,6 +9,7 @@ import style from '../../../Styles/modules/components/Project/oneproj.module.css
 import Viewer from "../model";
 import ProjInfo from "../components/OneProject/projInfo";
 import ProjHistory from "../components/OneProject/projHistory";
+import { useEffect } from "react";
 
 const Project = ({match, history, location}) => {
 
@@ -18,7 +19,9 @@ const Project = ({match, history, location}) => {
     const project = useSelector(state => state.projects.project)
     const sprint = useSelector(state => state.projects.sprint)    
 
-
+    useEffect(()=>{
+      console.log(project)
+  },[])
 
 
 
@@ -35,7 +38,7 @@ const Project = ({match, history, location}) => {
             history={history}
             sprints={project.sprints}
           />
-          <ProjectTeam hist={history} id={crypt} />
+          {/* <ProjectTeam hist={history} id={crypt} /> */}
           <Viewer project={project} />
         </div>
 

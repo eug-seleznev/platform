@@ -30,7 +30,11 @@ const Managment = ({submited, focusRow, location, history, setUpdate, updateMode
         <div className={modelsCss.managment__type}>
           <Bold size='14'>Типы моделей: </Bold>
           {models && models.map((el,i)=>{
-            return(<div style={{display:`${el.tags[0]===''?'none':'block'}`}}><Tag key={i} tagColor='#C8DDE9' tagText={el.tags[0]}/></div>)
+            console.log(el)
+            if(el.tags.length!==0) {
+              return(<div><Tag key={i} tagColor='#C8DDE9' tagText={el.tags[0]}/></div>)
+            }
+            
           })}
         </div>
       </div>

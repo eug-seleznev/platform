@@ -44,7 +44,6 @@ const plusMenuClick = (callback) => {
                     <StyledIn onClick={()=>plusMenuClick(createTicket)} className='menu__nav' to='/help'>
                         Проблемы с компом
                     </StyledIn>
-
                     {user.permission!=='user' && <StyledIn onClick={()=>plusMenuClick(createNews)} className='menu__nav' to='/admin/news'>
                         Добавить новость
                     </StyledIn>}
@@ -85,9 +84,9 @@ const plusMenuClick = (callback) => {
                         {user.name}
                    </div>
                    
-                    {/* <StyledLink to='/users/me' onClick={closeAll}>
-                        Мой профиль
-                    </StyledLink> */}
+                   <StyledLink to='../../../mytasks' className='menu__nav' >
+                        Мои задачи
+                    </StyledLink>
 
                     <StyledLink to='/myprojects' onClick={closeAll}>
                         Мои проекты

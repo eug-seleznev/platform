@@ -15,11 +15,13 @@ const { NEW_TD, NEW_TR, NEW_TBODY, NEW_TH, NEW_THEAD, NEW_TABLE } = require("../
 
 const Contractors = ({history}) => {
 	const dispatch = useDispatch ()
+    const permission = useSelector(state => state.auth.user.permission)
     const contractors = useSelector(state => state.users.contractors)
     const [sortOrder, setOrder] = useState(false)
 	useEffect (()=>{
         let query = 'name'
 		dispatch(allContractors({query, sortOrder}))
+        console.log(permission)
 	},[])
     const sortFunction = (query) => {
         setOrder(!sortOrder)
@@ -77,7 +79,7 @@ const Contractors = ({history}) => {
                 <NEW_TBODY>
                     {contractors.map((contractor,index) => {
                     return(  
-                    <NEW_TR className={style.contractors} key={index} onClick={()=> pushToEdit(contractor._id)} title="Редактировать информацию">
+                    <NEW_TR className={style.contractors} key={index}  title="Редактировать информацию">
                     
                         <NEW_TD>{contractor.fullname}</NEW_TD>
                         <NEW_TD style={{display:'flex',flexWrap:'wrap',alignItems:'center', maxWidth:'200px'}}>{contractor.partition.map((el,i)=>{
@@ -87,7 +89,7 @@ const Contractors = ({history}) => {
                         })}</NEW_TD>
                         <NEW_TD>{contractor.phone}</NEW_TD>
                         <NEW_TD className={style.turn__off}>{contractor.email}</NEW_TD>
-                        {/* <Td>{project.sprints.filter(sprint => sprint.status).length}/{project.sprints.length}</Td> */}
+                        <NEW_TD onClick={()=> permission==='admin'?pushToEdit(contractor._id):''} style={{display:`${permission==='admin'?'block':'none'}`}} className={style.editContractor}>изменить</NEW_TD>
                     </NEW_TR>
                     )
                 })}
