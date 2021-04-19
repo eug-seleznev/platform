@@ -10,10 +10,11 @@ import Menu from './Menu'
 import MenuMobile from './menuMobile'
 
 
+
 const HeaderL = ({addPodsos, createProj, createNews, createTicket}) => {
     const loaded = useSelector(state => state.auth.loaded)
     const user = useSelector(state => state.auth.user)
-   
+
     const [open, setOpen] = useState({
         menu: false,
         menuProfile: false,
@@ -30,7 +31,7 @@ const HeaderL = ({addPodsos, createProj, createNews, createTicket}) => {
     const allFalse= () => {
         setOpen({...open, mobile: false, menu:false, menuProfile: false})
     }
-
+  
     return (
       <>
         {!loaded ? (
@@ -46,21 +47,24 @@ const HeaderL = ({addPodsos, createProj, createNews, createTicket}) => {
                 </Bold>
                 <img alt="arrow" className="arrow" src="/headerArrow.png" />
               </ItemHead>
-              <ItemHead
-                
+              <ItemHead>
+              <Link to='../../../mytasks'
+                style={{display:'flex',textDecoration:'none'}}
               >
-                <Link to='../../../../mytasks'>
+                
                 <img alt="tasks" style={{width:'15px'}}className="invert" src="/lightn.png" />
-                </Link>
+                
                 <div style={{fontSize:'10px',
+                
                       color:'white',
-                      transform:'translate(-6px,15px)',
+                      transform:'translate(-3px,15px)',
                       width:'15px',height:'15px',
                       borderRadius:'100%',
                       backgroundColor:'grey',
                       textAlign:'center'}}>{user.tasks&&user.tasks.filter(task=>!task.taskStatus).length}
                 </div>
                 
+              </Link>
               </ItemHead>
               <ItemHead
                 onClick={() =>
