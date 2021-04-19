@@ -1,7 +1,8 @@
 
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import {Header, ItemHead} from '../../Styles/layout'
 import {Bold} from '../../Styles/typography'
 import { url } from '../utils/axios'
@@ -19,13 +20,13 @@ const HeaderL = ({addPodsos, createProj, createNews, createTicket}) => {
         mobile: false
     })
 
-
+    
     const mobClick = () => { 
         setOpen({...open, mobile: !open.mobile})
         // console.log(open)
     }
 
-
+   
     const allFalse= () => {
         setOpen({...open, mobile: false, menu:false, menuProfile: false})
     }
@@ -38,13 +39,29 @@ const HeaderL = ({addPodsos, createProj, createNews, createTicket}) => {
           <div>
               
             <Header>
+              
               <ItemHead className="mobile__menu" onClick={() => mobClick()}>
                 <Bold size="14" color="white">
                   меню
                 </Bold>
                 <img alt="arrow" className="arrow" src="/headerArrow.png" />
               </ItemHead>
-
+              <ItemHead
+                
+              >
+                <Link to='../../../../mytasks'>
+                <img alt="tasks" style={{width:'15px'}}className="invert" src="/lightn.png" />
+                </Link>
+                <div style={{fontSize:'10px',
+                      color:'white',
+                      transform:'translate(-6px,15px)',
+                      width:'15px',height:'15px',
+                      borderRadius:'100%',
+                      backgroundColor:'grey',
+                      textAlign:'center'}}>{user.tasks&&user.tasks.filter(task=>!task.taskStatus).length}
+                </div>
+                
+              </ItemHead>
               <ItemHead
                 onClick={() =>
                   setOpen({ ...open, menuProfile: false, menu: !open.menu })

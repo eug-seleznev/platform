@@ -42,10 +42,6 @@ const Sidebar = () => {
           <img alt="depart" src="/sidebarIcon.png" title="Отдел" />
           <p>Отдел</p>
         </SidebarLink>
-        <SidebarLink to="/contractors" className="nav-link">
-          <img alt="contactors" src="/sidebarIcon.png" title="Субподрядчики" />
-          <p>Субподряд чики</p>
-        </SidebarLink>
         <SidebarLink to="/departments" className="nav-link">
           <img alt="deps" src="/sidebarIcon.png" title="Все отделы" />
           <p>Все отделы</p>
