@@ -132,7 +132,7 @@ const Projects = ({history,location}) => {
     return (
       <div className={style.main}>
           <Regular size='16' color='#3F496C' className={style.title}>Все проекты</Regular>
-          <div className={style.row}>
+          <div className={style.row} style={{width:'120%'}}>
             {user.permission!=='user' && 
              <div className={style.row__in}><Link to='/admin/newproject'>
                <ButtonText fontSize='14px' style={{fontFamily:'SuisseIntlSemibold'}}>Создать новый проект</ButtonText></Link>
@@ -156,7 +156,7 @@ const Projects = ({history,location}) => {
                </div>
               
              </div>
-             <div className={style.row__in}>
+             <div className={style.row__in} >
               <Thin size='14'>
                   Проектов в работе: {projects
                 .filter((project) => !project.status).length}

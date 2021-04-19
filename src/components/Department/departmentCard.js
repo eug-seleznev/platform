@@ -19,7 +19,7 @@ import { allUsers } from '../../redux/actions/user';
 import { loadUser } from '../../redux/actions/auth';
 import ProjectsCard from '../Main/projectsCard';
 
-const DepartmentCard = ({itsAllDepsPage, department, user, history}) => {
+const DepartmentCard = ({itsAllDepsPage, department, user, history,mydep}) => {
 
 
 
@@ -99,7 +99,7 @@ const [showConfirm, setShowConfirm] = useState(false)
         <div>
        
             <div className={styles.container} style={{height: `${pageStatus?'60px':'auto'}`,overflowY: `${pageStatus?'hidden':'visible'}`}}>
-            <Bold className={styles.title} title={pageStatus?'Открыть отдел':''} onClick={()=>departStatus()} style={{cursor: `${itsAllDepsPage?'pointer':'default'}`}} size='30'>{department!==null?department.divname:''}</Bold>
+            <Bold className={styles.title} title={pageStatus?'Открыть отдел':''} onClick={()=>departStatus()} style={{cursor: `${itsAllDepsPage?'pointer':'default'}`, display:`${mydep?'none':'block'}`}} size='30'>{department!==null?department.divname:''}</Bold>
             {/* {button?
                  <Bold className={styles.joinBtn}  size='16px' color='#3F496C' onClick={()=>setShowConfirm(true)}>Выйти из отдела</Bold>:
                  <Bold className={styles.joinBtn}  size='16px' color='#3F496C' onClick={join}>Присоединиться к отделу</Bold>

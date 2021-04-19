@@ -4,9 +4,10 @@ import { Bold, Regular, Thin} from '../../Styles/typography'
 import style from '../../Styles/modules/components/Project/allproj.module.css'
 import { useEffect, useState } from "react"
 import {useDispatch} from "react-redux"
-import { allContractors, background, findContractorName } from "../../redux/actions/user"
+import { allContractors, background, deleteContractor, findContractorName } from "../../redux/actions/user"
 import { SearchInput } from "../../Styles/Forms"
-const { NEW_TD, NEW_TR, NEW_TBODY, NEW_TH, NEW_THEAD, NEW_TABLE } = require("../../Styles/tables")
+import ConfirmSubDel from "./confirm"
+const { NEW_TD, NEW_TR, NEW_TBODY, NEW_TH, NEW_THEAD, NEW_TABLE, Select } = require("../../Styles/tables")
 
 
 
@@ -18,10 +19,14 @@ const Contractors = ({history}) => {
     const permission = useSelector(state => state.auth.user.permission)
     const contractors = useSelector(state => state.users.contractors)
     const [sortOrder, setOrder] = useState(false)
+    const [chosenContractor, setChosenContractor] = useState({
+
+    })
+    const [modal, setModal] = useState(false)
+
 	useEffect (()=>{
         let query = 'name'
 		dispatch(allContractors({query, sortOrder}))
-        console.log(permission)
 	},[])
     const sortFunction = (query) => {
         setOrder(!sortOrder)
@@ -41,10 +46,16 @@ const Contractors = ({history}) => {
         let value = e.target.value
         dispatch (findContractorName({value,field}))
     }
+    const delMenu =(contractor)=>{
+        setChosenContractor(contractor)
+        setModal(true)
+    }
+    const delInfo = (id) =>{
+        dispatch(deleteContractor(id))
+        setModal(false)
+    }
     return (
         <div className={style.main}>
-            
-            <Regular size='16' color='#3F496C' className={style.title}> Все субподрядчики</Regular>
             <div className={style.row}>
                 <div className={style.row__in}>
                         <img src='/lupa.png' alt='lupa' className={style.row__img}></img>
@@ -79,7 +90,7 @@ const Contractors = ({history}) => {
                 <NEW_TBODY>
                     {contractors.map((contractor,index) => {
                     return(  
-                    <NEW_TR className={style.contractors} key={index}  title="Редактировать информацию">
+                    <NEW_TR className={style.contractors} key={index}  >
                     
                         <NEW_TD>{contractor.fullname}</NEW_TD>
                         <NEW_TD style={{display:'flex',flexWrap:'wrap',alignItems:'center', maxWidth:'200px'}}>{contractor.partition.map((el,i)=>{
@@ -89,10 +100,24 @@ const Contractors = ({history}) => {
                         })}</NEW_TD>
                         <NEW_TD>{contractor.phone}</NEW_TD>
                         <NEW_TD className={style.turn__off}>{contractor.email}</NEW_TD>
-                        <NEW_TD onClick={()=> permission==='admin'?pushToEdit(contractor._id):''} style={{display:`${permission==='admin'?'block':'none'}`}} className={style.editContractor}>изменить</NEW_TD>
+                        <NEW_TD style={{display:`${permission==='admin'?'block':'none'}`}}  className={style.editContractor}>
+                           <Select value='опции' onChange={(e)=>
+                               permission==='admin'&&e.target.value==="изменить"?pushToEdit(contractor._id):
+                               permission==='admin'&&e.target.value==="удалить"?delMenu(contractor):''
+                                                }>
+                                <option style={{display:'none'}} disabled>опции</option>
+                               <option >изменить</option>
+                               <option>удалить</option>
+                            </Select>
+                           
+                        </NEW_TD>
                     </NEW_TR>
                     )
                 })}
+                <div style={{display:`${modal?'block':'none'}`}}>
+                     <ConfirmSubDel accept={delInfo} contractor={chosenContractor} decline={setModal}></ConfirmSubDel> 
+                </div>
+                
                 </NEW_TBODY>
                
                 

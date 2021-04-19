@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { ALL_USERS,CHANGE_CONTAINER,SORT_USER_TASKS,MY_TASK_DELITE, EDIT_USER_TASK, FINISH_USER_TASK,ADD_USER_TASK,FIND_CONTRACTOR, SEARCH_TABLE_USER,EDIT_CONTRACTOR, CHANGE_PERMISSION, PERM_RETURN,ONE_CONTRACTOR, ONE_USER,SEARCH_USER,BACK_WHITE,ADD_CONTRACTOR,ALL_CONTRACTORS, ERROR_MSG, GREEN_MSG,PARTITION_UPDATE, EDIT_TASK} from "../types";
+import { ALL_USERS,DELETE_CONTRACTOR,CHANGE_CONTAINER,SORT_USER_TASKS,MY_TASK_DELITE, EDIT_USER_TASK, FINISH_USER_TASK,ADD_USER_TASK,FIND_CONTRACTOR, SEARCH_TABLE_USER,EDIT_CONTRACTOR, CHANGE_PERMISSION, PERM_RETURN,ONE_CONTRACTOR, ONE_USER,SEARCH_USER,BACK_WHITE,ADD_CONTRACTOR,ALL_CONTRACTORS, ERROR_MSG, GREEN_MSG,PARTITION_UPDATE, EDIT_TASK} from "../types";
 
 
 
@@ -32,6 +32,20 @@ export const changeContainer =(style)=> async dispatch => {
     type: CHANGE_CONTAINER,
     style: style
 })
+}
+export const deleteContractor =(id)=> async dispatch => {
+  try {
+    const res = await innerBackend.delete(`/merc/${id}`)
+    dispatch({
+        type: DELETE_CONTRACTOR,
+        payload: res.data
+    })
+      
+  }
+  catch (err) {
+    alert("ОШИБКА")
+        
+  } 
 }
 export const findContractorName = ({value, field}) => async dispatch  => {
   // console.log(value)

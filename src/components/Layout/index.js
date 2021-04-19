@@ -85,7 +85,7 @@ const Layout = ({ histCurrent}) => {
         setStatus(false)
     }
     return <div style={{zIndex: '9999'}}>
-        <Header createProj={createProj} addPodsos={addPodsos} createTicket={createTicket} createNews={createNews}/>
+        <Header createProj={createProj} history={histCurrent} addPodsos={addPodsos} createTicket={createTicket} createNews={createNews}/>
         <Sidebar/>
         <BackendMsg color={color} style={{opacity:`${msgTiming?1:0}`,zIndex:`${msgTiming?10000:-1000}`}}>
             {color==='red'?error:color==='green'?msg:''}

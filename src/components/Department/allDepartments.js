@@ -39,7 +39,7 @@ const AllDepartments = ({history}) => {
     return(
         
         <div className={styles.container}>
-        <Bold size='24' color='#3F496C' style={{borderBottom:'1px solid black'}}>Все отделы</Bold>
+        {/* <Bold size='24' color='#3F496C' style={{borderBottom:'1px solid black'}}>Все отделы</Bold> */}
         <div  className={styles.small__card__contain}>
             {allDeps!==null&&allDeps!==undefined?allDeps.map((el)=>{
                 return (
