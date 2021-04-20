@@ -189,9 +189,9 @@ font-size: 16px;
 export const SidebarContainer = styled.div`
   display: block;
   position: fixed;
-  width: 67px;
+  width: 45px;
   min-height: 100vh;
-  padding-top: 18px;
+  padding-top: 73px;
   z-index: 9999;
   background-color: #1c1e23;
   text-align: center;
@@ -214,7 +214,7 @@ text-align:center;
 
 img{
     margin:0;
-   
+    margin-bottom:30px
 }
     img.sidebar__logo{
         margin-bottom: 30px;

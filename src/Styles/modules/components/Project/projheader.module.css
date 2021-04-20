@@ -14,10 +14,31 @@
     width: 90vw;
     color: white;
 }
+.ideasHead {
+ 
+        background-color: black;
+        width: 107vw;
+        margin-left: -7vw;
+        height: 45px;
+        margin-top: -45px;
+
+}
+.ideasHeadRow {
+ 
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    margin-left: 56%;
+    color: white;
+    justify-content: space-between;
+    text-decoration: none;
+    padding-top: 15px;
+
+}
 @media (max-width:1400px) {
     .container {
         margin-top: -43px;
-        margin-left: -75px;
+        margin-left: -105px;
     }
     .row {
         display: flex;
@@ -25,6 +46,16 @@
         justify-content: space-between;
         width: 82vw;
         color: white;
+    }
+}
+@media (max-width:1000px) {
+    .ideasHeadRow {
+        margin-left: 66%
+    }
+    .container {
+        margin-left: -45px;
+        margin-left: -75px;
+
     }
 }
 

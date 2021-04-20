@@ -2,54 +2,94 @@
 import './sidebar.css'
 
 import {SidebarContainer, SidebarLink} from '../../Styles/layout'
+import {useState } from 'react';
 
 
 const Sidebar = () => {
 
 // const user = useSelector(state => state.auth.user)
 // const adminka = useRef(null)
-
+const [sidebarInfo, setSidebarInfo] = useState ('')
 
 
     return (
       <SidebarContainer>
-        <SidebarLink to="/" className="nav-link">
-          <img alt="logo" style={{width: "60px", height: "60px", marginTop: "-10px"}} className="sidebar__logo" src="/logo3.svg" />
-          <p></p>
+        <SidebarLink to="/" >
+          <img alt="logo"
+          onMouseEnter={()=>{setSidebarInfo('main')}}
+          onMouseLeave={()=>{setSidebarInfo('')}}
+          src="/logo3.svg" 
+      
+          />
+          <div className='descr'
+          style={{display:`${sidebarInfo==='main'?'block':'none'}`, marginTop:'-70px'}}
+          >Главная</div>
         </SidebarLink>
-
+{/* 
         <SidebarLink to="/" className="nav-link">
           <img alt="main" src="/sidebarIcon.png" />
           <p>Главная</p>
+        </SidebarLink> */}
+
+        <SidebarLink to="/projects" >
+          <img alt="project" 
+          
+          onMouseEnter={()=>{setSidebarInfo('project')}}
+          onMouseLeave={()=>{setSidebarInfo('')}}
+           src="/folder.svg" 
+           className='icon' />
+          <div className='descr'
+          style={{display:`${sidebarInfo==='project'?'block':'none'}`}}
+          >Проекты</div>
         </SidebarLink>
 
-        <SidebarLink to="/projects" className="nav-link">
-          <img alt="project" src="/sidebarIcon.png" title="Все проекты" />
-          <p>Проекты</p>
+        <SidebarLink to="/users" >
+          <img alt="users"style={{width: "18px"}}
+           src="/users.svg" 
+           onMouseEnter={()=>{setSidebarInfo('team')}}
+           onMouseLeave={()=>{setSidebarInfo('')}} 
+           className='icon'
+           />
+         <div className='descr'
+         style={{display:`${sidebarInfo==='team'?'block':'none'}`}}
+         >Команда</div>
         </SidebarLink>
 
-        <SidebarLink to="/users" className="nav-link">
-          <img alt="users" src="/sidebarIcon.png" title="Команда" />
-          <p>Команда</p>
+        <SidebarLink to="/ideas/office/new" >
+          <img alt="office" src="/office.svg"
+            onMouseEnter={()=>{setSidebarInfo('office')}}
+            onMouseLeave={()=>{setSidebarInfo('')
+            }} className='icon'
+            />
+          <div className='descr'
+          style={{display:`${sidebarInfo==='office'?'block':'none'}`}}
+          >Предложения</div>
         </SidebarLink>
 
-        <SidebarLink to="/office" className="nav-link">
-          <img alt="office" src="/sidebarIcon.png" title="Офис" />
-          <p>Офис</p>
+        <SidebarLink to="/department">
+          <img alt="depart" src="/sidebar.svg"
+          onMouseEnter={()=>{setSidebarInfo('department')}}
+          onMouseLeave={()=>{setSidebarInfo('')
+          }} className='icon'
+          style={{height: "22px"}} />
+          <div className='descr'
+          style={{display:`${sidebarInfo==='department'?'block':'none'}`}}
+          >Отделы</div>
         </SidebarLink>
-
-        <SidebarLink to="/department" className="nav-link">
-          <img alt="depart" src="/sidebarIcon.png" title="Отдел" />
-          <p>Отделы</p>
-        </SidebarLink>
-        
+{/*         
         <SidebarLink to="/idea/new" className="nav-link">
           <img alt="deps" src="/sidebarIcon.png" title="Идеи на платформу" />
-          <p>Идеи</p>
-        </SidebarLink>
-        <SidebarLink to="/docs" className="nav-link">
-          <img alt="deps" src="/sidebarIcon.png" title="Документация" />
-          <p>Документ ация</p>
+          <p></p>
+        </SidebarLink> */}
+        <SidebarLink to="/docs">
+          <img alt="deps" src="/docs.svg"
+          onMouseEnter={()=>{setSidebarInfo('docs')}}
+          onMouseLeave={()=>{setSidebarInfo('')}} 
+          className='icon'
+           />
+         <div className='descr'
+         style={{display:`${sidebarInfo==='docs'?'block':'none'}`}}
+         >Документация</div>
         </SidebarLink>
       </SidebarContainer>
     );

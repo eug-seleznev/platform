@@ -70,7 +70,7 @@ const ProfileComponent = ({user, history, change, mainPage}) => {
               return(<Tag  key={i}tagText={el} tagColor='#D3E1EE' />)
           }):''}
         </div>
-        <UserInfo user={user}me={me}  change={change} link={link}></UserInfo></div>
+        <UserInfo user={user}me={me} mainPage={mainPage} change={change} link={link}></UserInfo></div>
       </div>
      
     );

@@ -7,7 +7,7 @@ import Contact from './contact'
 
 
 
-const UserInfo = ({user, change, link, me}) => {
+const UserInfo = ({user, change, link, me, mainPage}) => {
 	return(
 		<InfoCard className={styles.info}>
 			<div className={styles.row}>
@@ -18,7 +18,7 @@ const UserInfo = ({user, change, link, me}) => {
 			<Light size='14' style={{marginTop:'10px',paddingTop:'8px',borderTop:'1px solid #CECECE'}}>Отдел:  {user.division!==null&&user.division!==undefined?user.division.divname:'нет'}</Light>
 			<Light size='14' style={{marginTop:'10px'}}>День рождения:  {user.bday?user.bday.slice(5,10).split('-').reverse().join('.'):''}</Light>
         	{change||me.permission==='admin'? <Light size='14' style={{marginTop:'7px'}}>Отчетность: <a target="_blank" rel="noreferrer" href={link}>google drive</a></Light>:''}
-			<a		className={styles.rocket}
+			<a	style={{display:`${mainPage?'none':'block'}`}}	className={styles.rocket}
 					target="_blank"
 					rel="noreferrer"
 					href={`https://chat.buro82.ru/direct/${
@@ -27,7 +27,7 @@ const UserInfo = ({user, change, link, me}) => {
 				>
 					{/* {" "}
 					{user.rocketname && user.rocketname}{" "} */}
-					<Contact text="Написать сообщение" src='/rocket.png'></Contact>
+					<Contact  text="Написать сообщение" src='/rocket.png'></Contact>
 				</a>
     	</InfoCard>
 	)

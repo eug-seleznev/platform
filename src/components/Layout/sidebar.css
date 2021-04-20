@@ -10,20 +10,22 @@
 	flex-direction: column;
 
 }
-.nav-link {
+
+.descr{
+	position: absolute;
+	left: 50px;
 	color: white;
-	width: 110px;
-	text-decoration: none;
-	font-size: 24px;
-	text-align: left;
-	margin-top: 30px;
-	
+	margin-top: -63px;
+	background-color: black;
+	border-radius: 5px;
+	padding: 10px;
+
 }
-.nav-link img {
-	height: 30px;
-	width: 30px;
-	margin-left: 40px;
-	margin-right: auto;
+
+.icon {
+	width: 25px;
+	padding-left: 3px;
+	padding-right: 3px;
 }
 .admin {
 	position: fixed;

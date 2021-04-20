@@ -3,9 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cleardData } from '../../../redux/actions/models';
 
-import { background } from '../../../redux/actions/user';
-import { ButtonText } from '../../../Styles/buttons';
-import { Regular, Thin } from '../../../Styles/typography';
+import { Thin } from '../../../Styles/typography';
 import Loader from './loader'
 import Managment from './Managment';
 import ModelsTable from './ModelsTable';
