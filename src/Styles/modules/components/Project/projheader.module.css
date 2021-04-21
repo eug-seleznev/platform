@@ -60,9 +60,24 @@
 }
 
 @media (max-width:700px) {
+    .ideasHeadRow {
+ 
+        display: flex;
+        flex-direction: row;
+        width: 200px;
+        
+        margin-left: 80px;
+        height: 100px;
+        color: white;
+        justify-content: space-between;
+ 
+        text-decoration: none;
+        padding-top: 15px;
+    
+    }
     .container {
         margin-left: -45px;
-        height:130px;
+        height:80px;
     }
     .row {
         flex-direction: column;
