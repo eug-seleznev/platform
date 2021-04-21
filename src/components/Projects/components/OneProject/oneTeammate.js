@@ -9,17 +9,21 @@ const ProjTeam = ({userName,userPos,userAvatar,userId,histProp, userTask}) => {
 	
 	return (
     <NEW_TABLE
-      style={{ width: "100%", whiteSpace: "nowrap", textAlign: "center" }}
+      style={{ width: "100%", textAlign: "center" }}
     >
       <NEW_TR onClick={() => histProp.push(`/users/${userId}`)}>
         <NEW_TD style={{
           // backgroundColor: "blue",
-          width: "50px"
+         minWidth:'100px',maxWidth:'100px',
+         
+          paddingRight:'20px'
         }}>{userTask}</NEW_TD>
 
         <NEW_TD
           style={{
-            textAlign: "center",
+            textAlign: "left",
+            whiteSpace: "nowrap", 
+            paddingRight:'5px'
             // backgroundColor: "green",
             // width: ""
           }}
@@ -32,7 +36,10 @@ const ProjTeam = ({userName,userPos,userAvatar,userId,histProp, userTask}) => {
              
             <p
               style={{
+                alignItems:'start',
+                minWidth:'170px',
                 marginTop: "-2px",
+           
               }}
             >
               {userName}
@@ -41,16 +48,18 @@ const ProjTeam = ({userName,userPos,userAvatar,userId,histProp, userTask}) => {
         </NEW_TD>
 
         <NEW_TD style={{
-          textAlign: "right",
+          textAlign: "right", padding:'0px'
+                
           // backgroundColor: "red"
         }}>
           <img
               alt="Пользователь"
               style={{
                 // alignContent: "center",
-                marginLeft: "-25px",
+                marginLeft: "0px",
                 width: "35px",
                 height: "35px",
+               
               }}
               className={table.image}
               src={url + "/" + userAvatar}
@@ -61,6 +70,7 @@ const ProjTeam = ({userName,userPos,userAvatar,userId,histProp, userTask}) => {
           style={{
             whiteSpace: "nowrap",
             textAlign: "right",
+            minWidth:'140px'
           }}
         >
           {userPos}

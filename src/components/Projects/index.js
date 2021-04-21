@@ -132,7 +132,7 @@ const Projects = ({history,location}) => {
     return (
       <div className={style.main}>
           <Regular size='16' color='#3F496C' className={style.title}>Все проекты</Regular>
-          <div className={style.row}>
+          <div className={style.row} style={{width:'120%'}}>
             {user.permission!=='user' && 
              <div className={style.row__in}><Link to='/admin/newproject'>
                <ButtonText fontSize='14px' style={{fontFamily:'SuisseIntlSemibold'}}>Создать новый проект</ButtonText></Link>
@@ -156,7 +156,7 @@ const Projects = ({history,location}) => {
                </div>
               
              </div>
-             <div className={style.row__in}>
+             <div className={style.row__in} >
               <Thin size='14'>
                   Проектов в работе: {projects
                 .filter((project) => !project.status).length}
@@ -175,7 +175,7 @@ const Projects = ({history,location}) => {
           <NEW_TABLE style={{border:'none'}}>
             <NEW_THEAD>
               <NEW_TR className={style.first} top="top">
-                <NEW_TH onClick={() => sortFunction("title")}>Название &#8597;</NEW_TH>
+                <NEW_TH style={{textAlign:'left'}} onClick={() => sortFunction("title")}>Название &#8597;</NEW_TH>
                 
                 <NEW_TH
                   onClick={() => sortFunction("dateStart")}
@@ -211,6 +211,7 @@ const Projects = ({history,location}) => {
               filter==='Завершенные'?project.status: project)
               .map((project, index) =>
 
+              
 
 
 

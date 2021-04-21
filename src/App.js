@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 import { loadUser } from './redux/actions/auth';
 
 //pages 
+import Docs from './components/Docs/index';
 import Admin from './components/Adminka/Index';
 import DataBase from './components/DataBase';
 import Projects from './components/Projects';
@@ -49,7 +50,6 @@ import EditUser from './components/User/editUser';
 import ProjectHelper from "./components/Projects/Project/Helper";
 import IdeaaHelper from "./components/Roadmap/Routing";
 import KPI from './components/KPI';
-import DailyUsers from './components/KPI/chart/users';
 import { getStat, WeeklyTask } from './redux/actions/stat';
 
 
@@ -57,11 +57,11 @@ const App = () => {
   const dispatch = useDispatch();
   const history = createBrowserHistory();
   const auth = useSelector(state => state.auth.isAuthenticated)
-  const loaded = useSelector(state => state.auth.loaded)
   const background = useSelector(state => state.users.background)
-
+  const style = useSelector(state => state.users.style)
   //chek auth token on render
   useEffect(() => {
+    
     setAuthToken(localStorage.token)
     if(localStorage.token){
       dispatch(loadUser());
@@ -71,13 +71,6 @@ const App = () => {
     }
   }, [])
 
-
-  // useEffect(() => {
-  //   if (loaded) {
-
-
-  //   }
-  // }, [loaded])
 
 
 
@@ -98,12 +91,13 @@ const App = () => {
           <>
             <Layout histCurrent={history} />
             <Switch>
-              <Container background={background}>
+              <Container style={style} background={background}>
                 {/* main */}
                 <Route exact path="/" component={Main} />
 
                 {/* сисадминошная */}
                 <Route exact path="/help" component={Admin} />
+                
                 <Route exact path="/tickets" component={Dashboard} />
                 <Route exact path="/tickets/:id" component={Ticket} />
 
@@ -129,7 +123,7 @@ const App = () => {
                 <Route exact path="/users" component={Users} />
                 <Route exact path="/users/me" component={MyProfile} />
                 <Route exact path="/users/me/partition" component={Partition} />
-
+                <Route exact path="/docs" component={Docs} />
                 <Route exact path="/users/:id" component={Employe} />
                 <Route exact path="/users/:id/edit" component={EditUser} />
 

@@ -1,8 +1,10 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { Bold } from "../../../Styles/typography";
+import { useEffect, useState } from "react";
+import { useSelector,useDispatch} from "react-redux"
+import { Bold, Thin } from "../../../Styles/typography";
 import SetMenu from "../components/OneProject/settingsMenu";
-
+import style from '../../../Styles/modules/components/Project/projheader.module.css'
+import sprint from '../../../Styles/modules/components/Project/oneproj.module.css'
+import { addProjToChosen } from "../../../redux/actions/projects";
 
 
 
@@ -10,60 +12,76 @@ import SetMenu from "../components/OneProject/settingsMenu";
 
 const Header = ({history, crypt}) => {
       const [open, setOpen] = useState(false);
-
+      const [nameV, setNameV] = useState('');
+      const [status, setStatus] = useState(false);
     const project = useSelector(state => state.projects.project)
-
+    const permission = useSelector(state => state.auth.user.permission)
+    const favProjects = useSelector(state => state.auth.user.fav_proj)
+    const dispatch = useDispatch();
     const handleRedirect = (name) => {
-        console.log(name);
+        setNameV(name)
         history.push(`/projects/${crypt}/${name}`)
     }
+    useEffect (()=> {
+      favProjects
+      .filter(fav => fav._id===project._id)
+      .map(()=>setStatus(true))
 
-
+},  [])
+    const chosenProj = () => {
+			setStatus(!status)
+			dispatch(addProjToChosen(project._id));
+		
+		   
+		}
 
     return (
       <div>
-        <div
-          style={{
-            backgroundColor: "black",
-            width: "120vw",
-            marginLeft: "-8vw",
-            marginTop: "-4.3vh",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              width: "85vw",
-              marginLeft: "8vw",
-              color: "white",
-            }}
-          >
-            <Bold size="20" color="white"
-             style={{
-               marginTop: '13px'
-             }} name="main" value="123" onClick={(e) => handleRedirect("main")}>
-              <b>{project.title} </b>
-            </Bold>
-            <p
+        <div className={style.container}>
+          <div className={style.row}>
+            <div style={{display:'flex'}}>
+               <Bold size="20" color="white"
+                style={{
+                  cursor:'pointer',
+                  marginTop: '-4px'
+                }} name="main" value="123" onClick={(e) => handleRedirect("main")}>
+                  {project.title} 
+                </Bold>
+                <img
+              src="/starb.png"
+              alt="star"
+              onClick={chosenProj}
+              style={{
+                cursor: "pointer",
+                marginTop: "-5px",
+                marginLeft:'20px',
+                backgroundColor: `${status ? "#ff9800" : "#C4C4C4"}`,
+              }}
+              className={sprint.chosen}
+            />
+            </div>
+           
+            <Thin
+              style={{cursor:'pointer',borderBottom:`${nameV==="info"?'2px solid white':'2px solid transparent'}`,width:'50px', fontFamily:`${nameV==="info"?'SuisseIntlRegular':'SuisseIntlThin'}`}}
+              color='white'
               name="main"
               value="123"
               onClick={(e) => handleRedirect("info")}
-            >Информация </p>
+            >Команда </Thin>
 
-            <p name="models" onClick={(e) => handleRedirect("models")}>
+            <Thin style={{cursor:'pointer',borderBottom:`${nameV==="models"?'2px solid white':'2px solid transparent'}`,width:'40px', fontFamily:`${nameV==="models"?'SuisseIntlRegular':'SuisseIntlThin'}`}} color='white' name="models" onClick={(e) => handleRedirect("models")}>
               Модели
-            </p>
-            <p name="tasks" onClick={(e) => handleRedirect("tasks")}>
+            </Thin>
+            <Thin style={{cursor:'pointer',borderBottom:`${nameV==="tasks"?'2px solid white':'2px solid transparent'}`,width:'40px', fontFamily:`${nameV==="tasks"?'SuisseIntlRegular':'SuisseIntlThin'}`}} color='white' name="tasks" onClick={(e) => handleRedirect("tasks")}>
               Спринты
-            </p>
-            <p name="event" onClick={(e) => handleRedirect("event")}>
+            </Thin>
+            <Thin style={{cursor:'pointer',borderBottom:`${nameV==="event"?'2px solid white':'2px solid transparent'}`,width:'40px', fontFamily:`${nameV==="event"?'SuisseIntlRegular':'SuisseIntlThin'}`}} color='white' name="event" onClick={(e) => handleRedirect("event")}>
               События
-            </p>
-            <p onClick={() => setOpen(!open)}> Настройки</p>
+            </Thin>
+            <Thin style={{display:`${permission==='admin'?'block':'none'}`,cursor:'pointer',borderBottom:`${open?'2px solid white':'2px solid transparent'}`,width:'40px', fontFamily:`${open?'SuisseIntlRegular':'SuisseIntlThin'}`}} color='white' onClick={() => setOpen(!open)}> Настройки</Thin>
           </div>
           <SetMenu
+          style={{cursor:'pointer'}}
             setOpen={setOpen}
             project={project}
             hist={history}

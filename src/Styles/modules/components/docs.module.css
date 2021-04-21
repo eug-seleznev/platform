@@ -1,0 +1,35 @@
+.editor {
+	
+
+	height: 100vh;
+	overflow: hidden;
+}
+.iframe {
+	width:96%;
+	height: 100vh;
+	margin-left: 75px;
+	margin-top: 67px;
+	border: 0px;
+}
+@media (max-width:1650px) {
+	.iframe {
+		width:95%;
+	}
+}
+@media (max-width:1350px) {
+	.iframe {
+		width:94%;
+	}
+}
+@media (max-width:1150px) {
+	.iframe {
+		width:93%;
+	}
+}
+@media (max-width:1000px) {
+	.iframe {
+		width:99%;
+		margin-left: 0px;
+	;
+	}
+}

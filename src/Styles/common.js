@@ -3,19 +3,19 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
 padding-left:  150px;
-padding-right:  70px;
+padding-right:  50px;
 width: 100%;
 height: 100%;
 padding-top: 110px;
-padding-bottom: 80px;
+padding-bottom: 40px;
 background-color:white;
 overflow-x: hidden;
 @media (max-width:1700px){
     width: 100vw;
     padding-left:135px;
     padding-top: 100px;
-    padding-right:70px;
-    padding-bottom: 80px;
+    padding-right:50px;
+    padding-bottom: 40px;
 }
 
 
@@ -25,7 +25,7 @@ overflow-x: hidden;
     padding-left:5px;
     padding-top: 110px;
     padding-right:5px;
-    padding-bottom: 100px;
+    padding-bottom: 40px;
 }
 
 `

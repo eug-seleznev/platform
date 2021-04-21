@@ -54,6 +54,7 @@ const Form = () => {
           <textarea
             required
             rows="5"
+            style={{resize:'none'}}
             cols="35"
             value={formData.description}
             name="description"
@@ -61,12 +62,13 @@ const Form = () => {
             onChange={handleChange}
           />
         </div>
-        <Button style={{
-          marginRight: "20px",
-          position: "absolute",
+        <div style={{width:"100%",display:'flex',justifyContent:'flex-end'}}>
+          <Button style={{
           zIndex: '20',
           marginTop: "-38px"
         }} type="submit">Отправить</Button>
+        </div>
+        
       </form>
     );
 }

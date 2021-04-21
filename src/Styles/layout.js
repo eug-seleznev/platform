@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom"
 export const Header =  styled.div`
     position: fixed;
     display: grid;
-    grid-template-columns: 1fr max-content max-content;
+    grid-template-columns: 1fr max-content max-content max-content;
     // flex-direction: row;
     // justify-content: flex-end;
     align-items: center;
@@ -103,7 +103,7 @@ export const MenuHead = styled.div`
 
     z-index: 99999;
     right: ${props => props.right};
-
+    border:1px solid black;
     background-color: white;
     height: max-content;
     width: 238px;

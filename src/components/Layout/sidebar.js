@@ -40,19 +40,16 @@ const Sidebar = () => {
 
         <SidebarLink to="/department" className="nav-link">
           <img alt="depart" src="/sidebarIcon.png" title="Отдел" />
-          <p>Отдел</p>
+          <p>Отделы</p>
         </SidebarLink>
-        <SidebarLink to="/contractors" className="nav-link">
-          <img alt="contactors" src="/sidebarIcon.png" title="Субподрядчики" />
-          <p>Субподряд чики</p>
-        </SidebarLink>
-        <SidebarLink to="/departments" className="nav-link">
-          <img alt="deps" src="/sidebarIcon.png" title="Все отделы" />
-          <p>Все отделы</p>
-        </SidebarLink>
+        
         <SidebarLink to="/idea/new" className="nav-link">
           <img alt="deps" src="/sidebarIcon.png" title="Идеи на платформу" />
           <p>Идеи</p>
+        </SidebarLink>
+        <SidebarLink to="/docs" className="nav-link">
+          <img alt="deps" src="/sidebarIcon.png" title="Документация" />
+          <p>Документ ация</p>
         </SidebarLink>
       </SidebarContainer>
     );

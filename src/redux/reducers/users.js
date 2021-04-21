@@ -1,6 +1,6 @@
 
 
-import { ALL_USERS,SEARCH_TABLE_USER,FIND_CONTRACTOR, CHANGE_PERMISSION,EDIT_CONTRACTOR,ONE_CONTRACTOR,PERM_RETURN,ONE_USER, CLEAR_ERROR, CLEAR_MSG, SEARCH_USER, ADD_CONTRACTOR, ALL_CONTRACTORS, PARTITION_UPDATE, BACK_WHITE} from '../types'
+import { ALL_USERS,DELETE_CONTRACTOR, CHANGE_CONTAINER,SEARCH_TABLE_USER,FIND_CONTRACTOR, CHANGE_PERMISSION,EDIT_CONTRACTOR,ONE_CONTRACTOR,PERM_RETURN,ONE_USER, CLEAR_ERROR, CLEAR_MSG, SEARCH_USER, ADD_CONTRACTOR, ALL_CONTRACTORS, PARTITION_UPDATE, BACK_WHITE} from '../types'
 
 
 
@@ -15,11 +15,12 @@ const initialState = {
     contractors: [],
     background:'#ECECEC',
     contractor:null,
+    style:{}
 }
 
 export default function(state = initialState, action) {
     const {
-        type, payload
+        type, payload, style
     } = action;
 
     switch(type){
@@ -29,6 +30,12 @@ export default function(state = initialState, action) {
                 users:payload,
                 
             }
+        case DELETE_CONTRACTOR: 
+        return {
+            ...state,
+            contractors:payload,
+            
+        }
         case FIND_CONTRACTOR: 
         return {
             ...state,
@@ -53,6 +60,13 @@ export default function(state = initialState, action) {
             return {
             ...state,
             contractor: payload
+            
+          
+        }
+        case CHANGE_CONTAINER: 
+        return {
+            ...state,
+           style: style
             
           
         }

@@ -5,6 +5,7 @@ export const USER_LOADED = 'user_loaded'
 export const CHANGE_USERDATA = 'change_user_data';
 export const CHANGE_AVATAR = 'change_avatar'
 export const CHANGE_LOADED = 'change_loaded'
+
 //auth errors
 export const AUTH_ERROR ='auth_error';
 /////////////////////////////
@@ -24,12 +25,13 @@ export const EDIT_USER_TASK='EDIT_USER_TASK'
 export const USER_TASKS='USER_TASKS'
 export const SORT_USER_TASKS ='SORT_USER_TASKS'
 export const MY_TASK_DELITE ="MY_TASK_DELITE"
+export const CHANGE_CONTAINER ="CHANGE_CONTAINER"
 //user errors
 export const USER_ERR = 'get_all_users_error'
 //search user 
 export const SEARCH_USER = 'search_user'
 //PROJECTS
-
+export const ADD_PROJ_TO_CHOSEN= 'ADD_PROJ_TO_CHOSEN';
 export const EDIT_PROJECT = 'edit_project';
 export const ALL_PROJECTS = 'all_projects';
 export const CREATE_PROJECT = 'create_project';
@@ -38,6 +40,7 @@ export const CLEAR_URN = 'clear_urn'
 export const SORT_PROJECTS = 'sort_projects' 
 export const CHANGE_ROCKET = 'CHANGE_ROCKET'
 export const SORT_TITLE = 'SORT_TITLE';
+export const CHANGE_USER_PROJ = 'CHANGE_USER_PROJ'
 //PROJECTS SORT
 
 export const UPDATE_PROJECT = 'project_updated';
@@ -76,6 +79,7 @@ export const ADD_CONTRACTOR = 'add_contractor';
 export const ALL_CONTRACTORS = 'all_contractors';
 export const ONE_CONTRACTOR = 'one_contractor';
 export const EDIT_CONTRACTOR = 'edit_contractor'
+export const DELETE_CONTRACTOR = 'DELETE_CONTRACTOR'
 //news
 export const CREATE_NEWS = 'create_news';
 export const ALL_NEWS = 'all_news'

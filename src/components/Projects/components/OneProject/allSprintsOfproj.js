@@ -5,7 +5,7 @@ import SprintDescription from "../SprintDescrForOneProj";
 
 import {  Thin } from "../../../../Styles/typography";
 import Subtitle from "./subtitle";
-import { addSprint } from "../../../../redux/actions/projects";
+import { addSprint, clearSprint } from "../../../../redux/actions/projects";
 import { useEffect, useState } from "react";
 
 
@@ -29,6 +29,7 @@ const AllSprintsOfProj = ({hist, sprints, match, status, crypt, sprint, location
 
 
 	const createSprint = () => {
+    dispatch(clearSprint());
     dispatch(addSprint(crypt));
     };
 

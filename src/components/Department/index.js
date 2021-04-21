@@ -7,7 +7,10 @@ import { useEffect, useState } from 'react'
 import DepartmentCard from './departmentCard'
 import { allUsers } from '../../redux/actions/user'
 import { ButtonText } from '../../Styles/buttons'
-import { Regular } from '../../Styles/typography'
+import table from '../../Styles/modules/components/Project/allproj.module.css'
+
+import {  Regular } from '../../Styles/typography'
+import AllDepartments from './allDepartments'
 
 const Department = ({history}) => {
     const dispatch = useDispatch()
@@ -15,6 +18,7 @@ const Department = ({history}) => {
     const users = useSelector(state => state.users.users)
     const department = useSelector(state => state.departments.findDep)
     const [load, setLoad] = useState (true)
+    const [myDeps, setMyDeps] = useState (true)
  useEffect(()=>{
     dispatch(allDepartments())
     dispatch(allUsers('name', true))
@@ -34,13 +38,25 @@ useEffect(()=>{
 },[user])
     return(
         <div className={styles.container}>
-            <Profile user={user} history={history}/>
+            {/* <Profile user={user} history={history}/> */}
+            <div style={{display:'flex'}}>
+                <Regular size='16'onClick={()=>{setMyDeps(true)}} color={myDeps?"#3F496C":'grey'} className={table.title} style={{cursor:'pointer', marginTop:'-25px',textDecoration:`${myDeps?"underline":'none'}`}}>Мой отдел</Regular>
+                <Regular size='16' style={{marginTop:'-25px'}}> / </Regular>
+                <Regular size='16'onClick={()=>{setMyDeps(false)}} color={!myDeps?"#3F496C":'grey'} className={table.title} style={{cursor:'pointer', marginTop:'-25px',textDecoration:`${!myDeps?"underline":'none'}`,marginLeft:'0px'}}>Все отделы</Regular>
+            </div>
+          {user.division===null||
+          user.division===undefined||
+          department===null? 
+          <Regular size='16'>Вы не состоите ни в одном отделе, вступить можно на <ButtonText fontSize='18px' onClick={()=>history.push('/edit')}>странице редактирования профиля</ButtonText> </Regular> :
+          myDeps?
 
-        {user.division===null||user.division===undefined||department===null? <Regular size='16'>Вы не состоите ни в одном отделе, вступить можно на <ButtonText fontSize='18px' onClick={()=>history.push('/edit')}>странице редактирования профиля</ButtonText> </Regular> :
-
-            <DepartmentCard button={true}load={load} itsAllDepsPage={false} department={department} user={user} history={history} users={users}/>
+            <DepartmentCard  button={true}load={load} itsAllDepsPage={false} department={department} user={user} history={history} users={users}/>
+            :<AllDepartments history={history}/>
   
         }
+        
+    
+                  
             
 
         
