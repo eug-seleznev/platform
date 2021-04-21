@@ -1,16 +1,31 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import {  useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Form from './form'
 import Ideas from "./Ideas";
 import Boat from "../../Illustration/boat.png";
+import { ModalContainer } from "../../../Styles/common";
+import { Light } from "../../../Styles/typography";
+import { deleteIdea, moveIdea } from "../../../redux/actions/ideas";
 
 
 const New = () => {
-
+  const dispatch = useDispatch()
   const [selectedIdea, setSelectedIdea] = useState(null)
-
+  const [filter, setFilter] = useState('')
+  const [onBoard, setOnBoard] = useState (false)
   const new_ideas = useSelector(state => state.ideas.new)
 
+
+const workDispatch =(id)=>{
+  // dispatch(inWorkPlatform(id))
+}
+const ideaDelete =(id)=>{
+  dispatch(deleteIdea(id))
+}
+const inWork =(id)=>{
+  let type = 1
+  dispatch(moveIdea({id,type}))
+}
 
     return (
       <div>
@@ -35,7 +50,14 @@ const New = () => {
             </p>
           </div>
         </div>
-
+        {selectedIdea?
+        <ModalContainer onClick={()=>!onBoard?setSelectedIdea(null):''}>
+            <div onMouseEnter={()=>{setOnBoard(true)}} onMouseLeave={()=>{setOnBoard(false)}}
+              style={{marginLeft:'20vw',width:'60vw',backgroundColor:'white',borderRadius:'5px',marginTop:'50vh',transform:'translateY(-50%)', height:'160px',padding:'20px'}}>
+                <Light size='25'>{selectedIdea}</Light>
+            </div>
+        </ModalContainer>:''
+        }
         <div
           style={{
             width: "65vw",
@@ -69,7 +91,7 @@ const New = () => {
                       paddingBottom: "5px",
                     }}
                   >
-                    <Ideas idea={idea} setSelected={setSelectedIdea} />
+                    <Ideas status='new' inWork={inWork} ideaDelete={ideaDelete} status='new' idea={idea} setSelected={setSelectedIdea} />
                   </div>
                 );
               })

@@ -40,32 +40,39 @@ const Ideas = ({idea, setSelected, status,addExecutor,skip}) => {
 
     return (
       <div>
+        <div>
+
+        </div>
         <Card
           style={{
             display: "flex",
             justifyContent:'space-between',
             alignItems: "center",
             height: "50px",
+            
         }}
-        onClick={() => setSelected(idea.title)}
+        
       >
         <div style={{display:'flex',
             alignItems: "center"}}>
-           <img
+            <img
             src="/like.png"
             style={{display:`${status==='new'?'block':'none'}`,
             width: "23px", height: "30px",
             backgroundColor:`${likeTrue?'red':'white'}`,
-            marginLeft: "5px",cursor:'pointer' }}
+            marginLeft: "5px", }}
             onClick={() =>likeButton()}
           />
               
           <Light
             style={{
+              cursor:'pointer',
               marginLeft: "15px",
               marginTop: "-3px",
             }}
             size="22"
+            title='подробнее...'
+            onClick={() => setSelected(idea.text)}
           >
             {idea.title}
           </Light>
@@ -73,15 +80,24 @@ const Ideas = ({idea, setSelected, status,addExecutor,skip}) => {
        
         <div style={{display:'flex',
             alignItems: "center"}}>
-          
-          {user.permission==='admin' && <Bold size='12' 
-                    style={{display:status!=='done'?'block':'none',cursor:'pointer'}}
-                    onMouseEnter={(e)=>{e.target.style.textDecoration='underline'}}
-                    onMouseLeave={(e)=>{e.target.style.textDecoration='none'}}
-                    color='#3F496C' 
-                    onClick={()=>status==='new'?addExecutor(idea._id): 
-                   skip(idea._id)}>
-                {!idea.status ? 'в работу' : 'отложить'}</Bold>}
+            <div>
+              {user.permission==='admin' && <Bold size='12' 
+                      style={{display:status==='work'?'block':'none',cursor:'pointer'}}
+                      onMouseEnter={(e)=>{e.target.style.textDecoration='underline'}}
+                      onMouseLeave={(e)=>{e.target.style.textDecoration='none'}}
+                      color='#3F496C' 
+                      onClick={()=>endButton()}>
+                  завершить</Bold>}
+              {user.permission==='admin' && <Bold size='12' 
+                      style={{display:status!=='done'?'block':'none',cursor:'pointer'}}
+                      onMouseEnter={(e)=>{e.target.style.textDecoration='underline'}}
+                      onMouseLeave={(e)=>{e.target.style.textDecoration='none'}}
+                      color='#3F496C' 
+                      onClick={()=>status==='new'?addExecutor(idea._id): 
+                    skip(idea._id)}>
+                  {!idea.status ? 'в работу' : 'отложить'}</Bold>}
+            </div>
+            
         <div
           style={{
             width: "30px",
@@ -90,6 +106,7 @@ const Ideas = ({idea, setSelected, status,addExecutor,skip}) => {
             borderRadius: "30%",
             marginLeft: "auto",
             marginRight: "20px",
+            marginLeft:'20px'
           }}
         >
           <Light style={{ position: "absolute", marginLeft: "10px" }}>

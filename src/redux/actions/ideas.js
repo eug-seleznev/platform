@@ -1,5 +1,5 @@
 import { innerBackend } from "../../components/utils/axios";
-import { GET_IDEAS, LIKE_IDEA, MOVE_IDEA, POST_IDEA } from "../types";
+import { GET_IDEAS, LIKE_IDEA, MOVE_IDEA, POST_IDEA,DELETE_IDEA } from "../types";
 
 
 
@@ -49,7 +49,24 @@ export const postNew = (formData) => async (dispatch) => {
   }
 };
 
-
+export const deleteIdea = (id) => async (dispatch) => {
+  try {
+    const res = await innerBackend.delete(`/ideas/delete/${id}`);
+    console.log(res.data)
+    dispatch({
+      type: DELETE_IDEA,
+      payload: res.data,
+    });
+  } catch (err) {
+    // const errors = err.response.data.err;
+    // errors.map((error) => {
+    //   return dispatch({
+    //     type: ERROR_MSG,
+    //     payload: error.msg,
+    //   });
+    // });
+  }
+};
 
 export const likeIdea = ({id}) => async (dispatch) => {
   try {

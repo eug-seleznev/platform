@@ -11,12 +11,14 @@ import { useDispatch, useSelector } from "react-redux";
 import Ideas from "./New/Ideas";
 import Boat from "../../Illustration/boat.png";
 import { inWork, Reverse, ReverseDate } from "../../../redux/actions/office";
+import { Light } from "../../../Styles/typography";
+import { ModalContainer } from "../../../Styles/common";
 
 
 const Work = () => {
   const dispatch = useDispatch()
   const [filter, setFilter] = useState('');
-  const [y, setY] = useState(false);
+  const [onBoard, setOnBoard] = useState (false)
   const [selectedIdea, setSelectedIdea] = useState(null)
   const reload = useSelector(state => state.office.reload)
   const new_ideas = useSelector(state => state.office.data)
@@ -29,7 +31,6 @@ const Work = () => {
 },[])
 const skip =(id) =>{
   dispatch(inWork(id))
-  setY(true)
 }
 useEffect(()=>{
   if (filter==='like'){
@@ -42,7 +43,16 @@ useEffect(()=>{
 },[reload])
     if(new_ideas) isInitial=false;
     return (
+      
       <div>
+        {selectedIdea?
+        <ModalContainer onClick={()=>!onBoard?setSelectedIdea(null):''}>
+            <div onMouseEnter={()=>{setOnBoard(true)}} onMouseLeave={()=>{setOnBoard(false)}}
+              style={{marginLeft:'20vw',width:'60vw',backgroundColor:'white',borderRadius:'5px',marginTop:'50vh',transform:'translateY(-50%)', minHeight:'160px',padding:'20px'}}>
+                <Light size='25'>{selectedIdea}</Light>
+            </div>
+        </ModalContainer>:''
+        } 
         {/* header */}
         <div style={{ textAlign: "center" }}>
           <img src={Boat} />

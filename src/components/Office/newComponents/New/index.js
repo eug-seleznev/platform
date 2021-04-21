@@ -6,6 +6,7 @@ import Boat from "../../../Illustration/boat.png";
 import { inWork, Reverse, ReverseDate } from "../../../../redux/actions/office";
 import { ModalContainer } from "../../../../Styles/common";
 import SearchUser from "../../searchUser";
+import { Light } from "../../../../Styles/typography";
 
 
 const New = () => {
@@ -14,6 +15,7 @@ const New = () => {
   const [selectedIdea, setSelectedIdea] = useState(null)
   const [id, setId] = useState (null)
   const [modal, setModal] = useState(false)
+  const [onBoard, setOnBoard] = useState (false)
   const new_ideas = useSelector(state => state.office.data)
   const reload = useSelector(state => state.office.reload)
   let isInitial;
@@ -73,7 +75,15 @@ useEffect(()=>{
         {!modal?'':
                     <ModalContainer>
                         <SearchUser func={workDispatch}/>
-                    </ModalContainer>} 
+                    </ModalContainer>}
+        {selectedIdea?
+        <ModalContainer onClick={()=>!onBoard?setSelectedIdea(null):''}>
+            <div onMouseEnter={()=>{setOnBoard(true)}} onMouseLeave={()=>{setOnBoard(false)}}
+              style={{marginLeft:'20vw',width:'60vw',backgroundColor:'white',borderRadius:'5px',marginTop:'50vh',transform:'translateY(-50%)', height:'160px',padding:'20px'}}>
+                <Light size='25'>{selectedIdea}</Light>
+            </div>
+        </ModalContainer>:''
+        } 
         <div
           style={{
             width: "65vw",

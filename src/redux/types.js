@@ -128,7 +128,8 @@ export const CLEAR_ERROR = 'clear_error_field'
 export const REVERSE_ARR = 'reverse';
 export const REVERSE_ARRDATE = 'revarrdate'
 
-
+//IDEA
+export const DELETE_IDEA= 'DELETE_IDEA'
 
 ///autodesk forge @ MODELS 
 export const GET_TOKEN = 'get_oauth_token'
