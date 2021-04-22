@@ -26,6 +26,7 @@ export const USER_TASKS='USER_TASKS'
 export const SORT_USER_TASKS ='SORT_USER_TASKS'
 export const MY_TASK_DELITE ="MY_TASK_DELITE"
 export const CHANGE_CONTAINER ="CHANGE_CONTAINER"
+export const CHANGE_TASKS_STATUS ="CHANGE_TASKS_STATUS"
 //user errors
 export const USER_ERR = 'get_all_users_error'
 //search user 

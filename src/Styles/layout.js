@@ -184,7 +184,23 @@ font-size: 16px;
 }
 `
 
-
+export const TasksContainer = styled.div`
+  display: block;
+  position: fixed;
+  width: 400px;
+  left:auto;
+  right:0px;
+  margin-top:67px;
+  min-height: 100vh;
+  padding-top: 43px;
+  z-index: 9999;
+  color: white;
+  background-color: #3F3F3F;
+  text-align: center;
+  @media (max-width: 1000px) {
+    display: none;
+  }
+`;
 
 export const SidebarContainer = styled.div`
   display: block;

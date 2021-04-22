@@ -46,6 +46,10 @@
 	background: none!important;
 	cursor: default;
 }
+.mytask__tr__port:hover{
+	background: grey!important;
+	cursor: pointer;
+}
 
 .date {
 	margin:23px;

@@ -1,8 +1,9 @@
 
 
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { tasksStatus } from '../../redux/actions/user'
 import {Header, ItemHead} from '../../Styles/layout'
 import {Bold} from '../../Styles/typography'
 import { url } from '../utils/axios'
@@ -11,10 +12,10 @@ import MenuMobile from './menuMobile'
 
 
 
-const HeaderL = ({addPodsos, createProj, createNews, createTicket}) => {
+const HeaderL = ({addPodsos, createProj, createNews, createTicket,tasks}) => {
+    const dispatch = useDispatch()
     const loaded = useSelector(state => state.auth.loaded)
     const user = useSelector(state => state.auth.user)
-
     const [open, setOpen] = useState({
         menu: false,
         menuProfile: false,
@@ -48,14 +49,18 @@ const HeaderL = ({addPodsos, createProj, createNews, createTicket}) => {
                 <img alt="arrow" className="arrow" src="/headerArrow.png" />
               </ItemHead>
               <ItemHead>
-              <Link to='../../../mytasks'
-                style={{display:'flex',textDecoration:'none'}}
+              <div
+                onClick={()=>{dispatch(tasksStatus(!tasks))}}
+                style={{textDecoration:'none',display:`${tasks===null?'none':'flex'}`}}
               >
                 
-                <img alt="tasks" style={{width:'15px'}}className="invert" src="/lightn.png" />
+                <img alt="tasks" style={{width:'15px',height:'30px'}}
+                className="invert" src="/lightn.png" 
+                 />
                 
-                <div style={{fontSize:'10px',
-                
+                <div style={{
+                      opacity:`${!tasks?1:0}`,
+                      fontSize:'10px',
                       color:'white',
                       transform:'translate(-3px,15px)',
                       width:'15px',height:'15px',
@@ -64,7 +69,7 @@ const HeaderL = ({addPodsos, createProj, createNews, createTicket}) => {
                       textAlign:'center'}}>{user.tasks&&user.tasks.filter(task=>!task.taskStatus).length}
                 </div>
                 
-              </Link>
+              </div>
               </ItemHead>
               <ItemHead
                 onClick={() =>
