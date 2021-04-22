@@ -26,6 +26,7 @@ export const USER_TASKS='USER_TASKS'
 export const SORT_USER_TASKS ='SORT_USER_TASKS'
 export const MY_TASK_DELITE ="MY_TASK_DELITE"
 export const CHANGE_CONTAINER ="CHANGE_CONTAINER"
+export const CHANGE_TASKS_STATUS ="CHANGE_TASKS_STATUS"
 //user errors
 export const USER_ERR = 'get_all_users_error'
 //search user 
@@ -128,7 +129,8 @@ export const CLEAR_ERROR = 'clear_error_field'
 export const REVERSE_ARR = 'reverse';
 export const REVERSE_ARRDATE = 'revarrdate'
 
-
+//IDEA
+export const DELETE_IDEA= 'DELETE_IDEA'
 
 ///autodesk forge @ MODELS 
 export const GET_TOKEN = 'get_oauth_token'

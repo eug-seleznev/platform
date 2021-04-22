@@ -7,9 +7,11 @@ import {useDispatch, useSelector} from 'react-redux'
 import { BackendMsg }  from '../../Styles/layout'
 
 import {errorAuthClear, msgAuthClear}  from "../../redux/actions/auth";
+import QuickTasks from './quickTasks'
 const Layout = ({ histCurrent}) => {
     const dispatch = useDispatch()
 
+    const tasksStatus = useSelector(state => state.users.tasksStatus) 
     const errorAll = useSelector(state => state.messages.error) 
     const msgAll = useSelector(state => state.messages.msg)
     const [error, setError] = useState ('')
@@ -19,7 +21,7 @@ const Layout = ({ histCurrent}) => {
     const [currentTitle, setCurrentTitle] = useState (false)
     const [color, setColor] = useState (false)
     const [status, setStatus] = useState (false)
-
+  
     useEffect(()=>{
         if(errorAll !==""){
             setError(errorAll)
@@ -62,9 +64,6 @@ const Layout = ({ histCurrent}) => {
     },[error])
     const createProj =()=>{
         histCurrent.replace('/admin/newproject')
-        // setCurrentTitle ('Создание нового проекта')
-        // setCurrentElem ('CreateProject')
-        // setStatus(true)
     }
     const createTicket =()=>{
         setCurrentTitle ('Проблемы с компьютером')
@@ -85,8 +84,9 @@ const Layout = ({ histCurrent}) => {
         setStatus(false)
     }
     return <div style={{zIndex: '9999'}}>
-        <Header createProj={createProj} history={histCurrent} addPodsos={addPodsos} createTicket={createTicket} createNews={createNews}/>
-        <Sidebar/>
+        <Header tasks={tasksStatus} createProj={createProj} history={histCurrent} addPodsos={addPodsos} createTicket={createTicket} createNews={createNews}/>
+        <Sidebar />
+        {tasksStatus&&<QuickTasks history={histCurrent}/>}
         <BackendMsg color={color} style={{opacity:`${msgTiming?1:0}`,zIndex:`${msgTiming?10000:-1000}`}}>
             {color==='red'?error:color==='green'?msg:''}
          

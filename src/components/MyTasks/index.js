@@ -6,7 +6,7 @@ import myTasks from '../../Styles/modules/main/mytasks.module.css'
 import { useEffect, useState } from 'react'
 import ProjTasks from './projTasks'
 import { useDispatch, useSelector } from 'react-redux'
-import { background, myTaskDelite, sortUserTasks } from '../../redux/actions/user'
+import { background, myTaskDelite, sortUserTasks, tasksStatus } from '../../redux/actions/user'
 import getCurrentMonth from './getCurrentMonth'
 import { finishUserTask } from "../../redux/actions/user"
 import getDate from '../Projects/getDate'
@@ -15,6 +15,7 @@ import TaskHistory from './history'
 import TaskLoader from './loader'
 import { Select } from '../../Styles/tables'
 import { editUserTask} from "../../redux/actions/user"
+import { loadUser } from '../../redux/actions/auth'
 
 // import {Link, NavLink } from 'react-router-dom'
 const MyTasks = ({history})=>{
@@ -32,6 +33,8 @@ const MyTasks = ({history})=>{
 		setCurrentDate(getDate(Date.now()))
 		return () => {
 		  dispatch(background('#ECECEC'))
+		  dispatch(loadUser())
+		  dispatch (tasksStatus(false))
 		}
 		
 	  }, [])

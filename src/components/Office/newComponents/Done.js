@@ -6,35 +6,44 @@
 
 
 
-import {  useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
+
+
+
+
+
+
+
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Ideas from "./New/Ideas";
-import Boat from "../Illustration/boat.png";
-import { ModalContainer } from "../../Styles/common";
-import { Light } from "../../Styles/typography";
-import { deleteIdea, moveIdea } from "../../redux/actions/ideas";
+import Boat from "../../Illustration/boat.png";
+import { Reverse, ReverseDate } from "../../../redux/actions/office";
 
 
 const Done = () => {
   const dispatch = useDispatch()
+  const [filter, setFilter] = useState('');
   const [selectedIdea, setSelectedIdea] = useState(null)
-  const [onBoard, setOnBoard] = useState (false)
-  const done_ideas = useSelector(state => state.ideas.done)
-
-
-
-const ideaDelete =(id)=>{
-  dispatch(deleteIdea(id))
-}
-// const skip =(id)=>{
-//   let type = 0
-//   dispatch(moveIdea({id,type}))
-// }
-// const end =(id)=>{
-//   let type = 2
-//   dispatch(moveIdea({id,type}))
-// }
+  const reload = useSelector(state => state.office.reload)
+  const new_ideas = useSelector(state => state.office.data)
+  let isInitial;
+  useEffect(()=>{
+    setFilter('like')
+    isInitial = true;
+    dispatch(Reverse({isInitial}))
+    
+},[])
+useEffect(()=>{
+  if (filter==='like'){
+      isInitial = true  
+      return dispatch(Reverse({isInitial}))
+  } if (filter==='date'){
+      isInitial = true
+      return dispatch(ReverseDate({isInitial}))
+  }
+},[reload])
+    if(new_ideas) isInitial=false;
     return (
       <div>
         {/* header */}
@@ -45,7 +54,7 @@ const ideaDelete =(id)=>{
               marginTop: "-50px",
             }}
           >
-            <h2> Помогите нам улучшить платформу</h2>
+            <h2> Предложения для офиса</h2>
 
             <p
               style={{
@@ -57,14 +66,7 @@ const ideaDelete =(id)=>{
             </p>
           </div>
         </div>
-        {selectedIdea?
-        <ModalContainer onClick={()=>!onBoard?setSelectedIdea(null):''}>
-            <div onMouseEnter={()=>{setOnBoard(true)}} onMouseLeave={()=>{setOnBoard(false)}}
-              style={{marginLeft:'20vw',width:'60vw',backgroundColor:'white',borderRadius:'5px',marginTop:'50vh',transform:'translateY(-50%)', height:'160px',padding:'20px'}}>
-                <Light size='25'>{selectedIdea}</Light>
-            </div>
-        </ModalContainer>:''
-        }
+
         <div
           style={{
             width: "65vw",
@@ -76,6 +78,8 @@ const ideaDelete =(id)=>{
             padding: "20px",
           }}
         >
+     
+          {/* ideas card */}
           <div
             style={{
               width: "100%",
@@ -83,8 +87,8 @@ const ideaDelete =(id)=>{
               // backgroundColor: "rgba(21,43,25,0.6)",
             }}
           >
-            {done_ideas.length ? (
-              done_ideas.map((idea, ind) => {
+            {new_ideas && new_ideas.length ? (
+              new_ideas.filter(el=>el.status==2).map((idea, ind) => {
                 return (
                   <div
                     key={ind}
@@ -92,7 +96,7 @@ const ideaDelete =(id)=>{
                       paddingBottom: "5px",
                     }}
                   >
-                    <Ideas  status='done'  ideaDelete={ideaDelete}  idea={idea} setSelected={setSelectedIdea} />
+                    <Ideas status='done' idea={idea} setSelected={setSelectedIdea} />
                   </div>
                 );
               })
@@ -106,3 +110,4 @@ const ideaDelete =(id)=>{
 }
 
 export default Done
+

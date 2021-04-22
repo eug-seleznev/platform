@@ -1,4 +1,4 @@
-import { GET_IDEAS, LIKE_IDEA, MOVE_IDEA, POST_IDEA } from "../types";
+import { GET_IDEAS, LIKE_IDEA, MOVE_IDEA, POST_IDEA,DELETE_IDEA } from "../types";
 
 
 
@@ -17,6 +17,13 @@ export default function(state = initialState, action) {
 
     switch (type) {
       case GET_IDEAS:
+      case DELETE_IDEA:
+        return {
+          ...state,
+          new: payload.unapproved,
+          work: payload.approved,
+          done: payload.finished,
+        }
       case MOVE_IDEA:
         return {
           ...state,

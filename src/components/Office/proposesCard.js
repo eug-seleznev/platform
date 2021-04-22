@@ -60,7 +60,11 @@ const endButton =(id) =>{
             <Thin className={styles.likes}>Исполнитель: {cardContent.executor.fullname}</Thin>
             <img alt='like'  src={url+'/'+cardContent.executor.avatar} className={styles.likeBtn} onClick={()=>likeButton(cardContent._id)}/></>:'' }
 
-                {user.permission==='admin' && <Bold className={styles.inWorkBtn} size='12' style={{display:rip?'none':'grid'}} color='#3F496C' onClick={()=>!cardContent.status?addExecutor(cardContent._id): dispatch(inWork(cardContent._id))}>{!cardContent.status ? 'в работу' : 'отложить'}</Bold>}
+                {user.permission==='admin' && <Bold className={styles.inWorkBtn} size='12' 
+                    style={{display:rip?'none':'grid'}} color='#3F496C' 
+                    onClick={()=>!cardContent.status?addExecutor(cardContent._id): 
+                    dispatch(inWork(cardContent._id))}>
+                {!cardContent.status ? 'в работу' : 'отложить'}</Bold>}
            
         </Card>
 
