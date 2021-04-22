@@ -116,7 +116,7 @@ const MyTasks = ({history})=>{
 						
 					</div>
                     
-                    <Link onClick={()=>mainTasksPage()} to='../../../../mytasks'><Regular size='14' onMouseEnter={(e)=>{e.target.style.textDecoration='underline'}}
+                    <Link onClick={()=>mainTasksPage()} to='../../../../mytasks'><Regular size='17' onMouseEnter={(e)=>{e.target.style.textDecoration='underline'}}
                         onMouseLeave={(e)=>{e.target.style.textDecoration='none'}}
                         className={myTasks.taskLink} color='white'>Подробнее...</Regular>
 					</Link>
