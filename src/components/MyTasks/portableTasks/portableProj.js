@@ -9,7 +9,7 @@ import style from "../../../Styles/modules/main/mytasks.module.css"
 
 
 
-const ProjTasks =({tasks, month,onChange,pushToProject})=>{
+const ProjTasks =({tasks, month,onChange,pushToProject, history})=>{
  	// const dispatch = useDispatch()
 	
 
@@ -25,7 +25,7 @@ const ProjTasks =({tasks, month,onChange,pushToProject})=>{
 					
 				</NEW_TR>
 			</NEW_THEAD>
-			<InWork onChange={onChange} tasks={tasks} pushToProject={pushToProject}/>
+			<InWork onChange={onChange} history={history} tasks={tasks} pushToProject={pushToProject}/>
 		
 		</NEW_TABLE>
 		</>

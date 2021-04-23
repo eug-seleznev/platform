@@ -20,8 +20,8 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask, onPressEnter})=>{
 	// 	dispatch(editUserTask({value, id,field}))
 	//   };
 	useEffect(()=>{
-		setActualInput('')
-	},[id])
+		console.log(actualInput) 
+	},[actualInput])
 	const onPressEscape =()=>{
 		setId('')
 	
@@ -38,6 +38,17 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask, onPressEnter})=>{
 		setActualInput('')
 		setId('')
 	};
+	const changeTask =(id2)=>{
+		if(id2!==id){
+			setId(id2)
+		setActualInput('')
+		}
+		
+		
+	}
+	const actInput =(id)=>{	
+		setActualInput(id)
+	}
 	const onTextChange =()=>{
 		let value = debounced
 		let field = 'taskTitle'
@@ -74,31 +85,35 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask, onPressEnter})=>{
 							return(
 								<>
 								{day.tasks.filter(task=>task.deadline).length>0?
-								<Light size='16' className={style.date}style={{textAlign:'start'}} color='#8C8C8C'>{currentDate===getDate(day.date)?'На сегодня':'до '+getDate(day.date)}</Light>:''}
+								<Light size='16' style={{textAlign:'start',marginLeft:'24px',marginTop:'10px'}} color='#8C8C8C'>{currentDate===getDate(day.date)?'На сегодня':'до '+getDate(day.date)}</Light>:''}
 								{day.tasks.filter(task=>task.deadline).map((task)=>{
 									return(
-										<NEW_TR key={task._id} onClick={()=>setId(task._id)}
+										<NEW_TR key={task._id} onClick={()=>changeTask(task._id)}
 											style={{outline:'none',
 											backgroundColor:id===task._id?'grey':''}} 
 											className={style.mytask__tr__port}
 											tabIndex="0"
 											onKeyDown={(e)=>e.key==='Delete'?delTask(task._id):e.key==='Enter'?ready(e):e.key==='Escape'?onPressEscape():''}>
-									<NEW_TD>
-									<input
-										type="checkbox"
-										defaultChecked={task.taskStatus}
-										value={task._id}
-										onChange={onChange}
-									></input>
+									<NEW_TD style={{display:'flex', alignItems:'center',paddingLeft:'20px'}}>
+										<div style={{filter:'invert(25%)'}}>
+											<input
+											type="checkbox"
+											defaultChecked={task.taskStatus}
+											value={task._id}
+											
+											onChange={onChange}
+											></input>
+										</div>
 										<input
+									
 											style={{
 												width:'70%',
-												background:`${id===task._id?'white':'none'}`,
+												background:`${actualInput===task._id?'white':'none'}`,
 												fontFamily:'SuisseIntlLight',
-												color:`${id===task._id?'black':'white'}`,
+												color:`${actualInput===task._id?'black':'white'}`,
 												pointerEvents:`${id===task._id?'auto':'none'}`,
 												WebkitUserSelect:`${id===task._id?'none':'none'}`,
-												border:`${id===task._id?'1px solid black':'1px solid transparent'}`
+												border:`${actualInput===task._id?'1px solid black':'1px solid transparent'}`
 											}}
 											className={newsp.input}
 											type="text"
@@ -106,7 +121,7 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask, onPressEnter})=>{
 											name="taskTitle"
 											// onKeyDown={(e)=>e.key==='Delete'?delTask(task._id):''}
 											
-											onClick={()=>setActualInput(task._id)}
+											onClick={()=>actInput(task._id)}
 											onChange={(e)=>setDebouced(e.target.value)}
 										></input>
 										<ButtonTextDiv name="taskTitle" onClick={()=>delTask(task._id)} style={{color:'white',visibility: `${id===task._id?'visible':'hidden'}`}}>Удалить</ButtonTextDiv>

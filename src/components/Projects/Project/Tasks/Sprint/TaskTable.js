@@ -173,7 +173,9 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
                   {team && (
                       <Select className={style.select} onChange={(e) => teamHandle(e, task)}>
                       {team.map((member) => {
-                        return (
+                        if(member.user!==null) {
+          
+                            return (
                           <>
                             {task.user._id === member.user._id ? (
                               <option selected value={member.user._id}>
@@ -187,16 +189,19 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
                             )}
                           </>
                         );
+                        }
+                      
                       })}
                     </Select>
                     )}
                 </>
               ) : (
                 <>
-                  {taskId === task._id && !task.user && (
+                  {task!==null && taskId === task._id && !task.user && (
                     <Select className={style.select}  defaultValue='Выбрать исполнителя' onChange={(e) => teamHandle(e, task)}>
                       <option> Выбрать исполнителя</option>
                       {team.map((member) => {
+                        if(member.user!==null)
                         return (
                           <option value={member.user._id} name={task._id}>
                             {" "}

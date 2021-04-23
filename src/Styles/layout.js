@@ -187,7 +187,7 @@ font-size: 16px;
 export const TasksContainer = styled.div`
   display: block;
   position: fixed;
-  width: 400px;
+  width: 450px;
   left:auto;
   right:0px;
   margin-top:67px;

@@ -1,5 +1,5 @@
 .main {
-    width: 400px;
+    width: 450px;
     display: flex;
     justify-content: space-around;
     color: white;
@@ -7,11 +7,14 @@
     margin-bottom: 20px;
 }
 .input {
-    height: 33px!important;
-    width: 90%!important;
+    height: 40px!important;
+    width: 91%!important;
     color: white!important;
     background-color: #555555;
     margin-bottom: 20px;
+    padding-left: 10px;
+    border: none!important;
+    font-size: 17px;
 }
 .input::placeholder {
     color: #BCBCBC!important;

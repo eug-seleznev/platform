@@ -78,6 +78,17 @@ const PortableTasks =({tasks})=>{
 		
 		setId('')
 	}
+	const changeTask =(id2)=>{
+		if(id2!==id){
+			setId(id2)
+		setActualInput('')
+		}
+		
+		
+	}
+	const actInput =(id)=>{	
+		setActualInput(id)
+	}
 	const onPressEscape =()=>{
 		setId('')
 	
@@ -124,10 +135,20 @@ const PortableTasks =({tasks})=>{
 							return(
 								<>
 								{day.tasks.filter(task=>!task.deadline).length>0?
-								<Light size='16' className={style.date}style={{textAlign:'start'}} color='#8C8C8C'>{currentDate===getDate(day.date)?'Сегодня':getDate(day.date)}</Light>:''}
+								<div style={{display:'flex',paddingLeft:'24px',alignItems:'center',marginTop:'10px'}}>
+									{currentDate===getDate(day.date)?
+										<div style={{width:"12px", height:'12px',backgroundColor:'grey',borderRadius:'100%',fontSize:'8.5px'}}>
+										{day.tasks.filter(task=>!task.deadline&&currentDate===getDate(day.date)).length}
+									</div>:''
+									}
+									
+									<Light size='16'style={{textAlign:'start',marginLeft:'6px'}}
+									 color='#8C8C8C'>{currentDate===getDate(day.date)?'Сегодня':
+									 getDate(day.date)}</Light>
+									</div>:''}
 								{day.tasks.filter(task=>!task.deadline).map((task)=>{
 									return(
-										<NEW_TR onClick={()=>setId(task._id)} key={task._id} 
+										<NEW_TR onClick={()=>changeTask(task._id)} key={task._id} 
 										style={{outline:'none',
 										backgroundColor:id===task._id?'grey':''}} 
 										className={style.mytask__tr__port}
@@ -136,31 +157,38 @@ const PortableTasks =({tasks})=>{
 										onKeyDown={(e)=>e.key==='Delete'?delTask(task._id):e.key=='Enter'&&deadlineEnter==false?setActualInput(''):e.key==='Escape'?onPressEscape():''}
 										
 										>
-									<NEW_TD style={{display:'flex', alignItems:'center'}}>
-										<input
+									<NEW_TD style={{display:'flex', alignItems:'center',paddingLeft:'20px'}}>
+										<div style={{filter:'invert(25%)',marginRight:'10px'}}>
+											<input
 											type="checkbox"
 											defaultChecked={task.taskStatus}
 											value={task._id}
+											
 											onChange={onChange}
-										></input>
+											></input>
+										</div>
+										
 
-										<input
-											style={{
-												width:`${id===task._id?'70%':'100%'}`,
-												background:`${id===task._id?'white':'none'}`,
-												fontFamily:'SuisseIntlLight',
-												color:`${id===task._id?'black':'white'}`,
-												pointerEvents:`${id===task._id?'auto':'none'}`,
-												WebkitUserSelect:`${id===task._id?'none':'none'}`,
-												border:`${id===task._id?'1px solid black':'1px solid transparent'}`
-											}}
-											className={newsp.input}
-											defaultValue={task.taskTitle}
-											onKeyDown={(e)=>e.key==='Delete'?delTask(task._id):e.key==='Enter'?onSubmit(e):''}
-											name="taskTitle"
-											onClick={()=>setActualInput(task._id)}
-											onChange={(e)=>{setDebouced(e.target.value)}}
-										></input>
+									<input
+									
+									style={{
+										width:'70%',
+										background:`${actualInput===task._id?'white':'none'}`,
+										fontFamily:'SuisseIntlLight',
+										color:`${actualInput===task._id?'black':'white'}`,
+										pointerEvents:`${id===task._id?'auto':'none'}`,
+										WebkitUserSelect:`${id===task._id?'none':'none'}`,
+										border:`${actualInput===task._id?'1px solid black':'1px solid transparent'}`
+										}}
+										className={newsp.input}
+										type="text"
+										defaultValue={task.taskTitle}
+										name="taskTitle"
+										// onKeyDown={(e)=>e.key==='Delete'?delTask(task._id):''}
+										
+										onClick={()=>actInput(task._id)}
+										onChange={(e)=>setDebouced(e.target.value)}
+									></input>
 										<form onSubmit={(e)=>onDeadlineChange(e)} style={{display:`${task._id === id?'flex':'none'}`}}>
 											
 											<ButtonTextDiv onClick={()=>setDeadline(true)}
@@ -173,7 +201,7 @@ const PortableTasks =({tasks})=>{
 												name="deadline"
 												onChange={(()=>{setDeadlineEnter(true)})}
 												onKeyDown={(e)=>e.key==='Enter'?onDeadlineChange(e):''}
-												style={{display:`${task._id === id&&deadline?'block':'none'}`,width:'115px'}}>
+												style={{display:`${task._id === id&&deadline?'block':'none'}`,width:'125px'}}>
 											</Input>
 									
 										</form>

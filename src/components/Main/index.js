@@ -16,14 +16,17 @@ import SprintBlock from './sprintBlock'
 const Main = ({history}) => {
 
     const dispatch = useDispatch()
-    
+    const tasksStatus = useSelector(state => state.users.tasksStatus)
     const user = useSelector(state => state.auth.user)
     const reloadSprints = useSelector(state => state.auth.chosenSprint)
     
 
 
 useEffect(() => {
+  if(!tasksStatus) {
     dispatch(loadUser());
+  }
+    
     dispatch(allNews());
     dispatch(allProjects());
     
@@ -31,8 +34,12 @@ useEffect(() => {
 
 
 
-useEffect(()=>{  
-    dispatch(loadUser())
+useEffect(()=>{   
+  
+        if(!tasksStatus) {
+    dispatch(loadUser());
+  }
+ 
 },[reloadSprints])
 
 if(!user.name){
