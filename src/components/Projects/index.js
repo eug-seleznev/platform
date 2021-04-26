@@ -22,6 +22,7 @@ import { ButtonText } from '../../Styles/buttons';
 import { background } from '../../redux/actions/user';
 import Tag from './components/OneProject/tag';
 import { Link } from 'react-router-dom';
+import { Path } from "../Layout/header";
 
 
 
@@ -138,11 +139,11 @@ const Projects = ({history,location}) => {
                <ButtonText fontSize='14px' style={{fontFamily:'SuisseIntlSemibold'}}>Создать новый проект</ButtonText></Link>
               </div>}
              <div className={style.row__in}>
-               <img alt='lupa'  src='/lupa.png' className={style.row__img}></img>
+               <img alt='lupa'  src={Path+'lupa.png'} className={style.row__img}></img>
                <SearchInput size='14px' placeholder='Поиск по названию' name='title' onChange={projectTitle}></SearchInput>
              </div>
              <div className={style.row__in}>
-               <img alt='lupa' src='/lupa.png' className={style.row__img}></img>
+               <img alt='lupa' src={Path+'lupa.png'} className={style.row__img}></img>
                <div>
                 <SearchInput size='14px' placeholder='Поиск по объекту' value={search} onChange={(e)=>{setSearch(e.target.value)}}></SearchInput>
                 <div className={style.input} style={{display:`${search===''?'none':'block'}`}} >

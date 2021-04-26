@@ -6,6 +6,9 @@ import { Bold } from '../../Styles/typography'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import NewsOpen from '../News/openNews'
+
+export const Path = process.env.REACT_APP_PATH;
+
 const NewsBlock = ({user, history}) => {
 	const [status, setStatus] = useState (false)
 	const [newsOpen, setNewsOpen] = useState({
@@ -22,11 +25,11 @@ const NewsBlock = ({user, history}) => {
     return(
 		<div className={styles.news}>
           <div className={styles.create__news}>
-          <img alt='news' className={styles.create__news__img}  src='/news.png'></img>
+          <img alt='news' className={styles.create__news__img}  src={Path + "news.png"}></img>
             <Bold color="black" size="18">
               Новости бюро
             </Bold>
-            {user.permission==='admin'?<img alt='news' className={styles.create__news__button} onClick={()=>{setStatus(true)}} src='/plus.png'></img>:''}
+            {user.permission==='admin'?<img alt='news' className={styles.create__news__button} onClick={()=>{setStatus(true)}} src={Path + "plus.png"}></img>:''}
           </div>
           <ModalWindow 
             bigTitle={'Создание новости'} 

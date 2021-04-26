@@ -56,7 +56,7 @@ const HeaderL = ({addPodsos, createProj, createNews, createTicket, tasks}) => {
               >
                 
                 <img alt="tasks" style={{width:'15px',height:'30px'}}
-                className="invert" src="/lightn.png" 
+                className="invert" src={Path + "lightn.png"}
                  />
                 
                 <div style={{

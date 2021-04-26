@@ -6,6 +6,7 @@ import { joinTeam } from '../../../../redux/actions/projects';
 import { useEffect, useState } from 'react';
 import Subtitle from './subtitle';
 import UserForm from './infoForm';
+import { Path } from '../../../Layout/header';
 
 
 
@@ -59,7 +60,7 @@ const ProjectTeam = ({history}) => {
       <div style={{display:'flex', alignItems:'center'}}>
         <Subtitle title='Команда проекта' isopen={open}
             openfunc={openfunc} 
-            src='/team.png'
+            src={Path+'team.png'}
             open={true} 
             srcplus={button} 
             buttonFunc={hadleTeam} 

@@ -17,8 +17,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Ideas from "./New/Ideas";
-import Boat from "../../Illustration/boat.png";
 import { Reverse, ReverseDate } from "../../../redux/actions/office";
+import { Path } from "../../Layout/header";
 
 
 const Done = () => {
@@ -48,7 +48,7 @@ useEffect(()=>{
       <div>
         {/* header */}
         <div style={{ textAlign: "center" }}>
-          <img src={Boat} />
+          <img src={Path+'Illustration/boat.png'} />
           <div
             style={{
               marginTop: "-50px",

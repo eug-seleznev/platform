@@ -4,6 +4,7 @@ import { Light, Thin } from "../../../Styles/typography"
 import { useSelector,useDispatch} from "react-redux"
 import { addToChosen } from '../../../redux/actions/auth'
 import Tag from "./OneProject/tag"
+import { Path } from "../../Layout/header"
 const SprintDescription = ({tags, dateOpen,taskcomplite, alltasks, history, crypt, id, title, dateClosePlan}) => {
 	
 	const dispatch = useDispatch();
@@ -69,7 +70,7 @@ const SprintDescription = ({tags, dateOpen,taskcomplite, alltasks, history, cryp
             </div>
 
             <img
-              src="/star.png"
+              src={Path+'star.png'}
               alt="star"
               onClick={chosenSprint}
               style={{

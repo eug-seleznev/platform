@@ -5,6 +5,7 @@ import SetMenu from "../components/OneProject/settingsMenu";
 import style from '../../../Styles/modules/components/Project/projheader.module.css'
 import sprint from '../../../Styles/modules/components/Project/oneproj.module.css'
 import { addProjToChosen } from "../../../redux/actions/projects";
+import { Path } from "../../Layout/header";
 
 
 
@@ -48,7 +49,7 @@ const Header = ({history, crypt}) => {
                   {project.title} 
                 </Bold>
                 <img
-              src="/starb.png"
+                src={Path+'starb.png'}
               alt="star"
               onClick={chosenProj}
               style={{

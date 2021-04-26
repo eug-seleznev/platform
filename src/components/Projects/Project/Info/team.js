@@ -12,6 +12,7 @@ import Search from "../../../User/Search"
 import UserTable from "../../../User/userTable"
 import { NEW_TABLE, NEW_TBODY, NEW_TD, NEW_TH, NEW_THEAD, NEW_TR } from "../../../../Styles/tables"
 import Subtitle from '../../components/OneProject/subtitle'
+import { Path } from '../../../Layout/header';
 
 const ProjectTeam = () => {
     const dispatch = useDispatch()
@@ -68,7 +69,7 @@ const ProjectTeam = () => {
                 <div style={{display:'flex', alignItems:'center'}}>
                 <Subtitle title='Команда проекта' isopen={open}
                     openfunc={openfunc} 
-                    src='/team.png'
+                    src={Path+'team.png'}
                     open={true} 
                     srcplus={button} 
                     buttonFunc={hadleTeam} 

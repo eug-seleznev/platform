@@ -7,6 +7,7 @@ import { Bold, Thin, Regular} from '../../Styles/typography'
 import { useState } from 'react'
 import Confirm from './confirm'
 import { url } from '../utils/axios'
+import { Path } from '../Layout/header'
 
 
 const ProposeCard = ({cardContent, rip,off, addExecutor,  user}) => {
@@ -36,13 +37,13 @@ const endButton =(id) =>{
        <div className={styles.cardGrid}>
 
             {cardContent.user._id===user.id||user.permission==='admin' ? 
-                <img alt='delite' src='/delete.png' className={styles.deleteBtn} 
+                <img alt='delite' src={Path+'delete.png'} className={styles.deleteBtn} 
                     style={{display:rip?'none':'grid'}} 
                     onClick={()=>setShowConfirm('Удалить')} /> 
                 :''} 
 
             {cardContent.user._id===user.id||user.permission==='admin' ? 
-                <img alt='check' src='/check.png' className={styles.inWork} 
+                <img alt='check' src={Path+'check.png'} className={styles.inWork} 
                     style={{display:rip||off?'none':'grid',height:'30px',width:'30px'}} 
                     onClick={()=>setShowConfirm('Завершить')} /> 
                 :'' }
@@ -53,7 +54,7 @@ const endButton =(id) =>{
             <Thin className={styles.date}>{cardContent.date.slice(5,10).split('-').reverse().join('.')}</Thin>
     
             {!cardContent.status?<>
-            <img alt='like' src='/like.png'  style={{backgroundColor:`${likeTrue?'red':'white'}`, display:`${rip?'none':'grid'}`, cursor:'pointer'}} className={styles.likeBtn} onClick={()=>likeButton(cardContent._id)} />
+            <img alt='like' src={Path+'like.png'}  style={{backgroundColor:`${likeTrue?'red':'white'}`, display:`${rip?'none':'grid'}`, cursor:'pointer'}} className={styles.likeBtn} onClick={()=>likeButton(cardContent._id)} />
             
             <Bold size='12' className={styles.likes}>{cardContent.likeCount} людям нравится</Bold></>
             : cardContent.executor!==null&&cardContent.executor!==undefined?<>

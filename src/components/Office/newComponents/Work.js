@@ -9,10 +9,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Ideas from "./New/Ideas";
-import Boat from "../../Illustration/boat.png";
 import { inWork, Reverse, ReverseDate } from "../../../redux/actions/office";
 import { Light } from "../../../Styles/typography";
 import { ModalContainer } from "../../../Styles/common";
+import { Path } from "../../Layout/header";
 
 
 const Work = () => {
@@ -55,7 +55,7 @@ useEffect(()=>{
         } 
         {/* header */}
         <div style={{ textAlign: "center" }}>
-          <img src={Boat} />
+          <img src={Path+'Illustration/boat.png'} />
           <div
             style={{
               marginTop: "-50px",

@@ -7,6 +7,7 @@ import {  Thin } from "../../../../Styles/typography";
 import Subtitle from "./subtitle";
 import { addSprint } from "../../../../redux/actions/projects";
 import { useEffect, useState } from "react";
+import { Path } from "../../../Layout/header";
 
 
 
@@ -40,7 +41,7 @@ const AllSprintsOfProj = ({hist, sprints, match, status, crypt, sprint, location
         <div onClick={() => setSubmited(true)}>
           <Subtitle
             title="Активные спринты"
-            src="/image 6.png"
+            src={Path+'image 6.png'}
             subtwidth="0%"
             buttonFunc={createSprint}
             buttonActive={true}

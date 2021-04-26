@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import style from '../../../../Styles/modules/components/Project/oneproj.module.css'
 import { allSprints} from "../../../../redux/actions/projects";
 import Subtitle from "./subtitle";
+import { Path } from "../../../Layout/header";
 let months = ['янв','фев',"мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"]
 let count = [1,2,3,4]
 
@@ -167,7 +168,7 @@ const CalendSprint = ({id}) => {
     return (
       <div style={{height:`${!open?'65px':'auto'}`, overflowY:'hidden'}} className={style.calend__contain}>
 				<div className={style.border__calend}></div>
-					<Subtitle title='Календарь проекта' src='/history.png' openfunc={openfunc} isopen={open} open={true} subtwidth='90%' buttonActive={false}></Subtitle> 
+					<Subtitle title='Календарь проекта'src={Path+'history.png'} openfunc={openfunc} isopen={open} open={true} subtwidth='90%' buttonActive={false}></Subtitle> 
 					{!paint?<div>loading...</div>:(
 					//календарь со спринтами
 					<> 

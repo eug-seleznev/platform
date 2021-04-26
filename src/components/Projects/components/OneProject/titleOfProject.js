@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import style from '../../../../Styles/modules/components/Project/oneproj.module.css'
 import { Bold, H1, Light} from '../../../../Styles/typography'
+import { Path } from "../../../Layout/header";
 import SetMenu from './settingsMenu';
 import Tag from "./tag";
 
@@ -49,7 +50,7 @@ const TitleOfProject = ({hist}) => {
               <Bold  size="16" className={style.title__options} onClick={openMenu}>
                 Настройки
               </Bold>
-              <img alt='open' src="/image 1.png" onClick={openMenu}></img>
+              <img alt='open' src={Path+'image 1.png'} onClick={openMenu}></img>
               {/* <SetMenu
                 closeAll={closeAll}
                 project={project}

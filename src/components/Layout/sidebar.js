@@ -4,7 +4,7 @@ import './sidebar.css'
 import {SidebarContainer, SidebarLink} from '../../Styles/layout'
 import {useState } from 'react';
 
-
+export const Path = process.env.REACT_APP_PATH;
 const Sidebar = () => {
 
 // const user = useSelector(state => state.auth.user)
@@ -18,7 +18,7 @@ const [sidebarInfo, setSidebarInfo] = useState ('')
           <img alt="logo"
           onMouseEnter={()=>{setSidebarInfo('main')}}
           onMouseLeave={()=>{setSidebarInfo('')}}
-          src="/logo3.svg" 
+          src={Path + "logo3.svg"}
       
           />
           <div className='descr'
@@ -36,7 +36,7 @@ const [sidebarInfo, setSidebarInfo] = useState ('')
           
           onMouseEnter={()=>{setSidebarInfo('project')}}
           onMouseLeave={()=>{setSidebarInfo('')}}
-           src="/folder.svg" 
+           src={Path + "folder.svg"}
            className='icon' />
           <div className='descr'
           style={{display:`${sidebarInfo==='project'?'block':'none'}`}}
@@ -45,7 +45,7 @@ const [sidebarInfo, setSidebarInfo] = useState ('')
 
         <SidebarLink to="/users" >
           <img alt="users"style={{width: "18px"}}
-           src="/users.svg" 
+           src={Path + "users.svg"}
            onMouseEnter={()=>{setSidebarInfo('team')}}
            onMouseLeave={()=>{setSidebarInfo('')}} 
            className='icon'
@@ -56,7 +56,7 @@ const [sidebarInfo, setSidebarInfo] = useState ('')
         </SidebarLink>
 
         <SidebarLink to="/ideas/office/new" >
-          <img alt="office" src="/office.svg"
+          <img alt="office" src={Path + "office.svg"}
             onMouseEnter={()=>{setSidebarInfo('office')}}
             onMouseLeave={()=>{setSidebarInfo('')
             }} className='icon'
@@ -67,7 +67,7 @@ const [sidebarInfo, setSidebarInfo] = useState ('')
         </SidebarLink>
 
         <SidebarLink to="/department">
-          <img alt="depart" src="/sidebar.svg"
+          <img alt="depart" src={Path + "sidebar.svg"}
           onMouseEnter={()=>{setSidebarInfo('department')}}
           onMouseLeave={()=>{setSidebarInfo('')
           }} className='icon'
@@ -82,7 +82,7 @@ const [sidebarInfo, setSidebarInfo] = useState ('')
           <p></p>
         </SidebarLink> */}
         <SidebarLink to="/docs">
-          <img alt="deps" src="/docs.svg"
+          <img alt="deps" src={Path + "docs.svg"}
           onMouseEnter={()=>{setSidebarInfo('docs')}}
           onMouseLeave={()=>{setSidebarInfo('')}} 
           className='icon'
