@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AddUserToTeam } from "../../redux/actions/projects";
 import style from '../../Styles/modules/components/Project/editproj.module.css'
 import { Light, Thin } from "../../Styles/typography";
+import { Path } from "../Layout/header";
 
 const UserTable = ({crypt, project}) => {
     const dispatch = useDispatch();
