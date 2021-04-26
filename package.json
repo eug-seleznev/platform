@@ -17,6 +17,10 @@
     },
     "win": {
       "icon": "build/icon.png"
+    },
+    "nsis":{
+      "oneClick": false,
+      "perMachine": true
     }
   },
   "dependencies": {
