@@ -5,7 +5,8 @@ import './App.css';
 import Auth from './components/Auth/index'
 
 import {
-  BrowserRouter as Router,
+  HashRouter,
+  BrowserRouter,
   Switch,
   Route,
   
@@ -50,15 +51,14 @@ import EditUser from './components/User/editUser';
 import ProjectHelper from "./components/Projects/Project/Helper";
 import IdeaaHelper from "./components/Roadmap/Routing";
 import KPI from './components/KPI';
-import DailyUsers from './components/KPI/chart/users';
 import { getStat, WeeklyTask } from './redux/actions/stat';
 
 
 const App = () => {
   const dispatch = useDispatch();
   const history = createBrowserHistory();
+  const Router = process.env.REACT_APP_TYPE==='web'? BrowserRouter : HashRouter
   const auth = useSelector(state => state.auth.isAuthenticated)
-  const loaded = useSelector(state => state.auth.loaded)
   const background = useSelector(state => state.users.background)
   const style = useSelector(state => state.users.style)
   //chek auth token on render
@@ -73,13 +73,6 @@ const App = () => {
     }
   }, [])
 
-
-  // useEffect(() => {
-  //   if (loaded) {
-
-
-  //   }
-  // }, [loaded])
 
 
 

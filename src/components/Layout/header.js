@@ -1,19 +1,17 @@
 
 
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import {  useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { tasksStatus } from '../../redux/actions/user'
 import {Header, ItemHead} from '../../Styles/layout'
 import {Bold} from '../../Styles/typography'
 import { url } from '../utils/axios'
 import Menu from './Menu'
 import MenuMobile from './menuMobile'
 
+export const Path = process.env.REACT_APP_PATH;
 
-
-const HeaderL = ({addPodsos, createProj, createNews, createTicket,tasks}) => {
-    const dispatch = useDispatch()
+const HeaderL = ({addPodsos, createProj, createNews, createTicket}) => {
     const loaded = useSelector(state => state.auth.loaded)
     const user = useSelector(state => state.auth.user)
     const [open, setOpen] = useState({
@@ -22,7 +20,7 @@ const HeaderL = ({addPodsos, createProj, createNews, createTicket,tasks}) => {
         mobile: false
     })
 
-    
+
     const mobClick = () => { 
         setOpen({...open, mobile: !open.mobile})
         // console.log(open)
@@ -46,21 +44,17 @@ const HeaderL = ({addPodsos, createProj, createNews, createTicket,tasks}) => {
                 <Bold size="14" color="white">
                   меню
                 </Bold>
-                <img alt="arrow" className="arrow" src="/headerArrow.png" />
+                <img alt="arrow" className="arrow" src={Path + "headerArrow.png"}/>
               </ItemHead>
               <ItemHead>
-              <div
-                onClick={()=>{dispatch(tasksStatus(!tasks))}}
-                style={{textDecoration:'none',display:`${tasks===null?'none':'flex'}`}}
+              <Link to='../../../mytasks'
+                style={{display:'flex',textDecoration:'none'}}
               >
                 
-                <img alt="tasks" style={{width:'15px',height:'30px'}}
-                className="invert" src="/lightn.png" 
-                 />
+                <img alt="tasks" style={{width:'15px'}}className="invert" src={Path + "lightn.png"} />
                 
-                <div style={{
-                      opacity:`${!tasks?1:0}`,
-                      fontSize:'10px',
+                <div style={{fontSize:'10px',
+                
                       color:'white',
                       transform:'translate(-3px,15px)',
                       width:'15px',height:'15px',
@@ -69,15 +63,15 @@ const HeaderL = ({addPodsos, createProj, createNews, createTicket,tasks}) => {
                       textAlign:'center'}}>{user.tasks&&user.tasks.filter(task=>!task.taskStatus).length}
                 </div>
                 
-              </div>
+              </Link>
               </ItemHead>
               <ItemHead
                 onClick={() =>
                   setOpen({ ...open, menuProfile: false, menu: !open.menu })
                 }
               >
-                <img alt="plus" className="invert" src="/headerPlus.png" />
-                <img alt="arrow" className="arrow" src="/headerArrow.png" />
+                <img alt="plus" className="invert" src={Path + "headerPlus.png"}/>
+                <img alt="arrow" className="arrow" src={Path + "headerArrow.png"}/>
               </ItemHead>
 
               <ItemHead
@@ -102,7 +96,7 @@ const HeaderL = ({addPodsos, createProj, createNews, createTicket,tasks}) => {
                     }`}
                   />
                 </div>
-                <img alt="arrow" className="arrow" src="/headerArrow.png" />
+                <img alt="arrow" className="arrow" src={Path + "headerArrow.png"} />
               </ItemHead>
             </Header>
           </div>

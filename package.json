@@ -1,13 +1,32 @@
 {
-  "name": "my-app",
+  "name": "BimFrame",
   "version": "0.1.0",
   "private": true,
+  "description": "desctop pratform app",
+  "author": "Kollab",
+  "homepage": "./",
+  "main": "public/electron.js",
+  "build": {
+    "appId": "platform.app",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories":{
+      "buildResources": "assets"
+    },
+    "win": {
+      "icon": "build/icon.png"
+    }
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.0",
     "chart.js": "^2.5",
+    "cross-env": "^7.0.3",
+    "electron-is-dev": "^2.0.0",
     "react": "^17.0.1",
     "react-chartjs-2": "^2.11.1",
     "react-css-modules": "^4.7.11",
@@ -27,8 +46,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "build-electron": "electron-builder",
+    "electron-build": "yarn build && yarn build-electron",
+    "electron-start": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {
     "extends": [
@@ -47,5 +69,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.2",
+    "electron": "^12.0.5",
+    "electron-builder": "^22.10.5",
+    "wait-on": "^5.3.0"
   }
 }
