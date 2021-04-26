@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Subtitle from "../components/OneProject/subtitle";
 import style from "../../../Styles/modules/components/Project/oneproj.module.css";
 import { Thin } from "../../../Styles/typography";
+import { Path } from "../../Layout/header";
 
 const Viewer = ({ project }) => {
 
@@ -27,7 +28,7 @@ const Viewer = ({ project }) => {
         openfunc={openfunc}
         subtwidth="90%"
         isopen={open}
-        src="/model.png"
+        src={Path+'model.png'}
         open={true}
       ></Subtitle>
       <div style={{ width: "80%", marginTop: "-27px" }}>

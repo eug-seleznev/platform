@@ -36,7 +36,9 @@ const ModelsTable = ({ models, history, location, setFocus, focusRow }) => {
                 <NEW_TD>{model.title}</NEW_TD>
                 <NEW_TD>{getDate(model.date)}</NEW_TD>
                 <NEW_TD style={{paddingTop:'14px'}}><Tag tagColor='#C8DDE9' tagText={model.tags[0]}/></NEW_TD>
-                <NEW_TD style={{display:'flex',alignItems:'center',paddingTop:'9px'}}>{model.user ? model.user.fullname : '' }<img className={modelsCss.img} style={{display:`${model.user?'block':'none'}`}} src={model.user ? url+'/'+model.user.avatar : '' }></img></NEW_TD>
+                <NEW_TD style={{display:'flex',alignItems:'center',paddingTop:'9px'}}>{model.user ? model.user.fullname : '' }
+                <img className={modelsCss.img} style={{display:`${model.user?'block':'none'}`}} 
+                src={model.user ? url+'/'+model.user.avatar : '' }></img></NEW_TD>
 
                 <NEW_TD>{model.version}</NEW_TD>
                 {/* <NEW_TD>опции</NEW_TD> */}

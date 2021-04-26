@@ -7,6 +7,7 @@ import { inWork, Reverse, ReverseDate } from "../../../../redux/actions/office";
 import { ModalContainer } from "../../../../Styles/common";
 import SearchUser from "../../searchUser";
 import { Light } from "../../../../Styles/typography";
+import { Path } from "../../../Layout/header";
 
 
 const New = () => {
@@ -54,7 +55,7 @@ useEffect(()=>{
       <div>
         {/* header */}
         <div style={{ textAlign: "center" }}>
-          <img src={Boat} />
+          <img src={Path+'Illustration/boat.png'} />
           <div
             style={{
               marginTop: "-50px",

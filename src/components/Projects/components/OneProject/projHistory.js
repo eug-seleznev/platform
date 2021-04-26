@@ -28,7 +28,7 @@ const ProjHistory = ({project,history}) => {
    	 <div className={styles.history}>
 		<div className={styles.title__history}>
 			<div className={styles.title__info} >
-					<img alt='info'  src='/info.png' style={{marginRight:'10px'}} ></img>
+					<img alt='info'  src={Path+'info.png'} style={{marginRight:'10px'}} ></img>
 					<Light size='18'>История проекта</Light>
 			</div>
 			

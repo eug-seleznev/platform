@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { SmallCard } from '../../Styles/common'
 import styles from '../../Styles/modules/main/main.module.css'
 import { Bold, Light } from '../../Styles/typography'
+import { Path } from '../Layout/header'
 
 const TaskBlock = ({user, history}) => {
   	const[activeSprints,setActiveSprints] = useState(0)	
@@ -18,7 +19,7 @@ const TaskBlock = ({user, history}) => {
     return(
 		<div className={styles.tasks}>
 			<div className={styles.create__news}>
-				<img className={styles.create__news__img}alt='tasks' src='/tasks.png'></img>
+				<img className={styles.create__news__img}alt='tasks' src={Path+'tasks.png'}></img>
 				<Bold color="black" size="18">
 					Задачи
 				</Bold>

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deletePropose, endPropose, inWork, likePropose } from "../../../../redux/actions/office";
 import { Card } from "../../../../Styles/modules/Roadmap";
 import { Bold, Light, Thin } from "../../../../Styles/typography";
+import { Path } from "../../../Layout/header";
 
 
 
@@ -56,7 +57,7 @@ const Ideas = ({idea, setSelected, status,addExecutor,skip}) => {
         <div style={{display:'flex',
             alignItems: "center"}}>
             <img
-            src="/like.png"
+            src={Path+'like.png'}
             style={{display:`${status==='new'?'block':'none'}`,
             width: "23px", height: "30px",
             backgroundColor:`${likeTrue?'red':'white'}`,
@@ -113,7 +114,7 @@ const Ideas = ({idea, setSelected, status,addExecutor,skip}) => {
             <b> {idea.likeCount}</b>
           </Light>
           {idea.user._id===user.id||user.permission==='admin' ? 
-                <img alt='delite' src='/delete.png'  
+                <img alt='delite'  src={Path+'delete.png'}
                     title='удалить'
                     style={{display:user.permission==='user'?'none':'block',
                      width:'10px', height:'10px',cursor:'pointer',
