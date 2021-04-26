@@ -224,10 +224,10 @@ const Projects = ({history,location}) => {
                     title="Открыть проект"
                   >
                     <NEW_TD>{project.title}</NEW_TD>
-                    <NEW_TD className={style.turn__off}>
+                    <NEW_TD className={style.turn__off} style={{whiteSpace:'nowrap'}}>
                       {project.dateStart.slice(0, 10)}
                     </NEW_TD>
-                    <NEW_TD>
+                    <NEW_TD style={{whiteSpace:'nowrap'}}>
                       {project.dateFinish !== undefined &&
                       project.dateFinish !== null
                         ? project.dateFinish.slice(0, 10)
