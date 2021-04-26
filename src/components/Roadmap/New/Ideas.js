@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { likeIdea } from "../../../redux/actions/ideas";
 import { Card } from "../../../Styles/modules/Roadmap";
 import { Bold, Light } from "../../../Styles/typography";
+import { Path } from "../../Layout/header";
 
 
 
@@ -30,7 +31,7 @@ const Ideas = ({idea, setSelected,ideaDelete,inWork, status,skip,end}) => {
         <div style={{display:'flex',
             alignItems: "center"}}>
         <img
-          src="/like.png"
+          src={Path + "like.png"}
           style={{backgroundColor:`${likeTrue?'red':'white'}`,
            display:status==='new'?'block':'none',
            width: "23px", height: "30px", marginLeft: "5px",cursor:'pointer' }}
@@ -83,7 +84,7 @@ const Ideas = ({idea, setSelected,ideaDelete,inWork, status,skip,end}) => {
             <b> {idea.likeCount}</b>
           </Light>
           {idea.user._id===user.id||user.permission==='admin' ? 
-                <img alt='delite' src='/delete.png'  
+                <img alt='delite'src={Path + "delete.png"} 
                     title='удалить'
                     style={{display:user.permission==='user'?'none':'block',
                      width:'10px', height:'10px',cursor:'pointer',

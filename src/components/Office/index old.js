@@ -81,7 +81,7 @@ useEffect(()=>{
         <div className={styles.officeContainer}> 
         <div>
             <Thin size='24' className={styles.title}>Предложения для офиса </Thin>
-            {!form?<img src='/plus.png' alt='plus' onClick={()=>setForm(true)}></img>:<ProposeForm closeForm={()=>setForm(false)} />} 
+            {!form?<img  src={Path + 'plus.png'} alt='plus' onClick={()=>setForm(true)}></img>:<ProposeForm closeForm={()=>setForm(false)} />} 
         </div>
             <div className={styles.filters}>
                 <FilterButton arrow={visibleArray.filter=='like'? true : false} reverse={reverse} onClick={()=>likeFIlter()}>Лайки</FilterButton>

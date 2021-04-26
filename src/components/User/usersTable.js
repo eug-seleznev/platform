@@ -13,6 +13,7 @@ import { url } from "../utils/axios";
 import { SearchInput } from "../../Styles/Forms";
 import { allDepartments } from "../../redux/actions/department";
 import Contractors from "../Superadmin/contractors";
+import { Path } from "../Layout/header";
 
 
 
@@ -55,11 +56,11 @@ const UsersTable = ({history}) => {
       <div className={style.main}>
         <div className={style.row}>
          <div className={style.row__in}>
-               <img src='/lupa.png' alt='lupa' className={style.row__img}></img>
+               <img  src={Path + 'lupa.png'} alt='lupa' className={style.row__img}></img>
                <SearchInput size='14px' onChange={findUser} placeholder='Поиск сотрудника' name='name' ></SearchInput>
              </div>
              <div className={style.row__in}>
-               <img src='/lupa.png' alt='lupa' className={style.row__img}></img>
+               <img  src={Path + 'lupa.png'} alt='lupa' className={style.row__img}></img>
                <SearchInput size='14' name='position' onChange={findUserPos}  placeholder='По должности'></SearchInput>
              </div>
              <div className={style.row__in}>

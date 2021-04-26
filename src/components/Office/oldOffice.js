@@ -89,7 +89,7 @@ useEffect(()=>{
         <div > 
             <div className={styles.row}>
                 <Light size='24' className={styles.title}>Предложения для офиса </Light>
-                {!form?<img  alt='news' src='/plus.png'style={{paddingTop:'5px', cursor:'pointer'}} onClick={()=>setForm(true)}></img>:
+                {!form?<img  alt='news'  src={Path + 'plus.png'}style={{paddingTop:'5px', cursor:'pointer'}} onClick={()=>setForm(true)}></img>:
                     <ModalContainer><ProposeForm closeForm={()=>setForm(false)} /></ModalContainer>} 
                 {!modal?'':
                     <ModalContainer>

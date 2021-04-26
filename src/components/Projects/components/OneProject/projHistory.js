@@ -12,14 +12,13 @@ import { Circle } from '../../../../Styles/project'
 
 import { useEffect } from 'react'
 import getDate from '../../getDate'
+import { Path } from '../../../Layout/header'
 
 
 
 const ProjHistory = ({project,history}) => {
     // const [overCard, setOvercard] = useState(false)
-	useEffect(()=>{
-		console.log(project)
-	},[project])
+
 
 	const pushToSprint =(id)=>{
 		history.push(`/projects/${project.crypt+'/tasks/'+id}`)

@@ -7,6 +7,7 @@ import {useDispatch} from "react-redux"
 import { allContractors, background, deleteContractor, findContractorName } from "../../redux/actions/user"
 import { SearchInput } from "../../Styles/Forms"
 import ConfirmSubDel from "./confirm"
+import { Path } from "../Layout/header"
 const { NEW_TD, NEW_TR, NEW_TBODY, NEW_TH, NEW_THEAD, NEW_TABLE, Select } = require("../../Styles/tables")
 
 
@@ -58,11 +59,11 @@ const Contractors = ({history}) => {
         <div className={style.main}>
             <div className={style.row}>
                 <div className={style.row__in}>
-                        <img src='/lupa.png' alt='lupa' className={style.row__img}></img>
+                        <img src={Path + 'lupa.png'} alt='lupa' className={style.row__img}></img>
                         <SearchInput size='14px' onChange={findContractor} name='name' placeholder='Поиск субподрядчика'  ></SearchInput>
                     </div>
                     <div className={style.row__in}>
-                        <img src='/lupa.png'alt='lupa' className={style.row__img}></img>
+                        <img src={Path + 'lupa.png'}alt='lupa' className={style.row__img}></img>
                         <SearchInput size='14' onChange={findContractor} name='partition' placeholder='По разделу'></SearchInput>
                     </div>
                     <div className={style.row__in}>

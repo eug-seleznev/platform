@@ -59,7 +59,7 @@ const UserTable = ({crypt, project}) => {
                       <button type="submit" 
 					//   onClick={() =>  setFormData({...formData, user: user._id})}
                       onClick={(e) => onSubmit(e, user._id)}
-                    ><img alt='plus'  src='/plus.png'></img></button>
+                    ><img alt='plus' src={Path + 'plus.png'}></img></button>
                     </td>
                   </tr>
                 );
