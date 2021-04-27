@@ -15,6 +15,9 @@
     "directories":{
       "buildResources": "assets"
     },
+    "mac": {
+      "target": "dmg"
+    },
     "win": {
       "icon": "build/icon.png"
     },
