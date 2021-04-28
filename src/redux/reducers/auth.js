@@ -60,15 +60,11 @@ export default function(state = initialState, action) {
                     ...state,
                     user: payload,
                 }
-            case CLEAR_ERROR:
-                return {
-                    ...state,
-                   error:''
-                }
             case CLEAR_MSG:
                 return {
                     ...state,
-                    msg:''
+                    msg:' ',
+                    error:' '
                 }
             case USER_LOADED:
                 return {

@@ -6,7 +6,7 @@ import Sidebar from './sidebar'
 import {useDispatch, useSelector} from 'react-redux'
 import { BackendMsg }  from '../../Styles/layout'
 
-import {errorAuthClear, msgAuthClear}  from "../../redux/actions/auth";
+import { msgAuthClear}  from "../../redux/actions/auth";
 import QuickTasks from './quickTasks'
 const Layout = ({ histCurrent}) => {
     const dispatch = useDispatch()
@@ -19,7 +19,7 @@ const Layout = ({ histCurrent}) => {
     const [msgTiming, setMsgTiming] = useState (false)
     const [currentElem, setCurrentElem] = useState (false)
     const [currentTitle, setCurrentTitle] = useState (false)
-    const [color, setColor] = useState (false)
+    const [color, setColor] = useState ('white')
     const [status, setStatus] = useState (false)
   
     useEffect(()=>{
@@ -36,32 +36,31 @@ const Layout = ({ histCurrent}) => {
     },[msgAll])
     
     useEffect(()=>{
-        if(msg!==''&&msg!==undefined&&msg!==false){
-            // console.log(msg)
-            setMsgTiming(true)
-                setTimeout(()=>{ 
-                    setMsgTiming(false)
-                    
-                         setMsg('')
-                         dispatch(msgAuthClear())
-               
-                   
-                },3500)
-        }
-    },[msg])
-    useEffect(()=>{
         if(error!==''){
-         
-            setMsgTiming(true)
-                setTimeout(()=>{
-                    setMsgTiming(false)
-                        
-                        setError('')
-                        dispatch(errorAuthClear())
-             
-                },4500)
+          let timeoutMsg = setTimeout(()=> setMsgTiming(false) ,3500)
+          setMsgTiming(true)
+          return ()=> {
+            clearTimeout(timeoutMsg)
+          } 
         }
-    },[error])
+      },[error])
+      useEffect(()=>{
+        if(msg!==''){
+          let timeoutMsg = setTimeout(()=> setMsgTiming(false) ,3500)
+          setMsgTiming(true)
+          return ()=> {
+            clearTimeout(timeoutMsg)
+          }
+        }
+      },[msg])
+      
+      useEffect(()=>{
+        if(!msgTiming){
+          dispatch(msgAuthClear())
+          setMsg('')
+        }
+      },[msgTiming])
+      
     const createProj =()=>{
         histCurrent.replace('/admin/newproject')
     }

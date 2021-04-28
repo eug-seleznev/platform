@@ -48,17 +48,17 @@ const MyTasks = ({history})=>{
 	   },[user.tasks])
 
 
-	const pushBack =()=>{
-		history.push(`./`)
-	}
+	// const pushBack =()=>{
+	// 	history.push(`./`)
+	// }
 	const delTask =(id)=>{
 		dispatch(myTaskDelite(id))
 	}
 
-	const sortTasks =(e)=>{
-		let val = e.target.value
-		dispatch(sortUserTasks(val))
-	}
+	// const sortTasks =(e)=>{
+	// 	let val = e.target.value
+	// 	dispatch(sortUserTasks(val))
+	// }
 	const mainTasksPage =()=>{
 		dispatch(tasksStatus(null))
 		

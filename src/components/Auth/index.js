@@ -8,7 +8,7 @@ import {LoginButton} from '../../Styles/buttons'
 import {Bold, Regular, Light} from '../../Styles/typography'
 import {useDispatch, useSelector} from 'react-redux'
 import { BackendMsg }  from '../../Styles/layout'
-import {errorAuthClear, msgAuthClear}  from "../../redux/actions/auth";
+import {msgAuthClear}  from "../../redux/actions/auth";
 const Auth = () => {
 
 const [error, setError] = useState(0)
@@ -17,7 +17,7 @@ const errorAll = useSelector(state => state.messages.error)
 const msgAll = useSelector(state => state.messages.error)
 const [msg, setMsg] = useState (false)
 const [msgTiming, setMsgTiming] = useState (false)
-const [color, setColor] = useState (false)
+const [color, setColor] = useState ('white')
 const dispatch = useDispatch()
 useEffect(()=>{
     if(errorAll!==""){
@@ -27,36 +27,35 @@ useEffect(()=>{
 },[errorAll])
 useEffect(()=>{
     if(msgAll!==""&&msgAll!==undefined){
-        // console.log(msgAll)
         setMsg(msgAll)
         setColor('red')
     }
 },[msgAll])
 useEffect(()=>{
-    if(error!==''){
-        setMsgTiming(true)
-            setTimeout(()=>{
-                setMsgTiming(false)
-                setTimeout(() => {
-                    setError('')
-                    dispatch(errorAuthClear())
-                }, 100);
-                 
-            },4500)
-    }
+  if(error!==''){
+    let timeoutMsg = setTimeout(()=> setMsgTiming(false) ,3500)
+    setMsgTiming(true)
+    return ()=> {
+      clearTimeout(timeoutMsg)
+    } 
+  }
 },[error])
 useEffect(()=>{
-    if(msg!==''){
-        setMsgTiming(true)
-            setTimeout(()=>{
-                setMsgTiming(false)
-                setTimeout(() => {
-                    dispatch(msgAuthClear()) 
-                    setMsg('')
-            }, 100);
-            },3500)
+  if(msg!==''){
+    let timeoutMsg = setTimeout(()=> setMsgTiming(false) ,3500)
+    setMsgTiming(true)
+    return ()=> {
+      clearTimeout(timeoutMsg)
     }
+  }
 },[msg])
+
+useEffect(()=>{
+  if(!msgTiming){
+    dispatch(msgAuthClear())
+    setMsg('')
+  }
+},[msgTiming])
 
   return (
     <div className={styles.margins}>

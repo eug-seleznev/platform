@@ -58,7 +58,7 @@ const TagSearch = ({func, tagCount}) => {
 			<input
 				value={value}
 				name='tag'
-				autocomplete="off"
+				autoComplete="off"
 				style={{fontFamily:'SuisseIntlThin', fontSize:'16px'}}
 				
 				onClick={(e)=>searchTags(e)}

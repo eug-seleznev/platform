@@ -45,13 +45,7 @@ export const msgAuthClear = ()=>dispatch => {
     
       })
 }
-export const errorAuthClear = ()=>dispatch => {
-    
-  return dispatch({
-      type: CLEAR_ERROR,
-  
-    })
-}
+
 export const login = (formData) => async dispatch  => {
     try {
         const res = await instance.post('/auth', formData)
