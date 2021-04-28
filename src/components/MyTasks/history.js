@@ -29,13 +29,13 @@ const TaskHistory = ({tasks, pushToProject, typeFilter, delTask,onPressEnter}) =
 			
 				{tasks.map((year, i)=>{
 					return(
-						<>
-						{year.month_tasks.length!==0?<Bold size='14' key={i} className={style.date2}>{year.year}</Bold>:''}
+						<NEW_TBODY key={i}>
+						{year.month_tasks.length!==0?<Bold size='14'  className={style.date2}>{year.year}</Bold>:''}
 						{year.month_tasks.map((task,i)=>{
 							return(
 								<>
 								{task.tasks.length!==0?<Light size='14' key={i} className={style.date2} color='#8C8C8C'>{task.month}</Light>:''}
-								<NEW_TBODY>
+								
 								{task.tasks.filter(task=>task.taskStatus && 
 									typeFilter==='Все'?task.taskTitle:
 									typeFilter==='Мои задачи'?!task.project:
@@ -73,11 +73,11 @@ const TaskHistory = ({tasks, pushToProject, typeFilter, delTask,onPressEnter}) =
 											<NEW_TD className={style.type}>{task.project?"Задачи проекта": 'Мои задачи'}</NEW_TD>
 										</NEW_TR>
 									)
-								}).reverse()}</NEW_TBODY>
+								}).reverse()}
 								</>
 							)
 						}).reverse()}
-						</>
+						</NEW_TBODY>
 						
 					)
 					

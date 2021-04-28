@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, } from "react-redux";
 import { addUserToTask, EditTask, finishTask } from "../../../../../redux/actions/projects";
-import { SPRINT_TABLE, TR,Select, SPRINT_TD } from "../../../../../Styles/tables"
+import { SPRINT_TABLE, TR,Select, SPRINT_TD, NEW_THEAD } from "../../../../../Styles/tables"
 import style from "../../../../../Styles/modules/components/Project/newsprint.module.css"
 import { Thin } from "../../../../../Styles/typography";
 import { Input } from "../../../../../Styles/Forms";
@@ -119,13 +119,14 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
 
   return (
     <SPRINT_TABLE onMouseLeave={() => setTaskId("")} >
-      {tasks.map((task) => {
+      <tbody>
+        {tasks.map((task,i) => {
         
         return (
           <TR
             onMouseOver={() => handleHover(task)}
             onClick={() => doubleClickEdit(task)}
-            
+            key={i}
             style={{
               backgroundColor: (task._id === focusRow || task._id === taskId) ? "#F2F2F2" : "white",
               userSelect: 'none'
@@ -157,15 +158,9 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
               </SPRINT_TD>
             ) : (<>
               <SPRINT_TD>{task.taskTitle}</SPRINT_TD>
-              
-              </>
-              
+
+              </> 
             )}
-
-            
-
-
-
             <SPRINT_TD >
               {task.user && team ? (
                
@@ -233,6 +228,8 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
           </TR>
         );
       })}
+      </tbody>
+      
     </SPRINT_TABLE>
   );
 };
