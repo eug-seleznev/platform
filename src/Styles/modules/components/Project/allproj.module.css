@@ -66,6 +66,9 @@
 .turn__off__700{
 	display: flex
 } 
+.turn__off__1280{
+	display: flex
+} 
 .editContractor:hover{
 	color:#3F496C;
 	text-decoration:  underline ;
@@ -93,6 +96,11 @@
 }
 @media(max-width:1450px){
 	.turn__off__1450{
+		display: none
+	}
+}
+@media(max-width:1280px){
+	.turn__off__1280{
 		display: none
 	}
 }

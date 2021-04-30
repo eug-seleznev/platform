@@ -180,7 +180,7 @@ const Projects = ({history,location}) => {
                 
                 <NEW_TH
                   onClick={() => sortFunction("dateStart")}
-                  className={style.turn__off}
+                  className={style.turn__off__1280}
                 >
                   Начало проекта &#8597;
                 </NEW_TH>
@@ -200,9 +200,9 @@ const Projects = ({history,location}) => {
                   </form>
                 </NEW_TH>
                 <NEW_TH  onClick={() => sortFunction("status")} >Статус &#8597;</NEW_TH>
-                <NEW_TH >Объект </NEW_TH>
+                <NEW_TH className={style.turn__off__1280}>Объект </NEW_TH>
                 
-                <NEW_TH className={style.turn__off}>Спринты</NEW_TH>
+                <NEW_TH   onClick={() => sortFunction("crypter")} className={style.turn__off}>Шифр &#8597;</NEW_TH>
             </NEW_TR>
             </NEW_THEAD>
            
@@ -224,7 +224,7 @@ const Projects = ({history,location}) => {
                     title="Открыть проект"
                   >
                     <NEW_TD>{project.title}</NEW_TD>
-                    <NEW_TD className={style.turn__off} style={{whiteSpace:'nowrap'}}>
+                    <NEW_TD className={style.turn__off__1280} style={{whiteSpace:'nowrap'}}>
                       {project.dateStart.slice(0, 10)}
                     </NEW_TD>
                     <NEW_TD style={{whiteSpace:'nowrap'}}>
@@ -254,23 +254,24 @@ const Projects = ({history,location}) => {
                         }
                       ></Tag>
                     </NEW_TD>
-                    <NEW_TD style={{ paddingTop: "10px" }}>
+                    <NEW_TD  style={{ paddingTop: "10px" }}>
                       {project.status ? (
                         <Tag tagText="Завершен" tagColor="#F1EFEF"></Tag>
                       ) : (
                         <Tag tagText="В работе" tagColor="#CCE9C8"></Tag>
                       )}
                     </NEW_TD>
-                    <NEW_TD style={{ paddingTop: "10px" }}>
+                    <NEW_TD className={style.turn__off__1280} style={{ paddingTop: "10px" }}>
                       {project.object}
                     </NEW_TD>
-                    <NEW_TD className={style.turn__off}>
-                      {project.sprints.filter((sprint) => !sprint.status)
+                    <NEW_TD style={{whiteSpace:'nowrap'}} className={style.turn__off}>
+                    {project.crypter}
+                      {/* {project.sprints.filter((sprint) => !sprint.status)
                         .length >= 1 ? (
                         <Circle color="green" />
                       ) : (
                         <Circle color="red" />
-                      )}
+                      )} */}
                     </NEW_TD>
                   </NEW_TR>
                 );
