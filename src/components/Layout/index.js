@@ -19,7 +19,7 @@ const Layout = ({ histCurrent}) => {
     const [msgTiming, setMsgTiming] = useState (false)
     const [currentElem, setCurrentElem] = useState (false)
     const [currentTitle, setCurrentTitle] = useState (false)
-    const [color, setColor] = useState ('white')
+    const [color, setColor] = useState ('rgba(0,0,0,0)')
     const [status, setStatus] = useState (false)
   
     useEffect(()=>{

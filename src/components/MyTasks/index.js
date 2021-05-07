@@ -32,8 +32,8 @@ const MyTasks = ({history})=>{
 		setCurrentMonth(getCurrentMonth(Date.now()))
 		setCurrentDate(getDate(Date.now()))
 		return () => {
-		  dispatch(background('#ECECEC'))
-		  dispatch(loadUser())
+		//   dispatch(background('#ECECEC'))
+		//   dispatch(loadUser())
 		  dispatch (tasksStatus(false))
 		}
 		
@@ -56,7 +56,7 @@ const MyTasks = ({history})=>{
 		dispatch(myTaskDelite(id))
 	}
 	const pushToProject =(link)=>{
-		history.push(`./projects/${link}`)
+		history.push(`./projects/${link}/main`)
 	}
 	const sortTasks =(e)=>{
 		let val = e.target.value

@@ -17,7 +17,7 @@ const errorAll = useSelector(state => state.messages.error)
 const msgAll = useSelector(state => state.messages.error)
 const [msg, setMsg] = useState (false)
 const [msgTiming, setMsgTiming] = useState (false)
-const [color, setColor] = useState ('white')
+const [color, setColor] = useState ('rgba(0,0,0,0)')
 const dispatch = useDispatch()
 useEffect(()=>{
     if(errorAll!==""){

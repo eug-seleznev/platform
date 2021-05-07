@@ -6,7 +6,7 @@ import myTasks from '../../../Styles/modules/main/mytasksSmall.module.css'
 import { useEffect, useState } from 'react'
 import ProjTasks from './portableProj'
 import { useDispatch, useSelector } from 'react-redux'
-import { background, myTaskDelite, sortUserTasks, tasksStatus } from '../../../redux/actions/user'
+import { background, myTaskDelite, sortUserTasks, tasksStatus, cursorStatus} from '../../../redux/actions/user'
 import getCurrentMonth from './../getCurrentMonth'
 import { finishUserTask } from "../../../redux/actions/user"
 import getDate from '../../Projects/getDate'
@@ -17,13 +17,13 @@ import TaskLoader from './../loader'
 import { getUserTasks, loadUser } from '../../../redux/actions/auth'
 import { Link } from 'react-router-dom'
 
-// import {Link, NavLink } from 'react-router-dom'
+// import { Link, NavLink } from 'react-router-dom'
 const MyTasks = ({history})=>{
-	const [pages, setPages]= useState('/all')
+	const [pages, setPages]= useState('/today')
 	const [currentMonth, setCurrentMonth] =useState('')
 	const [currentDate, setCurrentDate] =useState('')
 	const [projList,setProjList] =useState([])
-	const [typeFilter, setTypeFilter] = useState ('Все')
+
 
 	const dispatch = useDispatch();
 	const user = useSelector(state=>state.auth.user)
@@ -32,9 +32,9 @@ const MyTasks = ({history})=>{
 		setCurrentMonth(getCurrentMonth(Date.now()))
 		setCurrentDate(getDate(Date.now()))
         dispatch(getUserTasks())
-		return () => {
-          dispatch(loadUser())
-		}
+		// return () => {
+        //   dispatch(loadUser())
+		// }
 		
 	  }, [])
 	  useEffect(()=>{
@@ -73,17 +73,11 @@ const MyTasks = ({history})=>{
 	return(
 		
 			<TaskLoader>
-				<div className={modelsCss.main}>	
+				<div className={modelsCss.main}
+					onMouseEnter={()=>{dispatch(cursorStatus(true))}}
+					onMouseLeave={()=>{dispatch(cursorStatus(false))}}
+				>	
 					<div className={myTasks.main}>
-						<Light fontSize='16px'
-                        color='white'
-							style={{fontWeight:pages==='/all'?'bold':'',
-                            cursor:'pointer', 
-                            borderBottom:pages==='/all'?'4px solid white':'4px solid transparent'}}
-							className={myTasks.options__button} 
-							onClick={()=>{setPages('/all')}}>
-							Проектные
-						</Light>
 						<Light fontSize='16px' 
                         color='white'
 							style={{fontWeight:pages==='/today'?'bold':'',
@@ -93,6 +87,16 @@ const MyTasks = ({history})=>{
 							onClick={()=>{setPages('/today')}}>
 							Мои
 						</Light>
+						<Light fontSize='16px'
+                        color='white'
+							style={{fontWeight:pages==='/all'?'bold':'',
+                            cursor:'pointer', 
+                            borderBottom:pages==='/all'?'4px solid white':'4px solid transparent'}}
+							className={myTasks.options__button} 
+							onClick={()=>{setPages('/all')}}>
+							Проектные
+						</Light>
+						
 						<Light fontSize='16px'
                             color='white'
 							style={{fontWeight:pages==='/deferred'?'bold':'',

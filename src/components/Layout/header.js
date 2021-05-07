@@ -3,7 +3,7 @@
 import {  useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { tasksStatus } from '../../redux/actions/user'
+import { cursorStatus, tasksStatus } from '../../redux/actions/user'
 import {Header, ItemHead} from '../../Styles/layout'
 import {Bold} from '../../Styles/typography'
 import { url } from '../utils/axios'
@@ -52,6 +52,8 @@ const HeaderL = ({addPodsos, createProj, createNews, createTicket, tasks}) => {
               
                 <div
                 onClick={()=>{dispatch(tasksStatus(!tasks))}}
+                onMouseEnter={()=>{dispatch(cursorStatus(true))}}
+                onMouseLeave={()=>{dispatch(cursorStatus(false))}}
                 style={{textDecoration:'none',display:`${tasks===null?'none':'flex'}`}}
               >
                 

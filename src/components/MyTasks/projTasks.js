@@ -9,7 +9,7 @@ import style from "../../Styles/modules/main/mytasks.module.css"
 
 
 
-const ProjTasks =({tasks, month,onChange,pushToProject})=>{
+const ProjTasks =({tasks, month,onChange,pushToProject, mainPage})=>{
  	// const dispatch = useDispatch()
 	
 
@@ -22,14 +22,14 @@ const ProjTasks =({tasks, month,onChange,pushToProject})=>{
 		<NEW_TABLE style={{width:'100%'}}>
 			<NEW_THEAD>
 				<NEW_TR className={style.mytask__tr__nohover}>
-					<NEW_TH>Задача</NEW_TH>
-					<NEW_TH className={style.deadline}>Дедлайн</NEW_TH>
-					<NEW_TH className={style.mobile__resize}>Проект</NEW_TH>
-					<NEW_TH className={style.mobile__resize}>Назначил</NEW_TH>
+					<NEW_TH  className={style.task}>Задача</NEW_TH>
+					<NEW_TH  className={style.deadline}>Дедлайн</NEW_TH>
+					<NEW_TH  className={style.mobile__resize}>Проект</NEW_TH>
+					<NEW_TH style={{display:`${mainPage?'none':'block'}`}} className={style.mobile__resize}>Назначил</NEW_TH>
 				</NEW_TR>
 			</NEW_THEAD>
-			<InWork onChange={onChange} tasks={tasks} pushToProject={pushToProject}/>
-			<TaskDone onChange={onChange} month={month} tasks={tasks} pushToProject={pushToProject}/>
+			<InWork mainPage={mainPage} onChange={onChange} tasks={tasks} pushToProject={pushToProject}/>
+			<TaskDone mainPage={mainPage}  onChange={onChange} month={month} tasks={tasks} pushToProject={pushToProject}/>
 		</NEW_TABLE>
 		</>
 			

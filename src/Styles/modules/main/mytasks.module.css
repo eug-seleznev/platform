@@ -38,9 +38,20 @@
 	border-bottom: 1px solid grey!important;
 	color: grey;
 }
+.mobile__resize {
+	text-align: start!important;
+	
+}
+.task {
+	text-align: start!important;
+}
+.deadline {
+	text-align: start!important;
+}
 .mytask__tr:hover{
 
 	cursor: default;
+	
 }
 .mytask__tr__nohover:hover{
 	background: none!important;

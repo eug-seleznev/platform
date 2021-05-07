@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { allNews } from '../../redux/actions/news';
 import { allProjects } from '../../redux/actions/projects';
 import { useEffect } from 'react'
-import { loadUser } from '../../redux/actions/auth'
+import { getUserTasks, loadUser } from '../../redux/actions/auth'
 import { Redirect } from 'react-router-dom'
 import ProjectsBlock from './projectsBlock'
 import NewsBlock from './newsBlock'
@@ -24,7 +24,7 @@ const Main = ({history}) => {
 
 useEffect(() => {
   if(!tasksStatus) {
-    dispatch(loadUser());
+    dispatch(getUserTasks());
   }
     
     dispatch(allNews());
@@ -37,7 +37,7 @@ useEffect(() => {
 useEffect(()=>{   
   
         if(!tasksStatus) {
-    dispatch(loadUser());
+    dispatch(getUserTasks());
   }
  
 },[reloadSprints])

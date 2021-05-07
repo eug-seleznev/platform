@@ -52,6 +52,7 @@ import ProjectHelper from "./components/Projects/Project/Helper";
 import IdeaaHelper from "./components/Roadmap/Routing";
 import KPI from './components/KPI';
 import { getStat, WeeklyTask } from './redux/actions/stat';
+import { tasksStatus } from './redux/actions/user';
 
 
 const App = () => {
@@ -61,6 +62,8 @@ const App = () => {
   const auth = useSelector(state => state.auth.isAuthenticated)
   const background = useSelector(state => state.users.background)
   const style = useSelector(state => state.users.style)
+  const cursorTasks = useSelector(state=>state.users.cursorStatus)
+  const taskStatus = useSelector(state=>state.users.tasksStatus)
   //chek auth token on render
   useEffect(() => {
     
@@ -77,7 +80,13 @@ const App = () => {
 
 
   return (
-    <div className="App" style={{ backgroundColor: 'white' }}>
+    <div className="App" style={{ backgroundColor: 'white' }} 
+      onClick={()=>{
+        if(!cursorTasks&&taskStatus) {
+          dispatch(tasksStatus(false))
+        }
+      }}
+    >
       <Router history={history}>
         {!auth ? (
           <LoginContainer>
