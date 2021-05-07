@@ -16,7 +16,7 @@ const InWork =({tasks, onChange, pushToProject, mainPage})=>{
 	return(
 			<NEW_TBODY>
 				<NEW_TR className={style.mytask__tr__nohover}>
-					<NEW_TD >В работе {tasks.filter(task=>task.project && !task.taskStatus).length===0?'нет задач':''}</NEW_TD>
+					<NEW_TD >{tasks.filter(task=>task.project && !task.taskStatus).length===0?'Все задачи выполнены':''}</NEW_TD>
 				</NEW_TR>
 				<NEW_TR className={style.mytask__tr__nohover}>
 					<NEW_TD > </NEW_TD>
