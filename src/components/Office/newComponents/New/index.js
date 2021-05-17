@@ -1,32 +1,55 @@
-import {  useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Form from './form'
 import Ideas from "./Ideas";
-import Boat from "../../Illustration/boat.png";
-import { ModalContainer } from "../../../Styles/common";
-import { Light } from "../../../Styles/typography";
-import { deleteIdea, moveIdea } from "../../../redux/actions/ideas";
+import Boat from "../../../Illustration/boat.png";
+import { inWork, Reverse, ReverseDate } from "../../../../redux/actions/office";
+import { ModalContainer } from "../../../../Styles/common";
+import SearchUser from "../../searchUser";
+import { Light } from "../../../../Styles/typography";
 
 
 const New = () => {
   const dispatch = useDispatch()
+  const [filter, setFilter] = useState('');
   const [selectedIdea, setSelectedIdea] = useState(null)
-  const [filter, setFilter] = useState('')
+  const [id, setId] = useState (null)
+  const [modal, setModal] = useState(false)
   const [onBoard, setOnBoard] = useState (false)
-  const new_ideas = useSelector(state => state.ideas.new)
+  const new_ideas = useSelector(state => state.office.data)
+  const reload = useSelector(state => state.office.reload)
+  let isInitial;
+  useEffect(()=>{
+    setFilter('like')
+    isInitial = true;
+    dispatch(Reverse({isInitial}))
+    
+},[])
+const addExecutor =(id) =>{
+  setModal(true) 
+  setId(id)
+}
+const workDispatch =(user)=>{
+  // console.log(user)
+  dispatch(inWork(id, user))
+  setModal(false)
+}
+useEffect(()=>{
 
 
-const workDispatch =(id)=>{
-  // dispatch(inWorkPlatform(id))
-}
-const ideaDelete =(id)=>{
-  dispatch(deleteIdea(id))
-}
-const inWork =(id)=>{
-  let type = 1
-  dispatch(moveIdea({id,type}))
-}
+  if (filter==='like'){
+      isInitial = true
+      
+      return dispatch(Reverse({isInitial}))
+  } if (filter==='date'){
+      isInitial = true
 
+      return dispatch(ReverseDate({isInitial}))
+  }
+
+
+},[reload])
+    if(new_ideas) isInitial=false;
     return (
       <div>
         {/* header */}
@@ -37,7 +60,7 @@ const inWork =(id)=>{
               marginTop: "-50px",
             }}
           >
-            <h2> Помогите нам улучшить платформу</h2>
+            <h2> Предложения для офиса</h2>
 
             <p
               style={{
@@ -45,11 +68,14 @@ const inWork =(id)=>{
                 marginBottom: "40px",
               }}
             >
-              Тут можно создавать и голосовать за функционал, который вы хотите
-              увидеть в следующем релизе
+              Тут можно предлагать и голосовать за вещи, которые вы хотите увидеть в офисе.
             </p>
           </div>
         </div>
+        {!modal?'':
+                    <ModalContainer>
+                        <SearchUser func={workDispatch}/>
+                    </ModalContainer>}
         {selectedIdea?
         <ModalContainer onClick={()=>!onBoard?setSelectedIdea(null):''}>
             <div onMouseEnter={()=>{setOnBoard(true)}} onMouseLeave={()=>{setOnBoard(false)}}
@@ -57,7 +83,7 @@ const inWork =(id)=>{
                 <Light size='25'>{selectedIdea}</Light>
             </div>
         </ModalContainer>:''
-        }
+        } 
         <div
           style={{
             width: "65vw",
@@ -82,8 +108,8 @@ const inWork =(id)=>{
               // backgroundColor: "rgba(21,43,25,0.6)",
             }}
           >
-            {new_ideas.length ? (
-              new_ideas.map((idea, ind) => {
+            {new_ideas && new_ideas.length ? (
+              new_ideas.filter(el=>el.status==0).map((idea, ind) => {
                 return (
                   <div
                     key={ind}
@@ -91,7 +117,7 @@ const inWork =(id)=>{
                       paddingBottom: "5px",
                     }}
                   >
-                    <Ideas status='new' inWork={inWork} ideaDelete={ideaDelete} status='new' idea={idea} setSelected={setSelectedIdea} />
+                    <Ideas addExecutor={addExecutor} status='new' idea={idea} setSelected={setSelectedIdea} />
                   </div>
                 );
               })

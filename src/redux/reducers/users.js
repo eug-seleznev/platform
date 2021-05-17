@@ -1,6 +1,6 @@
 
 
-import { ALL_USERS,DELETE_CONTRACTOR, CHANGE_CONTAINER,SEARCH_TABLE_USER,FIND_CONTRACTOR, CHANGE_PERMISSION,EDIT_CONTRACTOR,ONE_CONTRACTOR,PERM_RETURN,ONE_USER, CLEAR_ERROR, CLEAR_MSG, SEARCH_USER, ADD_CONTRACTOR, ALL_CONTRACTORS, PARTITION_UPDATE, BACK_WHITE} from '../types'
+import { CHANGE_TASKS_STATUS,ALL_USERS,DELETE_CONTRACTOR, CHANGE_CONTAINER,SEARCH_TABLE_USER,FIND_CONTRACTOR, CHANGE_PERMISSION,EDIT_CONTRACTOR,ONE_CONTRACTOR,PERM_RETURN,ONE_USER, CLEAR_ERROR, CLEAR_MSG, SEARCH_USER, ADD_CONTRACTOR, ALL_CONTRACTORS, PARTITION_UPDATE, BACK_WHITE} from '../types'
 
 
 
@@ -15,6 +15,7 @@ const initialState = {
     contractors: [],
     background:'#ECECEC',
     contractor:null,
+    tasksStatus:false,
     style:{}
 }
 
@@ -88,6 +89,14 @@ export default function(state = initialState, action) {
                 ...state,
                 user: payload,
                 userLoaded: true
+            }
+        
+        case CHANGE_TASKS_STATUS:
+            console.log(payload)
+            return {
+                ...state,
+                tasksStatus: payload,
+                
             }
         case ONE_CONTRACTOR:
             return {

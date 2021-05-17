@@ -184,14 +184,30 @@ font-size: 16px;
 }
 `
 
-
+export const TasksContainer = styled.div`
+  display: block;
+  position: fixed;
+  width: 450px;
+  left:auto;
+  right:0px;
+  margin-top:67px;
+  min-height: 100vh;
+  padding-top: 43px;
+  z-index: 9999;
+  color: white;
+  background-color: #3F3F3F;
+  text-align: center;
+  @media (max-width: 1000px) {
+    display: none;
+  }
+`;
 
 export const SidebarContainer = styled.div`
   display: block;
   position: fixed;
-  width: 67px;
+  width: 45px;
   min-height: 100vh;
-  padding-top: 18px;
+  padding-top: 73px;
   z-index: 9999;
   background-color: #1c1e23;
   text-align: center;
@@ -214,7 +230,7 @@ text-align:center;
 
 img{
     margin:0;
-   
+    margin-bottom:30px
 }
     img.sidebar__logo{
         margin-bottom: 30px;

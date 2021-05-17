@@ -79,7 +79,7 @@ export const sortProjects = ({ query, orderSort }) => async (dispatch) => {
       payload: res.data,
     });
   } catch (err) {
-    alert("hahaha classic");
+    alert("oops classic");
   }
 };
 export const addProjToChosen = (id) => async (dispatch) => {

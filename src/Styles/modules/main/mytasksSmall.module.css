@@ -1,0 +1,32 @@
+.main {
+    width: 450px;
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    border-bottom: 1px solid white;
+    margin-bottom: 20px;
+}
+.input {
+    height: 40px!important;
+    width: 91%!important;
+    color: white!important;
+    background-color: #555555;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    border: none!important;
+    font-size: 17px;
+}
+.input::placeholder {
+    color: #BCBCBC!important;
+}
+.options__button {
+    padding-bottom: 13px;
+    
+
+}
+.taskLink {
+    margin-top: 30px;
+    margin-right: 20px;
+    text-align: end;
+    cursor: pointer;
+}

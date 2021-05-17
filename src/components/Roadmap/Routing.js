@@ -16,7 +16,7 @@ const Routing = ({match}) => {
           <Header />
           <Route exact path={`${match.path}/new`} component={New} />
           <Route exact path={`${match.path}/work`} component={Work} />
-          <Route exact path={`${match.path}/complited`} component={Done} />
+          <Route exact path={`${match.path}/done`} component={Done} />
           <Route exact path={`${match.path}/dashboard`} component={Dashboard} />
         </Loader>
     );
