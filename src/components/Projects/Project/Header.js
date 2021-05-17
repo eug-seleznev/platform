@@ -23,7 +23,7 @@ const Header = ({history, crypt}) => {
         history.push(`/projects/${crypt}/${name}`)
     }
     useEffect (()=> {
-      favProjects
+      favProjects && favProjects
       .filter(fav => fav._id===project._id)
       .map(()=>setStatus(true))
 
@@ -71,6 +71,9 @@ const Header = ({history, crypt}) => {
 
             <Thin style={{cursor:'pointer',borderBottom:`${nameV==="models"?'2px solid white':'2px solid transparent'}`,width:'40px', fontFamily:`${nameV==="models"?'SuisseIntlRegular':'SuisseIntlThin'}`}} color='white' name="models" onClick={(e) => handleRedirect("models")}>
               Модели
+            </Thin>
+            <Thin style={{cursor:'pointer',borderBottom:`${nameV==="kanban"?'2px solid white':'2px solid transparent'}`,width:'40px', fontFamily:`${nameV==="models"?'SuisseIntlRegular':'SuisseIntlThin'}`}} color='white' name="kanban" onClick={(e) => handleRedirect("kanban")}>
+              Задачи
             </Thin>
             <Thin style={{cursor:'pointer',borderBottom:`${nameV==="tasks"?'2px solid white':'2px solid transparent'}`,width:'40px', fontFamily:`${nameV==="tasks"?'SuisseIntlRegular':'SuisseIntlThin'}`}} color='white' name="tasks" onClick={(e) => handleRedirect("tasks")}>
               Спринты

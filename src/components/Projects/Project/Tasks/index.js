@@ -24,7 +24,7 @@ import getDate from "../../getDate";
 
 
 
-const Sprints = () => {
+const Kanban = () => {
     const project = useSelector(state => state.projects.project)
 
     return (
@@ -111,4 +111,4 @@ const Sprints = () => {
 
 
 
-export default Sprints
+export default Kanban

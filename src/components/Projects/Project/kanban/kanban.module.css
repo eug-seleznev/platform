@@ -1,0 +1,46 @@
+.main{
+    /* background-color: blue; */
+    margin-left: -105px;
+    margin-right: -50px;
+    display: grid;
+    min-height: 100vh;
+}
+.backLog{
+ background-color: #3F4659;
+ color: white;
+}
+.content{
+/* background-color: coral; */
+padding-top: 70px;
+}
+    .section{
+        overflow: hidden;
+    }
+    .title{
+        background-color: #FCFCFC;
+        border-top: 1px solid #D9EFF5;
+        border-bottom: 1px solid #D9EFF5;
+        font-family: SuisseIntlRegular;
+        margin-bottom: 10px;
+        height: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .tr{
+        display: grid;
+        grid-template-columns: 1fr repeat(3, minmax(max-content, 1fr)) 1fr;
+        column-gap: 50px;
+    }
+        .td{
+            border-left: 2px solid #8b97c2;
+            padding-left: 15px;
+        }
+
+
+.card{
+    background-color: cornflowerblue;
+    width: 222px;
+    height: 50px;
+    margin-bottom: 10px;
+}
