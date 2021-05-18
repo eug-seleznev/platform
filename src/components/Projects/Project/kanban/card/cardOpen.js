@@ -1,7 +1,9 @@
 
-import AddTask from '../../Tasks/Sprint/AddTask'
+import AddTask from './components/AddTask'
 import styles from './card.module.css'
 import CardEditor from './components/CardEditor';
+import TaskTable from './components/TaskTable';
+import Comments from './components/Comments';
 
 
 
@@ -17,6 +19,9 @@ const CardOpen = ({close}) => {
         <div className={styles.cardOpnenContainer} onClick={(e)=>e.stopPropagation()}>
 
             <CardEditor></CardEditor>
+            <TaskTable></TaskTable>
+            <AddTask></AddTask>
+            <Comments></Comments>
         </div>
       </div>
     );    
