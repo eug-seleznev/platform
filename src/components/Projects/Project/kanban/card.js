@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { createDispatchHook, useSelector } from "react-redux"
 
 
 
@@ -18,9 +18,14 @@ import CardOpen from "./cardOpen";
 const KanbanCard = () => {
     const [cardOpen, setCardOpen] = useState(false)
 
+    const cardClick = (e) => {
+      e.stopPropagation()
+      setCardOpen(true)
+    }
+
     return (
       <>
-      <div className={styles.card} onClick={()=>setCardOpen(true)}>
+      <div className={styles.card} onClick={(e)=>cardClick(e)}>
         card content
       </div>
 
