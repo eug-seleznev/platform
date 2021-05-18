@@ -3,7 +3,6 @@ import {innerBackend, instance, setAuthToken} from '../../components/utils/axios
 
 
 
-
 // LOAD USER 
 export const loadUser = () => async dispatch => {
 
@@ -139,8 +138,8 @@ export const changeData = (formData) => async dispatch  => {
 }
 export const changeAvatar = (file) => async dispatch  => {
 
-
   try {
+    console.log('file is here::::::',file)
   
   const form = new FormData()
   if(file){
@@ -156,6 +155,8 @@ export const changeAvatar = (file) => async dispatch  => {
 
 
       const res = await innerBackend.put(`/users/me/a`, form)
+console.log('res is here::::::',res.data)
+
       dispatch({
           type: CHANGE_AVATAR,
           payload: res.data

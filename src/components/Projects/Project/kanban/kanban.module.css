@@ -1,0 +1,62 @@
+.main{
+    /* background-color: blue; */
+    margin-left: -105px;
+    margin-right: -50px;
+    display: grid;
+    min-height: 100vh;
+}
+.backLog{
+ background-color: #3F4659;
+ display: flex;
+ justify-content: space-between;
+}
+    .verticalText{
+        height: max-content;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg);
+        margin-right: 10px;
+        margin-left: 5px;
+        margin-top: 30px;
+        color: white;
+
+    }
+    .backLogCards{
+        margin: 25px;
+        margin-top: 40px;
+    }
+.content{
+/* background-color: coral; */
+padding-top: 70px;
+}
+    .section{
+        overflow: hidden;
+    }
+    .title{
+        background-color: #FCFCFC;
+        border-top: 1px solid #D9EFF5;
+        border-bottom: 1px solid #D9EFF5;
+        font-family: SuisseIntlRegular;
+        margin-bottom: 10px;
+        height: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .tr{
+        display: grid;
+        grid-template-columns: 1fr 480px 480px 250px 1fr;
+        column-gap: 50px;
+    }
+        .titleTd{
+            border-left: 2px solid #8b97c2;
+            padding-left: 15px;
+        }
+        .td{
+            border-left: 2px solid #8b97c2;
+            padding-left: 15px;
+            display: grid;
+            column-gap: 10px;
+        }
+
+

@@ -3,7 +3,7 @@ import axios from 'axios'
 
 
 export const url = process.env.REACT_APP_IP;
-
+// console.log(url, 'utl')
 
 
 
