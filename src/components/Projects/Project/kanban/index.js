@@ -21,15 +21,24 @@ const Sprints = () => {
     const [sideOpen, setSideOpen] = useState(false)
 
     return (
-      <div className={styles.main} style={{gridTemplateColumns: sideOpen? '386px 1fr' : '50px 1fr'}}>
+      <div className={styles.main} style={{gridTemplateColumns: sideOpen? '386px 1fr' : 'max-content 1fr'}}>
         <div 
           className={styles.backLog} 
           onClick={()=>setSideOpen(!sideOpen)}
           >
-          тут 
+            <div className={styles.backLogCards} style={{display: sideOpen? 'block' : 'none'}}>
+              <KanbanCard />
+              <KanbanCard />
+              <KanbanCard />
+              <KanbanCard />
+            </div>
+            <div className={styles.verticalText}>
+              Все задачи
+            </div>
+         
         </div>
         <div className={styles.content}>
-          <KanbanSection />
+          <KanbanSection main />
           <KanbanSection />
           <KanbanSection />
           <KanbanSection />

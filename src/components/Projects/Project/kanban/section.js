@@ -15,7 +15,7 @@ import KanbanCard from "./card";
 
 
 
-const KanbanSection = () => {
+const KanbanSection = ({main}) => {
     const project = useSelector(state => state.projects.project)
     const [open, setOpen] = useState(false)
 
@@ -23,6 +23,7 @@ const KanbanSection = () => {
   
         <div className={styles.section} style={{height: open? 'max-content' : '30px'}}>
           <div className={styles.title} onClick={()=>setOpen(!open)}>
+            {!main? 
             <div className={styles.tr}>
                 <span/>
                 <div>
@@ -31,17 +32,30 @@ const KanbanSection = () => {
                 <span/>
                 <span/>
                 <span/>
-            </div> 
-            
+            </div> :
+            <div className={styles.tr}>
+              <span/>
+                <div className={styles.titleTd}>
+                    В работе
+                </div>
+                <div className={styles.titleTd}>
+                    Готово
+                </div>
+                <div className={styles.titleTd}>
+                    Просрочено
+                </div>
+                <span/>
+            </div>
+            }
           </div>
           <div className={styles.tr}>
             <span/>
-            <div className={styles.td}>
+            <div className={styles.td} style={{gridTemplateColumns:'max-content max-content'}}>
               <KanbanCard />
               <KanbanCard />
               <KanbanCard />
             </div>
-            <div className={styles.td}>
+            <div className={styles.td} style={{gridTemplateColumns:'max-content max-content'}}>
               <KanbanCard />
             </div>
             <div className={styles.td}>

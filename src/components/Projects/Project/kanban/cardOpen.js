@@ -9,29 +9,24 @@ import { Select, NEW_TABLE, NEW_TBODY, NEW_THEAD, NEW_TD, NEW_TH, NEW_TR } from 
 import { Light } from "../../../../Styles/typography";
 import Tag from "../../components/OneProject/tag";
 import getDate from "../../getDate";
-import CardOpen from "./cardOpen";
 
 
 
 
 
-const KanbanCard = () => {
-    const [cardOpen, setCardOpen] = useState(false)
+const CardOpen = ({data, close}) => {
 
+
+    
     return (
-      <>
-      <div className={styles.card} onClick={()=>setCardOpen(true)}>
-        card content
+      <div className={styles.cardOpnenBackground} onClick={close}>
+        <div className={styles.cardOpnenContainer} onClick={(e)=>e.stopPropagation()}>
+            {data}
+        </div>
       </div>
-
-
-      {cardOpen && 
-        <CardOpen data={'task data'} close={()=>setCardOpen(false)} />
-      }
-      </>
     );    
 }
 
 
 
-export default KanbanCard
+export default CardOpen
