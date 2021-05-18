@@ -9,7 +9,7 @@ import { Select, NEW_TABLE, NEW_TBODY, NEW_THEAD, NEW_TD, NEW_TH, NEW_TR } from 
 import { Light } from "../../../../Styles/typography";
 import Tag from "../../components/OneProject/tag";
 import getDate from "../../getDate";
-import KanbanCard from "./card";
+import KanbanCard from "./card/card";
 
 
 
