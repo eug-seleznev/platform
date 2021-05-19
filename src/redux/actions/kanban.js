@@ -1,5 +1,5 @@
 import { innerBackend, } from "../../components/utils/axios";
-import {ADD_NEW_CARD, ERROR_MSG,CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION} from "../types";
+import {ADD_NEW_CARD, ERROR_MSG,CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD} from "../types";
 export const currentCard = (info) => async dispatch  => {
     dispatch({
         type: CHANGE_CARD,
