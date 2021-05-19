@@ -22,20 +22,22 @@ import CreateForm from "./createForm";
 const Sprints = () => {
   const dispatch =useDispatch ()
   const project = useSelector(state=>state.projects.project)
+  const backlog = useSelector(state=>state.projects.backlog)
   const [createOpen, setCreateOpen] =useState ({
     status:false,
     place:'backlog'
 })
     const [sideOpen, setSideOpen] = useState(false)
-    
+    useEffect(()=>{
+      console.log(backlog)
+    },[backlog])
     return (
       <div className={styles.main} style={{gridTemplateColumns: sideOpen? '386px 1fr' : 'max-content 1fr'}}>
         <div 
           className={styles.backLog} 
           onClick={()=>setSideOpen(!sideOpen)}
           >
-            <Backlog setCreateOpen={setCreateOpen} sideOpen={sideOpen}></Backlog>
-           
+          <Backlog backlog={backlog} setCreateOpen={setCreateOpen} sideOpen={sideOpen}></Backlog>
             <div className={styles.verticalText}>
               Все задачи
             </div>
