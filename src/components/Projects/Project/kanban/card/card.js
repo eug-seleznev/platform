@@ -42,8 +42,8 @@ const KanbanCard = ({info}) => {
       </div>
 
 
-      {cardOpen && 
-        <CardOpen info={info} data={'task data'} close={()=>setCardOpen(false)} />
+      {cardOpen && info && 
+        <CardOpen isOpen={cardOpen} info={info} data={'task data'} close={()=>setCardOpen(false)} />
       }
       </>
     );    

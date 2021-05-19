@@ -16,6 +16,9 @@ export const ADD_NEW_ROW ='ADD_NEW_ROW'
 export const ADD_NEW_COLUMN ='ADD_NEW_COLUMN'
 export const ADD_NEW_CARD ='ADD_NEW_CARD'
 export const MOVE_CARD ='MOVE_CARD'
+export const CHANGE_CARD_TITLE ='CHANGE_CARD_TITLE'
+export const CHANGE_CARD_DESCRIPTION ='CHANGE_CARD_DESCRIPTION'
+export const CHANGE_CARD = 'CHANGE_CARD'
 //USERES
 export const ALL_USERS = 'users';
 export const GET_EMPLOYE = 'get_users';
