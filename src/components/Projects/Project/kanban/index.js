@@ -22,6 +22,7 @@ import CreateForm from "./createForm";
 const Sprints = () => {
   const dispatch =useDispatch ()
   const project = useSelector(state=>state.projects.project)
+  console.log('project',project)
   const backlog = useSelector(state=>state.projects.backlog)
   const [createOpen, setCreateOpen] =useState ({
     status:false,

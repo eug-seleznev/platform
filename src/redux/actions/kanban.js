@@ -32,11 +32,11 @@ export const addNewBoard = (crypt, name) => async dispatch  => {
 
 export const addNewRow = (board_id, formData) => async dispatch  => {
     
-    let body ={
-        name:string,
-        step:number,
-        start:date,
-        end:date}
+    // let body ={
+    //     name:string,
+    //     step:number,
+    //     start:date,
+    //     end:date}
     try {
         const res = await innerBackend.post(`/kanban/categories/new/${board_id}`,formData )
         dispatch({

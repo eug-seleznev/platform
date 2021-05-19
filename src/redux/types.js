@@ -11,7 +11,11 @@ export const AUTH_ERROR ='auth_error';
 /////////////////////////////
 
 //kanban
+export const ADD_NEW_BOARD ='ADD_NEW_BOARD'
+export const ADD_NEW_ROW ='ADD_NEW_ROW'
+export const ADD_NEW_COLUMN ='ADD_NEW_COLUMN'
 export const ADD_NEW_CARD ='ADD_NEW_CARD'
+export const MOVE_CARD ='MOVE_CARD'
 //USERES
 export const ALL_USERS = 'users';
 export const GET_EMPLOYE = 'get_users';
