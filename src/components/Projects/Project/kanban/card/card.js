@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import styles from './card.module.css'
 
@@ -10,14 +10,16 @@ import CardOpen from "./cardOpen";
 
 
 
-const KanbanCard = () => {
+const KanbanCard = ({info}) => {
     const [cardOpen, setCardOpen] = useState(false)
 
     const cardClick = (e) => {
       e.stopPropagation()
       setCardOpen(true)
     }
-
+    useEffect(()=>{
+      console.log (info)
+    },[info])
     return (
       <>
       <div className={styles.card}
@@ -27,10 +29,10 @@ const KanbanCard = () => {
         <div className={styles.card__circuit}
         style={{backgroundColor:'green'}}></div>
         <div className={styles.card__content}>
-          <Light size='16' style={{padding:'5px'}}>Кекция 1</Light>
+          <Light size='16' style={{padding:'5px'}}></Light>
           <div className={styles.card__content__second} >
             <div style={{display:'flex'}}>
-              <Light size='12' >Обычная  </Light>
+              <Light size='12' > </Light>
               <Light size='12' >3/7</Light>
             </div>
             <div style={{borderRadius:'100%',backgroundColor:'grey',width:'20px',height:'20px'}}>
@@ -41,7 +43,7 @@ const KanbanCard = () => {
 
 
       {cardOpen && 
-        <CardOpen data={'task data'} close={()=>setCardOpen(false)} />
+        <CardOpen info={info} data={'task data'} close={()=>setCardOpen(false)} />
       }
       </>
     );    
