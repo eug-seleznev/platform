@@ -45,8 +45,8 @@ padding-top: 70px;
     }
     .tr{
         display: grid;
-        grid-template-columns: 1fr 480px 480px 250px 1fr;
-        column-gap: 50px;
+        grid-template-columns: 1fr 530px 530px 250px 1fr;
+        /* column-gap: 50px; */
     }
         .titleTd{
             border-left: 2px solid #8b97c2;
@@ -56,7 +56,17 @@ padding-top: 70px;
             border-left: 2px solid #8b97c2;
             padding-left: 15px;
             display: grid;
+            grid-template-rows: max-content;
             column-gap: 10px;
+        }
+        .addGhost{
+            background-color: white;
+            min-width: 222px;
+            height: 50px;
+            margin-bottom: 10px;
+            border: 1px solid grey;
+            border-radius: 8PX;
+  
         }
 
 

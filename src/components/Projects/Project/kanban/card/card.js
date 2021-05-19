@@ -21,6 +21,7 @@ const KanbanCard = () => {
     return (
       <>
       <div className={styles.card}
+        draggable
         style={{border:'1px solid green'}}
         onClick={(e)=>cardClick(e)}>
         <div className={styles.card__circuit}
