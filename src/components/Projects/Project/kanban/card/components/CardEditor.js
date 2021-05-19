@@ -7,13 +7,20 @@ import { addToChosen } from "../../../../../../redux/actions/auth";
 import TagSearch from "../../../../components/tagSearch";
 import Tag from "../../../../components/OneProject/tag";
 import cardOpen from "./cardOpen.module.css"
+import {changeCardField}  from "../../../../../../redux/actions/kanban"
 
 
 
 
 
-
-const CardEditor = () => {
+const CardEditor = ({info}) => {
+  const dispatch= useDispatch()
+  const changeSomeField =(e)=>{
+    let val = e.target.value
+    let filed = e.target.name
+    let id = info._id
+    dispatch(changeCardField(val, filed, id))
+  }
   return (
     <div
       className={cardOpen.main}
@@ -26,7 +33,9 @@ const CardEditor = () => {
             fontSize: "20px",
           }}
           className={style.titleChange}
-          // value='Название'
+          value={info.title}
+          name='title'
+          onChange={(e)=>changeSomeField(e)}
         />
           <Light
             color="#3F496C"

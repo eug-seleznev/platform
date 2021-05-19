@@ -5,21 +5,23 @@ import CardEditor from './components/CardEditor';
 import TaskTable from './components/TaskTable';
 import Comments from './components/Comments';
 import { useEffect } from 'react';
+import { currentCard } from '../../../../../redux/actions/kanban';
+import { useDispatch } from 'react-redux';
 
 
 
 
 
 
-const CardOpen = ({close, info}) => { 
+const CardOpen = ({close, info, isOpen}) => { 
     const dispatch= useDispatch()
 
     useEffect(()=>{
       if(isOpen) {
-        dispatch(currentCard(info._id))
+        dispatch(currentCard(info))
       }
     },[isOpen])
-    
+
     return (
       <div className={styles.cardOpnenBackground} onClick={close}>
         <div className={styles.cardOpnenContainer} onClick={(e)=>e.stopPropagation()}>
