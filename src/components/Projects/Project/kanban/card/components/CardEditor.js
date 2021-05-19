@@ -26,7 +26,7 @@ const CardEditor = () => {
             fontSize: "20px",
           }}
           className={style.titleChange}
-          value='Название'
+          // value='Название'
         />
           <Light
             color="#3F496C"

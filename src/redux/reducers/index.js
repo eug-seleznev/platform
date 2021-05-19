@@ -10,7 +10,7 @@ import departments from './department'
 import messages from './messages'
 import ideas from './ideas'
 import stat from './stat'
-import kanban from './kanban'
+
 export default combineReducers({
     users,
     auth,
@@ -23,6 +23,6 @@ export default combineReducers({
     messages,
     ideas,
     stat,
-    kanban
+ 
 
 });

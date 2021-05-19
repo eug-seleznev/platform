@@ -24,7 +24,8 @@ const initialState = {
     tagSearch:[],
     modelLoaded: false,
     objectList:[],
-    newUrn: null
+    newUrn: null,
+    backlog:[]
 }
 
 export default function(state = initialState, action) {
@@ -53,7 +54,7 @@ export default function(state = initialState, action) {
                 case ADD_NEW_CARD:
                       return {
                         ...state,
-                        cardsArray: payload,
+                        backlog: payload.backlog,
                       };
                 case SEARCH_OBJECT: 
                     // console.log(payload)

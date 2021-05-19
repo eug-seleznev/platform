@@ -6,7 +6,7 @@ import KanbanCard from './card/card'
 import styles from './kanban.module.css'
 
 
-const Backlog =({sideOpen,setCreateOpen})=>{
+const Backlog =({sideOpen,setCreateOpen, backlog})=>{
     const createFromBacklog = ()=>{
         setCreateOpen ({
             status:true,
@@ -18,9 +18,15 @@ const Backlog =({sideOpen,setCreateOpen})=>{
         <>
         <div style={{display: sideOpen? 'block' : 'none'}}>
             <div className={styles.backLogCards} >
-                <KanbanCard />
-                <KanbanCard />
-                <KanbanCard />
+                {backlog.map((card,i)=>{
+                    return(
+                         <KanbanCard key={i} info={card}/>
+                    )
+                })
+
+                }
+               
+                
             </div>
             <div className={styles.backLogButtonCont}>
                 <div className={styles.backLogButton} onClick={createFromBacklog}>

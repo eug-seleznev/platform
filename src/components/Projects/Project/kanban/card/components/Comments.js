@@ -23,7 +23,7 @@ const Comments =()=>{
            <div className={style.comments__array}>
             {comms.map((comm,i)=>{
                 return(
-                    <div className={style.comments__one} >
+                    <div key={i} className={style.comments__one} >
                         <img src="/starr.png"></img>
                         <Light size='14' color='#878787'className={style.comments__date}>{comm.create}</Light>
                         <Light size='14' color='#878787'className={style.comments__text}>{comm.text}</Light>
