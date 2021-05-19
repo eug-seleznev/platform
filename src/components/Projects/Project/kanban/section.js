@@ -23,7 +23,7 @@ const KanbanSection = ({main}) => {
     return (
   
         <div className={styles.section} style={{height: open? 'max-content' : '30px'}}>
-          <div className={styles.title} onClick={()=>setOpen(!open)}>
+          <div className={styles.title} onClick={()=>setOpen(!open)} style={{backgroundColor: main? 'white' : '#FCFCFC'}}>
             {!main? 
             <div className={styles.tr}>
                 <span/>
@@ -51,8 +51,8 @@ const KanbanSection = ({main}) => {
           </div>
           <div className={styles.tr}>
             <span/>
-            <KanbanSectionTd two />
-            <KanbanSectionTd two />
+            <KanbanSectionTd twoColumns />
+            <KanbanSectionTd twoColumns />
             <KanbanSectionTd />
             <span/>
           </div>

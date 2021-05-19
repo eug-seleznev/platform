@@ -10,12 +10,13 @@ import { Light } from "../../../../Styles/typography";
 import Tag from "../../components/OneProject/tag";
 import getDate from "../../getDate";
 import KanbanCard from "./card/card";
+import { CSSTransition } from "react-transition-group";
 
 
 
 
 
-const KanbanSectionTd = ({two}) => {
+const KanbanSectionTd = ({twoColumns}) => {
     const project = useSelector(state => state.projects.project)
     const [hower, setHower] = useState(false)
     const [addGhost, setAddGhost] = useState(false)
@@ -23,7 +24,7 @@ const KanbanSectionTd = ({two}) => {
 
     const dragOver = (e) => {
         e.preventDefault()
-        refBG.current.style.backgroundColor = '#8b97c2'
+        refBG.current.style.backgroundColor = 'rgb(227, 225, 233)'
         setAddGhost(true)
     }
     const dragOut = (e) => {
@@ -39,19 +40,37 @@ const KanbanSectionTd = ({two}) => {
                 ref={refBG}
                 className={styles.td} 
                 style={{
-                    gridTemplateColumns: two? 'max-content max-content' : '1fr',
-                    backgroundColor: hower? '#8b97c2' : 'white',
+                    gridTemplateColumns: twoColumns? 'max-content max-content' : '1fr',
+                    // backgroundColor: hower? '#8b97c2' : 'white',
                     transitionDuration: '250ms'
                 }} 
                 onDragOver={e=>dragOver(e)}
                 onDragLeave={e=>dragOut(e)}
+                onDragEnd={e=>dragOut(e)}
                 onMouseOver={()=>setHower(true)}
                 onMouseOut={()=>setHower(false)}
                 >
               <KanbanCard />
               <KanbanCard />
               <KanbanCard />
-              {addGhost && <div className={styles.addGhost}/>}
+
+
+            <CSSTransition
+                in={addGhost}
+                timeout={200}
+                classNames={{
+                enter: styles.ghostEnter,
+                enterActive: styles.ghostEnterActive,
+                exit: styles.ghostExit,
+                exitActive: styles.ghostExitActive,
+                }}
+                unmountOnExit
+                // onEntered={() => ghostEntered()}
+                // onExited={() => setNext(true)}
+            >
+                    <div className={styles.addGhost}/>
+            </CSSTransition>
+
             </div>
             
    

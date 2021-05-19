@@ -66,7 +66,22 @@ padding-top: 70px;
             margin-bottom: 10px;
             border: 1px solid grey;
             border-radius: 8PX;
+            pointer-events: none;
   
         }
 
+        .ghostEnter{
+            opacity: 1;
+        }
+        .ghostEnterActive{
+            opacity: 1;
+            transition: opacity 0.2s, transform 0.2s;
 
+        }
+        .ghostExit{
+            opacity: 1;
+        }
+        .ghostExitActive{
+            opacity: 1;
+            transition: opacity 0.2s, transform 0.2s
+        }
