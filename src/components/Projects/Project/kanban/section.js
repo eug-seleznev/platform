@@ -10,6 +10,7 @@ import { Light } from "../../../../Styles/typography";
 import Tag from "../../components/OneProject/tag";
 import getDate from "../../getDate";
 import KanbanCard from "./card/card";
+import KanbanSectionTd from "./sectionTd";
 
 
 
@@ -50,17 +51,9 @@ const KanbanSection = ({main}) => {
           </div>
           <div className={styles.tr}>
             <span/>
-            <div className={styles.td} style={{gridTemplateColumns:'max-content max-content'}}>
-              <KanbanCard />
-              <KanbanCard />
-              <KanbanCard />
-            </div>
-            <div className={styles.td} style={{gridTemplateColumns:'max-content max-content'}}>
-              <KanbanCard />
-            </div>
-            <div className={styles.td}>
-              <KanbanCard />
-            </div>
+            <KanbanSectionTd two />
+            <KanbanSectionTd two />
+            <KanbanSectionTd />
             <span/>
           </div>
         </div>
