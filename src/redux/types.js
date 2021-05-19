@@ -10,7 +10,8 @@ export const CHANGE_LOADED = 'change_loaded'
 export const AUTH_ERROR ='auth_error';
 /////////////////////////////
 
-
+//kanban
+export const ADD_NEW_CARD ='ADD_NEW_CARD'
 //USERES
 export const ALL_USERS = 'users';
 export const GET_EMPLOYE = 'get_users';

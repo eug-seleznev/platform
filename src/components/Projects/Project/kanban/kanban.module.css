@@ -10,6 +10,40 @@
  display: flex;
  justify-content: space-between;
 }
+.backLogPlus{
+    filter:invert(1);
+    background:none;
+     width:10px;
+     margin-right:5px;
+    }
+    .backLogButtonCont {
+        display:flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+    .createWindow {
+        position: fixed;
+        left: 0;
+        top:0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 100000;
+        background-color: rgba(0,0,0,0.4);
+    }
+    .createCard {
+        width: 300px;
+        background-color: white;
+        margin-top: 45vh;
+        margin-left: 42vw;
+        transform: translateX(-50%),translateY(-50%);
+    }
+    .backLogButton {
+        display:flex;
+        align-items:center;
+        
+        width: fit-content;
+        margin: 0;
+    }
     .verticalText{
         height: max-content;
         writing-mode: vertical-rl;
