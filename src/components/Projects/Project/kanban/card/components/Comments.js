@@ -1,5 +1,7 @@
 import { ButtonTextLight } from "../../../../../../Styles/buttons"
 import { Light } from "../../../../../../Styles/typography"
+import style from './cardOpen.module.css'
+
 
 const Comments =()=>{
     let comms = [
@@ -18,25 +20,20 @@ const Comments =()=>{
     ]
     return (
         <div>
-           <div style={{marginTop:'10px',marginLeft:'25px'}}>
+           <div className={style.comments__array}>
             {comms.map((comm,i)=>{
                 return(
-                    <div style={{display:'flex',alignItems:'center',marginTop:'10px'}} >
+                    <div className={style.comments__one} >
                         <img src="/starr.png"></img>
-                        <Light size='14' color='#878787' style={{marginLeft:'15px',width:'85px'}}>{comm.create}</Light>
-                        <Light size='14' color='#878787' style={{marginLeft:'15px'}}>{comm.text}</Light>
+                        <Light size='14' color='#878787'className={style.comments__date}>{comm.create}</Light>
+                        <Light size='14' color='#878787'className={style.comments__text}>{comm.text}</Light>
                     </div>
                 )
             })}
             </div> 
-            <textarea style={{
-                resize:'none',padding:'10px',
-                width:'90%',borderRadius:'5px',margin:'25px',
-                marginBottom:'5px',
-                border:'1px solid #8FA7C6',
-                 fontFamily:'SuisseIntlLight'}} 
+            <textarea className={style.comments__area}
                  placeholder='Добавить комментарий, @упомянуть человека'></textarea>
-                 <div style={{display:'flex',width:'97%',justifyContent:'flex-end',marginRight:'25px'}}>
+                 <div className={style.comments__button__area}>
                     <ButtonTextLight>Добавить комментарий</ButtonTextLight>
                  </div>
         </div>

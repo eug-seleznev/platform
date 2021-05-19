@@ -1,3 +1,35 @@
 .main  {
     padding:20px;
 }
+.comments__area {
+    resize:none;
+    padding:10px;
+    width:90%;
+    border-radius:5px;
+    margin:25px;
+    margin-bottom:5px;
+    border:1px solid #8FA7C6;
+    font-family:SuisseIntlLight;
+}
+.comments__array {
+    margin-top:10px;
+    margin-left:25px;
+} 
+.comments__date {
+    margin-left:15px;
+    width:85px;
+}
+.comments__text{
+    margin-left:15px;
+}
+.comments__button__area {
+    display:flex;
+    width:97%;
+    justify-content:flex-end;
+    margin-right:25px;
+}
+.comments__one {
+    display:flex;
+    align-items:center;
+    margin-top:10px;
+}
