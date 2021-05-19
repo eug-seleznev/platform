@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 
 
@@ -11,27 +11,31 @@ import Tag from "../../components/OneProject/tag";
 import getDate from "../../getDate";
 import KanbanCard from "./card/card";
 import KanbanSection from "./section";
+import Backlog from "./backlog";
+import { addNewCard } from "../../../../redux/actions/kanban";
+import CreateForm from "./createForm";
 
 
 
 
 
 const Sprints = () => {
-    const project = useSelector(state => state.projects.project)
+  const dispatch =useDispatch ()
+  const project = useSelector(state=>state.projects.project)
+  const [createOpen, setCreateOpen] =useState ({
+    status:false,
+    place:'backlog'
+})
     const [sideOpen, setSideOpen] = useState(false)
-
+    
     return (
       <div className={styles.main} style={{gridTemplateColumns: sideOpen? '386px 1fr' : 'max-content 1fr'}}>
         <div 
           className={styles.backLog} 
           onClick={()=>setSideOpen(!sideOpen)}
           >
-            <div className={styles.backLogCards} style={{display: sideOpen? 'block' : 'none'}}>
-              <KanbanCard />
-              <KanbanCard />
-              <KanbanCard />
-              <KanbanCard />
-            </div>
+            <Backlog setCreateOpen={setCreateOpen} sideOpen={sideOpen}></Backlog>
+           
             <div className={styles.verticalText}>
               Все задачи
             </div>
@@ -43,6 +47,11 @@ const Sprints = () => {
           <KanbanSection />
           <KanbanSection />
         </div>
+        <div style={{display:createOpen.status?'block':'none'}}>
+           <CreateForm crypt={project.crypt} setCreateOpen={setCreateOpen}></CreateForm>
+        </div>
+       
+        
       </div>
     );    
 }

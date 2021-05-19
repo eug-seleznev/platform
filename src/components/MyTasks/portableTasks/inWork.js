@@ -2,11 +2,11 @@
 import style from "../../../Styles/modules/main/mytasks.module.css"
 
 import { NEW_TBODY, NEW_TD, NEW_TR } from "../../../Styles/tables"
-import { url } from "../../utils/axios"
+// import { url } from "../../utils/axios"
 import { ButtonTextLight } from "../../../Styles/buttons"
-import getDate from "../../Projects/getDate"
+// import getDate from "../../Projects/getDate"
 
-import { Light, Regular } from "../../../Styles/typography"
+import { Light } from "../../../Styles/typography"
 import { Link } from "react-router-dom"
 
 

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTask, clearSprint, deleteSprint, finishSprint } from "../../../../../redux/actions/projects";
-import { Button, CancelButton } from "../../../../../Styles/buttons";
-import style from "../../../../../Styles/modules/components/Project/newsprint.module.css"
-import Confirm from "../../../components/OneProject/confirm";
+import { addTask, clearSprint, deleteSprint, finishSprint } from "../../../../../../redux/actions/projects";
+import { Button, CancelButton } from "../../../../../../Styles/buttons";
+import style from "../../../../../../Styles/modules/components/Project/newsprint.module.css"
+import Confirm from "../../../../components/OneProject/confirm";
 
 
 
@@ -11,6 +11,7 @@ import Confirm from "../../../components/OneProject/confirm";
 
 
 const AddTask = () => {
+ 
     // const dispatch = useDispatch();
     // const [field, setField] = useState(true)
     // const [open, setOpen] = useState(false)
@@ -65,11 +66,14 @@ const AddTask = () => {
     return (
       <div>
         <form
-          onSubmit={onSubmit}
+          // onSubmit={onSubmit}
           style={{
             display: "flex",
             justifyContent: "space-between",
             width: "95%",
+            marginLeft:'20px',
+            paddingBottom:'20px',
+            borderBottom:'1px solid #AFAFAF'
           }}
         >
           <div style={{
@@ -77,11 +81,11 @@ const AddTask = () => {
           }}>
           
               <input
-                value={task}
+                // value={task}
                 className={style.input}
                 placeholder="Задача.."
                 style={{ marginTop: "10px" }}
-                onChange={onChange}
+                // onChange={onChange}
               />
             
             <Button
@@ -97,51 +101,53 @@ const AddTask = () => {
               }}
               type="submit"
               fontSize="14px"
-              onClick={formHandler}
+              // onClick={formHandler}
             >
-              Добавить задачу
+              Добавить
             </Button>
           </div>
           <div style={{ display: "flex", marginLeft: "-250px", left: "300px" }}>
             <CancelButton
               fontSize={"12px"}
               style={{
-                display: `${user.permission === "user" ? "none" : "flex"}`,
+                // display: `${user.permission === "user" ? "none" : "flex"}`,
                 background: "none",
                 color: "#3F496C",
                 border: "none",
                 marginLeft: "-50px",
                 whiteSpace: "nowrap",
               }}
-              onClick={openDelite}
+              // onClick={openDelite}
             >
-              Удалить спринт
+              Удалить
             </CancelButton>
 
-            <CancelButton
+            {/* <CancelButton
               padd="36px"
               fontSize={"16px"}
               style={{
-                display: `${user.permission === "user" ? "none" : "flex"}`,
+                // display: `${user.permission === "user" ? "none" : "flex"}`,
                 border: "none",
                 marginLeft: "20px",
                 whiteSpace: "nowrap",
               }}
-              onClick={openEnd}
+              // onClick={openEnd}
             >
               {sprint.status ? "Восстановить" : "Завершить"} спринт
-            </CancelButton>
+            </CancelButton> */}
           </div>
         </form>
-        <div style={{ display: `${open ? "block" : "none"}` }}>
-          <Confirm
+        <div 
+        // style={{ display: `${open ? "block" : "none"}` }}
+        >
+          {/* <Confirm
             type="спринт"
             buttonTitle={title}
             handleEnd={handleEnd}
             handleDelete={handleDelete}
             openConfirm={openConfirm}
             title={sprint.title}
-          ></Confirm>
+          ></Confirm> */}
         </div>
       </div>
     );

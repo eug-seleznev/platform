@@ -13,140 +13,26 @@ import cardOpen from "./cardOpen.module.css"
 
 
 
-const CardEditor = (
-  // {tags, id,status, title, setStatus, sprint_description, crypt, focusRow, editebleRow, creator, tasks}
-  ) => {
-//   const dispatch = useDispatch();
-
-//   //description handler
-//   const [sprintInfo, setSprintInfo] = useState({
-//     description: sprint_description,
-//     title: title
-//   });
-
-//   const [isSubmit, setSubmited] = useState(false)
- 
-//   const [completeTasks, setCompleteTasks] = useState(0);
-//   const [allTasks, setAllTasks] = useState(1);
-//   //add description to sprint
-//   const descriptionHandler = (e) => {
-//     setSprintInfo({...sprintInfo, description: e.target.value});
-//     dispatch(EditSprint(sprintInfo, id));
-//   };
-
-
-
-//  const handleUserKeyPress = useCallback(event => {
-//     const { key } = event;
-//     if(focusRow !== '' && key === 'Delete'){
-//         dispatch(DeleteTask({ id, focusRow }));
-
-//     }
-  
-//  })
- 
-
-
-//  useEffect(() => {
-//   setSprintInfo({...sprintInfo, title: title})
-//  }, [isSubmit])
-
-
-
-
-//   useEffect(() => {
-//         window.addEventListener("keydown", handleUserKeyPress);
-// return () => {
-//   window.removeEventListener("keydown", handleUserKeyPress);
-// };
-
-//   })
-//   const onEditSubmit = (e) => {
-//     e.preventDefault();
-//     dispatch(EditSprint(sprintInfo, id));
-   
-//   };
-
-//   //edit task
-//   const editHandler = () => {
-//     editebleRow();
-//   };
-//   const addCh = () => {
-//     dispatch(addToChosen(id))
-//     setStatus(!status)
-//   };
- 
-  
-
-//   const deletehandler = (e) => {
-//         // console.log(e.key)
-//         dispatch(DeleteTask({id, focusRow}))
-//   }
-
-
-
-//   useEffect(()=>{
-    
-//     if (tasks!==undefined){
-//       // console.log(tasks)
-//       setCompleteTasks(tasks.filter(task=>task.taskStatus).length)
-//       setAllTasks(tasks.length)
-//     }
-    
-//   },[tasks])
-
-
-//  const AddTag =(value)=>{
-//   if(value!=='') {
-//     dispatch(addTag(id, value))
-//   }
-  
-//  }
-//  const delTag =(tag)=>{
-//   dispatch(deleteTag(id, tag))
-//  }
-
-// const onChange = (e) => {
-//   setSprintInfo({...sprintInfo, title: e.target.value})
-//   // dispatch(EditSprint(sprintInfo, id));
-  
-// }
-//  const onSubmit = (e) => {
-//    e.preventDefault();
-//        dispatch(EditSprint(sprintInfo, id));
-//        setSubmited(false)
-//        setTimeout(() => dispatch(getProject(crypt)), 500);
-
-//       //  dispatch(getProject(crypt))
-
-   
-
-//  }
+const CardEditor = () => {
   return (
     <div
       className={cardOpen.main}
     >
-      <form 
-      // onSubmit={onSubmit}
-      >
-        {/* {!isSubmit ? ( */}
-          <Bold size="28" 
-          // onClick={() =>  // setSubmited(true)}
-          >
-            {/* // {title} */}
-          </Bold>
-        {/* ) : ( */}
-          <input
-            style={{
-              border: "none",
-              fontSize: "20px",
-            }}
-            className={style.titleChange}
-            // onChange={onChange}
-            // value={sprintInfo.title}
-            value='Название'
-          />
-        {/* )} */}
+      <form style={{display:'flex'}}>
+        <input
+          style={{
+            display:'flex',
+            border: "none",
+            fontSize: "20px",
+          }}
+          className={style.titleChange}
+          value='Название'
+        />
+          <Light
+            color="#3F496C"
+            style={{ cursor: "pointer", marginLeft:'5px', paddingTop:'4px'}}>
+            Добавить в избранное
+          </Light>
       </form>
       <div>
         <div
@@ -155,11 +41,9 @@ const CardEditor = (
           }}
         >
           <div className={style.editList}>
-            {/* {tasks !== undefined ? ( */}
               <div style={{ display: "flex" }}>
                 <Light style={{ width: "40px" }}>
-                  9/18
-                  {/* {completeTasks}/{allTasks} */}
+                   9/18
                 </Light>
                 <div className={style.card__thing}>
                   <div
@@ -170,56 +54,23 @@ const CardEditor = (
                   ></div>
                 </div>
               </div>
-            {/* ) : ( */}
-              {/* "" */}
-            {/* )} */}
-
             <div className={style.creator}>
-              <Light color="#3F496C"> Создатель: 
-              {/* {creator} */}
-               </Light>
+              <Light color="#3F496C"> Создатель: </Light>
             </div>
+            
             <div className={style.taglist}>
-              {/* {tags !== undefined */}
-                {/* ? tags.map((el, i) => {
-                    return ( */}
-                      <div
-                        style={{
-                          marginBottom: "10px",
-                          display: "flex",
-                          alignItems: "baseline",
-                        }}
-                      >
-                        {/* <Tag
-                          tagText={el}
-                          key={i}
-                          tagColor={
-                            i === 0
-                              ? "#C8D9E9"
-                              : i === 1
-                              ? "#E9E3C8"
-                              : "#AAF8A8"
-                          }
-                        /> */}
-                        <div className={style.cross} 
-                        // onClick={() => delTag(el)}
-                        >
-                          x
-                        </div>
+              <div
+                style={{
+                  marginBottom: "10px",
+                  display: "flex",
+                  alignItems: "baseline",
+                }}
+              >
+              <div className={style.cross}>
+                x
+              </div>
                       </div>
-                    {/* ); */}
-                  {/* })
-                : ""} */}
             </div>
-            {/* {tags !== undefined && tags.length < 2 ? ( */}
-              <TagSearch 
-                // tagCount={false} func={AddTag}
-                ></TagSearch>
-            {/* ) : (
-              ""
-            )} */}
-
-            {/* <Light color='#A3A3A3'> Добавить модель </Light> */}
           </div>
           <div
             style={{
@@ -232,29 +83,23 @@ const CardEditor = (
             <Light
               color="#3F496C"
               style={{ cursor: "pointer", whiteSpace: "nowrap" }}
-              // onClick={() => addCh()}
             >
-              {" "}
-              {/* {!status ? "Добавить в избранное" : "Убрать из избранного"} */}
             </Light>
           </div>
         </div>
         <div style={{ height: "20px" }}>
-          {/* {focusRow !== "" ? ( */}
             <div className={style.edit__task}>
               <Light
                 color="#3F496C"
-                // onClick={editHandler}
                 style={{ cursor: "pointer", marginRight: "50px" }}
               >
-                Редактировать задачу 
+                Редактировать
               </Light>
               <Light
                 color="#3F496C"
-                // onClick={deletehandler}
                 style={{ cursor: "pointer" }}
               >
-                Удалить задачу
+                Удалить
               </Light>
               <form 
               // onSubmit={onEditSubmit}
@@ -267,38 +112,15 @@ const CardEditor = (
                     whiteSpace: "initial"
                   }}
                 >
-                  <Thin size="16">Описание: </Thin>
-                  <input
+                  <textarea
                     type="text"
-                    // value={sprintInfo.description}
+                    style={{width:'40%',resize:"none",height:'70px'}}
                     placeholder="Добавить описание"
-                    // onChange={descriptionHandler}
                     className={style.changeDescr}
-                  ></input>
+                  ></textarea>
                 </div>
               </form>
             </div>
-          {/* ) : (
-            <div>
-              <form onSubmit={onEditSubmit}>
-                <div
-                  style={{
-                    display: "flex",
-                    // paddingLeft: "40px",
-                  }}
-                >
-                  <Thin size="16">Описание: </Thin>
-                  <input
-                    type="text"
-                    value={sprintInfo.description}
-                    placeholder="Добавить описание"
-                    // onChange={descriptionHandler}
-                    className={style.changeDescr}
-                  ></input>
-                </div>
-              </form>
-            </div>
-          )} */}
         </div>
       </div>
     </div>
