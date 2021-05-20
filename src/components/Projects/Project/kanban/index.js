@@ -12,53 +12,52 @@ import getDate from "../../getDate";
 import KanbanCard from "./card/card";
 import KanbanSection from "./section";
 import Backlog from "./backlog";
-import { addNewCard } from "../../../../redux/actions/kanban";
+import { addNewBoard, addNewCard } from "../../../../redux/actions/kanban";
 import CreateForm from "./createForm";
+import { NavLink } from "react-router-dom";
+import { ButtonText } from "../../../../Styles/buttons";
+import { Input } from "../../../../Styles/Forms";
 
 
 
 
 
-const Sprints = () => {
+const Kanbans = ({history}) => {
   const dispatch =useDispatch ()
   const project = useSelector(state=>state.projects.project)
   console.log('project',project)
-  const backlog = useSelector(state=>state.projects.backlog)
-  const [createOpen, setCreateOpen] =useState ({
-    status:false,
-    place:'backlog'
-})
-    const [sideOpen, setSideOpen] = useState(false)
-    useEffect(()=>{
-      console.log(backlog)
-    },[backlog])
+  const [title, setTitle] = useState('')
+
+  const handleRedirect = (name) => {
+    history.push(`/projects/${project.crypt}/board/${name}`)
+  }
+  const createBoard = () => {
+    dispatch(addNewBoard(project.crypt, title))
+  }
+
     return (
-      <div className={styles.main} style={{gridTemplateColumns: sideOpen? '386px 1fr' : 'max-content 1fr'}}>
-        <div 
-          className={styles.backLog} 
-          onClick={()=>setSideOpen(!sideOpen)}
-          >
-          <Backlog backlog={backlog} setCreateOpen={setCreateOpen} sideOpen={sideOpen}></Backlog>
-            <div className={styles.verticalText}>
-              Все задачи
-            </div>
-         
-        </div>
+      <div className={styles.main} >
         <div className={styles.content}>
-          <KanbanSection main />
-          <KanbanSection />
-          <KanbanSection />
-          <KanbanSection />
+            <Input 
+              name='name'
+              value={title}
+              onChange={(e)=>setTitle(e.target.value)}
+            />
+            <ButtonText onClick={()=>createBoard()}>Создать</ButtonText>
+            <ul>
+                {project.boards.map((el,i)=>{
+                  return(
+                    <li>
+                      <ButtonText onClick={()=>handleRedirect(el.name)}>{el.name}</ButtonText>
+                    </li>
+                  )
+                })}
+          </ul>
         </div>
-        <div style={{display:createOpen.status?'block':'none'}}>
-           <CreateForm crypt={project.crypt} setCreateOpen={setCreateOpen}></CreateForm>
-        </div>
-       
-        
       </div>
     );    
 }
 
 
 
-export default Sprints
+export default Kanbans

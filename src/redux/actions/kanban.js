@@ -67,8 +67,11 @@ export const addNewRow = (board_id, formData) => async dispatch  => {
     //     step:number,
     //     start:date,
     //     end:date}
+    console.log('formData',formData)
     try {
         const res = await innerBackend.post(`/kanban/categories/new/${board_id}`,formData )
+            console.log('formData',res.data)
+
         dispatch({
             type: ADD_NEW_ROW,
             payload: res.data
@@ -80,6 +83,7 @@ export const addNewRow = (board_id, formData) => async dispatch  => {
         }
       catch (err) {
         const errors = err.response.data.err;
+        console.log('errorrrr', err.response.data)
         errors.map(error => {
            return dispatch({
             type: ERROR_MSG,

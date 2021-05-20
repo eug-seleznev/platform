@@ -19,6 +19,7 @@ const Backlog =({sideOpen,setCreateOpen, backlog})=>{
         <div style={{display: sideOpen? 'block' : 'none'}}>
             <div className={styles.backLogCards} >
                 {backlog.map((card,i)=>{
+                    console.log('caaaaaaaaaaaaaaaaard',card)
                     return(
                          <KanbanCard key={i} info={card}/>
                     )

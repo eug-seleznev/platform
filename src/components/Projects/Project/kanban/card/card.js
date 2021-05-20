@@ -29,10 +29,10 @@ const KanbanCard = ({info}) => {
         <div className={styles.card__circuit}
         style={{backgroundColor:'green'}}></div>
         <div className={styles.card__content}>
-          <Light size='16' style={{padding:'5px'}}></Light>
+          <Light size='16' style={{padding:'5px'}}>{info?.title} </Light>
           <div className={styles.card__content__second} >
             <div style={{display:'flex'}}>
-              <Light size='12' > </Light>
+              <Light size='12' ></Light>
               <Light size='12' >3/7</Light>
             </div>
             <div style={{borderRadius:'100%',backgroundColor:'grey',width:'20px',height:'20px'}}>

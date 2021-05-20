@@ -14,7 +14,8 @@ import Viewer from '../../../Viewer/helper'
 import Development from './Development'
 
 import Info from "../Info";
-import Kanban from "../kanban";
+import Kanbans from "../kanban";
+import Board from "../kanban/board";
 
 
 const Helper = ({match, history}) => {
@@ -29,7 +30,8 @@ const Helper = ({match, history}) => {
           <Route exact path={`${match.path}/main`} component={Project} />
           {/* SPRINTS PAGES */}
           <Route exact path={`${match.path}/tasks`} component={Sprints} />
-          <Route exact path={`${match.path}/kanban`} component={Kanban} />
+          <Route exact path={`${match.path}/kanbans`} history={history} component={Kanbans} />
+          <Route exact path={`${match.path}/board/:board_name`} component={Board} />
           <Route
             exact
             path={`${match.path}/tasks/:sprint_id`}

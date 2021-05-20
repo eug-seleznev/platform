@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 
 
@@ -11,17 +11,19 @@ import Tag from "../../components/OneProject/tag";
 import getDate from "../../getDate";
 import KanbanCard from "./card/card";
 import { CSSTransition } from "react-transition-group";
+import { moveCard } from "../../../../redux/actions/kanban";
 
 
 
 
 
-const KanbanSectionTd = ({twoColumns}) => {
+const KanbanSectionTd = ({twoColumns, category, column}) => {
+    const dispatch = useDispatch()
     const project = useSelector(state => state.projects.project)
     const [hower, setHower] = useState(false)
     const [addGhost, setAddGhost] = useState(false)
     const refBG = useRef(null)
-
+console.log('category',category)
     const dragOver = (e) => {
         e.preventDefault()
         refBG.current.style.backgroundColor = 'rgb(227, 225, 233)'
@@ -32,6 +34,13 @@ const KanbanSectionTd = ({twoColumns}) => {
         refBG.current.style.backgroundColor='white'
         setAddGhost(false)
     }
+    const dropCard = (e) => {
+        e.preventDefault()
+        refBG.current.style.backgroundColor='white'
+        setAddGhost(false)
+        // dispatch(moveCard(cardId))
+    }
+
 
     return (
   
@@ -47,12 +56,18 @@ const KanbanSectionTd = ({twoColumns}) => {
                 onDragOver={e=>dragOver(e)}
                 onDragLeave={e=>dragOut(e)}
                 onDragEnd={e=>dragOut(e)}
+                onDrop={e=>dropCard(e)}
                 onMouseOver={()=>setHower(true)}
                 onMouseOut={()=>setHower(false)}
                 >
               <KanbanCard />
               <KanbanCard />
               <KanbanCard />
+                {category?.events?.filter(el=>el.column===column).map((el,i)=>{
+                    return(
+                        <KanbanCard info={el} />
+                    )
+                })}
 
 
             <CSSTransition

@@ -16,19 +16,19 @@ import KanbanSectionTd from "./sectionTd";
 
 
 
-const KanbanSection = ({main}) => {
+const KanbanSection = ({main, board, category}) => {
     const project = useSelector(state => state.projects.project)
     const [open, setOpen] = useState(false)
 
     return (
   
-        <div className={styles.section} style={{height: open? 'max-content' : '30px'}}>
+        <div className={styles.category} style={{height: main? 'max-content' : open? 'max-content' : '30px'}}>
           <div className={styles.title} onClick={()=>setOpen(!open)} style={{backgroundColor: main? 'white' : '#FCFCFC'}}>
             {!main? 
             <div className={styles.tr}>
                 <span/>
                 <div>
-                    Тайтл задач
+                    {category.name}
                 </div>
                 <span/>
                 <span/>
@@ -36,24 +36,24 @@ const KanbanSection = ({main}) => {
             </div> :
             <div className={styles.tr}>
               <span/>
-                <div className={styles.titleTd}>
-                    В работе
-                </div>
-                <div className={styles.titleTd}>
-                    Готово
-                </div>
-                <div className={styles.titleTd}>
-                    Просрочено
-                </div>
+                {board.columns.map((el,i)=>{
+                  return(
+                    <div className={styles.titleTd}>
+                      {el}
+                    </div>
+                  )
+                })}
                 <span/>
             </div>
             }
           </div>
           <div className={styles.tr}>
             <span/>
-            <KanbanSectionTd twoColumns />
-            <KanbanSectionTd twoColumns />
-            <KanbanSectionTd />
+            {board.columns.map((el,i)=>{
+              return(
+                <KanbanSectionTd twoColumns={i===0? true : i===1? true : false} category={category} column={el} />
+              )
+            })}
             <span/>
           </div>
         </div>
