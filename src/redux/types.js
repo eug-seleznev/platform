@@ -11,6 +11,7 @@ export const AUTH_ERROR ='auth_error';
 /////////////////////////////
 
 //kanban
+export const CHANGE_CARD_INFO='CHANGE_CARD_INFO'
 export const ADD_NEW_BOARD ='ADD_NEW_BOARD'
 export const ADD_NEW_ROW ='ADD_NEW_ROW'
 export const ADD_NEW_COLUMN ='ADD_NEW_COLUMN'
@@ -19,6 +20,7 @@ export const MOVE_CARD ='MOVE_CARD'
 export const CHANGE_CARD_TITLE ='CHANGE_CARD_TITLE'
 export const CHANGE_CARD_DESCRIPTION ='CHANGE_CARD_DESCRIPTION'
 export const CHANGE_CARD = 'CHANGE_CARD'
+export const ADD_COMMENT = 'ADD_COMMENT'
 //USERES
 export const ALL_USERS = 'users';
 export const GET_EMPLOYE = 'get_users';

@@ -1,5 +1,5 @@
 
-import { ADD_SPRINT,SORT_PROJECTS,SORT_TITLE, SEARCH_OBJECT, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL, EDIT_TASK, CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR, GET_URN, DELETE_SPRINT, CLEAR_URN, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, ADD_TAG, DELITE_USER, DELITE_TAG, ADD_USER_TO_TEAM, SORT_BY_TAGS, CHANGE_ROCKET, CLEAR_MODEL_DATA, CLEAR_SPRINT, ADD_NEW_CARD } from '../types'
+import { ADD_SPRINT,SORT_PROJECTS,SORT_TITLE, SEARCH_OBJECT, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL, EDIT_TASK, CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR, GET_URN, DELETE_SPRINT, CLEAR_URN, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, ADD_TAG, DELITE_USER, DELITE_TAG, ADD_USER_TO_TEAM, SORT_BY_TAGS, CHANGE_ROCKET, CLEAR_MODEL_DATA, CLEAR_SPRINT, ADD_NEW_CARD, ADD_COMMENT, CHANGE_CARD } from '../types'
 
 
 
@@ -25,7 +25,9 @@ const initialState = {
     modelLoaded: false,
     objectList:[],
     newUrn: null,
-    backlog:[]
+    backlog:[],
+    comments:[],
+    card:null
 }
 
 export default function(state = initialState, action) {
@@ -34,7 +36,6 @@ export default function(state = initialState, action) {
     } = action;
 
     switch(type){
-       
 
             case ALL_PROJECTS:
             case SORT_PROJECTS:
@@ -50,7 +51,17 @@ export default function(state = initialState, action) {
 
                     error: ''
                 }
-               
+                case ADD_COMMENT:
+                    return {
+                        ...state,
+                        comments: payload,
+                    };
+                case CHANGE_CARD:
+                    return {
+                        ...state,
+                        card:payload,
+                        comments: payload.comments
+                    };
                 case ADD_NEW_CARD:
                       return {
                         ...state,
@@ -148,7 +159,8 @@ export default function(state = initialState, action) {
                     sprint_load: false,
                     sprintLoad: false,
                     reload: false,
-                    backlog: payload.backlog
+                    backlog: payload.backlog,
+                    
                 }
             case SORT_BY_TAGS:
                 return {

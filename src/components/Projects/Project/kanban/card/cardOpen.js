@@ -6,31 +6,32 @@ import TaskTable from './components/TaskTable';
 import Comments from './components/Comments';
 import { useEffect } from 'react';
 import { currentCard } from '../../../../../redux/actions/kanban';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
 
 
 
-const CardOpen = ({close, info, isOpen}) => { 
-    const dispatch= useDispatch()
+const CardOpen = ({close}) => { 
 
-    useEffect(()=>{
-      if(isOpen) {
-        dispatch(currentCard(info))
-      }
-    },[isOpen])
+    
+    const info = useSelector(state=>state.projects.card)
+    
 
     return (
-      <div className={styles.cardOpnenBackground} onClick={close}>
+      <>
+      {info&&
+        <div className={styles.cardOpnenBackground} onClick={close}>
         <div className={styles.cardOpnenContainer} onClick={(e)=>e.stopPropagation()}>
             <CardEditor info={info}></CardEditor>
-            <TaskTable></TaskTable>
-            <AddTask></AddTask>
-            <Comments></Comments>
+            <TaskTable id={info._id} tasksArray={info.tasks}></TaskTable>
+            <AddTask id={info._id}></AddTask>
+            <Comments id={info._id} ></Comments>
         </div>
       </div>
+      }
+      </>
     );    
 }
 

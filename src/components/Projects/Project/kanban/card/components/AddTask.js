@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { addTaskCard } from "../../../../../../redux/actions/kanban";
 import { addTask, clearSprint, deleteSprint, finishSprint } from "../../../../../../redux/actions/projects";
 import { Button, CancelButton } from "../../../../../../Styles/buttons";
 import style from "../../../../../../Styles/modules/components/Project/newsprint.module.css"
@@ -10,20 +11,20 @@ import Confirm from "../../../../components/OneProject/confirm";
 
 
 
-const AddTask = () => {
+const AddTask = ({id}) => {
  
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     // const [field, setField] = useState(true)
     // const [open, setOpen] = useState(false)
-    // const [task, setTask] = useState('');
+    const [task, setTask] = useState('');
     // const [title, setTitle] = useState('');
     // const formHandler = () => {
     //     setField(true)
     // }
 
-    // const onChange = (e) => {
-    //     setTask(e.target.value)
-    // }
+    const onChange = (e) => {
+        setTask(e.target.value)
+    }
 
     // const handleEnd = (e) => {
       
@@ -54,19 +55,19 @@ const AddTask = () => {
     //   setOpen(true)
     //   setTitle(sprint.status?'Восстановить':"Завершить")
     // }
-    // const onSubmit = (e) => {
-    //     e.preventDefault();
-    //     if(field){
-    //         dispatch(addTask({ id, task }));
-    //     }
-    //    setTask("")
+    const onSubmit = (e) => {
+        e.preventDefault();
+        // if(field){
+            dispatch(addTaskCard(task,id));
+        // }
+       setTask("")
         
  
-    // }
+    }
     return (
       <div>
         <form
-          // onSubmit={onSubmit}
+          onSubmit={onSubmit}
           style={{
             display: "flex",
             justifyContent: "space-between",
@@ -81,11 +82,11 @@ const AddTask = () => {
           }}>
           
               <input
-                // value={task}
+                value={task}
                 className={style.input}
                 placeholder="Задача.."
                 style={{ marginTop: "10px" }}
-                // onChange={onChange}
+                onChange={onChange}
               />
             
             <Button

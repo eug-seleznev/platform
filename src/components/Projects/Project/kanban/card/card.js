@@ -5,6 +5,8 @@ import styles from './card.module.css'
 import { Light } from "../../../../../Styles/typography";
 
 import CardOpen from "./cardOpen";
+import { useDispatch } from "react-redux";
+import { currentCard } from "../../../../../redux/actions/kanban";
 
 
 
@@ -12,14 +14,15 @@ import CardOpen from "./cardOpen";
 
 const KanbanCard = ({info}) => {
     const [cardOpen, setCardOpen] = useState(false)
-
+    const dispatch = useDispatch()
+    
     const cardClick = (e) => {
       e.stopPropagation()
       setCardOpen(true)
+      dispatch(currentCard(info))
+      console.log(info)
     }
-    useEffect(()=>{
-      console.log (info)
-    },[info])
+  
     return (
       <>
       <div className={styles.card}
@@ -29,7 +32,7 @@ const KanbanCard = ({info}) => {
         <div className={styles.card__circuit}
         style={{backgroundColor:'green'}}></div>
         <div className={styles.card__content}>
-          <Light size='16' style={{padding:'5px'}}>{info?.title} </Light>
+          <Light size='16' style={{padding:'5px'}}>{info.title} </Light>
           <div className={styles.card__content__second} >
             <div style={{display:'flex'}}>
               <Light size='12' ></Light>
@@ -43,7 +46,7 @@ const KanbanCard = ({info}) => {
 
 
       {cardOpen && info && 
-        <CardOpen isOpen={cardOpen} info={info} data={'task data'} close={()=>setCardOpen(false)} />
+        <CardOpen isOpen={cardOpen} data={'task data'} close={()=>setCardOpen(false)} />
       }
       </>
     );    
