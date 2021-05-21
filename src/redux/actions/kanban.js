@@ -150,15 +150,25 @@ export const addNewCard = (crypt,title, description) => async dispatch  => {
             alert('ошибка')           
          }
 } 
-export const moveCard = (card_id, oldCategory, newCategory, backlog, column) => async dispatch  => {
+export const moveCard = ({from, to, oldPlaceId, newPlaceId, cardId, column}) => async dispatch  => {
     
-    let body = {
-        old_category: oldCategory, 
-        new_category: newCategory, 
-        backlog: backlog,
-        column: column} 
+    let body = oldPlaceId ? {
+        [`${from}_${to}`]: true, 
+        old_place: oldPlaceId,
+        new_place: newPlaceId,
+        card_id: cardId,
+        column: column
+    } : {
+        [`${from}_${to}`]: true, 
+        new_place: newPlaceId,
+        card_id: cardId,
+        column: column
+    }
     try {
-        const res = await innerBackend.post(`/kanban/cards/move/${card_id}`,body )
+        console.log('transfer body',body)
+        const res = await innerBackend.put(`/kanban/cards/move`,body )
+        console.log('transfer res',res)
+
         dispatch({
             type: MOVE_CARD,
             payload: res.data
@@ -168,10 +178,18 @@ export const moveCard = (card_id, oldCategory, newCategory, backlog, column) => 
         //     payload: res.data
         // })
         }
-        catch (err) {
-            alert('ошибка')           
-         }
+      catch (err) {
+        const errors = err.response.data.err;
+        console.log('moving error::',errors)
+        // errors.map(error => {
+        //    return dispatch({
+        //     type: ERROR_MSG,
+        //     payload: error.msg
+        // })
+        // })             
+    }
 } 
+
 export const addComment = (text, id) => async dispatch  => {
     console.log(text,id)
     let body ={

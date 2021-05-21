@@ -23,7 +23,7 @@ const KanbanSectionTd = ({twoColumns, category, column}) => {
     const [hower, setHower] = useState(false)
     const [addGhost, setAddGhost] = useState(false)
     const refBG = useRef(null)
-console.log('category',category)
+// console.log('category',category)
     const dragOver = (e) => {
         e.preventDefault()
         refBG.current.style.backgroundColor = 'rgb(227, 225, 233)'
@@ -38,7 +38,24 @@ console.log('category',category)
         e.preventDefault()
         refBG.current.style.backgroundColor='white'
         setAddGhost(false)
-        // dispatch(moveCard(cardId))
+        try {
+            console.log('1')
+            const data = JSON.parse(e.dataTransfer.getData('text'));
+            console.log('2', data)
+
+            dispatch(moveCard({
+                cardId:data.cardId, 
+                from:data.categoryID ? 'event' : data.timelineId ? 'timeline': data.backlog && 'backlog',
+                oldPlaceId: data.categoryID || data.timelineId || undefined,
+                to : category.timeline.length>0 ? 'timeline' : 'event' ,
+                newPlaceId : category.timeline.length>0 ?  category.timeline[0]._id : category._id ,
+                column:column
+            }))
+            console.log('3')
+
+        } catch (e) {
+            console.log('Не получилось переместить карточку', e)
+        }
     }
 
 
@@ -65,7 +82,12 @@ console.log('category',category)
               <KanbanCard />
                 {category?.events?.filter(el=>el.column===column).map((el,i)=>{
                     return(
-                        <KanbanCard info={el} />
+                        <KanbanCard info={el} currCategory={category._id}  />
+                    )
+                })}
+                {category?.timeline[0]?.cards?.filter(el=>el.column===column).map((el,i)=>{
+                    return(
+                        <KanbanCard info={el} timelineId={category?.timeline[0]?._id} />
                     )
                 })}
 

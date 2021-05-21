@@ -25,9 +25,9 @@ const Board = ({match}) => {
   const dispatch =useDispatch ()
   const project = useSelector(state=>state.projects.project)
   const board = project && project.boards.find(el=>el.name===match.params.board_name)
-  console.log('match',match.params.board_name)
-  console.log('project',project)
-  console.log('board',board)
+//   console.log('match',match.params.board_name)
+//   console.log('project',project)
+//   console.log('board',board)
   const backlog = useSelector(state=>state.projects.backlog)
   const [createOpen, setCreateOpen] =useState ({
     status:false,
@@ -36,9 +36,9 @@ const Board = ({match}) => {
     const [sideOpen, setSideOpen] = useState(false)
     const [category, setCategory] = useState({
         name: '',
-        step: 0,
-        date1: '',
-        date2: '',
+        step: '',
+        start: undefined,
+        end: undefined,
     })
     const [column, setColumn] = useState('')
     useEffect(()=>{
@@ -85,14 +85,14 @@ const Board = ({match}) => {
                 <Input 
                     name='category'
                     type='date'
-                    value={category.date1}
-                    onChange={(e)=>setCategory({...category, date1: e.target.value})}
+                    value={category.start}
+                    onChange={(e)=>setCategory({...category, start: e.target.value})}
                 />
                 <Input 
                     name='category'
                     type='date'
-                    value={category.date2}
-                    onChange={(e)=>setCategory({...category, date2: e.target.value})}
+                    value={category.end}
+                    onChange={(e)=>setCategory({...category, end: e.target.value})}
                 />
                 <ButtonText onClick={()=>createCategory()}>Создать категорию</ButtonText> 
             </div>

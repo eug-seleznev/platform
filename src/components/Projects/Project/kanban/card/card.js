@@ -12,7 +12,7 @@ import { currentCard } from "../../../../../redux/actions/kanban";
 
 
 
-const KanbanCard = ({info}) => {
+const KanbanCard = ({info, currCategory, timelineId, backlog}) => {
     const [cardOpen, setCardOpen] = useState(false)
     const dispatch = useDispatch()
     
@@ -22,11 +22,24 @@ const KanbanCard = ({info}) => {
       dispatch(currentCard(info))
       console.log(info)
     }
-  
+    const dragStart = (e) => {
+      e.stopPropagation()
+      const data={
+        categoryId: currCategory,
+        timelineId: timelineId,
+        backlog: backlog,
+        cardId: info._id
+      }
+      e.dataTransfer.setData('text', JSON.stringify(data));
+    }
+    useEffect(()=>{
+      console.log (info)
+    },[info])
     return (
       <>
       <div className={styles.card}
         draggable
+        onDragStart={(e)=>dragStart(e)}
         style={{border:'1px solid green'}}
         onClick={(e)=>cardClick(e)}>
         <div className={styles.card__circuit}

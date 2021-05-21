@@ -21,7 +21,7 @@ const Backlog =({sideOpen,setCreateOpen, backlog})=>{
                 {backlog.map((card,i)=>{
                     console.log('caaaaaaaaaaaaaaaaard',card)
                     return(
-                         <KanbanCard key={i} info={card}/>
+                         <KanbanCard key={i} info={card} backlog={true}/>
                     )
                 })
 
