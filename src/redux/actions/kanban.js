@@ -145,15 +145,25 @@ export const addNewCard = (crypt,title, description) => async dispatch  => {
         })             
     }
 } 
-export const moveCard = (card_id, oldCategory, newCategory, backlog, column) => async dispatch  => {
+export const moveCard = ({from, to, oldPlaceId, newPlaceId, cardId, column}) => async dispatch  => {
     
-    let body = {
-        old_category: oldCategory, 
-        new_category: newCategory, 
-        backlog: backlog,
-        column: column} 
+    let body = oldPlaceId ? {
+        [`${from}_${to}`]: true, 
+        old_place: oldPlaceId,
+        new_place: newPlaceId,
+        card_id: cardId,
+        column: column
+    } : {
+        [`${from}_${to}`]: true, 
+        new_place: newPlaceId,
+        card_id: cardId,
+        column: column
+    }
     try {
-        const res = await innerBackend.post(`/kanban/cards/move/${card_id}`,body )
+        console.log('transfer body',body)
+        const res = await innerBackend.put(`/kanban/cards/move`,body )
+        console.log('transfer res',res)
+
         dispatch({
             type: MOVE_CARD,
             payload: res.data
@@ -165,11 +175,68 @@ export const moveCard = (card_id, oldCategory, newCategory, backlog, column) => 
         }
       catch (err) {
         const errors = err.response.data.err;
-        errors.map(error => {
-           return dispatch({
-            type: ERROR_MSG,
-            payload: error.msg
-        })
-        })             
+        console.log('moving error::',errors)
+        // errors.map(error => {
+        //    return dispatch({
+        //     type: ERROR_MSG,
+        //     payload: error.msg
+        // })
+        // })             
     }
 } 
+
+
+// const fuck = [ {
+//     откуда_куда:true,
+//     old_place:id,
+//     new_place:id/crypt,    
+//     card_id:id,
+//     column:string,
+//     },
+
+// {
+//     backlog_event:true, 
+//     new_place: category_id, 
+//     card_id, 
+//     column
+// },
+// {
+//     backlog_timeline:true, 
+//     new_place: timeline_id, 
+//     card_id, 
+//     column
+// },
+// {
+//     timeline_timeline:true, 
+//     new_place: timeline_id, 
+//     old_place:timeline_id, 
+//     card_id, 
+//     column
+// },
+// {
+//     timeline_event:true, 
+//     new_place:category_id, 
+//     old_place: timeline_id, 
+//     card_id, 
+//     column
+// },
+// {
+//     event_event:true, 
+//     new_place:category_id, 
+//     old_place:category_id, 
+//     card_id, 
+//     column
+// },
+// {
+//     timeline_backlog:true, 
+//     new_place:project_crypt, 
+//     old_place:timeline_id, 
+//     card_id
+// },
+// {
+//     event_backlog:true, 
+//     new_place:crypt, 
+//     old_place:category_id, 
+//     card_id
+// }
+// ]

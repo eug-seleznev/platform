@@ -10,12 +10,22 @@ import CardOpen from "./cardOpen";
 
 
 
-const KanbanCard = ({info}) => {
+const KanbanCard = ({info, currCategory, timelineId, backlog}) => {
     const [cardOpen, setCardOpen] = useState(false)
 
     const cardClick = (e) => {
       e.stopPropagation()
       setCardOpen(true)
+    }
+    const dragStart = (e) => {
+      e.stopPropagation()
+      const data={
+        categoryId: currCategory,
+        timelineId: timelineId,
+        backlog: backlog,
+        cardId: info._id
+      }
+      e.dataTransfer.setData('text', JSON.stringify(data));
     }
     useEffect(()=>{
       console.log (info)
@@ -24,6 +34,7 @@ const KanbanCard = ({info}) => {
       <>
       <div className={styles.card}
         draggable
+        onDragStart={(e)=>dragStart(e)}
         style={{border:'1px solid green'}}
         onClick={(e)=>cardClick(e)}>
         <div className={styles.card__circuit}
