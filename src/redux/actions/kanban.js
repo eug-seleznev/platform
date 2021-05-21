@@ -1,11 +1,47 @@
 import { innerBackend, } from "../../components/utils/axios";
-import {ADD_NEW_CARD, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD} from "../types";
+import {CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD} from "../types";
 
+export const changeTaskCard = (prop, id, field) => async dispatch  => {
+    let body = {}
+    body[field] = prop
+    try {
+        const res = await innerBackend.get(`/kanban/cards/tasks/edit/${id}`, body)
+        dispatch({
+            type: CHANGE_CARD_INFO,
+            payload: res.data
+        })
+    }
+    catch (err) {
+       alert('ошибка')           
+    }
+}
 export const currentCard = (info) => async dispatch  => {
-    dispatch({
-        type: CHANGE_CARD,
-        payload: info
-    })
+    console.log(info._id)
+    try {
+        const res = await innerBackend.get(`/kanban/cards/get/single/${info._id}`)
+        dispatch({
+            type: CHANGE_CARD,
+            payload: res.data
+        })
+    }
+    catch (err) {
+       alert('ошибка')           
+    }
+}
+export const addTaskCard = (text,id) => async dispatch  => {
+    let body = {
+        title:text
+    }
+    try {
+        const res = await innerBackend.post(`/kanban/cards/tasks/new/${id}`,body)
+        dispatch({
+            type: CHANGE_CARD,
+            payload: res.data
+        })
+    }
+    catch (err) {
+       alert('ошибка')           
+    }
 }
 export const changeCardField = (val, field, id) => async dispatch  => {
     let body = {}
@@ -23,14 +59,8 @@ export const changeCardField = (val, field, id) => async dispatch  => {
         })
     }
     catch (err) {
-        const errors = err.response.data.err;
-        errors.map(error => {
-           return dispatch({
-            type: ERROR_MSG,
-            payload: error.msg
-        })
-        })             
-    }
+        alert('ошибка')           
+     }
 }
 
 export const addNewBoard = (crypt, name) => async dispatch  => {
@@ -49,15 +79,9 @@ export const addNewBoard = (crypt, name) => async dispatch  => {
         //     payload: res.data
         // })
         }
-      catch (err) {
-        const errors = err.response.data.err;
-        errors.map(error => {
-           return dispatch({
-            type: ERROR_MSG,
-            payload: error.msg
-        })
-        })             
-    }
+        catch (err) {
+            alert('ошибка')           
+         }
 } 
 
 export const addNewRow = (board_id, formData) => async dispatch  => {
@@ -81,16 +105,9 @@ export const addNewRow = (board_id, formData) => async dispatch  => {
         //     payload: res.data
         // })
         }
-      catch (err) {
-        const errors = err.response.data.err;
-        console.log('errorrrr', err.response.data)
-        errors.map(error => {
-           return dispatch({
-            type: ERROR_MSG,
-            payload: error.msg
-        })
-        })             
-    }
+        catch (err) {
+            alert('ошибка')           
+         }
 } 
 export const addNewColumn = (board_id, name) => async dispatch  => {
     
@@ -108,15 +125,9 @@ export const addNewColumn = (board_id, name) => async dispatch  => {
         //     payload: res.data
         // })
         }
-      catch (err) {
-        const errors = err.response.data.err;
-        errors.map(error => {
-           return dispatch({
-            type: ERROR_MSG,
-            payload: error.msg
-        })
-        })             
-    }
+        catch (err) {
+            alert('ошибка')           
+         }
 } 
 export const addNewCard = (crypt,title, description) => async dispatch  => {
     
@@ -135,15 +146,9 @@ export const addNewCard = (crypt,title, description) => async dispatch  => {
         //     payload: res.data
         // })
         }
-      catch (err) {
-        const errors = err.response.data.err;
-        errors.map(error => {
-           return dispatch({
-            type: ERROR_MSG,
-            payload: error.msg
-        })
-        })             
-    }
+        catch (err) {
+            alert('ошибка')           
+         }
 } 
 export const moveCard = ({from, to, oldPlaceId, newPlaceId, cardId, column}) => async dispatch  => {
     
@@ -185,58 +190,23 @@ export const moveCard = ({from, to, oldPlaceId, newPlaceId, cardId, column}) => 
     }
 } 
 
-
-// const fuck = [ {
-//     откуда_куда:true,
-//     old_place:id,
-//     new_place:id/crypt,    
-//     card_id:id,
-//     column:string,
-//     },
-
-// {
-//     backlog_event:true, 
-//     new_place: category_id, 
-//     card_id, 
-//     column
-// },
-// {
-//     backlog_timeline:true, 
-//     new_place: timeline_id, 
-//     card_id, 
-//     column
-// },
-// {
-//     timeline_timeline:true, 
-//     new_place: timeline_id, 
-//     old_place:timeline_id, 
-//     card_id, 
-//     column
-// },
-// {
-//     timeline_event:true, 
-//     new_place:category_id, 
-//     old_place: timeline_id, 
-//     card_id, 
-//     column
-// },
-// {
-//     event_event:true, 
-//     new_place:category_id, 
-//     old_place:category_id, 
-//     card_id, 
-//     column
-// },
-// {
-//     timeline_backlog:true, 
-//     new_place:project_crypt, 
-//     old_place:timeline_id, 
-//     card_id
-// },
-// {
-//     event_backlog:true, 
-//     new_place:crypt, 
-//     old_place:category_id, 
-//     card_id
-// }
-// ]
+export const addComment = (text, id) => async dispatch  => {
+    console.log(text,id)
+    let body ={
+        text:text
+    }
+    try {
+        const res = await innerBackend.post(`/kanban/cards/comment/new/${id}`,body )
+        dispatch({
+            type: ADD_COMMENT,
+            payload: res.data
+        })
+        // dispatch({
+        //     type: GREEN_MSG,
+        //     payload: res.data
+        // })
+        }
+        catch (err) {
+            alert('ошибка')           
+         }
+} 

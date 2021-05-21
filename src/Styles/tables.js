@@ -35,7 +35,6 @@ export const Select = styled.select`
 `
 export const NEW_TABLE = styled.table`
 border-collapse: collapse;
-  
    border-radius:5px;
     background-color: white;
 `
@@ -68,7 +67,7 @@ padding-bottom: 20px
 export const NEW_TD = styled.td`
     font-size: 14px;
     text-align: center;
-    vertical-align: middle;
+    height:fit-content;
     font-family: SuisseIntlLight;
     padding-right: 45px;
     min-height: 30px!important;

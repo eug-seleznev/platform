@@ -14,19 +14,27 @@
 .comments__array {
     margin-top:10px;
     margin-left:25px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 300px;
 } 
 .comments__date {
     margin-left:15px;
     width:85px;
+    white-space: nowrap;
+    width: fit-content;
 }
 .comments__text{
     margin-left:15px;
+    max-width: 400px;
 }
 .comments__button__area {
     display:flex;
-    width:97%;
+    width:100%;
+    flex-direction: column;
+    align-items: flex-end;
     justify-content:flex-end;
-    margin-right:25px;
+    
 }
 .comments__one {
     display:flex;
