@@ -1,15 +1,16 @@
 .card{
     background-color: white;
     min-width: 222px;
-    height: 50px;
+    min-height: 50px;
     margin-bottom: 10px;
+
     border-radius: 8PX;
     display: flex;
     cursor: pointer;
 }
 .card__circuit {
     width: 8px;
-    height: 100%;
+    height: auto;
     border-top-left-radius:5px;
     border-bottom-left-radius:5px
 }
@@ -28,7 +29,7 @@
     position: fixed;
     right: 0;
     left: 0;
-    top: 0;
+    top: -47px;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.329);
 }

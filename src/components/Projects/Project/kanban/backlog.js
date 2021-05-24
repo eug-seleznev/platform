@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addNewCard } from '../../../../redux/actions/kanban'
 import { ButtonTextLight } from '../../../../Styles/buttons'
+import { Path } from '../../../Layout/header'
 import KanbanCard from './card/card'
 import styles from './kanban.module.css'
 import { CSSTransition } from "react-transition-group";
@@ -58,8 +59,8 @@ const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId})=>{
             onDrop={dropCard}
             >
             <div className={styles.backLogCards} >
-                {backlog.map((card,i)=>{
-                    // console.log('caaaaaaaaaaaaaaaaard',card)
+                {backlog?.map((card,i)=>{
+
                     return(
                          <KanbanCard key={i} info={card} backlog={true}/>
                     )
@@ -85,7 +86,7 @@ const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId})=>{
             </div>
             <div className={styles.backLogButtonCont}>
                 <div className={styles.backLogButton} onClick={createFromBacklog}>
-                    <img src='/plus1.png'className={styles.backLogPlus}></img>
+                    <img alt='plus' src={Path+'plus1.png'}className={styles.backLogPlus}></img>
                     <ButtonTextLight color='white'style={{fontStyle:'italic'}}>Добавить карточку</ButtonTextLight>
                 </div>
             </div>

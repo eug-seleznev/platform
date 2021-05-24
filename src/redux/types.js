@@ -23,6 +23,7 @@ export const CHANGE_CARD = 'CHANGE_CARD'
 export const ADD_COMMENT = 'ADD_COMMENT'
 
 export const COMMON_KANBAN_RELOAD='COMMON_KANBAN_RELOAD'
+export const ADD_USER_TO_TASK_NEW = ' ADD_USER_TO_TASK_NEW '
 //USERES
 export const ALL_USERS = 'users';
 export const GET_EMPLOYE = 'get_users';

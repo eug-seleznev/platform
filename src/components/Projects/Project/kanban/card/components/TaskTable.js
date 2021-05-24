@@ -1,24 +1,25 @@
 import { useEffect, useState } from "react";
 import { useDispatch, } from "react-redux";
-import { changeTaskCard } from "../../../../../../redux/actions/kanban";
+import { changeTaskCard, userToTask } from "../../../../../../redux/actions/kanban";
 import { SPRINT_TABLE, TR,Select, SPRINT_TD, NEW_THEAD } from "../../../../../../Styles/tables"
 import style from "../../../../../../Styles/modules/components/Project/newsprint.module.css"
 import { Thin } from "../../../../../../Styles/typography";
 import { Input } from "../../../../../../Styles/Forms";
 import { ButtonText } from "../../../../../../Styles/buttons";
 import getDate from "../../../../getDate";
+import canban from './cardOpen.module.css'
 
 //todo: handle no tasks state
 
 
-const TaskTable = ({tasksArray, id}) => {
+const TaskTable = ({tasksArray, id, team}) => {
   let tasks = ['2','3']
-  let team = []
+  
   let selectFocusRow = ()=>{
     console.log('hi')
   }
   let  isEdit = false
-  let enableEdit = false
+
   const dispatch = useDispatch()
 
   const [taskId, setTaskId] = useState("");
@@ -26,6 +27,7 @@ const TaskTable = ({tasksArray, id}) => {
   const [deadline, setDeadline] = useState(false);
   const [taskTitle, setTaskTitle] = useState("");
   const [timeout , updateTimeout] = useState(undefined)
+  const [editField, setEditField] = useState(false) 
   const [debounced, setDebouced] = useState('')
   const [isDouble, setDouble] = useState(0)
     const [double, setD] = useState(0);
@@ -34,11 +36,13 @@ const TaskTable = ({tasksArray, id}) => {
     selectFocusRow(focusRow);
 
   }, [focusRow]);
-
+  const enableEdit = () => {
+    setEditField(!editField)
+  }
   const onChange = (e,field) => {
     let id = e.target.name;
     let prop = field==='taskStatus'?e.target.checked:e.target.value
-    dispatch(changeTaskCard({field, prop, id }));
+    dispatch(changeTaskCard(prop,id, field));
   };
 
   useEffect(() => {
@@ -57,10 +61,10 @@ const TaskTable = ({tasksArray, id}) => {
 		return huy()
 	}
 	const onTextChange =()=>{
-		let value = debounced
+		let prop = debounced
 		let field = 'taskTitle'
-		// console.log(value,id,field)
-		// dispatch(EditTask({value, id,focusRow,field}))
+		let id = focusRow 
+		dispatch(changeTaskCard(prop,id, field));
 	};
 	useEffect(()=>{
 		if(debounced!==''){
@@ -73,14 +77,16 @@ const TaskTable = ({tasksArray, id}) => {
   const onFocus=(e)=>{
     setTaskTitle(e.target.name)
   }
-  const submitEdit = (e) => {
-   enableEdit();
-  }
+  
   const changeTaskDate =(e)=>{
-    let value = e.target.value
-    let field = 'deadline'
-    // dispatch(EditTask({value, id, focusRow, field}))
-    setDeadline(false)
+    let prop = e.target.value
+		let field = 'deadline'
+		let id = focusRow 
+    let date = new Date(e.target.value)
+    let year = date.getFullYear()
+    if(year>2000) {
+      dispatch(changeTaskCard(prop,id,field))
+    }
   }
 
   const doubleClickEdit = (task) => {
@@ -104,9 +110,9 @@ const TaskTable = ({tasksArray, id}) => {
 
 
   const teamHandle = (e, task) => {
-    let userid = e.target.value
-    let focusRow = task._id
-    // dispatch(addUserToTask({userid, id, focusRow }))
+    let id = e.target.value
+    let task_id = task._id
+    dispatch(userToTask(id, task_id))
   }
 
 
@@ -121,7 +127,10 @@ const TaskTable = ({tasksArray, id}) => {
   }
 
   return (
-    <SPRINT_TABLE onMouseLeave={() => setTaskId("")} style={{marginTop:'50px',marginLeft:'20px'}} >
+    <div className={canban.tasks__container} style={{overflowY:tasksArray.length>8?'scroll': 'hidden',zIndex:-1}} >
+    <SPRINT_TABLE onMouseLeave={() => setTaskId("")} 
+      style={{marginTop:'50px',marginLeft:'20px'
+    }} >
       <tbody>
         {tasksArray&&tasksArray.map((task,i)=>{
         return (
@@ -130,8 +139,8 @@ const TaskTable = ({tasksArray, id}) => {
               onClick={() => doubleClickEdit(task)}
               key={i}
               style={{
-              backgroundColor: (task._id === focusRow || task._id === taskId) ? "#F2F2F2" : "white",
-              userSelect: 'none'
+                backgroundColor: (task._id === focusRow || task._id === taskId) ? "#F2F2F2" : "white",
+                userSelect: 'none'
             }}
             >
             <SPRINT_TD style={{width:'25px'}}>
@@ -146,9 +155,9 @@ const TaskTable = ({tasksArray, id}) => {
 
 
 
-            {isEdit && task._id === focusRow  ? (
+            {editField && task._id === focusRow  ? (
               <SPRINT_TD style={{width:'50%'}}>
-                <form onSubmit={submitEdit}>
+                <form onSubmit={enableEdit}>
                   <input
                     className={style.input}
                     type="text"
@@ -170,18 +179,18 @@ const TaskTable = ({tasksArray, id}) => {
                 <>
                   {team && (
                       <Select className={style.select} onChange={(e) => teamHandle(e, task)}>
-                      {team.map((member) => {
+                      {team.map((member,i) => {
                         if(member.user!==null) {
 
                             return (
                           <>
                             {task.user._id === member.user._id ? (
-                              <option selected value={member.user._id}>
+                              <option selected key={i} value={member.user._id}>
                                 {" "}
                                 {member.user.fullname}
                               </option>
                             ) : (
-                              <option value={member.user._id} name={task._id}>
+                              <option value={member.user._id} key={i} name={task._id}>
                                 {member.user.fullname}
                               </option>
                             )}
@@ -198,10 +207,10 @@ const TaskTable = ({tasksArray, id}) => {
                   {task!==null && taskId === task._id && !task.user && (
                     <Select  defaultValue='Выбрать исполнителя' onChange={(e) => teamHandle(e, task)}>
                       <option> Выбрать исполнителя</option>
-                      {team.map((member) => {
+                      {team.map((member,i) => {
                         if(member.user!==null)
                         return (
-                          <option value={member.user._id} name={task._id}>
+                          <option value={member.user._id}key={i}name={task._id}>
                             {" "}
                             {member.user.fullname}
                           </option>
@@ -212,29 +221,30 @@ const TaskTable = ({tasksArray, id}) => {
                 </>
               )}
             </SPRINT_TD>
-            <SPRINT_TD style={{width:'150px'}}>
-              <div style={{display:'flex'}}>
+            <SPRINT_TD style={{width:'150px',paddingRight:'25px'}}>
+              <div style={{display:task._id===focusRow?'flex':'none'}}>
                 <Thin >Дедлайн: </Thin> 
                 <ButtonText onClick={()=>setDeadline(true)}
                   style={{display:`${task._id !== focusRow||!deadline?'block':'none'}`}}>
                   {task.deadline!==undefined?getDate(task.deadline):'указать'}
                 </ButtonText>
                 
-                <Input onKeyPress={(e)=>e.key==='Enter'? setDeadline(false):''} 
+                <input onKeyPress={(e)=>e.key==='Enter'? setDeadline(false):''} 
                   type="date" 
                   onChange={(e)=>changeTaskDate(e,task._id)}
-                  style={{display:`${task._id === focusRow&&deadline?'block':'none'}`}}>
-                </Input>
+                  style={{display:`${task._id === focusRow&&deadline?'block':'none'}`, width:'140px'}}>
+                </input>
               </div>
               
             </SPRINT_TD>
             </TR>
-        )})}
+        )}).reverse()}
 
       
       </tbody>
       
     </SPRINT_TABLE>
+    </div>
   );
 };
 

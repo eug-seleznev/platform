@@ -8,6 +8,7 @@ import TagSearch from "../../../../components/tagSearch";
 import Tag from "../../../../components/OneProject/tag";
 import cardOpen from "./cardOpen.module.css"
 import {changeCardField}  from "../../../../../../redux/actions/kanban"
+import { Path } from "../../../../../Layout/header";
 
 
 
@@ -15,33 +16,58 @@ import {changeCardField}  from "../../../../../../redux/actions/kanban"
 
 const CardEditor = ({info}) => {
   const dispatch= useDispatch()
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const[chosen, setChosen]= useState(false)
+  useEffect(()=>{
+    if(info) {
+
+      setTitle(info.title)
+      setDescription(info.description)
+    }
+    
+  },[])
+  const onSubmit =(e)=>{
+    e.preventDefault()
+  }
+  const onEnter=(e)=>{
+    e.target.blur()
+  }
+  const toChosen =()=>{
+    setChosen(!chosen)
+    // dispatch(addCardToChosen(info._id))
+  }
   const changeSomeField =(e)=>{
+    if(e.target.name==='title')  {
+      setTitle(e.target.value)
+    }
+    else if(e.target.name==='description')  {
+      setDescription(e.target.value)
+    }
     let val = e.target.value
-    let filed = e.target.name
+    let field = e.target.name
     let id = info._id
-    dispatch(changeCardField(val, filed, id))
+    dispatch(changeCardField(val, field, id))
   }
   return (
     <div
       className={cardOpen.main}
     >
-      <form style={{display:'flex'}}>
+      <form style={{display:'flex',width:'100%'}} onSubmit={onSubmit}>
         <input
           style={{
-            display:'flex',
             border: "none",
             fontSize: "20px",
+            width:'100%'
           }}
           className={style.titleChange}
-          value={info.title}
+          value={title}
           name='title'
+          onKeyPress={(e)=>e.key==='Enter'?onEnter(e):''}
           onChange={(e)=>changeSomeField(e)}
         />
-          <Light
-            color="#3F496C"
-            style={{ cursor: "pointer", marginLeft:'5px', paddingTop:'4px'}}>
-            Добавить в избранное
-          </Light>
+          <img  onClick={toChosen} src={Path+'star.png'} style={{width:'30px',cursor:'pointer', backgroundColor:chosen?'#FFAF30':'rgba(0,0,0,0)'}}>
+          </img>
       </form>
       <div>
         <div
@@ -52,19 +78,19 @@ const CardEditor = ({info}) => {
           <div className={style.editList}>
               <div style={{ display: "flex" }}>
                 <Light style={{ width: "40px" }}>
-                   9/18
+                  {info.tasks.filter(task=>task.taskStatus).length}/{info.tasks.length}
                 </Light>
                 <div className={style.card__thing}>
                   <div
                     style={{
-                      width: `${Math.trunc((9 / 17) * 100)}%`,
+                      width: `${Math.trunc(info?.tasks.filter(task=>task.taskStatus).length / info?.tasks.length * 100)}%`,
                     }}
                     className={style.card__thing__full}
                   ></div>
                 </div>
               </div>
             <div className={style.creator}>
-              <Light color="#3F496C"> Создатель: </Light>
+              <Light color="#3F496C"> Создатель: {info?.creator?.fullname} </Light>
             </div>
             
             <div className={style.taglist}>
@@ -98,7 +124,7 @@ const CardEditor = ({info}) => {
         </div>
         <div style={{ height: "20px" }}>
             <div className={style.edit__task}>
-              <Light
+              {/* <Light
                 color="#3F496C"
                 style={{ cursor: "pointer", marginRight: "50px" }}
               >
@@ -109,21 +135,25 @@ const CardEditor = ({info}) => {
                 style={{ cursor: "pointer" }}
               >
                 Удалить
-              </Light>
+              </Light> */}
               <form 
-              // onSubmit={onEditSubmit}
+                onSubmit={onSubmit}
               >
                 <div
                   style={{
                     display: "flex",
-                    paddingLeft: "40px",
-                    width: "40vw",
+                    
+                    width: "100%",
                     whiteSpace: "initial"
                   }}
                 >
                   <textarea
                     type="text"
-                    style={{width:'40%',resize:"none",height:'70px'}}
+                    value={description}
+                    name='description'
+                    onKeyPress={(e)=>e.key==="Enter"?onEnter(e):''}
+                    onChange={(e)=>changeSomeField(e)}
+                    style={{width:'600px',resize:"none",height:'70px',zIndex:1}}
                     placeholder="Добавить описание"
                     className={style.changeDescr}
                   ></textarea>
