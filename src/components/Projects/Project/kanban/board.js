@@ -125,7 +125,7 @@ const Board = ({match}) => {
             <div className={styles.title}  style={{backgroundColor: 'white'}}>
               <div className={styles.tr}>
                 <span/>
-                  {board.columns.map((el,i)=>{
+                  {board && board.columns && board?.columns?.map((el,i)=>{
                     return(
                       <div className={styles.titleTd}>
                         {el}
@@ -141,14 +141,14 @@ const Board = ({match}) => {
                   <span/>
                   </div>
             </div>
-            {board?.categories.map((el,i)=>{
+            {board && board.columns && board?.categories.map((el,i)=>{
                 return(
                     <KanbanSection main={i===0? true : false} board={board} category={el} />
                 )
             })}
         </div>
         <div style={{display:createOpen.status?'block':'none'}}>
-           <CreateForm crypt={project.crypt} setCreateOpen={setCreateOpen} boardId={board._id}></CreateForm>
+           <CreateForm crypt={project.crypt} visible={createOpen.status} place={createOpen.place} setCreateOpen={setCreateOpen} boardId={board._id}></CreateForm>
         </div>
        
         
