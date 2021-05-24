@@ -1,6 +1,32 @@
 import { innerBackend, } from "../../components/utils/axios";
-import {CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD, ADD_USER_TO_TASK_NEW} from "../types";
+import {ADD_CARD_TO_CHOSEN,CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD, ADD_USER_TO_TASK_NEW, DELETE_CARD} from "../types";
 
+export const cardDelete = (id,crypt) => async dispatch  => {
+    
+    try {
+        const res = await innerBackend.delete(`/kanban/cards/delete/single?cardid=${id}&crypt=${crypt}`)
+        dispatch({
+            type: DELETE_CARD,
+            payload: res.data
+        })
+    }
+    catch (err) {
+       alert('ошибка')           
+    }
+}
+export const addCardToChosen = (id) => async dispatch  => {
+    
+    try {
+        const res = await innerBackend.put(`/kanban/cards/favorite/${id}`)
+        dispatch({
+            type: ADD_CARD_TO_CHOSEN,
+            payload: res.data
+        })
+    }
+    catch (err) {
+       alert('ошибка')           
+    }
+}
 export const changeTaskCard = (prop, id, field) => async dispatch  => {
     let body = {}
     body[field] = prop

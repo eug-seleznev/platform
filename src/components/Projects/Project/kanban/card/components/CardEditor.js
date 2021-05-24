@@ -7,7 +7,7 @@ import { addToChosen } from "../../../../../../redux/actions/auth";
 import TagSearch from "../../../../components/tagSearch";
 import Tag from "../../../../components/OneProject/tag";
 import cardOpen from "./cardOpen.module.css"
-import {changeCardField}  from "../../../../../../redux/actions/kanban"
+import {addCardToChosen, changeCardField}  from "../../../../../../redux/actions/kanban"
 import { Path } from "../../../../../Layout/header";
 
 
@@ -35,7 +35,7 @@ const CardEditor = ({info}) => {
   }
   const toChosen =()=>{
     setChosen(!chosen)
-    // dispatch(addCardToChosen(info._id))
+    dispatch(addCardToChosen(info._id))
   }
   const changeSomeField =(e)=>{
     if(e.target.name==='title')  {
@@ -153,7 +153,7 @@ const CardEditor = ({info}) => {
                     name='description'
                     onKeyPress={(e)=>e.key==="Enter"?onEnter(e):''}
                     onChange={(e)=>changeSomeField(e)}
-                    style={{width:'600px',resize:"none",height:'70px',zIndex:1}}
+                    style={{width:'670px',resize:"none",height:'70px',zIndex:1}}
                     placeholder="Добавить описание"
                     className={style.changeDescr}
                   ></textarea>

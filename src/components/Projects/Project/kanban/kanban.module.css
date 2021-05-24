@@ -32,7 +32,9 @@
     }
     .createCard {
         width: 300px;
+        padding:20px;
         background-color: white;
+        border-radius: 5px;
         margin-top: 45vh;
         margin-left: 42vw;
         transform: translateX(-50%),translateY(-50%);

@@ -22,6 +22,8 @@ export const CHANGE_CARD_DESCRIPTION ='CHANGE_CARD_DESCRIPTION'
 export const CHANGE_CARD = 'CHANGE_CARD'
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const ADD_USER_TO_TASK_NEW = ' ADD_USER_TO_TASK_NEW '
+export const ADD_CARD_TO_CHOSEN = 'ADD_CARD_TO_CHOSEN'
+export const DELETE_CARD = 'DELETE_CARD'
 //USERES
 export const ALL_USERS = 'users';
 export const GET_EMPLOYE = 'get_users';
