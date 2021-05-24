@@ -88,6 +88,22 @@ const KanbanSectionTd = ({twoColumns, category, column, boardId, timeline}) => {
                         <KanbanCard info={el} currCategory={category._id} timelineId={category?.timeline[0]?._id}  />
                     )
                 })}
+
+                <CSSTransition
+                    in={addGhost}
+                    timeout={200}
+                    classNames={{
+                    enter: styles.ghostEnter,
+                    enterActive: styles.ghostEnterActive,
+                    exit: styles.ghostExit,
+                    exitActive: styles.ghostExitActive,
+                    }}
+                    unmountOnExit
+                    // onEntered={() => ghostEntered()}
+                    // onExited={() => setNext(true)}
+                >
+                        <div className={styles.addGhost}/>
+                </CSSTransition>
                
                 <div className={styles.creationButton}>
                    <ButtonText onClick={()=>setNewCardModal(true)}>
@@ -97,21 +113,7 @@ const KanbanSectionTd = ({twoColumns, category, column, boardId, timeline}) => {
                 </div>
                 
 
-            <CSSTransition
-                in={addGhost}
-                timeout={200}
-                classNames={{
-                enter: styles.ghostEnter,
-                enterActive: styles.ghostEnterActive,
-                exit: styles.ghostExit,
-                exitActive: styles.ghostExitActive,
-                }}
-                unmountOnExit
-                // onEntered={() => ghostEntered()}
-                // onExited={() => setNext(true)}
-            >
-                    <div className={styles.addGhost}/>
-            </CSSTransition>
+           
 
             
             <CreateForm 
