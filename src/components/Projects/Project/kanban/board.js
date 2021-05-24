@@ -73,7 +73,7 @@ const Board = ({match}) => {
           className={styles.backLog} 
           onClick={()=>setSideOpen(!sideOpen)}
           >
-          <Backlog backlog={backlog} setCreateOpen={setCreateOpen} sideOpen={sideOpen}/>
+          <Backlog backlog={backlog} setCreateOpen={setCreateOpen} sideOpen={sideOpen} projectCrypt={project.crypt} boardId={board._id}/>
             <div className={styles.verticalText}>
               Все задачи
             </div>

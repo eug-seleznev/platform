@@ -40,18 +40,7 @@ const KanbanSectionTd = ({twoColumns, category, column, boardId}) => {
         refBG.current.style.backgroundColor='white'
         setAddGhost(false)
         try {
-            console.log('1')
             const data = JSON.parse(e.dataTransfer.getData('text'));
-            console.log('2', data, {
-                cardId:data.cardId, 
-                from:data.categoryId ? 'event' : data.timelineId ? 'timeline': data.backlog && 'backlog',
-                oldPlaceId: data.categoryId || data.timelineId || undefined,
-                to : category.timeline.length>0 ? 'timeline' : 'event' ,
-                newPlaceId : category.timeline.length>0 ?  category.timeline[0]._id : category._id ,
-                column:column,
-                board_id: boardId,
-            })
-
             dispatch(moveCard({
                 cardId:data.cardId, 
                 from:data.categoryId ? 'event' : data.timelineId ? 'timeline': data.backlog && 'backlog',
@@ -61,7 +50,6 @@ const KanbanSectionTd = ({twoColumns, category, column, boardId}) => {
                 column:column,
                 board_id: boardId,
             }))
-            console.log('3')
 
         } catch (e) {
             console.log('Не получилось переместить карточку', e)
