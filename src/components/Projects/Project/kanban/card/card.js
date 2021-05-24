@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 import styles from './card.module.css'
 
@@ -20,7 +20,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog}) => {
       e.stopPropagation()
       setCardOpen(true)
       dispatch(currentCard(info))
-      console.log(info)
+
     }
     const dragStart = (e) => {
       e.stopPropagation()
@@ -32,9 +32,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog}) => {
       }
       e.dataTransfer.setData('text', JSON.stringify(data));
     }
-    useEffect(()=>{
-      console.log (info)
-    },[info])
+ 
     return (
       <>
       <div className={styles.card}
@@ -45,11 +43,11 @@ const KanbanCard = ({info, currCategory, timelineId, backlog}) => {
         <div className={styles.card__circuit}
         style={{backgroundColor:'green'}}></div>
         <div className={styles.card__content}>
-          <Light size='16' style={{padding:'5px'}}>{info.title} </Light>
+          <Light size='16' style={{padding:'5px'}}>{info?.title} </Light>
           <div className={styles.card__content__second} >
             <div style={{display:'flex'}}>
               <Light size='12' ></Light>
-              <Light size='12' >3/7</Light>
+              <Light size='12' >{info?.tasks.filter(task=>task.taskStatus).length}/{info?.tasks.length}</Light>
             </div>
             <div style={{borderRadius:'100%',backgroundColor:'grey',width:'20px',height:'20px'}}>
             </div>

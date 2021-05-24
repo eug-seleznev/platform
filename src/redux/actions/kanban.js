@@ -1,11 +1,11 @@
 import { innerBackend, } from "../../components/utils/axios";
-import {CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD} from "../types";
+import {CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD, ADD_USER_TO_TASK_NEW} from "../types";
 
 export const changeTaskCard = (prop, id, field) => async dispatch  => {
     let body = {}
     body[field] = prop
     try {
-        const res = await innerBackend.get(`/kanban/cards/tasks/edit/${id}`, body)
+        const res = await innerBackend.put(`/kanban/cards/tasks/edit/${id}`, body)
         dispatch({
             type: CHANGE_CARD_INFO,
             payload: res.data
@@ -199,6 +199,26 @@ export const addComment = (text, id) => async dispatch  => {
         const res = await innerBackend.post(`/kanban/cards/comment/new/${id}`,body )
         dispatch({
             type: ADD_COMMENT,
+            payload: res.data
+        })
+        // dispatch({
+        //     type: GREEN_MSG,
+        //     payload: res.data
+        // })
+        }
+        catch (err) {
+            alert('ошибка')           
+         }
+} 
+export const userToTask = (id, task_id) => async dispatch  => {
+    console.log(id)
+    let body ={
+        user:id
+    }
+    try {
+        const res = await innerBackend.put(`/kanban/cards/tasks/exec/${task_id}`,body )
+        dispatch({
+            type: ADD_USER_TO_TASK_NEW,
             payload: res.data
         })
         // dispatch({

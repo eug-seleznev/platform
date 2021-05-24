@@ -120,7 +120,7 @@ const AddTask = ({id}) => {
               }}
               // onClick={openDelite}
             >
-              Удалить
+              Удалить карточку
             </CancelButton>
 
             {/* <CancelButton

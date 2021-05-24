@@ -21,7 +21,7 @@ const Comments =({id})=>{
         <div>
            <div className={style.comments__array}>
             {comments&&comments.map((comm,i)=>{
-                console.log(comm.author)
+
                 return(
                     <div key={i} className={style.comments__one} >
                         <img src={url+'/'+comm.author.avatar} style={{width:'20px',borderRadius:'100%'}}></img>

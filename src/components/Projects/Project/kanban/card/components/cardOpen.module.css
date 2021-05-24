@@ -16,7 +16,7 @@
     margin-left:25px;
     overflow-y: scroll;
     overflow-x: hidden;
-    max-height: 300px;
+    max-height: 250px;
 } 
 .comments__date {
     margin-left:15px;
