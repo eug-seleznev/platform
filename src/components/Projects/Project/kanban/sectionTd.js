@@ -22,6 +22,7 @@ const KanbanSectionTd = ({twoColumns, category, column, boardId}) => {
     const dispatch = useDispatch()
     const project = useSelector(state => state.projects.project)
     const [hower, setHower] = useState(false)
+    const [newCardModal, setNewCardModal] = useState(false)
     const [addGhost, setAddGhost] = useState(false)
     const refBG = useRef(null)
 // console.log('category',category)
@@ -55,6 +56,7 @@ const KanbanSectionTd = ({twoColumns, category, column, boardId}) => {
             console.log('Не получилось переместить карточку', e)
         }
     }
+    
 
 
     return (
@@ -86,7 +88,7 @@ const KanbanSectionTd = ({twoColumns, category, column, boardId}) => {
                         <KanbanCard info={el} timelineId={category?.timeline[0]?._id} />
                     )
                 })}
-                <ButtonText >Создать карточку</ButtonText>
+                <ButtonText onClick={()=>setNewCardModal(true)}>Создать карточку</ButtonText>
 
             <CSSTransition
                 in={addGhost}
@@ -103,6 +105,8 @@ const KanbanSectionTd = ({twoColumns, category, column, boardId}) => {
             >
                     <div className={styles.addGhost}/>
             </CSSTransition>
+
+            
 
             </div>
             
