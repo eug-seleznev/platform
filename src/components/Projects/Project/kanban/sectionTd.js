@@ -12,12 +12,13 @@ import getDate from "../../getDate";
 import KanbanCard from "./card/card";
 import { CSSTransition } from "react-transition-group";
 import { moveCard } from "../../../../redux/actions/kanban";
+import { ButtonText } from "../../../../Styles/buttons";
 
 
 
 
 
-const KanbanSectionTd = ({twoColumns, category, column}) => {
+const KanbanSectionTd = ({twoColumns, category, column, boardId}) => {
     const dispatch = useDispatch()
     const project = useSelector(state => state.projects.project)
     const [hower, setHower] = useState(false)
@@ -39,19 +40,16 @@ const KanbanSectionTd = ({twoColumns, category, column}) => {
         refBG.current.style.backgroundColor='white'
         setAddGhost(false)
         try {
-            console.log('1')
             const data = JSON.parse(e.dataTransfer.getData('text'));
-            console.log('2', data)
-
             dispatch(moveCard({
                 cardId:data.cardId, 
-                from:data.categoryID ? 'event' : data.timelineId ? 'timeline': data.backlog && 'backlog',
-                oldPlaceId: data.categoryID || data.timelineId || undefined,
+                from:data.categoryId ? 'event' : data.timelineId ? 'timeline': data.backlog && 'backlog',
+                oldPlaceId: data.categoryId || data.timelineId || undefined,
                 to : category.timeline.length>0 ? 'timeline' : 'event' ,
                 newPlaceId : category.timeline.length>0 ?  category.timeline[0]._id : category._id ,
-                column:column
+                column:column,
+                board_id: boardId,
             }))
-            console.log('3')
 
         } catch (e) {
             console.log('Не получилось переместить карточку', e)
@@ -77,9 +75,7 @@ const KanbanSectionTd = ({twoColumns, category, column}) => {
                 onMouseOver={()=>setHower(true)}
                 onMouseOut={()=>setHower(false)}
                 >
-              <KanbanCard />
-              <KanbanCard />
-              <KanbanCard />
+              
                 {category?.events?.filter(el=>el.column===column).map((el,i)=>{
                     return(
                         <KanbanCard info={el} currCategory={category._id}  />
@@ -90,7 +86,7 @@ const KanbanSectionTd = ({twoColumns, category, column}) => {
                         <KanbanCard info={el} timelineId={category?.timeline[0]?._id} />
                     )
                 })}
-
+                <ButtonText >Создать карточку</ButtonText>
 
             <CSSTransition
                 in={addGhost}
