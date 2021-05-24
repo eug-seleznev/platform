@@ -129,7 +129,7 @@ const TaskTable = ({tasksArray, id, team}) => {
   return (
     <div className={canban.tasks__container} style={{overflowY:tasksArray.length>8?'scroll': 'hidden',zIndex:-1}} >
     <SPRINT_TABLE onMouseLeave={() => setTaskId("")} 
-      style={{marginTop:'50px',marginLeft:'20px'
+      style={{marginTop:'10px',marginLeft:'20px'
     }} >
       <tbody>
         {tasksArray&&tasksArray.map((task,i)=>{

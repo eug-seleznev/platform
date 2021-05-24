@@ -1,8 +1,24 @@
 import { innerBackend, } from "../../components/utils/axios";
-import {ADD_CARD_TO_CHOSEN,CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD, COMMON_KANBAN_RELOAD, ADD_USER_TO_TASK_NEW} from "../types";
+import {ADD_TAG_CARD,DELETE_CARD,ADD_CARD_TO_CHOSEN,CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD, COMMON_KANBAN_RELOAD, ADD_USER_TO_TASK_NEW} from "../types";
 
 
 
+
+export const addTagCard = (id, value) => async dispatch  => {
+    let body = {
+        tag: value
+    }
+    try {
+        const res = await innerBackend.put(`/kanban/cards/tags/add/${id}`,body)
+        dispatch({
+            type: ADD_TAG_CARD,
+            payload: res.data
+        })
+    }
+    catch (err) {
+       alert('ошибка')           
+    }
+}
 export const loadBoard = (id) => async dispatch  => {
 
     // console.log('action ', `/kanban/boards/get/single/${id}`)

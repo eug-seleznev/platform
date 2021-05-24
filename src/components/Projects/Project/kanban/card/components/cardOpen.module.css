@@ -12,7 +12,7 @@
     font-family:SuisseIntlLight;
 }
 .tasks__container{
-    max-height:300px;
+    max-height:280px;
     overflow-y:scroll;
     overflow-x:hidden;
 } 
@@ -21,8 +21,31 @@
     margin-left:25px;
     overflow-y: scroll;
     overflow-x: hidden;
-    max-height: 270px;
+    max-height: 260px;
 } 
+.editList {
+	display: flex;
+	flex-wrap:wrap;
+	
+	justify-content: flex-start;
+	color:#3F496C;
+	margin-top:10px;
+}
+.creator {
+    margin-left: 10px;
+}
+.taglist{
+	display: flex;
+	margin-left:10px;
+	margin-right:0px;
+    height: 30px;
+}
+
+.taglist div{
+	
+	margin-right:10px;
+	
+}
 .comments__date {
     margin-left:15px;
     width:85px;

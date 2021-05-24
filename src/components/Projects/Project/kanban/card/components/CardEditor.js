@@ -7,7 +7,7 @@ import { addToChosen } from "../../../../../../redux/actions/auth";
 import TagSearch from "../../../../components/tagSearch";
 import Tag from "../../../../components/OneProject/tag";
 import cardOpen from "./cardOpen.module.css"
-import {addCardToChosen, changeCardField}  from "../../../../../../redux/actions/kanban"
+import {addCardToChosen, addTagCard, changeCardField}  from "../../../../../../redux/actions/kanban"
 import { Path } from "../../../../../Layout/header";
 
 
@@ -37,6 +37,15 @@ const CardEditor = ({info}) => {
     setChosen(!chosen)
     dispatch(addCardToChosen(info._id))
   }
+  const AddTag =(value)=>{
+    if(value!=='') {
+      dispatch(addTagCard(info._id, value))
+    }
+    
+   }
+   const delTag =(tag)=>{
+    // dispatch(deleteTagCard(id, tag))
+   }
   const changeSomeField =(e)=>{
     if(e.target.name==='title')  {
       setTitle(e.target.value)
@@ -75,7 +84,7 @@ const CardEditor = ({info}) => {
             display: "flex",
           }}
         >
-          <div className={style.editList}>
+          <div className={cardOpen.editList}>
               <div style={{ display: "flex" }}>
                 <Light style={{ width: "40px" }}>
                   {info.tasks.filter(task=>task.taskStatus).length}/{info.tasks.length}
@@ -89,38 +98,47 @@ const CardEditor = ({info}) => {
                   ></div>
                 </div>
               </div>
-            <div className={style.creator}>
-              <Light color="#3F496C"> Создатель: {info?.creator?.fullname} </Light>
+            <div className={cardOpen.creator}>
+              <Light color="#3F496C" size='16'> Создатель: {info?.creator?.fullname} </Light>
             </div>
             
-            <div className={style.taglist}>
-              <div
-                style={{
-                  marginBottom: "10px",
-                  display: "flex",
-                  alignItems: "baseline",
-                }}
-              >
-              <div className={style.cross}>
-                x
-              </div>
+            <div className={cardOpen.taglist}>
+              {info.tags !== undefined
+                ? info.tags.map((el, i) => {
+                    return (
+                      <div
+                        style={{
+                          marginBottom: "10px",
+                          display: "flex",
+                          alignItems: "baseline",
+                        }}
+                      >
+                        <Tag
+                          tagText={el}
+                          key={i}
+                          tagColor={
+                            i === 0
+                              ? "#C8D9E9"
+                              : i === 1
+                              ? "#E9E3C8"
+                              : "#AAF8A8"
+                          }
+                        />
+                        <div className={style.cross} onClick={() => delTag(el)}>
+                          x
+                        </div>
                       </div>
+                    );
+                  })
+                : ""}
             </div>
+            {info.tags !== undefined && info.tags.length < 2 ? (
+              <TagSearch tagCount={false} func={AddTag}></TagSearch>
+            ) : (
+              ""
+            )}
           </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              width: "13%",
-              marginTop: "10px",
-            }}
-          >
-            <Light
-              color="#3F496C"
-              style={{ cursor: "pointer", whiteSpace: "nowrap" }}
-            >
-            </Light>
-          </div>
+        
         </div>
         <div style={{ height: "20px" }}>
             <div className={style.edit__task}>
@@ -153,7 +171,7 @@ const CardEditor = ({info}) => {
                     name='description'
                     onKeyPress={(e)=>e.key==="Enter"?onEnter(e):''}
                     onChange={(e)=>changeSomeField(e)}
-                    style={{width:'670px',resize:"none",height:'70px',zIndex:1}}
+                    style={{width:'670px',resize:"none",height:'40px',zIndex:1}}
                     placeholder="Добавить описание"
                     className={style.changeDescr}
                   ></textarea>
