@@ -33,7 +33,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog}) => {
       e.dataTransfer.setData('text', JSON.stringify(data));
     }
     useEffect(()=>{
-      console.log (info)
+      // console.log (info)
     },[info])
     return (
       <>
@@ -45,7 +45,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog}) => {
         <div className={styles.card__circuit}
         style={{backgroundColor:'green'}}></div>
         <div className={styles.card__content}>
-          <Light size='16' style={{padding:'5px'}}>{info.title} </Light>
+          <Light size='16' style={{padding:'5px'}}>{info?.title} </Light>
           <div className={styles.card__content__second} >
             <div style={{display:'flex'}}>
               <Light size='12' ></Light>

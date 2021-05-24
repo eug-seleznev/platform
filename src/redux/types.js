@@ -21,6 +21,8 @@ export const CHANGE_CARD_TITLE ='CHANGE_CARD_TITLE'
 export const CHANGE_CARD_DESCRIPTION ='CHANGE_CARD_DESCRIPTION'
 export const CHANGE_CARD = 'CHANGE_CARD'
 export const ADD_COMMENT = 'ADD_COMMENT'
+
+export const COMMON_KANBAN_RELOAD='COMMON_KANBAN_RELOAD'
 //USERES
 export const ALL_USERS = 'users';
 export const GET_EMPLOYE = 'get_users';

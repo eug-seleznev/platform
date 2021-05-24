@@ -9,7 +9,7 @@ import styles from './kanban.module.css'
 
 
 
-const CreateForm = ({crypt,setCreateOpen}) => {
+const CreateForm = ({crypt,setCreateOpen, boardId}) => {
 
 const dispatch =useDispatch ()
 const [title, setTitle] = useState('')
@@ -17,7 +17,7 @@ const [description, setDescription] = useState('')
 
 const createCardFunc =(e)=>{
     e.preventDefault()
-    dispatch(addNewCard(crypt, title, description))
+    dispatch(addNewCard(crypt, title, description, boardId))
     setCreateOpen ({
         status:false,
         place:''
