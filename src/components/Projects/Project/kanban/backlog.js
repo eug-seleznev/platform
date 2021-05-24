@@ -59,7 +59,7 @@ const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId})=>{
             onDrop={dropCard}
             >
             <div className={styles.backLogCards} >
-                {backlog?.map((card,i)=>{
+                {backlog && backlog?.map((card,i)=>{
 
                     return(
                          <KanbanCard key={i} info={card} backlog={true}/>

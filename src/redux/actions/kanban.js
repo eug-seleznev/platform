@@ -257,17 +257,22 @@ export const addNewCard = (crypt,title, description, board_id) => async dispatch
             alert('ошибка')           
          }
 } 
-export const addNewCardToColumn = (category_id, title, description, column, timeline_id) => async dispatch  => {
+export const addNewCardToColumn = (category_id, title, description, column, timeline_id, boardId) => async dispatch  => {
     
     let body = {
         title: title,
         desctiption: description,
         column:column,
-        timeline:timeline_id}
+        timeline:timeline_id,
+        board_id: boardId
+    }
     try {
+        console.log(body)
         const res = await innerBackend.post(`/kanban/cards/new/category/${category_id}`,body )
+        console.log('resssssss',res)
+        
         dispatch({
-            type: ADD_NEW_CARD,
+            type: COMMON_KANBAN_RELOAD,
             payload: res.data
         })
         // dispatch({
@@ -276,7 +281,7 @@ export const addNewCardToColumn = (category_id, title, description, column, time
         // })
         }
         catch (err) {
-            alert('ошибка')           
+            console.log(err.response)
          }
 } 
 export const moveCard = ({board_id,from, to, oldPlaceId, newPlaceId, cardId, column}) => async dispatch  => {

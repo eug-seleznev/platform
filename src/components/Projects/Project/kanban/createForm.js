@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
-import { addNewCard } from '../../../../redux/actions/kanban'
+import { addNewCard, addNewCardToColumn } from '../../../../redux/actions/kanban'
 import { Button, CancelButton } from '../../../../Styles/buttons'
 import styles from './kanban.module.css'
 
@@ -11,7 +11,7 @@ import styles from './kanban.module.css'
 
 
 
-const CreateForm = ({crypt,setCreateOpen, boardId, visible, place}) => {
+const CreateForm = ({crypt,setCreateOpen, boardId, visible, place, categoryId, column, timeline }) => {
 
 const dispatch =useDispatch ()
 const [title, setTitle] = useState('')
@@ -26,6 +26,10 @@ const createCardFunc =(e)=>{
     })
     setDescription('')
     setTitle('')
+}
+const createCardInsideCategory = (e) => {
+  e.preventDefault()
+  dispatch(addNewCardToColumn(categoryId, title, description, column, timeline, boardId))
 }
 const close = () => {
   setCreateOpen ({
@@ -45,8 +49,9 @@ return (
     }}
     unmountOnExit
   >
-        {place==='backlog' ? <div className={styles.createWindow}>
-          <form className={styles.createCard}onSubmit={(e)=>{createCardFunc(e)}} >
+         
+        <div className={styles.createWindow}>
+          <form className={styles.createCard}onSubmit={(e)=>{place==='backlog' ? createCardFunc(e): createCardInsideCategory(e)}} >
             <input placeholder='Название' required style={{width:'97%',marginBottom:'10px',height:'30px'}} value={title} onChange={(e)=>{setTitle(e.target.value)}}></input>
             <input placeholder='Описание' style={{width:'97%',marginBottom:'10px',height:'30px'}} value={description} onChange={(e)=>{setDescription(e.target.value)}}></input>
             <div style={{width:'100%', display:'flex',justifyContent:'space-between'}}>
@@ -54,8 +59,8 @@ return (
               <Button type='submit' >Создать</Button>
             </div>
           </form>
-        </div> : 
-        <div>hi</div>}
+        </div> 
+        
   </CSSTransition>
     )
        

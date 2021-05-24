@@ -68,7 +68,7 @@ const Board = ({match}) => {
     }
 
     return (
-      <div className={styles.main} style={{gridTemplateColumns: sideOpen? '386px 1fr' : 'max-content 1fr'}}>
+      <div className={styles.main} style={{gridTemplateColumns: sideOpen? '386px 1fr' : '35px 1fr'}}>
         <div 
           className={styles.backLog} 
           onClick={()=>setSideOpen(!sideOpen)}

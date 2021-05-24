@@ -13,14 +13,17 @@ import KanbanCard from "./card/card";
 import { CSSTransition } from "react-transition-group";
 import { moveCard } from "../../../../redux/actions/kanban";
 import { ButtonText } from "../../../../Styles/buttons";
+import CreateForm from "./createForm";
+import { Path } from '../../../Layout/header'
 
 
 
 
 
-const KanbanSectionTd = ({twoColumns, category, column, boardId}) => {
+const KanbanSectionTd = ({twoColumns, category, column, boardId, timeline}) => {
     const dispatch = useDispatch()
     const project = useSelector(state => state.projects.project)
+    const currentColunmCards = timeline? category?.timeline[0]?.cards?.filter(el=>el.column===column) : category?.events?.filter(el=>el.column===column)
     const [hower, setHower] = useState(false)
     const [newCardModal, setNewCardModal] = useState(false)
     const [addGhost, setAddGhost] = useState(false)
@@ -42,12 +45,13 @@ const KanbanSectionTd = ({twoColumns, category, column, boardId}) => {
         setAddGhost(false)
         try {
             const data = JSON.parse(e.dataTransfer.getData('text'));
+            console.log('dataaaaaaaaaaaa',data)
             dispatch(moveCard({
                 cardId:data.cardId, 
-                from:data.categoryId ? 'event' : data.timelineId ? 'timeline': data.backlog && 'backlog',
-                oldPlaceId: data.categoryId || data.timelineId || undefined,
-                to : category.timeline.length>0 ? 'timeline' : 'event' ,
-                newPlaceId : category.timeline.length>0 ?  category.timeline[0]._id : category._id ,
+                from: data.timelineId ? 'timeline': data.categoryId ? 'event' : data.backlog && 'backlog',
+                oldPlaceId: data.timelineId || data.categoryId ||  undefined,
+                to : timeline ? 'timeline' : 'event' ,
+                newPlaceId : timeline ?  category.timeline[0]._id : category._id ,
                 column:column,
                 board_id: boardId,
             }))
@@ -67,6 +71,7 @@ const KanbanSectionTd = ({twoColumns, category, column, boardId}) => {
                 className={styles.td} 
                 style={{
                     gridTemplateColumns: twoColumns? 'max-content max-content' : '1fr',
+                    gridTemplateRows: twoColumns? `repeat(${currentColunmCards.length/2+1}, max-content)` : `repeat(${currentColunmCards.length+1}, max-content)`,
                     // backgroundColor: hower? '#8b97c2' : 'white',
                     transitionDuration: '250ms'
                 }} 
@@ -78,17 +83,19 @@ const KanbanSectionTd = ({twoColumns, category, column, boardId}) => {
                 onMouseOut={()=>setHower(false)}
                 >
               
-                {category?.events?.filter(el=>el.column===column).map((el,i)=>{
+                {currentColunmCards.map((el,i)=>{
                     return(
-                        <KanbanCard info={el} currCategory={category._id}  />
+                        <KanbanCard info={el} currCategory={category._id} timelineId={category?.timeline[0]?._id}  />
                     )
                 })}
-                {category?.timeline[0]?.cards?.filter(el=>el.column===column).map((el,i)=>{
-                    return(
-                        <KanbanCard info={el} timelineId={category?.timeline[0]?._id} />
-                    )
-                })}
-                <ButtonText onClick={()=>setNewCardModal(true)}>Создать карточку</ButtonText>
+               
+                <div className={styles.creationButton}>
+                   <ButtonText onClick={()=>setNewCardModal(true)}>
+                        <img alt='plus' src={Path+'plus1.png'}className={styles.categoryCardPlus}/>
+                        Создать карточку
+                    </ButtonText> 
+                </div>
+                
 
             <CSSTransition
                 in={addGhost}
@@ -107,7 +114,15 @@ const KanbanSectionTd = ({twoColumns, category, column, boardId}) => {
             </CSSTransition>
 
             
-
+            <CreateForm 
+                crypt={project.crypt} 
+                categoryId={category._id} 
+                column={column} 
+                timeline={category.timeline.length>0? category.timeline[0]._id : undefined} 
+                visible={newCardModal} 
+                place={'category'} 
+                setCreateOpen={()=>setNewCardModal()} 
+                boardId={boardId}/>
             </div>
             
    

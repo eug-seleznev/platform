@@ -51,7 +51,7 @@ const KanbanSection = ({main, board, category}) => {
             <span/>
             {board.columns.map((el,i)=>{
               return(
-                <KanbanSectionTd twoColumns={i===0? true : i===1? true : false} category={category} column={el} boardId={board._id} />
+                <KanbanSectionTd twoColumns={i===0? true : i===1? true : false} timeline={category.events.length>0? false : true} category={category} column={el} boardId={board._id} />
               )
             })}
             <span/>
