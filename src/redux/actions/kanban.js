@@ -259,7 +259,7 @@ export const moveCard = ({board_id,from, to, oldPlaceId, newPlaceId, cardId, col
         console.log('transfer res',res)
 
         dispatch({
-            type: COMMON_KANBAN_RELOAD,
+            type: MOVE_CARD,
             payload: res.data
         })
         // dispatch({

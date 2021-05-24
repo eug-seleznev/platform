@@ -31,7 +31,7 @@ return (
           <form className={styles.createCard}onSubmit={(e)=>{createCardFunc(e)}}>
             <input value={title} onChange={(e)=>{setTitle(e.target.value)}}></input>
             <input value={description} onChange={(e)=>{setDescription(e.target.value)}}></input>
-            <button type='button'>отменить</button>
+            <button type='button' onClick={()=>setCreateOpen({status: false, place:''})}>отменить</button>
             <button type='submit' >создать</button>
           </form>
         </div>
