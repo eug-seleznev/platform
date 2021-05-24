@@ -147,9 +147,9 @@ const Board = ({match}) => {
                 )
             })}
         </div>
-        <div style={{display:createOpen.status?'block':'none'}}>
+
+        
            <CreateForm crypt={project.crypt} visible={createOpen.status} place={createOpen.place} setCreateOpen={setCreateOpen} boardId={board._id}></CreateForm>
-        </div>
        
         
       </div>

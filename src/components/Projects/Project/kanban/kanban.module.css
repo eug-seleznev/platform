@@ -124,3 +124,20 @@ padding-top: 70px;
             opacity: 1;
             transition: opacity 0.2s, transform 0.2s
         }
+
+
+.formEnter{
+    opacity: 0;
+}
+.formEnterActive{
+    opacity: 1;
+    transition: opacity 0.5s, transform 0.5s;
+
+}
+.formExit{
+    opacity: 1;
+}
+.formExitActive{
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.5s
+}
