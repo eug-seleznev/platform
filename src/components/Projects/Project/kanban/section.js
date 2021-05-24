@@ -39,8 +39,9 @@ const KanbanSection = ({main, board, category}) => {
                  <span>
                    <ButtonText onClick={()=>deleteCategoryHandler()}>Удалить категорию</ButtonText>
                  </span>
-                 <div>
+                 <div style={{display: "flex"}}>
                      {category.name}
+                     {!main &&<div style={{transform: `rotate(${open?'90':'-90'}deg)`, marginLeft: '10px'}}>{'<'}</div>}
                  </div>
                  <span/>
                  <span/>
