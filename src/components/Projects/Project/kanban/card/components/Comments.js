@@ -11,6 +11,7 @@ import getDateWithTime from "./getDateWithTime"
 const Comments =({id})=>{
     const [comment,setComment] =useState('')
     const comments = useSelector(state=>state.projects.comments)
+    
     const dispatch = useDispatch()
     const createComment = (e) =>{
         e.preventDefault()
@@ -19,7 +20,9 @@ const Comments =({id})=>{
     }
     return (
         <div>
-           <div className={style.comments__array}>
+           <div className={style.comments__array} 
+           style={{overflowY:comments.length>7?'scroll':'hidden'}}
+           >
             {comments&&comments.map((comm,i)=>{
 
                 return(

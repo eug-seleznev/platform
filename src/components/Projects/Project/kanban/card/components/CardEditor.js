@@ -17,10 +17,13 @@ import { Path } from "../../../../../Layout/header";
 const CardEditor = ({info}) => {
   const dispatch= useDispatch()
   const [title, setTitle] = useState('')
-  
+  const [description, setDescription] = useState('')
+  const[chosen, setChosen]= useState(false)
   useEffect(()=>{
     if(info) {
+
       setTitle(info.title)
+      setDescription(info.description)
     }
     
   },[])
@@ -30,9 +33,16 @@ const CardEditor = ({info}) => {
   const onEnter=(e)=>{
     e.target.blur()
   }
+  const toChosen =()=>{
+    setChosen(!chosen)
+    // dispatch(addCardToChosen(info._id))
+  }
   const changeSomeField =(e)=>{
     if(e.target.name==='title')  {
       setTitle(e.target.value)
+    }
+    else if(e.target.name==='description')  {
+      setDescription(e.target.value)
     }
     let val = e.target.value
     let field = e.target.name
@@ -46,7 +56,6 @@ const CardEditor = ({info}) => {
       <form style={{display:'flex',width:'100%'}} onSubmit={onSubmit}>
         <input
           style={{
-           
             border: "none",
             fontSize: "20px",
             width:'100%'
@@ -57,7 +66,7 @@ const CardEditor = ({info}) => {
           onKeyPress={(e)=>e.key==='Enter'?onEnter(e):''}
           onChange={(e)=>changeSomeField(e)}
         />
-          <img style={{width:'30px'}} src={Path+'star.png'}>
+          <img  onClick={toChosen} src={Path+'star.png'} style={{width:'30px',cursor:'pointer', backgroundColor:chosen?'#FFAF30':'rgba(0,0,0,0)'}}>
           </img>
       </form>
       <div>
@@ -140,7 +149,11 @@ const CardEditor = ({info}) => {
                 >
                   <textarea
                     type="text"
-                    style={{width:'600px',resize:"none",height:'70px'}}
+                    value={description}
+                    name='description'
+                    onKeyPress={(e)=>e.key==="Enter"?onEnter(e):''}
+                    onChange={(e)=>changeSomeField(e)}
+                    style={{width:'600px',resize:"none",height:'70px',zIndex:1}}
                     placeholder="Добавить описание"
                     className={style.changeDescr}
                   ></textarea>

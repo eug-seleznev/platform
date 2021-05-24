@@ -7,6 +7,7 @@ import { Thin } from "../../../../../../Styles/typography";
 import { Input } from "../../../../../../Styles/Forms";
 import { ButtonText } from "../../../../../../Styles/buttons";
 import getDate from "../../../../getDate";
+import canban from './cardOpen.module.css'
 
 //todo: handle no tasks state
 
@@ -78,10 +79,14 @@ const TaskTable = ({tasksArray, id, team}) => {
   }
   
   const changeTaskDate =(e)=>{
-    let value = e.target.value
-    let field = 'deadline'
-    // dispatch(EditTask({value, id, focusRow, field}))
-    setDeadline(false)
+    let prop = e.target.value
+		let field = 'deadline'
+		let id = focusRow 
+    let date = new Date(e.target.value)
+    let year = date.getFullYear()
+    if(year>2000) {
+      dispatch(changeTaskCard(prop,id,field))
+    }
   }
 
   const doubleClickEdit = (task) => {
@@ -122,7 +127,7 @@ const TaskTable = ({tasksArray, id, team}) => {
   }
 
   return (
-    <div style={{maxHeight:'250px', overflowY:'scroll',overflowX:'hidden'}}>
+    <div className={canban.tasks__container} style={{overflowY:tasksArray.length>8?'scroll': 'hidden',zIndex:-1}} >
     <SPRINT_TABLE onMouseLeave={() => setTaskId("")} 
       style={{marginTop:'50px',marginLeft:'20px'
     }} >
@@ -185,7 +190,7 @@ const TaskTable = ({tasksArray, id, team}) => {
                                 {member.user.fullname}
                               </option>
                             ) : (
-                              <option value={member.user._id} name={task._id}>
+                              <option value={member.user._id} key={i} name={task._id}>
                                 {member.user.fullname}
                               </option>
                             )}
@@ -217,7 +222,7 @@ const TaskTable = ({tasksArray, id, team}) => {
               )}
             </SPRINT_TD>
             <SPRINT_TD style={{width:'150px',paddingRight:'25px'}}>
-              <div style={{display:'flex'}}>
+              <div style={{display:task._id===focusRow?'flex':'none'}}>
                 <Thin >Дедлайн: </Thin> 
                 <ButtonText onClick={()=>setDeadline(true)}
                   style={{display:`${task._id !== focusRow||!deadline?'block':'none'}`}}>

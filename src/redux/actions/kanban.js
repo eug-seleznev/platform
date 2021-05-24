@@ -16,7 +16,7 @@ export const changeTaskCard = (prop, id, field) => async dispatch  => {
     }
 }
 export const currentCard = (info) => async dispatch  => {
-    console.log(info._id)
+    // console.log(info._id)
     try {
         const res = await innerBackend.get(`/kanban/cards/get/single/${info._id}`)
         dispatch({
@@ -46,7 +46,7 @@ export const addTaskCard = (text,id) => async dispatch  => {
 export const changeCardField = (val, field, id) => async dispatch  => {
     let body = {}
     body[field] = val
-    console.log(body)
+    // console.log(body)
     let type = field==='title'?
         CHANGE_CARD_TITLE:
         field==='description'?
