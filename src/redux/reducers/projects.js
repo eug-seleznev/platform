@@ -56,7 +56,8 @@ export default function(state = initialState, action) {
                     return {
                         ...state,
                         project:payload,
-                        backlog:payload.backlog
+                        backlog:payload.backlog,
+                        card:null
                     }
                 case ADD_TAG_CARD:
                 return {
