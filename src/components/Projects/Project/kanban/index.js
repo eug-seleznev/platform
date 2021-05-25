@@ -23,6 +23,7 @@ const Kanbans = ({history}) => {
   }
   const createBoard = () => {
     dispatch(addNewBoard(project.crypt, title))
+    setTitle('')
   }
 
     return (
@@ -50,10 +51,10 @@ const Kanbans = ({history}) => {
                   onClick={()=>createBoard()}>Создать
                 </Button>
               </div>
-              {project.boards.map((el,i)=>{
+              {project && project.boards.map((el,i)=>{
                   return (
                     
-                      <div className={styles.main__board__item} onClick={()=>handleRedirect(el.name)}>
+                      <div key={i} className={styles.main__board__item} onClick={()=>handleRedirect(el.name)}>
                         {el.name}
                       </div>
                     

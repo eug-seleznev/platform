@@ -52,11 +52,11 @@ export default function(state = initialState, action) {
 
                     error: ''
                 }
-                // case ADD_NEW_BOARD:
-                //     return {
-                //         ...state,
-                //         project:payload,
-                //     }
+                case ADD_NEW_BOARD:
+                    return {
+                        ...state,
+                        project:payload,
+                    }
                 case DELETE_CARD:
                     return {
                         ...state,
