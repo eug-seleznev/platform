@@ -35,7 +35,7 @@ const KanbanSection = ({main, board, category}) => {
           {/* {main && } */}
 
           <div className={styles.title} onClick={()=>setOpen(!open)} style={{backgroundColor: main? 'white' : '#FCFCFC'}}>
-             <div className={styles.tr}>
+             <div className={styles.tr} style={{gridTemplateColumns: `1fr 530px 530px repeat(${board.columns.length-2},250px) 1fr`}}>
                  <span>
                    <ButtonText onClick={()=>deleteCategoryHandler()}>Удалить категорию</ButtonText>
                  </span>
@@ -48,7 +48,8 @@ const KanbanSection = ({main, board, category}) => {
                  <span/>
              </div> 
           </div>
-          <div className={styles.tr}>
+        
+          <div className={styles.tr} style={{gridTemplateColumns: `1fr 530px 530px repeat(${board.columns.length-2},250px) 1fr`}}>
             <span/>
             {board.columns.map((el,i)=>{
               return(

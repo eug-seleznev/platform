@@ -123,7 +123,7 @@ const Board = ({match}) => {
                 <ButtonText onClick={()=>createColumn()}>Создать колонку</ButtonText> 
             </div>
             <div className={styles.title}  style={{backgroundColor: 'white'}}>
-              <div className={styles.tr}>
+              <div className={styles.tr} style={{gridTemplateColumns: `1fr 530px 530px repeat(${board.columns.length-2},250px) 1fr`}}>
                 <span/>
                   {board && board.columns && board?.columns?.map((el,i)=>{
                     return(

@@ -71,7 +71,7 @@ const KanbanSectionTd = ({twoColumns, category, column, boardId, timeline}) => {
                 className={styles.td} 
                 style={{
                     gridTemplateColumns: twoColumns? 'max-content max-content' : '1fr',
-                    gridTemplateRows: twoColumns? `repeat(${currentColunmCards.length/2+1}, max-content)` : `repeat(${currentColunmCards.length+1}, max-content)`,
+                    gridTemplateRows: twoColumns? `repeat(${(currentColunmCards? currentColunmCards.length: 0)/2+1}, max-content)` : `repeat(${(currentColunmCards? currentColunmCards.length : 0)+1}, max-content)`,
                     // backgroundColor: hower? '#8b97c2' : 'white',
                     transitionDuration: '250ms'
                 }} 
@@ -83,7 +83,7 @@ const KanbanSectionTd = ({twoColumns, category, column, boardId, timeline}) => {
                 onMouseOut={()=>setHower(false)}
                 >
               
-                {currentColunmCards.map((el,i)=>{
+                {currentColunmCards && currentColunmCards.map((el,i)=>{
                     return(
                         <KanbanCard info={el} currCategory={category._id} timelineId={category?.timeline[0]?._id}  />
                     )
