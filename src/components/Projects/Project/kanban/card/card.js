@@ -1,12 +1,13 @@
 import { useState } from "react"
 
 import styles from './card.module.css'
-
-import { Light } from "../../../../../Styles/typography";
+import kanban from '../kanban.module.css'
+import { Light, Regular } from "../../../../../Styles/typography";
 
 import CardOpen from "./cardOpen";
-import { useDispatch } from "react-redux";
-import { currentCard } from "../../../../../redux/actions/kanban";
+import { useDispatch, useSelector } from "react-redux";
+import { cardDelete, currentCard } from "../../../../../redux/actions/kanban";
+import { Button, CancelButton } from "../../../../../Styles/buttons";
 
 
 
@@ -14,13 +15,24 @@ import { currentCard } from "../../../../../redux/actions/kanban";
 
 const KanbanCard = ({info, currCategory, timelineId, backlog}) => {
     const [cardOpen, setCardOpen] = useState(false)
+    const [deleteWindow, setDeleteWindow] = useState({
+      status:false,
+      id:''
+    })
     const dispatch = useDispatch()
-    
+    const crypt = useSelector(state=>state.projects.project.crypt)
     const cardClick = (e) => {
       e.stopPropagation()
       setCardOpen(true)
       dispatch(currentCard(info))
 
+    }
+    const deleteCard =()=>{
+      dispatch(cardDelete(deleteWindow.id, crypt))
+      setDeleteWindow ({
+        status:false,
+        id:''
+      })
     }
     const dragStart = (e) => {
       e.stopPropagation()
@@ -57,7 +69,20 @@ const KanbanCard = ({info, currCategory, timelineId, backlog}) => {
 
 
       {cardOpen && info && 
-        <CardOpen isOpen={cardOpen} data={'task data'} close={()=>setCardOpen(false)} />
+        <div>
+          <div className={styles.card__delete__window} style={{display:deleteWindow.status?'block':'none'}}>
+            <div className={kanban.createCard}>
+              <Regular size='16' style={{marginBottom:'20px'}}>Вы действительно хотите удалить карточку?</Regular>
+              <div style={{display:'flex', justifyContent:'space-between'}}>
+                <CancelButton fontSize='13px' grey type='button' padd='5px' onClick={()=>{setDeleteWindow({status:false, id:''})}}>Отменить</CancelButton>
+                <Button onClick={deleteCard} >Удалить</Button>
+              </div>
+              
+            </div>
+          </div>
+          <CardOpen isOpen={cardOpen} onClick={deleteCard} setDeleteWindow={setDeleteWindow} data={'task data'} close={()=>setCardOpen(false)} />
+        </div>
+        
       }
       </>
     );    

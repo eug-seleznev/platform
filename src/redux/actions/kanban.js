@@ -37,7 +37,7 @@ export const loadBoard = (id) => async dispatch  => {
 }
 
 export const cardDelete = (id,crypt) => async dispatch  => {
-    
+    console.log(id, crypt)
     try {
         const res = await innerBackend.delete(`/kanban/cards/delete/single?cardid=${id}&crypt=${crypt}`)
         dispatch({
