@@ -35,13 +35,13 @@ const KanbanSection = ({main, board, category}) => {
           {/* {main && } */}
 
           <div className={styles.title} onClick={()=>setOpen(!open)} style={{backgroundColor: main? 'white' : '#FCFCFC'}}>
-             <div className={styles.tr} style={{gridTemplateColumns: `1fr 530px 530px repeat(${board.columns.length-2},250px) 1fr`}}>
+             <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-2},250px) minmax(50px,1fr)`}}>
                  <span>
-                   <ButtonText onClick={()=>deleteCategoryHandler()}>Удалить категорию</ButtonText>
+                   <img src={Path+'trash-sharp.png'} style={{width:'20px', height: '20px', marginLeft: '20px'}}  title='удалить' onClick={()=>deleteCategoryHandler()}/>
                  </span>
-                 <div style={{display: "flex"}}>
+                 <div style={{display: "flex", alignItems: 'center'}}>
                      {category.name}
-                     {!main &&<div style={{transform: `rotate(${open?'90':'-90'}deg)`, marginLeft: '10px'}}>{'<'}</div>}
+                     {!main &&<img src={Path+'openicon.png'} style={{transform: `rotate(${open?'0':'180'}deg)`, marginLeft: '10px', width: '15px', height: '12px'}}></img>}
                  </div>
                  <span/>
                  <span/>
@@ -49,7 +49,7 @@ const KanbanSection = ({main, board, category}) => {
              </div> 
           </div>
         
-          <div className={styles.tr} style={{gridTemplateColumns: `1fr 530px 530px repeat(${board.columns.length-2},250px) 1fr`}}>
+          <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-2},250px) minmax(50px,1fr)`}}>
             <span/>
             {board.columns.map((el,i)=>{
               return(
