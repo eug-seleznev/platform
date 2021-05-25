@@ -27,7 +27,15 @@
     align-items: center;
     width: 100%;
 }
-
+.card__delete__window {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.329);
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
 .cardOpnenBackground{
     position: fixed;
     right: 0;

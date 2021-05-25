@@ -107,6 +107,7 @@ const CardEditor = ({info}) => {
                 ? info.tags.map((el, i) => {
                     return (
                       <div
+                      key={i}
                         style={{
                           marginBottom: "10px",
                           display: "flex",
@@ -115,7 +116,7 @@ const CardEditor = ({info}) => {
                       >
                         <Tag
                           tagText={el}
-                          key={i}
+                         
                           tagColor={
                             i === 0
                               ? "#C8D9E9"

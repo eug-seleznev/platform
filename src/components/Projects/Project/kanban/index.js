@@ -1,23 +1,13 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-
-
-
-import sprintCss from '../../../../Styles/modules/components/sprintCard.module.css'
 import styles from './kanban.module.css'
-import { Select, NEW_TABLE, NEW_TBODY, NEW_THEAD, NEW_TD, NEW_TH, NEW_TR } from '../../../../Styles/tables';
-import { Light } from "../../../../Styles/typography";
-import Tag from "../../components/OneProject/tag";
-import getDate from "../../getDate";
-import KanbanCard from "./card/card";
-import KanbanSection from "./section";
-import Backlog from "./backlog";
 import { addNewBoard, addNewCard } from "../../../../redux/actions/kanban";
-import CreateForm from "./createForm";
-import { NavLink } from "react-router-dom";
-import { ButtonText } from "../../../../Styles/buttons";
+import { Button, ButtonText, ButtonTextLight } from "../../../../Styles/buttons";
 import { Input } from "../../../../Styles/Forms";
-
+import modelsCss from '../../../../Styles/modules/components/Project/models.module.css'
+import { NEW_TABLE, NEW_TBODY, NEW_TD, NEW_TR } from "../../../../Styles/tables";
+import { Bold, Light } from "../../../../Styles/typography";
+import { Path } from "../../../Layout/header";
 
 
 
@@ -25,7 +15,7 @@ import { Input } from "../../../../Styles/Forms";
 const Kanbans = ({history}) => {
   const dispatch =useDispatch ()
   const project = useSelector(state=>state.projects.project)
-  console.log('project',project)
+  
   const [title, setTitle] = useState('')
 
   const handleRedirect = (name) => {
@@ -33,28 +23,54 @@ const Kanbans = ({history}) => {
   }
   const createBoard = () => {
     dispatch(addNewBoard(project.crypt, title))
+    setTitle('')
   }
 
     return (
-      <div className={styles.main} >
-        <div className={styles.content}>
-            <Input 
-              name='name'
-              value={title}
-              onChange={(e)=>setTitle(e.target.value)}
-            />
-            <ButtonText onClick={()=>createBoard()}>Создать</ButtonText>
-            <ul>
-                {project.boards.map((el,i)=>{
-                  return(
-                    <li>
-                      <ButtonText onClick={()=>handleRedirect(el.name)}>{el.name}</ButtonText>
-                    </li>
+      <div className={styles.main}>
+        <div>
+        {/* header */}
+        <div style={{ textAlign: "center" }}>
+          <img style={{height:'300px'}} src={Path+'Illustration/kanban.jpg'} />
+          <div className={styles.main__board}>
+            <h2>Новый подход к спринтам</h2>
+            <p className={styles.main__board__text}>
+              Теперь задачи проекта, это канбан доски, которые поделены как по вертикали (статусы задач), так и по горизонтали (категории, разные спринты). В разделах доски можно создавать карточки, которые могут содержать как одну задачу, так и несколько. На этой странице можно создать доску или выбрать из уже существующих.
+            </p>
+            <div className={styles.main__board__list}>
+              <div className={styles.main__board__create}>
+                <Input 
+                  name='name'
+                  placeholder='Введите название доски'
+                  style={{width:'99%',height:'29px'}}
+                  value={title}
+                  onChange={(e)=>setTitle(e.target.value)}
+                />
+                <Button style={{marginLeft:'20px',
+                  transform:'translateY(-36px)translateX(2px)',width:'100px'}}
+                  onClick={()=>createBoard()}>Создать
+                </Button>
+              </div>
+              {project && project.boards.map((el,i)=>{
+                  return (
+                    
+                      <div key={i} className={styles.main__board__item} onClick={()=>handleRedirect(el.name)}>
+                        {el.name}
+                      </div>
+                    
                   )
-                })}
-          </ul>
+              })}
+          </div>
+        </div> 
         </div>
+        </div>
+  
+        
+            
+   
+   
       </div>
+    
     );    
 }
 

@@ -11,7 +11,7 @@ import Confirm from "../../../../components/OneProject/confirm";
 
 
 
-const AddTask = ({id}) => {
+const AddTask = ({id, setDeleteWindow}) => {
  
     const dispatch = useDispatch();
     // const [field, setField] = useState(true)
@@ -118,7 +118,10 @@ const AddTask = ({id}) => {
                 marginLeft: "-50px",
                 whiteSpace: "nowrap",
               }}
-              // onClick={openDelite}
+              onClick={()=>setDeleteWindow({
+                status:true,
+                id: id
+              })}
             >
               Удалить карточку
             </CancelButton>
