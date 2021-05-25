@@ -3,7 +3,21 @@ import {ADD_TAG_CARD,DELETE_CARD,ADD_CARD_TO_CHOSEN,CHANGE_CARD_INFO,ADD_NEW_CAR
 
 
 
-
+export const removeTagCard = (id, tag) => async dispatch  => {
+    let body = {
+        tag: tag
+    }
+    try {
+        const res = await innerBackend.put(`/kanban/cards/tag/remove/${id}`,body)
+        dispatch({
+            type: ADD_TAG_CARD,
+            payload: res.data
+        })
+    }
+    catch (err) {
+       alert('ошибка')           
+    }
+}
 export const addTagCard = (id, value) => async dispatch  => {
     let body = {
         tag: value
