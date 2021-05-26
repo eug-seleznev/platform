@@ -4,7 +4,7 @@
     margin-right: -50px;
     display: grid;
     /* min-height: 100vh; */
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 .main__board {
     display:flex;
@@ -134,7 +134,7 @@ padding-top: 70px;
     }
 .board{
     width: 98vw; 
-    height: 75vh;  
+    height: 82vh;  
     /* background-color: blanchedalmond; */
     overflow: scroll;
 }

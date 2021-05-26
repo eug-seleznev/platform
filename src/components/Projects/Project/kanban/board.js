@@ -17,6 +17,7 @@ import CreateForm from "./createForm";
 
 import { Path } from "../../../Layout/header";
 import BoardSettings from './boardSettings'
+import BoardColumnsTitle from "./boardTitle";
 
 
 
@@ -29,6 +30,7 @@ const Board = ({match}) => {
 
   const boardDiv = useRef(null)
   const boardDivChild = useRef(null)
+  const boardTitle = useRef(null)
 
   const [createOpen, setCreateOpen] =useState ({
     status:false,
@@ -47,6 +49,7 @@ const Board = ({match}) => {
       x:0,
       y:0
     })
+
     const onMoveStart = (e) => {
       if(e.button===1){
         e.preventDefault()
@@ -59,6 +62,7 @@ const Board = ({match}) => {
     }
     const onMove = (e) => {
       moving && boardDiv.current.scrollTo( currentBoardXY.x+clientXY.x-e.clientX,  currentBoardXY.y+clientXY.y-e.clientY)
+      moving && boardTitle.current.scrollTo( currentBoardXY.x+clientXY.x-e.clientX,  0)
     }
     const onMoveEnd = (e) => {
       setMoving(false)
@@ -67,7 +71,11 @@ const Board = ({match}) => {
       document.body.style.cursor='auto'
 
     }
-    
+    const titleScroll = (e) => {
+      
+      boardTitle.current.scrollTo( boardDiv.current.scrollLeft,  0)
+    }
+
     useEffect(()=>{
         const boardId = project.boards.find(el=>el.name===match.params.board_name)._id
         // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',boardId)
@@ -92,36 +100,18 @@ const Board = ({match}) => {
           onClick={()=>setSideOpen(!sideOpen)}
           >
           <Backlog backlog={backlog} setCreateOpen={setCreateOpen} sideOpen={sideOpen} projectCrypt={project.crypt} boardId={board._id}/>
-            <div className={styles.verticalText}>
-              Все задачи
-            </div>
+          <div className={styles.verticalText}>Все задачи</div>
         </div>
 
         <div className={styles.content}>
-            <BoardSettings visible={settingsOpen} close={()=>setSettingsOpen(false)} boardId={board._id}  />
             <div onClick={()=>setSettingsOpen(true)}>Настройки</div>
 
-            <div ref={boardDiv} className={styles.board} onMouseDown={(e)=>onMoveStart(e)} onMouseMove={(e)=>onMove(e)} onMouseUp={(e)=>onMoveEnd(e)}>
+            <div ref={boardTitle} style={{width:'97vw', overflow:'hidden', scrollbarWidth: '0px', scrollbarColor: "transparent"}}>
+              <BoardColumnsTitle Path={Path} board={board} user={user} deleteColumn={(el)=>deleteColumnHandler(el)} />
+            </div>
+
+            <div ref={boardDiv} className={styles.board} onMouseDown={(e)=>onMoveStart(e)} onMouseMove={(e)=>onMove(e)} onMouseUp={(e)=>onMoveEnd(e)} onScroll={(e)=>titleScroll(e)}>
               <div ref={boardDivChild} style={{width: 'fit-content'}}>
-              <div className={styles.title}  style={{backgroundColor: 'white'}}>
-                <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-2},250px) minmax(50px,1fr)`}}>
-                  <span/>
-                    {board && board.columns && board?.columns?.map((el,i)=>{
-                      return(
-                        <div className={styles.titleTd}>
-                          <div style={{width: '90%', overflow: 'hidden'}}>{el}</div>
-                          <img alt='delite'  src={Path+'trash-sharp.png'}
-                              title='удалить'
-                              style={{display:user.permission==='user'?'none':'block',
-                                  width:'15px', height:'15px',cursor:'pointer', marginLeft: '10px'
-                                  }} 
-                              onClick={()=>deleteColumnHandler(el)} /> 
-                        </div>
-                      )
-                    })}
-                    <span/>
-                    </div>
-              </div>
                 {board && board.columns && board?.categories.map((el,i)=>{
                     return(
                         <KanbanSection main={i===0? true : false} board={board} category={el} />
@@ -130,8 +120,10 @@ const Board = ({match}) => {
                 </div>
             </div>
         </div>
-        
-           <CreateForm crypt={project.crypt} visible={createOpen.status} place={createOpen.place} setCreateOpen={setCreateOpen} boardId={board._id}></CreateForm>
+
+
+          <BoardSettings visible={settingsOpen} close={()=>setSettingsOpen(false)} boardId={board._id}  />
+          <CreateForm crypt={project.crypt} visible={createOpen.status} place={createOpen.place} setCreateOpen={setCreateOpen} boardId={board._id}></CreateForm>
        
         
       </div>
