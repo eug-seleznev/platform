@@ -134,7 +134,8 @@ padding-top: 70px;
     }
 .board{
     width: 98vw; 
-    height: 82vh;  
+    height: 70vh;  
+    
     /* background-color: blanchedalmond; */
     overflow: scroll;
 }
