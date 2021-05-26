@@ -27,7 +27,7 @@ const Kanbans = ({history}) => {
   }
 
     return (
-      <div className={styles.main}>
+      <div className={styles.start}>
         <div>
         {/* header */}
         <div style={{ textAlign: "center" }}>

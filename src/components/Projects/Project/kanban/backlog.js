@@ -7,6 +7,7 @@ import KanbanCard from './card/card'
 import styles from './kanban.module.css'
 import { CSSTransition } from "react-transition-group";
 import { moveCard } from "../../../../redux/actions/kanban";
+import { Regular } from '../../../../Styles/typography'
 
 
 const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId})=>{
@@ -58,6 +59,13 @@ const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId})=>{
             onDragLeave={dragOut} 
             onDrop={dropCard}
             >
+                <div style={{display:'flex', margin:'8px', marginBottom:'30px'}}>
+                    <Regular size='18' color='white'>
+                        Все задачи
+                    </Regular>
+                    <Regular size='18' color='grey' style={{marginLeft:'15px'}}>{backlog?.length}</Regular>
+                </div>
+            
             <div className={styles.backLogCards} >
                 {backlog && backlog?.map((card,i)=>{
 
@@ -68,13 +76,13 @@ const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId})=>{
 
                 }
                <CSSTransition
-                in={addGhost}
-                timeout={200}
-                classNames={{
-                enter: styles.ghostEnter,
-                enterActive: styles.ghostEnterActive,
-                exit: styles.ghostExit,
-                exitActive: styles.ghostExitActive,
+                    in={addGhost}
+                    timeout={200}
+                    classNames={{
+                    enter: styles.ghostEnter,
+                    enterActive: styles.ghostEnterActive,
+                    exit: styles.ghostExit,
+                    exitActive: styles.ghostExitActive,
                 }}
                 unmountOnExit
                 // onEntered={() => ghostEntered()}

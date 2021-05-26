@@ -1,13 +1,14 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import styles from './card.module.css'
 import kanban from '../kanban.module.css'
-import { Light, Regular } from "../../../../../Styles/typography";
+import { Light, Regular, Thin } from "../../../../../Styles/typography";
 
 import CardOpen from "./cardOpen";
 import { useDispatch, useSelector } from "react-redux";
 import { cardDelete, currentCard } from "../../../../../redux/actions/kanban";
 import { Button, CancelButton } from "../../../../../Styles/buttons";
+import Tag from "../../../components/OneProject/tag";
 
 
 
@@ -44,7 +45,9 @@ const KanbanCard = ({info, currCategory, timelineId, backlog}) => {
       }
       e.dataTransfer.setData('text', JSON.stringify(data));
     }
- 
+    useEffect(()=>{
+      console.log(info)
+    },[])
     return (
       <>
       <div className={styles.card}
@@ -61,8 +64,14 @@ const KanbanCard = ({info, currCategory, timelineId, backlog}) => {
               <Light size='12' ></Light>
               <Light size='12' >{info?.tasks.filter(task=>task.taskStatus).length}/{info?.tasks.length}</Light>
             </div>
-            <div style={{borderRadius:'100%',backgroundColor:'grey',width:'20px',height:'20px'}}>
+            <div style={{display:'flex',alignItems:'center'}}>
+              {info?.tags.map((tag,i)=>{
+                return(
+                  <Thin size='12' style={{marginRight:'10px'}} >#{tag}</Thin>
+                )
+              })}
             </div>
+            
           </div>
         </div>
       </div>

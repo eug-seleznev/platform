@@ -22,12 +22,20 @@ const createCardFunc =(e)=>{
     dispatch(addNewCard(crypt, title, description, boardId))
     setDescription('')
     setTitle('')
+    setCreateOpen ({
+      status:false,
+      place:''
+  })
 }
 const createCardInsideCategory = (e) => {
   e.preventDefault()
   dispatch(addNewCardToColumn(categoryId, title, description, column, timeline, boardId))
   setDescription('')
   setTitle('')
+  setCreateOpen ({
+    status:false,
+    place:''
+})
 }
 const close = () => {
   setCreateOpen ({
