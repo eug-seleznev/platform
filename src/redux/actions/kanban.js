@@ -259,7 +259,7 @@ export const addNewCard = (crypt,title, description, board_id) => async dispatch
     try {
         const res = await innerBackend.post(`/kanban/cards/new/backlog/${crypt}`,body )
         dispatch({
-            type: COMMON_KANBAN_RELOAD,
+            type:ADD_NEW_CARD,
             payload: res.data
         })
         // dispatch({

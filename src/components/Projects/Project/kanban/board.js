@@ -17,6 +17,7 @@ import CreateForm from "./createForm";
 
 import { Path } from "../../../Layout/header";
 import BoardSettings from './boardSettings'
+import { ButtonTextLight } from "../../../../Styles/buttons";
 
 
 
@@ -34,9 +35,9 @@ const Board = ({match}) => {
     status:false,
     place:'backlog'
 })
-    const [sideOpen, setSideOpen] = useState(false)
-    const [settingsOpen, setSettingsOpen] = useState(false)
-
+    const [sideOpen, setSideOpen] = useState(true)
+    const [createColumn, setCreateColumn] = useState(false)
+    const [createCategory, setCreateCategory] = useState(false)
     
     const [clientXY, setClientXY] = useState({
       x:0,
@@ -73,9 +74,9 @@ const Board = ({match}) => {
         // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',boardId)
         dispatch(loadBoard(boardId))
     },[])
-    useEffect(()=>{
-      console.log(backlog)
-    },[backlog])
+    // useEffect(()=>{
+    //   console.log(backlog)
+    // },[backlog])
 
 
     const deleteColumnHandler = (el) => {
@@ -86,25 +87,33 @@ const Board = ({match}) => {
     }
 
     return (
-      <div className={styles.main} style={{gridTemplateColumns: sideOpen? '386px 1fr' : '35px 1fr'}}>
+      <div className={styles.main} style={{gridTemplateColumns: sideOpen? '240px 1fr' : '35px 1fr'}}>
         <div 
           className={styles.backLog} 
-          onClick={()=>setSideOpen(!sideOpen)}
+          
           >
           <Backlog backlog={backlog} setCreateOpen={setCreateOpen} sideOpen={sideOpen} projectCrypt={project.crypt} boardId={board._id}/>
-            <div className={styles.verticalText}>
+            <div className={styles.verticalText} style={{display: sideOpen? 'none' : 'block'}}>
               Все задачи
             </div>
         </div>
 
         <div className={styles.content}>
-            <BoardSettings visible={settingsOpen} close={()=>setSettingsOpen(false)} boardId={board._id}  />
-            <div onClick={()=>setSettingsOpen(true)}>Настройки</div>
-
+            <BoardSettings visible={createCategory} type='category' close={()=>setCreateCategory(false)} boardId={board._id}  />
+            <BoardSettings visible={createColumn}type='column'  close={()=>setCreateColumn(false)} boardId={board._id}  />
+            <div className={styles.backLogButton} onClick={()=>setCreateCategory(true)} style={{marginBottom:'10px'}}>
+                <img alt='plus' src={Path+'plus1.png'} style={{width:'12px',marginRight:'5px',backgroundColor:'white'}} onClick={()=>setSettingsOpen(true)}></img>
+                <ButtonTextLight color='black'style={{fontStyle:'italic'}}>Добавить категорию</ButtonTextLight>
+            </div>
+            <div className={styles.backLogButton} onClick={()=>setCreateColumn(true)} style={{marginBottom:'10px'}}>
+                <img alt='plus' src={Path+'plus1.png'} style={{width:'12px',marginRight:'5px',backgroundColor:'white'}} onClick={()=>setSettingsOpen(true)}></img>
+                <ButtonTextLight color='black'style={{fontStyle:'italic'}}>Добавить колонку</ButtonTextLight>
+            </div>
+            
             <div ref={boardDiv} className={styles.board} onMouseDown={(e)=>onMoveStart(e)} onMouseMove={(e)=>onMove(e)} onMouseUp={(e)=>onMoveEnd(e)}>
               <div ref={boardDivChild} style={{width: 'fit-content'}}>
               <div className={styles.title}  style={{backgroundColor: 'white'}}>
-                <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-2},250px) minmax(50px,1fr)`}}>
+                <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board?.columns?.length-2},250px) minmax(50px,1fr)`}}>
                   <span/>
                     {board && board.columns && board?.columns?.map((el,i)=>{
                       return(
