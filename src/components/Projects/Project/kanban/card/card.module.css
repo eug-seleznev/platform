@@ -2,7 +2,10 @@
     background-color: white;
     width: 222px;
     min-height: 50px;
-    margin-bottom: 10px;
+    height: fit-content;
+    /* margin-bottom: auto; */
+    margin-top: 10px;
+    margin-right: 10px;
 
     border-radius: 8PX;
     display: flex;

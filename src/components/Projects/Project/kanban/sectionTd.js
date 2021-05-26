@@ -69,12 +69,6 @@ const KanbanSectionTd = ({twoColumns, category, column, boardId, timeline}) => {
             <div 
                 ref={refBG}
                 className={styles.td} 
-                style={{
-                    gridTemplateColumns: twoColumns? 'max-content max-content' : '1fr',
-                    gridTemplateRows: twoColumns? `repeat(${(currentColunmCards? currentColunmCards.length: 0)/2+1}, max-content)` : `repeat(${(currentColunmCards? currentColunmCards.length : 0)+1}, max-content)`,
-                    // backgroundColor: hower? '#8b97c2' : 'white',
-                    transitionDuration: '250ms'
-                }} 
                 onDragOver={e=>dragOver(e)}
                 onDragLeave={e=>dragOut(e)}
                 onDragEnd={e=>dragOut(e)}

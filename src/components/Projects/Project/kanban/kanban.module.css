@@ -108,12 +108,15 @@
     }
 .content{
 /* background-color: coral; */
+height: fit-content;
 padding-top: 70px;
 }
     .creationButton{
         display: flex;
         align-items: center;
         height: 50px;
+        margin-top: 10px;
+        margin-bottom: auto;
     }
     .categoryCardPlus{
         /* filter:invert(1); */
@@ -125,6 +128,12 @@ padding-top: 70px;
         overflow: hidden;
         margin-bottom: 10px;
     }
+.board{
+    width: 98vw; 
+    height: 75vh;  
+    /* background-color: blanchedalmond; */
+    overflow: scroll;
+}
     .title{
         background-color: #FCFCFC;
         border-top: 1px solid #D9EFF5;
@@ -132,33 +141,43 @@ padding-top: 70px;
         font-family: SuisseIntlRegular;
         margin-bottom: 10px;
         height: 30px;
+        width: max-content;
         display: flex;
         flex-direction: column;
         justify-content: center;
     }
     .tr{
         display: grid;
+        width: max-content;
         /* column-gap: 50px; */
     }
         .titleTd{
             border-left: 2px solid #8b97c2;
             padding-left: 15px;
             display: flex;
-            
+            /* width: auto; */
+            /* overflow: hidden; */
+
             align-items: center;
         }
         .td{
             border-left: 2px solid #8b97c2;
             padding-left: 15px;
-            display: grid;
-            /* grid-template-rows: max-content; */
-            column-gap: 10px;
+            padding-right: 15px;
+            padding-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            transition-duration: 250ms;
+            
         }
         .addGhost{
             background-color: white;
-            min-width: 222px;
+            width: 222px;
             height: 50px;
-            margin-bottom: 10px;
+            margin-top: 10px;
+            /* margin-right: 20px; */
+            /* margin-bottom: 10px; */
             border: 1px solid grey;
             border-radius: 8PX;
             pointer-events: none;
