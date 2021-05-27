@@ -115,12 +115,12 @@ const Board = ({match}) => {
                 <ButtonTextLight color='black'style={{fontStyle:'italic'}}>Добавить колонку</ButtonTextLight>
             </div>
             
-            <div ref={boardTitle} style={{width:'97vw', overflow:'hidden', scrollbarWidth: '0px', scrollbarColor: "transparent", }}>
+            <div ref={boardTitle} style={{width:'87vw', overflow:'hidden', scrollbarWidth: '0px', scrollbarColor: "transparent", }}>
               <BoardColumnsTitle Path={Path} board={board} user={user} deleteColumn={(el)=>deleteColumnHandler(el)} />
             </div>
 
             <div ref={boardDiv} className={styles.board} onMouseDown={(e)=>onMoveStart(e)} onMouseMove={(e)=>onMove(e)} onMouseUp={(e)=>onMoveEnd(e)} onScroll={(e)=>titleScroll(e)}>
-              <div ref={boardDivChild} style={{width: 'fit-content', minWidth: '100%', }}>
+              <div ref={boardDivChild} style={{width: 'fit-content', }}>
                 {board && board.columns && board?.categories.map((el,i)=>{
                     return(
                         <KanbanSection main={i===0? true : false} board={board} category={el} />
