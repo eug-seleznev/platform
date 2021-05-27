@@ -249,12 +249,13 @@ export const deleteColumn = (board_id, name) => async dispatch  => {
             console.log('ошибка удаления колонки',err.response)        
          }
 } 
-export const addNewCard = (crypt,title, description, board_id) => async dispatch  => {
+export const addNewCard = (crypt,title, description, board_id,type) => async dispatch  => {
     
     let body ={
         title: title,
         description: description,
-        board_id: board_id
+        board_id: board_id,
+        type: type
     }
     try {
         const res = await innerBackend.post(`/kanban/cards/new/backlog/${crypt}`,body )
@@ -271,15 +272,17 @@ export const addNewCard = (crypt,title, description, board_id) => async dispatch
             alert('ошибка')           
          }
 } 
-export const addNewCardToColumn = (category_id, title, description, column, timeline_id, boardId) => async dispatch  => {
+export const addNewCardToColumn = (category_id, title, description, column, timeline_id, boardId,type) => async dispatch  => {
     
     let body = {
         title: title,
         desctiption: description,
         column:column,
         timeline:timeline_id,
-        board_id: boardId
+        board_id: boardId,
+        type: type
     }
+    console.log(type)
     try {
         console.log(body)
         const res = await innerBackend.post(`/kanban/cards/new/category/${category_id}`,body )

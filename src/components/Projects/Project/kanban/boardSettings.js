@@ -58,7 +58,7 @@ return (
         <div className={styles.createWindow}>
           <form className={styles.createCard} style={{marginTop: '36vh'}}>
           <div style={{display:type==='category'?'block':'none'}}>
-                <Light className={styles.createCategoryInput} size='14'>Название</Light>
+                <Light  size='14'>Название</Light>
                <Input 
                     className={styles.createCategoryInput}
                     name='category'

@@ -101,14 +101,17 @@ const Board = ({match}) => {
         <div className={styles.content}>
             <BoardSettings visible={createCategory} type='category' close={()=>setCreateCategory(false)} boardId={board._id}  />
             <BoardSettings visible={createColumn}type='column'  close={()=>setCreateColumn(false)} boardId={board._id}  />
-            <div className={styles.backLogButton} onClick={()=>setCreateCategory(true)} style={{marginBottom:'10px'}}>
-                <img alt='plus' src={Path+'plus1.png'} style={{width:'12px',marginRight:'5px',backgroundColor:'white'}} onClick={()=>setSettingsOpen(true)}></img>
-                <ButtonTextLight color='black'style={{fontStyle:'italic'}}>Добавить категорию</ButtonTextLight>
+            <div style={{display:'flex'}}>
+              <div className={styles.backLogButton} onClick={()=>setCreateCategory(true)} style={{marginBottom:'10px'}}>
+                  <img alt='plus' src={Path+'plus1.png'} style={{width:'12px',marginRight:'5px',backgroundColor:'white'}} onClick={()=>setCreateCategory(true)}></img>
+                  <ButtonTextLight color='black'style={{fontStyle:'italic'}}>Добавить категорию</ButtonTextLight>
+              </div>
+              <div className={styles.backLogButton} onClick={()=>setCreateColumn(true)} style={{marginBottom:'10px'}}>
+                  <img alt='plus' src={Path+'plus1.png'} style={{width:'12px',marginRight:'5px',backgroundColor:'white'}} onClick={()=>setCreateColumn(true)}></img>
+                  <ButtonTextLight color='black'style={{fontStyle:'italic'}}>Добавить колонку</ButtonTextLight>
+              </div>
             </div>
-            <div className={styles.backLogButton} onClick={()=>setCreateColumn(true)} style={{marginBottom:'10px'}}>
-                <img alt='plus' src={Path+'plus1.png'} style={{width:'12px',marginRight:'5px',backgroundColor:'white'}} onClick={()=>setSettingsOpen(true)}></img>
-                <ButtonTextLight color='black'style={{fontStyle:'italic'}}>Добавить колонку</ButtonTextLight>
-            </div>
+            
             
             <div ref={boardDiv} className={styles.board} onMouseDown={(e)=>onMoveStart(e)} onMouseMove={(e)=>onMove(e)} onMouseUp={(e)=>onMoveEnd(e)}>
               <div ref={boardDivChild} style={{width: 'fit-content'}}>
@@ -117,7 +120,7 @@ const Board = ({match}) => {
                   <span/>
                     {board && board.columns && board?.columns?.map((el,i)=>{
                       return(
-                        <div className={styles.titleTd}>
+                        <div className={styles.titleTd} key={i}>
                           <div style={{width: '90%', overflow: 'hidden'}}>{el}</div>
                           <img alt='delite'  src={Path+'trash-sharp.png'}
                               title='удалить'
@@ -133,7 +136,7 @@ const Board = ({match}) => {
               </div>
                 {board && board.columns && board?.categories.map((el,i)=>{
                     return(
-                        <KanbanSection main={i===0? true : false} board={board} category={el} />
+                        <KanbanSection key={i} main={i===0? true : false} board={board} category={el} />
                     )
                 })}
                 </div>

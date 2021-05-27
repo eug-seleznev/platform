@@ -79,7 +79,7 @@ const KanbanSectionTd = ({twoColumns, category, column, boardId, timeline}) => {
               
                 {currentColunmCards && currentColunmCards.map((el,i)=>{
                     return(
-                        <KanbanCard info={el} currCategory={category._id} timelineId={category?.timeline[0]?._id}  />
+                        <KanbanCard key={i} info={el} currCategory={category._id} timelineId={category?.timeline[0]?._id}  />
                     )
                 })}
 

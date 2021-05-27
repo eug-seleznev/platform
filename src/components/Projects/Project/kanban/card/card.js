@@ -45,29 +45,35 @@ const KanbanCard = ({info, currCategory, timelineId, backlog}) => {
       }
       e.dataTransfer.setData('text', JSON.stringify(data));
     }
-    useEffect(()=>{
-      console.log(info)
-    },[])
+    // useEffect(()=>{
+    //   console.log(info)
+    // },[])
     return (
       <>
       <div className={styles.card}
         draggable
         onDragStart={(e)=>dragStart(e)}
-        style={{border:'1px solid green'}}
+        style={{border:info?.type==='Обычные задачи'?'1px solid #648FC6':info?.type==='Срочные задачи'?'1px solid #DA5050':'1px solid #36B65A'}}
         onClick={(e)=>cardClick(e)}>
         <div className={styles.card__circuit}
-        style={{backgroundColor:'green'}}></div>
+        style={{backgroundColor:info?.type==='О'?'#648FC6':info?.type==='Срочные задачи'?'#DA5050':'#36B65A'}}></div>
         <div className={styles.card__content}>
           <Light size='16' style={{padding:'5px'}}>{info?.title} </Light>
           <div className={styles.card__content__second} >
             <div style={{display:'flex'}}>
-              <Light size='12' ></Light>
+              <Light size='12' 
+                style={{marginRight:'5px'}}>
+                  { info?.type==='Одна задача'?'':
+                    info?.type==='Чеклист'?'Чеклист':
+                    info?.type==='Событие'?'':
+                  ''  }
+                </Light>
               <Light size='12' >{info?.tasks.filter(task=>task.taskStatus).length}/{info?.tasks.length}</Light>
             </div>
-            <div style={{display:'flex',alignItems:'center'}}>
+            <div style={{display:'flex',alignItems:'center',flexWrap:'nowrap',marginTop:'5px'}}>
               {info?.tags.map((tag,i)=>{
                 return(
-                  <Thin size='12' style={{marginRight:'10px'}} >#{tag}</Thin>
+                  <Thin key={i} size='12' style={{marginRight:'10px'}} >#{tag}</Thin>
                 )
               })}
             </div>
