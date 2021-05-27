@@ -41,7 +41,8 @@ const KanbanCard = ({info, currCategory, timelineId, backlog}) => {
         categoryId: currCategory,
         timelineId: timelineId,
         backlog: backlog,
-        cardId: info._id
+        cardId: info._id,
+        cardIndex: info.huindex
       }
       e.dataTransfer.setData('text', JSON.stringify(data));
     }

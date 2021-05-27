@@ -18,8 +18,11 @@ const KanbanSection = ({main, board, category}) => {
   const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
     // console.log('category',category)
-
-
+    const timelines = category && category.timeline.length>0 && category.timeline[0].cards.map((el,i)=>{
+      const newEl = {...el, huindex: i}
+      return newEl
+    })
+    // console.log('timelaaaaaans', timelines)
     const deleteCategoryHandler = (el) => {
       dispatch(deleteCategory(board._id,category._id))
     }
@@ -47,8 +50,9 @@ const KanbanSection = ({main, board, category}) => {
           <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-2},250px) minmax(50px,1fr)`,minWidth: '100%',}}>
             <span/>
             {board.columns.map((el,i)=>{
+              
               return(
-                <KanbanSectionTd twoColumns={i===0? true : i===1? true : false} timeline={category.events.length>0? false : true} category={category} column={el} boardId={board._id} />
+                <KanbanSectionTd category={category} timelineCards={timelines} column={el} boardId={board._id} />
               )
             })}
             <span/>

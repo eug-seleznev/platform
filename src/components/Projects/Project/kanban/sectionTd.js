@@ -20,10 +20,12 @@ import { Path } from '../../../Layout/header'
 
 
 
-const KanbanSectionTd = ({twoColumns, category, column, boardId, timeline}) => {
+const KanbanSectionTd = ({category, timelineCards, column, boardId, timeline}) => {
     const dispatch = useDispatch()
     const project = useSelector(state => state.projects.project)
-    const currentColunmCards = timeline? category?.timeline[0]?.cards?.filter(el=>el.column===column) : category?.events?.filter(el=>el.column===column)
+
+    const currentColunmCards =  category?.timeline[0]?.cards?.filter(el=>el.column===column)
+    
     const [hower, setHower] = useState(false)
     const [newCardModal, setNewCardModal] = useState(false)
     const [addGhost, setAddGhost] = useState(false)
