@@ -26,11 +26,11 @@ const KanbanSection = ({main, board, category}) => {
 
     return (
   
-        <div className={styles.category} style={{height: main? 'max-content' : open? 'max-content' : '30px'}}>
+        <div className={styles.category} style={{height: main? 'max-content' : open? 'max-content' : '30px', }}>
           {/* {main && } */}
 
-          <div className={styles.title} onClick={()=>setOpen(!open)} style={{backgroundColor: main? 'white' : '#FCFCFC'}}>
-             <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-2},250px) minmax(50px,1fr)`}}>
+          <div className={styles.title} onClick={()=>setOpen(!open)} style={{backgroundColor: main? 'white' : '#FCFCFC',minWidth: '100%',}}>
+             <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-2},250px) minmax(50px,1fr)`,minWidth: '100%', }}>
                  <span>
                    <img src={Path+'trash-sharp.png'} style={{width:'20px', height: '20px', marginLeft: '20px'}}  title='удалить' onClick={()=>deleteCategoryHandler()}/>
                  </span>
@@ -44,7 +44,7 @@ const KanbanSection = ({main, board, category}) => {
              </div> 
           </div>
         
-          <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-2},250px) minmax(50px,1fr)`}}>
+          <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-2},250px) minmax(50px,1fr)`,minWidth: '100%',}}>
             <span/>
             {board.columns.map((el,i)=>{
               return(

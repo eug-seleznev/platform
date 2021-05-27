@@ -115,31 +115,12 @@ const Board = ({match}) => {
                 <ButtonTextLight color='black'style={{fontStyle:'italic'}}>Добавить колонку</ButtonTextLight>
             </div>
             
-            <div ref={boardTitle} style={{width:'97vw', overflow:'hidden', scrollbarWidth: '0px', scrollbarColor: "transparent"}}>
+            <div ref={boardTitle} style={{width:'97vw', overflow:'hidden', scrollbarWidth: '0px', scrollbarColor: "transparent", }}>
               <BoardColumnsTitle Path={Path} board={board} user={user} deleteColumn={(el)=>deleteColumnHandler(el)} />
             </div>
 
             <div ref={boardDiv} className={styles.board} onMouseDown={(e)=>onMoveStart(e)} onMouseMove={(e)=>onMove(e)} onMouseUp={(e)=>onMoveEnd(e)} onScroll={(e)=>titleScroll(e)}>
-              <div ref={boardDivChild} style={{width: 'fit-content'}}>
-              <div className={styles.title}  style={{backgroundColor: 'white'}}>
-                <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board?.columns?.length-2},250px) minmax(50px,1fr)`}}>
-                  <span/>
-                    {board && board.columns && board?.columns?.map((el,i)=>{
-                      return(
-                        <div className={styles.titleTd}>
-                          <div style={{width: '90%', overflow: 'hidden'}}>{el}</div>
-                          <img alt='delite'  src={Path+'trash-sharp.png'}
-                              title='удалить'
-                              style={{display:user.permission==='user'?'none':'block',
-                                  width:'15px', height:'15px',cursor:'pointer', marginLeft: '10px'
-                                  }} 
-                              onClick={()=>deleteColumnHandler(el)} /> 
-                        </div>
-                      )
-                    })}
-                    <span/>
-                    </div>
-              </div>
+              <div ref={boardDivChild} style={{width: 'fit-content', minWidth: '100%', }}>
                 {board && board.columns && board?.categories.map((el,i)=>{
                     return(
                         <KanbanSection main={i===0? true : false} board={board} category={el} />
