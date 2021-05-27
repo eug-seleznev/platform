@@ -250,13 +250,14 @@ export const deleteColumn = (board_id, name) => async dispatch  => {
          }
 } 
 export const addNewCard = (crypt,title, description, board_id,type) => async dispatch  => {
-    
+    console.log(type)
     let body ={
         title: title,
         description: description,
         board_id: board_id,
         type: type
     }
+    console.log(body)
     try {
         const res = await innerBackend.post(`/kanban/cards/new/backlog/${crypt}`,body )
         dispatch({

@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import { addNewCard, addNewCardToColumn } from '../../../../redux/actions/kanban'
@@ -24,22 +24,27 @@ const createCardFunc =(e)=>{
     dispatch(addNewCard(crypt, title, description, boardId,type))
     setDescription('')
     setTitle('')
-    setType ('Одна задача')
+    
     setCreateOpen ({
       status:false,
       place:''
   })
+  // setType ('Одна задача')
 }
+useEffect(()=>{
+  console.log(type)
+},[type])
 const createCardInsideCategory = (e) => {
   e.preventDefault()
   dispatch(addNewCardToColumn(categoryId, title, description, column, timeline, boardId,type))
   setDescription('')
   setTitle('')
-  setType ('Одна задача')
+  
   setCreateOpen ({
     status:false,
     place:''
 })
+// setType ('Одна задача')
 }
 const close = () => {
   setCreateOpen ({

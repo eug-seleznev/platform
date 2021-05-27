@@ -28,6 +28,21 @@ user-select: none;
 	margin-left: 93px;
 
 }
+.settings__menu {
+    z-index: 9999;
+  
+    background-color: white;
+    border: 1px solid #a7a7a7;
+
+    width: 270px;
+    position: absolute;
+    left: auto;
+    right: 3vw;
+    height: 30px;
+    padding:10px;
+    border-radius: 7px;
+    margin-top: 15px;
+}
 .input {
 	height: 20px;
 	outline: none;
