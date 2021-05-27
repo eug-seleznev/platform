@@ -67,10 +67,13 @@
     
     background-color: #3F4659;
     display: flex;
-    height: 100%;
+    
+    
     justify-content: space-between;
     transition: all 3s ease-in-out;
     overflow: hidden;
+    padding-bottom: 30px;
+    margin-bottom: -40px;
 }
 .backLogPlus{
     filter:invert(1);
@@ -82,6 +85,7 @@
         display:flex;
         justify-content: flex-end;
         width: 90%;
+        
     }
     .createWindow {
         position: fixed;
@@ -97,16 +101,17 @@
         padding:20px;
         background-color: white;
         border-radius: 5px;
-        margin-top: 45vh;
+        margin-top: 38vh;
         margin-left: 42vw;
         transform: translateX(-50%),translateY(-50%);
     }
     .backLogButton {
         display:flex;
         align-items:center;
-        
-        width: fit-content;
         margin: 0;
+        margin-left: 10px;
+        width: fit-content;
+        
     }
     .verticalText{
         height: max-content;
@@ -233,4 +238,11 @@ padding-top: 70px;
 .formExitActive{
     opacity: 0;
     transition: opacity 0.5s, transform 0.5s
+}
+@media (max-width:1700px) {
+    .main{
+        /* background-color: blue; */
+        margin-left: -90px;
+       
+    }
 }

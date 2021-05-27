@@ -25,6 +25,7 @@
     padding-left:5px;
     justify-content:space-between;
     align-items: center;
+    flex-wrap: wrap;
     width: 100%;
 }
 .card__delete__window {

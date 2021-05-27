@@ -9,6 +9,11 @@ import Tag from "../../../../components/OneProject/tag";
 import cardOpen from "./cardOpen.module.css"
 import {addCardToChosen, addTagCard, changeCardField}  from "../../../../../../redux/actions/kanban"
 import { Path } from "../../../../../Layout/header";
+import SetMenu from "../../../../components/OneProject/settingsMenu";
+import { CSSTransition } from "react-transition-group";
+import { StyledIn } from "../../../../../../Styles/layout";
+import styles from '../../../../../../Styles/modules/components/headerMenu.module.css'
+import { Select } from "../../../../../../Styles/tables";
 
 
 
@@ -19,6 +24,7 @@ const CardEditor = ({info}) => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const[chosen, setChosen]= useState(false)
+  const[settings, setSettings]= useState(false)
   useEffect(()=>{
     if(info) {
 
@@ -53,6 +59,7 @@ const CardEditor = ({info}) => {
     else if(e.target.name==='description')  {
       setDescription(e.target.value)
     }
+    console.log(e.target.value)
     let val = e.target.value
     let field = e.target.name
     let id = info._id
@@ -62,12 +69,12 @@ const CardEditor = ({info}) => {
     <div
       className={cardOpen.main}
     >
-      <form style={{display:'flex',width:'100%'}} onSubmit={onSubmit}>
+      <form style={{display:'flex',width:'100%',justifyContent:'space-between'}} onSubmit={onSubmit}>
         <input
           style={{
             border: "none",
             fontSize: "20px",
-            width:'100%'
+            width:'70%'
           }}
           className={style.titleChange}
           value={title}
@@ -75,8 +82,40 @@ const CardEditor = ({info}) => {
           onKeyPress={(e)=>e.key==='Enter'?onEnter(e):''}
           onChange={(e)=>changeSomeField(e)}
         />
-          <img  onClick={toChosen} src={Path+'star.png'} style={{width:'30px',cursor:'pointer', backgroundColor:chosen?'#FFAF30':'rgba(0,0,0,0)'}}>
+        <div>
+          <img  onClick={()=>{setSettings(true)}} src={Path+'image 1.png'} style={{width:'30px',cursor:'pointer'}}>
           </img>
+          <div>
+          <CSSTransition
+            in={settings}
+            timeout={300}
+            classNames={{
+              enter:          styles.transitionsEnter,
+              enterActive:    styles.transitionsEnterActive,
+              exit:           styles.transitionsExit,
+              exitActive:     styles.transitionsExitActive,
+            }}
+            unmountOnExit
+          >
+                <div className={style.settings__menu} onMouseLeave={() =>setSettings(false)}>
+                      <div style={{display:'flex'}}>
+                          <StyledIn className='menu__nav' to='/help'>
+                            Изменить статус
+                          </StyledIn>
+                          <Select name='emergency' onChange={(e)=>{changeSomeField(e)}} style={{width:'110px',marginBottom:'50px',height:'35px', marginTop:'1px',marginLeft:'30px'}} defaultValue='Одна задача'>
+                            <option value='Обычная'>Обычная</option>
+                            <option value='Регулярная'>Регулярная</option>
+                            <option value='Срочная'>Срочная</option>
+                          </Select>
+                      </div>
+                       
+            </div>
+          </CSSTransition>
+        </div>
+          {/* <img  onClick={toChosen} src={Path+'star.png'} style={{width:'30px',cursor:'pointer', backgroundColor:chosen?'#FFAF30':'rgba(0,0,0,0)'}}>
+          </img> */}
+        </div>
+          
       </form>
       <div>
         <div

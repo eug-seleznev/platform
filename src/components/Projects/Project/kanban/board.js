@@ -123,7 +123,7 @@ const Board = ({match}) => {
               <div ref={boardDivChild} style={{width: 'fit-content', }}>
                 {board && board.columns && board?.categories.map((el,i)=>{
                     return(
-                        <KanbanSection main={i===0? true : false} board={board} category={el} />
+                        <KanbanSection key={i} main={i===0? true : false} board={board} category={el} />
                     )
                 })}
                 </div>
