@@ -1,6 +1,10 @@
 .start{
     /* background-color: blue; */
-    margin-top: 20px;
+    margin-left: -105px;
+    margin-right: -50px;
+    display: grid;
+    /* min-height: 100vh; */
+    /* margin-top: 20px; */
 }
 .main{
     /* background-color: blue; */
@@ -144,8 +148,9 @@ padding-top: 70px;
         margin-bottom: 10px;
     }
 .board{
-    width: 98vw; 
-    height: 75vh;  
+    width: 88vw; 
+    height: 70vh;  
+
     /* background-color: blanchedalmond; */
     overflow: scroll;
 }
