@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { cardDelete, currentCard } from "../../../../../redux/actions/kanban";
 import { Button, CancelButton } from "../../../../../Styles/buttons";
 import Tag from "../../../components/OneProject/tag";
+import { getProject } from "../../../../../redux/actions/projects";
 
 
 
@@ -50,6 +51,10 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost}) => {
       e.stopPropagation()
       console.log('drop to card')
 
+    }
+    const close = ()=>{
+      setCardOpen(false)
+      dispatch(getProject(crypt))
     }
     // useEffect(()=>{
     //   console.log(info)
@@ -108,7 +113,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost}) => {
               
             </div>
           </div>
-          <CardOpen isOpen={cardOpen} onClick={deleteCard} setDeleteWindow={setDeleteWindow} data={'task data'} close={()=>setCardOpen(false)} />
+          <CardOpen isOpen={cardOpen} onClick={deleteCard} setDeleteWindow={setDeleteWindow} data={'task data'} close={close} />
         </div>
         
       }
