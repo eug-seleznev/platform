@@ -39,7 +39,7 @@ const KanbanSection = ({main, board, category}) => {
                  </span>
                  <div style={{display: "flex", alignItems: 'center'}}>
                      {category.name}
-                     {!main &&<img src={Path+'openicon.png'} style={{transform: `rotate(${open?'0':'180'}deg)`, marginLeft: '10px', width: '15px', height: '12px'}}></img>}
+                     {!main &&<img src={Path+'openicon.png'} style={{transform: `rotate(${open?'0':'180'}deg)`, marginLeft: '10px', width: '15px'}}></img>}
                  </div>
                  <span/>
                  <span/>

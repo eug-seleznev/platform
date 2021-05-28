@@ -26,11 +26,11 @@ const CardOpen = ({close,setDeleteWindow}) => {
     return (
       <>
       {info&&
-        <div className={styles.cardOpnenBackground} onClick={close}>
-        <div className={styles.cardOpnenContainer} onClick={(e)=>e.stopPropagation()}>
-            <CardEditor  info={info}></CardEditor>
+        <div className={styles.cardOpnenBackground} onMouseDown={close}>
+        <div className={styles.cardOpnenContainer} onMouseDown={(e)=>e.stopPropagation()}>
+            <CardEditor setDeleteWindow={setDeleteWindow} info={info}></CardEditor>
             <TaskTable id={info._id} team={project.team2} tasksArray={info.tasks}></TaskTable>
-            <AddTask setDeleteWindow={setDeleteWindow} id={info._id}></AddTask>
+            <AddTask  id={info._id}></AddTask>
             <Comments id={info._id} ></Comments>
         </div>
       </div>

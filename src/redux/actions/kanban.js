@@ -1,5 +1,5 @@
 import { innerBackend, } from "../../components/utils/axios";
-import {CHOSEN_BOARD,ADD_TAG_CARD,DELETE_CARD,ADD_CARD_TO_CHOSEN,CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD, COMMON_KANBAN_RELOAD, ADD_USER_TO_TASK_NEW} from "../types";
+import {REMOVE_TAG_CARD,CHOSEN_BOARD,ADD_TAG_CARD,DELETE_CARD,ADD_CARD_TO_CHOSEN,CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD, COMMON_KANBAN_RELOAD, ADD_USER_TO_TASK_NEW} from "../types";
 
 
 
@@ -22,9 +22,9 @@ export const removeTagCard = (id, tag) => async dispatch  => {
         tag: tag
     }
     try {
-        const res = await innerBackend.put(`/kanban/cards/tag/remove/${id}`,body)
+        const res = await innerBackend.put(`/kanban/cards/tags/remove/${id}`,body)
         dispatch({
-            type: ADD_TAG_CARD,
+            type: REMOVE_TAG_CARD,
             payload: res.data
         })
     }
