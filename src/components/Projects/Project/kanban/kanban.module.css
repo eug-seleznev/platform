@@ -3,6 +3,7 @@
     margin-left: -105px;
     margin-right: -50px;
     display: grid;
+
     /* min-height: 100vh; */
     /* margin-top: 20px; */
 }
@@ -27,13 +28,13 @@
 }
 .main__board__item {
     cursor: pointer;
-    height: 25px;
+    height:25px;
     border-radius: 5px;
     margin-top: 10px;
     border: 0.4px solid #b7b7b7;
     text-align: left;
-    padding: 15px;
-    padding-top: 10px;
+    width: 96%;
+    padding: 10px;
     font-family: SuisseIntlLight;
     font-size: 22px;
 }
@@ -42,7 +43,7 @@
 }
 .main__board__list {
     width: 65vw;
-    margin-left: 10vw;
+    margin-left: 14vw;
     border: 0.4px solid #b7b7b7;
     border-radius: 7px;
     background-color: white;
@@ -131,7 +132,8 @@
 .content{
 /* background-color: coral; */
 height: fit-content;
-padding-top: 70px;
+margin-top: 70px;
+
 }
     .creationButton{
         display: flex;
@@ -152,8 +154,8 @@ padding-top: 70px;
     }
 .board{
     width: 88vw; 
-    height: 70vh;  
-
+    height: 74.4vh;  
+    margin-bottom: -18px;
     /* background-color: blanchedalmond; */
     overflow: scroll;
 }
