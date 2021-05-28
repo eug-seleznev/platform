@@ -22,7 +22,7 @@ const ModalTimeline =({setModal,id})=>{
                     <button className={style.window__button} style={{backgroundColor:timeline==="Месяц"?'rgba(0,0,0,0.2)':'rgba(0,0,0,0)'}} value="Месяц"onClick={(e)=>{setTimeline(e.target.value)}}>Месяц</button>
                 </div>
                 <Light size='14'color='grey' style={{marginTop:'5px',marginBottom:'10px'}}>Или свое значение</Light>
-                <input className={style.window__input} placeholder='Введите количество дней' type='number'></input>
+                <input className={style.window__input} placeholder='Введите количество дней' value={timeline} onChange={(e)=>{setTimeline(e.target.value)}} type='number'></input>
                 <div className={style.window__buttons__end}>
                     <ButtonTextLight fontSize='14px' onClick={()=>{setModal(false)}} color='#F84B4B' >Отмена</ButtonTextLight>
                     <ButtonTextLight fontSize='14px'  >Сохранить</ButtonTextLight>
