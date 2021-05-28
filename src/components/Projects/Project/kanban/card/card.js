@@ -41,7 +41,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId}
       })
     }
     useEffect(()=>{
-      console.log(info)
+      // console.log(info)
       favCards.map(card=>{
         if(card._id===info._id){
           setChosenCard(true)
