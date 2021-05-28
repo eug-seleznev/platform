@@ -106,14 +106,17 @@ const Board = ({match}) => {
         <div className={styles.content}>
             <BoardSettings visible={createCategory} type='category' close={()=>setCreateCategory(false)} boardId={board._id}  />
             <BoardSettings visible={createColumn}type='column'  close={()=>setCreateColumn(false)} boardId={board._id}  />
-            <div className={styles.backLogButton} onClick={()=>setCreateCategory(true)} style={{marginBottom:'10px'}}>
+            <div style={{display:'flex'}}>
+              <div className={styles.backLogButton} onClick={()=>setCreateCategory(true)} style={{marginBottom:'10px'}}>
                 <img alt='plus' src={Path+'plus1.png'} style={{width:'12px',marginRight:'5px',backgroundColor:'white'}}></img>
                 <ButtonTextLight color='black'style={{fontStyle:'italic'}}>Добавить категорию</ButtonTextLight>
+              </div>
+              <div className={styles.backLogButton} onClick={()=>setCreateColumn(true)} style={{marginBottom:'10px'}}>
+                  <img alt='plus' src={Path+'plus1.png'} style={{width:'12px',marginRight:'5px',backgroundColor:'white'}}></img>
+                  <ButtonTextLight color='black'style={{fontStyle:'italic'}}>Добавить колонку</ButtonTextLight>
+              </div>
             </div>
-            <div className={styles.backLogButton} onClick={()=>setCreateColumn(true)} style={{marginBottom:'10px'}}>
-                <img alt='plus' src={Path+'plus1.png'} style={{width:'12px',marginRight:'5px',backgroundColor:'white'}}></img>
-                <ButtonTextLight color='black'style={{fontStyle:'italic'}}>Добавить колонку</ButtonTextLight>
-            </div>
+            
             
             <div ref={boardTitle} style={{width:'87vw', overflow:'hidden', scrollbarWidth: '0px', scrollbarColor: "transparent", }}>
               <BoardColumnsTitle Path={Path} board={board} user={user} deleteColumn={(el)=>deleteColumnHandler(el)} />

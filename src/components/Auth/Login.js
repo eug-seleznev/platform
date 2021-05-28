@@ -62,7 +62,7 @@ const Login = () => {
 
 
 
-            <Bold size='12' className={styles.forgot}>Забыли пароль?</Bold>
+            {/* <Bold size='12' className={styles.forgot}>Забыли пароль?</Bold> */}
             <LoginButton color='white' bgColor='#3F496C' className={styles.button} type="submit"> Логин</LoginButton>
 
             </form>

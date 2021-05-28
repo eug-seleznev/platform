@@ -26,6 +26,7 @@ export const COMMON_KANBAN_RELOAD='COMMON_KANBAN_RELOAD'
 export const ADD_USER_TO_TASK_NEW = ' ADD_USER_TO_TASK_NEW '
 export const ADD_CARD_TO_CHOSEN = 'ADD_CARD_TO_CHOSEN'
 export const DELETE_CARD = 'DELETE_CARD'
+export const CHOSEN_BOARD= 'CHOSEN_BOARD'
 //USERES
 export const ALL_USERS = 'users';
 export const GET_EMPLOYE = 'get_users';

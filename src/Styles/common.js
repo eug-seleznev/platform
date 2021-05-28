@@ -7,14 +7,16 @@ padding-right:  50px;
 width: 100%;
 height: 100%;
 padding-top: 110px;
-padding-bottom: 40px;
+padding-bottom: 18.3px;
 background-color:white;
 overflow-x: hidden;
+overflow-y: hidden;
 @media (max-width:1700px){
     width: 100vw;
     padding-left:135px;
     padding-top: 100px;
     padding-right:50px;
+    overflow-y: hidden;
     padding-bottom: 40px;
 }
 
