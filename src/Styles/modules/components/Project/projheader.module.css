@@ -66,7 +66,7 @@
         flex-direction: row;
         width: 200px;
         
-        margin-left: 80px;
+        margin-left: 20px;
         height: 100px;
         color: white;
         justify-content: space-between;
@@ -77,9 +77,11 @@
     }
     .container {
         margin-left: -45px;
-        height:80px;
+        height:140px;
     }
     .row {
+        margin-left: -30px;
+        
         flex-direction: column;
         justify-content: space-between;
     }

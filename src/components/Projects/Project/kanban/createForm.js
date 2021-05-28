@@ -29,7 +29,7 @@ const createCardFunc =(e)=>{
       status:false,
       place:''
   })
-  // setType ('Одна задача')
+  setType ('Одна задача')
 }
 useEffect(()=>{
   console.log(type)
@@ -44,7 +44,7 @@ const createCardInsideCategory = (e) => {
     status:false,
     place:''
 })
-// setType ('Одна задача')
+setType ('Одна задача')
 }
 const close = () => {
   setCreateOpen ({

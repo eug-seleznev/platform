@@ -15,11 +15,11 @@ const Header = ({history, crypt}) => {
       const [open, setOpen] = useState(false);
       const [nameV, setNameV] = useState('');
       const [status, setStatus] = useState(false);
-    const project = useSelector(state => state.projects.project)
-    const permission = useSelector(state => state.auth.user.permission)
-    const favProjects = useSelector(state => state.auth.user.fav_proj)
-    const dispatch = useDispatch();
-    const handleRedirect = (name) => {
+      const project = useSelector(state => state.projects.project)
+      const permission = useSelector(state => state.auth.user.permission)
+      const favProjects = useSelector(state => state.auth.user.fav_proj)
+      const dispatch = useDispatch();
+      const handleRedirect = (name) => {
         setNameV(name)
         history.push(`/projects/${crypt}/${name}`)
     }

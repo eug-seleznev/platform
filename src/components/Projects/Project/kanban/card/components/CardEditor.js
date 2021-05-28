@@ -7,7 +7,7 @@ import { addToChosen } from "../../../../../../redux/actions/auth";
 import TagSearch from "../../../../components/tagSearch";
 import Tag from "../../../../components/OneProject/tag";
 import cardOpen from "./cardOpen.module.css"
-import {addCardToChosen, addTagCard, changeCardField}  from "../../../../../../redux/actions/kanban"
+import {addCardToChosen, addTagCard, changeCardField, removeTagCard}  from "../../../../../../redux/actions/kanban"
 import { Path } from "../../../../../Layout/header";
 import SetMenu from "../../../../components/OneProject/settingsMenu";
 import { CSSTransition } from "react-transition-group";
@@ -19,7 +19,7 @@ import { Select } from "../../../../../../Styles/tables";
 
 
 
-const CardEditor = ({info}) => {
+const CardEditor = ({info, setDeleteWindow}) => {
   const dispatch= useDispatch()
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
@@ -50,7 +50,7 @@ const CardEditor = ({info}) => {
     
    }
    const delTag =(tag)=>{
-    // dispatch(deleteTagCard(id, tag))
+    dispatch(removeTagCard(info._id, tag))
    }
   const changeSomeField =(e)=>{
     if(e.target.name==='title')  {
@@ -59,7 +59,7 @@ const CardEditor = ({info}) => {
     else if(e.target.name==='description')  {
       setDescription(e.target.value)
     }
-    console.log(e.target.value)
+    // console.log(e.target.value)
     let val = e.target.value
     let field = e.target.name
     let id = info._id
@@ -98,22 +98,38 @@ const CardEditor = ({info}) => {
             unmountOnExit
           >
                 <div className={style.settings__menu} onMouseLeave={() =>setSettings(false)}>
-                      <div style={{display:'flex'}}>
-                          <StyledIn className='menu__nav' to='/help'>
+                      <div style={{display:'flex',height:'25px'}}>
+                          <StyledIn style={{textDecoration:'none', cursor:'default'}} >
                             Изменить статус
                           </StyledIn>
-                          <Select name='emergency' onChange={(e)=>{changeSomeField(e)}} style={{width:'110px',marginBottom:'50px',height:'35px', marginTop:'1px',marginLeft:'30px'}} defaultValue='Одна задача'>
+                          <Select name='emergency'onChange={(e)=>{changeSomeField(e)}} style={{ cursor:'pointer',width:'110px',marginBottom:'50px',height:'35px', marginTop:'1px',marginLeft:'30px'}} defaultValue='Одна задача'>
                             <option value='Обычная'>Обычная</option>
                             <option value='Регулярная'>Регулярная</option>
                             <option value='Срочная'>Срочная</option>
                           </Select>
                       </div>
-                       
+                      <div style={{display:'flex',height:'25px',justifyContent:'space-between',alignItems:'center'}}>
+                        <StyledIn style={{textDecoration:'none', cursor:'default'}}>
+                              Добавить в избранное
+                        </StyledIn>
+                        <img  onClick={toChosen} src={Path+'star.png'} style={{width:'25px',height:'25px' ,cursor:'pointer',marginTop:'10px', backgroundColor:chosen?'#FFAF30':'rgba(0,0,0,0)'}}>
+                          </img>
+                      </div>
+                   
+                      <StyledIn
+                      style={{display:'flex',height:'24px'}}
+                          onClick={()=>setDeleteWindow({
+                            status:true,
+                            id: info._id
+                          })}
+                        >
+                          Удалить карточку
+                        </StyledIn>
+                     
             </div>
           </CSSTransition>
         </div>
-          {/* <img  onClick={toChosen} src={Path+'star.png'} style={{width:'30px',cursor:'pointer', backgroundColor:chosen?'#FFAF30':'rgba(0,0,0,0)'}}>
-          </img> */}
+          
         </div>
           
       </form>
