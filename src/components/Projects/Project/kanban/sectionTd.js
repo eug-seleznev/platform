@@ -31,6 +31,28 @@ const KanbanSectionTd = ({category, timelineCards, column, boardId, timelineId})
     const [addGhost, setAddGhost] = useState(false)
     const refBG = useRef(null)
 // console.log('category',category)
+const dragFunction = (e, index) => {
+    console.log('index',index)
+    try {
+        const data = JSON.parse(e.dataTransfer.getData('text'));
+        console.log('dataaaaaaaaaaaa',data)
+        dispatch(moveCard({
+            cardId:data.cardId, 
+            from: data.backlog ? 'backlog' : 'timeline',
+            oldPlaceId: data.timelineId ||  undefined,
+            to : 'timeline',
+            newPlaceId : timelineId,
+            column: column,
+            board_id: boardId,
+            index: index? index : (timelineCards.length-1)
+        }))
+
+    } catch (e) {
+        console.log('Не получилось переместить карточку', e)
+    }
+}
+
+
     const dragOver = (e) => {
         e.preventDefault()
         refBG.current.style.backgroundColor = 'rgb(227, 225, 233)'
@@ -44,7 +66,7 @@ const KanbanSectionTd = ({category, timelineCards, column, boardId, timelineId})
     const cardDragOver = (e,i) => {
         e.preventDefault()
         e.stopPropagation()
-        console.log('he')
+        // console.log('he')
 
         refBG.current.style.backgroundColor = 'rgb(227, 225, 233)'
         setAddGhost(`ghost${i}`)
@@ -59,23 +81,15 @@ const KanbanSectionTd = ({category, timelineCards, column, boardId, timelineId})
         e.preventDefault()
         refBG.current.style.backgroundColor='white'
         setAddGhost(false)
-        try {
-            const data = JSON.parse(e.dataTransfer.getData('text'));
-            console.log('dataaaaaaaaaaaa',data)
-            dispatch(moveCard({
-                cardId:data.cardId, 
-                from: data.backlog ? 'backlog' : 'timeline',
-                oldPlaceId: data.timelineId ||  undefined,
-                to : 'timeline',
-                newPlaceId : timelineId,
-                column: column,
-                board_id: boardId,
-            }))
-
-        } catch (e) {
-            console.log('Не получилось переместить карточку', e)
-        }
+        dragFunction(e)
     }
+    const dropToCard = (e, index) => {
+        e.stopPropagation()
+        dragFunction(e, index)
+        setAddGhost(false)
+        refBG.current.style.backgroundColor='white'
+
+      }
     
 
 
@@ -90,56 +104,49 @@ const KanbanSectionTd = ({category, timelineCards, column, boardId, timelineId})
                 onDragEnd={e=>dragOut(e)}
                 onDrop={e=>dropCard(e)}
                 onMouseOver={()=>setHower(true)}
-                
                 >
-              
-                {currentColunmCards && currentColunmCards.map((el,i)=>{
-                    return(
-                        <div onDragOver={(e)=>cardDragOver(e,i)} onDragLeave={(e)=>cardDragOut(e)}>
-                        
-                        {addGhost===`ghost${i}`?<div className={styles.addGhost}/>
-                        :
-                        <KanbanCard key={i} info={el} currCategory={category._id} timelineId={category?.timeline[0]?._id} />}
-                        </div>
-                    )
-                })}
+                    {currentColunmCards && currentColunmCards.map((el,i)=>{
+                        return(
+                            <div onDragOver={(e)=>cardDragOver(e,i)} onDragLeave={(e)=>cardDragOut(e)} onDrop={(e)=>dropToCard(e,el.huindex)}>
+                            
+                            {addGhost===`ghost${i}`?<div className={styles.addGhost}/>
+                            :
+                            <KanbanCard key={i} info={el} currCategory={category._id} timelineId={timelineId} />}
+                            </div>
+                        )
+                    })}
 
-                <CSSTransition
-                    in={addGhost==='ghost last'}
-                    timeout={200}
-                    classNames={{
-                    enter: styles.ghostEnter,
-                    enterActive: styles.ghostEnterActive,
-                    exit: styles.ghostExit,
-                    exitActive: styles.ghostExitActive,
-                    }}
-                    unmountOnExit
-                    // onEntered={() => ghostEntered()}
-                    // onExited={() => setNext(true)}
-                >
+                    <CSSTransition
+                        in={addGhost==='ghost last'}
+                        timeout={200}
+                        classNames={{
+                            enter: styles.ghostEnter,
+                            enterActive: styles.ghostEnterActive,
+                            exit: styles.ghostExit,
+                            exitActive: styles.ghostExitActive,
+                            }}
+                        unmountOnExit
+                    >
                         <div className={styles.addGhost}/>
-                </CSSTransition>
-               
-                <div className={styles.creationButton}>
-                   <ButtonText onClick={()=>setNewCardModal(true)}>
-                        <img alt='plus' src={Path+'plus1.png'}className={styles.categoryCardPlus}/>
-                        Создать карточку
-                    </ButtonText> 
-                </div>
+                    </CSSTransition>
                 
-
-           
-
-            
-            <CreateForm 
-                crypt={project.crypt} 
-                categoryId={category._id} 
-                column={column} 
-                timeline={category.timeline.length>0? category.timeline[0]._id : undefined} 
-                visible={newCardModal} 
-                place={'category'} 
-                setCreateOpen={()=>setNewCardModal()} 
-                boardId={boardId}/>
+                    <div className={styles.creationButton}>
+                        <ButtonText onClick={()=>setNewCardModal(true)}>
+                            <img alt='plus' src={Path+'plus1.png'}className={styles.categoryCardPlus}/>
+                            Создать карточку
+                        </ButtonText> 
+                    </div>
+     
+                    <CreateForm 
+                        crypt={project.crypt} 
+                        categoryId={category._id} 
+                        column={column} 
+                        timeline={timelineId} 
+                        visible={newCardModal} 
+                        place={'category'} 
+                        setCreateOpen={()=>setNewCardModal()} 
+                        boardId={boardId}
+                    />
             </div>
             
    

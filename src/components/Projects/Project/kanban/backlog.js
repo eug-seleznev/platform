@@ -21,6 +21,25 @@ const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId})=>{
     // const refBG = useRef(null)
     const [addGhost, setAddGhost] = useState(false)
 
+
+    const dragFunction = (e,index) => {
+        try {
+            const data = JSON.parse(e.dataTransfer.getData('text'));
+            dispatch(moveCard({
+                cardId:data.cardId, 
+                from:  data.backlog ? 'backlog' : 'timeline',
+                oldPlaceId:  data.timelineId || undefined,
+                to : 'backlog' ,
+                newPlaceId : projectCrypt ,
+                board_id : boardId,
+                index: index,
+            }))
+
+        } catch (e) {
+            console.log('Не получилось переместить карточку', e)
+        }
+    }
+
     const dragOver = (e) => {
         e.preventDefault()
         // refBG.current.style.backgroundColor = 'rgb(227, 225, 233)'
@@ -35,22 +54,29 @@ const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId})=>{
         e.preventDefault()
         // refBG.current.style.backgroundColor='white'
         setAddGhost(false)
-        try {
-            const data = JSON.parse(e.dataTransfer.getData('text'));
-            dispatch(moveCard({
-                cardId:data.cardId, 
-                from:data.categoryId ? 'event' : data.timelineId ? 'timeline': data.backlog && 'backlog',
-                oldPlaceId: data.categoryId || data.timelineId || undefined,
-                to : 'backlog' ,
-                newPlaceId : projectCrypt ,
-                board_id : boardId,
-            }))
-
-        } catch (e) {
-            console.log('Не получилось переместить карточку', e)
-        }
-    }
     
+    }
+    const cardDragOver = (e,i) => {
+        e.preventDefault()
+        e.stopPropagation()
+        // console.log('he')
+
+        setAddGhost(`ghost${i}`)
+    }
+    const cardDragOut = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        setAddGhost(false)
+    }
+    const dropToCard = (e, index) => {
+        e.stopPropagation()
+        console.log('drop to card')
+        dragFunction(e, index)
+        setAddGhost(false)
+
+      }
+
+
     return (
         <>
         <div 
@@ -70,7 +96,13 @@ const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId})=>{
                 {backlog && backlog?.map((card,i)=>{
 
                     return(
-                         <KanbanCard key={i} info={card} backlog={true}/>
+                        <div onDragOver={(e)=>cardDragOver(e,i)} onDragLeave={(e)=>cardDragOut(e)} onDrop={(e)=>dropToCard(e,i)}>
+                        
+                        {addGhost===`ghost${i}`?<div className={styles.addGhost}/>
+                        :
+                        <KanbanCard key={i} info={card} backlog={true}/>
+                        }
+                        </div>
                     )
                 })
 

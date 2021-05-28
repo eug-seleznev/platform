@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 
 
@@ -16,8 +16,14 @@ import { deleteCategory } from "../../../../redux/actions/kanban";
 
 const KanbanSection = ({main, board, category}) => {
   const dispatch = useDispatch()
-    const [open, setOpen] = useState(false)
-    // console.log('category',category)
+    const [open, setOpen] = useState(true)
+    const [timelineIndex, setTimelineIndex] = useState(0)
+    
+    useEffect(()=>{
+      
+    },[])
+
+
     const timelines = category && category.timeline.length>0 && category.timeline[0].cards.map((el,i)=>{
       const newEl = {...el, huindex: i}
       return newEl
@@ -29,7 +35,7 @@ const KanbanSection = ({main, board, category}) => {
 
     return (
   
-        <div className={styles.category} style={{height: main? 'max-content' : open? 'max-content' : '30px', }}>
+        <div className={styles.category} style={{height: open? 'max-content' : '30px', }}>
           {/* {main && } */}
 
           <div className={styles.title} onClick={()=>setOpen(!open)} style={{backgroundColor: main? 'white' : '#FCFCFC',minWidth: '100%',}}>

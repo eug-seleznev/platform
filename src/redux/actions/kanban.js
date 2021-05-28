@@ -316,7 +316,7 @@ export const addNewCardToColumn = (category_id, title, description, column, time
             console.log(err.response)
          }
 } 
-export const moveCard = ({board_id,from, to, oldPlaceId, newPlaceId, cardId, column}) => async dispatch  => {
+export const moveCard = ({board_id,from, to, oldPlaceId, newPlaceId, cardId, column, index}) => async dispatch  => {
     
     let body = oldPlaceId ? {
         [`${from}_${to}`]: true, 
@@ -324,13 +324,15 @@ export const moveCard = ({board_id,from, to, oldPlaceId, newPlaceId, cardId, col
         new_place: newPlaceId,
         card_id: cardId,
         column: column,
-        board_id: board_id
+        board_id: board_id,
+        index: index
     } : {
         [`${from}_${to}`]: true, 
         new_place: newPlaceId,
         card_id: cardId,
         column: column,
-        board_id: board_id
+        board_id: board_id,
+        index: index
     }
     try {
         console.log('transfer body',body)
