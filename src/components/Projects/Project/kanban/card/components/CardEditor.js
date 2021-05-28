@@ -19,7 +19,7 @@ import { Select } from "../../../../../../Styles/tables";
 
 
 
-const CardEditor = ({info, setDeleteWindow}) => {
+const CardEditor = ({info, setDeleteWindow, chosenCard}) => {
   const dispatch= useDispatch()
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
@@ -27,7 +27,8 @@ const CardEditor = ({info, setDeleteWindow}) => {
   const[settings, setSettings]= useState(false)
   useEffect(()=>{
     if(info) {
-
+      console.log(info)
+      setChosen(chosenCard)
       setTitle(info.title)
       setDescription(info.description)
     }
@@ -102,7 +103,7 @@ const CardEditor = ({info, setDeleteWindow}) => {
                           <StyledIn style={{textDecoration:'none', cursor:'default'}} >
                             Изменить статус
                           </StyledIn>
-                          <Select name='emergency'onChange={(e)=>{changeSomeField(e)}} style={{ cursor:'pointer',width:'110px',marginBottom:'50px',height:'35px', marginTop:'1px',marginLeft:'30px'}} defaultValue='Одна задача'>
+                          <Select name='emergency'onChange={(e)=>{changeSomeField(e)}} style={{ cursor:'pointer',width:'110px',marginBottom:'50px',height:'35px', marginTop:'1px',marginLeft:'30px'}} defaultValue={info.emergency}>
                             <option value='Обычная'>Обычная</option>
                             <option value='Регулярная'>Регулярная</option>
                             <option value='Срочная'>Срочная</option>
@@ -110,7 +111,7 @@ const CardEditor = ({info, setDeleteWindow}) => {
                       </div>
                       <div style={{display:'flex',height:'25px',justifyContent:'space-between',alignItems:'center'}}>
                         <StyledIn style={{textDecoration:'none', cursor:'default'}}>
-                              Добавить в избранное
+                              {chosen?'Убрать из избранного':'Добавить в избранное'}
                         </StyledIn>
                         <img  onClick={toChosen} src={Path+'star.png'} style={{width:'25px',height:'25px' ,cursor:'pointer',marginTop:'10px', backgroundColor:chosen?'#FFAF30':'rgba(0,0,0,0)'}}>
                           </img>
@@ -140,7 +141,7 @@ const CardEditor = ({info, setDeleteWindow}) => {
           }}
         >
           <div className={cardOpen.editList}>
-              <div style={{ display: "flex" }}>
+              <div style={{ display:info.type==='Одна задача'? 'none' : 'flex' }}>
                 <Light style={{ width: "40px" }}>
                   {info.tasks.filter(task=>task.taskStatus).length}/{info.tasks.length}
                 </Light>

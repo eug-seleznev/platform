@@ -139,7 +139,7 @@ margin-top: 70px;
     .creationButton{
         display: flex;
         align-items: center;
-        height: 50px;
+        height: 52px;
         margin-top: 10px;
         margin-bottom: auto;
     }
@@ -155,7 +155,7 @@ margin-top: 70px;
     }
 .board{
     width: 88vw; 
-    min-height: 71.85vh;  
+    height: 71.85vh;  
     margin-bottom: -18px;
     /* background-color: blanchedalmond; */
     overflow: scroll;
@@ -191,6 +191,7 @@ margin-top: 70px;
             padding-left: 15px;
             padding-right: 15px;
             padding-top: 10px;
+            padding-bottom: 20px;
             display: flex;
             flex-wrap: wrap;
             align-content: flex-start;

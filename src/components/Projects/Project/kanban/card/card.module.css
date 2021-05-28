@@ -17,6 +17,17 @@
     border-top-left-radius:5px;
     border-bottom-left-radius:5px
 }
+.card__exec__name {
+    position: absolute;
+    transform: translateX(-40px)translateY(5px);
+	color: white;
+    white-space: nowrap;
+    width: fit-content;
+	background-color: black;
+	border-radius: 5px;
+	padding: 4px;
+    
+}
 .card__content {
     width: 93.2%;
 }

@@ -111,7 +111,7 @@ const dragFunction = (e, index) => {
                             
                             {addGhost===`ghost${i}`?<div className={styles.addGhost}/>
                             :
-                            <KanbanCard key={i} info={el} currCategory={category._id} timelineId={timelineId} />}
+                            <KanbanCard boardId={boardId} key={i} info={el} currCategory={category._id} timelineId={timelineId} />}
                             </div>
                         )
                     })}

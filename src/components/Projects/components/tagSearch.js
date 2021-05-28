@@ -64,7 +64,7 @@ const TagSearch = ({func, tagCount}) => {
 				onClick={(e)=>searchTags(e)}
 				onChange={(e)=>searchTags(e)}
 				onKeyPress={(e)=>e.key==='Enter'?confirmTag(e):''}
-				placeholder="Введите тег спринта" // make sure to set up defaultValue
+				placeholder="Введите тег" // make sure to set up defaultValue
 			/>
 			<div className={style.searchTag} style={{display:`${tagArr.filter(res=> !tags.includes(res)).length>0?'block':'none'}`}}>
 				{tagArr.filter(res=> !tags.includes(res)).map((result,i)=>{

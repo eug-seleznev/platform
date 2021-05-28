@@ -70,7 +70,7 @@ const KanbanSection = ({main, board, category}) => {
             {board.columns.map((el,i)=>{
               
               return(
-                <KanbanSectionTd key={i} category={category} timelineId={category.timeline[0]._id} timelineCards={timelines} column={el} boardId={board._id} />
+                <KanbanSectionTd key={i} category={category} timelineId={category.timeline[0]?._id} timelineCards={timelines} column={el} boardId={board?._id} />
               )
             })}
             <span/>
