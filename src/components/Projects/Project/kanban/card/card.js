@@ -14,7 +14,7 @@ import Tag from "../../../components/OneProject/tag";
 
 
 
-const KanbanCard = ({info, currCategory, timelineId, backlog}) => {
+const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost}) => {
     const [cardOpen, setCardOpen] = useState(false)
     const [deleteWindow, setDeleteWindow] = useState({
       status:false,
@@ -46,19 +46,26 @@ const KanbanCard = ({info, currCategory, timelineId, backlog}) => {
       }
       e.dataTransfer.setData('text', JSON.stringify(data));
     }
+    const dropp = (e) => {
+      e.stopPropagation()
+      console.log('drop to card')
+
+    }
     // useEffect(()=>{
     //   console.log(info)
     // },[])
     return (
       <>
-      <div className={styles.card}
+      <div onDragOver={addGhost} className={styles.card}
         draggable
         onDragStart={(e)=>dragStart(e)}
         style={{border:
           info?.emergency==='Регулярная'?'1px solid #36B65A':
           info?.emergency==='Обычная'?'1px solid #648FC6':
           info?.emergency==='Срочная'?'1px solid #DA5050':'1px solid #648FC6'}}
-        onClick={(e)=>cardClick(e)}>
+        onClick={(e)=>cardClick(e)}
+        onDrop={(e)=>dropp(e)}
+        >
         <div className={styles.card__circuit}
           style={{backgroundColor:
             info?.emergency==='Регулярная'?'#36B65A':

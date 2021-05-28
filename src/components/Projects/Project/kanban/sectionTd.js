@@ -20,12 +20,12 @@ import { Path } from '../../../Layout/header'
 
 
 
-const KanbanSectionTd = ({category, timelineCards, column, boardId, timeline}) => {
+const KanbanSectionTd = ({category, timelineCards, column, boardId, timelineId}) => {
     const dispatch = useDispatch()
     const project = useSelector(state => state.projects.project)
 
-    const currentColunmCards =  category?.timeline[0]?.cards?.filter(el=>el.column===column)
-    
+    const currentColunmCards =  timelineCards.filter(el=>el.column===column)
+
     const [hower, setHower] = useState(false)
     const [newCardModal, setNewCardModal] = useState(false)
     const [addGhost, setAddGhost] = useState(false)
@@ -34,10 +34,24 @@ const KanbanSectionTd = ({category, timelineCards, column, boardId, timeline}) =
     const dragOver = (e) => {
         e.preventDefault()
         refBG.current.style.backgroundColor = 'rgb(227, 225, 233)'
-        setAddGhost(true)
+        setAddGhost('ghost last')
     }
     const dragOut = (e) => {
         e.preventDefault()
+        refBG.current.style.backgroundColor='white'
+        setAddGhost(false)
+    }
+    const cardDragOver = (e,i) => {
+        e.preventDefault()
+        e.stopPropagation()
+        console.log('he')
+
+        refBG.current.style.backgroundColor = 'rgb(227, 225, 233)'
+        setAddGhost(`ghost${i}`)
+    }
+    const cardDragOut = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
         refBG.current.style.backgroundColor='white'
         setAddGhost(false)
     }
@@ -50,11 +64,11 @@ const KanbanSectionTd = ({category, timelineCards, column, boardId, timeline}) =
             console.log('dataaaaaaaaaaaa',data)
             dispatch(moveCard({
                 cardId:data.cardId, 
-                from: data.timelineId ? 'timeline': data.categoryId ? 'event' : data.backlog && 'backlog',
-                oldPlaceId: data.timelineId || data.categoryId ||  undefined,
-                to : timeline ? 'timeline' : 'event' ,
-                newPlaceId : timeline ?  category.timeline[0]._id : category._id ,
-                column:column,
+                from: data.backlog ? 'backlog' : 'timeline',
+                oldPlaceId: data.timelineId ||  undefined,
+                to : 'timeline',
+                newPlaceId : timelineId,
+                column: column,
                 board_id: boardId,
             }))
 
@@ -76,17 +90,22 @@ const KanbanSectionTd = ({category, timelineCards, column, boardId, timeline}) =
                 onDragEnd={e=>dragOut(e)}
                 onDrop={e=>dropCard(e)}
                 onMouseOver={()=>setHower(true)}
-                onMouseOut={()=>setHower(false)}
+                
                 >
               
                 {currentColunmCards && currentColunmCards.map((el,i)=>{
                     return(
-                        <KanbanCard key={i} info={el} currCategory={category._id} timelineId={category?.timeline[0]?._id}  />
+                        <div onDragOver={(e)=>cardDragOver(e,i)} onDragLeave={(e)=>cardDragOut(e)}>
+                        
+                        {addGhost===`ghost${i}`?<div className={styles.addGhost}/>
+                        :
+                        <KanbanCard key={i} info={el} currCategory={category._id} timelineId={category?.timeline[0]?._id} />}
+                        </div>
                     )
                 })}
 
                 <CSSTransition
-                    in={addGhost}
+                    in={addGhost==='ghost last'}
                     timeout={200}
                     classNames={{
                     enter: styles.ghostEnter,
