@@ -1,10 +1,11 @@
 import styles from './kanban.module.css'
 import { Path } from "../../../Layout/header";
+import { updateTimeline } from '../../../../redux/actions/kanban';
 
 
 
 const BoardColumnsTitle = ({user, board, Path, deleteColumn}) => {
-
+console.log('fck board',board)
     if(!board){
         return <div>loading board...</div>
     }

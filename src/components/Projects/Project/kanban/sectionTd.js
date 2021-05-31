@@ -24,8 +24,7 @@ const KanbanSectionTd = ({category, timelineCards, column, boardId, timelineId})
     const dispatch = useDispatch()
     const project = useSelector(state => state.projects.project)
 
-    const currentColunmCards =  timelineCards.filter(el=>el.column===column)
-
+    const currentColunmCards = timelineCards &&  timelineCards.filter(el=>el.column===column)
     const [hower, setHower] = useState(false)
     const [newCardModal, setNewCardModal] = useState(false)
     const [addGhost, setAddGhost] = useState(false)

@@ -348,7 +348,8 @@ export default function(state = initialState, action) {
             case COMMON_KANBAN_RELOAD: 
                 return {
                     ...state,
-                    kanban: payload
+                    kanban: payload.board,
+                    backlog: payload.backlog
                 }
             case MOVE_CARD: 
                 return {
