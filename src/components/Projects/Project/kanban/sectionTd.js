@@ -43,7 +43,7 @@ const dragFunction = (e, index) => {
             newPlaceId : timelineId,
             column: column,
             board_id: boardId,
-            index: index? index : (timelineCards.length-1)
+            index: index? index : (timelineCards.length)
         }))
 
     } catch (e) {
