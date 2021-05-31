@@ -6,23 +6,27 @@ import { Light, Regular, Thin } from "../../../../../Styles/typography";
 
 import CardOpen from "./cardOpen";
 import { useDispatch, useSelector } from "react-redux";
-import { cardDelete, currentCard } from "../../../../../redux/actions/kanban";
+import { cardDelete, currentCard, loadBoard } from "../../../../../redux/actions/kanban";
 import { Button, CancelButton } from "../../../../../Styles/buttons";
 import Tag from "../../../components/OneProject/tag";
 import { getProject } from "../../../../../redux/actions/projects";
+import { url } from "../../../../utils/axios";
 
 
 
 
 
-const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost}) => {
+const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,history}) => {
     const [cardOpen, setCardOpen] = useState(false)
+    const [chosenCard, setChosenCard] = useState(false)
+    const [visibleName, setVisibleName] = useState(false)
     const [deleteWindow, setDeleteWindow] = useState({
       status:false,
       id:''
     })
     const dispatch = useDispatch()
     const crypt = useSelector(state=>state.projects.project.crypt)
+    const favCards = useSelector(state=>state.auth.user.fav_cards)
     const cardClick = (e) => {
       e.stopPropagation()
       setCardOpen(true)
@@ -30,12 +34,21 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost}) => {
 
     }
     const deleteCard =()=>{
-      dispatch(cardDelete(deleteWindow.id, crypt))
+      dispatch(cardDelete(deleteWindow.id, crypt, boardId))
       setDeleteWindow ({
         status:false,
         id:''
       })
     }
+    useEffect(()=>{
+      // console.log(info)
+      favCards.map(card=>{
+        if(card._id===info._id){
+          setChosenCard(true)
+          // console.log(card.title)
+        }
+        })
+    },[])
     const dragStart = (e) => {
       e.stopPropagation()
       const data={
@@ -55,6 +68,11 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost}) => {
     const close = ()=>{
       setCardOpen(false)
       dispatch(getProject(crypt))
+      dispatch(loadBoard(boardId))
+    }
+    const goToUser =(e,id)=>{
+      e.stopPropagation()
+      history.push(`../../../../users/${id}`)
     }
     // useEffect(()=>{
     //   console.log(info)
@@ -79,14 +97,45 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost}) => {
           }}>
         </div>
         <div className={styles.card__content}>
-          <Light size='16' style={{padding:'5px'}}>{info?.title} </Light>
+          <div style={{display:'flex', justifyContent:'space-between'}}>
+            <Light size='16' style={{padding:'5px',maxWidth:'50%'}}>{info?.title} </Light>
+            <div style={{display:'flex'}}>
+            {info?.execs?.map((el,i)=>{
+              return (
+                <div>
+                  <img key={i} 
+                    src={url+'/'+el.avatar} 
+                    onClick={(e)=>{goToUser(e, el._id)}}
+                    onMouseEnter={()=>{setVisibleName(el.fullname)}}
+                    onMouseLeave={()=>{setVisibleName('')}} 
+                    style={{
+                      width:'25px',marginLeft:'4px',
+                      height:'25px',marginTop:'3px',
+                      borderRadius:'100%',objectFit:'cover'
+                    
+                  }} ></img>
+                  <div style={{position:'relative'}}>
+                     <div className={styles.card__exec__name} 
+                      style={{display:`${visibleName===el.fullname?'block':'none'}`}}
+                    >{el.fullname}
+                    </div>
+                  </div>
+                 
+                </div>
+                
+              )
+            })}
+            </div>
+            
+          </div>
+          
           <div className={styles.card__content__second} >
             <div style={{display:'flex'}}>
               <Light size='12' 
                 style={{marginRight:'5px'}}>
                   { info.type==='Одна задача'?'Задача':info.type}
                 </Light>
-              <Light size='12' >{info?.tasks.filter(task=>task.taskStatus).length}/{info?.tasks.length}</Light>
+              <Light size='12' style={{display:info.type==='Одна задача'?'none':'block'}} >{info?.tasks.filter(task=>task.taskStatus).length}/{info?.tasks.length}</Light>
             </div>
             <div style={{display:'flex',alignItems:'center',flexWrap:'nowrap',marginTop:'5px'}}>
               {info?.tags.map((tag,i)=>{
@@ -113,7 +162,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost}) => {
               
             </div>
           </div>
-          <CardOpen isOpen={cardOpen} onClick={deleteCard} setDeleteWindow={setDeleteWindow} data={'task data'} close={close} />
+          <CardOpen chosenCard={chosenCard} isOpen={cardOpen} onClick={deleteCard} setDeleteWindow={setDeleteWindow} data={'task data'} close={close} />
         </div>
         
       }

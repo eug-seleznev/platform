@@ -38,7 +38,7 @@ const Kanbans = ({history}) => {
         <div style={{ textAlign: "center" }}>
           <img style={{height:'300px'}} src={Path+'Illustration/kanban.jpg'} />
           <div className={styles.main__board}>
-            <h2>Новый подход к спринтам</h2>
+            <h2 className={styles.main__board__title}>Новый подход к спринтам</h2>
             <p className={styles.main__board__text}>
               Теперь задачи проекта, это канбан доски, которые поделены как по вертикали (статусы задач), так и по горизонтали (категории, разные спринты). В разделах доски можно создавать карточки, которые могут содержать как одну задачу, так и несколько. На этой странице можно создать доску или выбрать из уже существующих.
             </p>

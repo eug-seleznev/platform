@@ -1,5 +1,5 @@
 import { innerBackend, } from "../../components/utils/axios";
-import {REMOVE_TAG_CARD,CHOSEN_BOARD,ADD_TAG_CARD,DELETE_CARD,ADD_CARD_TO_CHOSEN,CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD, COMMON_KANBAN_RELOAD, ADD_USER_TO_TASK_NEW} from "../types";
+import {LOAD_BOARD,REMOVE_TAG_CARD,CHOSEN_BOARD,ADD_TAG_CARD,DELETE_CARD,ADD_CARD_TO_CHOSEN,CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD, COMMON_KANBAN_RELOAD, ADD_USER_TO_TASK_NEW} from "../types";
 
 
 
@@ -49,13 +49,13 @@ export const addTagCard = (id, value) => async dispatch  => {
 }
 export const loadBoard = (id) => async dispatch  => {
 
-    // console.log('action ', `/kanban/boards/get/single/${id}`)
+    console.log(id)
     try {
         const res = await innerBackend.get(`/kanban/boards/get/single/${id}`)
        console.log(res)         
 
         dispatch({
-            type: COMMON_KANBAN_RELOAD,
+            type: LOAD_BOARD,
             payload: res.data
         })
     }
@@ -64,10 +64,10 @@ export const loadBoard = (id) => async dispatch  => {
     }
 }
 
-export const cardDelete = (id,crypt) => async dispatch  => {
+export const cardDelete = (id,crypt,boardId) => async dispatch  => {
     console.log(id, crypt)
     try {
-        const res = await innerBackend.delete(`/kanban/cards/delete/single?cardid=${id}&crypt=${crypt}`)
+        const res = await innerBackend.delete(`/kanban/cards/delete/single?cardid=${id}&crypt=${crypt}&boardid=${boardId}`)
         dispatch({
             type: DELETE_CARD,
             payload: res.data

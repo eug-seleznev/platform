@@ -1,5 +1,5 @@
 
-import {ADD_NEW_BOARD,CHANGE_CARD_INFO,ADD_USER_TO_TASK_NEW, ADD_SPRINT,SORT_PROJECTS,SORT_TITLE, SEARCH_OBJECT, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL, EDIT_TASK, CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR, GET_URN, DELETE_SPRINT, CLEAR_URN, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, ADD_TAG, DELITE_USER, DELITE_TAG, ADD_USER_TO_TEAM, SORT_BY_TAGS, CHANGE_ROCKET, CLEAR_MODEL_DATA, CLEAR_SPRINT, ADD_NEW_CARD, ADD_COMMENT, CHANGE_CARD,COMMON_KANBAN_RELOAD, MOVE_CARD,ADD_TAG_CARD, DELETE_CARD, REMOVE_TAG_CARD} from '../types'
+import {ADD_NEW_BOARD,CHANGE_CARD_INFO,ADD_USER_TO_TASK_NEW, ADD_SPRINT,SORT_PROJECTS,SORT_TITLE, SEARCH_OBJECT, ALL_PROJECTS,EDIT_PROJECT, CREATE_FAIL, EDIT_TASK, CREATE_PROJECT, GET_PROJECT, SPRINT_ERROR, ALL_SPRINT, UPDATE_PROJECT, GET_SPRINT, GET_TOKEN, ADD_TASKS, FINISH_TASK, DELETE_PROJECT, FINISH_SPRINT, JOIN_TEAM,FINISH_PROJECT, ADD_INFO_SPRINT, CLEAR_MSG, CLEAR_ERROR, GET_URN, DELETE_SPRINT, CLEAR_URN, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, ADD_TAG, DELITE_USER, DELITE_TAG, ADD_USER_TO_TEAM, SORT_BY_TAGS, CHANGE_ROCKET, CLEAR_MODEL_DATA, CLEAR_SPRINT, ADD_NEW_CARD, ADD_COMMENT, CHANGE_CARD,COMMON_KANBAN_RELOAD, MOVE_CARD,ADD_TAG_CARD, DELETE_CARD, REMOVE_TAG_CARD, LOAD_BOARD} from '../types'
 
 
 
@@ -60,8 +60,8 @@ export default function(state = initialState, action) {
                 case DELETE_CARD:
                     return {
                         ...state,
-                        project:payload,
                         backlog:payload.backlog,
+                        kanban:payload.board,
                         card:null
                     }
                 case ADD_TAG_CARD:
@@ -350,6 +350,12 @@ export default function(state = initialState, action) {
                     ...state,
                     kanban: payload.board,
                     backlog: payload.backlog
+                }
+            case LOAD_BOARD: 
+                return {
+                    ...state,
+                    kanban: payload.board,
+                    backlog:payload.backlog
                 }
             case MOVE_CARD: 
                 return {

@@ -16,7 +16,7 @@ import ModalTimeline from "./modalTimeline";
 
 
 
-const KanbanSection = ({main, board, category}) => {
+const KanbanSection = ({main, board, category, history}) => {
   const dispatch = useDispatch()
     const [open, setOpen] = useState(true)
     const [timelineIndex, setTimelineIndex] = useState(0)
@@ -108,7 +108,7 @@ useEffect(()=>{
             <span/>
             {board.columns.map((el,i)=>{
               return(
-                <KanbanSectionTd key={i} category={category} timelineId={category.timeline[timelineIndex]._id} timelineCards={timelines} column={el} boardId={board._id} />
+                <KanbanSectionTd history={history} key={i} category={category} timelineId={category.timeline[timelineIndex]._id} timelineCards={timelines} column={el} boardId={board._id} />
               )
             })}
             <span/>

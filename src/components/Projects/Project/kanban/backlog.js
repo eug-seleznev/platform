@@ -10,7 +10,7 @@ import { moveCard } from "../../../../redux/actions/kanban";
 import { Regular } from '../../../../Styles/typography'
 
 
-const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId})=>{
+const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId, history})=>{
     const dispatch = useDispatch()
     const createFromBacklog = ()=>{
         setCreateOpen ({
@@ -100,7 +100,7 @@ const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId})=>{
                         
                         {addGhost===`ghost${i}`?<div className={styles.addGhost}/>
                         :
-                        <KanbanCard key={i} info={card} backlog={true}/>
+                        <KanbanCard history={history} key={i} info={card} backlog={true}/>
                         }
                         </div>
                     )

@@ -25,9 +25,12 @@ const Department = ({history}) => {
     
  },[])
  useEffect(()=>{
-    setTimeout(()=>{
+    let timeout = setTimeout(()=>{
         setLoad(true)
     },5000)
+    return ()=> {
+        clearTimeout(timeout)
+    }
 },[])
 useEffect(()=>{
     if(user!==null&&user!==undefined) {
