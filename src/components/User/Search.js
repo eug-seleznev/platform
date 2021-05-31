@@ -49,9 +49,9 @@ const Search = ({project}) => {
             {!departments ? (
               <option> loading</option>
             ) : (
-              departments.map((department) => {
+              departments.map((department, i) => {
                 return (
-                  <option value={department.divname}>{department.divname} </option>
+                  <option key={i} value={department.divname}>{department.divname} </option>
                 );
               })
             )}
