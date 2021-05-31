@@ -31,7 +31,7 @@ const Comments =({id})=>{
                         <Bold size='14' color='#878787'className={style.comments__date}>{comm.author?.name} {comm.author?.lastname&&comm.author?.lastname?.charAt(0)}.</Bold>
                         <Light size='14' color='#878787'className={style.comments__date}>{getDateWithTime(comm.date)}</Light>
                         <Light size='14' color={comm.text.includes('Дедлайн')&&comm?.type==='history'?'#C64242':
-                        comm.text.includes('Готово')&&comm?.type==='history'?'#71D186':comm?.type==='history'?'#878787':
+                        comm.text.includes('> Готово')&&comm?.type==='history'?'#71D186':comm?.type==='history'?'#878787':
                         'black'}className={style.comments__text}>{comm.text}</Light>
                     </div>
                 )
