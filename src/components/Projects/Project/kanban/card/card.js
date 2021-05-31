@@ -16,7 +16,7 @@ import { url } from "../../../../utils/axios";
 
 
 
-const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId}) => {
+const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,history}) => {
     const [cardOpen, setCardOpen] = useState(false)
     const [chosenCard, setChosenCard] = useState(false)
     const [visibleName, setVisibleName] = useState(false)
@@ -70,9 +70,9 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId}
       dispatch(getProject(crypt))
       dispatch(loadBoard(boardId))
     }
-    const goToUser =(e)=>{
+    const goToUser =(e,id)=>{
       e.stopPropagation()
-      // history
+      history.push(`../../../../users/${id}`)
     }
     // useEffect(()=>{
     //   console.log(info)
@@ -100,11 +100,12 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId}
           <div style={{display:'flex', justifyContent:'space-between'}}>
             <Light size='16' style={{padding:'5px',maxWidth:'50%'}}>{info?.title} </Light>
             <div style={{display:'flex'}}>
-              {info?.execs?.map((el,i)=>{
+            {info?.execs?.map((el,i)=>{
               return (
                 <div>
                   <img key={i} 
                     src={url+'/'+el.avatar} 
+                    onClick={(e)=>{goToUser(e, el._id)}}
                     onMouseEnter={()=>{setVisibleName(el.fullname)}}
                     onMouseLeave={()=>{setVisibleName('')}} 
                     style={{
@@ -114,7 +115,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId}
                     
                   }} ></img>
                   <div style={{position:'relative'}}>
-                     <div className={styles.card__exec__name} onClick={(e)=>{goToUser(e, el._id)}}
+                     <div className={styles.card__exec__name} 
                       style={{display:`${visibleName===el.fullname?'block':'none'}`}}
                     >{el.fullname}
                     </div>

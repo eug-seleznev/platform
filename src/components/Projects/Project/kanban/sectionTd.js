@@ -20,7 +20,7 @@ import { Path } from '../../../Layout/header'
 
 
 
-const KanbanSectionTd = ({category, timelineCards, column, boardId, timelineId}) => {
+const KanbanSectionTd = ({category, timelineCards, column, boardId, timelineId,history}) => {
     const dispatch = useDispatch()
     const project = useSelector(state => state.projects.project)
 
@@ -111,7 +111,7 @@ const dragFunction = (e, index) => {
                             
                             {addGhost===`ghost${i}`?<div className={styles.addGhost}/>
                             :
-                            <KanbanCard boardId={boardId} key={i} info={el} currCategory={category._id} timelineId={timelineId} />}
+                            <KanbanCard history={history} boardId={boardId} key={i} info={el} currCategory={category._id} timelineId={timelineId} />}
                             </div>
                         )
                     })}

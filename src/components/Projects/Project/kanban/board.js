@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import sprintCss from '../../../../Styles/modules/components/sprintCard.module.css'
 import styles from './kanban.module.css'
 import { Select, NEW_TABLE, NEW_TBODY, NEW_THEAD, NEW_TD, NEW_TH, NEW_TR } from '../../../../Styles/tables';
-import { Light } from "../../../../Styles/typography";
+import { Bold, Light } from "../../../../Styles/typography";
 import Tag from "../../components/OneProject/tag";
 import getDate from "../../getDate";
 import KanbanCard from "./card/card";
@@ -22,7 +22,7 @@ import { ButtonTextLight } from "../../../../Styles/buttons";
 
 
 
-const Board = ({match}) => {
+const Board = ({match, history}) => {
   const dispatch =useDispatch ()
   const project = useSelector(state=>state.projects.project)
   const user = useSelector(state => state.auth.user)
@@ -83,8 +83,8 @@ const Board = ({match}) => {
         dispatch(loadBoard(boardId))
     },[])
     // useEffect(()=>{
-    //   console.log(backlog)
-    // },[backlog])
+    //   console.log(board)
+    // },[board])
 
 
     const deleteColumnHandler = (el) => {
@@ -97,7 +97,7 @@ const Board = ({match}) => {
     return (
       <div className={styles.main} style={{gridTemplateColumns: sideOpen? '240px 1fr' : '35px 1fr'}}>
         <div className={styles.backLog} >
-            <Backlog backlog={backlog} setCreateOpen={setCreateOpen} sideOpen={sideOpen} projectCrypt={project.crypt} boardId={board._id}/>
+            <Backlog history={history} backlog={backlog} setCreateOpen={setCreateOpen} sideOpen={sideOpen} projectCrypt={project.crypt} boardId={board._id}/>
             <div className={styles.verticalText} style={{display: sideOpen? 'none' : 'block'}}>
               Все задачи
             </div>
@@ -106,12 +106,15 @@ const Board = ({match}) => {
         <div className={styles.content}>
             <BoardSettings visible={createCategory} type='category' close={()=>setCreateCategory(false)} boardId={board._id}  />
             <BoardSettings visible={createColumn}type='column'  close={()=>setCreateColumn(false)} boardId={board._id}  />
-            <div style={{display:'flex'}}>
+            <div style={{display:'flex',marginLeft:'14px'}}>
               <div className={styles.backLogButton} onClick={()=>setCreateCategory(true)} style={{marginBottom:'10px'}}>
-                <img alt='plus' src={Path+'plus1.png'} style={{width:'12px',marginRight:'5px',backgroundColor:'white'}}></img>
+                <Bold size='24'>{board.name}</Bold>
+              </div>
+              <div className={styles.backLogButton} onClick={()=>setCreateCategory(true)} style={{marginBottom:'10px',marginTop:'2px'}}>
+                <img alt='plus' src={Path+'plus1.png'} style={{width:'12px',marginRight:'5px',marginLeft:'30px', backgroundColor:'white'}}></img>
                 <ButtonTextLight color='black'style={{fontStyle:'italic'}}>Добавить категорию</ButtonTextLight>
               </div>
-              <div className={styles.backLogButton} onClick={()=>setCreateColumn(true)} style={{marginBottom:'10px'}}>
+              <div className={styles.backLogButton} onClick={()=>setCreateColumn(true)} style={{marginBottom:'10px',marginTop:'2px'}}>
                   <img alt='plus' src={Path+'plus1.png'} style={{width:'12px',marginRight:'5px',backgroundColor:'white'}}></img>
                   <ButtonTextLight color='black'style={{fontStyle:'italic'}}>Добавить колонку</ButtonTextLight>
               </div>
@@ -126,7 +129,7 @@ const Board = ({match}) => {
               <div ref={boardDivChild} style={{width: 'fit-content' }}>
                 {board && board.columns && board?.categories.map((el,i)=>{
                     return(
-                        <KanbanSection key={i} main={i===0? true : false} board={board} category={el} />
+                        <KanbanSection history={history} key={i} main={i===0? true : false} board={board} category={el} />
                     )
                 })}
                 </div>
