@@ -400,3 +400,52 @@ export const userToTask = (id, task_id) => async dispatch  => {
             alert('ошибка')           
          }
 } 
+
+export const newTimeline = (categoryId, boardId) => async dispatch  => {
+    let body ={
+        board_id: boardId,
+    }
+    try {
+        console.log(body, categoryId)
+
+        const res = await innerBackend.put(`/kanban/categories/edit/newtimeline/${categoryId}`,body )
+        console.log(res)
+        dispatch({
+            type: COMMON_KANBAN_RELOAD,
+            payload: res.data
+        })
+        // dispatch({
+        //     type: GREEN_MSG,
+        //     payload: res.data
+        // })
+        }
+        catch (err) {
+            console.log('ошибка',err.response)           
+         }
+} 
+
+
+export const updateTimeline = (categoryId, step, boardId, timelineId) => async dispatch  => {
+    let body ={
+        step: step,
+        board_id: boardId,
+        timeline_id: timelineId,
+    }
+    try {
+        console.log(body, categoryId, )
+
+        const res = await innerBackend.put(`/kanban/categories/edit/timeline/${categoryId}`,body )
+        console.log(res)
+        dispatch({
+            type: COMMON_KANBAN_RELOAD,
+            payload: res.data
+        })
+        // dispatch({
+        //     type: GREEN_MSG,
+        //     payload: res.data
+        // })
+        }
+        catch (err) {
+            console.log('ошибка',err.response)           
+         }
+} 
