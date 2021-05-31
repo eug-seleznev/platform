@@ -27,7 +27,7 @@ const Comments =({id})=>{
 
                 return(
                     <div key={i} className={style.comments__one} >
-                        <img src={url+'/'+comm.author?.avatar} style={{width:'20px',borderRadius:'100%'}}></img>
+                        <img src={url+'/'+comm.author?.avatar} style={{width:'25px',height:'25px', objectFit:'cover', borderRadius:'100%'}}></img>
                         <Bold size='14' color='#878787'className={style.comments__date}>{comm.author?.name} {comm.author?.lastname&&comm.author?.lastname?.charAt(0)}.</Bold>
                         <Light size='14' color='#878787'className={style.comments__date}>{getDateWithTime(comm.date)}</Light>
                         <Light size='14' color={comm.text.includes('Дедлайн')&&comm?.type==='history'?'#C64242':
