@@ -1,19 +1,20 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTag, DeleteTask, deleteTag, EditSprint, getProject } from "../../../../../../redux/actions/projects";
-import {  Bold, Light, Regular, Thin } from "../../../../../../Styles/typography"
+import {Light} from "../../../../../../Styles/typography"
 import style from "../../../../../../Styles/modules/components/Project/newsprint.module.css"
-import { addToChosen } from "../../../../../../redux/actions/auth";
+
 import TagSearch from "../../../../components/tagSearch";
 import Tag from "../../../../components/OneProject/tag";
 import cardOpen from "./cardOpen.module.css"
 import {addCardToChosen, addTagCard, changeCardField, removeTagCard}  from "../../../../../../redux/actions/kanban"
 import { Path } from "../../../../../Layout/header";
-import SetMenu from "../../../../components/OneProject/settingsMenu";
+
 import { CSSTransition } from "react-transition-group";
 import { StyledIn } from "../../../../../../Styles/layout";
 import styles from '../../../../../../Styles/modules/components/headerMenu.module.css'
 import { Select } from "../../../../../../Styles/tables";
+import { ButtonTextLight } from "../../../../../../Styles/buttons";
+import getDate from "../../../../getDate";
 
 
 
@@ -25,6 +26,12 @@ const CardEditor = ({info, setDeleteWindow, chosenCard}) => {
   const [description, setDescription] = useState('')
   const[chosen, setChosen]= useState(false)
   const[settings, setSettings]= useState(false)
+  const[deadline,setDeadline] = useState({
+    set:false,
+    change:false,
+    val:'',
+    visible:false
+  })
   useEffect(()=>{
     if(info) {
       console.log(info)
@@ -54,6 +61,7 @@ const CardEditor = ({info, setDeleteWindow, chosenCard}) => {
     dispatch(removeTagCard(info._id, tag))
    }
   const changeSomeField =(e)=>{
+    
     if(e.target.name==='title')  {
       setTitle(e.target.value)
     }
@@ -65,6 +73,30 @@ const CardEditor = ({info, setDeleteWindow, chosenCard}) => {
     let field = e.target.name
     let id = info._id
     dispatch(changeCardField(val, field, id))
+  }
+  // useEffect(()=>{
+  //   console.log(deadline)
+  // },[deadline])
+  const changeVal =(e)=>{
+
+
+    
+      setDeadline({...deadline, val: e.target.value})
+   
+    
+  }
+  const changeDeadline =()=>{
+    let val = new Date (deadline.val)
+    let field = 'deadline'
+    let id = info._id
+    console.log(deadline.val)
+    
+    if(deadline.val!=='') {
+      dispatch(changeCardField(val, field, id))
+      setDeadline({...deadline,set:false, visible:true})
+    }
+    
+   
   }
   return (
     <div
@@ -83,6 +115,33 @@ const CardEditor = ({info, setDeleteWindow, chosenCard}) => {
           onKeyPress={(e)=>e.key==='Enter'?onEnter(e):''}
           onChange={(e)=>changeSomeField(e)}
         />
+        {deadline.set?
+        <div style={{marginTop:'3px'}}>
+          <div style={{display: !deadline.visible?'block':'none'}}>
+            <div style={{display:!deadline.set?'none':'flex'}}>
+              <input type='date' onKeyPress={(e)=>e.key==='Enter'?changeDeadline(e):''} onChange={changeVal}></input>
+              <ButtonTextLight onClick={changeDeadline} style={{margin:'5px'}}>Добавить</ButtonTextLight>
+            </div>
+          </div>
+          
+          {/* <Light style={{display: deadline.visible?'block':'none',marginTop:'1px'}}>{getDate(deadline.val)}</Light> */}
+        </div>:
+        <div>
+          <ButtonTextLight onClick={()=>{setDeadline({...deadline, set:true})}} style={{display:!deadline.visible&&!info.deadline?'block':'none'}}>Назначить дедлайн</ButtonTextLight>
+          <div style={{display:deadline.visible?'flex':'none',marginTop:'4px'}}>
+            <Light style={{marginTop:'1px'}}>{getDate(deadline.val)}</Light>
+            <ButtonTextLight onClick={()=>{setDeadline({...deadline,set:true,visible:false})}} style={{margin:'5px', transform:'translateY(-1px)'}}>Изменить</ButtonTextLight>
+          </div>
+          <div style={{display:!deadline.visible&&info.deadline?'flex':'none',marginTop:'4px'}}>
+            <Light style={{marginTop:'1px'}}>{getDate(info.deadline)}</Light>
+            <ButtonTextLight onClick={()=>{setDeadline({...deadline,set:true,visible:false})}} style={{margin:'5px', transform:'translateY(-1px)'}}>Изменить</ButtonTextLight>
+          </div>
+        </div>
+        
+        
+
+        }
+        
         <div>
           <img  onClick={()=>{setSettings(true)}} src={Path+'image 1.png'} style={{width:'30px',cursor:'pointer'}}>
           </img>
@@ -118,8 +177,8 @@ const CardEditor = ({info, setDeleteWindow, chosenCard}) => {
                       </div>
                    
                       <StyledIn
-                      style={{display:'flex',height:'24px'}}
-                          onClick={()=>setDeleteWindow({
+                            style={{display:'flex',height:'24px'}}
+                            onClick={()=>setDeleteWindow({
                             status:true,
                             id: info._id
                           })}

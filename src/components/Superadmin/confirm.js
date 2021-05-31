@@ -6,7 +6,7 @@ import { useState } from 'react'
 const ConfirmSubDel = ({accept, decline, title, contractor}) => {
     
     return(
-    console.log(contractor),
+//     console.log(contractor),
     <div className={styles.bg} >
             <Card className={styles.card}>
                 
