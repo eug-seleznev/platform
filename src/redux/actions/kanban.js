@@ -180,7 +180,8 @@ export const addNewCategory = (board_id, formData) => async dispatch  => {
     //     step:number,
     //     start:date,
     //     end:date}
-    const body = {...formData, board_id}
+    const body = {
+        name: formData, board_id: board_id}
     console.log('formData',body)
     try {
         const res = await innerBackend.post(`/kanban/categories/new/${board_id}`,formData )
@@ -401,12 +402,13 @@ export const userToTask = (id, task_id) => async dispatch  => {
          }
 } 
 
-export const newTimeline = (categoryId, boardId) => async dispatch  => {
+export const newTimeline = (categoryId, boardId, timelineId) => async dispatch  => {
     let body ={
         board_id: boardId,
+        timeline_id: timelineId,
     }
     try {
-        console.log(body, categoryId)
+        console.log('new timeline',body, categoryId)
 
         const res = await innerBackend.put(`/kanban/categories/edit/newtimeline/${categoryId}`,body )
         console.log(res)
@@ -432,7 +434,7 @@ export const updateTimeline = (categoryId, step, boardId, timelineId) => async d
         timeline_id: timelineId,
     }
     try {
-        console.log(body, categoryId, )
+        console.log('timeline shit',body, categoryId, )
 
         const res = await innerBackend.put(`/kanban/categories/edit/timeline/${categoryId}`,body )
         console.log(res)
