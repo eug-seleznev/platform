@@ -53,6 +53,8 @@ const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId, history
     const dropCard = (e) => {
         e.preventDefault()
         // refBG.current.style.backgroundColor='white'
+        dragFunction(e, backlog.length)
+
         setAddGhost(false)
     
     }
@@ -75,6 +77,7 @@ const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId, history
         setAddGhost(false)
 
       }
+      console.log('backlog', backlog)
 
 
     return (
