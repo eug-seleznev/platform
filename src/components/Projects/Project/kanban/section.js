@@ -84,7 +84,7 @@ useEffect(()=>{
                           setOpenTimlineModal(true)
                       }}>
                         <img alt='plus' src={Path+'plus1.png'}className={styles.backLogPlus} style={{filter:'invert(0)'}}></img>
-                        <ButtonTextLight color='black'style={{fontStyle:'italic'}}>{!category.timeline[0].start? 'Добавить таймлайн' : 'Изменить таймлайн'}</ButtonTextLight>
+                        <ButtonTextLight color='black'style={{fontStyle:'italic'}}>{!category.timeline[0]?.start? 'Добавить таймлайн' : 'Изменить таймлайн'}</ButtonTextLight>
                       </div> 
                       
                       <div style={{display: "flex", marginLeft: '20px'}}>
@@ -108,7 +108,7 @@ useEffect(()=>{
             <span/>
             {board.columns.map((el,i)=>{
               return(
-                <KanbanSectionTd history={history} key={i} category={category} timelineId={category.timeline[timelineIndex]._id} timelineCards={timelines} column={el} boardId={board._id} />
+                <KanbanSectionTd history={history} key={i} category={category} timelineId={category.timeline[timelineIndex]?._id} timelineCards={timelines} column={el} boardId={board._id} />
               )
             })}
             <span/>
@@ -125,8 +125,8 @@ export default KanbanSection
 
 const TimelineDates = ({timeline}) => {
 
-  const a = new Date(timeline.start)
-  const b = new Date(timeline.end)
+  const a = new Date(timeline?.start)
+  const b = new Date(timeline?.end)
   const start = a.getDate()
   const end = b.getDate()
   const months = ['янв','фев','март','апр','мая','июня','июля','авг','сент','окт','нояб','дек',]

@@ -41,7 +41,7 @@ const MyProjects = ({history}) => {
                     {projects.map((project,index) => {
                     
                     return(  
-                    <NEW_TR className={style.tr} key={index} onClick={() => history.push(`/projects/${project.crypt}`)} title="Открыть проект">
+                    <NEW_TR className={style.tr} key={index} onClick={() => history.push(`/projects/${project.crypt}/main`)} title="Открыть проект">
                     
                         <NEW_TD>{project.title}</NEW_TD>
                         <NEW_TD>{project.dateFinish!==undefined&&project.dateFinish!==null?project.dateFinish.slice(0, 10):'нет'}</NEW_TD>

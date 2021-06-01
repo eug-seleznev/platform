@@ -139,7 +139,7 @@ const Edit = ({ history}) => {
 			</select>
 		
 
-			<p className={styles.p}>Сменить должность</p>
+			<Thin className={styles.p}>Сменить должность</Thin>
 		 <Input 
 		 required 
 			  type='text'

@@ -37,7 +37,7 @@ const Comments =({id})=>{
                 )
             }).reverse()}
             </div> 
-            
+                
                  <form className={style.comments__button__area} onSubmit={createComment}>
                     <textarea 
                         className={style.comments__area} value={comment} 
