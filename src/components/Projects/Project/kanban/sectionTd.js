@@ -11,7 +11,7 @@ import Tag from "../../components/OneProject/tag";
 import getDate from "../../getDate";
 import KanbanCard from "./card/card";
 import { CSSTransition } from "react-transition-group";
-import { moveCard } from "../../../../redux/actions/kanban";
+import { moveCard, finishExpired } from "../../../../redux/actions/kanban";
 import { ButtonText } from "../../../../Styles/buttons";
 import CreateForm from "./createForm";
 import { Path } from '../../../Layout/header'
@@ -91,7 +91,11 @@ const dragFunction = (e, index) => {
       }
     
 
-
+if(column==='Потрачено'){
+    return(
+        <ExpiredColumn category={category} timelineCards={timelineCards} column={column} boardId={boardId} timelineId={timelineId} history={history} />
+    )
+}
     return (
   
      
@@ -155,3 +159,34 @@ const dragFunction = (e, index) => {
 
 
 export default KanbanSectionTd
+
+
+const ExpiredColumn = ({ category, timelineCards, column, boardId, timelineId,history}) => {
+    const dispatch = useDispatch()
+
+    const finish = (id) => {
+        dispatch(finishExpired(id, boardId))
+    }
+    
+    return(
+        <div 
+        // ref={refBG}
+        className={styles.td} 
+        // onDragOver={e=>dragOver(e)}
+        // onDragLeave={e=>dragOut(e)}
+        // onDragEnd={e=>dragOut(e)}
+        // onDrop={e=>dropCard(e)}
+        // onMouseOver={()=>setHower(true)}
+        >
+            {category.expired.map((el,i)=>{
+                return(
+                    // <div onDragOver={(e)=>cardDragOver(e,i)} onDragLeave={(e)=>cardDragOut(e)} onDrop={(e)=>dropToCard(e,el.huindex)}>
+                    <div>
+                    <div onClick={()=>finish(el._id)}>завершить \/</div>
+                        <KanbanCard notDraggable history={history} boardId={boardId} key={i} info={el} currCategory={category._id} timelineId={timelineId} />
+                    </div>
+                )
+            })}
+    </div>
+    )
+}

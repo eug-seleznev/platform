@@ -107,7 +107,7 @@ const Board = ({match, history}) => {
             <BoardSettings visible={createCategory} type='category' close={()=>setCreateCategory(false)} boardId={board._id}  />
             <BoardSettings visible={createColumn}type='column'  close={()=>setCreateColumn(false)} boardId={board._id}  />
             <div style={{display:'flex',marginLeft:'14px'}}>
-              <div className={styles.backLogButton} onClick={()=>setCreateCategory(true)} style={{marginBottom:'10px'}}>
+              <div className={styles.backLogButton}  style={{marginBottom:'10px'}}>
                 <Bold size='24'>{board.name}</Bold>
               </div>
               <div className={styles.backLogButton} onClick={()=>setCreateCategory(true)} style={{marginBottom:'10px',marginTop:'2px'}}>
