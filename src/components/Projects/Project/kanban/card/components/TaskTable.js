@@ -185,12 +185,12 @@ const TaskTable = ({tasksArray, id, team}) => {
                             return (
                           <>
                             {task.user._id === member.user._id ? (
-                              <option selected key={i} value={member.user._id}>
+                              <option selected value={member.user._id}>
                                 {" "}
                                 {member.user.fullname}
                               </option>
                             ) : (
-                              <option value={member.user._id} key={i} name={task._id}>
+                              <option value={member.user._id} name={task._id}>
                                 {member.user.fullname}
                               </option>
                             )}

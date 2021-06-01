@@ -10013,6 +10013,13 @@ react-hook-form@^6.12.2:
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-6.15.5.tgz#c2578f9ce6a6df7b33015587d40cd880dc13e2db"
   integrity sha512-so2jEPYKdVk1olMo+HQ9D9n1hVzaPPFO4wsjgSeZ964R7q7CHsYRbVF0PGBi83FcycA5482WHflasdwLIUVENg==
 
+react-input-trigger@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-input-trigger/-/react-input-trigger-1.1.2.tgz#752b9266debcb49a86c83bff1843b5e652e8e471"
+  integrity sha512-fz/uT7YxpKPUCt1SIBXDh2K1qvQFwBan7VwtxDU9ZMPpnit1YMVGc2Aw+aCVcjxb+hLslb2pZJxOCwVjID5OrQ==
+  dependencies:
+    textarea-caret "^3.1.0"
+
 react-is@^16.13.1, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
@@ -11717,6 +11724,11 @@ text-table@0.2.0, text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.npmjs.org/text-table/-/text-table-0.2.0.tgz"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
+
+textarea-caret@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/textarea-caret/-/textarea-caret-3.1.0.tgz#5d5a35bb035fd06b2ff0e25d5359e97f2655087f"
+  integrity sha512-cXAvzO9pP5CGa6NKx0WYHl+8CHKZs8byMkt3PCJBCmq2a34YA9pO1NrQET5pzeqnBjBdToF5No4rrmkDUgQC2Q==
 
 textextensions@^5.11.0:
   version "5.12.0"
