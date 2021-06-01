@@ -58,7 +58,7 @@ useEffect(()=>{
       if(timelineIndex<category.timeline.length-1){
         setTimelineIndex(timelineIndex+1)
       } else {
-        dispatch(newTimeline(category._id,board._id,))
+        dispatch(newTimeline(category._id,board._id,category.timeline[timelineIndex]._id))
       }
     }
 
@@ -87,14 +87,15 @@ useEffect(()=>{
                         <ButtonTextLight color='black'style={{fontStyle:'italic'}}>{!category.timeline[0]?.start? 'Добавить таймлайн' : 'Изменить таймлайн'}</ButtonTextLight>
                       </div> 
                       
-                      <div style={{display: "flex", marginLeft: '20px'}}>
-                        {timelineIndex>0 && <div onClick={(e)=>prevTimeline(e)}>{'< '}</div>}
+                      {category.timeline[timelineIndex].start && 
+                      <div style={{display: "flex", marginLeft: '20px', alignItems: 'center', border: '1px solid lightgrey', borderRadius: '13px', padding: '0 10px 0 10px'}} onClick={e=>e.stopPropagation()}>
+                        {timelineIndex>0 && <img src={Path+'openicon.png'} style={{transform: 'rotate(-90deg)', width: '10px', height: '10px', marginRight: '15px'}} onClick={(e)=>prevTimeline(e)}/>}
                         <TimelineDates timeline={category.timeline[timelineIndex]} />
                         {timelineIndex==category.timeline.length-1?
-                        <div onClick={(e)=>nextTimeline(e)}>{' +'}</div> 
+                        <img src={Path+'plus1.png'} style={{width: '10px', height: '10px', marginLeft: '15px'}} onClick={(e)=>nextTimeline(e)}/>
                         :
-                        <div onClick={(e)=>nextTimeline(e)}>{' >'}</div>}
-                      </div>
+                        <img src={Path+'openicon.png'} style={{transform: 'rotate(90deg)', width: '10px', height: '10px', marginLeft: '15px'}} onClick={(e)=>nextTimeline(e)}/>}
+                      </div>}
                  </div>
                  <span/>
                  <span/>
@@ -133,6 +134,9 @@ const TimelineDates = ({timeline}) => {
   const monthStart = months[a.getMonth()]
   const monthEnd = months[b.getMonth()]
 
+  if(!timeline.start){
+    return <div></div>
+  }
   return(
     <div> {start} {monthStart!==monthEnd && monthStart} - {end+' '+monthEnd}</div>
   )

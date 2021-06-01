@@ -14,12 +14,7 @@ import { Bold, Light } from '../../../../Styles/typography'
 const BoardSettings = ({close, boardId, visible, type}) => {
 
 const dispatch =useDispatch ()
-const [category, setCategory] = useState({
-    name: '',
-    step: '',
-    start: undefined,
-    end: undefined,
-})
+const [category, setCategory] = useState('')
 const [column, setColumn] = useState('')
 
 
@@ -33,12 +28,7 @@ const createColumn = () => {
 }
 const closeModal = () => {
     setColumn('')
-    setCategory({
-        name: '',
-        step: '',
-        start: undefined,
-        end: undefined,
-    })
+    setCategory('')
     close()
 }
 
@@ -64,33 +54,8 @@ return (
                     name='category'
                     type='text'
                     value={category.name}
-                    onChange={(e)=>setCategory({...category, name: e.target.value})}
-                />
-                <Light className={styles.createCategoryInput} size='14'>Шаг</Light>
-                <Input 
-                    className={styles.createCategoryInput}
-                    name='category'
-                    type='number'
-                    value={category.step}
-                    onChange={(e)=>setCategory({...category, step: Number(e.target.value)})}
-                />
-                <Light className={styles.createCategoryInput} size='14'>Начало</Light>
-                <Input 
-                    className={styles.createCategoryInput}
-                    name='category'
-                    type='date'
-                    value={category.start}
-                    onChange={(e)=>setCategory({...category, start: e.target.value})}
-                />
-                <Light className={styles.createCategoryInput} size='14'>Конец</Light>
-                <Input
-                    className={styles.createCategoryInput}  
-                    name='category'
-                    type='date'
-                    value={category.end}
-                    onChange={(e)=>setCategory({...category, end: e.target.value})}
-                />
-             
+                    onChange={(e)=>setCategory(e.target.value)}
+                />             
             </div>
             <div style={{display:type==='column'?'block':'none'}}>
                 <Light className={styles.createCategoryInput} size='14'>Название</Light>
