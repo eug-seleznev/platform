@@ -26,6 +26,9 @@
     overflow-y:scroll;
     overflow-x:hidden;
 } 
+.comments__name:hover {
+    background-color: #eee
+}
 .comments__array {
     margin-top:10px;
     margin-left:25px;

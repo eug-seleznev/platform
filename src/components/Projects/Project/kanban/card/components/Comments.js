@@ -7,8 +7,10 @@ import { url } from "../../../../../utils/axios"
 import style from './cardOpen.module.css'
 import getDateWithTime from "./getDateWithTime"
 import InputTrigger from 'react-input-trigger';
-import { allUsers } from "../../../../../../redux/actions/user"
+import { allUsers, userTableSearch } from "../../../../../../redux/actions/user"
 
+
+let state;
 const Comments =({id})=>{
     const [comment,setComment] =useState('')
     const comments = useSelector(state=>state.projects.comments)
@@ -17,7 +19,8 @@ const Comments =({id})=>{
         top:null,
         left:null,
         show:false,
-        text:''
+        text:'',
+        startPosition:0
     })
     const dispatch = useDispatch()
     useEffect(() => {
@@ -25,23 +28,43 @@ const Comments =({id})=>{
         let query = 'name'
         dispatch(allUsers({query, sortOrder}))
     }, [])
-    useEffect(() => {
-      console.log(users)
-    }, [users])
+  
     const createComment = (e) =>{
         e.preventDefault()
         dispatch(addComment(comment,id))
         setComment('')
     }
-    const handleInput =(meta)=>{
-        console.log(meta.text)
-        dispatch(allUsers({query, sortOrder}))
+    const takeUser =(user)=>{
+        return new Promise((resolve) =>{
+            const newText = `${comment.slice(0, dropdown.startPosition + 1)}${user+" "}${comment.slice(dropdown.startPosition + user.length, comment.length)}`
+            setComment(newText) 
+            setDropdown({
+                show: false,
+                left: null,
+                top: null,
+                text: null,
+            });
+            resolve()
+      })
     }
+
+            
+
+
+    const handleInput =(meta)=>{
+        // console.log(meta)
+        let field = 'name' 
+        let value = meta.text
+        dispatch(userTableSearch({value, field}))
+        
+    }
+
     const toggle = (metaInformation)=> {
-        console.log(metaInformation)
+        // console.log(metaInformation)
         const { hookType, cursor } = metaInformation;
         if (hookType === 'start') {
             setDropdown({
+                startPosition:cursor.selectionStart,
                 show: true,
                 left: cursor.left,
                 top: cursor.top + 50
@@ -82,9 +105,10 @@ const Comments =({id})=>{
                             shiftKey: true,
                         }}
                         onStart={(metaData) => toggle(metaData)}
-                        onType={(metaData) => {handleInput(metaData)}}
+                        onType={(metaData) => handleInput(metaData)}
                         onCancel={(metaData) => toggle(metaData)}
                         className={style.comments__area}
+                        endTrigger = {endTriggerHandler => state = endTriggerHandler}
                     >
                     <textarea 
                         className={style.comments__textarea}
@@ -111,7 +135,7 @@ const Comments =({id})=>{
                         >
                             {
                             users.map((user,i)=>{
-                            return(<Bold  style={{cursor:'pointer'}} key={i}>{user.fullname}</Bold>)
+                             return(<Bold className={style.comments__name}  style={{cursor:'pointer'}}onClick={()=>takeUser(user.fullname).then(state())} key={i}>{user.fullname}</Bold>)
                         })
 
                         }
