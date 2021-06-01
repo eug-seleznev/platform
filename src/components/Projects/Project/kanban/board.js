@@ -126,7 +126,7 @@ const Board = ({match, history}) => {
             </div>
 
             <div ref={boardDiv} className={styles.board} onMouseDown={(e)=>onMoveStart(e)} onMouseMove={(e)=>onMove(e)} onMouseUp={(e)=>onMoveEnd(e)} onScroll={(e)=>titleScroll(e)}>
-              <div ref={boardDivChild} style={{width: 'fit-content' }}>
+              <div ref={boardDivChild} style={{width: 'fit-content',minWidth:"100%" }}>
                 {board && board.columns && board?.categories.map((el,i)=>{
                     return(
                         <KanbanSection history={history} key={i} main={i===0? true : false} board={board} category={el} />
