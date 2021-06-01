@@ -16,7 +16,7 @@ import { url } from "../../../../utils/axios";
 
 
 
-const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,history}) => {
+const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,history, notDraggable}) => {
     const [cardOpen, setCardOpen] = useState(false)
     const [chosenCard, setChosenCard] = useState(false)
     const [visibleName, setVisibleName] = useState(false)
@@ -80,7 +80,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
     return (
       <>
       <div onDragOver={addGhost} className={styles.card}
-        draggable
+        draggable={!notDraggable? true : false}
         onDragStart={(e)=>dragStart(e)}
         style={{border:
           info?.emergency==='Регулярная'?'1px solid #36B65A':
@@ -135,10 +135,10 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
                 style={{marginRight:'5px'}}>
                   { info.type==='Одна задача'?'Задача':info.type}
                 </Light>
-              <Light size='12' style={{display:info.type==='Одна задача'?'none':'block'}} >{info?.tasks.filter(task=>task.taskStatus).length}/{info?.tasks.length}</Light>
+              <Light size='12' style={{display:info.type==='Одна задача'?'none':'block'}} >{info&& info.tasks &&info?.tasks.filter(task=>task.taskStatus).length}/{info&& info.tasks &&info?.tasks.length}</Light>
             </div>
             <div style={{display:'flex',alignItems:'center',flexWrap:'nowrap',marginTop:'5px'}}>
-              {info?.tags.map((tag,i)=>{
+              {info&& info.tags&& info?.tags.map((tag,i)=>{
                 return(
                   <Thin key={i} size='12' style={{marginRight:'10px'}} >#{tag}</Thin>
                 )

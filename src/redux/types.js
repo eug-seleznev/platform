@@ -29,6 +29,7 @@ export const DELETE_CARD = 'DELETE_CARD'
 export const CHOSEN_BOARD = 'CHOSEN_BOARD'
 export const REMOVE_TAG_CARD = 'REMOVE_TAG_CARD'
 export const LOAD_BOARD = 'LOAD_BOARD'
+export const UNEXPIRED = 'UNEXPIRED'
 //USERES
 export const ALL_USERS = 'users';
 export const GET_EMPLOYE = 'get_users';
