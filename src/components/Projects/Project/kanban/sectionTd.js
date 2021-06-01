@@ -91,7 +91,7 @@ const dragFunction = (e, index) => {
       }
     
 
-if(column==='Потрачено'){
+if(column==='Потрачено'||column==='Просрочено'){
     return(
         <ExpiredColumn category={category} timelineCards={timelineCards} column={column} boardId={boardId} timelineId={timelineId} history={history} />
     )
