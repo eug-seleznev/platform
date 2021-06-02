@@ -28,6 +28,9 @@ const BoardColumnsTitle = ({user, board, Path, deleteColumn}) => {
                         </div>
                       )
                     })}
+                    <div className={styles.titleTd} style={{width: '250px'}}>
+                      <div style={{width: '90%', overflow: 'hidden'}}>Просрочено</div>
+                    </div>
                     <span/>
                     </div>
               </div>
