@@ -29,14 +29,17 @@ const KanbanSection = ({main, board, category, history}) => {
       const now = Date.now()
       const nowTimelineIndex = category.timeline.findIndex(el=>{
         const timeDate = new Date (el.start)
-        const lol = timeDate.getTime()<now
+        const lol = timeDate.getTime()>now
+      // console.log('lol',now,  timeDate.getTime())
+
         return lol
       })
-      nowTimelineIndex>=0 && setTimelineIndex(nowTimelineIndex)
+      nowTimelineIndex>0 && setTimelineIndex(nowTimelineIndex-1)
+      // console.log('nowTimelineIndex',nowTimelineIndex)
     },[])
 
 useEffect(()=>{
-  // console.log('timelineIndex',timelineIndex)
+  console.log('timelineIndex',timelineIndex)
 },[timelineIndex])
 
     useEffect(()=>{
