@@ -24,7 +24,6 @@ const KanbanSection = ({main, board, category, history}) => {
     const [timelines, setTimelines] = useState(0)
     const [openTimlineModal, setOpenTimlineModal] = useState(false)
       
-    console.log('board',board)
 
     useEffect(()=>{
       const now = Date.now()
@@ -38,10 +37,6 @@ const KanbanSection = ({main, board, category, history}) => {
       nowTimelineIndex>0 && setTimelineIndex(nowTimelineIndex-1)
       // console.log('nowTimelineIndex',nowTimelineIndex)
     },[])
-
-useEffect(()=>{
-  console.log('timelineIndex',timelineIndex)
-},[timelineIndex])
 
     useEffect(()=>{
       const nowLine = category && category.timeline.length>0 && category.timeline[timelineIndex].cards.map((el,i)=>{

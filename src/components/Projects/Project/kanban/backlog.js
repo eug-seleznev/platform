@@ -45,7 +45,7 @@ const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId, history
     const dragOver = (e) => {
         e.preventDefault()
         // refBG.current.style.backgroundColor = 'rgb(227, 225, 233)'
-        setAddGhost(true)
+        setAddGhost('ghost last')
     }
     const dragOut = (e) => {
         e.preventDefault()
@@ -98,6 +98,7 @@ const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId, history
                 </div>
             
             <div className={styles.backLogCards} >
+                <div onDragOver={e=>e.stopPropagation()} >
                 {backlog && backlog?.map((card,i)=>{
 
                     return(
@@ -112,8 +113,9 @@ const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId, history
                 })
 
                 }
+                </div>
                <CSSTransition
-                    in={addGhost}
+                    in={addGhost==='ghost last'}
                     timeout={200}
                     classNames={{
                     enter: styles.ghostEnter,

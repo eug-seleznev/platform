@@ -43,7 +43,7 @@ const dragFunction = (e, index) => {
             newPlaceId : timelineId,
             column: column,
             board_id: boardId,
-            index: index? index : (timelineCards.length)
+            index: index
         }))
 
     } catch (e) {
@@ -54,7 +54,7 @@ const dragFunction = (e, index) => {
 
     const dragOver = (e) => {
         e.preventDefault()
-        refBG.current.style.backgroundColor = 'rgb(227, 225, 233)'
+        refBG.current.style.backgroundColor = 'rgb(248, 248, 250)'
         setAddGhost('ghost last')
     }
     const dragOut = (e) => {
@@ -67,7 +67,7 @@ const dragFunction = (e, index) => {
         e.stopPropagation()
         // console.log('he')
 
-        refBG.current.style.backgroundColor = 'rgb(227, 225, 233)'
+        refBG.current.style.backgroundColor = 'rgb(248, 248, 250)'
         setAddGhost(`ghost${i}`)
     }
     const cardDragOut = (e) => {
@@ -80,10 +80,11 @@ const dragFunction = (e, index) => {
         e.preventDefault()
         refBG.current.style.backgroundColor='white'
         setAddGhost(false)
-        dragFunction(e)
+        dragFunction(e, timelineCards.length)
     }
     const dropToCard = (e, index) => {
         e.stopPropagation()
+        console.log('index',index)
         dragFunction(e, index)
         setAddGhost(false)
         refBG.current.style.backgroundColor='white'
