@@ -31,10 +31,10 @@ const KanbanSectionTd = ({category, timelineCards, column, boardId, timelineId,h
     const refBG = useRef(null)
 // console.log('category',category)
 const dragFunction = (e, index) => {
-    console.log('index',index)
+    // console.log('index',index)
     try {
         const data = JSON.parse(e.dataTransfer.getData('text'));
-        console.log('dataaaaaaaaaaaa',data)
+        // console.log('dataaaaaaaaaaaa',data)
         dispatch(moveCard({
             cardId:data.cardId, 
             from: data.backlog ? 'backlog' : 'timeline',
@@ -121,7 +121,7 @@ if(column==='Потрачено'||column==='Просрочено'){
 
                     <CSSTransition
                         in={addGhost==='ghost last'}
-                        timeout={200}
+                        timeout={20}
                         classNames={{
                             enter: styles.ghostEnter,
                             enterActive: styles.ghostEnterActive,
