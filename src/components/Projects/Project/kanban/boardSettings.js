@@ -18,11 +18,13 @@ const [category, setCategory] = useState('')
 const [column, setColumn] = useState('')
 
 
-const createCategory = () => {
+const createCategory = (e) => {
+    e.preventDefault()
     dispatch(addNewCategory(boardId,category))
     close()
 }
-const createColumn = () => {
+const createColumn = (e) => {
+    e.preventDefault()
     dispatch(addNewColumn(boardId,column))
     close()
 }
@@ -69,8 +71,8 @@ return (
             </div>
             <div style={{display:'flex',justifyContent:'space-between', marginTop:'15px'}}>
                 <CancelButton fontSize='13px'padd='5px' grey onClick={()=>closeModal()}>Закрыть</CancelButton>
-                <Button onClick={()=>createColumn()} style={{display:type==='column'?'block':'none'}}>Создать колонку</Button> 
-                <Button onClick={()=>createCategory()} style={{display:type==='category'?'block':'none'}}>Создать категорию</Button> 
+                <Button onClick={(e)=>createColumn(e)} style={{display:type==='column'?'block':'none'}}>Создать колонку</Button> 
+                <Button onClick={(e)=>createCategory(e)} style={{display:type==='category'?'block':'none'}}>Создать категорию</Button> 
             </div>
             
             
