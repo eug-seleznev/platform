@@ -108,7 +108,7 @@ const Comments =({id})=>{
                         </Light>
                     </div>
                 )
-            }).reverse()}
+            })}
             </div> 
                 
                  <form className={style.comments__button__area} onSubmit={createComment}>

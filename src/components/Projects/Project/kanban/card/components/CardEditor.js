@@ -55,7 +55,6 @@ const CardEditor = ({info, setDeleteWindow, chosenCard}) => {
     if(value!=='') {
       dispatch(addTagCard(info._id, value))
     }
-    
    }
    const delTag =(tag)=>{
     dispatch(removeTagCard(info._id, tag))
@@ -78,12 +77,7 @@ const CardEditor = ({info, setDeleteWindow, chosenCard}) => {
   //   console.log(deadline)
   // },[deadline])
   const changeVal =(e)=>{
-
-
-    
-      setDeadline({...deadline, val: e.target.value})
-   
-    
+    setDeadline({...deadline, val: e.target.value})  
   }
   const changeDeadline =()=>{
     let val = new Date (deadline.val)

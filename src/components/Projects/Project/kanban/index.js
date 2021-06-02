@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styles from './kanban.module.css'
-import { addBoardToChosen, addNewBoard} from "../../../../redux/actions/kanban";
+import { addNewBoard} from "../../../../redux/actions/kanban";
 import { Button,} from "../../../../Styles/buttons";
 import { Input } from "../../../../Styles/Forms";
 import { Path } from "../../../Layout/header"
@@ -12,12 +12,8 @@ import BoardTitleIndex from "./boardTitleIndex";
 const Kanbans = ({history}) => {
   const dispatch = useDispatch ()
   const project = useSelector(state=>state.projects.project)
-  const user = useSelector(state=>state.auth.user)
   const [title, setTitle] = useState('')
 
-  // useEffect(()=>{
-  //   console.log (user)
-  // },[])
   const handleRedirect = (name) => {
     history.push(`/projects/${project.crypt}/board/${name}`)
   }
@@ -25,11 +21,7 @@ const Kanbans = ({history}) => {
     dispatch(addNewBoard(project.crypt, title))
     setTitle('')
   }
-  const chosenBoard =(id)=>{
-    console.log(id)
-    
-    dispatch(addBoardToChosen(id))
-  }
+  
     return (
       <div className={styles.start}>
         <div>
@@ -57,7 +49,7 @@ const Kanbans = ({history}) => {
               </div>
               {project && project.boards.map((el,i)=>{
                   return (
-                    <BoardTitleIndex el={el} key={i} chosenBoard={chosenBoard} handleRedirect={handleRedirect}></BoardTitleIndex>
+                    <BoardTitleIndex el={el} key={i} handleRedirect={handleRedirect}></BoardTitleIndex>
                       
                     
                   )

@@ -13,14 +13,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 
-const CardOpen = ({close,setDeleteWindow,chosenCard}) => { 
+const CardOpen = ({close,setDeleteWindow,chosenCard,boardId}) => { 
 
     
     const info = useSelector(state=>state.projects.card)
     const project = useSelector(state=>state.projects.project)
    
     useEffect(()=>{
-      console.log(chosenCard)
+      console.log(boardId)
     },[])
 
     return (
