@@ -1,5 +1,5 @@
 import { innerBackend, } from "../../components/utils/axios";
-import {LOAD_BOARD,REMOVE_TAG_CARD,CHOSEN_BOARD,ADD_TAG_CARD,DELETE_CARD,ADD_CARD_TO_CHOSEN,CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD, COMMON_KANBAN_RELOAD, ADD_USER_TO_TASK_NEW, UNEXPIRED} from "../types";
+import {DELETE_CARD_BACKLOG,CHANGE_CARD_REGULAR,LOAD_BOARD,REMOVE_TAG_CARD,CHOSEN_BOARD,ADD_TAG_CARD,DELETE_CARD,ADD_CARD_TO_CHOSEN,CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD, COMMON_KANBAN_RELOAD, ADD_USER_TO_TASK_NEW, UNEXPIRED} from "../types";
 
 
 
@@ -65,11 +65,14 @@ export const loadBoard = (id) => async dispatch  => {
 }
 
 export const cardDelete = (id,crypt,boardId) => async dispatch  => {
-    console.log(id, crypt)
+    
+    let type = boardId!==undefined?DELETE_CARD:DELETE_CARD_BACKLOG
+    let bid = boardId?'&boardid'+boardId:''
+    console.log(id, crypt,type, boardId)
     try {
-        const res = await innerBackend.delete(`/kanban/cards/delete/single?cardid=${id}&crypt=${crypt}&boardid=${boardId}`)
+        const res = await innerBackend.delete(`/kanban/cards/delete/single?cardid=${id}&crypt=${crypt+bid}`)
         dispatch({
-            type: DELETE_CARD,
+            type: type,
             payload: res.data
         })
     }
@@ -135,11 +138,12 @@ export const addTaskCard = (text,id) => async dispatch  => {
 export const changeCardField = (val, field, id) => async dispatch  => {
     let body = {}
     body[field] = val
-    // console.log(body)
+    console.log(body)
     let type = field==='title'?
         CHANGE_CARD_TITLE:
         field==='description'?
-        CHANGE_CARD_DESCRIPTION:''
+        CHANGE_CARD_DESCRIPTION:
+        field==='regular'?CHANGE_CARD_REGULAR:''
     try {
         const res = await innerBackend.put(`/kanban/cards/fields/edit/${id}`,body)
         dispatch({

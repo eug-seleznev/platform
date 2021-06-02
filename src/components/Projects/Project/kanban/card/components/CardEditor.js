@@ -6,7 +6,7 @@ import style from "../../../../../../Styles/modules/components/Project/newsprint
 import TagSearch from "../../../../components/tagSearch";
 import Tag from "../../../../components/OneProject/tag";
 import cardOpen from "./cardOpen.module.css"
-import {addCardToChosen, addTagCard, changeCardField, removeTagCard}  from "../../../../../../redux/actions/kanban"
+import {addCardToChosen, addTagCard, changeCardField, finishExpired, removeTagCard}  from "../../../../../../redux/actions/kanban"
 import { Path } from "../../../../../Layout/header";
 
 import { CSSTransition } from "react-transition-group";
@@ -20,7 +20,7 @@ import getDate from "../../../../getDate";
 
 
 
-const CardEditor = ({info, setDeleteWindow, chosenCard}) => {
+const CardEditor = ({info, setDeleteWindow, chosenCard,boardId}) => {
   const dispatch= useDispatch()
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
@@ -39,7 +39,7 @@ const CardEditor = ({info, setDeleteWindow, chosenCard}) => {
       setTitle(info.title)
       setDescription(info.description)
     }
-    
+    console.log(info)
   },[])
   const onSubmit =(e)=>{
     e.preventDefault()
@@ -78,6 +78,17 @@ const CardEditor = ({info, setDeleteWindow, chosenCard}) => {
   // },[deadline])
   const changeVal =(e)=>{
     setDeadline({...deadline, val: e.target.value})  
+  }
+  const makeRegular =(e)=>{
+    console.log(e.target.checked)
+
+    let val = e.target.checked
+    let field = 'regular'
+    let id = info._id
+    dispatch(changeCardField(val, field, id))
+  }
+  const finish =()=>{
+    dispatch(finishExpired(info.id, boardId))
   }
   const changeDeadline =()=>{
     let val = new Date (deadline.val)
@@ -158,10 +169,17 @@ const CardEditor = ({info, setDeleteWindow, chosenCard}) => {
                           </StyledIn>
                           <Select name='emergency'onChange={(e)=>{changeSomeField(e)}} style={{ cursor:'pointer',width:'110px',marginBottom:'50px',height:'35px', marginTop:'1px',marginLeft:'30px'}} defaultValue={info.emergency}>
                             <option value='Обычная'>Обычная</option>
-                            <option value='Регулярная'>Регулярная</option>
+                            {/* <option value='Регулярная'>Регулярная</option> */}
                             <option value='Срочная'>Срочная</option>
                           </Select>
                       </div>
+                      <div style={{display:'flex',height:'25px',justifyContent:'space-between',alignItems:'center'}}>
+                            <StyledIn style={{textDecoration:'none', cursor:'default'}}>
+                                Сделать регулярным
+                            </StyledIn>
+                            <input style={{width:'25px',height:'25px' ,cursor:'pointer',marginTop:'10px'}}type='checkbox'defaultChecked={info?.regular} onChange={(e)=>{makeRegular(e)}} >
+                            </input>
+                        </div>
                       <div style={{display:'flex',height:'25px',justifyContent:'space-between',alignItems:'center'}}>
                         <StyledIn style={{textDecoration:'none', cursor:'default'}}>
                               {chosen?'Убрать из избранного':'Добавить в избранное'}
@@ -169,9 +187,15 @@ const CardEditor = ({info, setDeleteWindow, chosenCard}) => {
                         <img  onClick={toChosen} src={Path+'star.png'} style={{width:'25px',height:'25px' ,cursor:'pointer',marginTop:'10px', backgroundColor:chosen?'#FFAF30':'rgba(0,0,0,0)'}}>
                           </img>
                       </div>
-                   
                       <StyledIn
-                            style={{display:'flex',height:'24px'}}
+                            style={{display:boardId?'flex':'none',height:'24px'}}
+                            onClick={()=>finish()}
+                          
+                        >
+                          Готово
+                        </StyledIn>
+                      <StyledIn
+                            style={{display:'flex',height:'24px',marginTop:'0px'}}
                             onClick={()=>setDeleteWindow({
                             status:true,
                             id: info._id
@@ -179,7 +203,8 @@ const CardEditor = ({info, setDeleteWindow, chosenCard}) => {
                         >
                           Удалить карточку
                         </StyledIn>
-                     
+                        
+                        
             </div>
           </CSSTransition>
         </div>
