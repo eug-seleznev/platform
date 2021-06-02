@@ -116,11 +116,11 @@ const Board = ({match, history}) => {
             </div>
             
             
-            <div ref={boardTitle} style={{width:'87vw', overflow:'hidden', scrollbarWidth: '0px', scrollbarColor: "transparent", }}>
+            <div ref={boardTitle} style={{ width: sideOpen? '87vw' : '96vw', overflow:'hidden', scrollbarWidth: '0px', scrollbarColor: "transparent", }}>
               <BoardColumnsTitle Path={Path} board={board} user={user} deleteColumn={(el)=>deleteColumnHandler(el)} />
             </div>
 
-            <div ref={boardDiv} className={styles.board} onMouseDown={(e)=>onMoveStart(e)} onMouseMove={(e)=>onMove(e)} onMouseUp={(e)=>onMoveEnd(e)} onScroll={(e)=>titleScroll(e)}>
+            <div ref={boardDiv} className={styles.board} style={{ width: sideOpen? '88vw' : '97vw' }} onMouseDown={(e)=>onMoveStart(e)} onMouseMove={(e)=>onMove(e)} onMouseUp={(e)=>onMoveEnd(e)} onScroll={(e)=>titleScroll(e)}>
               <div ref={boardDivChild} style={{width: 'fit-content',minWidth:"100%" }}>
                 {board && board.columns && board?.categories.map((el,i)=>{
                     return(
