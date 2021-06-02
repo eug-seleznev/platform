@@ -24,6 +24,7 @@ const KanbanSection = ({main, board, category, history}) => {
     const [timelines, setTimelines] = useState(0)
     const [openTimlineModal, setOpenTimlineModal] = useState(false)
       
+    console.log('board',board)
 
     useEffect(()=>{
       const now = Date.now()
@@ -75,7 +76,7 @@ useEffect(()=>{
           { openTimlineModal && <ModalTimeline id={category._id} setModal={setOpenTimlineModal} boardId={board._id} timelineId={category.timeline[timelineIndex]._id} /> }
           
           <div className={styles.title} onClick={()=>setOpen(!open)} style={{backgroundColor: main? 'white' : '#FCFCFC',minWidth: '100%',}}>
-             <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-2},250px) minmax(50px,1fr)`,minWidth: '100%', }}>
+             <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-1},250px) minmax(50px,1fr)`,minWidth: '100%', }}>
                  <span>
                    <img src={Path+'trash-sharp.png'} style={{width:'20px', height: '20px', marginLeft: '20px',marginTop:'9px'}}  title='удалить' onClick={()=>deleteCategoryHandler()}/>
                  </span>
@@ -109,7 +110,7 @@ useEffect(()=>{
 
           
         
-          <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-2},250px) minmax(50px,1fr)`,minWidth: '100%',}}>
+          <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-1},250px) minmax(50px,1fr)`,minWidth: '100%',}}>
             <span/>
             {board.columns.map((el,i)=>{
               return(
