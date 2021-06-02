@@ -162,7 +162,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
               
             </div>
           </div>
-          <CardOpen chosenCard={chosenCard} isOpen={cardOpen} onClick={deleteCard} setDeleteWindow={setDeleteWindow} data={'task data'} close={close} />
+          <CardOpen boardId={boardId} chosenCard={chosenCard} isOpen={cardOpen} onClick={deleteCard} setDeleteWindow={setDeleteWindow} data={'task data'} close={close} />
         </div>
         
       }

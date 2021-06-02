@@ -94,12 +94,12 @@ useEffect(()=>{
                       
                       {category.timeline[timelineIndex].start && 
                       <div style={{display: "flex", marginLeft: '20px', alignItems: 'center', border: '1px solid lightgrey', borderRadius: '13px', padding: '0 10px 0 10px'}} onClick={e=>e.stopPropagation()}>
-                        {timelineIndex>0 && <img src={Path+'openicon.png'} style={{transform: 'rotate(-90deg)', width: '10px', height: '10px', marginRight: '15px'}} onClick={(e)=>prevTimeline(e)}/>}
+                        <div style={{minWidth:'30px'}}>{timelineIndex>0 && <img src={Path+'openicon.png'} style={{transform: 'rotate(-90deg)',cursor:'pointer', width: '10px', height: '10px', marginRight: '15px'}} onClick={(e)=>prevTimeline(e)}/>}</div>
                         <TimelineDates timeline={category.timeline[timelineIndex]} />
-                        {timelineIndex==category.timeline.length-1?
+                        <div style={{minWidth:'30px'}}>{timelineIndex==category.timeline.length-1?
                         <img src={Path+'plus1.png'} style={{width: '10px', height: '10px', marginLeft: '15px'}} onClick={(e)=>nextTimeline(e)}/>
                         :
-                        <img src={Path+'openicon.png'} style={{transform: 'rotate(90deg)', width: '10px', height: '10px', marginLeft: '15px'}} onClick={(e)=>nextTimeline(e)}/>}
+                        <img src={Path+'openicon.png'} style={{transform: 'rotate(90deg)',cursor:'pointer', width: '10px', height: '10px', marginLeft: '15px'}} onClick={(e)=>nextTimeline(e)}/>}</div>
                       </div>}
                  </div>
                  <span/>
@@ -145,6 +145,6 @@ const TimelineDates = ({timeline}) => {
     return <div></div>
   }
   return(
-    <div> {start} {monthStart!==monthEnd && monthStart} - {end+' '+monthEnd}</div>
+    <div style={{minWidth:'105px',textAlign:"center"}}> {start} {monthStart!==monthEnd && monthStart} - {end+' '+monthEnd}</div>
   )
 }

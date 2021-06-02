@@ -27,8 +27,7 @@ const Header = ({history, crypt}) => {
       favProjects && favProjects
       .filter(fav => fav._id===project._id)
       .map(()=>setStatus(true))
-
-},  [])
+    },  [])
     const chosenProj = () => {
 			setStatus(!status)
 			dispatch(addProjToChosen(project._id));
