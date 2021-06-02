@@ -3,16 +3,11 @@ import { useDispatch, useSelector } from "react-redux"
 
 
 
-import sprintCss from '../../../../Styles/modules/components/sprintCard.module.css'
 import styles from './kanban.module.css'
-import { Select, NEW_TABLE, NEW_TBODY, NEW_THEAD, NEW_TD, NEW_TH, NEW_TR } from '../../../../Styles/tables';
-import { Bold, Light } from "../../../../Styles/typography";
-import Tag from "../../components/OneProject/tag";
-import getDate from "../../getDate";
-import KanbanCard from "./card/card";
+import { Bold, } from "../../../../Styles/typography";
 import KanbanSection from "./section";
 import Backlog from "./backlog";
-import { addNewCard, addNewCategory, addNewColumn, loadBoard,deleteColumn } from "../../../../redux/actions/kanban";
+import {  loadBoard,deleteColumn } from "../../../../redux/actions/kanban";
 import CreateForm from "./createForm";
 
 import { Path } from "../../../Layout/header";
@@ -96,7 +91,7 @@ const Board = ({match, history}) => {
 
     return (
       <div className={styles.main} style={{gridTemplateColumns: sideOpen? '240px 1fr' : '35px 1fr'}}>
-        <div className={styles.backLog} >
+        <div className={styles.backLog} onClick={()=>setSideOpen(!sideOpen)}>
             <Backlog history={history} backlog={backlog} setCreateOpen={setCreateOpen} sideOpen={sideOpen} projectCrypt={project.crypt} boardId={board._id}/>
             <div className={styles.verticalText} style={{display: sideOpen? 'none' : 'block'}}>
               Все задачи

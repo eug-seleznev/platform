@@ -181,10 +181,10 @@ export const addNewCategory = (board_id, formData) => async dispatch  => {
     //     start:date,
     //     end:date}
     const body = {
-        name: formData, board_id: board_id}
+        name: formData}
     console.log('formData',body)
     try {
-        const res = await innerBackend.post(`/kanban/categories/new/${board_id}`,formData )
+        const res = await innerBackend.post(`/kanban/categories/new/${board_id}`,body )
             console.log('formData',res.data)
 
         dispatch({

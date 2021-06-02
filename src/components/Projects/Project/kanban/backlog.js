@@ -12,7 +12,9 @@ import { Regular } from '../../../../Styles/typography'
 
 const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId, history})=>{
     const dispatch = useDispatch()
-    const createFromBacklog = ()=>{
+    const createFromBacklog = (e)=>{
+        e.stopPropagation()
+
         setCreateOpen ({
             status:true,
             place:'backlog'

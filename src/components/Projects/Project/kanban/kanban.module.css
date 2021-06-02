@@ -68,7 +68,7 @@
     
     background-color: #3F4659;
     display: flex;
-    width: 236px;
+    /* width: 236px; */
     
     justify-content: space-between;
     transition: all 3s ease-in-out;
