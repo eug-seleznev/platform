@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addComment } from "../../../../../../redux/actions/kanban"
 import { ButtonTextLight } from "../../../../../../Styles/buttons"
-import { Bold, Light } from "../../../../../../Styles/typography"
+import { Bold, Light, Regular } from "../../../../../../Styles/typography"
 import { url } from "../../../../../utils/axios"
 import style from './cardOpen.module.css'
 import getDateWithTime from "./getDateWithTime"
@@ -10,9 +10,11 @@ import InputTrigger from 'react-input-trigger';
 import { allUsers, userTableSearch } from "../../../../../../redux/actions/user"
 
 
-let state;
+let cancel;
 const Comments =({id})=>{
+    const [link,setLink] =useState('')
     const [comment,setComment] =useState('')
+    const [mentions,setMentions] =useState([])
     const comments = useSelector(state=>state.projects.comments)
     const users = useSelector(state => state.users.users)
     const [dropdown, setDropdown] =useState({
@@ -22,21 +24,31 @@ const Comments =({id})=>{
         text:'',
         startPosition:0
     })
+    
     const dispatch = useDispatch()
     useEffect(() => {
         let sortOrder = true
         let query = 'name'
         dispatch(allUsers({query, sortOrder}))
+        setLink(window.location.href)
     }, [])
-  
+    useEffect(() => {
+        console.log(mentions)
+    }, [mentions])
+    useEffect(() => {
+        console.log(link)
+    }, [link])
     const createComment = (e) =>{
         e.preventDefault()
-        dispatch(addComment(comment,id))
+        dispatch(addComment(comment,id,mentions, link))
         setComment('')
+        setMentions([])
     }
     const takeUser =(user)=>{
+        setMentions(mentions => [...mentions, user._id])
+        console.log(user)
         return new Promise((resolve) =>{
-            const newText = `${comment.slice(0, dropdown.startPosition + 1)}${user+" "}${comment.slice(dropdown.startPosition + user.length, comment.length)}`
+            const newText = `${comment.slice(0, dropdown.startPosition + 1)}${user.fullname+" "}${comment.slice(dropdown.startPosition + user.fullname.length, comment.length)}`
             setComment(newText) 
             setDropdown({
                 show: false,
@@ -91,8 +103,9 @@ const Comments =({id})=>{
                         <Bold size='14' color='#878787'className={style.comments__date}>{comm.author?.name} {comm.author?.lastname&&comm.author?.lastname?.charAt(0)}.</Bold>
                         <Light size='14' color='#878787'className={style.comments__date}>{getDateWithTime(comm.date)}</Light>
                         <Light size='14' color={comm.text.includes('Дедлайн')&&comm?.type==='history'?'#C64242':
-                        comm.text.includes('> Готово')&&comm?.type==='history'?'#71D186':comm?.type==='history'?'#878787':
-                        'black'}className={style.comments__text}>{comm.text}</Light>
+                            comm.text.includes('> Готово')&&comm?.type==='history'?'#71D186':comm?.type==='history'?'#878787':
+                            'black'}className={style.comments__text}>{comm.text}
+                        </Light>
                     </div>
                 )
             }).reverse()}
@@ -108,14 +121,15 @@ const Comments =({id})=>{
                         onType={(metaData) => handleInput(metaData)}
                         onCancel={(metaData) => toggle(metaData)}
                         className={style.comments__area}
-                        endTrigger = {endTriggerHandler => state = endTriggerHandler}
+                        endTrigger = {endTriggerHandler => cancel=endTriggerHandler }
                     >
                     <textarea 
                         className={style.comments__textarea}
                         value={comment} 
+                        spellcheck="false"
                         onKeyPress={(e)=>e.key==='Enter'?createComment(e):''}
                         onChange={(e)=>{setComment(e.target.value)}}
-                        placeholder='Добавить комментарий, @упомянуть человека'/>
+                        placeholder='Добавить комментарий, чтобы упомянуть человека нажимте @ и выберите нужного из списка'/>
                     </InputTrigger>
                     <div className={style.comments__dropdown}
                         style={{
@@ -135,7 +149,7 @@ const Comments =({id})=>{
                         >
                             {
                             users.map((user,i)=>{
-                             return(<Bold className={style.comments__name}  style={{cursor:'pointer'}}onClick={()=>takeUser(user.fullname).then(state())} key={i}>{user.fullname}</Bold>)
+                             return(<Regular className={style.comments__name}  style={{cursor:'pointer'}}onClick={()=>takeUser(user).then(cancel())} key={i}>{user.fullname}</Regular>)
                         })
 
                         }

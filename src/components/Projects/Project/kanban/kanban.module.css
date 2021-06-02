@@ -86,7 +86,7 @@
         display:flex;
         justify-content: flex-end;
         width: 90%;
-        
+        transform: translateX(6px);
     }
     .createWindow {
         position: fixed;

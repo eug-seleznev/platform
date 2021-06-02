@@ -1,14 +1,11 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styles from './kanban.module.css'
-import { addBoardToChosen, addNewBoard, addNewCard } from "../../../../redux/actions/kanban";
-import { Button, ButtonText, ButtonTextLight } from "../../../../Styles/buttons";
+import { addBoardToChosen, addNewBoard} from "../../../../redux/actions/kanban";
+import { Button,} from "../../../../Styles/buttons";
 import { Input } from "../../../../Styles/Forms";
-import modelsCss from '../../../../Styles/modules/components/Project/models.module.css'
-import { NEW_TABLE, NEW_TBODY, NEW_TD, NEW_TR } from "../../../../Styles/tables";
-import { Bold, Light } from "../../../../Styles/typography";
-import { Path } from "../../../Layout/header";
-
+import { Path } from "../../../Layout/header"
+import BoardTitleIndex from "./boardTitleIndex";
 
 
 
@@ -17,6 +14,7 @@ const Kanbans = ({history}) => {
   const project = useSelector(state=>state.projects.project)
   const user = useSelector(state=>state.auth.user)
   const [title, setTitle] = useState('')
+
   // useEffect(()=>{
   //   console.log (user)
   // },[])
@@ -29,6 +27,7 @@ const Kanbans = ({history}) => {
   }
   const chosenBoard =(id)=>{
     console.log(id)
+    
     dispatch(addBoardToChosen(id))
   }
     return (
@@ -58,12 +57,7 @@ const Kanbans = ({history}) => {
               </div>
               {project && project.boards.map((el,i)=>{
                   return (
-                    <div style={{display:'flex'}}>
-                      <div key={i} className={styles.main__board__item} onClick={()=>handleRedirect(el.name)}>
-                        {el.name}
-                      </div>
-                      <img onClick={()=>{chosenBoard(el._id)}} style={{cursor:'pointer',width:'30px', height:'30px',transform:'translate(10px, 15px)'}} src={Path+'star.png'}></img>
-                    </div>
+                    <BoardTitleIndex el={el} key={i} chosenBoard={chosenBoard} handleRedirect={handleRedirect}></BoardTitleIndex>
                       
                     
                   )

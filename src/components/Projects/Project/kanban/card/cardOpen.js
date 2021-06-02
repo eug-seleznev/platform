@@ -19,9 +19,9 @@ const CardOpen = ({close,setDeleteWindow,chosenCard}) => {
     const info = useSelector(state=>state.projects.card)
     const project = useSelector(state=>state.projects.project)
    
-    // useEffect(()=>{
-    //   console.log(favCards)
-    // },[])
+    useEffect(()=>{
+      console.log(chosenCard)
+    },[])
 
     return (
       <>

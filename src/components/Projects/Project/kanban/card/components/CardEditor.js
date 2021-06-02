@@ -102,7 +102,7 @@ const CardEditor = ({info, setDeleteWindow, chosenCard}) => {
     <div
       className={cardOpen.main}
     >
-      <form style={{display:'flex',width:'100%',justifyContent:'space-between'}} onSubmit={onSubmit}>
+      <div style={{display:'flex',width:'100%',justifyContent:'space-between'}} >
         <input
           style={{
             border: "none",
@@ -192,7 +192,7 @@ const CardEditor = ({info, setDeleteWindow, chosenCard}) => {
           
         </div>
           
-      </form>
+      </div>
       <div>
         <div
           style={{

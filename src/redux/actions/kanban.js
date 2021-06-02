@@ -361,10 +361,12 @@ export const moveCard = ({board_id,from, to, oldPlaceId, newPlaceId, cardId, col
     }
 } 
 
-export const addComment = (text, id) => async dispatch  => {
+export const addComment = (text, id,mentions,link) => async dispatch  => {
     console.log(text,id)
     let body ={
-        text:text
+        text:text,
+        mentions:mentions,
+        url:link
     }
     try {
         const res = await innerBackend.post(`/kanban/cards/comment/new/${id}`,body )
