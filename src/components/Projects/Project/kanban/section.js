@@ -10,6 +10,7 @@ import { Path } from "../../../Layout/header";
 import { deleteCategory, newTimeline } from "../../../../redux/actions/kanban";
 import { ButtonTextLight } from "../../../../Styles/buttons";
 import ModalTimeline from "./modalTimeline";
+import ExpiredColumn from "./expiredTd";
 
 
 
@@ -112,6 +113,7 @@ useEffect(()=>{
                 <KanbanSectionTd history={history} key={i} category={category} timelineId={category.timeline[timelineIndex]?._id} timelineCards={timelines} column={el} boardId={board._id} />
               )
             })}
+            <ExpiredColumn history={history} category={category}   boardId={board._id} timelineId={category.timeline[timelineIndex]?._id} />
             <span/>
           </div>
         </div>
@@ -122,6 +124,7 @@ useEffect(()=>{
 
 
 export default KanbanSection
+
 
 
 const TimelineDates = ({timeline}) => {
