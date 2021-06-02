@@ -461,9 +461,10 @@ export const finishExpired = (card_id, board_id) => async dispatch  => {
         board_id: board_id
     }
     try {
+        console.log('unexbody',body)
 
         const res = await innerBackend.put(`/kanban/cards/unexpire/${card_id}`,body)
-        console.log(res)
+        console.log('unex',res)
         dispatch({
             type: UNEXPIRED,
             payload: res.data

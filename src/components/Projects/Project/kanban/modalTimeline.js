@@ -10,7 +10,7 @@ const ModalTimeline =({setModal,id, boardId, timelineId})=>{
     const dispatch = useDispatch()
     const [timeline, setTimeline] = useState('')
     useEffect(()=>{
-        console.log(timeline)
+        // console.log(timeline)
     },[timeline])
 
     const save = () => {

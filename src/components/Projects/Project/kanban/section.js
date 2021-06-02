@@ -35,7 +35,7 @@ const KanbanSection = ({main, board, category, history}) => {
     },[])
 
 useEffect(()=>{
-  console.log('timelineIndex',timelineIndex)
+  // console.log('timelineIndex',timelineIndex)
 },[timelineIndex])
 
     useEffect(()=>{

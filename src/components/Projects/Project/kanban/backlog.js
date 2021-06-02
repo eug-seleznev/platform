@@ -77,7 +77,7 @@ const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId, history
         setAddGhost(false)
 
       }
-      console.log('backlog', backlog)
+    //   console.log('backlog', backlog)
 
 
     return (

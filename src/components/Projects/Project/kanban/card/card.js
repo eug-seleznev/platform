@@ -62,7 +62,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
     }
     const dropp = (e) => {
       e.stopPropagation()
-      console.log('drop to card')
+      // console.log('drop to card')
 
     }
     const close = ()=>{
