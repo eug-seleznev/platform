@@ -48,7 +48,7 @@ const MyTasks = ({history})=>{
 		
 	   },[user.tasks])
 
-
+	   
 	const pushBack =()=>{
 		history.push(`./`)
 	}

@@ -88,7 +88,8 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId}) => {
     dispatch(changeCardField(val, field, id))
   }
   const finish =()=>{
-    dispatch(finishExpired(info.id, boardId))
+    let id=info._id
+    dispatch(finishExpired(id, boardId))
   }
   const changeDeadline =()=>{
     let val = new Date (deadline.val)
