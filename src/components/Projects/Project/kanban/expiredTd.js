@@ -18,6 +18,7 @@ const ExpiredColumn = ({ category, boardId, timelineId,history}) => {
         <div 
         // ref={refBG}
         className={styles.td} 
+        style={{width: '235px'}}
         // onDragOver={e=>dragOver(e)}
         // onDragLeave={e=>dragOut(e)}
         // onDragEnd={e=>dragOut(e)}
