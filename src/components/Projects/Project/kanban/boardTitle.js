@@ -19,7 +19,7 @@ const BoardColumnsTitle = ({user, board, Path, deleteColumn}) => {
                       return(
                         <div className={styles.titleTd}>
                           <div style={{width: '90%', overflow: 'hidden'}}>{el}</div>
-                          {i>2 && <img alt='delite'  src={Path+'trash-sharp.png'}
+                          {i>1 && <img alt='delite'  src={Path+'trash-sharp.png'}
                               title='удалить'
                               style={{display:user.permission==='user'?'none':'block',
                                   width:'15px', height:'15px',cursor:'pointer', marginLeft: '10px'
