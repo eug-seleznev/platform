@@ -11,6 +11,7 @@ import { deleteCategory, newTimeline } from "../../../../redux/actions/kanban";
 import { ButtonTextLight } from "../../../../Styles/buttons";
 import ModalTimeline from "./modalTimeline";
 import ExpiredColumn from "./expiredTd";
+import ConfirmModal from "./confirm";
 
 
 
@@ -23,19 +24,16 @@ const KanbanSection = ({main, board, category, history}) => {
     const [timelineIndex, setTimelineIndex] = useState(0)
     const [timelines, setTimelines] = useState(0)
     const [openTimlineModal, setOpenTimlineModal] = useState(false)
-      
+    const [confirm, setConfirm] = useState(false)
 
     useEffect(()=>{
       const now = Date.now()
       const nowTimelineIndex = category.timeline.findIndex(el=>{
         const timeDate = new Date (el.start)
         const lol = timeDate.getTime()>now
-      // console.log('lol',now,  timeDate.getTime())
-
         return lol
       })
       nowTimelineIndex>0 && setTimelineIndex(nowTimelineIndex-1)
-      // console.log('nowTimelineIndex',nowTimelineIndex)
     },[])
 
     useEffect(()=>{
@@ -65,44 +63,20 @@ const KanbanSection = ({main, board, category, history}) => {
 
     
     return (
-  
-        <div className={styles.category} style={{height: open? 'max-content' : '30px', }}>
-          {/* {main && } */}
-          { openTimlineModal && <ModalTimeline id={category._id} setModal={setOpenTimlineModal} boardId={board._id} timelineId={category.timeline[timelineIndex]._id} /> }
-          
-          <div className={styles.title} onClick={()=>setOpen(!open)} style={{backgroundColor: main? 'white' : '#FCFCFC',minWidth: '100%',}}>
-             <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-1},250px) minmax(50px,1fr)`,minWidth: '100%', }}>
-                 <span>
-                   <img src={Path+'trash-sharp.png'} style={{width:'20px', height: '20px', marginLeft: '20px',marginTop:'9px'}}  title='удалить' onClick={()=>deleteCategoryHandler()}/>
-                 </span>
-                 <div style={{display: "flex", alignItems: 'center'}}>
-                     {category.name}
-                     {!main &&<img src={Path+'openicon.png'} style={{transform: `rotate(${open?'0':'180'}deg)`, marginLeft: '10px', width: '15px'}}></img>}
-                     
-                      <div className={styles.backLogButton} onClick={(e)=>{
-                          e.stopPropagation()
-                          setOpenTimlineModal(true)
-                      }}>
-                        <img alt='plus' src={Path+'plus1.png'}className={styles.backLogPlus} style={{filter:'invert(0)'}}></img>
-                        <ButtonTextLight color='black'style={{fontStyle:'italic'}}>{!category.timeline[0]?.start? 'Добавить таймлайн' : 'Изменить таймлайн'}</ButtonTextLight>
-                      </div> 
-                      
-                      {category.timeline[timelineIndex].start && 
-                      <div style={{display: "flex", marginLeft: '20px', alignItems: 'center', border: '1px solid lightgrey', borderRadius: '13px', padding: '0 10px 0 10px'}} onClick={e=>e.stopPropagation()}>
-                        <div style={{minWidth:'30px'}}>{timelineIndex>0 && <img src={Path+'openicon.png'} style={{transform: 'rotate(-90deg)',cursor:'pointer', width: '10px', height: '10px', marginRight: '15px'}} onClick={(e)=>prevTimeline(e)}/>}</div>
-                        <TimelineDates timeline={category.timeline[timelineIndex]} />
-                        <div style={{minWidth:'30px'}}>{timelineIndex==category.timeline.length-1?
-                        <img src={Path+'plus1.png'} style={{width: '10px', height: '10px', marginLeft: '15px'}} onClick={(e)=>nextTimeline(e)}/>
-                        :
-                        <img src={Path+'openicon.png'} style={{transform: 'rotate(90deg)',cursor:'pointer', width: '10px', height: '10px', marginLeft: '15px'}} onClick={(e)=>nextTimeline(e)}/>}</div>
-                      </div>}
-                 </div>
-                 <span/>
-                 <span/>
-                 <span/>
-             </div> 
-          </div>
-
+  <>
+        <div className={styles.category} style={{height: open? 'max-content' : '32px', }}>
+         
+          <CategoryTitle 
+              open={open} 
+              nextTimeline={nextTimeline} 
+              setConfirm={setConfirm} 
+              setOpen={setOpen} 
+              setOpenTimlineModal={setOpenTimlineModal} 
+              category={category} 
+              board={board}
+              prevTimeline={prevTimeline} 
+              timelineIndex={timelineIndex} 
+            />
           
         
           <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-1},250px) minmax(50px,1fr)`,minWidth: '100%',}}>
@@ -117,6 +91,11 @@ const KanbanSection = ({main, board, category, history}) => {
           </div>
         </div>
    
+
+
+    {openTimlineModal && <ModalTimeline id={category._id} setModal={setOpenTimlineModal} boardId={board._id} timelineId={category.timeline[timelineIndex]._id} />}
+    <ConfirmModal  visible={confirm} confirm={()=>deleteCategoryHandler()} close={()=>setConfirm(false)} text={'колонку '+category.name} />
+   </>
     );    
 }
 
@@ -141,5 +120,54 @@ const TimelineDates = ({timeline}) => {
   }
   return(
     <div style={{minWidth:'105px',textAlign:"center"}}> {start} {monthStart!==monthEnd && monthStart} - {end+' '+monthEnd}</div>
+  )
+}
+
+
+const CategoryTitle = ({open, setConfirm, setOpen, setOpenTimlineModal, nextTimeline, timelineIndex, prevTimeline, category, board,}) => {
+
+  
+
+ 
+  return(
+    <div className={styles.title} onClick={()=>setOpen(!open)} style={{backgroundColor:'#FCFCFC',minWidth: '100%',}}>
+    <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-1},250px) minmax(50px,1fr)`,minWidth: '100%', }}>
+        <span>
+           <img src={Path+'three-dots.png'} style={{marginLeft: '20px',}}  title='удалить' onClick={()=>setConfirm(true)}/>
+        </span>
+        <div style={{display: "flex", alignItems: 'center'}}>
+
+             {category.name}
+
+             <img src={Path+'kanban-open-icon.png'} style={{transform: `rotate(${open?'180':'0'}deg)`, marginLeft: '5px', height: '8px',}} />
+
+             {!category.timeline[0]?.start && 
+             <img 
+               alt='plus' 
+               src={Path+'kanban-plus.png'} 
+               style={{filter:'invert(0)', marginLeft: '10px', width: '10px', height: '10px'}} 
+               onClick={(e)=>{
+                 e.stopPropagation()
+                 setOpenTimlineModal(true)
+               }}
+             />}
+
+             {category.timeline[timelineIndex].start && 
+             <div style={{display: "flex", marginLeft: '20px', alignItems: 'center', border: '1px solid lightgrey', borderRadius: '13px', padding: '0 10px 0 10px'}} onClick={e=>e.stopPropagation()}>
+               <div style={{minWidth:'30px'}}>{timelineIndex>0 && <img src={Path+'openicon.png'} style={{transform: 'rotate(-90deg)',cursor:'pointer', width: '10px', height: '10px', marginRight: '15px'}} onClick={(e)=>prevTimeline(e)}/>}</div>
+                 <div onClick={()=>setOpenTimlineModal(true)}>
+                   <TimelineDates timeline={category.timeline[timelineIndex]} />
+                 </div>
+               <div style={{minWidth:'30px'}}>
+                 {timelineIndex==category.timeline.length-1?
+                 <img src={Path+'plus1.png'} style={{width: '10px', height: '10px', marginLeft: '15px'}} onClick={(e)=>nextTimeline(e)}/>
+                 :
+                 <img src={Path+'openicon.png'} style={{transform: 'rotate(90deg)',cursor:'pointer', width: '10px', height: '10px', marginLeft: '15px'}} onClick={(e)=>nextTimeline(e)}/>}
+               </div>
+             </div>}
+
+        </div>
+    </div> 
+ </div>
   )
 }

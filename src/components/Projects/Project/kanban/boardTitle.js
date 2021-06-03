@@ -1,17 +1,20 @@
+import { useState } from 'react'
+import ConfirmModal from './confirm'
 import styles from './kanban.module.css'
-import { Path } from "../../../Layout/header";
-import { updateTimeline } from '../../../../redux/actions/kanban';
-
 
 
 const BoardColumnsTitle = ({user, board, Path, deleteColumn}) => {
+  const [confirm, setConfirm] = useState({
+    visible: false,
+    column: ''
+  })
 // console.log('fck board',board)
     if(!board){
         return <div>loading board...</div>
     }
 
     return (
-   
+   <>
             <div className={styles.title}   style={{backgroundColor: 'white', width: 'fit-content', minWidth: '100%'}}>
                 <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns?.length-1},250px) minmax(50px,1fr)`, minWidth:'100%'}}>
                   <span/>
@@ -24,7 +27,7 @@ const BoardColumnsTitle = ({user, board, Path, deleteColumn}) => {
                               style={{display:user.permission==='user'?'none':'block',
                                   width:'15px', height:'15px',cursor:'pointer', marginLeft: '10px'
                                   }} 
-                              onClick={()=>deleteColumn(el)} />} 
+                              onClick={()=>setConfirm({visible: true, column: el})} />} 
                         </div>
                       )
                     })}
@@ -34,7 +37,9 @@ const BoardColumnsTitle = ({user, board, Path, deleteColumn}) => {
                     <span/>
                     </div>
               </div>
-         
+
+              <ConfirmModal  visible={confirm.visible} confirm={()=>deleteColumn(confirm.column)} close={()=>setConfirm(false)} text={'колонку '+confirm.column} />
+       </>  
     );    
 }
 

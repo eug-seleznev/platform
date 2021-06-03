@@ -14,6 +14,7 @@ import { Path } from "../../../Layout/header";
 import BoardSettings from './boardSettings'
 import BoardColumnsTitle from "./boardTitle";
 import { ButtonTextLight } from "../../../../Styles/buttons";
+import { CSSTransition } from 'react-transition-group'
 
 
 
@@ -32,7 +33,8 @@ const Board = ({match, history}) => {
     status:false,
     place:'backlog'
 })
-    const [sideOpen, setSideOpen] = useState(true)
+    const [sideOpen, setSideOpen] = useState(false)
+    const [settingsOpen, setSettingsOpen] = useState(false)
     const [createColumn, setCreateColumn] = useState(false)
     const [createCategory, setCreateCategory] = useState(false)
     
@@ -101,18 +103,13 @@ const Board = ({match, history}) => {
         <div className={styles.content}>
             <BoardSettings visible={createCategory} type='category' close={()=>setCreateCategory(false)} boardId={board._id}  />
             <BoardSettings visible={createColumn}type='column'  close={()=>setCreateColumn(false)} boardId={board._id}  />
-            <div style={{display:'flex',marginLeft:'14px'}}>
+            <div style={{display:'flex',alignItems: 'center',marginLeft:'14px'}}>
               <div className={styles.backLogButton}  style={{marginBottom:'10px'}}>
                 <Bold size='24'>{board.name}</Bold>
               </div>
-              <div className={styles.backLogButton} onClick={()=>setCreateCategory(true)} style={{marginBottom:'10px',marginTop:'2px'}}>
-                <img alt='plus' src={Path+'plus1.png'} style={{width:'12px',marginRight:'5px',marginLeft:'30px', backgroundColor:'white'}}></img>
-                <ButtonTextLight color='black'style={{fontStyle:'italic'}}>Добавить категорию</ButtonTextLight>
-              </div>
-              <div className={styles.backLogButton} onClick={()=>setCreateColumn(true)} style={{marginBottom:'10px',marginTop:'2px'}}>
-                  <img alt='plus' src={Path+'plus1.png'} style={{width:'12px',marginRight:'5px',backgroundColor:'white'}}></img>
-                  <ButtonTextLight color='black'style={{fontStyle:'italic'}}>Добавить колонку</ButtonTextLight>
-              </div>
+              <img src={Path+'three-dots.png'} onClick={()=>setSettingsOpen(true)} style={{marginLeft: '20px'}} />
+              <BoardSettingsMenu visible={settingsOpen} setCreateCategory={setCreateCategory} setCreateColumn={setCreateColumn} close={()=>setSettingsOpen(false)}/>
+              
             </div>
             
             
@@ -143,3 +140,34 @@ const Board = ({match, history}) => {
 
 
 export default Board
+
+const BoardSettingsMenu = ({visible, setCreateCategory, setCreateColumn, close}) => {
+
+  return(
+    <CSSTransition 
+    in={visible}
+    timeout={500}
+    classNames={{
+        enter: styles.formEnter,
+        enterActive: styles.formEnterActive,
+        exit: styles.formExit,
+        exitActive: styles.formExitActive,
+    }}
+    unmountOnExit
+  >
+         
+        <div className={styles.createWindow} onClick={close}>
+            <div style={{position: 'absolute', backgroundColor: "white", border: '1px solid lightgrey'}}>
+              <div className={styles.backLogButton} onClick={()=>setCreateCategory(true)} style={{marginBottom:'10px',marginTop:'2px'}}>
+                <img alt='plus' src={Path+'plus1.png'} style={{width:'12px',marginRight:'5px',marginLeft:'30px', backgroundColor:'white'}}></img>
+                <ButtonTextLight color='black'style={{fontStyle:'italic'}}>Добавить категорию</ButtonTextLight>
+              </div>
+              <div className={styles.backLogButton} onClick={()=>setCreateColumn(true)} style={{marginBottom:'10px',marginTop:'2px'}}>
+                  <img alt='plus' src={Path+'plus1.png'} style={{width:'12px',marginRight:'5px',backgroundColor:'white'}}></img>
+                  <ButtonTextLight color='black'style={{fontStyle:'italic'}}>Добавить колонку</ButtonTextLight>
+              </div>
+            </div>
+    </div>
+    </CSSTransition>
+  )
+}
