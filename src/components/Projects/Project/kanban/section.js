@@ -131,7 +131,7 @@ const CategoryTitle = ({open, setConfirm, setOpen, setOpenTimlineModal, nextTime
 const buttons = [
   {
     title: 'Удалить категорию',
-    func: ()=>setConfirm(true),
+    handler: ()=>setConfirm(true),
     icon: 'trash-sharp.png'
 
   }

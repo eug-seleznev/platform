@@ -94,12 +94,12 @@ const Board = ({match, history}) => {
     const boardSettingsButtons = [
       {
         title: 'Добавить категорию',
-        func: ()=>setCreateCategory(true),
+        handler: ()=>setCreateCategory(true),
         icon: 'plus1.png'
       },
       {
         title: 'Добавить колонку',
-        func: ()=>setCreateColumn(true),
+        handler: ()=>setCreateColumn(true),
         icon: 'three-dots.png'
       },
     ]
@@ -119,13 +119,10 @@ const Board = ({match, history}) => {
 
         <div className={styles.content}>
             <div style={{display:'flex',alignItems: 'center',marginLeft:'14px'}}>
-              <div className={styles.backLogButton}  style={{marginBottom:'10px'}}>
-                <Bold size='24'>{board.name}</Bold>
-              </div>
+              <Bold size='24' style={{marginBottom:'5px'}}>{board.name}</Bold>
               <ModalMenu buttons={boardSettingsButtons}>
-                  <img src={Path+'three-dots.png'} style={{marginLeft: '20px'}} />
+                  <img src={Path+'three-dots.png'} style={{marginLeft: '20px',}} />
               </ModalMenu>
-              {/* <img src={Path+'three-dots.png'} onClick={(e)=>setSettingsOpen({visible:true, x:e.clientX, y: e.clientY})} style={{marginLeft: '20px'}} /> */}
             </div>
             
             <div ref={boardTitle} style={{ width: sideOpen? '87vw' : '96vw', overflow:'hidden', scrollbarWidth: '0px', scrollbarColor: "transparent", }}>

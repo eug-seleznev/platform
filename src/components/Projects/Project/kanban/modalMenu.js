@@ -1,23 +1,10 @@
 import { useEffect, useRef, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-
-
-
 import styles from './kanban.module.css'
-import { Bold, } from "../../../../Styles/typography";
-import KanbanSection from "./section";
-import Backlog from "./backlog";
-import {  loadBoard,deleteColumn } from "../../../../redux/actions/kanban";
-import CreateForm from "./createForm";
-
 import { Path } from "../../../Layout/header";
-import BoardSettings from './boardSettings'
-import BoardColumnsTitle from "./boardTitle";
 import { ButtonTextLight } from "../../../../Styles/buttons";
 import { CSSTransition } from 'react-transition-group'
-import { PROPOSE_FAIL } from "../../../../redux/types";
 
-
+// to use <ModalMenu buttons={[{title, icon, handler}]}> <icon/> </ModalMenu>
 
 
 const useClickOutside = (callback) => {
@@ -48,11 +35,15 @@ const useClickOutside = (callback) => {
 
     const outclick = useClickOutside(()=>setOpen({...open, visible:false}))
     
+    const openModal = (e) => {
+      e.stopPropagation()
+      setOpen({visible: true, x:e.clientX, y:e.clientY})
+    }
     
       return(
           <>
 
-        <div onClick={(e)=>setOpen({visible: true, x:e.clientX, y:e.clientY})}>
+        <div onClick={(e)=>openModal(e)} style={{display:'flex', height: '100%', alignItems: "center"}}>
             {props.children}
         </div>
 
@@ -71,7 +62,7 @@ const useClickOutside = (callback) => {
               <div ref={outclick} style={{position: 'absolute', backgroundColor: "white", border: '1px solid lightgrey', left: open.x+10+'px', top: open.y+10+'px', padding:'10px',}}>
                 {props.buttons && props.buttons.map((el,i)=>{
                   return(
-                    <div style={{height:'30px'}} onClick={()=>el.func()}>
+                    <div style={{height:'30px', display: 'flex', alignItems: 'center'}} onClick={()=>el.handler()}>
                       <img alt='plus' src={Path+el.icon} style={{width:'12px',marginRight:'5px',}} />
                       <ButtonTextLight color='black'style={{fontStyle:'italic'}}>{el.title}</ButtonTextLight>
                     </div> 
