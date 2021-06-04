@@ -12,6 +12,7 @@ import ModalTimeline from "./modalTimeline";
 import ExpiredColumn from "./expiredTd";
 import ConfirmModal from "./confirm";
 import PopUpMenu from "./modalMenu";
+import ModalMenu from "./modalMenu";
 
 
 
@@ -92,7 +93,7 @@ const KanbanSection = ({main, board, category, history}) => {
         </div>
    
 
-    <PopUpMenu open={settingsOpen} buttons={boardSettingsButtons} close={()=>setSettingsOpen(false)}/>
+    {/* <PopUpMenu open={settingsOpen} buttons={boardSettingsButtons} close={()=>setSettingsOpen(false)}/> */}
     {openTimlineModal && <ModalTimeline id={category._id} setModal={setOpenTimlineModal} boardId={board._id} timelineId={category.timeline[timelineIndex]._id} />}
     <ConfirmModal  visible={confirm} confirm={()=>deleteCategoryHandler()} close={()=>setConfirm(false)} text={'колонку '+category.name} />
    </>
@@ -127,11 +128,22 @@ const TimelineDates = ({timeline}) => {
 const CategoryTitle = ({open, setConfirm, setOpen, setOpenTimlineModal, nextTimeline, timelineIndex, prevTimeline, category, board,}) => {
 
  
+const buttons = [
+  {
+    title: 'Удалить категорию',
+    func: ()=>setConfirm(true),
+    icon: 'trash-sharp.png'
+
+  }
+]
+
   return(
     <div className={styles.title} onClick={()=>setOpen(!open)} style={{backgroundColor:'#FCFCFC',minWidth: '100%',}}>
       <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-1},250px) minmax(50px,1fr)`,minWidth: '100%', }}>
           <span>
-            <img src={Path+'three-dots.png'} style={{marginLeft: '20px',}}  title='удалить' onClick={()=>setConfirm(true)}/>
+            <ModalMenu buttons={buttons}>
+                <img src={Path+'three-dots.png'} style={{marginLeft: '20px',}} />
+            </ModalMenu>
           </span>
           <div style={{display: "flex", alignItems: 'center'}}>
 

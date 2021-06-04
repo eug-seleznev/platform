@@ -22,11 +22,14 @@ const BoardColumnsTitle = ({user, board, Path, deleteColumn}) => {
                       return(
                         <div className={styles.titleTd}>
                           <div style={{width: '90%', overflow: 'hidden'}}>{el}</div>
-                          {i>1 && <img alt='delite'  src={Path+'trash-sharp.png'}
+                          {i>1 && <img alt='delite'  src={Path+'three-dots.png'}
                               title='удалить'
-                              style={{display:user.permission==='user'?'none':'block',
-                                  width:'15px', height:'15px',cursor:'pointer', marginLeft: '10px'
-                                  }} 
+                              style={{
+                                display:user.permission==='user'?'none':'block',
+                                cursor:'pointer', 
+                                marginLeft: '10px',
+                                marginRight: '10px',
+                              }} 
                               onClick={()=>setConfirm({visible: true, column: el})} />} 
                         </div>
                       )

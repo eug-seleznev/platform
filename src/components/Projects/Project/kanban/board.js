@@ -13,13 +13,17 @@ import CreateForm from "./createForm";
 import { Path } from "../../../Layout/header";
 import BoardSettings from './boardSettings'
 import BoardColumnsTitle from "./boardTitle";
-import { ButtonTextLight } from "../../../../Styles/buttons";
-import { CSSTransition } from 'react-transition-group'
+
+import ModalMenu from "./modalMenu";
+
+
+
+
 
 
 
 const Board = ({match, history}) => {
-  const dispatch =useDispatch ()
+  const dispatch = useDispatch ()
   const project = useSelector(state=>state.projects.project)
   const user = useSelector(state => state.auth.user)
   const board = useSelector(state=>state.projects.kanban)
@@ -34,7 +38,11 @@ const Board = ({match, history}) => {
     place:'backlog'
 })
     const [sideOpen, setSideOpen] = useState(false)
-    const [settingsOpen, setSettingsOpen] = useState(false)
+    const [settingsOpen, setSettingsOpen] = useState({
+      visible:false,
+      x:0,
+      y:0,
+    })
     const [createColumn, setCreateColumn] = useState(false)
     const [createCategory, setCreateCategory] = useState(false)
     
@@ -70,27 +78,36 @@ const Board = ({match, history}) => {
 
     }
     const titleScroll = (e) => {
-      
       boardTitle.current.scrollTo( boardDiv.current.scrollLeft,  0)
     }
 
     useEffect(()=>{
         const boardId = project.boards.find(el=>el.name===match.params.board_name)._id
-        // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',boardId)
         dispatch(loadBoard(boardId))
     },[])
-    // useEffect(()=>{
-    //   console.log(board)
-    // },[board])
-
 
     const deleteColumnHandler = (el) => {
         dispatch(deleteColumn(board._id,el))
       }
+
+
+    const boardSettingsButtons = [
+      {
+        title: 'Добавить категорию',
+        func: ()=>setCreateCategory(true),
+        icon: 'plus1.png'
+      },
+      {
+        title: 'Добавить колонку',
+        func: ()=>setCreateColumn(true),
+        icon: 'three-dots.png'
+      },
+    ]
+
+
     if(!board){
         return <div>loading board...</div>
     }
-
     return (
       <div className={styles.main} style={{gridTemplateColumns: sideOpen? '240px 1fr' : '35px 1fr'}}>
         <div className={styles.backLog} onClick={()=>setSideOpen(!sideOpen)}>
@@ -101,17 +118,15 @@ const Board = ({match, history}) => {
         </div>
 
         <div className={styles.content}>
-            <BoardSettings visible={createCategory} type='category' close={()=>setCreateCategory(false)} boardId={board._id}  />
-            <BoardSettings visible={createColumn}type='column'  close={()=>setCreateColumn(false)} boardId={board._id}  />
             <div style={{display:'flex',alignItems: 'center',marginLeft:'14px'}}>
               <div className={styles.backLogButton}  style={{marginBottom:'10px'}}>
                 <Bold size='24'>{board.name}</Bold>
               </div>
-              <img src={Path+'three-dots.png'} onClick={()=>setSettingsOpen(true)} style={{marginLeft: '20px'}} />
-              <BoardSettingsMenu visible={settingsOpen} setCreateCategory={setCreateCategory} setCreateColumn={setCreateColumn} close={()=>setSettingsOpen(false)}/>
-              
+              <ModalMenu buttons={boardSettingsButtons}>
+                  <img src={Path+'three-dots.png'} style={{marginLeft: '20px'}} />
+              </ModalMenu>
+              {/* <img src={Path+'three-dots.png'} onClick={(e)=>setSettingsOpen({visible:true, x:e.clientX, y: e.clientY})} style={{marginLeft: '20px'}} /> */}
             </div>
-            
             
             <div ref={boardTitle} style={{ width: sideOpen? '87vw' : '96vw', overflow:'hidden', scrollbarWidth: '0px', scrollbarColor: "transparent", }}>
               <BoardColumnsTitle Path={Path} board={board} user={user} deleteColumn={(el)=>deleteColumnHandler(el)} />
@@ -129,45 +144,14 @@ const Board = ({match, history}) => {
         </div>
 
 
-          {/* <BoardSettings visible={settingsOpen} close={()=>setSettingsOpen(false)} boardId={board._id}  /> */}
+          {/* <PopUpMenu open={settingsOpen} buttons={boardSettingsButtons} close={()=>setSettingsOpen(false)}/> */}
+          <BoardSettings visible={createCategory} type='category' close={()=>setCreateCategory(false)} boardId={board._id}  />
+          <BoardSettings visible={createColumn} type='column'  close={()=>setCreateColumn(false)} boardId={board._id}  />
           <CreateForm crypt={project.crypt} visible={createOpen.status} place={createOpen.place} setCreateOpen={setCreateOpen} boardId={board._id}></CreateForm>
-       
-        
       </div>
     );    
 }
-
-
-
 export default Board
 
-const BoardSettingsMenu = ({visible, setCreateCategory, setCreateColumn, close}) => {
 
-  return(
-    <CSSTransition 
-    in={visible}
-    timeout={500}
-    classNames={{
-        enter: styles.formEnter,
-        enterActive: styles.formEnterActive,
-        exit: styles.formExit,
-        exitActive: styles.formExitActive,
-    }}
-    unmountOnExit
-  >
-         
-        <div className={styles.createWindow} onClick={close}>
-            <div style={{position: 'absolute', backgroundColor: "white", border: '1px solid lightgrey'}}>
-              <div className={styles.backLogButton} onClick={()=>setCreateCategory(true)} style={{marginBottom:'10px',marginTop:'2px'}}>
-                <img alt='plus' src={Path+'plus1.png'} style={{width:'12px',marginRight:'5px',marginLeft:'30px', backgroundColor:'white'}}></img>
-                <ButtonTextLight color='black'style={{fontStyle:'italic'}}>Добавить категорию</ButtonTextLight>
-              </div>
-              <div className={styles.backLogButton} onClick={()=>setCreateColumn(true)} style={{marginBottom:'10px',marginTop:'2px'}}>
-                  <img alt='plus' src={Path+'plus1.png'} style={{width:'12px',marginRight:'5px',backgroundColor:'white'}}></img>
-                  <ButtonTextLight color='black'style={{fontStyle:'italic'}}>Добавить колонку</ButtonTextLight>
-              </div>
-            </div>
-    </div>
-    </CSSTransition>
-  )
-}
+
