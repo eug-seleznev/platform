@@ -56,12 +56,16 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.329);
 }
+.cardStatusColor {
+    height: 100%;
+    width: 16px;
+}
     .cardOpnenContainer{
-    
         
+        display: flex;
         margin-top: 113px;
         margin-left: auto;
-        width: 711px;
+        width: 700px;
         height: 100%;
         border: 1px solid rgb(208, 211, 255);
         background-color: white;

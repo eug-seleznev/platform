@@ -47,8 +47,8 @@ const AddTask = ({id}) => {
               <input
                 value={task}
                 className={style.input}
-                placeholder="Задача.."
-                style={{ marginTop: "10px" }}
+                placeholder="Название задачи..."
+                style={{ marginTop: "10px" , border:'none',color:'grey'}}
                 onChange={onChange}
               />
             

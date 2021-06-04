@@ -1,5 +1,5 @@
 import { innerBackend, } from "../../components/utils/axios";
-import {DELETE_CARD_BACKLOG,CHANGE_CARD_REGULAR,LOAD_BOARD,REMOVE_TAG_CARD,CHOSEN_BOARD,ADD_TAG_CARD,DELETE_CARD,ADD_CARD_TO_CHOSEN,CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD, COMMON_KANBAN_RELOAD, ADD_USER_TO_TASK_NEW, UNEXPIRED} from "../types";
+import {CHANGE_CARD_EMERGENCY,DELETE_CARD_BACKLOG,CHANGE_CARD_REGULAR,LOAD_BOARD,REMOVE_TAG_CARD,CHOSEN_BOARD,ADD_TAG_CARD,DELETE_CARD,ADD_CARD_TO_CHOSEN,CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD, COMMON_KANBAN_RELOAD, ADD_USER_TO_TASK_NEW, UNEXPIRED} from "../types";
 
 
 
@@ -138,12 +138,13 @@ export const addTaskCard = (text,id) => async dispatch  => {
 export const changeCardField = (val, field, id) => async dispatch  => {
     let body = {}
     body[field] = val
-    console.log(body)
+    // console.log(body)
     let type = field==='title'?
         CHANGE_CARD_TITLE:
         field==='description'?
         CHANGE_CARD_DESCRIPTION:
-        field==='regular'?CHANGE_CARD_REGULAR:''
+        field==='regular'?CHANGE_CARD_REGULAR:
+        field==='emergency'?CHANGE_CARD_EMERGENCY:''
     try {
         const res = await innerBackend.put(`/kanban/cards/fields/edit/${id}`,body)
         dispatch({

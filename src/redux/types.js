@@ -32,6 +32,7 @@ export const REMOVE_TAG_CARD = 'REMOVE_TAG_CARD'
 export const LOAD_BOARD = 'LOAD_BOARD'
 export const UNEXPIRED = 'UNEXPIRED'
 export const CHANGE_CARD_REGULAR = 'CHANGE_CARD_REGULARD'
+export const CHANGE_CARD_EMERGENCY = 'CHANGE_CARD_EMERGENCY '
 //USERES
 export const ALL_USERS = 'users';
 export const GET_EMPLOYE = 'get_users';

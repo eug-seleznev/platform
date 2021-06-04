@@ -11,7 +11,7 @@ import { allUsers, userTableSearch } from "../../../../../../redux/actions/user"
 
 
 let cancel;
-const Comments =({id})=>{
+const Comments =({id,emergency})=>{
     const [link,setLink] =useState('')
     const [comment,setComment] =useState('')
     const [mentions,setMentions] =useState([])
@@ -32,12 +32,12 @@ const Comments =({id})=>{
         dispatch(allUsers({query, sortOrder}))
         setLink(window.location.href)
     }, [])
-    useEffect(() => {
-        console.log(mentions)
-    }, [mentions])
-    useEffect(() => {
-        console.log(link)
-    }, [link])
+    // useEffect(() => {
+    //     console.log(mentions)
+    // }, [mentions])
+    // useEffect(() => {
+    //     console.log(link)
+    // }, [link])
     const createComment = (e) =>{
         e.preventDefault()
         dispatch(addComment(comment,id,mentions, link))
@@ -94,7 +94,7 @@ const Comments =({id})=>{
     return (
         <div>
            <div className={style.comments__array} 
-            style={{overflowY:comments.length>7?'scroll':'hidden'}}
+            style={{overflowY:comments.length>7?'scroll':'hidden',maxHeight: emergency === 'Событие'?'220px':'260px'}}
            >
             {comments&&comments.map((comm,i)=>{
                 return(

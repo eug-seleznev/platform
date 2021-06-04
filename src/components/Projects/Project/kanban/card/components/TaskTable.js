@@ -12,7 +12,7 @@ import canban from './cardOpen.module.css'
 //todo: handle no tasks state
 
 
-const TaskTable = ({tasksArray, id, team}) => {
+const TaskTable = ({tasksArray, id, team,info}) => {
   let tasks = ['2','3']
   
   let selectFocusRow = ()=>{
@@ -127,7 +127,7 @@ const TaskTable = ({tasksArray, id, team}) => {
   }
 
   return (
-    <div className={canban.tasks__container} style={{overflowY:tasksArray.length>8?'scroll': 'hidden',zIndex:-1}} >
+    <div className={canban.tasks__container} style={{overflowY:tasksArray.length>8?'scroll': 'hidden',zIndex:-1, maxHeight:info.emergency === 'Событие'?'220px':'280px'}} >
     <SPRINT_TABLE onMouseLeave={() => setTaskId("")} 
       style={{marginTop:'10px',marginLeft:'20px'
     }} >
