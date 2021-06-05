@@ -79,7 +79,7 @@ const Comments =({id,emergency})=>{
                 startPosition:cursor.selectionStart,
                 show: true,
                 left: cursor.left,
-                top: cursor.top + 50
+                top: cursor.top - 60
             });
         }
         else if (hookType === 'cancel') {
@@ -94,7 +94,7 @@ const Comments =({id,emergency})=>{
     return (
         <div>
            <div className={style.comments__array} 
-            style={{overflowY:comments.length>7?'scroll':'hidden',maxHeight: emergency === 'Событие'?'220px':'260px'}}
+            style={{overflowY:comments.length>7?'scroll':'hidden',maxHeight: emergency === 'Событие'?'22vh':'26vh'}}
            >
             {comments&&comments.map((comm,i)=>{
                 return(
@@ -154,7 +154,7 @@ const Comments =({id,emergency})=>{
 
                         }
                         </div>
-                    <ButtonTextLight style={{transform:'translateX(-30px)'}} type='submit'>Добавить комментарий</ButtonTextLight>
+                    <ButtonTextLight style={{transform:'translateX(-35px)'}} type='submit'>Добавить комментарий</ButtonTextLight>
                  </form> 
                 
                     

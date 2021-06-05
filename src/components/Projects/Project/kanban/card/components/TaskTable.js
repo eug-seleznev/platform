@@ -127,7 +127,7 @@ const TaskTable = ({tasksArray, id, team,info}) => {
   }
 
   return (
-    <div className={canban.tasks__container} style={{overflowY:tasksArray.length>8?'scroll': 'hidden',zIndex:-1, maxHeight:info.emergency === 'Событие'?'220px':'280px'}} >
+    <div className={canban.tasks__container} style={{overflowY:tasksArray.length>8?'scroll': 'hidden',zIndex:-1, maxHeight:info.emergency === 'Событие'?'22vh':'28vh'}} >
     <SPRINT_TABLE onMouseLeave={() => setTaskId("")} 
       style={{marginTop:'10px',marginLeft:'20px'
     }} >

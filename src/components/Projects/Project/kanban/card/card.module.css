@@ -50,11 +50,13 @@
 }
 .cardOpnenBackground{
     position: fixed;
-    right: 0;
+    right: -16px;
     left: 0;
     top: -47px;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.329);
+    overflow-y:hidden;
+    overflow-x:hidden
 }
 .cardStatusColor {
     height: 100%;
@@ -69,4 +71,11 @@
         height: 100%;
         border: 1px solid rgb(208, 211, 255);
         background-color: white;
+    }
+    @media (max-height:900px) {
+        .cardOpnenBackground{
+    
+            overflow-y:scroll;
+        
+        }
     }
