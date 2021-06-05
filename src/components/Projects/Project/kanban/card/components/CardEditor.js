@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import {Light} from "../../../../../../Styles/typography"
+import { useDispatch, useSelector } from "react-redux";
+import {Light, Regular} from "../../../../../../Styles/typography"
 import style from "../../../../../../Styles/modules/components/Project/newsprint.module.css"
-
-import TagSearch from "../../../../components/tagSearch";
-import Tag from "../../../../components/OneProject/tag";
+import card from '../card.module.css'
 import cardOpen from "./cardOpen.module.css"
-import {addCardToChosen, addTagCard, changeCardField, finishExpired, removeTagCard}  from "../../../../../../redux/actions/kanban"
+import {addCardToChosen, addTagCard, addUserToEvent, changeCardField, finishExpired, removeTagCard}  from "../../../../../../redux/actions/kanban"
 import { Path } from "../../../../../Layout/header";
-
 import { CSSTransition } from "react-transition-group";
 import { StyledIn } from "../../../../../../Styles/layout";
 import styles from '../../../../../../Styles/modules/components/headerMenu.module.css'
@@ -16,17 +13,24 @@ import { Select } from "../../../../../../Styles/tables";
 import { ButtonTextLight } from "../../../../../../Styles/buttons";
 import getDate from "../../../../getDate";
 import { url } from "../../../../../utils/axios";
+import getDateWithTime from "./getDateWithTime";
+import { Input } from "../../../../../../Styles/Forms";
+import { userTableSearch } from "../../../../../../redux/actions/user";
 
 
 
 
 
 const CardEditor = ({info, setDeleteWindow, chosenCard,boardId}) => {
+  const users = useSelector(state => state.users.users)
   const dispatch= useDispatch()
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const[chosen, setChosen]= useState(false)
   const[settings, setSettings]= useState(false)
+  const[addUser, setAddUser]= useState(false)
+  const [visibleName, setVisibleName] = useState('')
+  const [eventUsers, setEventUsers] = useState([])
   const[changeTitle, setChangeTitle]= useState(false)
   const[deadline,setDeadline] = useState({
     set:false,
@@ -43,9 +47,19 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId}) => {
     }
 
   },[])
+  useEffect(()=>{
+    info.event_users.map (user=>{
+      setEventUsers(eventUsers => [...eventUsers, user._id])
+    })
+
+  },[info])
   const onSubmit =(e)=>{
     e.preventDefault()
   }
+  const takeUser =(id)=>{
+    dispatch(addUserToEvent(info._id, id))
+    setAddUser(false)
+}
   const onEnter=(e)=>{
     e.target.blur()
     setChangeTitle(false)
@@ -54,14 +68,21 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId}) => {
     setChosen(!chosen)
     dispatch(addCardToChosen(info._id))
   }
-  const AddTag =(value)=>{
-    if(value!=='') {
-      dispatch(addTagCard(info._id, value))
-    }
-   }
-   const delTag =(tag)=>{
-    dispatch(removeTagCard(info._id, tag))
-   }
+  // const AddTag =(value)=>{
+  //   if(value!=='') {
+  //     dispatch(addTagCard(info._id, value))
+  //   }
+  //  }
+  //  const delTag =(tag)=>{
+  //   dispatch(removeTagCard(info._id, tag))
+  //  }
+   const handleInput =(e)=>{
+    // console.log(meta)
+    let field = 'name' 
+    let value = e.target.value
+    dispatch(userTableSearch({value, field}))
+    
+}
   const changeSomeField =(e)=>{
     
     if(e.target.name==='title')  {
@@ -144,7 +165,7 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId}) => {
                         </StyledIn>
                         <Select name='emergency'onChange={(e)=>{changeSomeField(e)}} style={{ cursor:'pointer',width:'110px',marginBottom:'50px',height:'35px', marginTop:'1px',marginLeft:'30px'}} defaultValue={info.emergency}>
                           <option value='Обычная'>Обычная</option>
-                          <option value='Cрочная'>Cрочная</option>  
+                          <option value='Срочная'>Срочная</option>  
                           <option value='Критическая'>Критическая</option>
                           <option value='Событие'>Событие</option>
                         </Select>
@@ -153,21 +174,17 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId}) => {
                           <StyledIn style={{textDecoration:'none', cursor:'default'}}>
                               Сделать регулярным
                           </StyledIn>
-                          <input style={{width:'25px',height:'25px' ,cursor:'pointer',marginTop:'10px'}}type='checkbox'defaultChecked={info?.regular} onChange={(e)=>{makeRegular(e)}} >
-                          </input>
+                          <input style={{width:'25px',height:'25px' ,cursor:'pointer',marginTop:'10px'}}type='checkbox'defaultChecked={info?.regular} onChange={(e)=>{makeRegular(e)}} />
                       </div>
                     <div style={{display:'flex',height:'25px',justifyContent:'space-between',alignItems:'center'}}>
                       <StyledIn style={{textDecoration:'none', cursor:'default'}}>
                             {chosen?'Убрать из избранного':'Добавить в избранное'}
                       </StyledIn>
-                      <img  onClick={toChosen} src={Path+'star.png'} style={{width:'25px',height:'25px' ,cursor:'pointer',marginTop:'10px', backgroundColor:chosen?'#FFAF30':'rgba(0,0,0,0)'}}>
-                        </img>
+                      <img  onClick={toChosen} src={Path+'star.png'} style={{width:'25px',height:'25px' ,cursor:'pointer',marginTop:'10px', backgroundColor:chosen?'#FFAF30':'rgba(0,0,0,0)'}}/>  
                     </div>
                     <StyledIn
                           style={{display:boardId?'flex':'none',height:'24px'}}
-                          onClick={()=>finish()}
-                        
-                      >
+                          onClick={()=>finish()}>
                         Готово
                       </StyledIn>
                     <StyledIn
@@ -178,17 +195,16 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId}) => {
                         })}
                       >
                         Удалить карточку
-                      </StyledIn>
-                      
-                      
-          </div>
-        </CSSTransition>
-      </div>
-      </div>
-        }
+                      </StyledIn>               
+                  </div>
+                </CSSTransition>
+              </div>
+              </div>
+              }
        
         
         
+        {info.emergency!=='Событие'? 
         <div>
          
         {deadline.set?
@@ -213,11 +229,9 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId}) => {
             {/* <ButtonTextLight onClick={()=>{setDeadline({...deadline,set:true,visible:false})}} style={{margin:'5px', transform:'translateY(-1px)'}}>Изменить</ButtonTextLight> */}
           </div>
         </div>
-        
-        
-
         }
-        </div>
+        </div>:<Light style={{transform:'translate(-20px, 6px)'}}>Событие</Light>
+        }
           
       </div>
       <div>
@@ -227,7 +241,7 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId}) => {
           }}
         >
           <div className={cardOpen.editList}>
-              <div style={{ display:info.type==='Одна задача'||info.emergency === "Событие"? 'none' : 'flex' }}>
+              <div style={{ display:!info.type||info.emergency === "Событие"? 'none' : 'flex' }}>
                 <Light style={{ width: "40px" }}>
                   {info.tasks.filter(task=>task.taskStatus).length}/{info.tasks.length}
                 </Light>
@@ -282,7 +296,7 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId}) => {
           </div>
         
         </div>
-        <div style={{ height: "20px",marginBottom:info.emergency === "Событие"? '150px':'0px' }}>
+        <div style={{ height: "20px",marginBottom:info.emergency === "Событие"? '170px':'0px' }}>
             <div className={style.edit__task}>
               {/* <Light
                 color="#3F496C"
@@ -323,18 +337,78 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId}) => {
             <div style={{display: info.emergency === "Событие"? 'block' : 'none' }}>
               <div style={{ borderTop:'1px solid #AFAFAF', borderBottom:'1px solid #AFAFAF',marginTop:'10px'}}>
               <Light style={{marginTop:'7px'}} size='15.5'>Участники</Light>
-             {
-               info.execs.map((el,i)=>{
-                 return (
-                   <img key={i} src={url+'/'+el.avatar} style={{height:'30px',width:'30px',objectFit:'cover',borderRadius:'100%',marginRight:'10px',marginTop:'14px',marginBottom:'23px'}}></img>
-                 )
-               })
-             }
-            <img src={Path+'plus thin.png'} style={{height:'25px',width:'25px',objectFit:'cover',borderRadius:'100%',marginRight:'10px',marginTop:'14px',marginBottom:'23px',marginLeft:'20px'}}></img> 
+              <div style={{display:'flex'}}>
+                {info.event_users?.map((el,i)=>{
+                  return (
+                    <div>
+                      <img key={i} src={url+'/'+el.avatar} 
+                        style={{display:addUser?'none':'block',
+                        cursor:'pointer',  height:'30px',width:'30px',
+                        objectFit:'cover',borderRadius:'100%',marginRight:'10px',
+                        marginTop:'14px',marginBottom:'23px'}} 
+                        onMouseEnter={()=>{setVisibleName(el.fullname)}}
+                        onMouseLeave={()=>{setVisibleName('')}}></img>
+                        <div className={card.card__exec__name} 
+                          style={{display:`${visibleName===el.fullname?'block':'none'}`, transform:'translate(-40px,-20px)'}}
+                          >{el.fullname}
+                        </div>
+                    </div>
+                  )
+                })
+              }
+              
+             
+            
+               {!addUser?
+                <img src={Path+'plus thin.png'} style={{height:'25px',width:'25px',objectFit:'cover',
+                borderRadius:'100%',marginRight:'10px',marginTop:'14px',
+                marginBottom:'23px',marginLeft:'20px',cursor:'pointer'}} onClick={()=>{setAddUser(true)}}></img>:
+
+               <div>
+                    <Input style={{width: "180px"}} onChange={handleInput}></Input> 
+                      <div className={style.comments__dropdown}
+                        style={{    
+                            position:'absolute',
+                            width: "170px",
+                            height:'55px',
+                            borderRadius: "5px",
+                            border:'1px solid black',
+                            background: "white",
+                            boxShadow: "rgba(0, 0, 0, 0.4) 0px 1px 4px",         
+                            padding:'10px',
+                            overflowY:users.length>3?'scroll':'hidden'
+                        }}
+                        >
+                            {
+                            users.map((user,i)=>{
+                              if(!eventUsers.includes(user._id)) {
+                                return(<Regular className={cardOpen.comments__name} onClick={()=>takeUser(user._id)} style={{cursor:'pointer'}} key={i}>{user.fullname}</Regular>)
+                              }
+                                 
+                        
+                             
+                        })
+
+                        }
+                      </div> 
+               </div>
+               }       
             </div>
-            <Light style={{borderBottom:'1px solid #AFAFAF',paddingBottom:'13px',marginTop:'13px'}}>
-              15 мая 2021
-            </Light>
+            </div>
+            <div>
+               {
+               !info?.event_date? 
+                <>
+                  <Light style={{marginBottom:'10px',marginTop:'5px'}}>Введите дату события</Light>
+                  <input type="datetime-local" name='event_date' onKeyPress={(e)=>e.key==='Enter'&&e.target.value!=='Invalid Date'?changeSomeField(e):''}></input> 
+                </>
+                :
+                <Light style={{borderBottom:'1px solid #AFAFAF',paddingBottom:'13px',marginTop:'13px'}}>
+                 {getDateWithTime(info?.event_date)}
+                </Light>
+              }
+            </div>
+           
 
             </div>
            

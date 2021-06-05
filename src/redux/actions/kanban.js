@@ -1,5 +1,5 @@
 import { innerBackend, } from "../../components/utils/axios";
-import {CHANGE_CARD_EMERGENCY,DELETE_CARD_BACKLOG,CHANGE_CARD_REGULAR,LOAD_BOARD,REMOVE_TAG_CARD,CHOSEN_BOARD,ADD_TAG_CARD,DELETE_CARD,ADD_CARD_TO_CHOSEN,CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD, COMMON_KANBAN_RELOAD, ADD_USER_TO_TASK_NEW, UNEXPIRED} from "../types";
+import {ADD_USER_TO_EVENT,CHANGE_CARD_DATE,CHANGE_CARD_EMERGENCY,DELETE_CARD_BACKLOG,CHANGE_CARD_REGULAR,LOAD_BOARD,REMOVE_TAG_CARD,CHOSEN_BOARD,ADD_TAG_CARD,DELETE_CARD,ADD_CARD_TO_CHOSEN,CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD, COMMON_KANBAN_RELOAD, ADD_USER_TO_TASK_NEW, UNEXPIRED} from "../types";
 
 
 
@@ -32,6 +32,22 @@ export const removeTagCard = (id, tag) => async dispatch  => {
        alert('ошибка')           
     }
 }
+export const addUserToEvent = (card_id,id) => async dispatch  => {
+    let body = {
+        user_id: id
+    }
+    try {
+        const res = await innerBackend.put(`/kanban/cards/events/adduser/${card_id}`,body)
+        dispatch({
+            type: ADD_USER_TO_EVENT,
+            payload: res.data
+        })
+    }
+    catch (err) {
+       alert('ошибка')           
+    }
+}
+
 export const addTagCard = (id, value) => async dispatch  => {
     let body = {
         tag: value
@@ -64,10 +80,10 @@ export const loadBoard = (id) => async dispatch  => {
     }
 }
 
-export const cardDelete = (id,crypt,boardId) => async dispatch  => {
+export const cardDelete = (id,crypt,boardId,backlog) => async dispatch  => {
     
-    let type = boardId!==undefined?DELETE_CARD:DELETE_CARD_BACKLOG
-    let bid = boardId?'&boardid'+boardId:''
+    let type = !backlog?DELETE_CARD:DELETE_CARD_BACKLOG
+    let bid = !backlog?'&boardid='+boardId:''
     console.log(id, crypt,type, boardId)
     try {
         const res = await innerBackend.delete(`/kanban/cards/delete/single?cardid=${id}&crypt=${crypt+bid}`)
@@ -144,6 +160,7 @@ export const changeCardField = (val, field, id) => async dispatch  => {
         field==='description'?
         CHANGE_CARD_DESCRIPTION:
         field==='regular'?CHANGE_CARD_REGULAR:
+        field==='event_date'?CHANGE_CARD_DATE:
         field==='emergency'?CHANGE_CARD_EMERGENCY:''
     try {
         const res = await innerBackend.put(`/kanban/cards/fields/edit/${id}`,body)

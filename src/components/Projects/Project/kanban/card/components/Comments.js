@@ -79,7 +79,7 @@ const Comments =({id,emergency})=>{
                 startPosition:cursor.selectionStart,
                 show: true,
                 left: cursor.left,
-                top: cursor.top + 50
+                top: cursor.top - 60
             });
         }
         else if (hookType === 'cancel') {

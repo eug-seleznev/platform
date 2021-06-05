@@ -8,9 +8,10 @@ import CardOpen from "./cardOpen";
 import { useDispatch, useSelector } from "react-redux";
 import { cardDelete, currentCard, loadBoard } from "../../../../../redux/actions/kanban";
 import { Button, CancelButton } from "../../../../../Styles/buttons";
-import Tag from "../../../components/OneProject/tag";
+
 import { getProject } from "../../../../../redux/actions/projects";
 import { url } from "../../../../utils/axios";
+import getDateWithTime from "./components/getDateWithTime";
 
 
 
@@ -18,6 +19,7 @@ import { url } from "../../../../utils/axios";
 
 const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,history, notDraggable}) => {
     const [cardOpen, setCardOpen] = useState(false)
+
     const [chosenCard, setChosenCard] = useState(false)
     const [visibleName, setVisibleName] = useState(false)
     const [deleteWindow, setDeleteWindow] = useState({
@@ -29,19 +31,21 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
     const favCards = useSelector(state=>state.auth.user.fav_cards)
     const cardClick = (e) => {
       e.stopPropagation()
-      setCardOpen(true)
+     
       dispatch(currentCard(info))
-
+      setTimeout(()=>{
+        setCardOpen(true)
+      },100)
+      
     }
     const deleteCard =()=>{
-      dispatch(cardDelete(deleteWindow.id, crypt, boardId))
+      dispatch(cardDelete(deleteWindow.id, crypt, boardId,backlog))
       setDeleteWindow ({
         status:false,
         id:''
       })
     }
     useEffect(()=>{
-      // console.log(info)
       favCards.map(card=>{
         if(card._id===info._id){
           setChosenCard(true)
@@ -83,24 +87,29 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
         draggable={!notDraggable? true : false}
         onDragStart={(e)=>dragStart(e)}
         style={{border:
-          info?.emergency==='Регулярная'?'1px solid #36B65A':
+          info?.emergency==='Событие'?'1px solid #9CE3B0':
           info?.emergency==='Обычная'?'1px solid #648FC6':
-          info?.emergency==='Срочная'?'1px solid #DA5050':'1px solid #648FC6'}}
+          info?.emergency==='Критическая'?'1px solid #D83B44':
+          info?.emergency==='Срочная'?'1px solid #FFB21D':'1px solid #648FC6'}}
         onClick={(e)=>cardClick(e)}
         onDrop={(e)=>dropp(e)}
         >
         <div className={styles.card__circuit}
           style={{backgroundColor:
-            info?.emergency==='Регулярная'?'#36B65A':
+            info?.emergency==='Событие'?'#9CE3B0':
             info?.emergency==='Обычная'?'#648FC6':
-            info?.emergency==='Срочная'?'#DA5050':'#648FC6'
+            info?.emergency==='Критическая'?'#D83B44':
+            info?.emergency==='Срочная'?'#FFB21D':'#648FC6'
           }}>
         </div>
         <div className={styles.card__content}>
           <div style={{display:'flex', justifyContent:'space-between'}}>
             <Light size='16' style={{padding:'5px',maxWidth:'50%'}}>{info?.title} </Light>
             <div style={{display:'flex'}}>
-            {info?.execs?.map((el,i)=>{
+            {
+            info.emergency==='Событие'
+            ? 
+            info.event_users.map((el,i)=>{
               return (
                 <div>
                   <img key={i} 
@@ -124,7 +133,33 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
                 </div>
                 
               )
-            })}
+            }):
+            info.execs.map((el,i)=>{
+              return (
+                <div>
+                  <img key={i} 
+                    src={url+'/'+el.avatar} 
+                    onClick={(e)=>{goToUser(e, el._id)}}
+                    onMouseEnter={()=>{setVisibleName(el.fullname)}}
+                    onMouseLeave={()=>{setVisibleName('')}} 
+                    style={{
+                      width:'25px',marginLeft:'4px',
+                      height:'25px',marginTop:'3px',
+                      borderRadius:'100%',objectFit:'cover'
+                    
+                  }} ></img>
+                  <div style={{position:'relative'}}>
+                     <div className={styles.card__exec__name} 
+                      style={{display:`${visibleName===el.fullname?'block':'none'}`}}
+                    >{el.fullname}
+                    </div>
+                  </div>
+                 
+                </div>
+                
+              )
+            })
+          }
             </div>
             
           </div>
@@ -133,15 +168,18 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
             <div style={{display:'flex'}}>
               <Light size='12' 
                 style={{marginRight:'5px'}}>
-                  { info.type==='Одна задача'?'Задача':info.type}
+                  { info.emergency!=='Событие'&&!info.type?'Задача':
+                    info.emergency==='Событие'&& info.event_date?getDateWithTime(info.event_date) :
+                    info.emergency==='Событие'&&!info.event_date?'Событие':info.type}
                 </Light>
-              <Light size='12' style={{display:info.type==='Одна задача'?'none':'block'}} >{info&& info.tasks &&info?.tasks.filter(task=>task.taskStatus).length}/{info&& info.tasks &&info?.tasks.length}</Light>
+              <Light size='12' style={{display:info.type==='Одна задача'||!info.type?'none':'block'}} >{info&& info.tasks &&info?.tasks.filter(task=>task.taskStatus).length}/{info&& info.tasks &&info?.tasks.length}</Light>
             </div>
             <div style={{display:'flex',alignItems:'center',flexWrap:'nowrap',marginTop:'5px'}}>
               {info&& info.tags&& info?.tags.map((tag,i)=>{
-                return(
-                  <Thin key={i} size='12' style={{marginRight:'10px'}} >#{tag}</Thin>
-                )
+                
+                  return(
+                    <Thin key={i} size='12' style={{marginRight:'10px'}} >#{tag}</Thin>
+                  )
               })}
             </div>
             
