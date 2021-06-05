@@ -27,7 +27,7 @@ const CardOpen = ({close,setDeleteWindow,chosenCard,boardId}) => {
       <>
       {info&&
         <div className={styles.cardOpnenBackground}  onMouseDown={close}>
-        <div className={styles.cardOpnenContainer} onMouseDown={(e)=>e.stopPropagation()}>
+        <div className={styles.cardOpnenContainer} onClick={(e)=>e.stopPropagation()} onMouseUp={(e)=>e.stopPropagation()} onMouseDown={(e)=>e.stopPropagation()}>
             
             <div style={{display:"flex"}}>
               <div className={styles.cardStatusColor} style={{backgroundColor:info.emergency==="Обычная"?'#8FA7C6':info.emergency==="Cрочная"?'#FFB21D':info.emergency==="Критическая"?'#D83B44':info.emergency==="Событие"?'#9CE3B0':'#8FA7C6',width:'16px'}}></div>
