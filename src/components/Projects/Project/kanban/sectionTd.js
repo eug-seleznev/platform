@@ -1,17 +1,13 @@
-import { useEffect, useRef, useState } from "react"
+import {  useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 
 
-import sprintCss from '../../../../Styles/modules/components/sprintCard.module.css'
 import styles from './kanban.module.css'
-import { Select, NEW_TABLE, NEW_TBODY, NEW_THEAD, NEW_TD, NEW_TH, NEW_TR } from '../../../../Styles/tables';
-import { Light } from "../../../../Styles/typography";
-import Tag from "../../components/OneProject/tag";
-import getDate from "../../getDate";
+
 import KanbanCard from "./card/card";
 import { CSSTransition } from "react-transition-group";
-import { moveCard, finishExpired } from "../../../../redux/actions/kanban";
+import { moveCard } from "../../../../redux/actions/kanban";
 import { ButtonText } from "../../../../Styles/buttons";
 import CreateForm from "./createForm";
 import { Path } from '../../../Layout/header'
@@ -37,8 +33,8 @@ const dragFunction = (e, index) => {
         // console.log('dataaaaaaaaaaaa',data)
         dispatch(moveCard({
             cardId:data.cardId, 
-            from: data.backlog ? 'backlog' : 'timeline',
-            oldPlaceId: data.timelineId ||  undefined,
+            from: data.expired? 'expired': data.backlog ? 'backlog' : 'timeline',
+            oldPlaceId: data.expired? data.categoryId : data.backlog ? undefined:  data.timelineId,
             to : 'timeline',
             newPlaceId : timelineId,
             column: column,

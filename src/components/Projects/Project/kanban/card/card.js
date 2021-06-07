@@ -17,7 +17,7 @@ import getDateWithTime from "./components/getDateWithTime";
 
 
 
-const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,history, notDraggable}) => {
+const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,history, expired}) => {
     const [cardOpen, setCardOpen] = useState(false)
 
     const [chosenCard, setChosenCard] = useState(false)
@@ -56,6 +56,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
     const dragStart = (e) => {
       e.stopPropagation()
       const data={
+        expired: expired,
         categoryId: currCategory,
         timelineId: timelineId,
         backlog: backlog,
@@ -84,7 +85,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
     return (
       <>
       <div onDragOver={addGhost} className={styles.card}
-        draggable={!notDraggable? true : false}
+        draggable
         onDragStart={(e)=>dragStart(e)}
         style={{border:
           info?.emergency==='Событие'?'1px solid #9CE3B0':

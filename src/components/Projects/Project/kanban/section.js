@@ -27,6 +27,7 @@ const KanbanSection = ({main, board, category, history}) => {
     const [openTimlineModal, setOpenTimlineModal] = useState(false)
     const [confirm, setConfirm] = useState(false)
 
+
     useEffect(()=>{
       const now = Date.now()
       const nowTimelineIndex = category.timeline.findIndex(el=>{
@@ -38,7 +39,7 @@ const KanbanSection = ({main, board, category, history}) => {
     },[])
 
     useEffect(()=>{
-      const nowLine = category && category.timeline.length>0 && category.timeline[timelineIndex].cards.map((el,i)=>{
+      const nowLine = category && category.timeline.length>0 && category.timeline[timelineIndex] && category.timeline[timelineIndex].cards.map((el,i)=>{
         const newEl = {...el, huindex: i}
         return newEl
       })
@@ -58,6 +59,7 @@ const KanbanSection = ({main, board, category, history}) => {
         setTimelineIndex(timelineIndex+1)
       } else {
         dispatch(newTimeline(category._id,board._id,category.timeline[timelineIndex]._id))
+        setTimelineIndex(timelineIndex+1)
       }
     }
 
@@ -87,7 +89,7 @@ const KanbanSection = ({main, board, category, history}) => {
                 <KanbanSectionTd history={history} key={i} category={category} timelineId={category.timeline[timelineIndex]?._id} timelineCards={timelines} column={el} boardId={board._id} />
               )
             })}
-            <ExpiredColumn history={history} category={category}   boardId={board._id} timelineId={category.timeline[timelineIndex]?._id} />
+            <ExpiredColumn  history={history} category={category}   boardId={board._id} timelineId={category.timeline[timelineIndex]?._id} />
             <span/>
           </div>
         </div>
@@ -95,7 +97,7 @@ const KanbanSection = ({main, board, category, history}) => {
 
     {/* <PopUpMenu open={settingsOpen} buttons={boardSettingsButtons} close={()=>setSettingsOpen(false)}/> */}
     {openTimlineModal && <ModalTimeline id={category._id} setModal={setOpenTimlineModal} boardId={board._id} timelineId={category.timeline[timelineIndex]._id} />}
-    <ConfirmModal  visible={confirm} confirm={()=>deleteCategoryHandler()} close={()=>setConfirm(false)} text={'колонку '+category.name} />
+    <ConfirmModal visible={confirm} confirm={()=>deleteCategoryHandler()} close={()=>setConfirm(false)} text={'колонку '+category.name} />
    </>
     );    
 }
@@ -108,20 +110,21 @@ export default KanbanSection
 
 const TimelineDates = ({timeline}) => {
 
-  const a = new Date(timeline?.start)
-  const b = new Date(timeline?.end)
-  const start = a.getDate()
-  const end = b.getDate()
-  const months = ['янв','фев','март','апр','мая','июня','июля','авг','сент','окт','нояб','дек',]
-  const monthStart = months[a.getMonth()]
-  const monthEnd = months[b.getMonth()]
-
-  if(!timeline.start){
+  if(timeline && timeline.start){
+    const a = new Date(timeline?.start)
+    const b = new Date(timeline?.end)
+    const start = a.getDate()
+    const end = b.getDate()
+    const months = ['янв','фев','март','апр','мая','июня','июля','авг','сент','окт','нояб','дек',]
+    const monthStart = months[a.getMonth()]
+    const monthEnd = months[b.getMonth()]
+  
+    return(
+      <div style={{minWidth:'105px',textAlign:"center"}}> {start} {monthStart!==monthEnd && monthStart} - {end+' '+monthEnd}</div>
+    )
+  } else if (timeline && !timeline.start) {
     return <div></div>
   }
-  return(
-    <div style={{minWidth:'105px',textAlign:"center"}}> {start} {monthStart!==monthEnd && monthStart} - {end+' '+monthEnd}</div>
-  )
 }
 
 
@@ -151,7 +154,7 @@ const buttons = [
 
               <img src={Path+'kanban-open-icon.png'} style={{transform: `rotate(${open?'180':'0'}deg)`, marginLeft: '5px', height: '8px',}} />
 
-              {!category.timeline[0]?.start && 
+              {category && category.timeline[0] && !category.timeline[0].start && 
               <img 
                 alt='plus' 
                 src={Path+'kanban-plus.png'} 
@@ -162,17 +165,21 @@ const buttons = [
                 }}
               />}
 
-              {category.timeline[timelineIndex].start && 
+              {category && category.timeline[0] &&  category.timeline[0].start && 
               <div style={{display: "flex", marginLeft: '20px', alignItems: 'center', border: '1px solid lightgrey', borderRadius: '13px', padding: '0 10px 0 10px'}} onClick={e=>e.stopPropagation()}>
-                <div style={{minWidth:'30px'}}>{timelineIndex>0 && <img src={Path+'openicon.png'} style={{transform: 'rotate(-90deg)',cursor:'pointer', width: '10px', height: '10px', marginRight: '15px'}} onClick={(e)=>prevTimeline(e)}/>}</div>
+                <div style={{minWidth:'30px'}}>
+                  {timelineIndex>0 && 
+                  <img src={Path+'openicon.png'} style={{transform: 'rotate(-90deg)',cursor:'pointer', width: '10px', height: '10px', marginRight: '15px'}} onClick={(e)=>prevTimeline(e)}/>
+                  }
+                </div>
+                {category.timeline[timelineIndex] && category.timeline[timelineIndex].start && 
                   <div onClick={()=>setOpenTimlineModal(true)}>
                     <TimelineDates timeline={category.timeline[timelineIndex]} />
                   </div>
+                }
+                  
                 <div style={{minWidth:'30px'}}>
-                  {timelineIndex==category.timeline.length-1?
-                  <img src={Path+'plus1.png'} style={{width: '10px', height: '10px', marginLeft: '15px'}} onClick={(e)=>nextTimeline(e)}/>
-                  :
-                  <img src={Path+'openicon.png'} style={{transform: 'rotate(90deg)',cursor:'pointer', width: '10px', height: '10px', marginLeft: '15px'}} onClick={(e)=>nextTimeline(e)}/>}
+                  <img src={Path+'openicon.png'} style={{transform: 'rotate(90deg)',cursor:'pointer', width: '10px', height: '10px', marginLeft: '15px'}} onClick={(e)=>category.timeline[timelineIndex] && category.timeline[timelineIndex].start && nextTimeline(e)}/>
                 </div>
               </div>}
 
