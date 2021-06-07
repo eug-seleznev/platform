@@ -136,9 +136,10 @@ export const currentCard = (info) => async dispatch  => {
        alert('ошибка')           
     }
 }
-export const addTaskCard = (text,id) => async dispatch  => {
+export const addTaskCard = (text,id,proj_id) => async dispatch  => {
     let body = {
-        title:text
+        title:text,
+        project_id:proj_id
     }
     try {
         const res = await innerBackend.post(`/kanban/cards/tasks/new/${id}`,body)

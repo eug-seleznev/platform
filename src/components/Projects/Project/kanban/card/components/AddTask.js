@@ -11,7 +11,7 @@ import Confirm from "../../../../components/OneProject/confirm";
 
 
 
-const AddTask = ({id}) => {
+const AddTask = ({id,proj_id}) => {
  
     const dispatch = useDispatch();
     const [task, setTask] = useState('');
@@ -22,7 +22,7 @@ const AddTask = ({id}) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-            dispatch(addTaskCard(task,id));
+            dispatch(addTaskCard(task,id,proj_id));
        setTask("")
         
  

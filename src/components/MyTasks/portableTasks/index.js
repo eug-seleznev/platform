@@ -6,7 +6,7 @@ import myTasks from '../../../Styles/modules/main/mytasksSmall.module.css'
 import { useEffect, useState } from 'react'
 import ProjTasks from './portableProj'
 import { useDispatch, useSelector } from 'react-redux'
-import { background, myTaskDelite, sortUserTasks, tasksStatus, cursorStatus} from '../../../redux/actions/user'
+import { background, myTaskDelite, sortUserTasks, tasksStatus, cursorStatus, finishAllTasks} from '../../../redux/actions/user'
 import getCurrentMonth from './../getCurrentMonth'
 import { finishUserTask } from "../../../redux/actions/user"
 import getDate from '../../Projects/getDate'
@@ -65,10 +65,10 @@ const MyTasks = ({history})=>{
 	}
 	const onChange = (e) => {
 		let taskid = e.target.value;
-		dispatch(finishUserTask({ taskid }));
+		dispatch(finishAllTasks({ taskid }));
 	  };
 	const onPressEnter = (taskid) => {
-		dispatch(finishUserTask({ taskid }));
+		dispatch(finishAllTasks({ taskid }));
 	  };
 	return(
 		

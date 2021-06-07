@@ -6,16 +6,14 @@ import myTasks from '../../Styles/modules/main/mytasks.module.css'
 import { useEffect, useState } from 'react'
 import ProjTasks from './projTasks'
 import { useDispatch, useSelector } from 'react-redux'
-import { background, myTaskDelite, sortUserTasks, tasksStatus } from '../../redux/actions/user'
+import { background, finishAllTasks, myTaskDelite, sortUserTasks, tasksStatus } from '../../redux/actions/user'
 import getCurrentMonth from './getCurrentMonth'
-import { finishUserTask } from "../../redux/actions/user"
 import getDate from '../Projects/getDate'
 import DeadlineTasks from './deadlineTasks'
 import TaskHistory from './history'
 import TaskLoader from './loader'
 import { Select } from '../../Styles/tables'
-import { editUserTask} from "../../redux/actions/user"
-import { loadUser } from '../../redux/actions/auth'
+
 
 // import {Link, NavLink } from 'react-router-dom'
 const MyTasks = ({history})=>{
@@ -64,10 +62,10 @@ const MyTasks = ({history})=>{
 	}
 	const onChange = (e) => {
 		let taskid = e.target.value;
-		dispatch(finishUserTask({ taskid }));
+		dispatch(finishAllTasks({ taskid }));
 	  };
 	const onPressEnter = (taskid) => {
-		dispatch(finishUserTask({ taskid }));
+		dispatch(finishAllTasks({ taskid }));
 	  };
 	return(
 		

@@ -217,7 +217,32 @@ export const cursorStatus = (status) => async dispatch =>{
 })
 
 }
+export const finishAllTasks = ({taskid}) => async dispatch  => {
 
+    try {
+      // console.log(tasks, 'tasks', id, 'id')
+      const res = await innerBackend.put(`users/tasks/changestatus/${taskid}`)
+      dispatch({
+          type: FINISH_USER_TASK,
+          payload: res.data
+      })
+      dispatch({
+          type: GREEN_MSG,
+          payload: res.data
+      })
+      }
+    catch (err) {
+      const errors = err.response.data.err;
+      errors.map(error => {
+        return dispatch({
+          type: ERROR_MSG,
+          payload: error.msg
+      })
+      })            
+    
+  }
+
+}
 export const finishUserTask = ({taskid}) => async dispatch  => {
 
   try {

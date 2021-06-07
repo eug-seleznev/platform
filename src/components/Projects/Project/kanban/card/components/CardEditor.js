@@ -207,29 +207,29 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId}) => {
         {info.emergency!=='Событие'? 
         <div>
          
-        {deadline.set?
-        <div style={{marginTop:'3px'}}>
-          <div style={{display: !deadline.visible?'block':'none'}}>
-            <div style={{display:!deadline.set?'none':'flex'}}>
-              <input type='date' onKeyPress={(e)=>e.key==='Enter'?changeDeadline(e):''} onChange={changeVal}></input>
-              {/* <ButtonTextLight onClick={changeDeadline} style={{margin:'5px'}}>Добавить</ButtonTextLight> */}
+          {deadline.set?
+          <div style={{marginTop:'3px'}}>
+            <div style={{display: !deadline.visible?'block':'none'}}>
+              <div style={{display:!deadline.set?'none':'flex'}}>
+                <input type='date' onKeyPress={(e)=>e.key==='Enter'?changeDeadline(e):''} onChange={changeVal}></input>
+                {/* <ButtonTextLight onClick={changeDeadline} style={{margin:'5px'}}>Добавить</ButtonTextLight> */}
+              </div>
+            </div>
+            
+            {/* <Light style={{display: deadline.visible?'block':'none',marginTop:'1px'}}>{getDate(deadline.val)}</Light> */}
+          </div>:
+          <div>
+            <ButtonTextLight onDoubleClick={()=>{setDeadline({...deadline, set:true})}} style={{display:!deadline.visible&&!info.deadline?'block':'none',transform:'translate(-20px, 10px)'}}>Назначить дедлайн</ButtonTextLight>
+            <div style={{display:deadline.visible?'flex':'none',marginTop:'4px'}}>
+              <Light onDoubleClick={()=>{setDeadline({...deadline,set:true,visible:false})}} style={{marginTop:'1px',cursor:'pointer',transform:'translate(-20px)'}}>{getDate(deadline.val)}</Light>
+              {/* <ButtonTextLight onClick={()=>{setDeadline({...deadline,set:true,visible:false})}} style={{margin:'5px', transform:'translateY(-1px)'}}>Изменить</ButtonTextLight> */}
+            </div>
+            <div style={{display:!deadline.visible&&info.deadline?'flex':'none',marginTop:'4px'}}>
+              <Light onDoubleClick={()=>{setDeadline({...deadline,set:true,visible:false})}} style={{marginTop:'1px',cursor:'pointer',transform:'translate(-20px)'}}>{getDate(info.deadline)}</Light>
+              {/* <ButtonTextLight onClick={()=>{setDeadline({...deadline,set:true,visible:false})}} style={{margin:'5px', transform:'translateY(-1px)'}}>Изменить</ButtonTextLight> */}
             </div>
           </div>
-          
-          {/* <Light style={{display: deadline.visible?'block':'none',marginTop:'1px'}}>{getDate(deadline.val)}</Light> */}
-        </div>:
-        <div>
-          <ButtonTextLight onDoubleClick={()=>{setDeadline({...deadline, set:true})}} style={{display:!deadline.visible&&!info.deadline?'block':'none',transform:'translate(-20px, 10px)'}}>Назначить дедлайн</ButtonTextLight>
-          <div style={{display:deadline.visible?'flex':'none',marginTop:'4px'}}>
-            <Light onDoubleClick={()=>{setDeadline({...deadline,set:true,visible:false})}} style={{marginTop:'1px',cursor:'pointer',transform:'translate(-20px)'}}>{getDate(deadline.val)}</Light>
-            {/* <ButtonTextLight onClick={()=>{setDeadline({...deadline,set:true,visible:false})}} style={{margin:'5px', transform:'translateY(-1px)'}}>Изменить</ButtonTextLight> */}
-          </div>
-          <div style={{display:!deadline.visible&&info.deadline?'flex':'none',marginTop:'4px'}}>
-            <Light onDoubleClick={()=>{setDeadline({...deadline,set:true,visible:false})}} style={{marginTop:'1px',cursor:'pointer',transform:'translate(-20px)'}}>{getDate(info.deadline)}</Light>
-            {/* <ButtonTextLight onClick={()=>{setDeadline({...deadline,set:true,visible:false})}} style={{margin:'5px', transform:'translateY(-1px)'}}>Изменить</ButtonTextLight> */}
-          </div>
-        </div>
-        }
+          }
         </div>:<Light style={{transform:'translate(-20px, 6px)'}}>Событие</Light>
         }
           

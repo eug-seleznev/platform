@@ -31,6 +31,11 @@ const Comments =({id,emergency})=>{
         let query = 'name'
         dispatch(allUsers({query, sortOrder}))
         setLink(window.location.href)
+        commentRef.current.scrollTo({
+            top: commentRef.current.scrollHeight+1000,
+            left: 0,
+
+        });
     }, [])
     // useEffect(() => {
     //     console.log(mentions)
@@ -48,8 +53,7 @@ const Comments =({id,emergency})=>{
       })
         
     }
-    const commentScroll =(e)=>{
-
+    const commentScroll =()=>{
         setTimeout(()=>{
             commentRef.current.scrollTo({
                 top: commentRef.current.scrollHeight+1000,

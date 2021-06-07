@@ -156,7 +156,7 @@ const TaskTable = ({tasksArray, id, team,info}) => {
 
 
             {editField && task._id === focusRow  ? (
-              <SPRINT_TD style={{width:'50%'}}>
+              <SPRINT_TD style={{width:'200px'}}>
                 <form onSubmit={enableEdit}>
                   <input
                     className={style.input}
@@ -169,11 +169,11 @@ const TaskTable = ({tasksArray, id, team,info}) => {
                 </form>
               </SPRINT_TD>
             ) : (<>
-              <SPRINT_TD style={{maxWidth:'300px'}}>{task.taskTitle}</SPRINT_TD>
+              <SPRINT_TD style={{width:'200px'}}>{task.taskTitle}</SPRINT_TD>
 
               </> 
             )}
-            <SPRINT_TD >
+            <SPRINT_TD style={{width:'25%'}}>
               {task.user && team ? (
                 
                 <>
@@ -232,7 +232,7 @@ const TaskTable = ({tasksArray, id, team,info}) => {
                 <input onKeyPress={(e)=>e.key==='Enter'? setDeadline(false):''} 
                   type="date" 
                   onChange={(e)=>changeTaskDate(e,task._id)}
-                  style={{display:`${task._id === focusRow&&deadline?'block':'none'}`, width:'140px'}}>
+                  style={{display:`${task._id === focusRow&&deadline?'block':'none'}`, width:'130px'}}>
                 </input>
               </div>
               

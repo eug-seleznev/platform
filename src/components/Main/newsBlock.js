@@ -1,16 +1,14 @@
 
-import ModalWindow from '../Projects/components/ModalWindow'
+
 import styles from '../../Styles/modules/main/main.module.css'
-import NewsCard from '../News/newsCard'
+
 import { Bold } from '../../Styles/typography'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import NewsOpen from '../News/openNews'
 
-import { getUserTasks } from '../../redux/actions/auth'
 import ProjTasks from '../MyTasks/projTasks'
 import getCurrentMonth from '../MyTasks/getCurrentMonth'
-import { finishUserTask } from '../../redux/actions/user'
+import { finishAllTasks } from '../../redux/actions/user'
 
 export const Path = process.env.REACT_APP_PATH;
 
@@ -38,7 +36,7 @@ const NewsBlock = ({user, history}) => {
     }
     const onChange = (e) => {
       let taskid = e.target.value;
-      dispatch(finishUserTask({ taskid }));
+      dispatch(finishAllTasks({ taskid }));
       };
     return(
 		<div className={styles.news}>
