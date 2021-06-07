@@ -11,7 +11,7 @@ import { allUsers, userTableSearch } from "../../../../../../redux/actions/user"
 
 
 let cancel;
-const Comments =({id,emergency})=>{
+const Comments =({id,emergency, history})=>{
     const [link,setLink] =useState('')
     const [comment,setComment] =useState('')
     const [mentions,setMentions] =useState([])
@@ -61,6 +61,9 @@ const Comments =({id,emergency})=>{
                 behavior: 'smooth'
             });
         },200) 
+    }
+    const goToUser=(userid)=>{
+        history.push(`../../../../users/${userid}`)
     }
     const takeUser =(user)=>{
         setMentions(mentions => [...mentions, user._id])
@@ -116,8 +119,8 @@ const Comments =({id,emergency})=>{
             {comments&&comments.map((comm,i)=>{
                 return(
                     <div key={i} className={style.comments__one} >
-                        <img src={url+'/'+comm.author?.avatar} style={{width:'25px',height:'25px', objectFit:'cover', borderRadius:'100%'}}></img>
-                        <Bold size='14' color='#878787'className={style.comments__date}>{comm.author?.name} {comm.author?.lastname&&comm.author?.lastname?.charAt(0)}.</Bold>
+                        <img src={url+'/'+comm.author?.avatar}onClick={()=>goToUser(comm.author?._id)} style={{width:'25px',height:'25px', objectFit:'cover', borderRadius:'100%',cursor:'pointer'}}></img>
+                        <Bold size='14' color='#878787'className={style.comments__author}onClick={()=>goToUser(comm.author?._id)}>{comm.author?.name} {comm.author?.lastname&&comm.author?.lastname?.charAt(0)}.</Bold>
                         <Light size='14' color='#878787'className={style.comments__date}>{getDateWithTime(comm.date)}</Light>
                         <Light size='14' color={comm.text.includes('Дедлайн')&&comm?.type==='history'?'#C64242':
                             comm.text.includes('> Готово')&&comm?.type==='history'?'#71D186':comm?.type==='history'?'#878787':

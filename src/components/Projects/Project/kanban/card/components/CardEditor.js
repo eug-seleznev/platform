@@ -21,7 +21,7 @@ import { userTableSearch } from "../../../../../../redux/actions/user";
 
 
 
-const CardEditor = ({info, setDeleteWindow, chosenCard,boardId}) => {
+const CardEditor = ({info, setDeleteWindow, chosenCard,boardId,history}) => {
   const users = useSelector(state => state.users.users)
   const dispatch= useDispatch()
   const [title, setTitle] = useState('')
@@ -97,9 +97,9 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId}) => {
     let id = info._id
     dispatch(changeCardField(val, field, id))
   }
-  // useEffect(()=>{
-  //   console.log(deadline)
-  // },[deadline])
+  const goToUser=(userid)=>{
+    history.push(`../../../../users/${userid}`)
+}
   const changeVal =(e)=>{
     setDeadline({...deadline, val: e.target.value})  
   }
@@ -346,6 +346,7 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId}) => {
                         cursor:'pointer',  height:'30px',width:'30px',
                         objectFit:'cover',borderRadius:'100%',marginRight:'10px',
                         marginTop:'14px',marginBottom:'23px'}} 
+                        onClick={()=>goToUser(el._id)}
                         onMouseEnter={()=>{setVisibleName(el.fullname)}}
                         onMouseLeave={()=>{setVisibleName('')}}></img>
                         <div className={card.card__exec__name} 

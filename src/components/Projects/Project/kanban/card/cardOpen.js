@@ -12,7 +12,7 @@ import { useCallback, useEffect } from 'react';
 
 
 
-const CardOpen = ({close,setDeleteWindow,chosenCard,boardId}) => { 
+const CardOpen = ({close,setDeleteWindow,chosenCard,boardId, history}) => { 
 
     
     const info = useSelector(state=>state.projects.card)
@@ -49,10 +49,10 @@ const CardOpen = ({close,setDeleteWindow,chosenCard,boardId}) => {
                   width:'16px'}}>
                 </div>
               <div>
-              <CardEditor boardId={boardId} chosenCard={chosenCard} setDeleteWindow={setDeleteWindow} info={info}></CardEditor>
+              <CardEditor boardId={boardId} chosenCard={chosenCard} history={history} setDeleteWindow={setDeleteWindow} info={info}></CardEditor>
               <TaskTable info={info} id={info._id} team={project.team2} tasksArray={info.tasks}></TaskTable>
               <AddTask proj_id={project._id} id={info._id}></AddTask>
-              <Comments emergency={info.emergency} id={info._id} ></Comments>
+              <Comments history={history} emergency={info.emergency} id={info._id} ></Comments>
             </div>
               
             </div>
