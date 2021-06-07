@@ -5,6 +5,7 @@ import CardEditor from './components/CardEditor';
 import TaskTable from './components/TaskTable';
 import Comments from './components/Comments';
 import { useSelector } from 'react-redux';
+import { useCallback, useEffect } from 'react';
 
 
 
@@ -20,7 +21,19 @@ const CardOpen = ({close,setDeleteWindow,chosenCard,boardId}) => {
     // useEffect(()=>{
     //   console.log(boardId)
     // },[])
-
+    const escFunction = useCallback((e) => {
+      if(e.keyCode === 27) {
+        close()
+      }
+    }, []);
+  
+    useEffect(() => {
+      document.addEventListener("keydown", escFunction, false);
+  
+      return () => {
+        document.removeEventListener("keydown", escFunction, false);
+      };
+    }, []);
     return (
       <>
       {info&&
