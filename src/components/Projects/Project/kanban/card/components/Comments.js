@@ -48,7 +48,8 @@ const Comments =({id,emergency})=>{
       })
         
     }
-    const commentScroll =()=>{
+    const commentScroll =(e)=>{
+
         setTimeout(()=>{
             commentRef.current.scrollTo({
                 top: commentRef.current.scrollHeight+1000,
@@ -123,7 +124,7 @@ const Comments =({id,emergency})=>{
             })}
             </div> 
                 
-                 <form className={style.comments__button__area} onSubmit={()=>createComment().then(commentScroll)}>
+                 <form className={style.comments__button__area} onSubmit={(e)=>createComment(e).then(commentScroll)}>
                     <InputTrigger
                         trigger={{
                             keyCode: 50,
@@ -138,7 +139,7 @@ const Comments =({id,emergency})=>{
                     <textarea 
                         className={style.comments__textarea}
                         value={comment} 
-                        spellcheck="false"
+                        spellCheck="false"
                         onKeyPress={(e)=>e.key==='Enter'?createComment(e).then(commentScroll):''}
                         onChange={(e)=>{setComment(e.target.value)}}
                         placeholder='Добавить комментарий, чтобы упомянуть человека нажимте @ и выберите нужного из списка'/>
