@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addComment } from "../../../../../../redux/actions/kanban"
 import { ButtonTextLight } from "../../../../../../Styles/buttons"
@@ -24,7 +24,7 @@ const Comments =({id,emergency})=>{
         text:'',
         startPosition:0
     })
-    
+    const commentRef = useRef()
     const dispatch = useDispatch()
     useEffect(() => {
         let sortOrder = true
@@ -40,13 +40,25 @@ const Comments =({id,emergency})=>{
     // }, [link])
     const createComment = (e) =>{
         e.preventDefault()
-        dispatch(addComment(comment,id,mentions, link))
-        setComment('')
-        setMentions([])
+        return new Promise((resolve) =>{
+            dispatch(addComment(comment,id,mentions, link))
+            setComment('')
+            setMentions([])
+            resolve()
+      })
+        
+    }
+    const commentScroll =()=>{
+        setTimeout(()=>{
+            commentRef.current.scrollTo({
+                top: commentRef.current.scrollHeight+1000,
+                left: 0,
+                behavior: 'smooth'
+            });
+        },200) 
     }
     const takeUser =(user)=>{
         setMentions(mentions => [...mentions, user._id])
-        console.log(user)
         return new Promise((resolve) =>{
             const newText = `${comment.slice(0, dropdown.startPosition + 1)}${user.fullname+" "}${comment.slice(dropdown.startPosition + user.fullname.length, comment.length)}`
             setComment(newText) 
@@ -93,7 +105,7 @@ const Comments =({id,emergency})=>{
 
     return (
         <div>
-           <div className={style.comments__array} 
+           <div className={style.comments__array} ref={commentRef}
             style={{overflowY:comments.length>7?'scroll':'hidden',maxHeight: emergency === 'Событие'?'22vh':'26vh'}}
            >
             {comments&&comments.map((comm,i)=>{
@@ -111,7 +123,7 @@ const Comments =({id,emergency})=>{
             })}
             </div> 
                 
-                 <form className={style.comments__button__area} onSubmit={createComment}>
+                 <form className={style.comments__button__area} onSubmit={()=>createComment().then(commentScroll)}>
                     <InputTrigger
                         trigger={{
                             keyCode: 50,
@@ -127,7 +139,7 @@ const Comments =({id,emergency})=>{
                         className={style.comments__textarea}
                         value={comment} 
                         spellcheck="false"
-                        onKeyPress={(e)=>e.key==='Enter'?createComment(e):''}
+                        onKeyPress={(e)=>e.key==='Enter'?createComment(e).then(commentScroll):''}
                         onChange={(e)=>{setComment(e.target.value)}}
                         placeholder='Добавить комментарий, чтобы упомянуть человека нажимте @ и выберите нужного из списка'/>
                     </InputTrigger>
