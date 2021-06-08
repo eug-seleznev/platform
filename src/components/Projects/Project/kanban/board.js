@@ -7,7 +7,7 @@ import styles from './kanban.module.css'
 import { Bold, } from "../../../../Styles/typography";
 import KanbanSection from "./section";
 import Backlog from "./backlog";
-import {  loadBoard,deleteColumn } from "../../../../redux/actions/kanban";
+import {  loadBoard,deleteColumn, clearBoard } from "../../../../redux/actions/kanban";
 import CreateForm from "./createForm";
 
 import { Path } from "../../../Layout/header";
@@ -104,6 +104,9 @@ const Board = ({match, history}) => {
       },
     ]
 
+    useEffect(()=>{
+      return () => dispatch(clearBoard())
+    },[])
 
     if(!board){
         return <div>loading board...</div>

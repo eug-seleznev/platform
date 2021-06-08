@@ -21,7 +21,6 @@ const KanbanSectionTd = ({category, timelineCards, column, boardId, timelineId,h
     const project = useSelector(state => state.projects.project)
 
     let currentColunmCards = timelineCards &&  timelineCards.filter(el=>el.column===column)
-    const [initial, setInitial] = useState(false)
     const [hower, setHower] = useState(false)
     const [newCardModal, setNewCardModal] = useState(false)
     const [addGhost, setAddGhost] = useState(false)
@@ -88,9 +87,7 @@ const dragFunction = (e, index) => {
 
       }
     
-    useEffect(()=>{
-        return () => dispatch(clearBoard())
-    },[])
+
 
     return (
   
