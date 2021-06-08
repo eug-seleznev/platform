@@ -59,7 +59,7 @@ const useClickOutside = (callback) => {
           unmountOnExit
         >
           
-              <div ref={outclick} style={{position: 'absolute', backgroundColor: "white", border: '1px solid lightgrey', left: open.x+10+'px', top: open.y+10+'px', padding:'10px',}}>
+              <div ref={outclick} style={{position: 'absolute', backgroundColor: "white", border: '1px solid lightgrey', left: open.x+10+'px', top: open.y+10+'px', padding:'10px', zIndex:'9999'}}>
                 {props.buttons && props.buttons.map((el,i)=>{
                   return(
                     <div style={{height:'30px', display: 'flex', alignItems: 'center'}} onClick={()=>el.handler()}>
