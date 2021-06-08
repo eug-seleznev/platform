@@ -1,4 +1,4 @@
-import {  useRef, useState } from "react"
+import {  useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 
@@ -7,7 +7,7 @@ import styles from './kanban.module.css'
 
 import KanbanCard from "./card/card";
 import { CSSTransition } from "react-transition-group";
-import { moveCard } from "../../../../redux/actions/kanban";
+import { clearBoard, moveCard } from "../../../../redux/actions/kanban";
 import { ButtonText } from "../../../../Styles/buttons";
 import CreateForm from "./createForm";
 import { Path } from '../../../Layout/header'
@@ -20,7 +20,8 @@ const KanbanSectionTd = ({category, timelineCards, column, boardId, timelineId,h
     const dispatch = useDispatch()
     const project = useSelector(state => state.projects.project)
 
-    const currentColunmCards = timelineCards &&  timelineCards.filter(el=>el.column===column)
+    let currentColunmCards = timelineCards &&  timelineCards.filter(el=>el.column===column)
+    const [initial, setInitial] = useState(false)
     const [hower, setHower] = useState(false)
     const [newCardModal, setNewCardModal] = useState(false)
     const [addGhost, setAddGhost] = useState(false)
@@ -87,6 +88,9 @@ const dragFunction = (e, index) => {
 
       }
     
+    useEffect(()=>{
+        return () => dispatch(clearBoard())
+    },[])
 
     return (
   
