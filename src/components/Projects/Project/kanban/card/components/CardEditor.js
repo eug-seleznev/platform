@@ -322,7 +322,7 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId,history}) => {
         </div>
         <div style={{marginBottom:'10px',marginTop:'5px', display:'flex'}}>
           <Thin size='16'>Дедлайн: </Thin>
-          <Thin size='16'>{info.deadline ? getDate(info.deadline): !info.deadline&&deadline.val===''?'нет': getDate(deadline.val)}</Thin>
+          <Thin size='16'>{info.deadline&&deadline.val==='' ? getDate(info.deadline): !info.deadline&&deadline.val===''?'нет': getDate(deadline.val)}</Thin>
         </div>
         <div style={{ height: "20px",marginBottom:info.emergency === "Событие"? '170px':'0px' }}>
           
