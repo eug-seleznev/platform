@@ -95,6 +95,7 @@ const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId, history
                         Все задачи
                     </Regular>
                     <Regular size='18' color='grey' style={{marginLeft:'15px'}}>{backlog?.length}</Regular>
+                    <img src={Path+'kanban-open-icon-white.png'} style={{width: '10px', height: '15px',alignSelf: 'center',marginLeft: "auto", marginRight: '10px',cursor: 'pointer'}} />
                 </div>
             
             <div className={styles.backLogCards} >
