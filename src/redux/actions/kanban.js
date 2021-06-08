@@ -443,11 +443,12 @@ export const newTimeline = (categoryId, boardId, timelineId) => async dispatch  
 } 
 
 
-export const updateTimeline = (categoryId, step, boardId, timelineId) => async dispatch  => {
+export const updateTimeline = (categoryId, step, boardId, timelineId, month) => async dispatch  => {
     let body ={
         step: step,
         board_id: boardId,
         timeline_id: timelineId,
+        month: month,
     }
     try {
         console.log('timeline shit',body, categoryId, )

@@ -172,7 +172,7 @@ const buttons = [
                   }
                 </div>
                 {category.timeline[timelineIndex] && category.timeline[timelineIndex].start && 
-                  <div onClick={()=>setOpenTimlineModal(true)}>
+                  <div /*onClick={()=>setOpenTimlineModal(true)}*/>
                     <TimelineDates timeline={category.timeline[timelineIndex]} />
                   </div>
                 }
