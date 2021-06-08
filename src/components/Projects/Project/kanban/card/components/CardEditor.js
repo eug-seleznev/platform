@@ -124,16 +124,21 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId,history}) => {
     history.push(`../../../../users/${userid}`)
 }
   const changeVal =(e)=>{
-    setDeadline({...deadline, val: e.target.value})  
-  }
-  const makeRegular =(e)=>{
-    console.log(e.target.checked)
-
-    let val = e.target.checked
-    let field = 'regular'
+    let val = new Date (e.target.value)
+    let field = 'deadline'
     let id = info._id
+    setDeadline({...deadline, val: e.target.value}) 
     dispatch(changeCardField(val, field, id))
+     
   }
+  // const makeRegular =(e)=>{
+  //   console.log(e.target.checked)
+
+  //   let val = e.target.checked
+  //   let field = 'regular'
+  //   let id = info._id
+  //   dispatch(changeCardField(val, field, id))
+  // }
   const finish =()=>{
     let id=info._id
     dispatch(finishExpired(id, boardId))
@@ -193,7 +198,7 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId,history}) => {
                     <div style={{marginTop:'3px'}}>
                       <div style={{display: !deadline.visible?'block':'none'}}>
                         <div style={{display:!deadline.set?'none':'flex'}}>
-                          <input type='date' onKeyPress={(e)=>e.key==='Enter'?changeDeadline(e):''} onChange={changeVal} style={{width:'125px'}}></input>
+                          <input type='date' onKeyPress={(e)=>e.key==='Enter'?changeDeadline(e):''} onChange={(e)=>{changeVal(e)}} style={{width:'45px',border:'none',outline:'none'}}></input>
                           {/* <ButtonTextLight onClick={changeDeadline} style={{margin:'5px'}}>Добавить</ButtonTextLight> */}
                         </div>
                       </div>
