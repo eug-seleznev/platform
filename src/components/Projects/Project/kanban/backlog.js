@@ -92,7 +92,7 @@ const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId, history
             >
                 <div style={{display:'flex', margin:'8px', marginBottom:'30px'}}>
                     <Regular size='18' color='white'>
-                        Все задачи
+                        Задачи
                     </Regular>
                     <Regular size='18' color='grey' style={{marginLeft:'15px'}}>{backlog?.length}</Regular>
                     <img src={Path+'kanban-open-icon-white.png'} style={{width: '10px', height: '15px',alignSelf: 'center',marginLeft: "auto", marginRight: '10px',cursor: 'pointer'}} />
@@ -135,7 +135,7 @@ const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId, history
             <div className={styles.backLogButtonCont}>
                 <div className={styles.backLogButton} onClick={createFromBacklog}>
                     <img alt='plus' src={Path+'plus1.png'}className={styles.backLogPlus}></img>
-                    <ButtonTextLight color='white'style={{fontStyle:'italic'}}>Добавить карточку</ButtonTextLight>
+                    <ButtonTextLight color='white' style={{fontStyle:'italic'}}>Добавить карточку</ButtonTextLight>
                 </div>
             </div>
             
