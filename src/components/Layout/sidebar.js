@@ -14,12 +14,12 @@ const [sidebarInfo, setSidebarInfo] = useState ('')
 
     return (
       <SidebarContainer>
-        <SidebarLink to="/" >
+        <SidebarLink draggable="false" to="/" >
           <img alt="logo"
           onMouseEnter={()=>{setSidebarInfo('main')}}
           onMouseLeave={()=>{setSidebarInfo('')}}
           src={Path + "logo3.svg"}
-      
+          draggable="false"
           />
           <div className='descr'
           style={{display:`${sidebarInfo==='main'?'block':'none'}`, marginTop:'-70px'}}
@@ -31,9 +31,9 @@ const [sidebarInfo, setSidebarInfo] = useState ('')
           <p>Главная</p>
         </SidebarLink> */}
 
-        <SidebarLink to="/projects" >
+        <SidebarLink draggable="false" to="/projects" >
           <img alt="project" 
-          
+          draggable="false"
           onMouseEnter={()=>{setSidebarInfo('project')}}
           onMouseLeave={()=>{setSidebarInfo('')}}
            src={Path + "folder.svg"}
@@ -43,31 +43,34 @@ const [sidebarInfo, setSidebarInfo] = useState ('')
           >Проекты</div>
         </SidebarLink>
 
-        <SidebarLink to="/users" >
+        <SidebarLink draggable="false" to="/users" >
           <img alt="users"style={{width: "18px"}}
            src={Path + "users.svg"}
            onMouseEnter={()=>{setSidebarInfo('team')}}
            onMouseLeave={()=>{setSidebarInfo('')}} 
            className='icon'
+           draggable="false"
            />
          <div className='descr'
          style={{display:`${sidebarInfo==='team'?'block':'none'}`}}
          >Команда</div>
         </SidebarLink>
 
-        <SidebarLink to="/ideas/office/new" >
+        <SidebarLink draggable="false" to="/ideas/office/new" >
           <img alt="office" src={Path + "office.svg"}
             onMouseEnter={()=>{setSidebarInfo('office')}}
             onMouseLeave={()=>{setSidebarInfo('')
             }} className='icon'
+            draggable="false"
             />
           <div className='descr'
           style={{display:`${sidebarInfo==='office'?'block':'none'}`}}
           >Предложения</div>
         </SidebarLink>
 
-        <SidebarLink to="/department">
+        <SidebarLink draggable="false" to="/department">
           <img alt="depart" src={Path + "sidebar.svg"}
+          draggable="false"
           onMouseEnter={()=>{setSidebarInfo('department')}}
           onMouseLeave={()=>{setSidebarInfo('')
           }} className='icon'
@@ -81,8 +84,9 @@ const [sidebarInfo, setSidebarInfo] = useState ('')
           <img alt="deps" src="/sidebarIcon.png" title="Идеи на платформу" />
           <p></p>
         </SidebarLink> */}
-        <SidebarLink to="/docs">
+        <SidebarLink draggable="false" to="/docs">
           <img alt="deps" src={Path + "docs.svg"}
+          draggable="false"
           onMouseEnter={()=>{setSidebarInfo('docs')}}
           onMouseLeave={()=>{setSidebarInfo('')}} 
           className='icon'

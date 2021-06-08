@@ -57,7 +57,7 @@ const HeaderL = ({addPodsos, createProj, createNews, createTicket, tasks}) => {
                 style={{textDecoration:'none',display:`${tasks===null?'none':'flex'}`}}
               >
                 
-                <img alt="tasks" style={{width:'15px',height:'30px'}}
+                <img alt="tasks" draggable="false" style={{width:'15px',height:'30px'}}
                 className="invert" src={Path + "lightn.png"}
                  />
                 
@@ -79,8 +79,8 @@ const HeaderL = ({addPodsos, createProj, createNews, createTicket, tasks}) => {
                   setOpen({ ...open, menuProfile: false, menu: !open.menu })
                 }
               >
-                <img alt="plus" className="invert" src={Path + "headerPlus.png"}/>
-                <img alt="arrow" className="arrow" src={Path + "headerArrow.png"}/>
+                <img alt="plus" draggable="false" className="invert" src={Path + "headerPlus.png"}/>
+                <img alt="arrow" draggable="false" className="arrow" src={Path + "headerArrow.png"}/>
               </ItemHead>
 
               <ItemHead
@@ -94,6 +94,7 @@ const HeaderL = ({addPodsos, createProj, createNews, createTicket, tasks}) => {
               >
                 <div className="avatar">
                   <img
+                  draggable="false"
                     alt="avatar"
                     height="100%"
                     src={`${url}/${
@@ -105,7 +106,7 @@ const HeaderL = ({addPodsos, createProj, createNews, createTicket, tasks}) => {
                     }`}
                   />
                 </div>
-                <img alt="arrow" className="arrow" src={Path + "headerArrow.png"} />
+                <img draggable="false" alt="arrow" className="arrow" src={Path + "headerArrow.png"} />
               </ItemHead>
             </Header>
           </div>

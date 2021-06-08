@@ -119,7 +119,7 @@ const Comments =({id,emergency, history})=>{
             {comments&&comments.map((comm,i)=>{
                 return(
                     <div key={i} className={style.comments__one} >
-                        <img src={url+'/'+comm.author?.avatar}onClick={()=>goToUser(comm.author?._id)} style={{width:'25px',height:'25px', objectFit:'cover', borderRadius:'100%',cursor:'pointer'}}></img>
+                        <img draggable="false" src={url+'/'+comm.author?.avatar}onClick={()=>goToUser(comm.author?._id)} style={{width:'25px',height:'25px', objectFit:'cover', borderRadius:'100%',cursor:'pointer'}}></img>
                         <Bold size='14' color='#878787'className={style.comments__author}onClick={()=>goToUser(comm.author?._id)}>{comm.author?.name} {comm.author?.lastname&&comm.author?.lastname?.charAt(0)}.</Bold>
                         <Light size='14' color='#878787'className={style.comments__date}>{getDateWithTime(comm.date)}</Light>
                         <Light size='14' color={comm.text.includes('Дедлайн')&&comm?.type==='history'?'#C64242':
