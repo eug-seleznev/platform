@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, } from "react-redux";
 import { changeTaskCard, userToTask } from "../../../../../../redux/actions/kanban";
 import { SPRINT_TABLE, TR,Select, SPRINT_TD, NEW_THEAD } from "../../../../../../Styles/tables"
@@ -14,7 +14,7 @@ import canban from './cardOpen.module.css'
 
 const TaskTable = ({tasksArray, id, team,info}) => {
   let tasks = ['2','3']
-  
+  const taskRef = useRef()
   let selectFocusRow = ()=>{
     console.log('hi')
   }
@@ -36,6 +36,12 @@ const TaskTable = ({tasksArray, id, team,info}) => {
     selectFocusRow(focusRow);
 
   }, [focusRow]);
+  useEffect(() => {
+    taskRef.current.scrollTo({
+        top: taskRef.current.scrollHeight+1000,
+        left: 0,
+    });
+}, [])
   const enableEdit = () => {
     setEditField(!editField)
   }
@@ -44,14 +50,24 @@ const TaskTable = ({tasksArray, id, team,info}) => {
     let prop = field==='taskStatus'?e.target.checked:e.target.value
     dispatch(changeTaskCard(prop,id, field));
   };
-
+  const taskScroll =()=>{
+    setTimeout(()=>{
+      taskRef.current.scrollTo({
+            top: taskRef.current.scrollHeight+1000,
+            left: 0,
+            behavior: 'smooth'
+        });
+    },200) 
+}
   useEffect(() => {
     if (isEdit) {
       let task = tasks.filter((task) => task._id === focusRow);
   
     }
   }, [isEdit]);
-
+  useEffect(() => {
+    taskScroll()
+  }, [tasksArray]);
   //edit task
   const debounce =(fn,ms)=>{
 		const huy=()=> {
@@ -127,7 +143,7 @@ const TaskTable = ({tasksArray, id, team,info}) => {
   }
 
   return (
-    <div className={canban.tasks__container} style={{overflowY:tasksArray.length>8?'scroll': 'hidden',zIndex:-1, maxHeight:info.emergency === 'Событие'?'22vh':'28vh'}} >
+    <div className={canban.tasks__container} ref={taskRef} style={{overflowY:tasksArray.length>8?'scroll': 'hidden',zIndex:-1, maxHeight:info.emergency === 'Событие'?'22vh':'28vh'}} >
     <SPRINT_TABLE onMouseLeave={() => setTaskId("")} 
       style={{marginTop:'10px',marginLeft:'20px'
     }} >
@@ -238,7 +254,7 @@ const TaskTable = ({tasksArray, id, team,info}) => {
               
             </SPRINT_TD>
             </TR>
-        )}).reverse()}
+        )})}
 
       
       </tbody>

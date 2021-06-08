@@ -22,10 +22,9 @@ const AddTask = ({id,proj_id}) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-            dispatch(addTaskCard(task,id,proj_id));
-       setTask("")
-        
- 
+        dispatch(addTaskCard(task,id,proj_id));
+        setTask("")
+
     }
     return (
       <div>
