@@ -35,6 +35,7 @@ export const CHANGE_CARD_REGULAR = 'CHANGE_CARD_REGULARD'
 export const CHANGE_CARD_EMERGENCY = 'CHANGE_CARD_EMERGENCY '
 export const CHANGE_CARD_DATE = 'CHANGE_CARD_DATE'
 export const ADD_USER_TO_EVENT = 'ADD_USER_TO_EVENT'
+export const CLEAR_BOARD = 'CLEAR_BOARD'
 //USERES
 export const ALL_USERS = 'users';
 export const GET_EMPLOYE = 'get_users';

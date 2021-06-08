@@ -11,7 +11,6 @@ import { deleteCategory, newTimeline } from "../../../../redux/actions/kanban";
 import ModalTimeline from "./modalTimeline";
 import ExpiredColumn from "./expiredTd";
 import ConfirmModal from "./confirm";
-import PopUpMenu from "./modalMenu";
 import ModalMenu from "./modalMenu";
 
 
@@ -173,7 +172,7 @@ const buttons = [
                   }
                 </div>
                 {category.timeline[timelineIndex] && category.timeline[timelineIndex].start && 
-                  <div onClick={()=>setOpenTimlineModal(true)}>
+                  <div /*onClick={()=>setOpenTimlineModal(true)}*/>
                     <TimelineDates timeline={category.timeline[timelineIndex]} />
                   </div>
                 }
