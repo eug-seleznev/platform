@@ -215,12 +215,12 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId,history}) => {
                   </div>
         
                     </div>
-                    <div style={{display:'flex',height:'25px',justifyContent:'space-between',alignItems:'center'}}>
+                    {/* <div style={{display:'flex',height:'25px',justifyContent:'space-between',alignItems:'center'}}>
                           <StyledIn style={{textDecoration:'none', cursor:'default'}}>
                               Сделать регулярным
                           </StyledIn>
                           <input style={{width:'18px',height:'18px' ,cursor:'pointer',marginTop:'10px'}}type='checkbox'defaultChecked={info?.regular} onChange={(e)=>{makeRegular(e)}} />
-                      </div>
+                        </div> */}
                     <div style={{display:'flex',height:'25px',justifyContent:'space-between',alignItems:'center'}}>
                       <StyledIn style={{textDecoration:'none', cursor:'default'}}>
                             {chosen?'Убрать из избранного':'Добавить в избранное'}
