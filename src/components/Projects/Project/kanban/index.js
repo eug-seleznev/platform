@@ -17,7 +17,8 @@ const Kanbans = ({history}) => {
   const handleRedirect = (name) => {
     history.push(`/projects/${project.crypt}/board/${name}`)
   }
-  const createBoard = () => {
+  const createBoard = (e) => {
+    e.preventDefault()
     dispatch(addNewBoard(project.crypt, title))
     setTitle('')
   }
@@ -34,7 +35,7 @@ const Kanbans = ({history}) => {
               Теперь задачи проекта, это канбан доски, которые поделены как по вертикали (статусы задач), так и по горизонтали (категории, разные спринты). В разделах доски можно создавать карточки, которые могут содержать как одну задачу, так и несколько. На этой странице можно создать доску или выбрать из уже существующих.
             </p>
             <div className={styles.main__board__list}>
-              <div className={styles.main__board__create}>
+              <form className={styles.main__board__create} onSubmit={createBoard}>
                 <Input 
                   name='name'
                   placeholder='Введите название доски'
@@ -44,9 +45,10 @@ const Kanbans = ({history}) => {
                 />
                 <Button style={{marginLeft:'20px',
                   transform:'translateY(-36px)translateX(2px)',width:'100px'}}
-                  onClick={()=>createBoard()}>Создать
-                </Button>
-              </div>
+                  type='submit'>Создать
+                </Button> 
+              </form>
+                
               {project && project.boards.map((el,i)=>{
                   return (
                     <BoardTitleIndex el={el} key={i} handleRedirect={handleRedirect}></BoardTitleIndex>

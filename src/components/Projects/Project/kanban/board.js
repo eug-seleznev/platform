@@ -112,7 +112,7 @@ const Board = ({match, history}) => {
       <div className={styles.main} style={{gridTemplateColumns: sideOpen? '240px 1fr' : '35px 1fr'}}>
         <div className={styles.backLog} onClick={()=>setSideOpen(!sideOpen)}>
             <Backlog history={history} backlog={backlog} setCreateOpen={setCreateOpen} sideOpen={sideOpen} projectCrypt={project.crypt} boardId={board._id}/>
-            <div className={styles.verticalText} style={{display: sideOpen? 'none' : 'block'}}>
+            <div className={styles.verticalText} style={{display: sideOpen? 'none' : 'block',cursor: 'pointer'}}>
               Все задачи
               <img src={Path+'kanban-open-icon-white.png'} style={{width: '10px', height:'15px', marginTop: '10px', marginLeft: '-7px', marginBottom: '-20px',cursor: 'pointer'}} />
             </div>
