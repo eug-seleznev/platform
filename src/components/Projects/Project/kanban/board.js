@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 
 import styles from './kanban.module.css'
-import { Bold, } from "../../../../Styles/typography";
+import { Bold, Light, } from "../../../../Styles/typography";
 import KanbanSection from "./section";
 import Backlog from "./backlog";
 import {  loadBoard,deleteColumn, clearBoard } from "../../../../redux/actions/kanban";
@@ -122,13 +122,20 @@ const Board = ({match, history}) => {
         </div>
 
         <div className={styles.content}>
+            
             <div style={{display:'flex',alignItems: 'center',marginLeft:'14px'}}>
               <Bold size='24' style={{marginBottom:'5px'}}>{board.name}</Bold>
               <ModalMenu buttons={boardSettingsButtons}>
                   <img src={Path+'three-dots.png'} style={{marginLeft: '20px',}} />
               </ModalMenu>
             </div>
-            
+            {/* <div style={{display:'flex',alignItems: 'center',marginLeft:'14px', marginBottom:'20px'}}>
+            <label className={styles.switch}  style={{transform:'scale(0.7)'}} >
+              <input type="checkbox" checked={user.theme}/>
+              <span className={styles.slider}></span>
+            </label>
+            <Light size='18' style={{marginLeft:'14px'}}>Темная тема</Light>
+            </div> */}
             <div ref={boardTitle} style={{ width: sideOpen? '87vw' : '96vw', overflow:'hidden', scrollbarWidth: '0px', scrollbarColor: "transparent", }}>
               <BoardColumnsTitle Path={Path} board={board} user={user} deleteColumn={(el)=>deleteColumnHandler(el)} />
             </div>

@@ -225,7 +225,7 @@ const TaskTable = ({tasksArray, id, team,info}) => {
                       <option> Выбрать исполнителя</option>
                       {team.map((member,i) => {
                         if(member.user!==null)
-                        console.log(member.user)
+                        // console.log(member.user)
                         return (
                           <option value={member.user._id}key={i}name={task._id}>
                             

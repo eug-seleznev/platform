@@ -35,7 +35,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
       dispatch(currentCard(info))
       setTimeout(()=>{
         setCardOpen(true)
-      },100)
+      },300)
       
     }
     const deleteCard =()=>{
