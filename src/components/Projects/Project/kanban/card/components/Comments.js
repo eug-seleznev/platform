@@ -11,7 +11,7 @@ import { allUsers, userTableSearch } from "../../../../../../redux/actions/user"
 
 
 let cancel;
-const Comments =({id,emergency, history})=>{
+const Comments =({id,emergency, history, theme})=>{
     const [link,setLink] =useState('')
     const [comment,setComment] =useState('')
     const [mentions,setMentions] =useState([])
@@ -124,7 +124,7 @@ const Comments =({id,emergency, history})=>{
                         <Light size='14' color='#878787'className={style.comments__date}>{getDateWithTime(comm.date)}</Light>
                         <Light size='14' color={comm.text.includes('Дедлайн')&&comm?.type==='history'?'#C64242':
                             comm.text.includes('> Готово')&&comm?.type==='history'?'#71D186':comm?.type==='history'?'#878787':
-                            'black'}className={style.comments__text}>{comm.text}
+                            theme?'white':'black'}className={style.comments__text}>{comm.text}
                         </Light>
                     </div>
                 )
@@ -146,6 +146,7 @@ const Comments =({id,emergency, history})=>{
                     <textarea 
                         className={style.comments__textarea}
                         value={comment} 
+                        style={{backgroundColor:!theme?'white':'#1E1E1E',color:theme?'white':'#3F496C'}}
                         spellCheck="false"
                         onKeyPress={(e)=>e.key==='Enter'?createComment(e).then(commentScroll):''}
                         onChange={(e)=>{setComment(e.target.value)}}
@@ -174,7 +175,7 @@ const Comments =({id,emergency, history})=>{
 
                         }
                         </div>
-                    <ButtonTextLight style={{transform:'translateX(-35px)'}} type='submit'>Добавить комментарий</ButtonTextLight>
+                    <ButtonTextLight style={{transform:'translateX(-35px)',color:theme?'white':'#3F496C'}} type='submit'>Добавить комментарий</ButtonTextLight>
                  </form> 
                 
                     

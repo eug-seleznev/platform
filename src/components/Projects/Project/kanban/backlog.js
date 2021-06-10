@@ -135,7 +135,7 @@ const Backlog =({sideOpen,setCreateOpen, backlog, projectCrypt, boardId, history
             <div className={styles.backLogButtonCont}>
                 <div className={styles.backLogButton} onClick={createFromBacklog}>
                     <img alt='plus' src={Path+'plus1.png'}className={styles.backLogPlus}></img>
-                    <ButtonTextLight color='white' style={{fontStyle:'italic'}}>Добавить карточку</ButtonTextLight>
+                    <ButtonTextLight color='#7B7B7B' style={{fontStyle:'italic'}}>Создать карточку</ButtonTextLight>
                 </div>
             </div>
             

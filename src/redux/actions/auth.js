@@ -1,4 +1,4 @@
-import {REGISTER, USER_TASKS, LOGIN, USER_LOADED,CHANGE_AVATAR,CLEAR_MSG,CLEAR_ERROR, CHANGE_USERDATA, CHANGE_LOADED, ADD_SPRINT_TO_CHOSEN, ERROR_MSG, GREEN_MSG} from '../types'
+import {CHANGE_THEME,REGISTER, USER_TASKS, LOGIN, USER_LOADED,CHANGE_AVATAR,CLEAR_MSG,CLEAR_ERROR, CHANGE_USERDATA, CHANGE_LOADED, ADD_SPRINT_TO_CHOSEN, ERROR_MSG, GREEN_MSG} from '../types'
 import {innerBackend, instance, setAuthToken} from '../../components/utils/axios'
 
 
@@ -119,6 +119,36 @@ export const changeData = (formData) => async dispatch  => {
       const res = await innerBackend.put(`/users/me`, formData)
       dispatch({
           type: CHANGE_USERDATA,
+          payload: res.data
+      })
+      dispatch({
+        type: GREEN_MSG,
+        payload: res.data
+    })
+
+    }
+    catch (err) {
+      const errors = err.response.data.err;
+      errors.map(error => {
+         return dispatch({
+          type: ERROR_MSG,
+          payload: error.msg
+      })
+      })
+          
+    } 
+
+}
+export const changeThemeField = (theme) => async dispatch  => {
+  let body ={
+    theme:theme
+  }
+ 
+  try {
+      // console.log('hello change', formData)
+      const res = await innerBackend.put(`/users/me`, body)
+      dispatch({
+          type: CHANGE_THEME,
           payload: res.data
       })
       dispatch({

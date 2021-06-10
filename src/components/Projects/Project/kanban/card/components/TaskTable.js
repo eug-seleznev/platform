@@ -12,7 +12,7 @@ import canban from './cardOpen.module.css'
 //todo: handle no tasks state
 
 
-const TaskTable = ({tasksArray, id, team,info}) => {
+const TaskTable = ({tasksArray, id, team,info,theme}) => {
   let tasks = ['2','3']
   const taskRef = useRef()
   let selectFocusRow = ()=>{
@@ -155,7 +155,7 @@ const TaskTable = ({tasksArray, id, team,info}) => {
               onClick={() => doubleClickEdit(task)}
               key={i}
               style={{
-                backgroundColor: (task._id === focusRow || task._id === taskId) ? "#F2F2F2" : "white",
+                backgroundColor: (task._id === focusRow || task._id === taskId) ? "rgba(0,0,0,0.2)" : !theme ? 'white' : '#1E1E1E',
                 userSelect: 'none'
             }}
             >
@@ -177,6 +177,7 @@ const TaskTable = ({tasksArray, id, team,info}) => {
                   <input
                     className={style.input}
                     type="text"
+                    style={{color: theme ? 'white': 'black', backgroundColor: !theme ?'white':'#1E1E1E'}}
                     defaultValue={taskTitle}
                     name={task.taskTitle}
                     onClick={(e)=>onFocus(e)}
@@ -185,7 +186,7 @@ const TaskTable = ({tasksArray, id, team,info}) => {
                 </form>
               </SPRINT_TD>
             ) : (<>
-              <SPRINT_TD style={{width:'200px'}}>{task.taskTitle}</SPRINT_TD>
+              <SPRINT_TD style={{width:'200px',color: theme ? 'white': 'black'}}>{task.taskTitle}</SPRINT_TD>
 
               </> 
             )}
@@ -194,7 +195,7 @@ const TaskTable = ({tasksArray, id, team,info}) => {
                 
                 <>
                   {team && (
-                      <Select className={style.select} onChange={(e) => teamHandle(e, task)}>
+                      <Select className={style.select } style={{color: theme ? 'white': 'black', backgroundColor: !theme ?'rgba(0,0,0,0)':'#1E1E1E'}} onChange={(e) => teamHandle(e, task)}>
                       {team.map((member,i) => {
                         if(member.user!==null) {
 
@@ -221,7 +222,7 @@ const TaskTable = ({tasksArray, id, team,info}) => {
               ) : (
                 <>
                   {task!==null && taskId === task._id && !task.user && (
-                    <Select  defaultValue='Выбрать исполнителя' onChange={(e) => teamHandle(e, task)}>
+                    <Select style={{color: theme ? 'white': 'black', backgroundColor: !theme ?'rgba(0,0,0,0)':'#1E1E1E'}} defaultValue='Выбрать исполнителя' onChange={(e) => teamHandle(e, task)}>
                       <option> Выбрать исполнителя</option>
                       {team.map((member,i) => {
                         if(member.user!==null)
@@ -240,16 +241,16 @@ const TaskTable = ({tasksArray, id, team,info}) => {
             </SPRINT_TD>
             <SPRINT_TD style={{width:'150px',paddingRight:'25px'}}>
               <div style={{display:task._id===focusRow?'flex':'none'}}>
-                <Thin >Дедлайн: </Thin> 
+                <Thin style={{color: theme ? 'white': 'black', backgroundColor: !theme ?'white':'#1E1E1E'}}>Дедлайн: </Thin> 
                 <ButtonText onClick={()=>setDeadline(true)}
-                  style={{display:`${task._id !== focusRow||!deadline?'block':'none'}`}}>
+                  style={{display:`${task._id !== focusRow||!deadline?'block':'none'}`,color: theme ? 'white': 'black', backgroundColor: !theme ?'white':'#1E1E1E'}}>
                   {task.deadline!==undefined?getDate(task.deadline):'указать'}
                 </ButtonText>
                 
                 <input onKeyPress={(e)=>e.key==='Enter'? setDeadline(false):''} 
                   type="date" 
                   onChange={(e)=>changeTaskDate(e,task._id)}
-                  style={{display:`${task._id === focusRow&&deadline?'block':'none'}`, width:'130px'}}>
+                  style={{display:`${task._id === focusRow&&deadline?'block':'none'}`, width:'130px', color: theme ? 'white': 'black', backgroundColor: !theme ?'white':'#1E1E1E'}}>
                 </input>
               </div>
               

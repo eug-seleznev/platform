@@ -34,7 +34,7 @@ const useClickOutside = (callback) => {
 
 
     const outclick = useClickOutside(()=>setOpen({...open, visible:false}))
-    
+
     const openModal = (e) => {
       e.stopPropagation()
       setOpen({visible: true, x:e.clientX, y:e.clientY})
@@ -43,7 +43,9 @@ const useClickOutside = (callback) => {
       return(
           <>
 
-        <div onClick={(e)=>openModal(e)} style={{display:'flex', height: '100%', alignItems: "center"}}>
+        <div onClick={(e)=>openModal(e)} style={{display:'flex', height: '100%',
+            alignItems: "center",color:!props.theme?'white':'#1C1E23',
+            backgroundColor:!props.theme?'white':'#1C1E23'}}>
             {props.children}
         </div>
 
@@ -59,12 +61,19 @@ const useClickOutside = (callback) => {
           unmountOnExit
         >
           
-              <div ref={outclick} style={{position: 'absolute', backgroundColor: "white", border: '1px solid lightgrey', left: open.x+10+'px', top: open.y+10+'px', padding:'10px', zIndex:'9999'}}>
+              <div ref={outclick} style={{
+                  position: 'absolute',
+                  border: '1px solid lightgrey',
+                  left: open.x+10+'px',
+                  top: open.y+10+'px', 
+                  padding:'10px', zIndex:'9999',
+                  backgroundColor:!props.theme?'white':'#1C1E23',
+                  color:props.theme?'#1C1E23':'white'}}>
                 {props.buttons && props.buttons.map((el,i)=>{
                   return(
-                    <div style={{height:'30px', display: 'flex', alignItems: 'center'}} onClick={()=>el.handler()}>
-                      <img alt='plus' src={Path+el.icon} style={{width:'12px',marginRight:'5px',}} />
-                      <ButtonTextLight color='black'style={{fontStyle:'italic'}}>{el.title}</ButtonTextLight>
+                    <div style={{height:'30px', display: 'flex', alignItems: 'center',color:props.theme?'#1C1E23':'white'}} onClick={()=>el.handler()}>
+                      <img alt='plus' src={Path+el.icon} style={{width:'12px',marginRight:'5px', filter: !props.theme?'invert(0)':'invert(1)'}} />
+                      <ButtonTextLight color={!props.theme?'#1C1E23':'white'}style={{fontStyle:'italic'}}>{el.title}</ButtonTextLight>
                     </div> 
                   )
                 })}

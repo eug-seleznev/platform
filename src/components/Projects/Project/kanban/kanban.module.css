@@ -206,6 +206,7 @@ margin-top: 70px;
         background:none;
         width:10px;
         margin-right:5px;
+        z-index: -1;
     }
     .category{
         overflow: hidden;
@@ -213,8 +214,8 @@ margin-top: 70px;
     }
 .board{
    
-    height: 71.65vh;  
-    margin-bottom: -18px;
+    height: 72.4vh;  
+    margin-bottom: -17.5px;
     /* background-color: blanchedalmond; */
     overflow: scroll;
 }

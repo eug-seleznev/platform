@@ -21,7 +21,7 @@ import { userTableSearch } from "../../../../../../redux/actions/user";
 
 
 
-const CardEditor = ({info, setDeleteWindow, chosenCard,boardId,history}) => {
+const CardEditor = ({info, setDeleteWindow, chosenCard,boardId,history,theme}) => {
   const users = useSelector(state => state.users.users)
   const project = useSelector(state => state.projects.project)
   const dispatch= useDispatch()
@@ -165,13 +165,14 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId,history}) => {
           style={{
             fontSize: "24px",
             fontFamily: 'SuisseIntlRegular',
+            filter:theme?'invert(1)':'invert(0)'
           }}
           className={style.titleChange}
           value={title}
           name='title'
           onKeyPress={(e)=>e.key==='Enter'?onEnter(e):''}
           onChange={(e)=>changeSomeField(e)}
-        />:  <div style={{display:'flex',alignItems:'center'}}><div style={{fontFamily:'SuisseIntlRegular',fontSize:'24px', marginTop:'5px',cursor:'pointer'}} onDoubleClick={()=>{setChangeTitle(true)}}>{title}</div>
+        />:  <div style={{display:'flex',alignItems:'center'}}><div style={{fontFamily:'SuisseIntlRegular',fontSize:'24px', marginTop:'5px',cursor:'pointer',color:!theme?'black':'white'}} onDoubleClick={()=>{setChangeTitle(true)}}>{title}</div>
         <img draggable="false" onClick={()=>{setSettings(!settings)}} src={Path+'three-dots.png'} style={{width:'30px',height:'30px', objectFit:'contain',cursor:'pointer',marginLeft:'20px',marginTop:'8px'}}>
         </img>
         <div>
@@ -186,19 +187,18 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId,history}) => {
           }}
           unmountOnExit
         >
-              <div className={style.settings__menu} onMouseLeave={() =>setSettings(false)}>
+              <div className={style.settings__menu} style={{filter:theme?'invert(1)':'invert(0)'}} onMouseLeave={() =>setSettings(false)}>
                     <div style={{display:'flex',height:'25px',justifyContent:'space-between'}}>
                         <StyledIn style={{textDecoration:'none', cursor:'default'}} >
                           Изменить дедлайн
                         </StyledIn>
                         
-        <div>
-         
+                  <div>
                     {deadline.set?
                     <div style={{marginTop:'3px'}}>
                       <div style={{display: !deadline.visible?'block':'none'}}>
                         <div style={{display:!deadline.set?'none':'flex'}}>
-                          <input type='date' onKeyPress={(e)=>e.key==='Enter'?changeDeadline(e):''} onChange={(e)=>{changeVal(e)}} style={{width:'45px',border:'none',outline:'none'}}></input>
+                          <input type='date' onKeyPress={(e)=>e.key==='Enter'?changeDeadline(e):''} onChange={(e)=>{changeVal(e)}} style={{width:'45px',border:'none',outline:'none',borderRadius:'0px'}}></input>
                           {/* <ButtonTextLight onClick={changeDeadline} style={{margin:'5px'}}>Добавить</ButtonTextLight> */}
                         </div>
                       </div>
@@ -253,7 +253,12 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId,history}) => {
               }
        
         
-                        <Select name='emergency'onChange={(e)=>{changeSomeField(e)}} style={{ cursor:'pointer',width:'120px',height:'35px', marginTop:'1px',transform:'translateX(-20px)'}} defaultValue={info.emergency}>
+                        <Select name='emergency'onChange={(e)=>{changeSomeField(e)}} 
+                          style={{ cursor:'pointer',width:'120px',
+                            height:'35px', marginTop:'1px',
+                            transform:'translateX(-20px)',
+                            color:!theme?'black':'white',
+                            backgroundColor:!theme?'white':'#1E1E1E'}} defaultValue={info.emergency}>
                           <option value='Обычная'>Обычная</option>
                           <option value='Срочная'>Срочная</option>  
                           <option value='Критическая'>Критическая</option>
@@ -271,7 +276,7 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId,history}) => {
         >
           <div className={cardOpen.editList}>
               <div style={{ display:!info.type||info.emergency === "Событие"? 'none' : 'flex' }}>
-                <Light style={{ width: "40px",marginBottom:'5px',marginTop:'5px',marginLeft:'-7px' }}>
+                <Light style={{ width: "40px",marginBottom:'5px',marginTop:'5px',marginLeft:'-7px', color:theme?'white':'black' }}>
                   {info.tasks.filter(task=>task.taskStatus).length}/{info.tasks.length}
                 </Light>
                 <div className={style.card__thing} style={{marginBottom:'5px',marginTop:'10px'}}>
@@ -325,11 +330,11 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId,history}) => {
           </div>
         
         </div>
-        <div style={{marginBottom:'10px',marginTop:'5px', display:'flex'}}>
-          <Thin size='16'>Дедлайн: </Thin>
-          <Thin size='16'>{info.deadline&&deadline.val==='' ? getDate(info.deadline): !info.deadline&&deadline.val===''?'нет': getDate(deadline.val)}</Thin>
+        <div style={{marginBottom:'5px',marginTop:'5px', display:info.emergency==='Событие'?'none':'flex'}}>
+          <Thin size='16' color={theme?'white':'black'}>Дедлайн: </Thin>
+          <Thin size='16'color={theme?'white':'black'}>{info.deadline&&deadline.val==='' ? getDate(info.deadline): !info.deadline&&deadline.val===''?'нет': getDate(deadline.val)}</Thin>
         </div>
-        <div style={{ height: "20px",marginBottom:info.emergency === "Событие"? '170px':'0px' }}>
+        <div style={{ height: "20px",marginTop:'5px',marginBottom:info.emergency === "Событие"? '170px':'0px' }}>
           
             <div className={style.edit__task}>
               {/* <Light
@@ -361,7 +366,7 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId,history}) => {
                     name='description'
                     onKeyPress={(e)=>e.key==="Enter"?onEnter(e):''}
                     onChange={(e)=>changeSomeField(e)}
-                    style={{width:'660px',resize:"none",height:'40px',zIndex:1}}
+                    style={{width:'635px',resize:"none",height:'40px',zIndex:1,color:theme?'white':'black', backgroundColor:!theme?'white':'#1E1E1E'}}
                     placeholder="Добавить описание"
                     className={style.changeDescr}
                   ></textarea>
@@ -371,7 +376,7 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId,history}) => {
             </div>
             <div style={{display: info.emergency === "Событие"? 'block' : 'none' }}>
               <div style={{ borderTop:'1px solid #AFAFAF', borderBottom:'1px solid #AFAFAF',marginTop:'10px'}}>
-              <Light style={{marginTop:'7px'}} size='15.5'>Участники</Light>
+              <Light style={{marginTop:'7px',color:theme?'white':'black'}} size='15.5'>Участники</Light>
               <div style={{display:'flex'}}>
                 {info.event_users?.map((el,i)=>{
                   return (
@@ -397,11 +402,13 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId,history}) => {
              
             
                {!addUser?
-                <img draggable="false" src={Path+'plus thin.png'} style={{height:'25px',width:'25px',objectFit:'cover',
-                borderRadius:'100%',marginRight:'10px',marginTop:'14px',
-                marginBottom:'23px',marginLeft:'20px',cursor:'pointer'}} onClick={()=>{setAddUser(true)}}></img>:
+                <img draggable="false" src={Path+'plus thin.png'} style={{
+                  height:'25px',width:'25px',objectFit:'cover',
+                  borderRadius:'100%',marginRight:'10px',marginTop:'14px',
+                  marginBottom:'23px',marginLeft:'20px',cursor:'pointer'
+                }} onClick={()=>{setAddUser(true)}}></img>:
 
-               <div>
+               <div style={{filter: theme?'invert(1)':'invert(0)'}}>
                     <Input style={{width: "180px"}} onChange={handleInput}></Input> 
                       <div className={style.comments__dropdown}
                         style={{    
@@ -436,15 +443,15 @@ const CardEditor = ({info, setDeleteWindow, chosenCard,boardId,history}) => {
                {
                !evDate? 
                 <>
-                  <Light style={{marginBottom:'10px',marginTop:'5px'}}>Введите дату события</Light>
-                  <div style={{display:'flex'}}>
+                  <Light style={{marginBottom:'10px',color:theme?'white':'black',marginTop:'5px'}}>Введите дату события</Light>
+                  <div style={{display:'flex',filter:theme?'invert(1)':'invert(0)'}}>
                       <input type="datetime-local" name='event_date' onChange={(e)=>{setEvDateVal(e.target.value)}} onKeyPress={(e)=>e.key==='Enter'&&e.target.value!=='Invalid Date'?changeEventDate():''}></input> 
                       <button style={{background:'none', outline:'none', border:'none',cursor:'pointer'}} onClick={()=>{changeEventDate()}}><img style={{width:'12px',marginTop:'6px'}} src='/check.png'></img></button>
                   </div>
                   
                 </>
                 :
-                <Light className={cardOpen.event__date} onDoubleClick={()=>{setEvDate (false)}} style={{borderBottom:'1px solid #AFAFAF',paddingBottom:'13px',marginTop:'13px'}}>
+                <Light className={cardOpen.event__date} onDoubleClick={()=>{setEvDate (false)}} style={{borderBottom:'1px solid #AFAFAF',paddingBottom:'13px',marginTop:'13px',color:theme?'white':'black'}}>
                  {getDateWithTime(info?.event_date)}
                 </Light>
               }

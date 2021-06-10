@@ -1,5 +1,5 @@
 
-import {REGISTER,EDIT_USER_TASK,MY_TASK_DELITE,USER_TASKS, AUTH_ERROR,SORT_USER_TASKS,FINISH_USER_TASK, LOGIN, USER_LOADED, CHANGE_USERDATA, CHANGE_AVATAR, CHANGE_LOADED, ADD_SPRINT_TO_CHOSEN, CLEAR_MSG, CLEAR_ERROR, ADD_USER_TASK} from '../types'
+import {REGISTER,EDIT_USER_TASK,MY_TASK_DELITE,USER_TASKS, AUTH_ERROR,SORT_USER_TASKS,FINISH_USER_TASK, LOGIN, USER_LOADED, CHANGE_USERDATA, CHANGE_AVATAR, CHANGE_LOADED, ADD_SPRINT_TO_CHOSEN, CLEAR_MSG, CLEAR_ERROR, ADD_USER_TASK, CHANGE_THEME} from '../types'
 
 
 
@@ -10,7 +10,8 @@ const initialState = {
     msg:null,
     error: '',
     loaded: false,
-    chosenSprint: false
+    chosenSprint: false,
+
 }
 
 export default function(state = initialState, action) {
@@ -78,7 +79,12 @@ export default function(state = initialState, action) {
                         ...state,
                         loaded: true
                     }
-            
+                case CHANGE_THEME: 
+                // console.log (payload.theme)
+                    return {
+                        ...state,
+                        user: payload
+                    }
                 case CHANGE_USERDATA:
                     return {
                         ...state,
