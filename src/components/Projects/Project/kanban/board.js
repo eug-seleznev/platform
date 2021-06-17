@@ -165,15 +165,15 @@ const Board = ({match, history}) => {
             <div style={{display:'flex',alignItems: 'center',marginLeft:'14px'}}>
               
               {!edit
-                        ?<Bold size='24' style={{marginBottom:'5px'}}>{board.name}</Bold>
-                        :<form onSubmit={editName}>
-                            <input 
-                                defaultValue={board.name}
-                                onClick={e=>e.stopPropagation()}
-                                onChange={(e)=>setNewName(e.target.value)}
-                                />
-                        </form>
-                        }
+                  ?<Bold size='24' style={{marginBottom:'5px'}}>{board.name}</Bold>
+                  :<form onSubmit={editName}>
+                      <input 
+                          defaultValue={board.name}
+                          onClick={e=>e.stopPropagation()}
+                          onChange={(e)=>setNewName(e.target.value)}
+                          />
+                  </form>
+                  }
               <ModalMenu buttons={boardSettingsButtons}>
                   <img src={Path+'three-dots.png'} style={{marginLeft: '20px',}} />
               </ModalMenu>

@@ -44,7 +44,7 @@ const useClickOutside = (callback) => {
       return(
           <>
 
-        <div onClick={(e)=>openModal(e)} style={{display:'flex', height: '100%', alignItems: "center", cursor: 'pointer'}}>
+        <div onClick={(e)=>openModal(e)} style={{display:'flex', height: '100%', alignItems: "center", cursor: 'pointer', minHeight:'15px'}}>
             {props.children}
         </div>
 
