@@ -37,7 +37,8 @@ const useClickOutside = (callback) => {
     
     const openModal = (e) => {
       e.stopPropagation()
-      setOpen({visible: true, x:e.clientX, y:e.clientY})
+      const scrolled = document.documentElement.scrollTop
+      setOpen({visible: true, x:e.clientX, y:scrolled+e.clientY})
     }
     
       return(
@@ -62,8 +63,13 @@ const useClickOutside = (callback) => {
               <div ref={outclick} style={{position: 'absolute', backgroundColor: "white", border: '1px solid lightgrey', left: open.x+10+'px', top: open.y+10+'px', padding:'10px', zIndex:'9999'}}>
                 {props.buttons && props.buttons.map((el,i)=>{
                   return(
-                    <div style={{height:'30px', display: 'flex', alignItems: 'center'}} onClick={()=>el.handler()}>
-                      <img alt='plus' src={Path+el.icon} style={{width:'12px',marginRight:'5px',}} />
+                    <div style={{height:'30px', display: 'flex', alignItems: 'center'}} 
+                          onClick={(e)=>{
+                              e.stopPropagation()
+                              el.handler()
+                              setOpen({...open, visible:false})
+                            }}>
+                      <img src={Path+el.icon} style={{width:'12px',marginRight:'5px',}} />
                       <ButtonTextLight color='black'style={{fontStyle:'italic'}}>{el.title}</ButtonTextLight>
                     </div> 
                   )

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styles from './kanban.module.css'
-import { addNewBoard} from "../../../../redux/actions/kanban";
+import { addNewBoard, } from "../../../../redux/actions/kanban";
 import { Button,} from "../../../../Styles/buttons";
 import { Input } from "../../../../Styles/Forms";
 import { Path } from "../../../Layout/header"
