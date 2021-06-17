@@ -55,7 +55,6 @@ import ModalMenu from "./modalMenu"
 
         return (
             <div style={{display:'flex', alignItems:'center'}}>
-                
                     <div className={styles.main__board__item} onClick={()=>handleRedirect(el.name)} onDoubleClick={()=>setEdit(true)}>
                     {!edit
                         ?<div>{el.name}</div>
