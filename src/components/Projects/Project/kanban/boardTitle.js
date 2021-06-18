@@ -20,7 +20,7 @@ const BoardColumnsTitle = ({user, board, Path, deleteColumn}) => {
 
     return (
           <>
-            <div className={styles.title} style={{backgroundColor: !theme?'rgba(0,0,0,0)':'#1C1E23', width: 'fit-content', minWidth: '100%'}}>
+            <div className={styles.title} style={{backgroundColor: !theme?'rgba(0,0,0,0)':'#292929', width: 'fit-content', minWidth: '100%'}}>
                 <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns?.length-1},250px) minmax(50px,1fr)`, minWidth:'100%'}}>
                   <span/>
 

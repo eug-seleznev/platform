@@ -1,6 +1,6 @@
 
 import { useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import { Button, CancelButton } from '../../../../Styles/buttons'
 import styles from './kanban.module.css'
@@ -73,7 +73,7 @@ export default BoardSettings
 const CreateColumn = ({create, closeModal}) => {
     const [name, setName] = useState('')
     const input = useRef(null)
-
+const theme = useSelector(state => state.auth.user.theme)
     const close = () => {
         setName('')
         closeModal()
@@ -82,11 +82,13 @@ const CreateColumn = ({create, closeModal}) => {
         input.current.focus()
     },[])
     return(
-        <form className={styles.createCard} style={{marginTop: '36vh'}} onSubmit={(e)=>create(e,name)}>
+        <form className={styles.createCard} style={{marginTop: '36vh',backgroundColor:theme?'#18191B':'white'}} onSubmit={(e)=>create(e,name)}>
           <div>
-            <Light className={styles.createCategoryInput} size='14'>Название колонки</Light>
+            <Light className={styles.createCategoryInput}color={!theme?'black':'white'} size='14'>Название колонки</Light>
              <Input 
                   className={styles.createCategoryInput}
+                  style={{backgroundColor:theme?'292929':'white'}}
+                  
                   required
                   name='name'
                   ref={input}
@@ -95,7 +97,7 @@ const CreateColumn = ({create, closeModal}) => {
               />
           </div>
           <div style={{display:'flex',justifyContent:'space-between', marginTop:'15px'}}>
-              <CancelButton fontSize='13px'padd='5px' grey onClick={close}>Закрыть</CancelButton>
+              <CancelButton fontSize='13px'padd='5px'style={{backgroundColor:theme?'#18191B':'grey',border:theme?'none':''}} onClick={close}>Закрыть</CancelButton>
               <Button type='submit'>Создать колонку</Button> 
           </div>
         </form>
@@ -104,6 +106,7 @@ const CreateColumn = ({create, closeModal}) => {
 
 const CreateCategory = ({create, closeModal}) => {
     const [name, setName] = useState('')
+    const theme = useSelector(state => state.auth.user.theme)
     const input = useRef(null)
     const close = () => {
         setName('')
@@ -115,9 +118,9 @@ const CreateCategory = ({create, closeModal}) => {
     },[])
 
     return(
-        <form className={styles.createCard} style={{marginTop: '36vh'}} onSubmit={(e)=>create(e,name)}>
+        <form className={styles.createCard} style={{marginTop: '36vh',backgroundColor:theme?'#18191B':'white'}} onSubmit={(e)=>create(e,name)}>
         <div>
-            <Light  size='14'>Название категории</Light>
+            <Light color={!theme?'black':'white'}  size='14'>Название категории</Light>
              <Input 
                   className={styles.createCategoryInput}
                   required
@@ -129,7 +132,7 @@ const CreateCategory = ({create, closeModal}) => {
               />             
           </div>
           <div style={{display:'flex',justifyContent:'space-between', marginTop:'15px'}}>
-              <CancelButton fontSize='13px'padd='5px' grey onClick={close}>Закрыть</CancelButton>
+              <CancelButton fontSize='13px'padd='5px' style={{backgroundColor:theme?'#18191B':'grey',border:theme?'none':''}}  onClick={close}>Закрыть</CancelButton>
               <Button type='submit'>Создать категорию</Button> 
           </div>
         </form>

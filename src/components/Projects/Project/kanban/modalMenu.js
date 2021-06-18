@@ -44,8 +44,8 @@ const useClickOutside = (callback) => {
           <>
 
         <div onClick={(e)=>openModal(e)} style={{display:'flex', height: '100%',
-            alignItems: "center",color:!props.theme?'white':'#1C1E23',
-            backgroundColor:!props.theme?'white':'#1C1E23'}}>
+            alignItems: "center",color:!props.theme?'white':'#292929',
+            backgroundColor:!props.theme?'white':'#292929'}}>
             {props.children}
         </div>
 
@@ -67,13 +67,13 @@ const useClickOutside = (callback) => {
                   left: open.x+10+'px',
                   top: open.y+10+'px', 
                   padding:'10px', zIndex:'9999',
-                  backgroundColor:!props.theme?'white':'#1C1E23',
-                  color:props.theme?'#1C1E23':'white'}}>
+                  backgroundColor:!props.theme?'white':'#0D1117',
+                  color:props.theme?'#0D1117':'white'}}>
                 {props.buttons && props.buttons.map((el,i)=>{
                   return(
-                    <div style={{height:'30px', display: 'flex', alignItems: 'center',color:props.theme?'#1C1E23':'white'}} onClick={()=>el.handler()}>
+                    <div style={{height:'30px', display: 'flex', alignItems: 'center',color:props.theme?'#0D1117':'white'}} onClick={()=>el.handler()}>
                       <img alt='plus' src={Path+el.icon} style={{width:'12px',marginRight:'5px', filter: !props.theme?'invert(0)':'invert(1)'}} />
-                      <ButtonTextLight color={!props.theme?'#1C1E23':'white'}style={{fontStyle:'italic'}}>{el.title}</ButtonTextLight>
+                      <ButtonTextLight color={!props.theme?'#0D1117':'white'}style={{fontStyle:'italic'}}>{el.title}</ButtonTextLight>
                     </div> 
                   )
                 })}

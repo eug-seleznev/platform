@@ -46,16 +46,18 @@ const dragFunction = (e, index) => {
         console.log('Не получилось переместить карточку', e)
     }
 }
-
+useEffect(()=>{
+    refBG.current.style.backgroundColor=theme?'#0D1117':'white'
+},[theme])
 
     const dragOver = (e) => {
         e.preventDefault()
-        refBG.current.style.backgroundColor = 'rgb(248, 248, 250)'
+        refBG.current.style.backgroundColor=theme?'#0D1117':'rgb(248, 248, 250)'
         setAddGhost('ghost last')
     }
     const dragOut = (e) => {
         e.preventDefault()
-        refBG.current.style.backgroundColor='white'
+        refBG.current.style.backgroundColor=theme?'#0D1117':'white'
         setAddGhost(false)
     }
     const cardDragOver = (e,i) => {
@@ -63,18 +65,18 @@ const dragFunction = (e, index) => {
         e.stopPropagation()
         // console.log('he')
 
-        refBG.current.style.backgroundColor = 'rgb(248, 248, 250)'
+        refBG.current.style.backgroundColor=theme?'#0D1117':'rgb(248, 248, 250)'
         setAddGhost(`ghost${i}`)
     }
     const cardDragOut = (e) => {
         e.preventDefault()
         e.stopPropagation()
-        refBG.current.style.backgroundColor='white'
+        refBG.current.style.backgroundColor=theme?'#0D1117':'white'
         setAddGhost(false)
     }
     const dropCard = (e) => {
         e.preventDefault()
-        refBG.current.style.backgroundColor='white'
+        refBG.current.style.backgroundColor=theme?'#0D1117':'white'
         setAddGhost(false)
         dragFunction(e, timelineCards.length)
     }
@@ -83,7 +85,7 @@ const dragFunction = (e, index) => {
         console.log('index',index)
         dragFunction(e, index)
         setAddGhost(false)
-        refBG.current.style.backgroundColor='white'
+        refBG.current.style.backgroundColor=theme?'#0D1117':'white'
 
       }
     
