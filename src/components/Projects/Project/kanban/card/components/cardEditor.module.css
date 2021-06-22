@@ -1,0 +1,26 @@
+.title {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.title__input {
+    font-size: 24px;
+	font-family: SuisseIntlRegular;
+	border: none;
+	background-color: #ECECEC;
+	width: 100%;
+}
+.title__static {
+    font-family: SuisseIntlRegular;
+    font-size: 24px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.title__threedot {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-top: 8px;
+}
