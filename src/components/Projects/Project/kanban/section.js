@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux"
 import styles from './kanban.module.css'
 import KanbanSectionTd from "./sectionTd";
 import { Path } from "../../../Layout/header";
-import { deleteCategory, newTimeline } from "../../../../redux/actions/kanban";
+import { deleteCategory, newTimeline, renameCategory } from "../../../../redux/actions/kanban";
 import ModalTimeline from "./modalTimeline";
 import ExpiredColumn from "./expiredTd";
 import ConfirmModal from "./confirm";
@@ -46,7 +46,10 @@ const KanbanSection = ({main, board, category, history}) => {
       })
       setTimelines(nowLine)
     },[timelineIndex,board])
-  
+
+    const changeCategoryName = (newCategoryName) => {
+      dispatch(renameCategory(board._id,category._id,newCategoryName))
+    }
     const deleteCategoryHandler = (el) => {
       dispatch(deleteCategory(board._id,category._id))
     }
@@ -80,6 +83,7 @@ const KanbanSection = ({main, board, category, history}) => {
               board={board}
               prevTimeline={prevTimeline} 
               timelineIndex={timelineIndex} 
+              changeCategoryName={changeCategoryName}
             />
           
         
@@ -129,17 +133,32 @@ const TimelineDates = ({timeline,theme}) => {
 }
 
 
-const CategoryTitle = ({open, setConfirm, setOpen, setOpenTimlineModal, nextTimeline, timelineIndex, prevTimeline, category, board,}) => {
+const CategoryTitle = ({open, setConfirm, setOpen, setOpenTimlineModal, nextTimeline, timelineIndex, prevTimeline, category, board, changeCategoryName}) => {
+  
   const theme = useSelector(state => state.auth.user.theme)
+  const [editName, setEditName] = useState(false)
+  const [newCategoryName, setNewCategoryName] = useState(category.name)
  
-  const buttons = [
-    {
-      title: 'Удалить категорию',
-      handler: ()=>setConfirm(true),
-      icon: 'trash-sharp.png'
+  const submit = () => {
+    changeCategoryName(newCategoryName)
+    setEditName(false)
+  }
 
-    }
-  ]
+
+const buttons = [
+  {
+    title: 'Изменить название',
+    handler: ()=>setEditName(true),
+    icon: 'edit1.jpg'
+
+  },
+  {
+    title: 'Удалить категорию',
+    handler: ()=>setConfirm(true),
+    icon: 'trash-sharp.png'
+
+  },
+]
 
   return(
     <div className={styles.title} onClick={()=>setOpen(!open)} style={{backgroundColor:!theme?'rgba(0,0,0,0)':'#292929',minWidth: '100%',color:theme?'white':'black'}}>
@@ -149,9 +168,18 @@ const CategoryTitle = ({open, setConfirm, setOpen, setOpenTimlineModal, nextTime
                 <img src={Path+'three-dots.png'} style={{marginLeft: '20px',}} />
             </ModalMenu>
           </span>
-          <div style={{display: "flex", alignItems: 'center',color:theme?'white':'black'}}>
-
-              {category.name}
+          <div style={{display: "flex", alignItems: 'center', color:theme?'white':'black'}}>
+              {!editName
+                ?<div onClick={e=>e.stopPropagation()} onDoubleClick={()=>setEditName(true)}>{category.name}</div>
+                :<form onSubmit={submit}>
+                    <input 
+                        defaultValue={category.name}
+                        onClick={e=>e.stopPropagation()}
+                        onChange={(e)=>setNewCategoryName(e.target.value)}
+                        />
+                </form>
+                }
+              
 
               <img src={Path+'kanban-open-icon.png'} style={{transform: `rotate(${open?'180':'0'}deg)`, marginLeft: '5px', height: '8px',filter:theme?'invert(1)':'invert(0)'}} />
 

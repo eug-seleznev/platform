@@ -86,12 +86,15 @@
 }
 .main__board__item {
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     height:25px;
     border-radius: 5px;
     margin-top: 10px;
     border: 0.4px solid #b7b7b7;
     text-align: left;
-    width: 96%;
+    width: 100%;
     padding: 10px;
     font-family: SuisseIntlLight;
     font-size: 22px;

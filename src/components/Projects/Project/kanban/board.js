@@ -7,7 +7,7 @@ import styles from './kanban.module.css'
 import { Bold, Light, } from "../../../../Styles/typography";
 import KanbanSection from "./section";
 import Backlog from "./backlog";
-import {  loadBoard,deleteColumn, clearBoard } from "../../../../redux/actions/kanban";
+import {  loadBoard,deleteColumn, clearBoard, addBoardToChosen, renameBoard, deleteBoard } from "../../../../redux/actions/kanban";
 import CreateForm from "./createForm";
 
 import { Path } from "../../../Layout/header";
@@ -15,6 +15,7 @@ import BoardSettings from './boardSettings'
 import BoardColumnsTitle from "./boardTitle";
 
 import ModalMenu from "./modalMenu";
+import ConfirmModal from "./confirm";
 import { changeThemeField } from "../../../../redux/actions/auth";
 import { background } from "../../../../redux/actions/user";
 
@@ -31,6 +32,7 @@ const Board = ({match, history}) => {
   const user = useSelector(state => state.auth.user)
   const board = useSelector(state=>state.projects.kanban)
   const backlog = useSelector(state=>state.projects.backlog)
+  const favBoards = useSelector(state=>state.auth.user.fav_boards)
 
   const boardDiv = useRef(null)
   const boardDivChild = useRef(null)
@@ -41,11 +43,7 @@ const Board = ({match, history}) => {
     place:'backlog'
 })
     const [sideOpen, setSideOpen] = useState(false)
-    const [settingsOpen, setSettingsOpen] = useState({
-      visible:false,
-      x:0,
-      y:0,
-    })
+
     const [createColumn, setCreateColumn] = useState(false)
     const [createCategory, setCreateCategory] = useState(false)
 
@@ -58,9 +56,21 @@ const Board = ({match, history}) => {
       x:0,
       y:0
     })
-    // useEffect(()=>{
-    //   console.log(user.theme)
-    // },[user])
+    const [edit, setEdit] = useState(false)
+    const [newName, setNewName] = useState('')
+    const [confirm, setConfirm] = useState(false)
+    const [chosen,setChosen] =useState(false)
+
+    useEffect(()=>{
+      if (board){
+        setNewName(board.name)
+        favBoards.map(el=>{
+        if(el.board_id===board._id){
+              setChosen(true)
+          }
+        })}
+    },[board])
+
     const onMoveStart = (e) => {
       if(e.button===1){
         e.preventDefault()
@@ -98,7 +108,20 @@ const Board = ({match, history}) => {
         dispatch(deleteColumn(board._id,el))
       }
 
+      const chosenBoard =()=>{
+        setChosen(!chosen)
+        dispatch(addBoardToChosen(board._id))
+    }
 
+    const editName =()=>{
+        dispatch(renameBoard(board._id, newName))
+        setEdit(false)
+        history.push(`/projects/${project.crypt}/board/${newName}`)
+    }
+    const deleteThisBoard = () => {
+        dispatch(deleteBoard(board._id))
+        history.push(`/projects/${project.crypt}/kanbans`)
+    }
     const boardSettingsButtons = [
       {
         title: 'Добавить категорию',
@@ -109,6 +132,21 @@ const Board = ({match, history}) => {
         title: 'Добавить колонку',
         handler: ()=>setCreateColumn(true),
         icon: 'three-dots.png'
+      },
+      {
+        title: 'Редактировать название',
+        handler: ()=>setEdit(true),
+        icon: 'edit1.jpg'
+      },
+      {
+        title: chosen?'Убрать из избранных':'Добавить в избранные',
+        handler: ()=>chosenBoard(),
+        icon: 'starr.png'
+      },
+      {
+        title: 'Удалить доску',
+        handler: ()=>setConfirm(true),
+        icon: 'trash-sharp.png'
       },
     ]
 
@@ -136,7 +174,18 @@ const Board = ({match, history}) => {
         <div className={styles.content}>
             
             <div style={{display:'flex',alignItems: 'center',marginLeft:'14px'}}>
-              <Bold size='24' style={{marginBottom:'5px',color:user.theme?'white':'black'}}>{board.name}</Bold>
+              
+              {!edit
+                  ?<Bold size='24' style={{marginBottom:'5px',color:user.theme?'white':'black'}}>{board.name}</Bold>
+                  :<form onSubmit={editName}>
+                      <input 
+                          defaultValue={board.name}
+                          onClick={e=>e.stopPropagation()}
+                          onChange={(e)=>setNewName(e.target.value)}
+                          />
+                  </form>
+                  }
+              
               <ModalMenu buttons={boardSettingsButtons} theme={user.theme}>
                   <img src={Path+'three-dots.png'} style={{marginLeft: '20px',}} />
               </ModalMenu>
@@ -166,6 +215,7 @@ const Board = ({match, history}) => {
 
 
           {/* <PopUpMenu open={settingsOpen} buttons={boardSettingsButtons} close={()=>setSettingsOpen(false)}/> */}
+          <ConfirmModal  visible={confirm} confirm={()=>deleteThisBoard()} close={()=>setConfirm(false)} text={'доску '+board.name} />
           <BoardSettings visible={createCategory} type='category' close={()=>setCreateCategory(false)} boardId={board._id}  />
           <BoardSettings visible={createColumn} type='column'  close={()=>setCreateColumn(false)} boardId={board._id}  />
           <CreateForm crypt={project.crypt} visible={createOpen.status} place={createOpen.place} setCreateOpen={setCreateOpen} boardId={board._id}></CreateForm>

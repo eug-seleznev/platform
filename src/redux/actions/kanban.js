@@ -1,5 +1,5 @@
 import { innerBackend, } from "../../components/utils/axios";
-import {ADD_USER_TO_EVENT,CHANGE_CARD_DATE,CHANGE_CARD_EMERGENCY,DELETE_CARD_BACKLOG,CHANGE_CARD_REGULAR,LOAD_BOARD,REMOVE_TAG_CARD,CHOSEN_BOARD,ADD_TAG_CARD,DELETE_CARD,ADD_CARD_TO_CHOSEN,CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD, COMMON_KANBAN_RELOAD, ADD_USER_TO_TASK_NEW, UNEXPIRED, CLEAR_BOARD} from "../types";
+import {ADD_USER_TO_EVENT,CHANGE_CARD_DATE,CHANGE_CARD_EMERGENCY,DELETE_CARD_BACKLOG,CHANGE_CARD_REGULAR,LOAD_BOARD,REMOVE_TAG_CARD,CHOSEN_BOARD,ADD_TAG_CARD,DELETE_CARD,ADD_CARD_TO_CHOSEN,CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD, COMMON_KANBAN_RELOAD, ADD_USER_TO_TASK_NEW, UNEXPIRED, CLEAR_BOARD, RENAME_BOARD} from "../types";
 
 
 
@@ -195,7 +195,47 @@ export const addNewBoard = (crypt, name) => async dispatch  => {
             alert('ошибка')           
          }
 } 
-
+export const deleteBoard = (board_id) => async dispatch  => {
+    
+   
+    try {
+        const res = await innerBackend.delete(`/kanban/boards/delete/${board_id}`)
+        dispatch({
+            type: ADD_NEW_BOARD,
+            payload: res.data
+        })
+        // dispatch({
+        //     type: GREEN_MSG,
+        //     payload: res.data
+        // })
+        }
+        catch (err) {
+            alert('ошибка')  
+            console.log(err)         
+         }
+}
+export const renameBoard = (board_id, name) => async dispatch  => {
+    
+    let body ={
+        name: name,
+    }
+    try {
+        const res = await innerBackend.put(`/kanban/boards/rename/${board_id}`, body)
+        console.log('resssssssss',res)
+        dispatch({
+            type: RENAME_BOARD,
+            payload: res.data
+        })
+        // dispatch({
+        //     type: GREEN_MSG,
+        //     payload: res.data
+        // })
+        }
+        catch (err) {
+            alert('ошибка')  
+            console.log(err)         
+         }
+}
 export const addNewCategory = (board_id, formData) => async dispatch  => {
     
     // let body ={
@@ -221,6 +261,29 @@ export const addNewCategory = (board_id, formData) => async dispatch  => {
         }
         catch (err) {
             console.log('ошибка создания категории',err.response)                  
+         }
+} 
+export const renameCategory = (boardId, categoryId, name) => async dispatch  => {
+    
+    const body ={
+        name:name,
+        board_id: boardId    
+    }
+    try {
+        const res = await innerBackend.put(`/kanban/categories/edit/rename/${categoryId}`,body)
+            console.log('formData',res.data)
+
+        dispatch({
+            type: COMMON_KANBAN_RELOAD,
+            payload: res.data
+        })
+        // dispatch({
+        //     type: GREEN_MSG,
+        //     payload: res.data
+        // })
+        }
+        catch (err) {
+            console.log('ошибка удаления категории',err.response)        
          }
 } 
 export const deleteCategory = (boardId, categoryId) => async dispatch  => {
@@ -264,6 +327,29 @@ export const addNewColumn = (board_id, name) => async dispatch  => {
         }
         catch (err) {
             console.log('ошибка создания колонки',err.response)        
+         }
+} 
+export const renameColumn = (board_id, name, index) => async dispatch  => {
+    
+    let body = {
+        new_column: name, 
+        ind: index
+    }
+    try {
+        console.log('what',board_id, body)
+        const res = await innerBackend.put(`/kanban/boards/column/rename/${board_id}`,body)
+
+        dispatch({
+            type: COMMON_KANBAN_RELOAD,
+            payload: res.data
+        })
+        // dispatch({
+        //     type: GREEN_MSG,
+        //     payload: res.data
+        // })
+        }
+        catch (err) {
+            console.log('ошибка редактирования колонки',err.response)        
          }
 } 
 export const deleteColumn = (board_id, name) => async dispatch  => {
