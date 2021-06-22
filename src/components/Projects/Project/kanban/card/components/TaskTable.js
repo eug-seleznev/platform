@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, } from "react-redux";
 import { changeTaskCard, userToTask } from "../../../../../../redux/actions/kanban";
 import { SPRINT_TABLE, TR,Select, SPRINT_TD, NEW_THEAD } from "../../../../../../Styles/tables"
@@ -12,9 +12,9 @@ import canban from './cardOpen.module.css'
 //todo: handle no tasks state
 
 
-const TaskTable = ({tasksArray, id, team,info}) => {
+const TaskTable = ({tasksArray, id, team,info,theme}) => {
   let tasks = ['2','3']
-  
+  const taskRef = useRef()
   let selectFocusRow = ()=>{
     console.log('hi')
   }
@@ -36,6 +36,12 @@ const TaskTable = ({tasksArray, id, team,info}) => {
     selectFocusRow(focusRow);
 
   }, [focusRow]);
+  useEffect(() => {
+    taskRef.current.scrollTo({
+        top: taskRef.current.scrollHeight+1000,
+        left: 0,
+    });
+}, [])
   const enableEdit = () => {
     setEditField(!editField)
   }
@@ -44,14 +50,24 @@ const TaskTable = ({tasksArray, id, team,info}) => {
     let prop = field==='taskStatus'?e.target.checked:e.target.value
     dispatch(changeTaskCard(prop,id, field));
   };
-
+  const taskScroll =()=>{
+    setTimeout(()=>{
+      taskRef.current.scrollTo({
+            top: taskRef.current.scrollHeight+1000,
+            left: 0,
+            behavior: 'smooth'
+        });
+    },200) 
+}
   useEffect(() => {
     if (isEdit) {
       let task = tasks.filter((task) => task._id === focusRow);
   
     }
   }, [isEdit]);
-
+  useEffect(() => {
+    taskScroll()
+  }, [tasksArray]);
   //edit task
   const debounce =(fn,ms)=>{
 		const huy=()=> {
@@ -127,7 +143,7 @@ const TaskTable = ({tasksArray, id, team,info}) => {
   }
 
   return (
-    <div className={canban.tasks__container} style={{overflowY:tasksArray.length>8?'scroll': 'hidden',zIndex:-1, maxHeight:info.emergency === 'Событие'?'22vh':'28vh'}} >
+    <div className={canban.tasks__container} ref={taskRef} style={{overflowY:tasksArray.length>8?'scroll': 'hidden',zIndex:-1, maxHeight:info.emergency === 'Событие'?'22vh':'28vh'}} >
     <SPRINT_TABLE onMouseLeave={() => setTaskId("")} 
       style={{marginTop:'10px',marginLeft:'20px'
     }} >
@@ -139,7 +155,7 @@ const TaskTable = ({tasksArray, id, team,info}) => {
               onClick={() => doubleClickEdit(task)}
               key={i}
               style={{
-                backgroundColor: (task._id === focusRow || task._id === taskId) ? "#F2F2F2" : "white",
+                backgroundColor: (task._id === focusRow || task._id === taskId) ? "rgba(0,0,0,0.2)" : !theme ? 'white' : '#1E1E1E',
                 userSelect: 'none'
             }}
             >
@@ -161,6 +177,7 @@ const TaskTable = ({tasksArray, id, team,info}) => {
                   <input
                     className={style.input}
                     type="text"
+                    style={{color: theme ? 'white': 'black', backgroundColor: !theme ?'white':'#1E1E1E'}}
                     defaultValue={taskTitle}
                     name={task.taskTitle}
                     onClick={(e)=>onFocus(e)}
@@ -169,7 +186,7 @@ const TaskTable = ({tasksArray, id, team,info}) => {
                 </form>
               </SPRINT_TD>
             ) : (<>
-              <SPRINT_TD style={{width:'200px'}}>{task.taskTitle}</SPRINT_TD>
+              <SPRINT_TD style={{width:'200px',color: theme ? 'white': 'black'}}>{task.taskTitle}</SPRINT_TD>
 
               </> 
             )}
@@ -178,7 +195,7 @@ const TaskTable = ({tasksArray, id, team,info}) => {
                 
                 <>
                   {team && (
-                      <Select className={style.select} onChange={(e) => teamHandle(e, task)}>
+                      <Select className={style.select } style={{color: theme ? 'white': 'black', backgroundColor: !theme ?'rgba(0,0,0,0)':'#1E1E1E'}} onChange={(e) => teamHandle(e, task)}>
                       {team.map((member,i) => {
                         if(member.user!==null) {
 
@@ -205,13 +222,14 @@ const TaskTable = ({tasksArray, id, team,info}) => {
               ) : (
                 <>
                   {task!==null && taskId === task._id && !task.user && (
-                    <Select  defaultValue='Выбрать исполнителя' onChange={(e) => teamHandle(e, task)}>
+                    <Select style={{color: theme ? 'white': 'black', backgroundColor: !theme ?'rgba(0,0,0,0)':'#1E1E1E'}} defaultValue='Выбрать исполнителя' onChange={(e) => teamHandle(e, task)}>
                       <option> Выбрать исполнителя</option>
                       {team.map((member,i) => {
                         if(member.user!==null)
+                        // console.log(member.user)
                         return (
                           <option value={member.user._id}key={i}name={task._id}>
-                            {" "}
+                            
                             {member.user.fullname}
                           </option>
                         );
@@ -223,22 +241,22 @@ const TaskTable = ({tasksArray, id, team,info}) => {
             </SPRINT_TD>
             <SPRINT_TD style={{width:'150px',paddingRight:'25px'}}>
               <div style={{display:task._id===focusRow?'flex':'none'}}>
-                <Thin >Дедлайн: </Thin> 
+                <Thin style={{color: theme ? 'white': 'black', backgroundColor: !theme ?'white':'#1E1E1E'}}>Дедлайн: </Thin> 
                 <ButtonText onClick={()=>setDeadline(true)}
-                  style={{display:`${task._id !== focusRow||!deadline?'block':'none'}`}}>
+                  style={{display:`${task._id !== focusRow||!deadline?'block':'none'}`,color: theme ? 'white': 'black', backgroundColor: !theme ?'white':'#1E1E1E'}}>
                   {task.deadline!==undefined?getDate(task.deadline):'указать'}
                 </ButtonText>
                 
                 <input onKeyPress={(e)=>e.key==='Enter'? setDeadline(false):''} 
                   type="date" 
                   onChange={(e)=>changeTaskDate(e,task._id)}
-                  style={{display:`${task._id === focusRow&&deadline?'block':'none'}`, width:'130px'}}>
+                  style={{display:`${task._id === focusRow&&deadline?'block':'none'}`, width:'130px', color: theme ? 'white': 'black', backgroundColor: !theme ?'white':'#1E1E1E'}}>
                 </input>
               </div>
               
             </SPRINT_TD>
             </TR>
-        )}).reverse()}
+        )})}
 
       
       </tbody>

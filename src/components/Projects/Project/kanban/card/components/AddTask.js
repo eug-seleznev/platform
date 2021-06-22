@@ -11,7 +11,7 @@ import Confirm from "../../../../components/OneProject/confirm";
 
 
 
-const AddTask = ({id,proj_id}) => {
+const AddTask = ({id,proj_id,theme}) => {
  
     const dispatch = useDispatch();
     const [task, setTask] = useState('');
@@ -22,10 +22,9 @@ const AddTask = ({id,proj_id}) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-            dispatch(addTaskCard(task,id,proj_id));
-       setTask("")
-        
- 
+        dispatch(addTaskCard(task,id,proj_id));
+        setTask("")
+
     }
     return (
       <div>
@@ -48,7 +47,7 @@ const AddTask = ({id,proj_id}) => {
                 value={task}
                 className={style.input}
                 placeholder="Название задачи..."
-                style={{ marginTop: "10px" , border:'none',color:'grey'}}
+                style={{ marginTop: "10px" , border:'none',color: theme ? 'white': 'black', backgroundColor: !theme ?'white':'#1E1E1E'}}
                 onChange={onChange}
               />
             
@@ -59,6 +58,8 @@ const AddTask = ({id,proj_id}) => {
                 border: "none",
                 color: "#3F496C",
                 left: "250px",
+                color: theme ? 'white': '#3F496C',
+                 backgroundColor: !theme ?'white':'#1E1E1E'
     
               }}
               type="submit"

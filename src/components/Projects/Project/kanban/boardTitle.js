@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { renameColumn } from '../../../../redux/actions/kanban'
+import { useSelector } from 'react-redux'
 import ConfirmModal from './confirm'
 import styles from './kanban.module.css'
 import ModalMenu from './modalMenu'
 
 
 const BoardColumnsTitle = ({user, board, Path, deleteColumn}) => {
+  const theme = useSelector(state => state.auth.user.theme)
   const [confirm, setConfirm] = useState({
     visible: false,
     column: ''
@@ -17,18 +19,18 @@ const BoardColumnsTitle = ({user, board, Path, deleteColumn}) => {
     }
 
     return (
-   <>
-            <div className={styles.title}   style={{backgroundColor: 'white', width: 'fit-content', minWidth: '100%'}}>
+          <>
+            <div className={styles.title} style={{backgroundColor: !theme?'rgba(0,0,0,0)':'#1C1E23', width: 'fit-content', minWidth: '100%'}}>
                 <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns?.length-1},250px) minmax(50px,1fr)`, minWidth:'100%'}}>
                   <span/>
                     {board && board.columns && board?.columns?.map((el,i)=>{
                       
                       return(
-                        <ColumnTitle boardId={board._id} el={el} index={i} Path={Path} setConfirm={setConfirm} editable={i>1 && user.permission!=='user'}/>
+                        <ColumnTitle boardId={board._id} el={el} index={i} Path={Path} setConfirm={setConfirm} editable={i>1 && user.permission!=='user'} theme={theme}/>
                       )
                     })}
                     <div className={styles.titleTd} style={{width: '250px'}}>
-                      <div style={{width: '90%', overflow: 'hidden'}}>Просрочено</div>
+                      <div style={{width: '90%', overflow: 'hidden',color:theme?'white':'black'}}>Просрочено</div>
                     </div>
                   <span/>
                 </div>
@@ -44,7 +46,7 @@ const BoardColumnsTitle = ({user, board, Path, deleteColumn}) => {
 export default BoardColumnsTitle
 
 
-const ColumnTitle = ({el, Path, setConfirm, editable, boardId, index}) => {
+const ColumnTitle = ({el, Path, setConfirm, editable, boardId, index, theme}) => {
   const dispatch = useDispatch()
   const [edit, setEdit] = useState()
   const [newName, setNewName] = useState()
@@ -74,9 +76,10 @@ const ColumnTitle = ({el, Path, setConfirm, editable, boardId, index}) => {
   ]
 
   return(
+   
     <div className={styles.titleTd}>
       {!edit
-          ?<div onDoubleClick={()=>setEdit(true)} style={{width: '90%', overflow: 'hidden'}}>{el}</div>
+          ?<div onDoubleClick={()=>setEdit(true)} style={{width: '90%', overflow: 'hidden', color:theme?'white':'black'}}>{el}</div>
           :<form onSubmit={submit}>
               <input 
                   defaultValue={el}

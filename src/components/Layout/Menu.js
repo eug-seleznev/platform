@@ -41,22 +41,22 @@ const plusMenuClick = (callback) => {
                          
                    </div>
 
-                    <StyledIn onClick={()=>plusMenuClick(createTicket)} className='menu__nav' to='/help'>
+                    <StyledIn draggable="false" onClick={()=>plusMenuClick(createTicket)} className='menu__nav' to='/help'>
                         Проблемы с компом
                     </StyledIn>
-                    {user.permission!=='user' && <StyledIn onClick={()=>plusMenuClick(createNews)} className='menu__nav' to='/admin/news'>
+                    {user.permission!=='user' && <StyledIn draggable="false" onClick={()=>plusMenuClick(createNews)} className='menu__nav' to='/admin/news'>
                         Добавить новость
                     </StyledIn>}
 
-                    {user.permission!=='user' &&  <StyledLink className='menu__nav' to='/admin/newproject'>
+                    {user.permission!=='user' &&  <StyledLink draggable="false" className='menu__nav' to='/admin/newproject'>
 
                         Создать проект
                     </StyledLink>}
 
-                    {user.permission!=='user' && <StyledIn onClick={()=>plusMenuClick(()=>setDepForm(true))}>
+                    {user.permission!=='user' && <StyledIn draggable="false" onClick={()=>plusMenuClick(()=>setDepForm(true))}>
                         Создать отдел
                     </StyledIn>}
-                    {user.permission!=='user' && <StyledIn onClick={()=>plusMenuClick(addPodsos)}>
+                    {user.permission!=='user' && <StyledIn draggable="false" onClick={()=>plusMenuClick(addPodsos)}>
                         Добавить субподрядчика
                     </StyledIn>}
             
@@ -84,24 +84,24 @@ const plusMenuClick = (callback) => {
                         {user.name}
                    </div>
                    
-                   <StyledLink to='../../../mytasks' className='menu__nav' >
+                   <StyledLink draggable="false" to='../../../mytasks' className='menu__nav' >
                         Мои задачи
                     </StyledLink>
 
-                    <StyledLink to='/myprojects' onClick={closeAll}>
+                    <StyledLink draggable="false" to='/myprojects' onClick={closeAll}>
                         Мои проекты
                     </StyledLink>
 
-                    <StyledLink to='/department' onClick={closeAll}>
+                    <StyledLink draggable="false" to='/department' onClick={closeAll}>
                         Отдел
                     </StyledLink>
 
-                    <StyledLink style={{display:`${user.permission==='user'?'none':'block'}`}} to='/news' onClick={closeAll}>
+                    <StyledLink draggable="false" style={{display:`${user.permission==='user'?'none':'block'}`}} to='/news' onClick={closeAll}>
                         Новости
                     </StyledLink>
 
                     {user.permission==='admin'?(
-                    <StyledLink to='/tickets' onClick={closeAll}>
+                    <StyledLink draggable="false" to='/tickets' onClick={closeAll}>
                         Панель сисадмина
                     </StyledLink>):<></>}
                     

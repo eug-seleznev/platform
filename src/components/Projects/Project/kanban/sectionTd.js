@@ -19,7 +19,7 @@ import { Path } from '../../../Layout/header'
 const KanbanSectionTd = ({category, timelineCards, column, boardId, timelineId,history}) => {
     const dispatch = useDispatch()
     const project = useSelector(state => state.projects.project)
-
+    const theme = useSelector(state => state.auth.user.theme)
     let currentColunmCards = timelineCards &&  timelineCards.filter(el=>el.column===column)
     const [hower, setHower] = useState(false)
     const [newCardModal, setNewCardModal] = useState(false)
@@ -127,8 +127,8 @@ const dragFunction = (e, index) => {
                     </CSSTransition>
                 
                     <div className={styles.creationButton}>
-                        <ButtonText onClick={()=>setNewCardModal(true)}>
-                            <img alt='plus' src={Path+'plus1.png'}className={styles.categoryCardPlus}/>
+                        <ButtonText onClick={()=>setNewCardModal(true)} style={{color:theme?'white':'#3F496C'}}>
+                            <img alt='plus' src={Path+'plus1.png'}className={styles.categoryCardPlus} />
                             Создать карточку
                         </ButtonText> 
                     </div>
