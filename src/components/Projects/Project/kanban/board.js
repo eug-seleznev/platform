@@ -8,7 +8,6 @@ import { Bold, Light, } from "../../../../Styles/typography";
 import KanbanSection from "./section";
 import Backlog from "./backlog";
 import {  loadBoard,deleteColumn, clearBoard, addBoardToChosen, renameBoard, deleteBoard } from "../../../../redux/actions/kanban";
-import CreateForm from "./createForm";
 
 import { Path } from "../../../Layout/header";
 import BoardSettings from './boardSettings'

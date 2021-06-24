@@ -1,0 +1,33 @@
+.backLogCards{
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    width: 100%;      
+    padding-left: 3px;
+}
+.backlogTitleContainer{
+    display:flex;
+    flex-direction: row;
+    margin:8px;
+    margin-bottom:30px;
+   
+    
+    }
+    .cardNumberCircle{
+        margin-left:10px;
+        width:18px;
+        text-align:center;
+        align-self:center;
+        background-color: #E4E4E4;
+        border-radius:100%;
+        padding-top:3px;
+        padding-bottom:3px;
+    }
+    .backlogCloseArrow{
+        width: 8px;
+        height: 16px;
+        align-self: center;
+        margin-left: auto;
+        margin-right: 10px;
+        cursor: pointer;
+    }

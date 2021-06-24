@@ -9,7 +9,7 @@ import KanbanCard from "./card/card";
 import { CSSTransition } from "react-transition-group";
 import { clearBoard, moveCard } from "../../../../redux/actions/kanban";
 import { ButtonText } from "../../../../Styles/buttons";
-import CreateForm from "./createForm";
+import CreateForm from "./components/createForm";
 import { Path } from '../../../Layout/header'
 
 

@@ -2,11 +2,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
-import { addNewCard, addNewCardToColumn } from '../../../../redux/actions/kanban'
-import { Button, CancelButton, KanbanFormButton } from '../../../../Styles/buttons'
-import { KanbanSearchInput } from '../../../../Styles/Forms'
-import { Path } from '../../../Layout/header'
-import styles from './kanban.module.css'
+import { addNewCard, addNewCardToColumn } from '../../../../../redux/actions/kanban'
+import { Button, CancelButton, KanbanFormButton } from '../../../../../Styles/buttons'
+import { KanbanSearchInput } from '../../../../../Styles/Forms'
+import { Path } from '../../../../Layout/header'
+import styles from '../kanban.module.css'
 
 
 
