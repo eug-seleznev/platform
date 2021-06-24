@@ -1,4 +1,4 @@
-import styles from '../kanban.module.css'
+import styles from './ghostCard.module.css'
 import { CSSTransition } from "react-transition-group";
 
 

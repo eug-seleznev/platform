@@ -6,8 +6,8 @@ import { addNewCard, addNewCardToColumn } from '../../../../../redux/actions/kan
 import { Button, CancelButton, KanbanFormButton } from '../../../../../Styles/buttons'
 import { KanbanSearchInput } from '../../../../../Styles/Forms'
 import { Path } from '../../../../Layout/header'
-import styles from '../kanban.module.css'
-
+import styles from './createForm.module.css'
+import {useClickOutside, useEscapeClick} from '../hooks/hooks'
 
 
 
@@ -22,35 +22,27 @@ const close = () => {
   setTitle('')
   closeForm()
   }
-
-useEffect(() => {
-  const closeIt = (e) => {
-    if(e.keyCode === 27){
-      close()
-    }
-  }
-  window.addEventListener('keydown', closeIt)
-return () => window.removeEventListener('keydown', closeIt)
-},[])
+const outclick = useClickOutside(()=>close())
+const escapeClick = useEscapeClick(()=>close())
 
 useEffect(()=>{
   input.current.focus()
 },[])
 
-const createCardFunc =(e)=>{
+const addCardToBacklog =(e)=>{
   e.preventDefault()
   dispatch(addNewCard(projectCrypt, title, boardId,))
   setTitle('')
 }
 
-const createCardInsideCategory = (e) => {
+const addCardToTimeline = (e) => {
   e.preventDefault()
   dispatch(addNewCardToColumn(categoryId, title,  column, timeline, boardId,))
   setTitle('')
 }
 
 return (
-          <form  className={styles.createCard} onSubmit={(e)=>{backlog ? createCardFunc(e): createCardInsideCategory(e)}} >
+          <form ref={outclick}  className={styles.createCard} onSubmit={(e)=>{backlog ? addCardToBacklog(e): addCardToTimeline(e)}} >
             <KanbanSearchInput 
               ref={input} 
               placeholder='Название карточки' 
@@ -59,9 +51,9 @@ return (
               value={title} 
               onChange={(e)=>{setTitle(e.target.value)}}
             />
-            <div style={{width:'100%', display:'flex',marginLeft:'5px',borderTop:'1px solid #7F8DA1', paddingTop:'10px'}}>
+            <div className={styles.buttonsContainer}>
               <KanbanFormButton type='submit'>Создать</KanbanFormButton>
-              <img src={Path+'kanban-cross-white.png'} style={{width: '25px',height:'25px',marginLeft:'5px',cursor:'pointer', filter: !backlog && 'invert(1)'}} onClick={close}/>
+              <img src={Path+'kanban-cross-white.png'} style={{filter: !backlog && 'invert(1)'}} className={styles.formCloseButton} onClick={close}/>
             </div>
           </form>
     )
