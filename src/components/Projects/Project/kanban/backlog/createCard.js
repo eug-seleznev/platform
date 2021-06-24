@@ -18,10 +18,10 @@ const CreateCard =({projectCrypt, boardId,})=>{
  
 
     return (
-        <div style={{marginLeft:'auto', marginRight:'auto'}}>
+        <div style={{width:'100%', display: 'flex', justifyContent: 'space-around'}}>
             {!newCardInput 
-                ? <KanbanButton color='#E4E4E4' style={{marginTop:'15px'}} onClick={()=>setNewCardInput(true)}>
-                     <img src={Path+'kanban-plus-white.png'} style={{marginRight: '5px',}}/>
+                ? <KanbanButton color='#E4E4E4' onClick={()=>setNewCardInput(true)}>
+                     <img src={Path+'kanban-plus-white.png'}/>
                      Создать карточку
                   </KanbanButton> 
                 : <CreateForm backlog boardId={boardId} closeForm={()=>setNewCardInput(false)} projectCrypt={projectCrypt} />

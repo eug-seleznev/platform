@@ -7,6 +7,24 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+::-webkit-scrollbar {
+  width: 15px;
+  margin:15px;
+}
+ 
+::-webkit-scrollbar-track {
+}
+ 
+::-webkit-scrollbar-thumb {
+  border: 5px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  border-radius: 9999px;
+  background-color: #AAAAAA;
+
+}
+
+
 code {
   font-family: source-code-pro, SuisseIntlRegular, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

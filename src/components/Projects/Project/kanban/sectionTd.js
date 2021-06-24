@@ -103,7 +103,7 @@ const dragFunction = (e, index) => {
                 >
                     {currentColunmCards && currentColunmCards.map((el,i)=>{
                         return(
-                            <div onDragOver={(e)=>cardDragOver(e,i)} onDragLeave={(e)=>cardDragOut(e)} onDrop={(e)=>dropToCard(e,el.huindex)}>
+                            <div onDragOver={(e)=>cardDragOver(e,i)} onDragLeave={(e)=>cardDragOut(e)} onDrop={(e)=>dropToCard(e,el.huindex)} style={{marginTop:'10px'}}>
                             
                             {addGhost===`ghost${i}`?<div className={styles.addGhost}/>
                             :

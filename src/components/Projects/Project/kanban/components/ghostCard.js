@@ -2,13 +2,13 @@ import styles from '../kanban.module.css'
 import { CSSTransition } from "react-transition-group";
 
 
-const GhostCard = ({visible}) => {
+const GhostCard = ({visible, }) => {
 
     
 return(
     <CSSTransition
     in={visible}
-    timeout={0}
+    timeout={50}
     classNames={{
     enter: styles.ghostEnter,
     enterActive: styles.ghostEnterActive,
@@ -17,7 +17,7 @@ return(
 }}
 unmountOnExit
 >
-    <div className={styles.addGhost}/>
+    <div className={styles.addGhost} />
 </CSSTransition>
 )
 }

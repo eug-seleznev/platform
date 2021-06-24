@@ -29,36 +29,11 @@ const Backlog =({sideOpen, backlog, projectCrypt, boardId, history, project,clos
         <>
         <div 
             style={{display: sideOpen? 'block' : 'none', width: '100%'}} 
-            // onDragOver={dragOver} 
-            // onDragLeave={dragOut} 
-            // onDrop={dropCard}
             >
             <BacklogTitle cardNumber={filterredCards.length} closeBacklog={closeBacklog}/>  
             <BacklogFilters setFilterByBoard={setFilterByBoard} setFilterByName={setFilterByName} setFilterByUser={setFilterByUser} boardId={boardId} project={project} />
             <CardList backlog={backlog} boardId={boardId} filterredCards={filterredCards} history={history} projectCrypt={projectCrypt}  />
-            
-            {/* <div className={styles.backLogCards} >
-                <div onDragOver={e=>e.stopPropagation()} >
-                    {filterredCards.map((card,i)=>{
-                        return(
-                            <div onDragOver={(e)=>cardDragOver(e,i)} onDragLeave={(e)=>cardDragOut(e)} onDrop={(e)=>dropToCard(e,i)}>
-                            
-                            {addGhost===`ghost${i}`?<div className={styles.addGhost}/>
-                            :
-                            <KanbanCard history={history} key={i} info={card} backlog={true}/>
-                            }
-                            </div>
-                        )
-                    })
-
-                    }
-                </div>
-               <GhostCard visible={addGhost} />
-               
-           
-            </div> */}
-                    
-           <CreateCard boardId={boardId} projectCrypt={projectCrypt} />
+            <CreateCard boardId={boardId} projectCrypt={projectCrypt} />
             
         </div>
         

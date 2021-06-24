@@ -34,7 +34,7 @@ const BacklogFilters = ({setFilterByBoard, setFilterByUser, setFilterByName, pro
       }
 
     return(
-        <div onClick={e=>e.stopPropagation()} style={{paddingLeft:'15px',paddingRight:'15px',width:'100%', boxSizing: 'border-box', borderBottom: '1px solid #7F8DA1'}}>
+        <div onClick={e=>e.stopPropagation()} style={{paddingLeft:'15px',paddingRight:'15px',width:'100%', boxSizing: 'border-box', }}>
             <Select 
                 options={boards}
                 defaultValue={boards[curBoard]}

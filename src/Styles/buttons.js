@@ -197,6 +197,10 @@ export const KanbanButton =  styled.button`
   background-color: ${props => props.bg ? props.bg : "#404040"};
   ;
 
+  img{
+    margin-right: 5px;
+  }
+  
   &:hover{
   // text-decoration: underline;
   background-color: grey;

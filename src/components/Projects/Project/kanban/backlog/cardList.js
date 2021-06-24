@@ -38,7 +38,7 @@ const CardList =({backlog, projectCrypt, boardId, history, filterredCards})=>{
 
     const dragOver = (e) => {
         e.preventDefault()
-        setAddGhost('ghost last')
+        // setAddGhost('ghost last')
     }
     const dragOut = (e) => {
         e.preventDefault()
@@ -74,19 +74,19 @@ const CardList =({backlog, projectCrypt, boardId, history, filterredCards})=>{
     return (
         
             <div 
-                className={styles.backLogCards} 
-                onDragOver={dragOver} 
+                className={styles.backLogListContainer} 
+                onDragOverCapture={dragOver} 
                 onDragLeave={dragOut} 
                 onDrop={dropCard}
                 >
-                <div onDragOver={e=>e.stopPropagation()} onDragLeave={(e)=>cardDragOut(e)} >
+                <div onDragOver={e=>e.stopPropagation()} className={styles.backLogCardsList} >
                     {filterredCards.map((card,i)=>{
                         return(
-                            <div style={{paddingTop:'10px'}}  onDragOver={(e)=>cardDragOver(e,i)}  onDrop={(e)=>dropToCard(e,i)}>
+                            <div style={{paddingTop:'10px'}}  onDragOverCapture={(e)=>cardDragOver(e,i)}  onDrop={(e)=>dropToCard(e,i)}>
                             
-                                <GhostCard visible={addGhost===`ghost${i}`} />
+                                {addGhost===`ghost${i}`?<GhostCard visible={true} />
                                 
-                                <KanbanCard history={history} key={i} info={card} backlog={true}/>
+                                :<KanbanCard history={history} key={i} info={card} backlog={true}/>}
                            
                             </div>
                         )
