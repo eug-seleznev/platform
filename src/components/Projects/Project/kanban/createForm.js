@@ -3,25 +3,25 @@ import { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import { addNewCard, addNewCardToColumn } from '../../../../redux/actions/kanban'
-import { Button, CancelButton } from '../../../../Styles/buttons'
+import { Button, CancelButton, KanbanFormButton } from '../../../../Styles/buttons'
+import { KanbanSearchInput } from '../../../../Styles/Forms'
+import { Path } from '../../../Layout/header'
 import styles from './kanban.module.css'
 
 
 
 
 
-
-const CreateForm = ({crypt,setCreateOpen, boardId, visible, place, categoryId, column, timeline }) => {
+const CreateForm = ({projectCrypt,closeForm, boardId, backlog, categoryId, column, timeline }) => {
 
 const dispatch =useDispatch ()
 const [title, setTitle] = useState('')
 const input = useRef(null)
+
 const close = () => {
   setTitle('')
-  setCreateOpen ({
-    status:false,
-    place:''
-})}
+  closeForm()
+  }
 
 useEffect(() => {
   const closeIt = (e) => {
@@ -34,51 +34,36 @@ return () => window.removeEventListener('keydown', closeIt)
 },[])
 
 useEffect(()=>{
-  visible && input.current.focus()
-},[visible])
+  input.current.focus()
+},[])
 
 const createCardFunc =(e)=>{
   e.preventDefault()
-  dispatch(addNewCard(crypt, title, boardId,))
-  close()
+  dispatch(addNewCard(projectCrypt, title, boardId,))
+  setTitle('')
 }
 
 const createCardInsideCategory = (e) => {
   e.preventDefault()
   dispatch(addNewCardToColumn(categoryId, title,  column, timeline, boardId,))
-  close()
+  setTitle('')
 }
 
 return (
-  <CSSTransition 
-    in={visible}
-    timeout={500}
-    classNames={{
-    enter: styles.formEnter,
-    enterActive: styles.formEnterActive,
-    exit: styles.formExit,
-    exitActive: styles.formExitActive,
-    }}
-    unmountOnExit
-  >
-        <div className={styles.createWindow}>
-          <form className={styles.createCard} onSubmit={(e)=>{place==='backlog' ? createCardFunc(e): createCardInsideCategory(e)}} >
-            <input 
+          <form  className={styles.createCard} onSubmit={(e)=>{backlog ? createCardFunc(e): createCardInsideCategory(e)}} >
+            <KanbanSearchInput 
               ref={input} 
-              placeholder='Название' 
+              placeholder='Название карточки' 
               required 
-              style={{width:'97%',marginBottom:'10px',height:'30px'}} 
+              style={{width:'100%',height:'30px',}} 
               value={title} 
               onChange={(e)=>{setTitle(e.target.value)}}
             />
-            <div style={{width:'100%', display:'flex',justifyContent:'space-between'}}>
-              <CancelButton fontSize='13px' grey type='button' padd='5px' onClick={close}>Закрыть</CancelButton>
-              <Button type='submit'>Создать</Button>
+            <div style={{width:'100%', display:'flex',marginLeft:'5px',borderTop:'1px solid #7F8DA1', paddingTop:'10px'}}>
+              <KanbanFormButton type='submit'>Создать</KanbanFormButton>
+              <img src={Path+'kanban-cross-white.png'} style={{width: '25px',height:'25px',marginLeft:'5px',cursor:'pointer', filter: !backlog && 'invert(1)'}} onClick={close}/>
             </div>
           </form>
-        </div> 
-        
-  </CSSTransition>
     )
        
 }

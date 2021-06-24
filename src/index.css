@@ -42,3 +42,9 @@ code {
           src: url(./fonts/SuisseIntl/Thin/SuisseIntl-Thin.woff), 
           url(./fonts/SuisseIntl/Thin/SuisseIntl-Thin.woff2); 
           }
+          @font-face {
+            font-family: SuisseIntlLightItalic;
+            src: url(./fonts/SuisseIntl/LightItalic/SuisseIntl-LightItalic.eot);
+            src: url(./fonts/SuisseIntl/LightItalic/SuisseIntl-LightItalic.woff), 
+            url(./fonts/SuisseIntl/LightItalic/SuisseIntl-LightItalic.woff2); 
+            }

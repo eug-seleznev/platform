@@ -126,23 +126,21 @@ const dragFunction = (e, index) => {
                         <div className={styles.addGhost}/>
                     </CSSTransition>
                 
-                    <div className={styles.creationButton}>
-                        <ButtonText onClick={()=>setNewCardModal(true)} style={{color:theme?'white':'#3F496C'}}>
+                    {!newCardModal
+                        ?<ButtonText className={styles.creationButton} onClick={()=>setNewCardModal(true)} style={{color:theme?'white':'#3F496C'}}>
                             <img alt='plus' src={Path+'plus1.png'}className={styles.categoryCardPlus} />
                             Создать карточку
                         </ButtonText> 
-                    </div>
-     
-                    <CreateForm 
-                        crypt={project.crypt} 
-                        categoryId={category._id} 
-                        column={column} 
-                        timeline={timelineId} 
-                        visible={newCardModal} 
-                        place={'category'} 
-                        setCreateOpen={()=>setNewCardModal()} 
-                        boardId={boardId}
-                    />
+        
+                        :<CreateForm 
+                            crypt={project.crypt} 
+                            categoryId={category._id} 
+                            column={column} 
+                            timeline={timelineId} 
+                            closeForm={()=>setNewCardModal()} 
+                            boardId={boardId}
+                        />
+                    }
             </div>
             
    

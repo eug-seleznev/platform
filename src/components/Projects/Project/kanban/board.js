@@ -162,12 +162,12 @@ const Board = ({match, history}) => {
         return <div>loading board...</div>
     }
     return (
-      <div className={styles.main} style={{gridTemplateColumns: sideOpen? '240px 1fr' : '35px 1fr',backgroundColor:!user.theme?'rgba(0,0,0,0)':'#1C1E23'}}>
-        <div className={styles.backLog} onClick={()=>setSideOpen(!sideOpen)}>
-            <Backlog history={history} backlog={backlog} setCreateOpen={setCreateOpen} sideOpen={sideOpen} projectCrypt={project.crypt} boardId={board._id}/>
-            <div className={styles.verticalText} style={{display: sideOpen? 'none' : 'block',cursor: 'pointer'}}>
+      <div className={styles.main} style={{gridTemplateColumns: sideOpen? '255px 1fr' : '35px 1fr',backgroundColor:!user.theme?'rgba(0,0,0,0)':'#1C1E23'}}>
+        <div className={styles.backLog}>
+            <Backlog history={history} backlog={backlog} setCreateOpen={setCreateOpen} sideOpen={sideOpen} projectCrypt={project.crypt} boardId={board._id} project={project} closeBacklog={()=>setSideOpen(!sideOpen)}/>
+            <div className={styles.verticalText} onClick={()=>setSideOpen(!sideOpen)} style={{display: sideOpen? 'none' : 'block',cursor: 'pointer'}}>
               Задачи
-              <img src={Path+'kanban-open-icon-white.png'} style={{width: '10px', height:'15px', marginTop: '10px', marginLeft: '-7px', marginBottom: '-20px',cursor: 'pointer'}} />
+              <img src={Path+'backlogArrow.png'} style={{width: '8px', height: '16px', marginTop: '10px', marginLeft: '-7px', marginBottom: '-20px',cursor: 'pointer'}} />
             </div>
         </div>
 
@@ -218,7 +218,7 @@ const Board = ({match, history}) => {
           <ConfirmModal  visible={confirm} confirm={()=>deleteThisBoard()} close={()=>setConfirm(false)} text={'доску '+board.name} />
           <BoardSettings visible={createCategory} type='category' close={()=>setCreateCategory(false)} boardId={board._id}  />
           <BoardSettings visible={createColumn} type='column'  close={()=>setCreateColumn(false)} boardId={board._id}  />
-          <CreateForm crypt={project.crypt} visible={createOpen.status} place={createOpen.place} setCreateOpen={setCreateOpen} boardId={board._id}></CreateForm>
+          {/* <CreateForm crypt={project.crypt} visible={createOpen.status} place={createOpen.place} setCreateOpen={setCreateOpen} boardId={board._id}></CreateForm> */}
       </div>
     );    
 }

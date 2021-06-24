@@ -182,3 +182,45 @@ export const LoginButton =  styled.button`
 }
 
 `
+
+export const KanbanButton =  styled.button`
+  display: inline-block;
+  border: none;
+  border-radius: 13px;
+  font-size:${props => props.fontSize};
+  font-family: SuisseIntlLightItalic;
+  padding:3px 5px;
+ 
+  outline: none;
+  text-decoration: none;
+  color: white;
+  background-color: ${props => props.bg ? props.bg : "#404040"};
+  ;
+
+  &:hover{
+  // text-decoration: underline;
+  background-color: grey;
+  cursor: pointer;
+}
+`
+
+export const KanbanFormButton =  styled.button`
+  display: inline-block;
+  border: none;
+  border-radius: 3px;
+  font-size:${props => props.fontSize};
+  font-family: SuisseIntlLightItalic;
+  padding:3px 5px;
+ 
+  outline: none;
+  text-decoration: none;
+  color: white;
+  background-color: ${props => props.bg ? props.bg : "#648FC6"};
+  ;
+
+  &:hover{
+  // text-decoration: underline;
+  background-color: #424658;
+  cursor: pointer;
+}
+`

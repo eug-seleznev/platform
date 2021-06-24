@@ -137,18 +137,8 @@
     padding-bottom: 30px;
     margin-bottom: -40px;
 }
-.backLogPlus{
-    filter:invert(1);
-    background:none;
-     width:10px;
-     margin-right:5px;
-    }
-    .backLogButtonCont {
-        display:flex;
-        justify-content: flex-end;
-        width: 90%;
-        transform: translateX(6px);
-    }
+
+
     .createWindow {
         position: fixed;
         left: 0;
@@ -159,23 +149,11 @@
         background-color: rgba(0,0,0,0.4);
     }
     .createCard {
-        width: 300px;
-        padding:20px;
-        background-color: white;
-        border-radius: 5px;
-        margin-top: 38vh;
-        margin-left: 42vw;
-        transform: translateX(-50%),translateY(-50%);
+        width: 220px;
+        margin-right: 20px;
+        margin-top: 10px;
     }
-    .backLogButton {
-        display:flex;
-        align-items:center;
-        margin: 0;
-        margin-left: 10px;
-        height: 40px;
-        width: fit-content;
-        
-    }
+
     .verticalText{
         height: max-content;
         writing-mode: vertical-rl;
@@ -188,7 +166,11 @@
 
     }
     .backLogCards{
-        margin: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    width: 100%;      
+    padding-left: 3px;
 
     }
 .content{
@@ -198,8 +180,7 @@ margin-top: 70px;
 
 }
     .creationButton{
-        display: flex;
-        align-items: center;
+      
         height: 52px;
         margin-top: 10px;
         margin-bottom: auto;
