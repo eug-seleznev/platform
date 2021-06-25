@@ -4,7 +4,7 @@ import { copyCardToColumn } from "../../../../../../../redux/actions/kanban";
 import { Select } from "../../../../../../../Styles/tables";
 import { Regular } from "../../../../../../../Styles/typography";
 import { Path } from "../../../../../../Layout/header";
-import { useClickOutside } from "../../../modalMenu";
+import { useClickOutside } from "../../../hooks/hooks";
 import settings from "./settings.module.css";
 const Copy = ({ id, open, setOpen, timelineId, title, theme }) => {
   const columns = useSelector((state) => state.projects.kanban.columns);

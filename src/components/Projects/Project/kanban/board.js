@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import styles from './kanban.module.css'
 import { Bold, Light, } from "../../../../Styles/typography";
 import KanbanSection from "./section";
-import Backlog from "./backlog";
+import Backlog from "./backlog/index";
 import {  loadBoard,deleteColumn, clearBoard, addBoardToChosen, renameBoard, deleteBoard } from "../../../../redux/actions/kanban";
 
 import { Path } from "../../../Layout/header";

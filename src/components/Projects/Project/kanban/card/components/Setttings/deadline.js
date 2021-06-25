@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux"
 import { changeCardField } from "../../../../../../../redux/actions/kanban"
 import { Regular } from "../../../../../../../Styles/typography"
 import { Path } from "../../../../../../Layout/header"
-import { useClickOutside } from "../../../modalMenu"
+import { useClickOutside } from "../../../hooks/hooks";
 import settings from './settings.module.css'
 
 const Deadline = ({open, setOpen,emergency,id}) =>{

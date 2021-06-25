@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { sendNotifications } from "../../../../../../../redux/actions/kanban";
 import { Light, Regular } from "../../../../../../../Styles/typography";
 import { Path } from "../../../../../../Layout/header";
-import { useClickOutside } from "../../../modalMenu";
+import { useClickOutside } from "../../../hooks/hooks";
 import settings from "./settings.module.css";
 
 const Notifications = ({ open, setOpen, deadline, id, theme }) => {

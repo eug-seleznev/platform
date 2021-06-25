@@ -22,7 +22,7 @@ import getDateWithTime from "./getDateWithTime";
 import { Input } from "../../../../../../Styles/Forms";
 import { userTableSearch } from "../../../../../../redux/actions/user";
 import NewSettings from "./NewSettings";
-import { useClickOutside } from "../../modalMenu";
+import { useClickOutside } from "../../hooks/hooks";
 
 const CardEditor = ({
   info,

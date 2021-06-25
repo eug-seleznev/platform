@@ -7,21 +7,6 @@ import {useClickOutside} from './hooks/hooks'
 // to use <ModalMenu buttons={[{title, icon, handler}]}> <icon/> </ModalMenu>
 
 
-const useClickOutside = (callback) => {
-    let domNode = useRef()
-    useEffect(()=>{
-      let handler = (e) => {
-        if (domNode && domNode.current && !domNode.current.contains(e.target)){
-          callback()
-        }
-      }
-      document.addEventListener('mousedown',handler)
-      return () => document.removeEventListener('mousedown', handler)
-    })
-  
-  return domNode
-  }
-  export  {useClickOutside}
 
   const ModalMenu = (props) => {
 

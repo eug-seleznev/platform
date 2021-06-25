@@ -4,7 +4,8 @@ import { addUserToEvent } from "../../../../../../../redux/actions/kanban";
 import { Light, Regular } from "../../../../../../../Styles/typography";
 import { Path } from "../../../../../../Layout/header"
 import { url } from "../../../../../../utils/axios";
-import { useClickOutside } from "../../../modalMenu";
+import { useClickOutside } from "../../../hooks/hooks";
+
 
 import settings from './settings.module.css'
 
