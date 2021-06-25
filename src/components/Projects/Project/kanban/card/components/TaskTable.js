@@ -8,6 +8,7 @@ import { Input } from "../../../../../../Styles/Forms";
 import { ButtonText } from "../../../../../../Styles/buttons";
 import getDate from "../../../../getDate";
 import canban from './cardOpen.module.css'
+import TextareaAutosize from "react-autosize-textarea/lib";
 
 //todo: handle no tasks state
 
@@ -16,7 +17,7 @@ const TaskTable = ({tasksArray, id, team,info,theme}) => {
   let tasks = ['2','3']
   const taskRef = useRef()
   let selectFocusRow = ()=>{
-    console.log('hi')
+    
   }
   let  isEdit = false
 
@@ -143,9 +144,9 @@ const TaskTable = ({tasksArray, id, team,info,theme}) => {
   }
 
   return (
-    <div className={canban.tasks__container} ref={taskRef} style={{overflowY:tasksArray.length>8?'scroll': 'hidden',zIndex:-1, maxHeight:info.emergency === 'Событие'?'22vh':'28vh'}} >
+    <div className={canban.tasks__container} ref={taskRef} style={{overflowY:tasksArray.length>4?'scroll': 'hidden',zIndex:-1, maxHeight:'20vh',minHeight:'13vh',marginTop:info.execs?.length===0?'-215px':'-125px'}} >
     <SPRINT_TABLE onMouseLeave={() => setTaskId("")} 
-      style={{marginTop:'10px',marginLeft:'20px'
+      style={{marginTop:'10px',marginLeft:'20px',marginBottom:'-30px'
     }} >
       <tbody>
         {tasksArray&&tasksArray.map((task,i)=>{
@@ -155,7 +156,7 @@ const TaskTable = ({tasksArray, id, team,info,theme}) => {
               onClick={() => doubleClickEdit(task)}
               key={i}
               style={{
-                backgroundColor: (task._id === focusRow || task._id === taskId) ? "rgba(0,0,0,0.2)" : !theme ? 'white' : '#1E1E1E',
+                backgroundColor: (task._id === focusRow || task._id === taskId) ? "rgba(0,0,0,0.1)" : !theme ? 'white' : '#1E1E1E',
                 userSelect: 'none'
             }}
             >
@@ -172,21 +173,31 @@ const TaskTable = ({tasksArray, id, team,info,theme}) => {
 
 
             {editField && task._id === focusRow  ? (
-              <SPRINT_TD style={{width:'200px'}}>
+              <SPRINT_TD>
                 <form onSubmit={enableEdit}>
-                  <input
+                  <TextareaAutosize
+                    maxRows={3}
                     className={style.input}
                     type="text"
-                    style={{color: theme ? 'white': 'black', backgroundColor: !theme ?'white':'#1E1E1E'}}
+                    style={{
+                      fontFamily:'SuisseIntlLight',
+                      resize:'none',
+                      borderRadius:'5px',
+                      width:'250px',
+                      marginBottom:'-4px',
+                      color: theme ? "white" : "black",
+                      backgroundColor: !theme ? "white" : "#1E1E1E",
+                    }}
+                    onKeyPress={(e)=>e.key==='Enter'?setFocusRow(''):''}
                     defaultValue={taskTitle}
                     name={task.taskTitle}
                     onClick={(e)=>onFocus(e)}
                     onChange={(e)=>{setDebouced(e.target.value)}}
-                  ></input>
+                  ></TextareaAutosize>
                 </form>
               </SPRINT_TD>
             ) : (<>
-              <SPRINT_TD style={{width:'200px',color: theme ? 'white': 'black'}}>{task.taskTitle}</SPRINT_TD>
+              <SPRINT_TD style={{width:'200px',color: theme ? 'white': 'black',marginBottom:'5px'}}>{task.taskTitle}</SPRINT_TD>
 
               </> 
             )}
@@ -241,9 +252,9 @@ const TaskTable = ({tasksArray, id, team,info,theme}) => {
             </SPRINT_TD>
             <SPRINT_TD style={{width:'150px',paddingRight:'25px'}}>
               <div style={{display:task._id===focusRow?'flex':'none'}}>
-                <Thin style={{color: theme ? 'white': 'black', backgroundColor: !theme ?'white':'#1E1E1E'}}>Дедлайн: </Thin> 
+                <Thin style={{color: theme ? 'white': 'black', backgroundColor: !theme ?'rgba(0,0,0,0)':'#1E1E1E'}}>Дедлайн: </Thin> 
                 <ButtonText onClick={()=>setDeadline(true)}
-                  style={{display:`${task._id !== focusRow||!deadline?'block':'none'}`,color: theme ? 'white': 'black', backgroundColor: !theme ?'white':'#1E1E1E'}}>
+                  style={{display:`${task._id !== focusRow||!deadline?'block':'none'}`,color: theme ? 'white': 'black', backgroundColor: !theme ?'rgba(0,0,0,0)':'#1E1E1E'}}>
                   {task.deadline!==undefined?getDate(task.deadline):'указать'}
                 </ButtonText>
                 

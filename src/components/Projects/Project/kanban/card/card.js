@@ -80,9 +80,6 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
       e.stopPropagation()
       history.push(`../../../../users/${id}`)
     }
-    // useEffect(()=>{
-    //   console.log(info)
-    // },[])
     return (
       <>
       <div onDragOver={addGhost} className={styles.card}
@@ -112,33 +109,33 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
             <Light color={theme?'white':'black'} size='16' style={{padding:'5px',maxWidth:'50%'}}>{info?.title} </Light>
             <div style={{display:'flex'}}>
             {
-            info.emergency==='Событие'
-            ? 
-            info.event_users.map((el,i)=>{
-              return (
-                <div>
-                  <img key={i} 
-                    src={url+'/'+el.avatar} 
-                    onClick={(e)=>{goToUser(e, el._id)}}
-                    onMouseEnter={()=>{setVisibleName(el.fullname)}}
-                    onMouseLeave={()=>{setVisibleName('')}} 
-                    style={{
-                      width:'25px',marginLeft:'4px',
-                      height:'25px',marginTop:'3px',
-                      borderRadius:'100%',objectFit:'cover'
+            // info.emergency==='Событие'
+            // ? 
+            // info.event_users.map((el,i)=>{
+            //   return (
+            //     <div>
+            //       <img key={i} 
+            //         src={url+'/'+el.avatar} 
+            //         onClick={(e)=>{goToUser(e, el._id)}}
+            //         onMouseEnter={()=>{setVisibleName(el.fullname)}}
+            //         onMouseLeave={()=>{setVisibleName('')}} 
+            //         style={{
+            //           width:'25px',marginLeft:'4px',
+            //           height:'25px',marginTop:'3px',
+            //           borderRadius:'100%',objectFit:'cover'
                     
-                  }} ></img>
-                  <div style={{position:'relative'}}>
-                     <div className={styles.card__exec__name} 
-                      style={{display:`${visibleName===el.fullname?'block':'none'}`, border:'1px solid white'}}
-                    >{el.fullname}
-                    </div>
-                  </div>
+            //       }} ></img>
+            //       <div style={{position:'relative'}}>
+            //          <div className={styles.card__exec__name} 
+            //           style={{display:`${visibleName===el.fullname?'block':'none'}`, border:'1px solid white'}}
+            //         >{el.fullname}
+            //         </div>
+            //       </div>
                  
-                </div>
+            //     </div>
                 
-              )
-            }):
+            //   )
+            // }):
             info.execs.map((el,i)=>{
               return (
                 <div>
@@ -158,9 +155,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
                     >{el.fullname}
                     </div>
                   </div>
-                 
-                </div>
-                
+                </div>  
               )
             })
           }
@@ -205,7 +200,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
               
             </div>
           </div>
-          <CardOpen theme={theme} history={history} boardId={boardId} chosenCard={chosenCard} isOpen={cardOpen} onClick={deleteCard} setDeleteWindow={setDeleteWindow} data={'task data'} close={close} />
+          <CardOpen timelineId={timelineId} theme={theme} history={history} boardId={boardId} chosenCard={chosenCard} isOpen={cardOpen} onClick={deleteCard} setDeleteWindow={setDeleteWindow} data={'task data'} close={close} />
         </div>
         
       }

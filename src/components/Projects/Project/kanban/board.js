@@ -189,9 +189,9 @@ const Board = ({match, history}) => {
               <ModalMenu buttons={boardSettingsButtons} theme={user.theme}>
                   <img src={Path+'three-dots.png'} style={{marginLeft: '20px',}} />
               </ModalMenu>
-              <div style={{display:'flex',alignItems: 'center',marginLeft:'14px', marginBottom:'10px'}}>
+              <div style={{display:'flex',visibility:'hidden',alignItems: 'center',marginLeft:'14px', marginBottom:'10px'}}>
               <label className={styles.switch} style={{transform:'scale(0.7)'}} >
-                <input type="checkbox" checked={user.theme} onClick={()=>changeTheme()} />
+                <input type="checkbox" defaultChecked={user.theme} onClick={()=>changeTheme()} />
                 <span className={styles.slider}></span>
               </label>
               <Light size='18' style={{marginLeft:'14px',color:user.theme?'white':'black'}} >Темная тема</Light>

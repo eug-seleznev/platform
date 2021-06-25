@@ -5,6 +5,7 @@ import style from "../../../../../../Styles/modules/components/Project/newsprint
 import card from "../card.module.css";
 import cardOpen from "./cardOpen.module.css";
 import cardEditor from "./cardEditor.module.css";
+import settingsCss from "./Setttings/settings.module.css";
 import {
   addCardToChosen,
   addUserToEvent,
@@ -21,6 +22,7 @@ import getDateWithTime from "./getDateWithTime";
 import { Input } from "../../../../../../Styles/Forms";
 import { userTableSearch } from "../../../../../../redux/actions/user";
 import NewSettings from "./NewSettings";
+import { useClickOutside } from "../../modalMenu";
 
 const CardEditor = ({
   info,
@@ -29,6 +31,7 @@ const CardEditor = ({
   boardId,
   history,
   theme,
+  timelineId
 }) => {
   const users = useSelector((state) => state.users.users);
   const project = useSelector((state) => state.projects.project);
@@ -50,9 +53,9 @@ const CardEditor = ({
     val: "",
     visible: false,
   });
+  const outclick = useClickOutside(()=>addUser&&setAddUser(false))
   useEffect(() => {
     if (info) {
-      // console.log(info)
       setChosen(chosenCard);
       setTitle(info.title);
       setDescription(info.description);
@@ -62,7 +65,7 @@ const CardEditor = ({
     }
   }, []);
   useEffect(() => {
-    info.event_users.map((user) => {
+    info.execs.map((user) => {
       setEventUsers((eventUsers) => [...eventUsers, user._id]);
     });
     project.team2.map((user) => {
@@ -89,13 +92,6 @@ const CardEditor = ({
     let value = e.target.value;
     dispatch(userTableSearch({ value, field }));
   };
-  const changeEventDate = () => {
-    let id = info._id;
-    let val = evDateVal;
-    let field = "event_date";
-    dispatch(changeCardField(val, field, id));
-    setEvDate(true);
-  };
   const changeSomeField = (e) => {
     if (e.target.name === "title") {
       setTitle(e.target.value);
@@ -113,29 +109,12 @@ const CardEditor = ({
   const goToUser = (userid) => {
     history.push(`../../../../users/${userid}`);
   };
-  const changeVal = (e) => {
-    let val = new Date(e.target.value);
-    let field = "deadline";
-    let id = info._id;
-    setDeadline({ ...deadline, val: e.target.value });
-    dispatch(changeCardField(val, field, id));
-  };
-
+  
   const finish = () => {
     let id = info._id;
     dispatch(finishExpired(id, boardId));
   };
-  const changeDeadline = () => {
-    let val = new Date(deadline.val);
-    let field = "deadline";
-    let id = info._id;
-    console.log(deadline.val);
-
-    if (deadline.val !== "") {
-      dispatch(changeCardField(val, field, id));
-      setDeadline({ ...deadline, set: false, visible: true });
-    }
-  };
+  
   return (
     <div className={cardOpen.main}>
       <div className={cardEditor.title}>
@@ -186,159 +165,34 @@ const CardEditor = ({
                   style={{ filter: theme ? "invert(1)" : "invert(0)" }}
                   onMouseLeave={() => setSettings(false)}
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      height: "25px",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <StyledIn
-                      style={{ textDecoration: "none", cursor: "default" }}
-                    >
-                      Изменить дедлайн
-                    </StyledIn>
-
-                    <div>
-                      {deadline.set ? (
-                        <div style={{ marginTop: "3px" }}>
-                          <div
-                            style={{
-                              display: !deadline.visible ? "block" : "none",
-                            }}
-                          >
-                            <div
-                              style={{
-                                display: !deadline.set ? "none" : "flex",
-                              }}
-                            >
-                              <input
-                                type="date"
-                                onKeyPress={(e) =>
-                                  e.key === "Enter" ? changeDeadline(e) : ""
-                                }
-                                onChange={(e) => {
-                                  changeVal(e);
-                                }}
-                                style={{
-                                  width: "45px",
-                                  border: "none",
-                                  outline: "none",
-                                  borderRadius: "0px",
-                                }}
-                              ></input>
-                            </div>
-                          </div>
-                        </div>
-                      ) : (
-                        <div>
-                          <img
-                            draggable="false"
-                            onClick={() => {
-                              setDeadline({ ...deadline, set: true });
-                            }}
-                            src={Path + "plus thin.png"}
-                            style={{
-                              display:
-                                !deadline.visible && !info.deadline
-                                  ? "block"
-                                  : "none",
-                              marginTop: "10px",
-                              width: "18px",
-                              height: "18px",
-                              transform: "translateX(-3px)",
-                              cursor: "pointer",
-                            }}
-                          ></img>
-                          <div
-                            style={{
-                              display: deadline.visible ? "flex" : "none",
-                              marginTop: "4px",
-                            }}
-                          >
-                            <Light
-                              onDoubleClick={() => {
-                                setDeadline({
-                                  ...deadline,
-                                  set: true,
-                                  visible: false,
-                                });
-                              }}
-                              style={{
-                                marginTop: "1px",
-                                cursor: "pointer",
-                                marginTop: "6px",
-                              }}
-                            >
-                              {getDate(deadline.val)}
-                            </Light>
-                          </div>
-                          <div
-                            style={{
-                              display:
-                                !deadline.visible && info.deadline
-                                  ? "flex"
-                                  : "none",
-                              marginTop: "4px",
-                            }}
-                          >
-                            <Light
-                              onDoubleClick={() => {
-                                setDeadline({
-                                  ...deadline,
-                                  set: true,
-                                  visible: false,
-                                });
-                              }}
-                              style={{ marginTop: "1px", cursor: "pointer" }}
-                            >
-                              {getDate(info.deadline)}
-                            </Light>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      height: "25px",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <StyledIn
-                      style={{ textDecoration: "none", cursor: "default" }}
+                  
+                 
+                    <Light
+                      onClick={toChosen}
+                      className={settingsCss.users__name}
+                      style={{
+                        cursor:'pointer'
+                      }}
                     >
                       {chosen ? "Убрать из избранного" : "Добавить в избранное"}
-                    </StyledIn>
-                    <img
-                      draggable="false"
-                      onClick={toChosen}
-                      src={Path + "star.png"}
-                      style={{
-                        width: "25px",
-                        height: "25px",
-                        cursor: "pointer",
-                        marginTop: "10px",
-                        backgroundColor: chosen ? "#FFAF30" : "rgba(0,0,0,0)",
-                      }}
-                    />
-                  </div>
-                  <StyledIn
+                    </Light>
+                   
+                  <Light
+                  className={settingsCss.users__name}
                     style={{
                       display: boardId ? "flex" : "none",
-                      height: "24px",
+                      cursor:'pointer'
                     }}
                     onClick={() => finish()}
                   >
                     Готово
-                  </StyledIn>
-                  <StyledIn
+                  </Light>
+                  <Light
+                    className={settingsCss.users__name}
                     style={{
                       display: "flex",
-                      height: "24px",
                       marginTop: "0px",
+                      cursor:'pointer'
                     }}
                     onClick={() =>
                       setDeleteWindow({
@@ -348,7 +202,7 @@ const CardEditor = ({
                     }
                   >
                     Удалить карточку
-                  </StyledIn>
+                  </Light>
                 </div>
               </CSSTransition>
             </div>
@@ -395,32 +249,31 @@ const CardEditor = ({
             </div>
           </form>
         </div>
-        <NewSettings theme={theme}info={info}></NewSettings>
+        <NewSettings timelineId={timelineId} projTeam={projTeam} users={users} theme={theme}info={info}eventUsers={eventUsers}></NewSettings>
         <div
           style={{
             height: "20px",
             marginTop: "5px",
-            marginBottom: info.emergency === "Событие" ? "170px" : "0px",
+            marginBottom: info.emergency === "Событие" ? "170px" : "170px",
           }}
         >
           <div
-            style={{ display: info.emergency === "Событие" ? "block" : "none" }}
+            style={{ display: info.execs?.length>0 ? "block" : "none" }}
           >
             <div
               style={{
-                borderTop: "1px solid #AFAFAF",
                 borderBottom: "1px solid #AFAFAF",
-                marginTop: "10px",
+                marginTop:'5px'
               }}
             >
               <Light
-                style={{ marginTop: "7px", color: theme ? "white" : "black" }}
+                style={{  color: theme ? "white" : "black" }}
                 size="15.5"
               >
                 Участники
               </Light>
               <div style={{ display: "flex" }}>
-                {info.event_users?.map((el, i) => {
+                {info.execs?.map((el, i) => {
                   return (
                     <div>
                       <img
@@ -481,12 +334,13 @@ const CardEditor = ({
                     }}
                   ></img>
                 ) : (
-                  <div style={{ filter: theme ? "invert(1)" : "invert(0)" }}>
+                  <div ref={outclick} style={{ filter: theme ? "invert(1)" : "invert(0)" }}>
                     <Input
                       style={{ width: "180px" }}
                       onChange={handleInput}
                     ></Input>
                     <div
+                     
                       className={cardOpen.comments__dropdown}
                       style={{
                         position: "absolute",
@@ -506,14 +360,14 @@ const CardEditor = ({
                           !eventUsers.includes(user._id)
                         ) {
                           return (
-                            <Regular
+                            <Light
                               className={cardOpen.comments__name}
                               onClick={() => takeUser(user._id)}
                               style={{ cursor: "pointer" }}
                               key={i}
                             >
                               {user.fullname}
-                            </Regular>
+                            </Light>
                           );
                         }
                       })}
@@ -523,7 +377,7 @@ const CardEditor = ({
               </div>
             </div>
             <div>
-              {!evDate ? (
+              {/* {!evDate ? (
                 <>
                   <Light
                     style={{
@@ -585,7 +439,7 @@ const CardEditor = ({
                 >
                   {getDateWithTime(info?.event_date)}
                 </Light>
-              )}
+              )} */}
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 .main  {
     padding:20px;
     z-index: 1000;
+    min-width: 720px;
 }
 .comments__area {
     

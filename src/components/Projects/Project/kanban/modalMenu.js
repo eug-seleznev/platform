@@ -21,7 +21,7 @@ const useClickOutside = (callback) => {
   
   return domNode
   }
-  
+  export  {useClickOutside}
 
   const ModalMenu = (props) => {
 

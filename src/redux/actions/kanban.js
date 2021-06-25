@@ -1,5 +1,5 @@
 import { innerBackend, } from "../../components/utils/axios";
-import {ADD_USER_TO_EVENT,CHANGE_CARD_DATE,CHANGE_CARD_EMERGENCY,DELETE_CARD_BACKLOG,CHANGE_CARD_REGULAR,LOAD_BOARD,REMOVE_TAG_CARD,CHOSEN_BOARD,ADD_TAG_CARD,DELETE_CARD,ADD_CARD_TO_CHOSEN,CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD, COMMON_KANBAN_RELOAD, ADD_USER_TO_TASK_NEW, UNEXPIRED, CLEAR_BOARD, RENAME_BOARD} from "../types";
+import {CHANGE_CARD_DEADLINE,LIKE_CARD,ADD_USER_TO_EVENT,CHANGE_CARD_DATE,CHANGE_CARD_EMERGENCY,DELETE_CARD_BACKLOG,CHANGE_CARD_REGULAR,LOAD_BOARD,REMOVE_TAG_CARD,CHOSEN_BOARD,ADD_TAG_CARD,DELETE_CARD,ADD_CARD_TO_CHOSEN,CHANGE_CARD_INFO,ADD_NEW_CARD,ADD_COMMENT, ADD_NEW_BOARD, ADD_NEW_COLUMN, ADD_NEW_ROW, MOVE_CARD, ERROR_MSG, CHANGE_CARD_TITLE, CHANGE_CARD_DESCRIPTION, CHANGE_CARD, COMMON_KANBAN_RELOAD, ADD_USER_TO_TASK_NEW, UNEXPIRED, CLEAR_BOARD, RENAME_BOARD, GREEN_MSG} from "../types";
 
 
 
@@ -10,6 +10,52 @@ export const addBoardToChosen = (id) => async dispatch  => {
         const res = await innerBackend.put(`/kanban/boards/favorite/${id}`)
         dispatch({
             type: CHOSEN_BOARD,
+            payload: res.data
+        })
+    }
+    catch (err) {
+       alert('ошибка')           
+    }
+}
+export const likeCard =(id)=> async dispatch =>{
+    try {
+        const res = await innerBackend.post(`/kanban/cards/like/${id}`)
+        dispatch({
+            type: LIKE_CARD,
+            payload: res.data
+        })
+    }
+    catch (err) {
+       alert('ошибка')           
+    }
+}
+export const copyCardToColumn =(chosenColumn,board_id,id,newTitle,timelineId)=> async dispatch =>{
+    let body = {
+        column: chosenColumn,
+        board_id: board_id,
+        title: newTitle,
+        newTimeline:timelineId
+    }
+    try {
+        const res = await innerBackend.put(`/kanban/cards/copy/${id}`, body)
+        dispatch({
+            type: GREEN_MSG,
+            payload: res.data
+        })
+    }
+    catch (err) {
+       alert('ошибка')           
+    }
+}
+export const sendNotifications =(execs,isDeadline,deadlinePush,id)=> async dispatch =>{
+    let body = {
+        execs: execs,
+        date: isDeadline ? deadlinePush : null
+    }
+    try {
+        const res = await innerBackend.put(`/kanban/cards/notification/${id}`, body)
+        dispatch({
+            type: GREEN_MSG,
             payload: res.data
         })
     }
@@ -65,10 +111,8 @@ export const addTagCard = (id, value) => async dispatch  => {
 }
 export const loadBoard = (id) => async dispatch  => {
 
-    console.log(id)
     try {
-        const res = await innerBackend.get(`/kanban/boards/get/single/${id}`)
-       console.log(res)         
+        const res = await innerBackend.get(`/kanban/boards/get/single/${id}`)        
 
         dispatch({
             type: LOAD_BOARD,
@@ -162,6 +206,7 @@ export const changeCardField = (val, field, id) => async dispatch  => {
         CHANGE_CARD_DESCRIPTION:
         field==='regular'?CHANGE_CARD_REGULAR:
         field==='event_date'?CHANGE_CARD_DATE:
+        field==='deadline'?CHANGE_CARD_DEADLINE:
         field==='emergency'?CHANGE_CARD_EMERGENCY:''
     try {
         const res = await innerBackend.put(`/kanban/cards/fields/edit/${id}`,body)
