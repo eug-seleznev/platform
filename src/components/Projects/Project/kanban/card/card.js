@@ -136,7 +136,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
                 
             //   )
             // }):
-            info.execs.map((el,i)=>{
+            info && info.execs && info.execs.map((el,i)=>{
               return (
                 <div>
                   <img key={i} 
