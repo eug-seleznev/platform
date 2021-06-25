@@ -1,22 +1,21 @@
-import {  useEffect, useState } from 'react'
+import {  useEffect, useMemo, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import {  KanbanButton } from '../../../../../Styles/buttons'
-import { Path } from '../../../../Layout/header'
 import KanbanCard from '../card/card'
 import styles from './backlog.module.css'
 import { moveCard } from "../../../../../redux/actions/kanban";
-import CreateForm from '../components/createForm'
-import BacklogTitle from './backlogTitle'
-import BacklogFilters from './backlogFilters'
 import GhostCard from '../components/ghostCard'
-import CreateCard from './createCard'
 
-const CardList =({backlog, projectCrypt, boardId, history, filterredCards})=>{
+const CardList =({backlog, projectCrypt, boardId, history, filterredCards, scrollDown, setScrollDown})=>{
 
     const dispatch = useDispatch()
-
+    const scrollContainer = useRef(null)
     const [addGhost, setAddGhost] = useState(false)
 
+    useEffect(()=>{
+        scrollDown && scrollContainer.current.scrollTo(0,9999)
+        setScrollDown()
+    },[backlog])
+    
 
     const dragFunction = (e,index) => {
         try {
@@ -62,9 +61,10 @@ const CardList =({backlog, projectCrypt, boardId, history, filterredCards})=>{
         e.stopPropagation()
         setAddGhost(false)
     }
-    const dropToCard = (e, index) => {
+    const dropToCard = (e, card_id) => {
         e.stopPropagation()
         console.log('drop to card')
+        const index = backlog.findIndex(el=>el._id===card_id)
         dragFunction(e, index)
         setAddGhost(false)
 
@@ -79,10 +79,10 @@ const CardList =({backlog, projectCrypt, boardId, history, filterredCards})=>{
                 onDragLeave={dragOut} 
                 onDrop={dropCard}
                 >
-                <div onDragOver={e=>e.stopPropagation()} className={styles.backLogCardsList} >
+                <div ref={scrollContainer} onDragOver={e=>e.stopPropagation()} className={styles.backLogCardsList} >
                     {filterredCards.map((card,i)=>{
                         return(
-                            <div style={{paddingTop:'10px'}}  onDragOverCapture={(e)=>cardDragOver(e,i)}  onDrop={(e)=>dropToCard(e,i)}>
+                            <div style={{paddingTop:'10px'}}  onDragOverCapture={(e)=>cardDragOver(e,i)}  onDrop={(e)=>dropToCard(e,card._id)}>
                             
                                 {addGhost===`ghost${i}`?<GhostCard visible={true} />
                                 

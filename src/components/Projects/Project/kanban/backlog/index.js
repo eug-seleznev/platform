@@ -24,6 +24,7 @@ const Backlog =({sideOpen, backlog, projectCrypt, boardId, history, project,clos
         .filter(el=>filterByUser? el.execs.some(el=>el._id===filterByUser) : true)
         .filter(el=>el.title.match(filterByName))
 
+    const [newCardScrollDown, setNewCardScrollDown] = useState(false)
 
     return (
         <>
@@ -32,8 +33,8 @@ const Backlog =({sideOpen, backlog, projectCrypt, boardId, history, project,clos
             >
             <BacklogTitle cardNumber={filterredCards.length} closeBacklog={closeBacklog}/>  
             <BacklogFilters setFilterByBoard={setFilterByBoard} setFilterByName={setFilterByName} setFilterByUser={setFilterByUser} boardId={boardId} project={project} />
-            <CardList backlog={backlog} boardId={boardId} filterredCards={filterredCards} history={history} projectCrypt={projectCrypt}  />
-            <CreateCard boardId={boardId} projectCrypt={projectCrypt} />
+            <CardList scrollDown={newCardScrollDown} setScrollDown={()=>setNewCardScrollDown(false)} backlog={backlog} boardId={boardId} filterredCards={filterredCards} history={history} projectCrypt={projectCrypt}  />
+            <CreateCard callback={()=>setNewCardScrollDown(true)} boardId={boardId} projectCrypt={projectCrypt} />
             
         </div>
         
