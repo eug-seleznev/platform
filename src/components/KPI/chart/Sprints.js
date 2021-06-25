@@ -64,7 +64,7 @@ const WeeklySprints = () => {
   return (
     <>
       <div className="header">
-        <h1 className="title">Weekly created sprints</h1>
+        <h1 className="title">Недельные спринты</h1>
       </div>
       {loaded && <Line data={data} options={options} />}
     </>
