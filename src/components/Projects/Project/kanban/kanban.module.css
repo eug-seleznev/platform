@@ -170,8 +170,9 @@ margin-top: 70px;
 }
     .creationButton{
       
-        margin-top: 10px;
+        margin-top: 24px;
         margin-bottom: auto;
+        margin-left: 45px;
     }
     .categoryCardPlus{
         /* filter:invert(1); */

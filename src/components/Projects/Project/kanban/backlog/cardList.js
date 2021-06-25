@@ -1,15 +1,9 @@
-import {  useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import {  KanbanButton } from '../../../../../Styles/buttons'
-import { Path } from '../../../../Layout/header'
 import KanbanCard from '../card/card'
 import styles from './backlog.module.css'
 import { moveCard } from "../../../../../redux/actions/kanban";
-import CreateForm from '../components/createForm'
-import BacklogTitle from './backlogTitle'
-import BacklogFilters from './backlogFilters'
 import GhostCard from '../components/ghostCard'
-import CreateCard from './createCard'
 
 const CardList =({backlog, projectCrypt, boardId, history, filterredCards})=>{
 
