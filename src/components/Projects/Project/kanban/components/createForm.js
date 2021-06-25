@@ -12,7 +12,7 @@ import {useClickOutside, useEscapeClick} from '../hooks/hooks'
 
 
 
-const CreateForm = ({projectCrypt,closeForm, boardId, backlog, categoryId, column, timeline }) => {
+const CreateForm = ({projectCrypt,closeForm, boardId, backlog, categoryId, column, timeline, callback }) => {
 
 const dispatch =useDispatch ()
 const [title, setTitle] = useState('')
@@ -33,6 +33,7 @@ const addCardToBacklog =(e)=>{
   e.preventDefault()
   dispatch(addNewCard(projectCrypt, title, boardId,))
   setTitle('')
+  callback()
 }
 
 const addCardToTimeline = (e) => {
