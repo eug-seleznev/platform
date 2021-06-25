@@ -89,7 +89,7 @@ const [addGhost, setAddGhost] = useState()
         >
             {category.expired.map((el,i)=>{
                 return(
-                    <div onDragOver={(e)=>cardDragOver(e,i)} onDragLeave={(e)=>cardDragOut(e)} onDrop={(e)=>dropToCard(e,i)}>
+                    <div onDragOver={(e)=>cardDragOver(e,i)} onDragLeave={(e)=>cardDragOut(e)} onDrop={(e)=>dropToCard(e,i)} style={{marginTop: '10px'}}>
                             
                             {addGhost===`ghost${i}`?<div className={styles.addGhost}/>
                             :

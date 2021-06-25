@@ -1,0 +1,20 @@
+.createCard {
+    width: 220px;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+.buttonsContainer{
+    width:100%;
+    display:flex;
+    margin-left:5px;
+    border-top:1px solid #7F8DA1;
+    padding-top:10px;
+}
+    .formCloseButton{
+        width: 25px;
+        height:25px;
+        margin-left:5px;
+        cursor:pointer;
+        
+    }

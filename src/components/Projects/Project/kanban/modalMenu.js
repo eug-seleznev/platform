@@ -3,7 +3,7 @@ import styles from './kanban.module.css'
 import { Path } from "../../../Layout/header";
 import { ButtonTextLight } from "../../../../Styles/buttons";
 import { CSSTransition } from 'react-transition-group'
-
+import {useClickOutside} from './hooks/hooks'
 // to use <ModalMenu buttons={[{title, icon, handler}]}> <icon/> </ModalMenu>
 
 

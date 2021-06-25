@@ -8,8 +8,8 @@ import styles from './kanban.module.css'
 import KanbanCard from "./card/card";
 import { CSSTransition } from "react-transition-group";
 import { clearBoard, moveCard } from "../../../../redux/actions/kanban";
-import { ButtonText } from "../../../../Styles/buttons";
-import CreateForm from "./createForm";
+import { ButtonText, KanbanButton } from "../../../../Styles/buttons";
+import CreateForm from "./components/createForm";
 import { Path } from '../../../Layout/header'
 
 
@@ -105,7 +105,7 @@ useEffect(()=>{
                 >
                     {currentColunmCards && currentColunmCards.map((el,i)=>{
                         return(
-                            <div onDragOver={(e)=>cardDragOver(e,i)} onDragLeave={(e)=>cardDragOut(e)} onDrop={(e)=>dropToCard(e,el.huindex)}>
+                            <div onDragOver={(e)=>cardDragOver(e,i)} onDragLeave={(e)=>cardDragOut(e)} onDrop={(e)=>dropToCard(e,el.huindex)} style={{marginTop:'10px'}}>
                             
                             {addGhost===`ghost${i}`?<div className={styles.addGhost}/>
                             :
@@ -128,23 +128,22 @@ useEffect(()=>{
                         <div className={styles.addGhost}/>
                     </CSSTransition>
                 
-                    <div className={styles.creationButton}>
-                        <ButtonText onClick={()=>setNewCardModal(true)} style={{color:theme?'white':'#3F496C'}}>
-                            <img alt='plus' src={Path+'plus1.png'}className={styles.categoryCardPlus} />
+                    {!newCardModal
+                        ?<KanbanButton color={theme?'#E4E4E4':'#A1A1A1'} bg={theme?'#404040':'rgba(196, 196, 196, 0.2)'} className={styles.creationButton} onClick={()=>setNewCardModal(true)} >
+                            <img src={Path+(theme?'kanban-plus-white.png':'kanban-plus-dark.png')} />
                             Создать карточку
-                        </ButtonText> 
-                    </div>
-     
-                    <CreateForm 
-                        crypt={project.crypt} 
-                        categoryId={category._id} 
-                        column={column} 
-                        timeline={timelineId} 
-                        visible={newCardModal} 
-                        place={'category'} 
-                        setCreateOpen={()=>setNewCardModal()} 
-                        boardId={boardId}
-                    />
+                        </KanbanButton>  
+                        
+        
+                        :<CreateForm 
+                            crypt={project.crypt} 
+                            categoryId={category._id} 
+                            column={column} 
+                            timeline={timelineId} 
+                            closeForm={()=>setNewCardModal()} 
+                            boardId={boardId}
+                        />
+                    }
             </div>
             
    
