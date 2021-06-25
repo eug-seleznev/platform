@@ -27,6 +27,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
       id:''
     })
     const dispatch = useDispatch()
+    const theme = useSelector(state=>state.auth.user.theme)
     const crypt = useSelector(state=>state.projects.project.crypt)
     const favCards = useSelector(state=>state.auth.user.fav_cards)
     const cardClick = (e) => {
@@ -35,7 +36,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
       dispatch(currentCard(info))
       setTimeout(()=>{
         setCardOpen(true)
-      },100)
+      },300)
       
     }
     const deleteCard =()=>{
@@ -79,15 +80,15 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
       e.stopPropagation()
       history.push(`../../../../users/${id}`)
     }
-    // useEffect(()=>{
-    //   console.log(info)
-    // },[])
     return (
       <>
       <div onDragOver={addGhost} className={styles.card}
         draggable
         onDragStart={(e)=>dragStart(e)}
-        style={{border:
+        style={{
+          zIndex:1000,
+          backgroundColor:!theme?'white':'#1E1E1E',
+          border:
           info?.emergency==='Событие'?'1px solid #9CE3B0':
           info?.emergency==='Обычная'?'1px solid #648FC6':
           info?.emergency==='Критическая'?'1px solid #D83B44':
@@ -105,36 +106,36 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
         </div>
         <div className={styles.card__content}>
           <div style={{display:'flex', justifyContent:'space-between'}}>
-            <Light size='16' style={{padding:'5px',maxWidth:'50%'}}>{info?.title} </Light>
+            <Light color={theme?'white':'black'} size='16' style={{padding:'5px',maxWidth:'50%'}}>{info?.title} </Light>
             <div style={{display:'flex'}}>
             {
-            info.emergency==='Событие'
-            ? 
-            info.event_users.map((el,i)=>{
-              return (
-                <div>
-                  <img key={i} 
-                    src={url+'/'+el.avatar} 
-                    onClick={(e)=>{goToUser(e, el._id)}}
-                    onMouseEnter={()=>{setVisibleName(el.fullname)}}
-                    onMouseLeave={()=>{setVisibleName('')}} 
-                    style={{
-                      width:'25px',marginLeft:'4px',
-                      height:'25px',marginTop:'3px',
-                      borderRadius:'100%',objectFit:'cover'
+            // info.emergency==='Событие'
+            // ? 
+            // info.event_users.map((el,i)=>{
+            //   return (
+            //     <div>
+            //       <img key={i} 
+            //         src={url+'/'+el.avatar} 
+            //         onClick={(e)=>{goToUser(e, el._id)}}
+            //         onMouseEnter={()=>{setVisibleName(el.fullname)}}
+            //         onMouseLeave={()=>{setVisibleName('')}} 
+            //         style={{
+            //           width:'25px',marginLeft:'4px',
+            //           height:'25px',marginTop:'3px',
+            //           borderRadius:'100%',objectFit:'cover'
                     
-                  }} ></img>
-                  <div style={{position:'relative'}}>
-                     <div className={styles.card__exec__name} 
-                      style={{display:`${visibleName===el.fullname?'block':'none'}`}}
-                    >{el.fullname}
-                    </div>
-                  </div>
+            //       }} ></img>
+            //       <div style={{position:'relative'}}>
+            //          <div className={styles.card__exec__name} 
+            //           style={{display:`${visibleName===el.fullname?'block':'none'}`, border:'1px solid white'}}
+            //         >{el.fullname}
+            //         </div>
+            //       </div>
                  
-                </div>
+            //     </div>
                 
-              )
-            }):
+            //   )
+            // }):
             info.execs.map((el,i)=>{
               return (
                 <div>
@@ -146,18 +147,15 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
                     style={{
                       width:'25px',marginLeft:'4px',
                       height:'25px',marginTop:'3px',
-                      borderRadius:'100%',objectFit:'cover'
-                    
+                      borderRadius:'100%',objectFit:'cover'                   
                   }} ></img>
                   <div style={{position:'relative'}}>
                      <div className={styles.card__exec__name} 
-                      style={{display:`${visibleName===el.fullname?'block':'none'}`}}
+                      style={{display:`${visibleName===el.fullname?'block':'none'}`, border:'1px solid white'}}
                     >{el.fullname}
                     </div>
                   </div>
-                 
-                </div>
-                
+                </div>  
               )
             })
           }
@@ -168,12 +166,13 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
           <div className={styles.card__content__second} >
             <div style={{display:'flex'}}>
               <Light size='12' 
+                color={theme?'#B7B7B7':'black'}
                 style={{marginRight:'5px'}}>
                   { info.emergency!=='Событие'&&!info.type?'Задача':
                     info.emergency==='Событие'&& info.event_date?getDateWithTime(info.event_date) :
                     info.emergency==='Событие'&&!info.event_date?'Событие':info.type}
                 </Light>
-              <Light size='12' style={{display:info.type==='Одна задача'||!info.type?'none':'block'}} >{info&& info.tasks &&info?.tasks.filter(task=>task.taskStatus).length}/{info&& info.tasks &&info?.tasks.length}</Light>
+              <Light color={theme?'#B7B7B7':'black'} size='12' style={{display:info.type==='Одна задача'||!info.type?'none':'block'}} >{info&& info.tasks &&info?.tasks.filter(task=>task.taskStatus).length}/{info&& info.tasks &&info?.tasks.length}</Light>
             </div>
             <div style={{display:'flex',alignItems:'center',flexWrap:'nowrap',marginTop:'5px'}}>
               {info&& info.tags&& info?.tags.map((tag,i)=>{
@@ -201,7 +200,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
               
             </div>
           </div>
-          <CardOpen history={history} boardId={boardId} chosenCard={chosenCard} isOpen={cardOpen} onClick={deleteCard} setDeleteWindow={setDeleteWindow} data={'task data'} close={close} />
+          <CardOpen timelineId={timelineId} theme={theme} history={history} boardId={boardId} chosenCard={chosenCard} isOpen={cardOpen} onClick={deleteCard} setDeleteWindow={setDeleteWindow} data={'task data'} close={close} />
         </div>
         
       }

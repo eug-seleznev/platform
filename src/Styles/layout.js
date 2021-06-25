@@ -209,7 +209,7 @@ export const SidebarContainer = styled.div`
   min-height: 100vh;
   padding-top: 73px;
   z-index: 9999;
-  background-color: #1c1e23;
+  background-color: #0d1117;
   text-align: center;
   @media (max-width: 1000px) {
     display: none;

@@ -1,0 +1,139 @@
+.main {
+    border-top: 1px solid #AFAFAF;
+    border-bottom: 1px solid #AFAFAF;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+   
+}
+.imagesRow {
+    display: flex;
+    align-items: center;
+}
+.selector {
+    outline: none;
+    border: none;
+    font-family: SuisseIntlLight;
+    font-size:14px;
+    cursor: pointer;
+    width: 120px;
+    height: 25px;
+    margin:15px;
+    margin-right:0px;
+    border-radius: 5px;
+}
+.selector__option {
+    background-color: white;
+}
+.selector__option:hover {
+    background-color: #ad3a3a!important
+}
+.calendar {
+    width:30px;
+    position:absolute;
+    overflow:hidden;
+    transform:translateY(-28px);
+    cursor:pointer!important;
+}
+.calendar__input {
+    width:50px;
+    margin-left:-44px;
+    transform:scale(2.2);
+    opacity:0;
+   
+}
+.calendar__input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+  }
+.imageBackground {
+    height: 32px;
+    width: 32px;
+    border-radius: 5px;
+    background-color: #3F496C;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.button {
+    outline: none;
+    background-color: #3F496C;
+    color: white;
+    border-radius: 5px;
+    font-family: SuisseIntlLight;
+    font-size: 14px;
+    width: 96%;
+    border: none;
+    height: 24px;
+    margin-top: 13px;
+    cursor: pointer;
+}
+.button:hover {
+
+}
+.users__dropdown {
+    position: absolute;
+    border-radius: 5px;
+
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 4px;
+    padding: 10px;
+    overflow-y: scroll;
+    margin-top: 18px;
+}
+.users__dropdown::-webkit-scrollbar {
+    display: none;
+}
+.users__name {
+     margin: 6px;
+     padding-top: 2px;
+     padding-bottom: 2px;
+     margin-left: -3px;
+     margin-top: 0px;
+     display:flex;
+     align-items:center;
+     cursor: pointer;
+}
+.users__avatar {
+    width:18px;
+    height:18px;
+    border-radius:100%;
+    margin-right:8px;
+    object-fit:cover;
+}
+.users__name:hover {
+   
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.copy {
+    width: 170px;
+    height: 143px;
+    background-color: white;
+    border-radius: 10px;
+    position: absolute;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 4px;
+    padding: 5px;
+    padding-left: 10px;
+    margin-top: 20px;
+    margin-left: -147px;
+}
+.visibleRow {
+    display: flex;
+    align-items: center;
+}
+.textarea {
+    resize:none;
+    font-family:SuisseIntlLight;
+    font-size:14px;
+    border-radius:5px;
+    margin-top: 10px;
+}
+.description {
+    border-radius: 5px;
+    background-color: #9196A8;
+    padding: 5px;
+    position: absolute;
+    margin-top: -30px;
+    /* margin-left: 37px; */
+}

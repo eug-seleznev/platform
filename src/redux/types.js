@@ -36,7 +36,10 @@ export const CHANGE_CARD_REGULAR = 'CHANGE_CARD_REGULARD'
 export const CHANGE_CARD_EMERGENCY = 'CHANGE_CARD_EMERGENCY '
 export const CHANGE_CARD_DATE = 'CHANGE_CARD_DATE'
 export const ADD_USER_TO_EVENT = 'ADD_USER_TO_EVENT'
+export const CHANGE_CARD_DEADLINE = "CHANGE_CARD_DEADLINE"
 export const CLEAR_BOARD = 'CLEAR_BOARD'
+export const CHANGE_THEME = 'CHANGE_THEME'
+export const LIKE_CARD = 'LIKE_CARD'
 //USERES
 export const ALL_USERS = 'users';
 export const GET_EMPLOYE = 'get_users';

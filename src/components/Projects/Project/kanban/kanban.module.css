@@ -13,7 +13,62 @@
     margin-right: -50px;
     display: grid;
 }
-   
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 20px;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    border-radius: 20px;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
 .dropMenuButton{
     
 }
@@ -82,18 +137,37 @@
     padding-bottom: 30px;
     margin-bottom: -40px;
 }
-.backLogPlus{
-    filter:invert(1);
-    background:none;
-     width:10px;
-     margin-right:5px;
+
+
+    .createWindow {
+        position: fixed;
+        left: 0;
+        top:0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 100000;
+        background-color: rgba(0,0,0,0.4);
     }
-    .backLogButtonCont {
-        display:flex;
-        justify-content: flex-end;
-        width: 90%;
-        transform: translateX(6px);
+  
+
+    .verticalText{
+        height: max-content;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg);
+        margin-right: 10px;
+        margin-left: 5px;
+        margin-top: 30px;
+        color: white;
+
     }
+  
+.content{
+/* background-color: coral; */
+height: fit-content;
+margin-top: 70px;
+
+}
     .createWindow {
         position: fixed;
         left: 0;
@@ -112,48 +186,18 @@
         margin-left: 42vw;
         transform: translateX(-50%),translateY(-50%);
     }
-    .backLogButton {
-        display:flex;
-        align-items:center;
-        margin: 0;
-        margin-left: 10px;
-        height: 40px;
-        width: fit-content;
-        
-    }
-    .verticalText{
-        height: max-content;
-        writing-mode: vertical-rl;
-        text-orientation: mixed;
-        transform: rotate(180deg);
-        margin-right: 10px;
-        margin-left: 5px;
-        margin-top: 30px;
-        color: white;
-
-    }
-    .backLogCards{
-        margin: 8px;
-
-    }
-.content{
-/* background-color: coral; */
-height: fit-content;
-margin-top: 70px;
-
-}
     .creationButton{
-        display: flex;
-        align-items: center;
-        height: 52px;
-        margin-top: 10px;
+      
+        margin-top: 24px;
         margin-bottom: auto;
+        margin-left: 45px;
     }
     .categoryCardPlus{
         /* filter:invert(1); */
         background:none;
         width:10px;
         margin-right:5px;
+        z-index: -1;
     }
     .category{
         overflow: hidden;
@@ -161,8 +205,8 @@ margin-top: 70px;
     }
 .board{
    
-    height: 71.65vh;  
-    margin-bottom: -18px;
+    height: 72.4vh;  
+    margin-bottom: -17.5px;
     /* background-color: blanchedalmond; */
     overflow: scroll;
 }
@@ -209,34 +253,7 @@ margin-top: 70px;
             transition-duration: 250ms;
             
         }
-        .addGhost{
-            background-color: white;
-            width: 222px;
-            height: 50px;
-            margin-top: 10px;
-            margin-right: 10px;
-            /* margin-bottom: 10px; */
-            border: 1px solid grey;
-            border-radius: 8PX;
-            pointer-events: none;
-  
-        }
-
-        .ghostEnter{
-            opacity: 1;
-        }
-        .ghostEnterActive{
-            opacity: 1;
-            transition: opacity 0.2s, transform 0.2s;
-
-        }
-        .ghostExit{
-            opacity: 1;
-        }
-        .ghostExitActive{
-            opacity: 1;
-            transition: opacity 0.2s, transform 0.2s
-        }
+     
 
 
 .formEnter{

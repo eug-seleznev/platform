@@ -1,6 +1,7 @@
 .main  {
     padding:20px;
     z-index: 1000;
+    min-width: 720px;
 }
 .comments__area {
     
@@ -39,13 +40,19 @@
     max-height: 260px;
     
 } 
+.event__date {
+    cursor: pointer;
+}
+.event__date:hover {
+    text-decoration: underline;
+}
 .editList {
 	display: flex;
 	flex-wrap:wrap;
-	margin-bottom: 10px;
+	/* margin-bottom: 10px; */
 	justify-content: flex-start;
 	color:#3F496C;
-	margin-top:10px;
+	/* margin-top:10px; */
 }
 .creator {
     margin-left: 10px;

@@ -24,7 +24,7 @@ const Kanbans = ({history}) => {
   }
   
     return (
-      <div className={styles.start}>
+      <div className={styles.start} >
         <div>
         {/* header */}
         <div style={{ textAlign: "center" }}>
@@ -52,8 +52,7 @@ const Kanbans = ({history}) => {
               {project && project.boards.map((el,i)=>{
                   return (
                     <BoardTitleIndex el={el} key={i} handleRedirect={handleRedirect}></BoardTitleIndex>
-                      
-                    
+   
                   )
               })}
           </div>

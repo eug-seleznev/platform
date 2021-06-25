@@ -4,9 +4,9 @@
     min-height: 50px;
     height: fit-content;
     /* margin-bottom: auto; */
-    margin-top: 10px;
+    /* margin-top: 10px; */
     margin-right: 10px;
-
+    
     border-radius: 8PX;
     display: flex;
     cursor: pointer;
@@ -50,6 +50,8 @@
 }
 .cardOpnenBackground{
     position: fixed;
+    display: grid;
+    grid-template-columns: 1fr 850px;
     right: -16px;
     left: 0;
     top: -47px;
@@ -63,12 +65,12 @@
     width: 16px;
 }
     .cardOpnenContainer{
-        
         display: flex;
+     
         margin-top: 113px;
         margin-left: auto;
-        width: 700px;
-        height: 100%;
+        width: 800px;
+        height: 120%;
         border: 1px solid rgb(208, 211, 255);
         background-color: white;
     }
@@ -76,6 +78,13 @@
         .cardOpnenBackground{
     
             overflow-y:scroll;
+        
+        }
+    }
+    @media (max-height:550px) {
+        .cardOpnenBackground{
+    
+            height: 160%;
         
         }
     }

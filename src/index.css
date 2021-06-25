@@ -7,6 +7,24 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+::-webkit-scrollbar {
+  width: 15px;
+  margin:15px;
+}
+ 
+::-webkit-scrollbar-track {
+}
+ 
+::-webkit-scrollbar-thumb {
+  border: 5px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  border-radius: 9999px;
+  background-color: #AAAAAA;
+
+}
+
+
 code {
   font-family: source-code-pro, SuisseIntlRegular, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -42,3 +60,9 @@ code {
           src: url(./fonts/SuisseIntl/Thin/SuisseIntl-Thin.woff), 
           url(./fonts/SuisseIntl/Thin/SuisseIntl-Thin.woff2); 
           }
+          @font-face {
+            font-family: SuisseIntlLightItalic;
+            src: url(./fonts/SuisseIntl/LightItalic/SuisseIntl-LightItalic.eot);
+            src: url(./fonts/SuisseIntl/LightItalic/SuisseIntl-LightItalic.woff), 
+            url(./fonts/SuisseIntl/LightItalic/SuisseIntl-LightItalic.woff2); 
+            }

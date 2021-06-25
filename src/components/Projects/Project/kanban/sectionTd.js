@@ -8,8 +8,8 @@ import styles from './kanban.module.css'
 import KanbanCard from "./card/card";
 import { CSSTransition } from "react-transition-group";
 import { clearBoard, moveCard } from "../../../../redux/actions/kanban";
-import { ButtonText } from "../../../../Styles/buttons";
-import CreateForm from "./createForm";
+import { ButtonText, KanbanButton } from "../../../../Styles/buttons";
+import CreateForm from "./components/createForm";
 import { Path } from '../../../Layout/header'
 
 
@@ -19,7 +19,7 @@ import { Path } from '../../../Layout/header'
 const KanbanSectionTd = ({category, timelineCards, column, boardId, timelineId,history}) => {
     const dispatch = useDispatch()
     const project = useSelector(state => state.projects.project)
-
+    const theme = useSelector(state => state.auth.user.theme)
     let currentColunmCards = timelineCards &&  timelineCards.filter(el=>el.column===column)
     const [hower, setHower] = useState(false)
     const [newCardModal, setNewCardModal] = useState(false)
@@ -46,16 +46,18 @@ const dragFunction = (e, index) => {
         console.log('Не получилось переместить карточку', e)
     }
 }
-
+useEffect(()=>{
+    refBG.current.style.backgroundColor=theme?'#0D1117':'white'
+},[theme])
 
     const dragOver = (e) => {
         e.preventDefault()
-        refBG.current.style.backgroundColor = 'rgb(248, 248, 250)'
+        refBG.current.style.backgroundColor=theme?'#0D1117':'rgb(248, 248, 250)'
         setAddGhost('ghost last')
     }
     const dragOut = (e) => {
         e.preventDefault()
-        refBG.current.style.backgroundColor='white'
+        refBG.current.style.backgroundColor=theme?'#0D1117':'white'
         setAddGhost(false)
     }
     const cardDragOver = (e,i) => {
@@ -63,18 +65,18 @@ const dragFunction = (e, index) => {
         e.stopPropagation()
         // console.log('he')
 
-        refBG.current.style.backgroundColor = 'rgb(248, 248, 250)'
+        refBG.current.style.backgroundColor=theme?'#0D1117':'rgb(248, 248, 250)'
         setAddGhost(`ghost${i}`)
     }
     const cardDragOut = (e) => {
         e.preventDefault()
         e.stopPropagation()
-        refBG.current.style.backgroundColor='white'
+        refBG.current.style.backgroundColor=theme?'#0D1117':'white'
         setAddGhost(false)
     }
     const dropCard = (e) => {
         e.preventDefault()
-        refBG.current.style.backgroundColor='white'
+        refBG.current.style.backgroundColor=theme?'#0D1117':'white'
         setAddGhost(false)
         dragFunction(e, timelineCards.length)
     }
@@ -83,7 +85,7 @@ const dragFunction = (e, index) => {
         console.log('index',index)
         dragFunction(e, index)
         setAddGhost(false)
-        refBG.current.style.backgroundColor='white'
+        refBG.current.style.backgroundColor=theme?'#0D1117':'white'
 
       }
     
@@ -103,7 +105,7 @@ const dragFunction = (e, index) => {
                 >
                     {currentColunmCards && currentColunmCards.map((el,i)=>{
                         return(
-                            <div onDragOver={(e)=>cardDragOver(e,i)} onDragLeave={(e)=>cardDragOut(e)} onDrop={(e)=>dropToCard(e,el.huindex)}>
+                            <div onDragOver={(e)=>cardDragOver(e,i)} onDragLeave={(e)=>cardDragOut(e)} onDrop={(e)=>dropToCard(e,el.huindex)} style={{marginTop:'10px'}}>
                             
                             {addGhost===`ghost${i}`?<div className={styles.addGhost}/>
                             :
@@ -126,23 +128,22 @@ const dragFunction = (e, index) => {
                         <div className={styles.addGhost}/>
                     </CSSTransition>
                 
-                    <div className={styles.creationButton}>
-                        <ButtonText onClick={()=>setNewCardModal(true)}>
-                            <img alt='plus' src={Path+'plus1.png'}className={styles.categoryCardPlus}/>
+                    {!newCardModal
+                        ?<KanbanButton color={theme?'#E4E4E4':'#A1A1A1'} bg={theme?'#404040':'rgba(196, 196, 196, 0.2)'} className={styles.creationButton} onClick={()=>setNewCardModal(true)} >
+                            <img src={Path+(theme?'kanban-plus-white.png':'kanban-plus-dark.png')} />
                             Создать карточку
-                        </ButtonText> 
-                    </div>
-     
-                    <CreateForm 
-                        crypt={project.crypt} 
-                        categoryId={category._id} 
-                        column={column} 
-                        timeline={timelineId} 
-                        visible={newCardModal} 
-                        place={'category'} 
-                        setCreateOpen={()=>setNewCardModal()} 
-                        boardId={boardId}
-                    />
+                        </KanbanButton>  
+                        
+        
+                        :<CreateForm 
+                            crypt={project.crypt} 
+                            categoryId={category._id} 
+                            column={column} 
+                            timeline={timelineId} 
+                            closeForm={()=>setNewCardModal()} 
+                            boardId={boardId}
+                        />
+                    }
             </div>
             
    

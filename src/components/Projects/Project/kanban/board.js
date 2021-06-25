@@ -4,11 +4,10 @@ import { useDispatch, useSelector } from "react-redux"
 
 
 import styles from './kanban.module.css'
-import { Bold, } from "../../../../Styles/typography";
+import { Bold, Light, } from "../../../../Styles/typography";
 import KanbanSection from "./section";
-import Backlog from "./backlog";
+import Backlog from "./backlog/index";
 import {  loadBoard,deleteColumn, clearBoard, addBoardToChosen, renameBoard, deleteBoard } from "../../../../redux/actions/kanban";
-import CreateForm from "./createForm";
 
 import { Path } from "../../../Layout/header";
 import BoardSettings from './boardSettings'
@@ -16,6 +15,8 @@ import BoardColumnsTitle from "./boardTitle";
 
 import ModalMenu from "./modalMenu";
 import ConfirmModal from "./confirm";
+import { changeThemeField } from "../../../../redux/actions/auth";
+import { background } from "../../../../redux/actions/user";
 
 
 
@@ -26,6 +27,7 @@ import ConfirmModal from "./confirm";
 const Board = ({match, history}) => {
   const dispatch = useDispatch ()
   const project = useSelector(state=>state.projects.project)
+
   const user = useSelector(state => state.auth.user)
   const board = useSelector(state=>state.projects.kanban)
   const backlog = useSelector(state=>state.projects.backlog)
@@ -43,7 +45,7 @@ const Board = ({match, history}) => {
 
     const [createColumn, setCreateColumn] = useState(false)
     const [createCategory, setCreateCategory] = useState(false)
-    
+
     const [clientXY, setClientXY] = useState({
       x:0,
       y:0
@@ -92,7 +94,10 @@ const Board = ({match, history}) => {
     const titleScroll = (e) => {
       boardTitle.current.scrollTo( boardDiv.current.scrollLeft,  0)
     }
-
+    const changeTheme = () =>{
+      dispatch (changeThemeField(!user.theme))
+    }
+  
     useEffect(()=>{
         const boardId = project.boards.find(el=>el.name===match.params.board_name)._id
         dispatch(loadBoard(boardId))
@@ -145,27 +150,32 @@ const Board = ({match, history}) => {
     ]
 
     useEffect(()=>{
-      return () => dispatch(clearBoard())
+      dispatch (background(!user.theme?'rgba(0,0,0,0)':'#0D1117'))
+      return () => {
+        dispatch(clearBoard())
+        dispatch(background('white'))
+      }
     },[])
 
     if(!board){
         return <div>loading board...</div>
     }
     return (
-      <div className={styles.main} style={{gridTemplateColumns: sideOpen? '240px 1fr' : '35px 1fr'}}>
-        <div className={styles.backLog} onClick={()=>setSideOpen(!sideOpen)}>
-            <Backlog history={history} backlog={backlog} setCreateOpen={setCreateOpen} sideOpen={sideOpen} projectCrypt={project.crypt} boardId={board._id}/>
-            <div className={styles.verticalText} style={{display: sideOpen? 'none' : 'block',cursor: 'pointer'}}>
-              Все задачи
-              <img src={Path+'kanban-open-icon-white.png'} style={{width: '10px', height:'15px', marginTop: '10px', marginLeft: '-7px', marginBottom: '-20px',cursor: 'pointer'}} />
+      <div className={styles.main} style={{gridTemplateColumns: sideOpen? '255px 1fr' : '35px 1fr',backgroundColor:!user.theme?'rgba(0,0,0,0)':'#1C1E23'}}>
+        <div className={styles.backLog}>
+            <Backlog history={history} backlog={backlog} setCreateOpen={setCreateOpen} sideOpen={sideOpen} projectCrypt={project.crypt} boardId={board._id} project={project} closeBacklog={()=>setSideOpen(!sideOpen)}/>
+            <div className={styles.verticalText} onClick={()=>setSideOpen(!sideOpen)} style={{display: sideOpen? 'none' : 'block',cursor: 'pointer'}}>
+              Задачи
+              <img src={Path+'backlogArrow.png'} style={{width: '8px', height: '16px', marginTop: '10px', marginLeft: '-7px', marginBottom: '-20px',cursor: 'pointer'}} />
             </div>
         </div>
 
         <div className={styles.content}>
+            
             <div style={{display:'flex',alignItems: 'center',marginLeft:'14px'}}>
               
               {!edit
-                  ?<Bold size='24' style={{marginBottom:'5px'}}>{board.name}</Bold>
+                  ?<Bold size='24' style={{marginBottom:'5px',color:user.theme?'white':'black'}}>{board.name}</Bold>
                   :<form onSubmit={editName}>
                       <input 
                           defaultValue={board.name}
@@ -174,16 +184,24 @@ const Board = ({match, history}) => {
                           />
                   </form>
                   }
-              <ModalMenu buttons={boardSettingsButtons}>
+              
+              <ModalMenu buttons={boardSettingsButtons} theme={user.theme}>
                   <img src={Path+'three-dots.png'} style={{marginLeft: '20px',}} />
               </ModalMenu>
+              <div style={{display:'flex',visibility:'hidden',alignItems: 'center',marginLeft:'14px', marginBottom:'10px'}}>
+              <label className={styles.switch} style={{transform:'scale(0.7)'}} >
+                <input type="checkbox" defaultChecked={user.theme} onClick={()=>changeTheme()} />
+                <span className={styles.slider}></span>
+              </label>
+              <Light size='18' style={{marginLeft:'14px',color:user.theme?'white':'black'}} >Темная тема</Light>
+              </div>
             </div>
             
             <div ref={boardTitle} style={{ width: sideOpen? '87vw' : '96vw', overflow:'hidden', scrollbarWidth: '0px', scrollbarColor: "transparent", }}>
               <BoardColumnsTitle Path={Path} board={board} user={user} deleteColumn={(el)=>deleteColumnHandler(el)} />
             </div>
 
-            <div ref={boardDiv} className={styles.board} style={{ width: sideOpen? '88vw' : '97vw' }} onMouseDown={(e)=>onMoveStart(e)} onMouseMove={(e)=>onMove(e)} onMouseUp={(e)=>onMoveEnd(e)} onScroll={(e)=>titleScroll(e)}>
+            <div ref={boardDiv} className={styles.board} style={{ width: sideOpen? '88vw' : '97vw',backgroundColor:!user.theme?'rgba(0,0,0,0)':'#0D1117' }} onMouseDown={(e)=>onMoveStart(e)} onMouseMove={(e)=>onMove(e)} onMouseUp={(e)=>onMoveEnd(e)} onScroll={(e)=>titleScroll(e)}>
               <div ref={boardDivChild} style={{width: 'fit-content',minWidth:"100%" }}>
                 {board && board.columns && board?.categories.map((el,i)=>{
                     return(
@@ -199,7 +217,7 @@ const Board = ({match, history}) => {
           <ConfirmModal  visible={confirm} confirm={()=>deleteThisBoard()} close={()=>setConfirm(false)} text={'доску '+board.name} />
           <BoardSettings visible={createCategory} type='category' close={()=>setCreateCategory(false)} boardId={board._id}  />
           <BoardSettings visible={createColumn} type='column'  close={()=>setCreateColumn(false)} boardId={board._id}  />
-          <CreateForm crypt={project.crypt} visible={createOpen.status} place={createOpen.place} setCreateOpen={setCreateOpen} boardId={board._id}></CreateForm>
+          {/* <CreateForm crypt={project.crypt} visible={createOpen.status} place={createOpen.place} setCreateOpen={setCreateOpen} boardId={board._id}></CreateForm> */}
       </div>
     );    
 }

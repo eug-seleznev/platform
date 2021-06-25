@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 
 
@@ -19,13 +19,15 @@ import ModalMenu from "./modalMenu";
 
 
 const KanbanSection = ({main, board, category, history}) => {
+
   const dispatch = useDispatch()
+
     const [open, setOpen] = useState(true)
     const [timelineIndex, setTimelineIndex] = useState(0)
     const [timelines, setTimelines] = useState(0)
     const [openTimlineModal, setOpenTimlineModal] = useState(false)
     const [confirm, setConfirm] = useState(false)
-
+   
 
     useEffect(()=>{
       const now = Date.now()
@@ -111,7 +113,7 @@ export default KanbanSection
 
 
 
-const TimelineDates = ({timeline}) => {
+const TimelineDates = ({timeline,theme}) => {
 
   if(timeline && timeline.start){
     const a = new Date(timeline?.start)
@@ -123,7 +125,7 @@ const TimelineDates = ({timeline}) => {
     const monthEnd = months[b.getMonth()]
   
     return(
-      <div style={{minWidth:'105px',textAlign:"center"}}> {start} {monthStart!==monthEnd && monthStart} - {end+' '+monthEnd}</div>
+      <div style={{minWidth:'105px',textAlign:"center",color:theme?'white':'black'}}> {start} {monthStart!==monthEnd && monthStart} - {end+' '+monthEnd}</div>
     )
   } else if (timeline && !timeline.start) {
     return <div></div>
@@ -132,7 +134,8 @@ const TimelineDates = ({timeline}) => {
 
 
 const CategoryTitle = ({open, setConfirm, setOpen, setOpenTimlineModal, nextTimeline, timelineIndex, prevTimeline, category, board, changeCategoryName}) => {
-
+  
+  const theme = useSelector(state => state.auth.user.theme)
   const [editName, setEditName] = useState(false)
   const [newCategoryName, setNewCategoryName] = useState(category.name)
  
@@ -158,14 +161,14 @@ const buttons = [
 ]
 
   return(
-    <div className={styles.title} onClick={()=>setOpen(!open)} style={{backgroundColor:'#FCFCFC',minWidth: '100%',}}>
+    <div className={styles.title} onClick={()=>setOpen(!open)} style={{backgroundColor:!theme?'rgba(0,0,0,0)':'#292929',minWidth: '100%',color:theme?'white':'black'}}>
       <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-1},250px) minmax(50px,1fr)`,minWidth: '100%', }}>
           <span>
-            <ModalMenu buttons={buttons}>
+            <ModalMenu theme={theme} buttons={buttons}>
                 <img src={Path+'three-dots.png'} style={{marginLeft: '20px',}} />
             </ModalMenu>
           </span>
-          <div style={{display: "flex", alignItems: 'center'}}>
+          <div style={{display: "flex", alignItems: 'center', color:theme?'white':'black'}}>
               {!editName
                 ?<div onClick={e=>e.stopPropagation()} onDoubleClick={()=>setEditName(true)}>{category.name}</div>
                 :<form onSubmit={submit}>
@@ -178,7 +181,7 @@ const buttons = [
                 }
               
 
-              <img src={Path+'kanban-open-icon.png'} style={{transform: `rotate(${open?'180':'0'}deg)`, marginLeft: '5px', height: '8px',}} />
+              <img src={Path+'kanban-open-icon.png'} style={{transform: `rotate(${open?'180':'0'}deg)`, marginLeft: '5px', height: '8px',filter:theme?'invert(1)':'invert(0)'}} />
 
               {category && category.timeline[0] && !category.timeline[0].start && 
               <img 
@@ -195,17 +198,17 @@ const buttons = [
               <div style={{display: "flex", marginLeft: '20px', alignItems: 'center', border: '1px solid lightgrey', borderRadius: '13px', padding: '0 10px 0 10px'}} onClick={e=>e.stopPropagation()}>
                 <div style={{minWidth:'30px'}}>
                   {timelineIndex>0 && 
-                  <img src={Path+'openicon.png'} style={{transform: 'rotate(-90deg)',cursor:'pointer', width: '10px', height: '10px', marginRight: '15px'}} onClick={(e)=>prevTimeline(e)}/>
+                  <img src={Path+'openicon.png'} style={{transform: 'rotate(-90deg)',cursor:'pointer', width: '10px', height: '10px', marginRight: '15px',filter:theme?'invert(1)':'invert(0)'}} onClick={(e)=>prevTimeline(e)}/>
                   }
                 </div>
                 {category.timeline[timelineIndex] && category.timeline[timelineIndex].start && 
                   <div /*onClick={()=>setOpenTimlineModal(true)}*/>
-                    <TimelineDates timeline={category.timeline[timelineIndex]} />
+                    <TimelineDates theme={theme} timeline={category.timeline[timelineIndex]} />
                   </div>
                 }
                   
                 <div style={{minWidth:'30px'}}>
-                  <img src={Path+'openicon.png'} style={{transform: 'rotate(90deg)',cursor:'pointer', width: '10px', height: '10px', marginLeft: '15px'}} onClick={(e)=>category.timeline[timelineIndex] && category.timeline[timelineIndex].start && nextTimeline(e)}/>
+                  <img src={Path+'openicon.png'} style={{transform: 'rotate(90deg)',cursor:'pointer', width: '10px', height: '10px', marginLeft: '15px',filter:theme?'invert(1)':'invert(0)'}} onClick={(e)=>category.timeline[timelineIndex] && category.timeline[timelineIndex].start && nextTimeline(e)}/>
                 </div>
               </div>}
 
