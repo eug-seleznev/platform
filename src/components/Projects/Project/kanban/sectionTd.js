@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 
 import styles from './kanban.module.css'
+import ghostStyles from './components/ghostCard.module.css'
 
 import KanbanCard from "./card/card";
 import { CSSTransition } from "react-transition-group";
@@ -105,7 +106,7 @@ const dragFunction = (e, index) => {
                         return(
                             <div onDragOver={(e)=>cardDragOver(e,i)} onDragLeave={(e)=>cardDragOut(e)} onDrop={(e)=>dropToCard(e,el.huindex)} style={{marginTop:'10px'}}>
                             
-                            {addGhost===`ghost${i}`?<div className={styles.addGhost}/>
+                            {addGhost===`ghost${i}`?<div className={ghostStyles.addGhost}/>
                             :
                             <KanbanCard history={history} boardId={boardId} key={i} info={el} currCategory={category._id} timelineId={timelineId} />}
                             </div>
@@ -123,7 +124,7 @@ const dragFunction = (e, index) => {
                             }}
                         unmountOnExit
                     >
-                        <div className={styles.addGhost}/>
+                        <div style={{marginTop:'10px'}} className={ghostStyles.addGhost}/>
                     </CSSTransition>
                 
                     {!newCardModal
