@@ -193,7 +193,7 @@ export const KanbanButton =  styled.button`
  
   outline: none;
   text-decoration: none;
-  color: white;
+  color: ${props => props.color};
   background-color: ${props => props.bg ? props.bg : "#404040"};
   ;
 

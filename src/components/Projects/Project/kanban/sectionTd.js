@@ -8,7 +8,7 @@ import styles from './kanban.module.css'
 import KanbanCard from "./card/card";
 import { CSSTransition } from "react-transition-group";
 import { clearBoard, moveCard } from "../../../../redux/actions/kanban";
-import { ButtonText } from "../../../../Styles/buttons";
+import { ButtonText, KanbanButton } from "../../../../Styles/buttons";
 import CreateForm from "./components/createForm";
 import { Path } from '../../../Layout/header'
 
@@ -127,10 +127,11 @@ const dragFunction = (e, index) => {
                     </CSSTransition>
                 
                     {!newCardModal
-                        ?<ButtonText className={styles.creationButton} onClick={()=>setNewCardModal(true)} style={{color:theme?'white':'#3F496C'}}>
-                            <img alt='plus' src={Path+'plus1.png'}className={styles.categoryCardPlus} />
+                        ?<KanbanButton color={theme?'#E4E4E4':'#A1A1A1'} bg={theme?'#404040':'rgba(196, 196, 196, 0.2)'} className={styles.creationButton} onClick={()=>setNewCardModal(true)} >
+                            <img src={Path+(theme?'kanban-plus-white.png':'kanban-plus-dark.png')} />
                             Создать карточку
-                        </ButtonText> 
+                        </KanbanButton>  
+                        
         
                         :<CreateForm 
                             crypt={project.crypt} 
