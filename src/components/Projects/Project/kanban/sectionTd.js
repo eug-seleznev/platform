@@ -126,7 +126,7 @@ useEffect(()=>{
                             }}
                         unmountOnExit
                     >
-                        <div className={ghostStyles.addGhost}/>
+                        <div style={{marginTop:'10px'}} className={ghostStyles.addGhost}/>
                     </CSSTransition>
                 
                     {!newCardModal

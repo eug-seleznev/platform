@@ -63,7 +63,7 @@ const Notifications = ({ open, setOpen, deadline, id, theme }) => {
         ref={outclick}
         style={{
           width: "375px",
-          height: "82px",
+          height: !deadline?'25px':'82px',
           overflowY: "hidden",
           marginLeft: "-37px",
           visibility: open === "notifications" ? "visible" : "hidden",
@@ -76,7 +76,7 @@ const Notifications = ({ open, setOpen, deadline, id, theme }) => {
             <Light
               className={settings.users__name}
               color={theme ? "white" : "black"}
-              style={{ cursor: "pointer" }}
+              style={{ display: nt.includes('дедлайна')&&!deadline?'none':'block' , cursor: "pointer" }}
               key={i}
               onClick={()=>nt==="Отправить уведомления участникам"?sendNots(true, false):
               nt==="Напомнить мне за день до дедлайна"?sendNots(false, true):

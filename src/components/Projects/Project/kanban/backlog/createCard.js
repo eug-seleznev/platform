@@ -10,7 +10,7 @@ import BacklogTitle from './backlogTitle'
 import BacklogFilters from './backlogFilters'
 import GhostCard from '../components/ghostCard'
 
-const CreateCard =({projectCrypt, boardId,})=>{
+const CreateCard =({projectCrypt, boardId, callback})=>{
 
 
     const [newCardInput, setNewCardInput] = useState(false)
@@ -24,7 +24,7 @@ const CreateCard =({projectCrypt, boardId,})=>{
                      <img src={Path+'kanban-plus-white.png'}/>
                      Создать карточку
                   </KanbanButton> 
-                : <CreateForm backlog boardId={boardId} closeForm={()=>setNewCardInput(false)} projectCrypt={projectCrypt} />
+                : <CreateForm callback={callback} backlog boardId={boardId} closeForm={()=>setNewCardInput(false)} projectCrypt={projectCrypt} />
             }
         </div>
     )
