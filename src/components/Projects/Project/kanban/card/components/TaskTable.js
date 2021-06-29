@@ -3,12 +3,14 @@ import { useDispatch, } from "react-redux";
 import { changeTaskCard, userToTask } from "../../../../../../redux/actions/kanban";
 import { SPRINT_TABLE, TR,Select, SPRINT_TD, NEW_THEAD } from "../../../../../../Styles/tables"
 import style from "../../../../../../Styles/modules/components/Project/newsprint.module.css"
-import { Thin } from "../../../../../../Styles/typography";
+import { Light, Thin } from "../../../../../../Styles/typography";
 import { Input } from "../../../../../../Styles/Forms";
 import { ButtonText } from "../../../../../../Styles/buttons";
 import getDate from "../../../../getDate";
 import canban from './cardOpen.module.css'
 import TextareaAutosize from "react-autosize-textarea/lib";
+import { Path } from "../../../../../Layout/header";
+import { useClickOutside } from "../../hooks/hooks";
 
 //todo: handle no tasks state
 
@@ -22,10 +24,11 @@ const TaskTable = ({tasksArray, id, team,info,theme}) => {
   let  isEdit = false
 
   const dispatch = useDispatch()
-
+  const outclick = useClickOutside(() =>  setDeadline(false));
   const [taskId, setTaskId] = useState("");
   const [focusRow, setFocusRow] = useState("");
   const [deadline, setDeadline] = useState(false);
+  const [editable, setEditable] = useState(false);
   const [taskTitle, setTaskTitle] = useState("");
   const [timeout , updateTimeout] = useState(undefined)
   const [editField, setEditField] = useState(false) 
@@ -35,8 +38,9 @@ const TaskTable = ({tasksArray, id, team,info,theme}) => {
 
   useEffect(() => {
     selectFocusRow(focusRow);
-
+    setEditable('')
   }, [focusRow]);
+  
   useEffect(() => {
     taskRef.current.scrollTo({
         top: taskRef.current.scrollHeight+1000,
@@ -144,7 +148,7 @@ const TaskTable = ({tasksArray, id, team,info,theme}) => {
   }
 
   return (
-    <div className={canban.tasks__container} ref={taskRef} style={{overflowY:tasksArray.length>4?'scroll': 'hidden',zIndex:-1, maxHeight:'20vh',minHeight:'13vh',marginTop:info.execs?.length===0?'-215px':'-125px'}} >
+    <div className={canban.tasks__container} ref={taskRef} style={{overflowY:tasksArray.length>4?'scroll': 'hidden',zIndex:-1, maxHeight:'20vh',minHeight:'15vh',marginTop:info.execs?.length===0?'-215px':'-125px'}} >
     <SPRINT_TABLE onMouseLeave={() => setTaskId("")} 
       style={{marginTop:'10px',marginLeft:'20px',marginBottom:'-30px'
     }} >
@@ -160,7 +164,7 @@ const TaskTable = ({tasksArray, id, team,info,theme}) => {
                 userSelect: 'none'
             }}
             >
-            <SPRINT_TD style={{width:'25px'}}>
+            <SPRINT_TD style={{width:'2%'}}>
               <input
                 type="checkbox"
                 defaultChecked={task.taskStatus}
@@ -173,7 +177,7 @@ const TaskTable = ({tasksArray, id, team,info,theme}) => {
 
 
             {editField && task._id === focusRow  ? (
-              <SPRINT_TD>
+              <SPRINT_TD style={{width:'88%'}}>
                 <form onSubmit={enableEdit}>
                   <TextareaAutosize
                     maxRows={3}
@@ -183,7 +187,7 @@ const TaskTable = ({tasksArray, id, team,info,theme}) => {
                       fontFamily:'SuisseIntlLight',
                       resize:'none',
                       borderRadius:'5px',
-                      width:'250px',
+                      width:'95%',
                       marginBottom:'-4px',
                       color: theme ? "white" : "black",
                       backgroundColor: !theme ? "white" : "#1E1E1E",
@@ -197,11 +201,27 @@ const TaskTable = ({tasksArray, id, team,info,theme}) => {
                 </form>
               </SPRINT_TD>
             ) : (<>
-              <SPRINT_TD style={{width:'200px',color: theme ? 'white': 'black',marginBottom:'5px'}}>{task.taskTitle}</SPRINT_TD>
+              <SPRINT_TD style={{color: theme ? 'white': 'black',marginBottom:'5px',width:'80%'}}>{task.taskTitle}</SPRINT_TD>
 
               </> 
             )}
-            <SPRINT_TD style={{width:'25%'}}>
+            <SPRINT_TD  >
+              {task._id === focusRow 
+                &&<img src={Path+'three-dots.png'} style={{width:'20px',height:'20px',objectFit:"contain",cursor:'pointer'}} onClick={()=>{setEditable(editable!==task._id?task._id:'')}}/>}
+                {editable===task._id &&
+                <div style={{position:'relative'}}>
+                  <div style={{
+                  position:'absolute',
+                  width: '195px',
+                  height: '45px',
+                  marginLeft:'-210px',
+                  marginTop:'-35px',
+                  borderRadius:'5px',
+                  visibility:editable?'visible':'hidden',
+                  backgroundColor: !theme ? "white" : "#1E1E1E",
+                  border:theme ?'1px solid grey':'1px solid grey'
+              }}>
+              <div >
               {task.user && team ? (
                 
                 <>
@@ -232,7 +252,7 @@ const TaskTable = ({tasksArray, id, team,info,theme}) => {
                 </>
               ) : (
                 <>
-                  {task!==null && taskId === task._id && !task.user && (
+                  {task!==null &&  !task.user && (
                     <Select style={{color: theme ? 'white': 'black', backgroundColor: !theme ?'rgba(0,0,0,0)':'#1E1E1E'}} defaultValue='Выбрать исполнителя' onChange={(e) => teamHandle(e, task)}>
                       <option> Выбрать исполнителя</option>
                       {team.map((member,i) => {
@@ -249,23 +269,36 @@ const TaskTable = ({tasksArray, id, team,info,theme}) => {
                   )}
                 </>
               )}
-            </SPRINT_TD>
-            <SPRINT_TD style={{width:'150px',paddingRight:'25px'}}>
+            </div>
+            <div style={{width:'150px',paddingRight:'25px'}}>
               <div style={{display:task._id===focusRow?'flex':'none'}}>
-                <Thin style={{color: theme ? 'white': 'black', backgroundColor: !theme ?'rgba(0,0,0,0)':'#1E1E1E'}}>Дедлайн: </Thin> 
+                <Light style={{color: theme ? 'white': 'black', backgroundColor: !theme ?'rgba(0,0,0,0)':'#1E1E1E',margin:'5px'}}>Дедлайн: </Light> 
                 <ButtonText onClick={()=>setDeadline(true)}
                   style={{display:`${task._id !== focusRow||!deadline?'block':'none'}`,color: theme ? 'white': 'black', backgroundColor: !theme ?'rgba(0,0,0,0)':'#1E1E1E'}}>
                   {task.deadline!==undefined?getDate(task.deadline):'указать'}
                 </ButtonText>
+                <div style={{overflowX:'hidden'}}>
+                    <input ref={outclick} className={style.inputTask} onKeyPress={(e)=>e.key==='Enter'? setDeadline(false):''} 
+                      type='datetime-local' 
+                      onChange={(e)=>changeTaskDate(e,task._id)}
+                      style={{display:`${task._id === focusRow&&deadline?'block':'none'}`, 
+                      width:'130px',outline:'none',border:'none',marginLeft:'-110px', color: theme ? 'white': 'black',
+                      backgroundColor: !theme ?'white':'#1E1E1E'}}
+                    />
+                    
+                </div>
                 
-                <input onKeyPress={(e)=>e.key==='Enter'? setDeadline(false):''} 
-                  type="date" 
-                  onChange={(e)=>changeTaskDate(e,task._id)}
-                  style={{display:`${task._id === focusRow&&deadline?'block':'none'}`, width:'130px', color: theme ? 'white': 'black', backgroundColor: !theme ?'white':'#1E1E1E'}}>
-                </input>
+                    
+   
               </div>
               
+            </div>
+                </div>
+                
+                </div>
+                }
             </SPRINT_TD>
+            
             </TR>
         )})}
 

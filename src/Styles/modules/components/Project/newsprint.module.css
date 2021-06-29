@@ -23,6 +23,9 @@ user-select: none;
 	display: flex;
 	
 }
+.inputTask {
+
+}
 .select{
 
 	margin-left: 0px;
@@ -43,6 +46,7 @@ user-select: none;
     border-radius: 7px;
     margin-top: 15px;
 }
+
 .input {
 	height: 20px;
 	outline: none;
