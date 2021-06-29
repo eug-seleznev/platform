@@ -12,6 +12,7 @@ import { Button, CancelButton } from "../../../../../Styles/buttons";
 import { getProject } from "../../../../../redux/actions/projects";
 import { url } from "../../../../utils/axios";
 import getDateWithTime from "./components/getDateWithTime";
+import { Path } from "../../../../Layout/header";
 
 
 
@@ -22,6 +23,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
 
     const [chosenCard, setChosenCard] = useState(false)
     const [visibleName, setVisibleName] = useState(false)
+    const [deadline, setDeadline] = useState(false)
     const [deleteWindow, setDeleteWindow] = useState({
       status:false,
       id:''
@@ -53,6 +55,14 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
           // console.log(card.title)
         }
         })
+
+      if(info.deadline){
+        const ded = new Date(info.deadline)
+        const date = ded.getDate()
+        const months = ['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек']
+        const month = months[ded.getMonth()+1]
+        setDeadline(date+' '+month)
+      }
     },[])
     const dragStart = (e) => {
       e.stopPropagation()
@@ -80,6 +90,8 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
       e.stopPropagation()
       history.push(`../../../../users/${id}`)
     }
+
+    console.log('card ',info)
     return (
       <>
       <div onDragOver={addGhost} className={styles.card}
@@ -105,84 +117,45 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
           }}>
         </div>
         <div className={styles.card__content}>
-          <div style={{display:'flex', justifyContent:'space-between'}}>
-            <Light color={theme?'white':'black'} size='16' style={{padding:'5px',maxWidth:'50%'}}>{info?.title} </Light>
-            <div style={{display:'flex'}}>
-            {
-            // info.emergency==='Событие'
-            // ? 
-            // info.event_users.map((el,i)=>{
-            //   return (
-            //     <div>
-            //       <img key={i} 
-            //         src={url+'/'+el.avatar} 
-            //         onClick={(e)=>{goToUser(e, el._id)}}
-            //         onMouseEnter={()=>{setVisibleName(el.fullname)}}
-            //         onMouseLeave={()=>{setVisibleName('')}} 
-            //         style={{
-            //           width:'25px',marginLeft:'4px',
-            //           height:'25px',marginTop:'3px',
-            //           borderRadius:'100%',objectFit:'cover'
-                    
-            //       }} ></img>
-            //       <div style={{position:'relative'}}>
-            //          <div className={styles.card__exec__name} 
-            //           style={{display:`${visibleName===el.fullname?'block':'none'}`, border:'1px solid white'}}
-            //         >{el.fullname}
-            //         </div>
-            //       </div>
-                 
-            //     </div>
-                
-            //   )
-            // }):
-            info && info.execs && info.execs.map((el,i)=>{
-              return (
-                <div>
-                  <img key={i} 
-                    src={url+'/'+el.avatar} 
-                    onClick={(e)=>{goToUser(e, el._id)}}
-                    onMouseEnter={()=>{setVisibleName(el.fullname)}}
-                    onMouseLeave={()=>{setVisibleName('')}} 
-                    style={{
-                      width:'25px',marginLeft:'4px',
-                      height:'25px',marginTop:'3px',
-                      borderRadius:'100%',objectFit:'cover'                   
-                  }} ></img>
-                  <div style={{position:'relative'}}>
-                     <div className={styles.card__exec__name} 
-                      style={{display:`${visibleName===el.fullname?'block':'none'}`, border:'1px solid white'}}
-                    >{el.fullname}
-                    </div>
-                  </div>
-                </div>  
-              )
-            })
-          }
-            </div>
+            <Light color={theme?'white':'black'} size='16' style={{padding:'5px',maxWidth:'80%'}}>{info?.title}</Light>
+           
             
-          </div>
           
-          <div className={styles.card__content__second} >
-            <div style={{display:'flex'}}>
-              <Light size='12' 
-                color={theme?'#B7B7B7':'black'}
-                style={{marginRight:'5px'}}>
-                  { info.emergency!=='Событие'&&!info.type?'Задача':
-                    info.emergency==='Событие'&& info.event_date?getDateWithTime(info.event_date) :
-                    info.emergency==='Событие'&&!info.event_date?'Событие':info.type}
-                </Light>
-              <Light color={theme?'#B7B7B7':'black'} size='12' style={{display:info.type==='Одна задача'||!info.type?'none':'block'}} >{info&& info.tasks &&info?.tasks.filter(task=>task.taskStatus).length}/{info&& info.tasks &&info?.tasks.length}</Light>
+          <div className={styles.card__content__second}>
+            <Light size='12' color={'#B7B7B7'} style={{marginRight:'5px'}}>
+                {deadline && deadline}
+            </Light>
+            <Light color={theme?'#B7B7B7':'#3F496C'} size='12' style={{display:info.type==='Одна задача'||!info.type?'none':'block'}} >
+              {info&& info.tasks &&info?.tasks.filter(task=>task.taskStatus).length}/{info&& info.tasks &&info?.tasks.length}
+            </Light>
+            <img src={Path+'heart.png'} style={{width:'12px',height:'12px', marginLeft:'10px'}}/>
+            <div style={{display:'flex', marginLeft:'auto'}}>
+            {info && info.execs && info.execs.map((el,i)=>{
+              return (
+                  <div>
+                    <img key={i} 
+                      src={url+'/'+el.avatar} 
+                      onClick={(e)=>{goToUser(e, el._id)}}
+                      onMouseEnter={()=>{setVisibleName(el.fullname)}}
+                      onMouseLeave={()=>{setVisibleName('')}} 
+                      style={{
+                        width:'16px',marginLeft:'4px',
+                        height:'16px',marginTop:'3px',
+                        borderRadius:'100%',objectFit:'cover'                   
+                      }} 
+                    />
+                    <div style={{position:'relative'}}>
+                      <div className={styles.card__exec__name} 
+                        style={{display:`${visibleName===el.fullname?'block':'none'}`, border:'1px solid white'}}
+                      >
+                        {el.fullname}
+                      </div>
+                    </div>
+                  </div>  
+                )
+              })
+            }
             </div>
-            <div style={{display:'flex',alignItems:'center',flexWrap:'nowrap',marginTop:'5px'}}>
-              {info&& info.tags&& info?.tags.map((tag,i)=>{
-                
-                  return(
-                    <Thin key={i} size='12' style={{marginRight:'10px'}} >#{tag}</Thin>
-                  )
-              })}
-            </div>
-            
           </div>
         </div>
       </div>
@@ -211,3 +184,32 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
 
 
 export default KanbanCard
+
+
+           // info.emergency==='Событие'
+            // ? 
+            // info.event_users.map((el,i)=>{
+            //   return (
+            //     <div>
+            //       <img key={i} 
+            //         src={url+'/'+el.avatar} 
+            //         onClick={(e)=>{goToUser(e, el._id)}}
+            //         onMouseEnter={()=>{setVisibleName(el.fullname)}}
+            //         onMouseLeave={()=>{setVisibleName('')}} 
+            //         style={{
+            //           width:'25px',marginLeft:'4px',
+            //           height:'25px',marginTop:'3px',
+            //           borderRadius:'100%',objectFit:'cover'
+                    
+            //       }} ></img>
+            //       <div style={{position:'relative'}}>
+            //          <div className={styles.card__exec__name} 
+            //           style={{display:`${visibleName===el.fullname?'block':'none'}`, border:'1px solid white'}}
+            //         >{el.fullname}
+            //         </div>
+            //       </div>
+                 
+            //     </div>
+                
+            //   )
+            // }):
