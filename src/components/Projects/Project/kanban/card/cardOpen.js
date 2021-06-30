@@ -53,7 +53,7 @@ const CardOpen = ({close,setDeleteWindow,chosenCard,boardId, history, theme,time
                   }}>
                 </div>
               <div>
-              <CardEditor timelineId={timelineId} theme={theme} boardId={boardId} chosenCard={chosenCard} history={history} setDeleteWindow={setDeleteWindow} info={info}></CardEditor>
+              <CardEditor timelineId={timelineId} theme={theme} boardId={boardId} chosenCard={chosenCard}tasksLength={info.tasks?.length} history={history} setDeleteWindow={setDeleteWindow} info={info}></CardEditor>
               <TaskTable  theme={theme} info={info} id={info._id} team={project.team2} tasksArray={info.tasks}></TaskTable>
               <AddTask theme={theme} proj_id={project._id} id={info._id}></AddTask>
               <Comments theme={theme} history={history} emergency={info.emergency} id={info._id} ></Comments>

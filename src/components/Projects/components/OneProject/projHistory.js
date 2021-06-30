@@ -60,8 +60,8 @@ const ProjHistory = ({project,history}) => {
 						return (
               <NEW_TR onClick={() => pushToSprint(sprint._id)} key={i}>
                 <NEW_TD size="14" className={styles.tdd}>
-                  {sprint.tasks.length -
-                    sprint.tasks.filter((task) => task.taskStatus).length ===
+                  {sprint.tasks?.length -
+                    sprint.tasks?.filter((task) => task.taskStatus).length ===
                   0 ? (
                     <Circle color="#6DD66B"style={{marginRight:'5px'}} />
                   ) : (

@@ -1,5 +1,5 @@
 .container {
-    background-color: black;
+    background-color: #1C2742;
     width: 105vw;
     padding-left: 90px;
     height:30px;
@@ -35,9 +35,21 @@
     padding-top: 15px;
 
 }
+@media (max-width:1700px) {
+    .container {
+        margin-top: -33px;
+
+    }
+    .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 90vw;
+        color: white;
+    }
+}
 @media (max-width:1400px) {
     .container {
-        margin-top: -43px;
         margin-left: -105px;
     }
     .row {
@@ -53,7 +65,6 @@
         margin-left: 66%
     }
     .container {
-        margin-left: -45px;
         margin-left: -75px;
 
     }

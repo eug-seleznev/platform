@@ -57,7 +57,7 @@ import ModalMenu from "./modalMenu"
             <div style={{display:'flex', alignItems:'center'}}>
                     <div className={styles.main__board__item} onClick={()=>handleRedirect(el.name)} onDoubleClick={()=>setEdit(true)}>
                     {!edit
-                        ?<div>{el.name}</div>
+                        ?<div style={{color:"#3F496C"}}>{el.name}</div>
                         :<form onSubmit={editName}>
                             <input 
                                 defaultValue={el.name}

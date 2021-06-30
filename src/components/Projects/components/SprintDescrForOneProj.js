@@ -17,18 +17,11 @@ const SprintDescription = ({tags, dateOpen,taskcomplite, alltasks, history, cryp
 
 
 	useEffect (()=> {
-
-
-					chosenSprints
-          .filter(sprint => sprint._id===id)
-          .map(()=>setStatus(true))
-
-          
-
-
-		
-
-	},  [actualClose])
+    chosenSprints
+    .filter(sprint => sprint._id===id)
+    .map(()=>setStatus(true))
+  },  
+  [actualClose])
 
 
 

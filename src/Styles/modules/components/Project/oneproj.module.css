@@ -143,8 +143,22 @@
 .info__descr__laptop {
 	display: none;
 }
+.info__line2 {
+	margin-top: 1.5px;
+	margin-bottom: 10px;
+	min-width: 50px;
+}
 .info__line {
+
 	margin-bottom: 15px;
+	min-width: 50px;
+}
+.info__line:last-child {
+	margin-bottom: 0px;
+	min-width: 50px;
+}
+.info__line2:last-child {
+	margin-bottom: 0px;
 	min-width: 50px;
 }
 .info__link {
@@ -326,7 +340,7 @@ border-bottom: none;
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 0px;
-	width: 100%;
+	width: 90%;
 }
 .title__history {
 	display: flex;
@@ -540,7 +554,9 @@ border-bottom: none;
 		
 		padding: 20px;
 	}
-	
+	.sprintdescr__cont {
+		width: 100%
+	}
 }
 @media (max-width:700px){
 	.title__cont {

@@ -11,6 +11,8 @@ import {
   allUsers,
   userTableSearch,
 } from "../../../../../../redux/actions/user";
+import { Path } from "../../../../../Layout/header";
+import editor from "../../../../../../Styles/modules/components/Project/newsprint.module.css";
 
 let cancel;
 const Comments = ({ id, emergency, history, theme }) => {
@@ -27,6 +29,7 @@ const Comments = ({ id, emergency, history, theme }) => {
     startPosition: 0,
   });
   const commentRef = useRef();
+  const inputRef = useRef();
   const dispatch = useDispatch();
   useEffect(() => {
     let sortOrder = true;
@@ -52,6 +55,10 @@ const Comments = ({ id, emergency, history, theme }) => {
       setMentions([]);
       resolve();
     });
+  };
+  const hi = (e) => {
+
+    
   };
   const commentScroll = () => {
     setTimeout(() => {
@@ -113,12 +120,41 @@ const Comments = ({ id, emergency, history, theme }) => {
 
   return (
     <div>
+      <div>
+        <div
+          style={{
+            paddingTop: "5px",
+            display: comments.length > 0 ? "block" : "none",
+            marginTop: "5px",
+            backgroundColor: "white",
+          }}
+        >
+          <div
+            style={{
+              paddingBottom: "20px",
+              paddingTop: "15px",
+              marginTop: "-22px",
+              marginLeft: "25px",
+            }}
+             className={editor.headtd}
+          >
+            <img src={Path + "actions.svg"} />
+            <Regular
+              color='#656565'
+              style={{ color: theme ? "white" : "black", marginLeft: "5px" }}
+              size="15.5"
+            >
+              Действия
+            </Regular>
+          </div>
+        </div>
+      </div>
       <div
         className={style.comments__array}
         ref={commentRef}
         style={{
           overflowY: comments.length > 7 ? "scroll" : "hidden",
-          maxHeight: "19vh",
+          maxHeight: "21vh",marginTop:'20px'
         }}
       >
         {comments &&
@@ -181,6 +217,7 @@ const Comments = ({ id, emergency, history, theme }) => {
         onSubmit={(e) => createComment(e).then(commentScroll)}
       >
         <InputTrigger
+          ref={inputRef}
           trigger={{
             keyCode: 50,
             shiftKey: true,
@@ -199,8 +236,9 @@ const Comments = ({ id, emergency, history, theme }) => {
               color: theme ? "white" : "#3F496C",
             }}
             spellCheck="false"
-            onKeyPress={(e) =>
-              e.key === "Enter" ? createComment(e).then(commentScroll) : ""
+
+            onKeyDown={(e) =>
+              e.key === "Enter" ? createComment(e).then(commentScroll) :''
             }
             onChange={(e) => {
               setComment(e.target.value);
@@ -238,15 +276,37 @@ const Comments = ({ id, emergency, history, theme }) => {
             );
           })}
         </div>
-        <ButtonTextLight
-          style={{
-            transform: "translateX(-35px)",
-            color: theme ? "white" : "#3F496C",
-          }}
-          type="submit"
-        >
-          Добавить комментарий
-        </ButtonTextLight>
+      <div>
+        <button
+            // ref={buttonRef}
+            
+            className={style.anotherSumbmitButton}
+            style={{  
+              transform: "translateX(-30px)",
+              color: theme ? "white" : "#3F496C",
+              backgroundColor: !theme ? "rgba(196,196,196, 0.3)" : "#1E1E1E",
+              marginRight:'30px'
+            }}
+            type='button'
+            fontSize="14px"
+          >
+            Прикрепить файл
+          </button>
+         <button
+            // ref={buttonRef}
+            className={style.anotherSumbmitButton}
+            style={{
+              transform: "translateX(-30px)",
+              color: theme ? "white" : "#3F496C",
+              backgroundColor: !theme ? "rgba(196,196,196, 0.3)" : "#1E1E1E",
+            }}
+            type='button'
+            fontSize="14px"
+          >
+            Добавить комментарий
+          </button>
+      </div>
+        
       </form>
     </div>
   );

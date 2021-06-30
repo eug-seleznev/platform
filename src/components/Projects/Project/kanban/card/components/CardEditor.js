@@ -25,6 +25,7 @@ import NewSettings from "./NewSettings";
 import { useClickOutside } from "../../hooks/hooks";
 
 const CardEditor = ({
+  tasksLength,
   info,
   setDeleteWindow,
   chosenCard,
@@ -375,6 +376,7 @@ const CardEditor = ({
                   </div>
                 )}
               </div>
+              
             </div>
             <div>
               {/* {!evDate ? (

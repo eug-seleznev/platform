@@ -56,6 +56,18 @@ user-select: none;
 	font-size: 16px;
 	-webkit-user-select: none;
 }
+.headtd {
+	display: flex;
+	position: absolute;
+	background-color: white;
+	width: 100%;
+	padding-bottom: 5px;
+	padding-top: 15px;
+	margin-top: -20px;
+}
+.checktd {
+	width: 12px!important;
+}
 .input[type="text"]{
     -moz-user-select: -moz-none;
     -o-user-select: none;

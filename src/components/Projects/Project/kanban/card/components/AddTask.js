@@ -45,7 +45,7 @@ const AddTask = ({ id, proj_id, theme }) => {
           width: "95%",
           marginLeft: "20px",
           paddingBottom: "20px",
-          borderBottom: "1px solid #AFAFAF",
+          // borderBottom: "1px solid #AFAFAF",
         }}
       >
         <div

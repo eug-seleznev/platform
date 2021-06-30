@@ -13,6 +13,19 @@
     border:1px solid #8FA7C6;
     outline: none;
 }
+.anotherSumbmitButton {
+    overflow-wrap: normal;
+    font-family:SuisseIntlLight;
+    cursor:pointer;
+    outline:none;
+    font-size:16px;
+    border-radius:5px;
+    height:28px;
+    width:210px;
+    white-space: nowrap;
+    border: none;
+    left: 250px;
+}
 .comments__textarea {
     padding:10px;
     width:96.6%;

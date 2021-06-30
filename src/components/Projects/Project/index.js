@@ -3,7 +3,7 @@
 import {  useSelector } from "react-redux";
 
 
-import AllSprintsOfProj from "../components/OneProject/allSprintsOfproj";
+import AllBoardsOfProj from "../components/OneProject/allSprintsOfproj";
 import ProjectTeam from "../components/OneProject/ProjectTeam";
 import style from '../../../Styles/modules/components/Project/oneproj.module.css'
 import Viewer from "../model";
@@ -19,16 +19,16 @@ const Project = ({match, history, location}) => {
     const project = useSelector(state => state.projects.project)
     const sprint = useSelector(state => state.projects.sprint)    
 
-    useEffect(()=>{
-      console.log(project)
-  },[])
+  //   useEffect(()=>{
+  //     console.log(project)
+  // },[])
 
 
 
     return (
       <div className={style.contain}>
         <div className={style.first__col}> 
-          <AllSprintsOfProj
+          <AllBoardsOfProj
             status={project.status}
             crypt={project.crypt}
             match={match}
@@ -37,6 +37,7 @@ const Project = ({match, history, location}) => {
             location={location}
             history={history}
             sprints={project.sprints}
+            boards={project.boards}
           />
           {/* <ProjectTeam hist={history} id={crypt} /> */}
           <Viewer project={project} />
@@ -44,7 +45,7 @@ const Project = ({match, history, location}) => {
 
         <div>
           <ProjInfo history={history} project={project} />
-          <ProjHistory history={history} project={project} />
+          {/* <ProjHistory history={history} project={project} /> */}
         </div>
 
         {/* <CalendSprint id={crypt} hist={history} project={project} /> */}
