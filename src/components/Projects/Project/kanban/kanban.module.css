@@ -168,10 +168,29 @@ height: fit-content;
 margin-top: 70px;
 
 }
+    .createWindow {
+        position: fixed;
+        left: 0;
+        top:0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 100000;
+        background-color: rgba(0,0,0,0.4);
+    }
+    .createCard {
+        width: 300px;
+        padding:20px;
+        background-color: white;
+        border-radius: 5px;
+        margin-top: 38vh;
+        margin-left: 42vw;
+        transform: translateX(-50%),translateY(-50%);
+    }
     .creationButton{
       
-        margin-top: 10px;
+        margin-top: 24px;
         margin-bottom: auto;
+        margin-left: 45px;
     }
     .categoryCardPlus{
         /* filter:invert(1); */
