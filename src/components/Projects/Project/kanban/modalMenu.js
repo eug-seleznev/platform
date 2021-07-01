@@ -31,7 +31,7 @@ import {useClickOutside} from './hooks/hooks'
 
         <div onClick={(e)=>openModal(e)} style={{display:'flex', height: '100%',cursor: 'pointer', minHeight:'15px',
                   width:'fit-content',
-                  alignItems: "center",color:!props.theme?'white':'#1C1E23', 
+                  alignItems: "center",color:!props.theme?'white':'#1C1E23', marginLeft:'15px',
             backgroundColor:!props.theme?'white':'#1C1E23',}}>
             {props.children}
         </div>
