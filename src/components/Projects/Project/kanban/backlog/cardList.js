@@ -82,7 +82,7 @@ const CardList =({backlog, projectCrypt, boardId, history, filterredCards, scrol
                 <div ref={scrollContainer} onDragOver={e=>e.stopPropagation()} className={styles.backLogCardsList} >
                     {filterredCards.map((card,i)=>{
                         return(
-                            <div style={{paddingTop:'10px'}}  onDragOverCapture={(e)=>cardDragOver(e,i)}  onDrop={(e)=>dropToCard(e,card._id)}>
+                            <div key={'cardList'+card._id} style={{paddingTop:'10px'}}  onDragOverCapture={(e)=>cardDragOver(e,i)}  onDrop={(e)=>dropToCard(e,card._id)}>
                             
                                 {addGhost===`ghost${i}`?<GhostCard visible={true} />
                                 

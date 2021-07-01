@@ -26,7 +26,7 @@ const BoardColumnsTitle = ({user, board, Path, deleteColumn}) => {
                     {board && board.columns && board?.columns?.map((el,i)=>{
                       
                       return(
-                        <ColumnTitle boardId={board._id} el={el} index={i} Path={Path} setConfirm={setConfirm} editable={i>1 && user.permission!=='user'} theme={theme}/>
+                        <ColumnTitle key={'boardTitle'+el} boardId={board._id} el={el} index={i} Path={Path} setConfirm={setConfirm} editable={i>1 && user.permission!=='user'} theme={theme}/>
                       )
                     })}
                     <div className={styles.titleTd} style={{width: '250px'}}>

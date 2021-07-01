@@ -60,7 +60,7 @@ import {useClickOutside} from './hooks/hooks'
                   }}>
                 {props.buttons && props.buttons.map((el,i)=>{
                   return(
-                    <div style={{height:'30px', display: 'flex', alignItems: 'center', cursor: "pointer",color:props.theme?'#1C1E23':'white'}} 
+                    <div key={'modalMenu'+el.title} style={{height:'30px', display: 'flex', alignItems: 'center', cursor: "pointer",color:props.theme?'#1C1E23':'white'}} 
                           onClick={(e)=>{
                               e.stopPropagation()
                               el.handler()
