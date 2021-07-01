@@ -99,7 +99,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
               </Light>
               }
 
-              {info && info.tasks && 
+              {info && info.tasks && info?.tasks.length>0 &&
               <Regular color={theme?'#B7B7B7':'#3F496C'} size='11' style={{marginRight:'5px'}} >
                 {info?.tasks.filter(task=>task.taskStatus).length}/{info?.tasks.length}
               </Regular>
