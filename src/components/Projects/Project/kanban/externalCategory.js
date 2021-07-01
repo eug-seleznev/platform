@@ -97,13 +97,13 @@ const buttons = [
 
   return(
     <div className={styles.title} onClick={()=>setOpen(!open)} style={{backgroundColor:'#FCFCFC',minWidth: '100%',color:theme?'white':'black',borderColor:'#C68F92'}}>
-      <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-1},250px) minmax(50px,1fr)`,minWidth: '100%', }}>
+      <div className={styles.tr} style={{display: `flex`,minWidth: '100%', }}>
           <span>
             <ModalMenu theme={theme} buttons={buttons}>
                 <img src={Path+'three-dots.png'} style={{marginLeft: '20px',}} />
             </ModalMenu>
           </span>
-          <div style={{display: "flex", alignItems: 'center', color:theme?'white':'black'}}>
+          <div style={{display: "flex", alignItems: 'center', color:theme?'white':'black',marginLeft:'30px'}}>
               <div onClick={e=>e.stopPropagation()} >{category.name}</div>
               <img src={Path+'kanban-open-icon.png'} style={{transform: `rotate(${open?'180':'0'}deg)`, marginLeft: '5px', height: '8px',filter:theme?'invert(1)':'invert(0)'}} />
               <img alt='lock' />
