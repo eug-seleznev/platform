@@ -17,6 +17,8 @@ import ModalMenu from "./modalMenu";
 import ConfirmModal from "./confirm";
 import { changeThemeField } from "../../../../redux/actions/auth";
 import { background } from "../../../../redux/actions/user";
+import ExternalCategoryModal from "./externalCategoryModal";
+import ExternalCategory from "./externalCategory";
 
 
 
@@ -32,7 +34,7 @@ const Board = ({match, history}) => {
   const board = useSelector(state=>state.projects.kanban)
   const backlog = useSelector(state=>state.projects.backlog)
   const favBoards = useSelector(state=>state.auth.user.fav_boards)
-
+console.log('board',board)
   const boardDiv = useRef(null)
   const boardDivChild = useRef(null)
   const boardTitle = useRef(null)
@@ -45,6 +47,7 @@ const Board = ({match, history}) => {
 
     const [createColumn, setCreateColumn] = useState(false)
     const [createCategory, setCreateCategory] = useState(false)
+    const [externalCategory, setExternalCategory] = useState(false)
 
     const [clientXY, setClientXY] = useState({
       x:0,
@@ -133,6 +136,11 @@ const Board = ({match, history}) => {
         icon: 'three-dots.png'
       },
       {
+        title: 'Добавить категорию с другой доски',
+        handler: ()=>setExternalCategory(true),
+        icon: 'three-dots.png'
+      },
+      {
         title: 'Редактировать название',
         handler: ()=>setEdit(true),
         icon: 'edit1.jpg'
@@ -208,11 +216,17 @@ const Board = ({match, history}) => {
                         <KanbanSection history={history} key={i} main={i===0? true : false} board={board} category={el} />
                     )
                 })}
+                {board && board.monitor && board.monitor.map((el,i)=>{
+
+                  return(
+                    <ExternalCategory history={history} key={i} board={board} category={el} />
+                  )
+                })}
                 </div>
             </div>
         </div>
 
-
+          {externalCategory && <ExternalCategoryModal boards={project.boards} currentBoardId={board._id} close={()=>setExternalCategory(false)}/>}
           {/* <PopUpMenu open={settingsOpen} buttons={boardSettingsButtons} close={()=>setSettingsOpen(false)}/> */}
           <ConfirmModal  visible={confirm} confirm={()=>deleteThisBoard()} close={()=>setConfirm(false)} text={'доску '+board.name} />
           <BoardSettings visible={createCategory} type='category' close={()=>setCreateCategory(false)} boardId={board._id}  />

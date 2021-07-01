@@ -228,3 +228,20 @@ export const KanbanFormButton =  styled.button`
   cursor: pointer;
 }
 `
+export const KanbanInsideButton =  styled.button`
+color: white;
+  font-family: SuisseIntlLight;
+  cursor: pointer;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  // height: 28px;
+  width: 180px;
+  white-space: nowrap;
+  border: none;
+  left: 250px;
+  color: "#3F496C";
+  background-color: rgba(196,196,196, 0.3) ;
+  // background-color:  "#1E1E1E";
+  font-size:14px;
+`

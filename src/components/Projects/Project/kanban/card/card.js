@@ -91,7 +91,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
       history.push(`../../../../users/${id}`)
     }
 
-    console.log('card ',info)
+    // console.log('card ',info)
     return (
       <>
       <div onDragOver={addGhost} className={styles.card}

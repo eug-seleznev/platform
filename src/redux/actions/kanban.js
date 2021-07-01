@@ -308,6 +308,52 @@ export const addNewCategory = (board_id, formData) => async dispatch  => {
             console.log('ошибка создания категории',err.response)                  
          }
 } 
+export const addExternalCategory = (category_id, current_board_id) => async dispatch  => {
+
+    const body = {
+        board_id: current_board_id
+    }
+    console.log('body',body)
+    try {
+        const res = await innerBackend.put(`/kanban/category/monitor/${category_id}`,body )
+            console.log('res',res)
+
+        dispatch({
+            type: COMMON_KANBAN_RELOAD,
+            payload: res.data
+        })
+        // dispatch({
+        //     type: GREEN_MSG,
+        //     payload: res.data
+        // })
+        }
+        catch (err) {
+            console.log('ошибка мониторинга категории',err.response)                  
+         }
+} 
+export const removeExternalCategory = (category_id, current_board_id) => async dispatch  => {
+
+    const body = {
+        board_id: current_board_id
+    }
+    console.log('body',body)
+    try {
+        const res = await innerBackend.put(`/kanban/category/monitor/remove/${category_id}`,body )
+            console.log('res',res)
+
+        dispatch({
+            type: COMMON_KANBAN_RELOAD,
+            payload: res.data
+        })
+        // dispatch({
+        //     type: GREEN_MSG,
+        //     payload: res.data
+        // })
+        }
+        catch (err) {
+            console.log('ошибка мониторинга категории',err.response)                  
+         }
+} 
 export const renameCategory = (boardId, categoryId, name) => async dispatch  => {
     
     const body ={

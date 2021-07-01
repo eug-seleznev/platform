@@ -1,3 +1,67 @@
+.ext__bg{
+    position: absolute;
+    left:0;
+    right: 0;
+    top:0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.329);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ext__container{
+    background-color: #3F4659;
+    margin: 100px;
+    min-width: 500px;
+    /* min-height: 400px; */
+    padding: 10px;
+    border-radius: 8px;
+  
+}
+.ext__title{
+    text-align: center;
+    margin: 15px;
+    color: white;
+}
+.ext__selects{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.ext__buttons{
+    margin-top: 15px ;
+    display: flex;
+    height: 35px;
+    align-items: stretch;
+}
+
+.ext__titleTd{
+    border-left: 2px solid #8b97c2;
+    padding-left: 15px;
+    display: flex;
+    /* width: auto; */
+    /* overflow: hidden; */
+
+    align-items: center;
+}
+.ext__td{
+    border-left: 2px solid #8b97c2;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    transition-duration: 250ms;
+}
+
+
+
+
+
+
 .start{
     /* background-color: blue; */
     margin-left: -105px;
