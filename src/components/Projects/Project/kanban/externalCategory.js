@@ -2,14 +2,15 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styles from './kanban.module.css'
 import { Path } from "../../../Layout/header";
-import {removeExternalCategory } from "../../../../redux/actions/kanban";
+import {loadBoard, removeExternalCategory } from "../../../../redux/actions/kanban";
 import ConfirmModal from "./confirm";
 import ModalMenu from "./modalMenu";
 import ExternalCategoryTd from "./externalCategoryTd";
 import ExternalExpiredColumn from "./externalExpiredTd";
+import { Regular } from "../../../../Styles/typography";
 
 
-const ExternalCategory = ({ board, category, history}) => {
+const ExternalCategory = ({ board, category, history, projectCrypt}) => {
 
   const dispatch = useDispatch()
 
@@ -56,12 +57,14 @@ const ExternalCategory = ({ board, category, history}) => {
               setOpen={setOpen} 
               category={category} 
               board={board}
+              projectCrypt={projectCrypt}
+              history={history}
             />
           <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) repeat(${category.columns.length+1},250px) minmax(50px,1fr)`,minWidth: '100%', pointerEvents:'none'}}>
             <span/>
             {category.columns.map((el,i)=>{
               return(
-                <ExternalCategoryTd history={history} key={i} category={category} timelineId={category.timeline[timelineIndex]?._id} timelineCards={timelines} column={el} boardId={board._id} />
+                <ExternalCategoryTd history={history} key={'externalCategory'+el} category={category} timelineId={category.timeline[timelineIndex]?._id} timelineCards={timelines} column={el} boardId={board._id} />
               )
             })}
             <ExternalExpiredColumn  history={history} category={category}   boardId={board._id} timelineId={category.timeline[timelineIndex]?._id} />
@@ -81,15 +84,26 @@ export default ExternalCategory
 
 
 
-const CategoryTitle = ({open, setConfirm, setOpen, category, board, }) => {
+const CategoryTitle = ({open, setConfirm, setOpen, category, board, projectCrypt,history }) => {
   
   const theme = useSelector(state => state.auth.user.theme)
+const dispatch = useDispatch()
+const handleRedirect = () => {
+  history.push(`/projects/${projectCrypt}/board/${category.og_board.board_name}`)
+  dispatch(loadBoard(category.og_board.board_id))
+}
 
 const buttons = [
 
   {
     title: 'Убрать из мониторинга',
     handler: ()=>setConfirm(true),
+    icon: 'trash-sharp.png'
+
+  },
+  {
+    title: 'Перейте к доске',
+    handler: ()=>handleRedirect(),
     icon: 'trash-sharp.png'
 
   },
@@ -108,6 +122,7 @@ const buttons = [
               <img src={Path+'kanban-open-icon.png'} style={{transform: `rotate(${open?'180':'0'}deg)`, marginLeft: '5px', height: '8px',filter:theme?'invert(1)':'invert(0)'}} />
               <img alt='lock' />
           </div>
+          <Regular color='#C24747' style={{marginLeft:'10px'}}>Доска: {category.og_board && category.og_board.board_name}</Regular>
       </div> 
   </div>
   )

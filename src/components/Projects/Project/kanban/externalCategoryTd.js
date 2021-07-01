@@ -18,8 +18,8 @@ const ExternalCategoryTd = ({category, timelineCards, column, boardId, timelineI
                 >
                     {currentColunmCards && currentColunmCards.map((el,i)=>{
                         return(
-                        <div style={{marginTop: '10px'}}>
-                            <KanbanCard history={history} boardId={boardId} key={i} info={el} currCategory={category._id} timelineId={timelineId} />
+                        <div key={'externalTd'+el._id} style={{marginTop: '10px'}}>
+                            <KanbanCard history={history} boardId={boardId} info={el} currCategory={category._id} timelineId={timelineId} />
                         </div>
                         )
                     })}

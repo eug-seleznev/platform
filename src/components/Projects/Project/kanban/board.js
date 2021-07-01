@@ -104,7 +104,7 @@ console.log('board',board)
     useEffect(()=>{
         const boardId = project.boards.find(el=>el.name===match.params.board_name)._id
         dispatch(loadBoard(boardId))
-    },[])
+    },[match.params])
 
     const deleteColumnHandler = (el) => {
         dispatch(deleteColumn(board._id,el))
@@ -219,7 +219,7 @@ console.log('board',board)
                 {board && board.monitor && board.monitor.map((el,i)=>{
 
                   return(
-                    <ExternalCategory history={history} key={i} board={board} category={el} />
+                    <ExternalCategory projectCrypt={project.crypt} history={history} key={i} board={board} category={el} />
                   )
                 })}
                 </div>
