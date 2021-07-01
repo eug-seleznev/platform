@@ -206,7 +206,7 @@ console.log('board',board)
             </div>
             
             <div ref={boardTitle} style={{ width: sideOpen? '87vw' : '96vw', overflow:'hidden', scrollbarWidth: '0px', scrollbarColor: "transparent", }}>
-              <BoardColumnsTitle Path={Path} board={board} user={user} deleteColumn={(el)=>deleteColumnHandler(el)} />
+              <BoardColumnsTitle Path={Path} boardRef={boardDivChild} board={board} user={user} deleteColumn={(el)=>deleteColumnHandler(el)} />
             </div>
 
             <div ref={boardDiv} className={styles.board} style={{ width: sideOpen? '88vw' : '97vw',backgroundColor:!user.theme?'rgba(0,0,0,0)':'#0D1117' }} onMouseDown={(e)=>onMoveStart(e)} onMouseMove={(e)=>onMove(e)} onMouseUp={(e)=>onMoveEnd(e)} onScroll={(e)=>titleScroll(e)}>
