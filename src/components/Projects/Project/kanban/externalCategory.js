@@ -8,6 +8,8 @@ import ModalMenu from "./modalMenu";
 import ExternalCategoryTd from "./externalCategoryTd";
 import ExternalExpiredColumn from "./externalExpiredTd";
 import { Regular } from "../../../../Styles/typography";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock } from "@fortawesome/free-solid-svg-icons";
 
 
 const ExternalCategory = ({ board, category, history, projectCrypt}) => {
@@ -119,7 +121,7 @@ const buttons = [
           <div style={{display: "flex", alignItems: 'center', color:theme?'white':'black',marginLeft:'30px'}}>
               <div onClick={e=>e.stopPropagation()} >{category.name}</div>
               <img src={Path+'kanban-open-icon.png'} style={{transform: `rotate(${open?'180':'0'}deg)`, marginLeft: '5px', height: '8px',filter:theme?'invert(1)':'invert(0)'}} />
-              <img alt='lock' />
+              <FontAwesomeIcon icon={faLock} style={{marginLeft:'10px'}}/>
           </div>
           <Regular color='#C24747' style={{marginLeft:'10px'}}>Доска: {category.og_board && category.og_board.board_name}</Regular>
       </div> 
