@@ -116,7 +116,7 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
             <div className={styles.execsArr}>
               {info && info.execs && info.execs.map((el,i)=>{
                 return (
-                  <ExecsIcon el={el} history={history} /> 
+                  <ExecsIcon key={'excIcn'+el._id} el={el} history={history} /> 
                   )
                 })
               }

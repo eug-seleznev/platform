@@ -34,7 +34,6 @@ const CardContainer = ({info, currCategory, timelineId, backlog, addGhost, expir
  
   
  
-console.log(info)
     return (
       <div onDragOver={addGhost} className={styles.card}
         draggable

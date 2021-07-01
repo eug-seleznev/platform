@@ -34,7 +34,6 @@ const Board = ({match, history}) => {
   const board = useSelector(state=>state.projects.kanban)
   const backlog = useSelector(state=>state.projects.backlog)
   const favBoards = useSelector(state=>state.auth.user.fav_boards)
-console.log('board',board)
   const boardDiv = useRef(null)
   const boardDivChild = useRef(null)
   const boardTitle = useRef(null)

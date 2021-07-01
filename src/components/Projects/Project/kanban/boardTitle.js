@@ -9,7 +9,6 @@ import ModalMenu from './modalMenu'
 
 const BoardColumnsTitle = ({user, board, Path, deleteColumn, boardRef}) => {
 
-  console.log(boardRef)
   const theme = useSelector(state => state.auth.user.theme)
   const [boardWidth, setBoardWidth] = useState('fit-content')
     const [confirm, setConfirm] = useState({
@@ -18,9 +17,7 @@ const BoardColumnsTitle = ({user, board, Path, deleteColumn, boardRef}) => {
   })
 
   useEffect(()=>{
-    console.log('boardRef',boardRef)
     boardRef!==null && setBoardWidth(boardRef.current.offsetWidth)
-
   },[boardRef])
 
     if(!board){

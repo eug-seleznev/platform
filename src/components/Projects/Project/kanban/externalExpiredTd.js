@@ -18,8 +18,8 @@ const theme =  useSelector (state=>state.auth.user.theme)
             <Regular >Просрочено</Regular>
             {category.expired.map((el,i)=>{
                 return(
-                    <div style={{marginTop: '10px'}}>
-                        <KanbanCard expired history={history} boardId={boardId} key={i} info={el} currCategory={category._id} timelineId={timelineId} />
+                    <div style={{marginTop: '10px'}} key={'extExpTd'+i}>
+                        <KanbanCard expired history={history} boardId={boardId}  info={el} currCategory={category._id} timelineId={timelineId} />
                     </div>
                 )
             })}

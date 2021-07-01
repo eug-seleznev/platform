@@ -31,7 +31,6 @@ const ExternalCategory = ({ board, category, history, projectCrypt}) => {
     },[])
 
     useEffect(()=>{
-      console.log('index',timelineIndex)
       const nowLine = category && category.timeline.length>0 && category.timeline[timelineIndex] && category.timeline[timelineIndex].cards.map((el,i)=>{
         const newEl = {...el, huindex: i}
         return newEl
