@@ -55,6 +55,7 @@
     flex-wrap: wrap;
     align-content: flex-start;
     transition-duration: 250ms;
+    height: 100%;
 }
 
 
