@@ -68,8 +68,12 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
       dispatch(getProject(crypt))
       dispatch(loadBoard(boardId))
     }
- 
-console.log(info)
+    const goToUser =(e,id)=>{
+      e.stopPropagation()
+      history.push(`../../../../users/${id}`)
+    }
+
+    // console.log('card ',info)
     return (
       <>
      <CardContainer
