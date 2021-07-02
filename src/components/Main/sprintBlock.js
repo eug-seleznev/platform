@@ -22,7 +22,7 @@ const SprintBlock = ({user, history}) => {
         <div className={styles.create__news}>
           <img className={styles.create__news__img}alt='star' src={Path+'starr.png'}></img>
             <Bold color="black" size="18">
-              Избранные задачи
+               Задачи на проектах
             </Bold>
 
           </div>
