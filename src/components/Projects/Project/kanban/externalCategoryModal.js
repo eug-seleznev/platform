@@ -35,6 +35,7 @@ const categories = boards[boards.findIndex(el=>el._id===chosenBoardId)]?.categor
 const monitor = (e) => {
     e.preventDefault()
     dispatch(addExternalCategory(chosenCategory, currentBoardId))
+    close()
 }
 
 if(!boards){
@@ -43,7 +44,7 @@ if(!boards){
     return(
         <div className={styles.ext__bg} onClick={close}>
             <div className={styles.ext__container} onClick={e=>e.stopPropagation()}>
-                <Regular size='20' className={styles.ext__title}>Выберите категорию для мониторинга</Regular>
+                <Regular size='20' color='white' className={styles.ext__title}>Выберите категорию для мониторинга</Regular>
                 <form onSubmit={monitor}>
                 <div className={styles.ext__selects} >
                     <Select 

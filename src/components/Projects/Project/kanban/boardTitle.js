@@ -7,7 +7,7 @@ import styles from './kanban.module.css'
 import ModalMenu from './modalMenu'
 
 
-const BoardColumnsTitle = ({user, board, Path, deleteColumn, boardRef}) => {
+const BoardColumnsTitle = ({user, board, Path, deleteColumn, boardRef, columnsGrid}) => {
 
   const theme = useSelector(state => state.auth.user.theme)
   const [boardWidth, setBoardWidth] = useState('fit-content')
@@ -27,7 +27,7 @@ const BoardColumnsTitle = ({user, board, Path, deleteColumn, boardRef}) => {
     return (
           <>
             <div className={styles.title} style={{backgroundColor: !theme?'rgba(0,0,0,0)':'#292929', width: boardWidth, minWidth: '100%'}}>
-                <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns?.length-1},250px) minmax(50px,1fr)`, minWidth:'100%'}}>
+                <div className={styles.tr} style={{gridTemplateColumns: columnsGrid, minWidth:'100%'}}>
                   <span/>
                     {board && board.columns && board?.columns?.map((el,i)=>{
                       

@@ -40,6 +40,8 @@ export const CHANGE_CARD_DEADLINE = "CHANGE_CARD_DEADLINE"
 export const CLEAR_BOARD = 'CLEAR_BOARD'
 export const CHANGE_THEME = 'CHANGE_THEME'
 export const LIKE_CARD = 'LIKE_CARD'
+export const KANBAN_MONITORING = 'KANBAN_MONITORING'
+
 //USERES
 export const ALL_USERS = 'users';
 export const GET_EMPLOYE = 'get_users';
