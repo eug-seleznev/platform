@@ -553,15 +553,25 @@ export const moveCard = ({board_id,from, to, oldPlaceId, newPlaceId, cardId, col
     }
 } 
 
-export const addComment = (text, id,mentions,link) => async dispatch  => {
-    console.log(text,id)
-    let body ={
-        text:text,
-        mentions:mentions,
-        url:link
+export const addComment = (formData,file,id) => async dispatch  => {
+    console.log(formData,file)
+
+    const form = new FormData()
+    if(file){
+        form.append(
+            'file',
+            file
+          )
     }
+    
+
+    Object.keys(formData).map((el) => {
+        form.append(
+            `${el}`, formData[el]
+        )
+    })
     try {
-        const res = await innerBackend.post(`/kanban/cards/comment/new/${id}`,body )
+        const res = await innerBackend.post(`/kanban/cards/comment/new/${id}`,form )
         dispatch({
             type: ADD_COMMENT,
             payload: res.data

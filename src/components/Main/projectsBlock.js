@@ -9,7 +9,7 @@ const ProjectsBlock = ({user, history}) => {
 
     return(
 		<div className={styles.projects}>
-		<div style={{display:'flex'}}>
+		<div style={{display:'flex',flexWrap:'wrap'}}>
 		  <img alt='myproj' src={Path+'proj.png'} style={{height:'34px'}}></img>
 		  <Regular color="#3F496C" size="18" className={styles.myProj}>
 			Мои проекты

@@ -25,7 +25,7 @@ export const getStat = () => async (dispatch) => {
       payload: res.data,
     });
 
-    console.log(res.data);
+    // console.log(res.data);
   } catch (err) {}
 };
 
@@ -33,9 +33,9 @@ export const getStat = () => async (dispatch) => {
 // get / news / get / stats / week;
 export const WeeklyTask = () => async (dispatch) => {
   try {
-    console.log('ermmmm')
+    // console.log('ermmmm')
       const res = await innerBackend.get('/news/get/stats/week')
-      console.log(res.data)
+      // console.log(res.data)
       dispatch({
         type: GET_WEEKLY_TASK,
         payload: res.data

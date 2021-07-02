@@ -40,7 +40,7 @@ const NewsBlock = ({user, history}) => {
       dispatch(finishAllTasks({ taskid }));
       };
     return(
-		<div >
+		<div className={styles.main__news}>
           <div className={styles.create__news}>
           <img alt='news' className={styles.create__news__img}  src={Path + "tasks.png"}></img>
             <Bold color="black" size="18">

@@ -47,13 +47,13 @@ const AddUsers = ({users,projTeam, info,eventUsers,open,setOpen,theme}) =>{
                     !eventUsers.includes(user._id)
                 ) {
                     return (
-                        <div className={settings.users__name} >
+                        <div className={settings.users__name} key={i}>
                             <img src={url+'/'+user.avatar} className={settings.users__avatar}/>
                             <Light
                                 color={theme ? "white" : "black"}
                                 onClick={() => takeUser(user._id)}
                                 style={{ cursor: "pointer" }}
-                                key={i}
+                            
                             >
                                 {user.fullname}
                             </Light> 

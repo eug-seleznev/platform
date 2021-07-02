@@ -151,7 +151,7 @@ const TaskTable = ({ tasksArray, id, team, info, theme }) => {
       className={canban.tasks__container}
       ref={taskRef}
       style={{
-        overflowY: tasksArray.length > 4 ? "scroll" : "hidden",
+        overflowY: tasksArray.length > 3 ? "scroll" : "hidden",
         zIndex: -1,
         maxHeight: "20vh",
         minHeight: "15vh",

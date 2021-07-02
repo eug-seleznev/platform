@@ -13,6 +13,24 @@
     border:1px solid #8FA7C6;
     outline: none;
 }
+.comments__image__container {
+    height:190px;
+    width:auto;
+    display:flex;
+    margin-top: 10px;
+}
+.comments__image__border{
+    margin-left:10px;
+    margin-right:10px;
+    background-color:#CECECE;
+    height:100%;
+    width:5px;
+    border-radius:5px;
+}
+.comments__image {
+    object-fit: contain;
+    max-height: 190px;
+}
 .anotherSumbmitButton {
     overflow-wrap: normal;
     font-family:SuisseIntlLight;
@@ -25,6 +43,20 @@
     white-space: nowrap;
     border: none;
     left: 250px;
+}
+.commentsImageInput {
+    position:absolute;
+    transform:translateX(-269px);
+    width:210px;
+    height:28px;
+    cursor:pointer;
+    opacity:0
+}
+.commentsImageMsg {
+    position:absolute;
+    transform:translateX(-269px) translateY(-23px);
+    width:210px;
+    height:28px;
 }
 .comments__textarea {
     padding:10px;

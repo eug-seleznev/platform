@@ -123,6 +123,7 @@ const CardEditor = ({
           <input className={cardEditor.title__input}
             style={{
               filter: theme ? "invert(1)" : "invert(0)",
+             
             }}
             value={title}
             name="title"
@@ -276,9 +277,8 @@ const CardEditor = ({
               <div style={{ display: "flex" }}>
                 {info.execs?.map((el, i) => {
                   return (
-                    <div>
+                    <div key={i}>
                       <img
-                        key={i}
                         src={url + "/" + el.avatar}
                         draggable="false"
                         style={{
@@ -335,7 +335,7 @@ const CardEditor = ({
                     }}
                   ></img>
                 ) : (
-                  <div ref={outclick} style={{ filter: theme ? "invert(1)" : "invert(0)" }}>
+                  <div ref={outclick} style={{ filter: theme ? "invert(1)" : "invert(0)",zIndex:190 }}>
                     <Input
                       style={{ width: "180px" }}
                       onChange={handleInput}

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addComment } from "../../../../../../redux/actions/kanban";
 import { ButtonTextLight } from "../../../../../../Styles/buttons";
-import { Bold, Light, Regular } from "../../../../../../Styles/typography";
+import { Bold, Light, Regular, Thin } from "../../../../../../Styles/typography";
 import { url } from "../../../../../utils/axios";
 import style from "./cardOpen.module.css";
 import getDateWithTime from "./getDateWithTime";
@@ -18,6 +18,7 @@ let cancel;
 const Comments = ({ id, emergency, history, theme }) => {
   const [link, setLink] = useState("");
   const [comment, setComment] = useState("");
+  const [msg, setMsg] = useState("");
   const [mentions, setMentions] = useState([]);
   const comments = useSelector((state) => state.projects.comments);
   const users = useSelector((state) => state.users.users);
@@ -28,9 +29,11 @@ const Comments = ({ id, emergency, history, theme }) => {
     text: "",
     startPosition: 0,
   });
+  const  [file, setFile] = useState(null) 
   const commentRef = useRef();
   const inputRef = useRef();
   const dispatch = useDispatch();
+ 
   useEffect(() => {
     let sortOrder = true;
     let query = "name";
@@ -41,24 +44,39 @@ const Comments = ({ id, emergency, history, theme }) => {
       left: 0,
     });
   }, []);
-  // useEffect(() => {
-  //     console.log(mentions)
-  // }, [mentions])
+
+  const handleFile =(e)=>{
+    let loadFile = new Promise((resolve)=>{
+     setFile(e.target.files[0])
+     resolve()
+  })
+  loadFile.then( 
+    setMsg('Изображение загружено!')
+  )
+  }
+   
+
+      
+
+
   // useEffect(() => {
   //     console.log(link)
   // }, [link])
   const createComment = (e) => {
     e.preventDefault();
     return new Promise((resolve) => {
-      dispatch(addComment(comment, id, mentions, link));
+      let formData = {
+        text:comment,
+        mentions:mentions,
+        url:link,
+      }
+      dispatch(addComment(formData,file,id));
       setComment("");
+      setMsg('')
+      setFile(null);
       setMentions([]);
       resolve();
     });
-  };
-  const hi = (e) => {
-
-    
   };
   const commentScroll = () => {
     setTimeout(() => {
@@ -132,7 +150,7 @@ const Comments = ({ id, emergency, history, theme }) => {
           <div
             style={{
               paddingBottom: "20px",
-              paddingTop: "15px",
+              paddingTop: "12px",
               marginTop: "-22px",
               marginLeft: "25px",
             }}
@@ -153,14 +171,16 @@ const Comments = ({ id, emergency, history, theme }) => {
         className={style.comments__array}
         ref={commentRef}
         style={{
-          overflowY: comments.length > 7 ? "scroll" : "hidden",
+          overflowY: "scroll" ,
           maxHeight: "21vh",marginTop:'20px'
         }}
       >
         {comments &&
           comments.map((comm, i) => {
+
             return (
-              <div key={i} className={style.comments__one}>
+              <div key={i}>
+              <div  className={style.comments__one}>
                 <img
                   draggable="false"
                   src={url + "/" + comm.author?.avatar}
@@ -207,7 +227,16 @@ const Comments = ({ id, emergency, history, theme }) => {
                 >
                   {comm.text}
                 </Light>
+                
+               
               </div>
+              { comm.image &&
+                   <div className={style.comments__image__container}>
+                      <div className={style.comments__image__border}></div>
+                      <img src={url+'/'+comm.image} className={style.comments__image}></img>
+                    </div>
+                }
+                </div>
             );
           })}
       </div>
@@ -290,8 +319,10 @@ const Comments = ({ id, emergency, history, theme }) => {
             type='button'
             fontSize="14px"
           >
-            Прикрепить файл
+            Добавить файл
           </button>
+          <input type='file'className={style.commentsImageInput} onChange={(e)=>handleFile(e)}></input>
+          <Thin className={style.commentsImageMsg}>{msg}</Thin> 
          <button
             // ref={buttonRef}
             className={style.anotherSumbmitButton}
@@ -300,7 +331,7 @@ const Comments = ({ id, emergency, history, theme }) => {
               color: theme ? "white" : "#3F496C",
               backgroundColor: !theme ? "rgba(196,196,196, 0.3)" : "#1E1E1E",
             }}
-            type='button'
+            type='submit'
             fontSize="14px"
           >
             Добавить комментарий

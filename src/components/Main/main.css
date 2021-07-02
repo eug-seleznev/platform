@@ -3,10 +3,11 @@
     display: grid;
     grid-template-areas: 
     'profile news'
-    'projects projects'
+    'profile events'
+    'projects .'
     'tasks .'
     ;
-    grid-template-rows: min-content min-content min-content;
+    grid-template-rows: min-content min-content min-content  min-content;
     grid-template-columns:2fr 1fr;
     column-gap: 2vw;
     row-gap: 40px;
@@ -15,6 +16,9 @@
     .main__profile{
         grid-area: profile; 
 
+    }
+    .my_events {
+        grid-area: events; 
     }
     .main__projects{
         grid-area: projects;
@@ -46,7 +50,7 @@
 
     .main__news{
         grid-area: news;
-     
+     height: min-content;
        
     
        
