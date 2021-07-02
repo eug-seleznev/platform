@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { finishAllTasks } from "../../redux/actions/user";
 import styles from "../../Styles/modules/main/main.module.css";
-import { Bold, Light, Regular } from "../../Styles/typography";
+import { Bold, Light, Regular, Thin } from "../../Styles/typography";
 import { Path } from "../Layout/header";
 import getCurrentMonth from "../MyTasks/getCurrentMonth";
 import ProjTasks from "../MyTasks/projTasks";
