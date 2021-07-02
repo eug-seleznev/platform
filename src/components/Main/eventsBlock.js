@@ -8,7 +8,7 @@ import getCurrentMonth from '../MyTasks/getCurrentMonth'
 import ProjTasks from '../MyTasks/projTasks'
 import SprintCard from './sprintCard'
 
-const SprintBlock = ({user, history}) => {
+const EventsBlock = ({user, history}) => {
   const dispatch = useDispatch()
   const onChange = (e) => {
     let taskid = e.target.value;
@@ -18,17 +18,17 @@ const SprintBlock = ({user, history}) => {
       history.push(`./projects/${link}/main`)
     }
     return(
-		<div className={styles.my_sprints}>
+		<div className={styles.my_events}>
         <div className={styles.create__news}>
           <img className={styles.create__news__img}alt='star' src={Path+'starr.png'}></img>
             <Bold color="black" size="18">
-              Избранные задачи
+              Ближайшие события
             </Bold>
 
           </div>
-        <ProjTasks mainPage={true} tasks={user.tasks}month={getCurrentMonth(Date.now())} onChange={onChange} pushToProject={pushToProject}history={history}></ProjTasks>
+        
         </div>
     )
 }
 
-export default SprintBlock 
+export default EventsBlock 

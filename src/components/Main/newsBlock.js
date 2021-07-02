@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 import ProjTasks from '../MyTasks/projTasks'
 import getCurrentMonth from '../MyTasks/getCurrentMonth'
 import { finishAllTasks } from '../../redux/actions/user'
+import BoardsBlock from './boardsBlock'
 
 export const Path = process.env.REACT_APP_PATH;
 
@@ -39,11 +40,11 @@ const NewsBlock = ({user, history}) => {
       dispatch(finishAllTasks({ taskid }));
       };
     return(
-		<div className={styles.news}>
+		<div >
           <div className={styles.create__news}>
           <img alt='news' className={styles.create__news__img}  src={Path + "tasks.png"}></img>
             <Bold color="black" size="18">
-              Задачи
+              Избранные доски
             </Bold>
             {/* {user.permission==='admin'?<img alt='news' className={styles.create__news__button} onClick={()=>{setStatus(true)}} src={Path + "plus.png"}></img>:''} */}
           </div>
@@ -81,7 +82,7 @@ const NewsBlock = ({user, history}) => {
             content={newsOpen.content}
           />
         )} */}
-        <ProjTasks mainPage={true} tasks={user.tasks}month={currentMonth} onChange={onChange} pushToProject={pushToProject}history={history}/>
+        <BoardsBlock mainPage={true} boards={user.boards} tasks={user.tasks}month={currentMonth} onChange={onChange} pushToProject={pushToProject}history={history}/>
         </div>
     )
 }

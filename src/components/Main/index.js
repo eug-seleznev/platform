@@ -12,6 +12,7 @@ import ProjectsBlock from './projectsBlock'
 import NewsBlock from './newsBlock'
 import TaskBlock from './taskBlock'
 import SprintBlock from './sprintBlock'
+import EventsBlock from './eventsBlock';
 
 const Main = ({history}) => {
 
@@ -57,7 +58,7 @@ if(!user.name){
       
         <ProjectsBlock history={history} user={user}/>
         <NewsBlock history={history} user={user}/>
-        <TaskBlock user={user} history={history}/>
+        <EventsBlock user={user} history={history}/>
         <SprintBlock user={user}/>
       </div>
     );

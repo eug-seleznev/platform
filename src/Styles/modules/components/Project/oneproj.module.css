@@ -3,20 +3,29 @@
 	margin-top: 5vh;
 	grid-template-rows: repeat (max-content, 3);
 	grid-template-columns: 0.87fr 1.13fr;
-	
-
-	
 }
 .first__col{
-
-		margin-left: 15%;
-		width: 85%
-
+	margin-left: 15%;
+	width: 85%
+}
+.chosenTitle:hover {
+	cursor: pointer;
+}
+.chosenTitle:hover {
+	text-decoration: underline;
+}
+.chosenBoard {
+	display: flex;
+	justify-content: space-between;
+	border-radius: 10px;
+	padding: 10px;
+	border: 1px solid #8FA7C6;
+	margin-top: 8px;
+	width: 100%;
 }
 .sprints {
 	grid-area: sprints;
 	width: 100%;
-
 }
 .team {
 	width: 100%;
@@ -54,8 +63,7 @@
 	text-align: right;
 }
 .card__title {
-	text-align: left;
-	
+	text-align: left;	
 }
 .link{
 	cursor:pointer;
@@ -90,12 +98,10 @@
 	padding-right: 0;
 }
 .history_tags{
-	
 	flex-direction: row;
 	display: flex;
 	justify-content: flex-end;
 	padding-right: 0px;
-	
 	padding-top: 16px;
 }
 .card__tasks {
@@ -124,12 +130,10 @@
 	justify-content: space-between;
 }
 .sprint__title {
-	
 	display: flex;
 	padding-top: 15px;
 	padding-bottom: 25px;
 	justify-content: space-between;
-	
 }
 
 .info__project {
@@ -137,7 +141,6 @@
 	height: auto;
 	border: 1px solid #8FA7C6;
 	border-radius: 10px;
-	
 	padding: 20px;
 }
 .info__descr__laptop {
