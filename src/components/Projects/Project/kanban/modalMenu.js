@@ -30,7 +30,8 @@ import {useClickOutside} from './hooks/hooks'
           <>
 
         <div onClick={(e)=>openModal(e)} style={{display:'flex', height: '100%',cursor: 'pointer', minHeight:'15px',
-            alignItems: "center",color:!props.theme?'white':'#1C1E23',
+                  width:'fit-content',
+                  alignItems: "center",color:!props.theme?'white':'#1C1E23', marginLeft:'15px',
             backgroundColor:!props.theme?'white':'#1C1E23',}}>
             {props.children}
         </div>
@@ -60,7 +61,7 @@ import {useClickOutside} from './hooks/hooks'
                   }}>
                 {props.buttons && props.buttons.map((el,i)=>{
                   return(
-                    <div style={{height:'30px', display: 'flex', alignItems: 'center', cursor: "pointer",color:props.theme?'#1C1E23':'white'}} 
+                    <div key={'modalMenu'+el.title} style={{height:'30px', display: 'flex', alignItems: 'center', cursor: "pointer",color:props.theme?'#1C1E23':'white'}} 
                           onClick={(e)=>{
                               e.stopPropagation()
                               el.handler()

@@ -106,7 +106,7 @@ useEffect(()=>{
                 >
                     {currentColunmCards && currentColunmCards.map((el,i)=>{
                         return(
-                            <div onDragOver={(e)=>cardDragOver(e,i)} onDragLeave={(e)=>cardDragOut(e)} onDrop={(e)=>dropToCard(e,el.huindex)} style={{marginTop:'10px'}}>
+                            <div key={'sectionTd'+el._id} onDragOver={(e)=>cardDragOver(e,i)} onDragLeave={(e)=>cardDragOut(e)} onDrop={(e)=>dropToCard(e,el.huindex)} style={{marginTop:'10px'}}>
                             
                             {addGhost===`ghost${i}`?<div className={ghostStyles.addGhost}/>
                             :

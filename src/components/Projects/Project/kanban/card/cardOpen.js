@@ -6,6 +6,7 @@ import TaskTable from './components/TaskTable';
 import Comments from './components/Comments';
 import { useSelector } from 'react-redux';
 import { useCallback, useEffect } from 'react';
+import { useEscapeClick } from '../hooks/hooks';
 
 
 
@@ -17,23 +18,9 @@ const CardOpen = ({close,setDeleteWindow,chosenCard,boardId, history, theme,time
     
     const info = useSelector(state=>state.projects.card)
     const project = useSelector(state=>state.projects.project)
-   
-    // useEffect(()=>{
-    //   console.log(boardId)
-    // },[])
-    const escFunction = useCallback((e) => {
-      if(e.keyCode === 27) {
-        close()
-      }
-    }, []);
-  
-    useEffect(() => {
-      document.addEventListener("keydown", escFunction, false);
-  
-      return () => {
-        document.removeEventListener("keydown", escFunction, false);
-      };
-    }, []);
+    const escFunction = useEscapeClick(close)
+
+    
     return (
       <>
       {info&&

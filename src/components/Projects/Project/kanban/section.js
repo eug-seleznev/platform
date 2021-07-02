@@ -12,6 +12,7 @@ import ModalTimeline from "./modalTimeline";
 import ExpiredColumn from "./expiredTd";
 import ConfirmModal from "./confirm";
 import ModalMenu from "./modalMenu";
+import DisplayPeriod from "./displayPeriod";
 
 
 
@@ -27,6 +28,7 @@ const KanbanSection = ({main, board, category, history}) => {
     const [timelines, setTimelines] = useState(0)
     const [openTimlineModal, setOpenTimlineModal] = useState(false)
     const [confirm, setConfirm] = useState(false)
+    const [displayPeriod, setDisplayPeriod] = useState(false)
    
 
     useEffect(()=>{
@@ -84,6 +86,7 @@ const KanbanSection = ({main, board, category, history}) => {
               prevTimeline={prevTimeline} 
               timelineIndex={timelineIndex} 
               changeCategoryName={changeCategoryName}
+              setDisplayPeriod={setDisplayPeriod}
             />
           
         
@@ -100,9 +103,9 @@ const KanbanSection = ({main, board, category, history}) => {
         </div>
    
 
-    {/* <PopUpMenu open={settingsOpen} buttons={boardSettingsButtons} close={()=>setSettingsOpen(false)}/> */}
     {openTimlineModal && <ModalTimeline id={category._id} setModal={setOpenTimlineModal} boardId={board._id} timelineId={category.timeline[timelineIndex]._id} />}
     <ConfirmModal visible={confirm} confirm={()=>deleteCategoryHandler()} close={()=>setConfirm(false)} text={'колонку '+category.name} />
+    {/* {displayPeriod && <DisplayPeriod close={()=>setDisplayPeriod(false)} />} */}
    </>
     );    
 }
@@ -133,12 +136,12 @@ const TimelineDates = ({timeline,theme}) => {
 }
 
 
-const CategoryTitle = ({open, setConfirm, setOpen, setOpenTimlineModal, nextTimeline, timelineIndex, prevTimeline, category, board, changeCategoryName}) => {
+const CategoryTitle = ({open, setConfirm, setOpen, setOpenTimlineModal, nextTimeline, timelineIndex, prevTimeline, category, board, changeCategoryName, setDisplayPeriod}) => {
   
   const theme = useSelector(state => state.auth.user.theme)
   const [editName, setEditName] = useState(false)
   const [newCategoryName, setNewCategoryName] = useState(category.name)
- 
+  
   const submit = () => {
     changeCategoryName(newCategoryName)
     setEditName(false)
@@ -202,7 +205,7 @@ const buttons = [
                   }
                 </div>
                 {category.timeline[timelineIndex] && category.timeline[timelineIndex].start && 
-                  <div /*onClick={()=>setOpenTimlineModal(true)}*/>
+                  <div onClick={()=>setDisplayPeriod(true)}>
                     <TimelineDates theme={theme} timeline={category.timeline[timelineIndex]} />
                   </div>
                 }

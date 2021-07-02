@@ -266,7 +266,7 @@ export const renameBoard = (board_id, name) => async dispatch  => {
     }
     try {
         const res = await innerBackend.put(`/kanban/boards/rename/${board_id}`, body)
-        console.log('resssssssss',res)
+        // console.log('resssssssss',res)
         dispatch({
             type: RENAME_BOARD,
             payload: res.data
@@ -290,10 +290,10 @@ export const addNewCategory = (board_id, formData) => async dispatch  => {
     //     end:date}
     const body = {
         name: formData}
-    console.log('formData',body)
+    // console.log('formData',body)
     try {
         const res = await innerBackend.post(`/kanban/categories/new/${board_id}`,body )
-            console.log('formData',res.data)
+            // console.log('formData',res)
 
         dispatch({
             type: COMMON_KANBAN_RELOAD,
@@ -308,6 +308,52 @@ export const addNewCategory = (board_id, formData) => async dispatch  => {
             console.log('ошибка создания категории',err.response)                  
          }
 } 
+export const addExternalCategory = (category_id, current_board_id) => async dispatch  => {
+
+    const body = {
+        board_id: current_board_id
+    }
+    console.log('body',body)
+    try {
+        const res = await innerBackend.put(`/kanban/category/monitor/${category_id}`,body )
+            console.log('res',res)
+
+        dispatch({
+            type: COMMON_KANBAN_RELOAD,
+            payload: res.data
+        })
+        // dispatch({
+        //     type: GREEN_MSG,
+        //     payload: res.data
+        // })
+        }
+        catch (err) {
+            console.log('ошибка мониторинга категории',err.response)                  
+         }
+} 
+export const removeExternalCategory = (category_id, current_board_id) => async dispatch  => {
+
+    const body = {
+        board_id: current_board_id
+    }
+    console.log('body',body)
+    try {
+        const res = await innerBackend.put(`/kanban/category/monitor/remove/${category_id}`,body )
+            console.log('res',res)
+
+        dispatch({
+            type: COMMON_KANBAN_RELOAD,
+            payload: res.data
+        })
+        // dispatch({
+        //     type: GREEN_MSG,
+        //     payload: res.data
+        // })
+        }
+        catch (err) {
+            console.log('ошибка мониторинга категории',err.response)                  
+         }
+} 
 export const renameCategory = (boardId, categoryId, name) => async dispatch  => {
     
     const body ={
@@ -316,7 +362,7 @@ export const renameCategory = (boardId, categoryId, name) => async dispatch  => 
     }
     try {
         const res = await innerBackend.put(`/kanban/categories/edit/rename/${categoryId}`,body)
-            console.log('formData',res.data)
+            // console.log('formData',res.data)
 
         dispatch({
             type: COMMON_KANBAN_RELOAD,
@@ -361,6 +407,7 @@ export const addNewColumn = (board_id, name) => async dispatch  => {
     try {
         console.log(board_id, body)
         const res = await innerBackend.put(`/kanban/boards/column/new/${board_id}`,body )
+        // console.log('res',res)
         dispatch({
             type: COMMON_KANBAN_RELOAD,
             payload: res.data

@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createBrowserHistory } from "history";
 import './App.css';
 import Auth from './components/Auth/index'
-
+// import './components/fontAwesome'
+import '@fortawesome/free-solid-svg-icons'
+import '@fortawesome/free-regular-svg-icons'
 import {
   HashRouter,
   BrowserRouter,

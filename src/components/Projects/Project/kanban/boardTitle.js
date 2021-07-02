@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { renameColumn } from '../../../../redux/actions/kanban'
 import { useSelector } from 'react-redux'
@@ -7,12 +7,18 @@ import styles from './kanban.module.css'
 import ModalMenu from './modalMenu'
 
 
-const BoardColumnsTitle = ({user, board, Path, deleteColumn}) => {
+const BoardColumnsTitle = ({user, board, Path, deleteColumn, boardRef}) => {
+
   const theme = useSelector(state => state.auth.user.theme)
-  const [confirm, setConfirm] = useState({
+  const [boardWidth, setBoardWidth] = useState('fit-content')
+    const [confirm, setConfirm] = useState({
     visible: false,
     column: ''
   })
+
+  useEffect(()=>{
+    boardRef!==null && setBoardWidth(boardRef.current.offsetWidth)
+  },[boardRef])
 
     if(!board){
         return <div>loading board...</div>
@@ -20,13 +26,13 @@ const BoardColumnsTitle = ({user, board, Path, deleteColumn}) => {
 
     return (
           <>
-            <div className={styles.title} style={{backgroundColor: !theme?'rgba(0,0,0,0)':'#292929', width: 'fit-content', minWidth: '100%'}}>
+            <div className={styles.title} style={{backgroundColor: !theme?'rgba(0,0,0,0)':'#292929', width: boardWidth, minWidth: '100%'}}>
                 <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns?.length-1},250px) minmax(50px,1fr)`, minWidth:'100%'}}>
                   <span/>
                     {board && board.columns && board?.columns?.map((el,i)=>{
                       
                       return(
-                        <ColumnTitle boardId={board._id} el={el} index={i} Path={Path} setConfirm={setConfirm} editable={i>1 && user.permission!=='user'} theme={theme}/>
+                        <ColumnTitle key={'boardTitle'+el} boardId={board._id} el={el} index={i} Path={Path} setConfirm={setConfirm} editable={i>1 && user.permission!=='user'} theme={theme}/>
                       )
                     })}
                     <div className={styles.titleTd} style={{width: '250px'}}>
