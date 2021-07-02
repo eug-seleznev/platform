@@ -11,7 +11,7 @@ import getCurrentMonth from "../../getCurrentMonth"
 
 
 
-const TaskDone =({tasks, pushToProject,month, onChange})=>{
+const TaskDone =({tasks, pushToProject,month, onChange,mainPage})=>{
 	
 	
 	return(
@@ -49,7 +49,7 @@ const TaskDone =({tasks, pushToProject,month, onChange})=>{
 							<NEW_TD className={style.mobile__resize}>
 								<ButtonTextLight style={{display:`${task.project?'block':'none'}`}} onClick={()=>pushToProject(task.project.crypt)}>{task.project ? task.project.title: ""}</ButtonTextLight>
 							</NEW_TD>
-							<NEW_TD className={style.user__td} >
+							<NEW_TD className={style.user__td} style={{contentVisibility:`${mainPage?'hidden':'visible'}`}}>
 								{task.user2? task.user2.fullname:'я'}
 								{task.user2? <img className={style.mytask__img} src={url+'/'+task.user2.avatar}></img> :''}
 							</NEW_TD>

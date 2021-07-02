@@ -3,12 +3,7 @@ import { finishAllTasks } from "../../redux/actions/user";
 import styles from "../../Styles/modules/main/main.module.css";
 import { Bold, Light, Regular, Thin } from "../../Styles/typography";
 import { Path } from "../Layout/header";
-import getCurrentMonth from "../MyTasks/getCurrentMonth";
-import ProjTasks from "../MyTasks/projTasks";
-import SprintCard from "./sprintCard";
 import card from "../Projects/Project/kanban/card/card.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as heartOutline } from "@fortawesome/free-regular-svg-icons";
 import getDate from "../Projects/getDate";
 const EventsBlock = ({ user, history }) => {
   const dispatch = useDispatch();
@@ -21,7 +16,7 @@ const EventsBlock = ({ user, history }) => {
   };
   const cardMain = {
     border: "1px solid #9CE3B0",
- minHeight:'35px'
+    minHeight:'35px'
   };
   return (
     <div className={styles.my_events}>

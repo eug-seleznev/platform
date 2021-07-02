@@ -22,7 +22,7 @@ const BoardsBlock = ({boards,  history}) => {
                   return (
                     <div className={style.chosenBoard} key={i}>
                         <Light size='16' onClick={()=>handleRedirect(board.name,board.project)}  className={style.chosenTitle}>{board.name}</Light>
-                        <Light  className={style.chosenTitle}onClick={()=>handleRedirectProj(board.project)} color='#878787' size='14'>{'Проект: '+ board.project_title}</Light>
+                        <Light className={style.chosenTitle}onClick={()=>handleRedirectProj(board.project)} color='#878787' size='14'>{'Проект: '+ board.project_title}</Light>
                     </div>
                   );
                 })}
