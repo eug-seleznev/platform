@@ -37,7 +37,7 @@ const Board = ({match, history}) => {
   const boardDivChild = useRef(null)
   const boardTitle = useRef(null)
 
-  const columnsGrid = `80px 530px 530px repeat(${board.columns?.length-1},250px) minmax(50px,1fr)`
+  const columnsGrid = `80px 530px 530px repeat(${board?.columns?.length-1},250px) minmax(50px,1fr)`
 
   const [createOpen, setCreateOpen] =useState ({
     status:false,
