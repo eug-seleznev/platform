@@ -42,7 +42,7 @@ const AllBoardsOfProj = ({boards, crypt, history}) => {
                   <BoardTitleIndex el={board} key={i} handleRedirect={handleRedirect}></BoardTitleIndex>
                   
                 );
-              })}
+              }).reverse()}
           </div>
         )}
         <br />

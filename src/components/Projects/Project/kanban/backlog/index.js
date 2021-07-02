@@ -31,7 +31,7 @@ const Backlog =({sideOpen, backlog, projectCrypt, boardId, history, project,clos
         <div 
             style={{display: sideOpen? 'block' : 'none', width: '100%'}} 
             >
-            <BacklogTitle cardNumber={filterredCards.length} closeBacklog={closeBacklog}/>  
+            <BacklogTitle cardNumber={filterredCards?.length} closeBacklog={closeBacklog}/>  
             <BacklogFilters setFilterByBoard={setFilterByBoard} setFilterByName={setFilterByName} setFilterByUser={setFilterByUser} boardId={boardId} project={project} />
             <CardList scrollDown={newCardScrollDown} setScrollDown={()=>setNewCardScrollDown(false)} backlog={backlog} boardId={boardId} filterredCards={filterredCards} history={history} projectCrypt={projectCrypt}  />
             <CreateCard callback={()=>setNewCardScrollDown(true)} boardId={boardId} projectCrypt={projectCrypt} />

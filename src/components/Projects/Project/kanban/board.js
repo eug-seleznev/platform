@@ -102,7 +102,7 @@ const Board = ({match, history}) => {
     }
   
     useEffect(()=>{
-        const boardId = project.boards.find(el=>el.name===match.params.board_name)._id
+        const boardId = project.boards.find(el=>el.name===match.params.board_name)?._id
         dispatch(loadBoard(boardId))
     },[match.params])
 

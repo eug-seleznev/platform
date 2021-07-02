@@ -154,7 +154,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height:25px;
+    min-height:25px;
     border-radius: 5px;
     margin-top: 10px;
     border: 0.4px solid #b7b7b7;
