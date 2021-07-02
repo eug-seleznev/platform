@@ -13,7 +13,7 @@ const BoardsBlock = ({boards,  history}) => {
       return (
         <div className={style.sprints}>
           {boards.length === 0 ? (
-            <Thin size="22">Нет избранных досок</Thin>
+            <Thin size="16" style={{marginTop:'20px'}}>Нет избранных досок</Thin>
           ) : (
             <div className={style.sprintdescr__cont}>
               {boards

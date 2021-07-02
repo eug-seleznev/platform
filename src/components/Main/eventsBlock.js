@@ -35,7 +35,9 @@ const EventsBlock = ({ user, history }) => {
           Ближайшие события
         </Bold>
       </div>
-      {user.event_cards
+      {user.event_cards.filter((card) => card.emergency === "Событие").length === 0 ? (
+            <Thin size="16" style={{marginTop:'20px'}}>Нет ближайших событий</Thin>
+          ) : user.event_cards
         .filter((card) => card.emergency === "Событие")
         .map((el, i) => {
           return (
