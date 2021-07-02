@@ -54,14 +54,6 @@ const Comments = ({ id, emergency, history, theme }) => {
     setMsg('Файл выбран!')
   )
   }
-   
-
-      
-
-
-  // useEffect(() => {
-  //     console.log(file)
-  // }, [file])
   const createComment = (e) => {
     e.preventDefault();
     return new Promise((resolve) => {
