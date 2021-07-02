@@ -18,7 +18,7 @@ const SprintBlock = ({user, history}) => {
       history.push(`./projects/${link}/main`)
     }
     return(
-		<div className={styles.my_sprints}>
+		<div className={styles.my_sprints} style={{marginTop:'30px'}}>
         <div className={styles.create__news}>
           <img className={styles.create__news__img}alt='star' src={Path+'starr.png'}></img>
             <Bold color="black" size="18">

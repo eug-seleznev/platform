@@ -7,7 +7,7 @@
     'projects .'
     'tasks .'
     ;
-    grid-template-rows: min-content min-content min-content  min-content;
+    grid-template-rows: min-content min-content min-content min-content;
     grid-template-columns:2fr 1fr;
     column-gap: 2vw;
     row-gap: 40px;
@@ -21,6 +21,7 @@
         grid-area: events; 
     }
     .main__projects{
+        margin-top: 50px;
         grid-area: projects;
     }
             .main__profile__logo{

@@ -8,7 +8,7 @@ const ProjectsBlock = ({user, history}) => {
 	const [showProj, setShowProj] = useState (1)
 
     return(
-		<div className={styles.projects}>
+		<div className={styles.projects} style={{marginTop:'30px'}}>
 		<div style={{display:'flex',flexWrap:'wrap'}}>
 		  <img alt='myproj' src={Path+'proj.png'} style={{height:'34px'}}></img>
 		  <Regular color="#3F496C" size="18" className={styles.myProj}>
