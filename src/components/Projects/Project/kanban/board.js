@@ -29,7 +29,6 @@ import ExternalCategory from "./externalCategory";
 const Board = ({match, history}) => {
   const dispatch = useDispatch ()
   const project = useSelector(state=>state.projects.project)
-
   const user = useSelector(state => state.auth.user)
   const board = useSelector(state=>state.projects.kanban)
   const backlog = useSelector(state=>state.projects.backlog)
@@ -37,6 +36,8 @@ const Board = ({match, history}) => {
   const boardDiv = useRef(null)
   const boardDivChild = useRef(null)
   const boardTitle = useRef(null)
+
+  const columnsGrid = `80px 530px 530px repeat(${board.columns?.length-1},250px) minmax(50px,1fr)`
 
   const [createOpen, setCreateOpen] =useState ({
     status:false,
@@ -205,14 +206,14 @@ const Board = ({match, history}) => {
             </div>
             
             <div ref={boardTitle} style={{ width: sideOpen? '87vw' : '96vw', overflow:'hidden', scrollbarWidth: '0px', scrollbarColor: "transparent", }}>
-              <BoardColumnsTitle Path={Path} boardRef={boardDivChild} board={board} user={user} deleteColumn={(el)=>deleteColumnHandler(el)} />
+              <BoardColumnsTitle Path={Path} boardRef={boardDivChild} board={board} user={user} deleteColumn={(el)=>deleteColumnHandler(el)} columnsGrid={columnsGrid} />
             </div>
 
             <div ref={boardDiv} className={styles.board} style={{ width: sideOpen? '88vw' : '97vw',backgroundColor:!user.theme?'rgba(0,0,0,0)':'#0D1117' }} onMouseDown={(e)=>onMoveStart(e)} onMouseMove={(e)=>onMove(e)} onMouseUp={(e)=>onMoveEnd(e)} onScroll={(e)=>titleScroll(e)}>
               <div ref={boardDivChild} style={{width: 'fit-content',minWidth:"100%" }}>
                 {board && board.columns && board?.categories.map((el,i)=>{
                     return(
-                        <KanbanSection history={history} key={i} main={i===0? true : false} board={board} category={el} />
+                        <KanbanSection history={history} key={i} main={i===0? true : false} board={board} category={el} columnsGrid={columnsGrid} />
                     )
                 })}
                 {board && board.monitor && board.monitor.map((el,i)=>{

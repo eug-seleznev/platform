@@ -19,7 +19,7 @@ import DisplayPeriod from "./displayPeriod";
 
 
 
-const KanbanSection = ({main, board, category, history}) => {
+const KanbanSection = ({main, board, category, history, columnsGrid}) => {
 
   const dispatch = useDispatch()
 
@@ -90,7 +90,7 @@ const KanbanSection = ({main, board, category, history}) => {
             />
           
         
-          <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-1},250px) minmax(50px,1fr)`,minWidth: '100%',}}>
+          <div className={styles.tr} style={{gridTemplateColumns: columnsGrid,minWidth: '100%',}}>
             <span/>
             {board.columns.map((el,i)=>{
               return(
@@ -165,7 +165,7 @@ const buttons = [
 
   return(
     <div className={styles.title} onClick={()=>setOpen(!open)} style={{backgroundColor:!theme?'rgba(0,0,0,0)':'#292929',minWidth: '100%',color:theme?'white':'black'}}>
-      <div className={styles.tr} style={{gridTemplateColumns: `minmax(50px,1fr) 530px 530px repeat(${board.columns.length-1},250px) minmax(50px,1fr)`,minWidth: '100%', }}>
+      <div className={styles.tr} style={{gridTemplateColumns: '80px 1fr',minWidth: '100%', }}>
           <span>
             <ModalMenu theme={theme} buttons={buttons}>
                 <img src={Path+'three-dots.png'} style={{marginLeft: '20px',}} />
