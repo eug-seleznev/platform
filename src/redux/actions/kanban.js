@@ -554,7 +554,7 @@ export const moveCard = ({board_id,from, to, oldPlaceId, newPlaceId, cardId, col
 } 
 
 export const addComment = (formData,file,id) => async dispatch  => {
-    console.log(formData,file)
+    // console.log(formData,file)
 
     const form = new FormData()
     if(file){

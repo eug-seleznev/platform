@@ -172,7 +172,7 @@ const TaskTable = ({ tasksArray, id, team, info, theme }) => {
             }}
           >
             <td className={style.headtd}>
-              <img src={Path + "bolt.svg"} />
+              <img draggable="false" src={Path + "bolt.svg"} />
               <Regular
               color='#656565'
                 style={{ color: theme ? "white" : "black", marginLeft: "5px" }}

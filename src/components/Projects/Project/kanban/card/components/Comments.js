@@ -51,7 +51,7 @@ const Comments = ({ id, emergency, history, theme }) => {
      resolve()
   })
   loadFile.then( 
-    setMsg('Изображение загружено!')
+    setMsg('Файл выбран!')
   )
   }
    
@@ -60,8 +60,8 @@ const Comments = ({ id, emergency, history, theme }) => {
 
 
   // useEffect(() => {
-  //     console.log(link)
-  // }, [link])
+  //     console.log(file)
+  // }, [file])
   const createComment = (e) => {
     e.preventDefault();
     return new Promise((resolve) => {
@@ -156,7 +156,7 @@ const Comments = ({ id, emergency, history, theme }) => {
             }}
              className={editor.headtd}
           >
-            <img src={Path + "actions.svg"} />
+            <img draggable="false" src={Path + "actions.svg"} />
             <Regular
               color='#656565'
               style={{ color: theme ? "white" : "black", marginLeft: "5px" }}
@@ -177,8 +177,8 @@ const Comments = ({ id, emergency, history, theme }) => {
       >
         {comments &&
           comments.map((comm, i) => {
-
             return (
+              
               <div key={i}>
               <div  className={style.comments__one}>
                 <img
@@ -225,15 +225,23 @@ const Comments = ({ id, emergency, history, theme }) => {
                   }
                   className={style.comments__text}
                 >
-                  {comm.text}
+                  {comm.text+'   '}
                 </Light>
+                { comm.file?.file_type === 'file' &&
                 
+                <a href={url+'/'+comm.file?.path} target='#blank'className={style.comments__file}>
+                <Light size='14' color='#3F496C'>
+                    {comm.file?.og_name}
+                    </Light>
+                </a>
+                   
+                }
                
               </div>
-              { comm.image &&
+              { comm.file?.file_type === 'image' &&
                    <div className={style.comments__image__container}>
                       <div className={style.comments__image__border}></div>
-                      <img src={url+'/'+comm.image} className={style.comments__image}></img>
+                      <img draggable="false" src={url+'/'+comm.file.path} className={style.comments__image}></img>
                     </div>
                 }
                 </div>

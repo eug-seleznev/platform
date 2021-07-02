@@ -19,6 +19,13 @@
     display:flex;
     margin-top: 10px;
 }
+.comments__file {
+    cursor: pointer;
+    text-decoration: none;
+}
+.comments__file:hover {
+    text-decoration: underline;
+}
 .comments__image__border{
     margin-left:10px;
     margin-right:10px;
