@@ -59,10 +59,10 @@ const Comments = ({ id, emergency, history, theme }) => {
     return new Promise((resolve) => {
       let formData = {
         text:comment,
-        mentions:mentions,
+        // mentions:mentions,
         url:link,
       }
-      dispatch(addComment(formData,file,id));
+      dispatch(addComment(formData,file,id,mentions));
       setComment("");
       setMsg('')
       setFile(null);

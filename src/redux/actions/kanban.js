@@ -553,9 +553,9 @@ export const moveCard = ({board_id,from, to, oldPlaceId, newPlaceId, cardId, col
     }
 } 
 
-export const addComment = (formData,file,id) => async dispatch  => {
-    // console.log(formData,file)
-
+export const addComment = (formData,file,id,ment) => async dispatch  => {
+    console.log(ment)
+    let mentions = ment.toString().replace(' ')
     const form = new FormData()
     if(file){
         form.append(
@@ -563,23 +563,31 @@ export const addComment = (formData,file,id) => async dispatch  => {
             file
           )
     }
-    
+    if(ment){
+        form.append(
+            'mentions',
+            mentions
+          )
+    }
 
     Object.keys(formData).map((el) => {
+        console.log(`${el}`, formData[el])
         form.append(
+            
             `${el}`, formData[el]
         )
     })
     try {
+        console.log(form)
         const res = await innerBackend.post(`/kanban/cards/comment/new/${id}`,form )
         dispatch({
             type: ADD_COMMENT,
             payload: res.data
         })
-        // dispatch({
-        //     type: GREEN_MSG,
-        //     payload: res.data
-        // })
+        dispatch({
+            type: GREEN_MSG,
+            payload: res.data
+        })
         }
         catch (err) {
             alert('ошибка')           
