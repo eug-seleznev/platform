@@ -14,7 +14,7 @@ const CardContainer = ({info, currCategory, timelineId, backlog, addGhost, expir
       dispatch(currentCard(info))
       setTimeout(()=>{
         setCardOpen(true)
-      },300)
+      },600)
       
     }
  
