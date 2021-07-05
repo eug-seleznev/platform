@@ -19,13 +19,13 @@
 }
 .card__exec__name {
     position: absolute;
-    transform: translateX(32px)translateY(-27px);
+    transform: translateX(-35px)translateY(-3px);
 	color: white;
     white-space: nowrap;
     width: fit-content;
 	background-color: black;
 	border-radius: 5px;
-	padding: 4px;
+	padding: 2px;
     z-index: 120;
     border:'1px solid white'
 }

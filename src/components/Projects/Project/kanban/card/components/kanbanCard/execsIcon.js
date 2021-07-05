@@ -21,7 +21,7 @@ const ExecsIcon = ({el,history}) =>{
                 onMouseLeave={()=>{setVisibleName(false)}} 
                 className={styles.execsIcon}
             />
-            <div style={{position:'relative',display: visibleName?'block':'none'}}>
+            <div style={{position:'relative',zIndex:'2999', display: visibleName?'block':'none'}}>
                 <div className={styles.card__exec__name}>
                     {el.fullname}
                 </div>
