@@ -19,7 +19,7 @@
 }
 .card__exec__name {
     position: absolute;
-    transform: translateX(-40px)translateY(5px);
+    transform: translateX(32px)translateY(-27px);
 	color: white;
     white-space: nowrap;
     width: fit-content;
