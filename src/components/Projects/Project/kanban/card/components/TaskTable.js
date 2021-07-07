@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState,Fragment } from "react";
 import { useDispatch } from "react-redux";
 import {
   changeTaskCard,
@@ -300,7 +300,7 @@ const TaskTable = ({ tasksArray, id, team, info, theme }) => {
                                     {team.map((member, i) => {
                                       if (member.user !== null) {
                                         return (
-                                          <>
+                                          <Fragment key={i}>
                                             {task.user._id ===
                                             member.user._id ? (
                                               <option
@@ -318,7 +318,7 @@ const TaskTable = ({ tasksArray, id, team, info, theme }) => {
                                                 {member.user.fullname}
                                               </option>
                                             )}
-                                          </>
+                                          </Fragment>
                                         );
                                       }
                                     })}

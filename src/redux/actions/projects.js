@@ -1,10 +1,97 @@
 import { innerBackend, } from "../../components/utils/axios";
-import {ADD_PROJ_TO_CHOSEN, ADD_SPRINT,ADD_USER_TO_TEAM,CHANGE_USER_PROJ,SEARCH_OBJECT,SORT_TITLE, SORT_PROJECTS,CHANGE_ROCKET, ADD_TAG,SORT_BY_TAGS, ADD_TASKS,CLEAR_URN,GREEN_MSG,DELITE_USER, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK,DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT, DELETE_SPRINT,ERROR_MSG, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, DELITE_TAG,CLEAR_SPRINT  } from "../types";
+import {ADD_CUSTOM_FIELD, ADD_SPRINT,ADD_USER_TO_TEAM,CHANGE_USER_PROJ,SEARCH_OBJECT,SORT_TITLE, SORT_PROJECTS,CHANGE_ROCKET, ADD_TAG,SORT_BY_TAGS, ADD_TASKS,CLEAR_URN,GREEN_MSG,DELITE_USER, ALL_PROJECTS, ALL_SPRINT, EDIT_TASK,DELETE_PROJECT,EDIT_PROJECT, FINISH_SPRINT, FINISH_TASK, GET_PROJECT,CREATE_PROJECT, GET_SPRINT, JOIN_TEAM, SPRINT_ERROR, FINISH_PROJECT,ADD_INFO_SPRINT, DELETE_SPRINT,ERROR_MSG, CHANGE_DESCRIPTION, ADD_USER_TO_TASK, SEARCH_TAG, DELITE_TAG,CLEAR_SPRINT  } from "../types";
 
 
 
+export const deleteCustomField = (id) => async dispatch  => {
 
+  try {
+      const res = await innerBackend.post(`/projects/custom/remove/${id}`)
+      dispatch({
+          type: ADD_CUSTOM_FIELD,
+          payload: res.data
+      })
+      dispatch({
+          type: GREEN_MSG,
+          payload: res.data
+      })
+      }
+      catch (err) {
+          alert(err)           
+       }
+} 
+export const editCustomField = (formData,id,file) => async dispatch  => {
+ 
+  // console.log(formData)
+  const form = new FormData()
+  if(file){
+    
+    console.log(file )
+    form.append(
+        'file',
+        file
+      )
+  }
 
+  Object.keys(formData).map((el) => {
+      console.log(`${el}`, formData[el])
+      form.append(
+          
+          `${el}`, formData[el]
+      )
+  })
+  try {
+      console.log(form)
+      const res = await innerBackend.post(`/projects/custom/edit/${id}`,form )
+      dispatch({
+          type: ADD_CUSTOM_FIELD,
+          payload: res.data
+      })
+      dispatch({
+          type: GREEN_MSG,
+          payload: res.data
+      })
+      }
+      catch (err) {
+          alert(err)           
+       }
+} 
+export const addCustomField = (formData,file,id) => async dispatch  => {
+ 
+  console.log(formData)
+  const form = new FormData()
+  if(file){
+    
+    console.log(file )
+    form.append(
+        'file',
+        file
+      )
+  }
+
+  Object.keys(formData).map((el) => {
+      console.log(`${el}`, formData[el])
+      form.append(
+          
+          `${el}`, formData[el]
+      )
+  })
+  try {
+      console.log(form)
+      const res = await innerBackend.post(`/projects/custom/add/${id}`,form )
+      dispatch({
+          type: ADD_CUSTOM_FIELD,
+          payload: res.data
+      })
+      dispatch({
+          type: GREEN_MSG,
+          payload: res.data
+      })
+      }
+      catch (err) {
+          alert(err)           
+       }
+} 
 export const newProject = (formData) => async dispatch  => {
     // console.log (formData)
     try {

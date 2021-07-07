@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState,Fragment } from "react"
 import style from "../../Styles/modules/main/mytasks.module.css"
 import newsp from "../../Styles/modules/components/Project/newsprint.module.css"
 import { NEW_TABLE, NEW_TBODY, NEW_TD, NEW_TH, NEW_THEAD, NEW_TR } from "../../Styles/tables"
@@ -6,7 +6,7 @@ import { ButtonTextDiv} from "../../Styles/buttons"
 import getDate from "../Projects/getDate"
 import { useDispatch} from "react-redux"
 import { addUserTask, editUserTask } from "../../redux/actions/user"
-import { Light } from "../../Styles/typography"
+import { Light } from "../../Styles/typography" 
 
 const DeadlineTasks =({tasks, onChange,currentDate, delTask, onPressEnter})=>{
 	const dispatch = useDispatch()
@@ -70,9 +70,9 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask, onPressEnter})=>{
 			</NEW_THEAD>
 			<NEW_TBODY>
 				
-						{tasks.map((day)=>{
+						{tasks.map((day,i)=>{
 							return(
-								<>
+								<Fragment key={i}>
 								{day.tasks.filter(task=>task.deadline&&!task.taskStatus).length!==0?<Light size='14' className={style.date} color='#8C8C8C'>{currentDate===getDate(day.date)?'Сегодня':getDate(day.date)}</Light>:''}
 								{day.tasks.filter(task=>task.deadline).map((task)=>{
 									return(
@@ -113,7 +113,7 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask, onPressEnter})=>{
 								</NEW_TR>
 									)
 								})}
-								</>
+								</Fragment>
 							)
 						})}
 				

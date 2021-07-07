@@ -74,6 +74,7 @@ export const SORT_PROJECTS = 'sort_projects'
 export const CHANGE_ROCKET = 'CHANGE_ROCKET'
 export const SORT_TITLE = 'SORT_TITLE';
 export const CHANGE_USER_PROJ = 'CHANGE_USER_PROJ'
+export const ADD_CUSTOM_FIELD = 'ADD_CUSTOM_FIELD'
 //PROJECTS SORT
 
 export const UPDATE_PROJECT = 'project_updated';

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState,Fragment } from "react"
 import style from "../../../Styles/modules/main/mytasks.module.css"
 import myTasks from '../../../Styles/modules/main/mytasksSmall.module.css'
 import newsp from "../../../Styles/modules/components/Project/newsprint.module.css"
@@ -131,9 +131,9 @@ const PortableTasks =({tasks})=>{
 				</NEW_TR>
 			</NEW_THEAD>
 			<NEW_TBODY>
-						{user.activeTasks.map((day)=>{
+						{user.activeTasks.map((day,i)=>{
 							return(
-								<>
+								<Fragment key={i}>
 								{day.tasks.filter(task=>!task.deadline).length>0?
 								<div style={{display:'flex',paddingLeft:'24px',alignItems:'center',marginTop:'10px'}}>
 									{currentDate===getDate(day.date)?
@@ -213,7 +213,7 @@ const PortableTasks =({tasks})=>{
 									)
 								})}
 								
-								</>
+								</Fragment>
 						
 							)
 						}).reverse()}

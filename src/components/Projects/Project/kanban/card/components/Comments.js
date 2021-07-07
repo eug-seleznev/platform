@@ -37,6 +37,7 @@ const Comments = ({ id, emergency, history, theme }) => {
   useEffect(() => {
     let sortOrder = true;
     let query = "name";
+
     dispatch(allUsers({ query, sortOrder }));
     setLink(window.location.href);
     commentRef.current.scrollTo({
@@ -317,7 +318,7 @@ const Comments = ({ id, emergency, history, theme }) => {
               marginRight:'30px'
             }}
             type='button'
-            fontSize="14px"
+ 
           >
             Добавить файл
           </button>
@@ -332,7 +333,7 @@ const Comments = ({ id, emergency, history, theme }) => {
               backgroundColor: !theme ? "rgba(196,196,196, 0.3)" : "#1E1E1E",
             }}
             type='submit'
-            fontSize="14px"
+
           >
             Добавить комментарий
           </button>

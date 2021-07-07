@@ -1,19 +1,10 @@
-import { useDispatch } from "react-redux";
-import { finishAllTasks } from "../../redux/actions/user";
+
 import styles from "../../Styles/modules/main/main.module.css";
 import { Bold, Light, Regular, Thin } from "../../Styles/typography";
 import { Path } from "../Layout/header";
 import card from "../Projects/Project/kanban/card/card.module.css";
 import getDate from "../Projects/getDate";
-const EventsBlock = ({ user, history }) => {
-  const dispatch = useDispatch();
-  const onChange = (e) => {
-    let taskid = e.target.value;
-    dispatch(finishAllTasks({ taskid }));
-  };
-  const pushToProject = (link) => {
-    history.push(`./projects/${link}/main`);
-  };
+const EventsBlock = ({ user }) => {
   const cardMain = {
     border: "1px solid #9CE3B0",
     minHeight:'35px'

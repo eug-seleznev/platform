@@ -3,7 +3,6 @@ import BoardTitleIndex from "../Projects/Project/kanban/boardTitleIndex";
 import style from '../../Styles/modules/components/Project/oneproj.module.css'
 import { Light, Thin } from "../../Styles/typography";
 const BoardsBlock = ({boards,  history}) => { 
-    const dispatch = useDispatch();
     const handleRedirect = (name, crypt) => {
       history.push(`/projects/${crypt}/board/${name}`)
     }

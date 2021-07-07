@@ -9,6 +9,7 @@ import { background } from '../../../redux/actions/user';
 import ProjTeamEdit from '../components/EditProj/projteamedit';
 import LinkInputs from '../components/EditProj/linkInputs';
 import CustomerInfo from '../components/EditProj/customerInfo';
+import EditCustomFields from '../components/EditProj/editCustomFields';
 const ProjectEdit = ({history, match}) => {
 	let {crypt} = match.params;
     const dispatch = useDispatch();
@@ -135,6 +136,7 @@ const ProjectEdit = ({history, match}) => {
                     <Regular className={style.info__row__point} onClick={()=> setEditStage(2)} color={editStage===2?'black':'#8B8B8B'}  size={'14'}>Команда проекта</Regular>
                     <Regular className={style.info__row__point} onClick={()=> setEditStage(3)} color={editStage===3?'black':'#8B8B8B'}  size={'14'}>Ссылки на документацию</Regular>
                     <Regular className={style.info__row__point} onClick={()=> setEditStage(4)} color={editStage===4?'black':'#8B8B8B'}  size={'14'}>Информация о заказчике</Regular>
+                    <Regular className={style.info__row__point} onClick={()=> setEditStage(5)} color={editStage===5?'black':'#8B8B8B'}  size={'14'}>Редактировать кастомные поля</Regular>
                 </div>
             <form className='form' onSubmit={onSubmit}>
             <div style={{display:`${editStage===1?'block':'none'}`}}>
@@ -169,6 +171,11 @@ const ProjectEdit = ({history, match}) => {
             <CustomerInfo
                customerNew={customerNew}
                onCustomerChange={onCustomerChange}
+            />
+            </div>
+            <div style={{display:`${editStage===5?'block':'none'}`,width:'100%'}}>
+            <EditCustomFields
+              customFields={project.custom_fields} 
             />
             </div>
             </form>

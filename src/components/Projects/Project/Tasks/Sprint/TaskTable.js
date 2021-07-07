@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import { useDispatch, } from "react-redux";
 import { addUserToTask, EditTask, finishTask } from "../../../../../redux/actions/projects";
 import { SPRINT_TABLE, TR,Select, SPRINT_TD, NEW_THEAD } from "../../../../../Styles/tables"
@@ -167,11 +167,11 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
                 <>
                   {team && (
                       <Select className={style.select} onChange={(e) => teamHandle(e, task)}>
-                      {team.map((member) => {
+                      {team.map((member,i) => {
                         if(member.user!==null) {
           
                             return (
-                          <>
+                          <Fragment key={i}>
                             {task.user._id === member.user._id ? (
                               <option selected value={member.user._id}>
                                 {" "}
@@ -182,7 +182,7 @@ const TaskTable = ({ tasks, id, selectFocusRow, isEdit, enableEdit, team }) => {
                                 {member.user.fullname}
                               </option>
                             )}
-                          </>
+                          </Fragment>
                         );
                         }
                       

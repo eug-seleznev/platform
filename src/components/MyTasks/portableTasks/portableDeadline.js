@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState,Fragment } from "react"
 import style from "../../../Styles/modules/main/mytasks.module.css"
 import newsp from "../../../Styles/modules/components/Project/newsprint.module.css"
 import { NEW_TABLE, NEW_TBODY, NEW_TD, NEW_TH, NEW_THEAD, NEW_TR } from "../../../Styles/tables"
@@ -81,9 +81,9 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask, onPressEnter})=>{
 			</NEW_THEAD>
 			<NEW_TBODY>
 				
-						{tasks.map((day)=>{
+						{tasks.map((day,i)=>{
 							return(
-								<>
+								<Fragment key={i}>
 								{day.tasks.filter(task=>task.deadline).length>0?
 								<Light size='16' style={{textAlign:'start',marginLeft:'24px',marginTop:'10px'}} color='#8C8C8C'>{currentDate===getDate(day.date)?'На сегодня':'до '+getDate(day.date)}</Light>:''}
 								{day.tasks.filter(task=>task.deadline).map((task)=>{
@@ -130,7 +130,7 @@ const DeadlineTasks =({tasks, onChange,currentDate, delTask, onPressEnter})=>{
 								</NEW_TR>
 									)
 								})}
-								</>
+								</Fragment>
 							)
 						})}
 				

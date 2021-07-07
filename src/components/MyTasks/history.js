@@ -4,7 +4,7 @@ import getDate from "../Projects/getDate"
 import { Bold, Light, Regular } from "../../Styles/typography"
 
 import { ButtonTextDiv, ButtonTextLight } from "../../Styles/buttons"
-import { useState } from "react"
+import { useState, Fragment } from "react"
 
 
 const TaskHistory = ({tasks, pushToProject, typeFilter, delTask,onPressEnter}) => {
@@ -33,7 +33,7 @@ const TaskHistory = ({tasks, pushToProject, typeFilter, delTask,onPressEnter}) =
 						{year.month_tasks.length!==0?<Bold size='14'  className={style.date2}>{year.year}</Bold>:''}
 						{year.month_tasks.map((task,i)=>{
 							return(
-								<>
+								<Fragment key={i}>
 								{task.tasks.length!==0?<Light size='14' key={i} className={style.date2} color='#8C8C8C'>{task.month}</Light>:''}
 								
 								{task.tasks.filter(task=>task.taskStatus && 
@@ -74,7 +74,7 @@ const TaskHistory = ({tasks, pushToProject, typeFilter, delTask,onPressEnter}) =
 										</NEW_TR>
 									)
 								}).reverse()}
-								</>
+								</Fragment>
 							)
 						}).reverse()}
 						</NEW_TBODY>
