@@ -54,7 +54,7 @@ const Main = ({ history }) => {
       <div>
         <NewsBlock history={history} user={user} />
         <EventsBlock user={user} history={history} />
-        <SprintBlock user={user} />
+        <SprintBlock user={user} history={history} />
       </div>
     </div>
   );

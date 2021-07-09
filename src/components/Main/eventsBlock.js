@@ -7,7 +7,8 @@ import getDate from "../Projects/getDate";
 const EventsBlock = ({ user }) => {
   const cardMain = {
     border: "1px solid #9CE3B0",
-    minHeight:'35px'
+    minHeight:'35px',
+    
   };
   return (
     <div className={styles.my_events}>
@@ -35,7 +36,7 @@ const EventsBlock = ({ user }) => {
               <div style={{marginLeft:'5px'}}>
                 <div style={{display:'flex'}}>
                 
-                <Light size="16" style={{ maxWidth: "80%" }}>
+                <Light size="16" style={{ maxWidth: "80%",paddingTop:'5px',paddingBottom:'4px' }}>
                   {el.title}
                 </Light>
               </div>
@@ -44,7 +45,7 @@ const EventsBlock = ({ user }) => {
                 <Light
                   size="11"
                   color={"#B7B7B7"}
-                  style={{ marginRight: "5px", width: "max-content" }}
+                  style={{ marginRight: "5px", width: "max-content",paddingBottom:'5px'  }}
                 >
                   {getDate(el.deadline)}
                 </Light>)}

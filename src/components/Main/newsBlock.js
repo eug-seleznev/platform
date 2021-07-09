@@ -30,7 +30,7 @@ const NewsBlock = ({user, history}) => {
 	//   }
     useEffect(()=>{
       setCurrentMonth(getCurrentMonth(Date.now()))
-      console.log(user.tasks)
+      // console.log(user.tasks)
     },[])
     const pushToProject =(link)=>{
       history.push(`./projects/${link}/main`)
