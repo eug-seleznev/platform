@@ -40,7 +40,7 @@ const ProjInfo = ({ project, history, singlePage }) => {
       val: project.cusStorage,
     },
   ];
-
+  if (newFields)
   return (
     <div
       className={styles.info__cont}
@@ -129,7 +129,7 @@ const ProjInfo = ({ project, history, singlePage }) => {
             >
               {project.customerNew[0]?.email}
             </Light>
-            {project.customerNew[0]?.other?.map((contact, i) => {
+            {project?.customerNew[0]?.other?.map((contact, i) => {
               return (
                 <Light
                   key={i}
@@ -173,7 +173,7 @@ const ProjInfo = ({ project, history, singlePage }) => {
             })}
           </>
         )}
-        {project.custom_fields.map((field,i)=>{
+        {project.custom_fields?.map((field,i)=>{
           return (
             <div
                   className={styles.info__crypt}
