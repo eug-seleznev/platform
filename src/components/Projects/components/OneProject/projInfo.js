@@ -145,7 +145,7 @@ const ProjInfo = ({ project, history, singlePage }) => {
         </div>
         {singlePage && (
           <>
-            {newFields?.map((field, i) => {
+            {newFields && newFields?.map((field, i) => {
               return (
                 <div
                   className={styles.info__crypt}
