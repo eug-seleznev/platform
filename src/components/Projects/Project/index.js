@@ -39,7 +39,7 @@ const Project = ({match, history, location}) => {
             sprints={project.sprints}
             boards={project.boards}
           />
-          {/* <ProjectTeam hist={history} id={crypt} /> */}
+           <ProjectTeam hist={history} id={crypt} />
           <Viewer project={project} />
         </div>
 

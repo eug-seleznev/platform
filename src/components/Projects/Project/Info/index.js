@@ -4,7 +4,6 @@ import { Path } from "../../../Layout/header"
 import ProjInfo from "../../components/OneProject/projInfo"
 import NewFields from "./newFields"
 
-
 const Info = ({history}) => {
     const project = useSelector (state=>state.projects.project)
 

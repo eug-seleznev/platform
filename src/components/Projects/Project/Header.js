@@ -17,7 +17,7 @@ const Header = ({ history, crypt }) => {
   const dispatch = useDispatch();
   let headerList = [
     {link:"main",title:'Дешборд'},
-    // {link:"tasks",title:'Статистика'},
+    // {link:"",title:'Статистика'},
     {link:"models",title:'Модели'},
     // {link:"kanbans",title:'Задачи'},
     {link:"info",title:'Инфромация'}

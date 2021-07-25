@@ -41,7 +41,7 @@ const EditCustomFields = ({ customFields }) => {
 
   return (
     <div className={style.inputs}>
-      {customFields.map((field, i) => {
+      {customFields && customFields.map((field, i) => {
         return (
           <div style={{ display: "flex",alignItems:'center' }}>
             <div
