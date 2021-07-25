@@ -117,19 +117,8 @@ const TaskTable = ({ tasksArray, id, team, info, theme }) => {
   const doubleClickEdit = (task) => {
     setTaskTitle(task.taskTitle);
     setFocusRow(task._id);
-    if (isDouble === 0) {
-      setDouble(1);
-      setD(true);
-      setTimeout(() => setD(false), 300);
-    }
+    enableEdit();
 
-    if (isDouble === 1 && double) {
-      enableEdit();
-    }
-
-    if (isDouble === 1 && !double) {
-      setDouble(0);
-    }
   };
 
   const teamHandle = (e, task) => {
@@ -189,7 +178,8 @@ const TaskTable = ({ tasksArray, id, team, info, theme }) => {
               return (
                 <TR
                   onMouseOver={() => handleHover(task)}
-                  onClick={() => doubleClickEdit(task)}
+                  // onClick={() => doubleClickEdit(task)}
+                  onDoubleClick={() => doubleClickEdit(task)}
                   key={i}
                   style={{
                     backgroundColor:
@@ -210,8 +200,11 @@ const TaskTable = ({ tasksArray, id, team, info, theme }) => {
                     ></input>
                   </SPRINT_TD>
 
+
                   {editField && task._id === focusRow ? (
+
                     <SPRINT_TD style={{ width: "88%" }}>
+
                       <form onSubmit={enableEdit}>
                         <TextareaAutosize
                           maxRows={3}
@@ -245,12 +238,16 @@ const TaskTable = ({ tasksArray, id, team, info, theme }) => {
                         style={{
                           color: theme ? "white" : "#3F496C",
                           marginBottom: "5px",
-                          width: "90%",
+                          width: "60%",
                           marginLeft: "10px",
                         }}
                       >
                         {task.taskTitle}
                       </SPRINT_TD>
+
+                      {task?.user && <SPRINT_TD style={{ marginLeft: "10px", marginRight: '0'}}>
+                        {task?.user && task.user?.fullname}
+                      </SPRINT_TD>}
                     </>
                   )}
                   <SPRINT_TD>
@@ -427,8 +424,9 @@ const TaskTable = ({ tasksArray, id, team, info, theme }) => {
                     )}
                   </SPRINT_TD>
                 </TR>
-              );
-            })}
+              )})
+            }
+
         </tbody>
       </SPRINT_TABLE>
     </div>
