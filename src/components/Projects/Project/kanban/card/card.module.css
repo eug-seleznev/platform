@@ -67,13 +67,13 @@
 .cardOpnenBackground{
     position: fixed;
     display: grid;
-    grid-template-columns: 1fr 850px;
+    grid-template-columns: 1fr 1000px;
     right: -16px;
     left: 0;
     top: -47px;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.329);
-    overflow-y:hidden;
+    overflow-y:scroll;
     overflow-x:hidden
 }
 .cardStatusColor {
@@ -85,8 +85,8 @@
      
         margin-top: 113px;
         margin-left: auto;
-        width: 800px;
-        height: 120%;
+        width: 1000px;
+        height: 100%;
         border: 1px solid rgb(208, 211, 255);
         background-color: white;
     }

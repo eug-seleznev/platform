@@ -140,16 +140,15 @@ const TaskTable = ({ tasksArray, id, team, info, theme }) => {
       className={canban.tasks__container}
       ref={taskRef}
       style={{
-        overflowY: tasksArray.length > 3 ? "scroll" : "hidden",
+        overflowY: "visible",
         zIndex: -1,
-        maxHeight: "20vh",
         minHeight: "15vh",
         marginTop: info.execs?.length === 0 ? "-215px" : "-135px",
       }}
     >
       <SPRINT_TABLE
         onMouseLeave={() => setTaskId("")}
-        style={{ marginTop: "10px", marginLeft: "20px", marginBottom: "-30px" }}
+        style={{ marginLeft: "20px", marginBottom: "0px",overflowY: "visible", }}
       >
         <thead>
           <TR
@@ -203,7 +202,7 @@ const TaskTable = ({ tasksArray, id, team, info, theme }) => {
 
                   {editField && task._id === focusRow ? (
 
-                    <SPRINT_TD style={{ width: "88%" }}>
+                    <SPRINT_TD style={{ width: "60%" }}>
 
                       <form onSubmit={enableEdit}>
                         <TextareaAutosize

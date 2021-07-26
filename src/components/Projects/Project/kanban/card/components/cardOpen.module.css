@@ -76,8 +76,8 @@
     height: 40px;
 }
 .tasks__container{
-    max-height:280px;
-    overflow-y:scroll;
+    max-height:1000px;
+    overflow-y:visible;
     overflow-x:hidden;
     
 } 
