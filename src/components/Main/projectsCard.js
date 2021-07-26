@@ -30,35 +30,30 @@ const ProjectsCard = ({project}) => {
       
         <Card className={styles.projContainer}>
           <div>
-          <div className={styles.end}>
-            {/* {
-            project.sprints.length==0?<Circle red />:<Circle green />
-          } */}
-          
-          <Bold size="12" color="#848484" style={{marginLeft:'20px'}} >
-            {" "}
-            {daysLeft>0?daysLeft:'?'} {daysLeft < 0?"дней до дедлайна":daysLeft < 1 ? "день до дедлайна" : daysLeft < 5 ? "дня до дедлайна" : "дней до дедлайна"}
-          </Bold>
-          </div>
+            {/*<div className={styles.end}>*/}
+
+            {/*     <Bold size="12" color="#848484" style={{marginLeft:'20px'}} >*/}
+            {/*        {" "}*/}
+            {/*        {daysLeft>0?daysLeft:'?'} {daysLeft < 0?"дней до дедлайна":daysLeft < 1 ? "день до дедлайна" : daysLeft < 5 ? "дня до дедлайна" : "дней до дедлайна"}*/}
+            {/*    </Bold>*/}
+
+            {/*</div>*/}
+
           <div className={styles.projtop}>
-          <Link  style={{textDecoration: 'none'}}to={`../projects/${project.crypt}/main`}>
-            <Light size="24" color='#3F496C' className={styles.title}>
-              {project.title}
-            </Light>
-          </Link>
-          {/* <Light size="16" className={styles.description}>
-            {project.about != null
-              ? project.about
-              : "Короткое описание проекта"}
-          </Light> */}
-          
-          
+            <Link  style={{textDecoration: 'none'}}to={`../projects/${project.crypt}/main`}>
+                <Light size="24" color='#3F496C' className={styles.title}>
+                {project.title}
+                </Light>
+            </Link>
+
+              <div className={styles.tags}>
+                  <Tag  tagText={project.stage} tagColor='#E9E3C8'/>
+                  <Tag tagText={project.type} tagColor='#C8D9E9'/>
+              </div>
           </div>
+
           </div>
-          <div className={styles.tags}>
-            <Tag  tagText={project.stage} tagColor='#E9E3C8'/>   
-            <Tag tagText={project.type} tagColor='#C8D9E9'/>
-          </div>
+
          
         </Card>
       
