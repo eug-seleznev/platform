@@ -4,7 +4,6 @@ import { Bold,Light } from '../../Styles/typography'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Tag from '../Projects/components/OneProject/tag'
-import { Circle } from '../../Styles/project'
 
 
 
