@@ -184,6 +184,7 @@ const Comments = ({ id, emergency, history, theme }) => {
                     objectFit: "cover",
                     borderRadius: "100%",
                     cursor: "pointer",
+                    transform:"translateY(-5px)"
                   }}
                 ></img>
                 <Bold
