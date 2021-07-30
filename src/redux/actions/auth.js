@@ -91,11 +91,11 @@ export const register = ({formData}) => async dispatch  => {
       catch (err) {
         console.log(err)
         const errors = err.response.data
- 
+        console.log(errors)
     
            dispatch({
               type: ERROR_MSG,
-              payload: errors
+              payload: errors.err
         })
       
 
