@@ -22,7 +22,7 @@ import DisplayPeriod from "./displayPeriod";
 const KanbanSection = ({main, board, category, history, columnsGrid}) => {
 
   const dispatch = useDispatch()
-
+  console.log(category)
     const [open, setOpen] = useState(true)
     const [timelineIndex, setTimelineIndex] = useState(0)
     const [timelines, setTimelines] = useState(0)
@@ -34,11 +34,12 @@ const KanbanSection = ({main, board, category, history, columnsGrid}) => {
     useEffect(()=>{
       const now = Date.now()
       const nowTimelineIndex = category.timeline.findIndex(el=>{
-        const timeDate = new Date (el.start)
-        const lol = timeDate.getTime()>now
-        return lol
+        const timeStart = new Date (el.start)
+        const timeEnd = new Date (el.end)
+        const res = timeStart.getTime()<now && timeEnd.getTime()>now
+        return res
       })
-      nowTimelineIndex>0 && setTimelineIndex(nowTimelineIndex-1)
+      nowTimelineIndex>0 && setTimelineIndex(nowTimelineIndex)
     },[])
 
     useEffect(()=>{
