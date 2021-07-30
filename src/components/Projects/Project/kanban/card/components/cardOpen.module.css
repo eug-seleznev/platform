@@ -154,6 +154,6 @@
 }
 .comments__one {
     display:flex;
-    align-items:center;
+    align-items:flex-start;
     margin-top:10px;
 }

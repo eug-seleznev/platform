@@ -124,15 +124,16 @@ const Edit = ({ history}) => {
 			></Input>
 <Thin className={styles.p}>Отдел</Thin>
 			<select
-			required 
-			onChange={e => divisionChange(e)}
-			name='division'
+				required 
+				onChange={e => divisionChange(e)}
+				name='division'
+				value={!user.division?"Выберите отдел":user?.division?.divname}
 			>
-				<option selected={user.division? false : true}>Выберите отдел</option>
+				<option value="Выберите отдел">Выберите отдел</option>
 				{departments && departments.map((el,i)=>{
 
 					return(
-						<option selected={user.division&& (user.division.divname===el.divname ? true : false)} value={el.divname}>{el.divname}</option>
+						<option key={i} value={el.divname}>{el.divname}</option>
 					)
 				})}
 				

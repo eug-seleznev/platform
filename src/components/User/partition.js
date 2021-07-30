@@ -61,8 +61,8 @@ const Partition = ({subcontr, partition}) => {
 
          <div style={{display:'flex', flexWrap:'wrap'}}>
           
-          {partition!==undefined?partitionList.map(el => (
-            <div className={style.partition} >
+          {partition!==undefined?partitionList.map((el,i) => (
+            <div className={style.partition} key={i}>
               <input
                 type="checkbox"
                 key={el}
@@ -72,7 +72,7 @@ const Partition = ({subcontr, partition}) => {
                 value={el}
                 onChange={(e) => {subcontr? onSubcChange(e):onChange(e)}}
               />
-              <label for="subscribeNews">{el}</label>
+              <label htmlFor="subscribeNews">{el}</label>
             </div>
           )):''}
 
