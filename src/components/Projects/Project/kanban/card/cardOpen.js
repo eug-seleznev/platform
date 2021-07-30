@@ -29,7 +29,7 @@ const CardOpen = ({close,setDeleteWindow,chosenCard,boardId, history, theme,time
         >
           <div style={{height:'100vh'}} onMouseDown={close}></div>
             <div className={styles.cardOpnenContainer} style={{ backgroundColor:!theme?'white':'#1E1E1E'}} >
-              <div style={{display:"flex"}}>
+              <div style={{display:"flex",width:"100%"}}>
                 <div className={styles.cardStatusColor} 
                   style={{
                     backgroundColor:info.emergency==="Обычная"?'#8FA7C6':
@@ -39,7 +39,7 @@ const CardOpen = ({close,setDeleteWindow,chosenCard,boardId, history, theme,time
                     width:'16px'
                   }}>
                 </div>
-              <div>
+              <div style={{width:"100%"}}>
                 <CardEditor timelineId={timelineId} theme={theme} boardId={boardId} chosenCard={chosenCard}tasksLength={info.tasks?.length} history={history} setDeleteWindow={setDeleteWindow} info={info}></CardEditor>
                 <TaskTable  theme={theme} info={info} id={info._id} team={project.team2} tasksArray={info.tasks}></TaskTable>
                 <AddTask theme={theme} proj_id={project._id} id={info._id}></AddTask>
