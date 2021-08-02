@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 import styles from './kanban.module.css'
+import ghostStyles from './components/ghostCard.module.css'
 import KanbanCard from "./card/card";
 
 import { moveCard } from "../../../../redux/actions/kanban";
@@ -91,7 +92,7 @@ const [addGhost, setAddGhost] = useState()
                 return(
                     <div key={'expired'+el._id} onDragOver={(e)=>cardDragOver(e,i)} onDragLeave={(e)=>cardDragOut(e)} onDrop={(e)=>dropToCard(e,i)} style={{marginTop: '10px'}}>
                             
-                            {addGhost===`ghost${i}`?<div className={styles.addGhost}/>
+                            {addGhost===`ghost${i}`?<div className={ghostStyles.addGhost}/>
                             :
                             <KanbanCard expired history={history} boardId={boardId} key={i} info={el} currCategory={category._id} timelineId={timelineId} />
                             }
