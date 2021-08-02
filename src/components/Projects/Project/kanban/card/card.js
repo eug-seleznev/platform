@@ -56,9 +56,9 @@ const KanbanCard = ({info, currCategory, timelineId, backlog, addGhost, boardId,
         const ded = new Date(info.deadline)
         const date = ded.getDate()
         const months = ['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек']
-        const month = months[ded.getMonth()+1]
-        const hour = ded.getHours()+1
-        const min = ded.getMinutes()+1
+        const month = months[ded.getMonth()]
+        const hour = ded.getHours()
+        const min = ded.getMinutes()
         setDeadline(date+' '+month+' '+hour+':'+min)
       }
     },[])
