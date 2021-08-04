@@ -31,7 +31,7 @@ export const loadUser = () => async dispatch => {
     
      
    catch (err) {
-    console.log(err.response.data, 'ERROR!!!')
+    console.log(err, 'ERROR!!!')
   }
 }
    
@@ -62,14 +62,15 @@ export const login = (formData) => async dispatch  => {
       catch (err) {
         console.log(err)
 
-        const errors = err.response.data.errors;
-        errors.map(err => {
+        // const errors = err.response.data.errors;
+        // errors.map(err => {
           
-           return dispatch({
-            type: ERROR_MSG,
-            payload: err.err
-        })
-        })            
+        //    return dispatch({
+        //     type: ERROR_MSG,
+        //     payload: err.err
+        // })
+        // }
+        // )            
       
     }
 

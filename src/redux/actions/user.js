@@ -232,13 +232,8 @@ export const finishAllTasks = ({taskid}) => async dispatch  => {
       })
       }
     catch (err) {
-      const errors = err.response.data.err;
-      errors.map(error => {
-        return dispatch({
-          type: ERROR_MSG,
-          payload: error.msg
-      })
-      })            
+      // const errors = err.response.data.err;
+      console.log (err)            
     
   }
 
