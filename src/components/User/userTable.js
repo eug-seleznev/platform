@@ -38,7 +38,6 @@ const UserTable = ({crypt, project}) => {
      resolve()
    })
    setUser.then( 
-    console.log(formData,id),
     setUser(true)
    ) 
   }
