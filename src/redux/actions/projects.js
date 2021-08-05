@@ -345,7 +345,7 @@ export const changeUserPropertiesProj = (ready,prop,crypt,userId,val) => async d
         }
 
   try {
-    console.log(body, crypt)
+    // console.log(body, crypt)
       const res = await innerBackend.put(`/projects/team2/${crypt}/${userId}`,body)
       dispatch({
           type: CHANGE_USER_PROJ,
@@ -848,6 +848,7 @@ export const joinTeam = (id,formData) => async dispatch  => {
 }
 
 export const AddUserToTeam = (formData) => async dispatch => {
+  console.log(formData)
   try {
     let body = {
       user: formData.user,
@@ -866,6 +867,6 @@ export const AddUserToTeam = (formData) => async dispatch => {
     
   
   } catch (err) {
-  alert('AAAAAAAAAAAAAAAAAAAAAA')    
+  alert(err)    
   }
 }

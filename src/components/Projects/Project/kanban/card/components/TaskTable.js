@@ -80,11 +80,11 @@ const TaskTable = ({ tasksArray, id, team, info, theme }) => {
   }, [tasksArray]);
   //edit task
   const debounce = (fn, ms) => {
-    const huy = () => {
+    const meh = () => {
       clearTimeout(timeout);
       updateTimeout(setTimeout(fn, ms));
     };
-    return huy();
+    return meh();
   };
   const onTextChange = () => {
     let prop = debounced;
@@ -113,7 +113,17 @@ const TaskTable = ({ tasksArray, id, team, info, theme }) => {
       dispatch(changeTaskCard(prop, id, field));
     }
   };
-
+  useEffect(()=>{
+    if(editable) {
+      document.addEventListener('keypress', (event) => {
+        const keyName = event.key;
+        if (keyName === 'Enter') {
+          setEditable(false)
+        }
+      }, false);
+    }
+   
+  }, [editable])
   const doubleClickEdit = (task) => {
     setTaskTitle(task.taskTitle);
     setFocusRow(task._id);
@@ -244,9 +254,10 @@ const TaskTable = ({ tasksArray, id, team, info, theme }) => {
                         {task.taskTitle}
                       </SPRINT_TD>
 
-                      {task?.user && <SPRINT_TD style={{ marginLeft: "10px", marginRight: '0'}}>
-                        {task?.user && task.user?.fullname}
+                      {task?.user && <SPRINT_TD style={{ marginLeft: "10px", marginRight: '0',width:'310px'}}>
+                        {task?.user && task.user?.fullname}{task?.deadline &&', до ' + getDate(task?.deadline) }
                       </SPRINT_TD>}
+                      
                     </>
                   )}
                   <SPRINT_TD>
@@ -264,6 +275,7 @@ const TaskTable = ({ tasksArray, id, team, info, theme }) => {
                         }}
                       />
                     )}
+                    
                     {editable === task._id && (
                       <div style={{ position: "relative" }}>
                         <div

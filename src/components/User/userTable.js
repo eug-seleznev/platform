@@ -8,33 +8,56 @@ import { Path } from "../Layout/header";
 const UserTable = ({crypt, project}) => {
     const dispatch = useDispatch();
     const users = useSelector(state => state.users.searchResult)
-	
+    const [user,setUser] =useState(false)
     const [formData, setFormData] = useState({
       crypt: crypt,
       user: "",
       position: "",
       task: "",
     });
-    const onChange = (e) => {
-        setFormData({...formData, [e.target.name]: e.target.value})
-
+    const onChange = (e, id) => {
+        // setFormData({...formData, 
+        //   [e.target.name]: e.target.value
+        // })
+        console.log(id)
+        setFormData({...formData,
+           user: id,
+             [e.target.name]: e.target.value
+          })
     }
 
     const onSubmit = (e, id) => {
-      document.getElementById(id).style.display = "none"
+      document.getElementById(id).style.opacity = 1
       e.preventDefault()
-  // console.log(id)
-      setFormData({...formData, user: id})
-      setTimeout(() => {
-        setFormData({...formData, user:""})
-      }, 500);
+  console.log(id)
+  
+  if(formData.user==="") {
+    console.log('weeeeeeee')
+    let setUser = new Promise((resolve)=>{
+     setFormData({...formData, user: id })
+     resolve()
+   })
+   setUser.then( 
+    console.log(formData,id),
+    setUser(true)
+   ) 
+  }
+  else {
+     dispatch(AddUserToTeam(formData))
+  }
+ 
        
     }
 	useEffect(()=>{
-		if(formData.user!=='')
-			{dispatch(AddUserToTeam(formData))}
-			
+		if(user) {
+      dispatch(AddUserToTeam(formData))
+    }
+    setUser(false)
 	},[formData])
+  useEffect(()=>{
+    
+    
+  },[users])
     return (
    
         <table className={style.people__table} style={{borderWidth:`${users.length === 0?'0px':'1px'}`}}>
@@ -50,10 +73,10 @@ const UserTable = ({crypt, project}) => {
                     </td>
 
                     <td>
-                      <input type="text" name="position" onChange={onChange} placeholder="Должность"></input>
+                      <input type="text" name="position"  onChange={(e)=>onChange(e, user._id)} placeholder="Должность"></input>
                     </td>
                     <td>
-                      <input type="text" name="task" onChange={onChange} placeholder="Раздел"></input>
+                      <input type="text" name="task" onChange={(e)=>onChange(e, user._id)} placeholder="Раздел"></input>
                     </td>
 
                     <td>

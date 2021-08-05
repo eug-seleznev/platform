@@ -21,19 +21,19 @@ const ProjectTeam = ({history}) => {
   const project = useSelector(state => state.projects.project)
   const userId = useSelector(state => state.auth.user._id)
   const id = useSelector(state => state.projects.project.crypt)
-
+//   useEffect(()=>{
+//     console.log(button)
+// },[button])
     useEffect(()=>{
-
-   
-    
-        
         project.team2.map((el)=>{
-          // console.log(el.user._id,userId)
-          setButton(el.user._id===userId)
+          // console.log (el.user,el.user._id===userId)
+          if(el.user._id===userId){
+            setButton(true)
+          }
+          
           idArray.push(el._id)
         })
-      
-    },[])
+    },[project.team2])
 
     const hadleTeam =()=>{
       if(button) { 

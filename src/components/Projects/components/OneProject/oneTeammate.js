@@ -11,7 +11,7 @@ const ProjTeam = ({userName,userPos,userAvatar,userId,histProp, userTask}) => {
     <NEW_TABLE
       style={{ width: "100%", textAlign: "center" }}
     >
-      <NEW_TR onClick={() => histProp.push(`/users/${userId}`)}>
+      <NEW_TR onClick={() => histProp?.push(`/users/${userId}`)}>
         <NEW_TD style={{
           // backgroundColor: "blue",
          minWidth:'100px',maxWidth:'100px',
