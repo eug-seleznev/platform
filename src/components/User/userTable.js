@@ -9,6 +9,9 @@ const UserTable = ({crypt, project}) => {
     const dispatch = useDispatch();
     const users = useSelector(state => state.users.searchResult)
     const [user,setUser] =useState(false)
+    const [hideUser,setHideUser] =useState([])
+    const [position,setPosition] =useState('')
+    const [task,setTask] =useState('')
     const [formData, setFormData] = useState({
       crypt: crypt,
       user: "",
@@ -19,6 +22,12 @@ const UserTable = ({crypt, project}) => {
         // setFormData({...formData, 
         //   [e.target.name]: e.target.value
         // })
+        if(e.target.name==='position') {
+          setPosition(e.target.value)
+        }
+        if(e.target.name==='task') {
+          setTask(e.target.value)
+        }
         console.log(id)
         setFormData({...formData,
            user: id,
@@ -27,22 +36,20 @@ const UserTable = ({crypt, project}) => {
     }
 
     const onSubmit = (e, id) => {
-      document.getElementById(id).style.opacity = 1
-      e.preventDefault()
-  console.log(id)
-  
+      setHideUser(hideUser => [...hideUser, id])
+      // e.preventDefault()
+      setPosition('')
+  setTask('')
   if(formData.user==="") {
-    console.log('weeeeeeee')
-    let setUser = new Promise((resolve)=>{
+    return new Promise((resolve)=>{
      setFormData({...formData, user: id })
      resolve()
    })
-   setUser.then( 
-    setUser(true)
-   ) 
+  
   }
   else {
-     dispatch(AddUserToTeam(formData))
+    setHideUser(hideUser => [...hideUser, formData.user])
+    return dispatch(AddUserToTeam(formData))
   }
  
        
@@ -50,12 +57,13 @@ const UserTable = ({crypt, project}) => {
 	useEffect(()=>{
 		if(user) {
       dispatch(AddUserToTeam(formData))
+      setFormData({...formData, user: '' })
+      setUser(false)
     }
-    setUser(false)
-	},[formData])
+    
+	},[user])
   useEffect(()=>{
-    
-    
+    setHideUser([])
   },[users])
     return (
    
@@ -66,22 +74,24 @@ const UserTable = ({crypt, project}) => {
             <tbody>
               {users.map((user, index) => {
                 return (
-                  <tr key={index} id={user._id}>
+                  <tr key={index} style={{display:hideUser.includes(user._id)?'none':''}}>
                     <td>
                       <Light size='14'>{user.fullname}</Light>
                     </td>
 
                     <td>
-                      <input type="text" name="position"  onChange={(e)=>onChange(e, user._id)} placeholder="Должность"></input>
+                      <input type="text" name="position" value={user._id===formData.user?position:''}onKeyDown={(e)=>e.key==='Enter'&&onSubmit(e, user._id)} onChange={(e)=>onChange(e, user._id)} placeholder="Должность"></input>
                     </td>
                     <td>
-                      <input type="text" name="task" onChange={(e)=>onChange(e, user._id)} placeholder="Раздел"></input>
+                      <input type="text" name="task" value={user._id===formData.user?task:''} onKeyDown={(e)=>e.key==='Enter'&&onSubmit(e, user._id)} onChange={(e)=>onChange(e, user._id)} placeholder="Раздел"></input>
                     </td>
 
                     <td>
-                      <button type="submit" 
+                      <button type="button" 
 					//   onClick={() =>  setFormData({...formData, user: user._id})}
-                      onClick={(e) => onSubmit(e, user._id)}
+                      onClick={(e) => onSubmit(e, user._id).then( 
+                        setUser(true)
+                       )}
                     ><img alt='plus' src={Path + 'plus.png'}></img></button>
                     </td>
                   </tr>

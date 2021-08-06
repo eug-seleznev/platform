@@ -2,7 +2,7 @@
 	display: grid;
 	margin-top: 5vh;
 	grid-template-rows: repeat (max-content, 3);
-	grid-template-columns: 0.87fr 1.13fr;
+	grid-template-columns: 0.92fr 1.08fr;
 }
 .first__col{
 	margin-left: 15%;
