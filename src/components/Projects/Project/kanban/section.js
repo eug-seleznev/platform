@@ -22,7 +22,7 @@ import DisplayPeriod from "./displayPeriod";
 const KanbanSection = ({main, board, category, history, columnsGrid}) => {
 
   const dispatch = useDispatch()
-  console.log(category)
+  // console.log(category)
     const [open, setOpen] = useState(true)
     const [timelineIndex, setTimelineIndex] = useState(0)
     const [timelines, setTimelines] = useState(0)

@@ -338,12 +338,12 @@ export const getProject = (id) => async dispatch  => {
 
 }
 export const changeUserPropertiesProj = (ready,prop,crypt,userId,val) => async dispatch  => {
-  
+  console.log(ready,prop,crypt,userId,val)
   let body = {
             position: prop==='position'?val:ready,
             task: prop==='task'?val:ready,
         }
-
+        console.log(body)
   try {
     // console.log(body, crypt)
       const res = await innerBackend.put(`/projects/team2/${crypt}/${userId}`,body)

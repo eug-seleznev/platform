@@ -180,6 +180,26 @@ export const currentCard = (info) => async dispatch  => {
        alert('ошибка')           
     }
 }
+export const DeleteTaskCard = ({ id, focusRow }) => async (dispatch) => {
+    try {
+      let body = {
+        taskid: focusRow,
+      };
+      // console.log(id)
+  
+      // console.log(body)
+      const res = await innerBackend.put(
+        `/kanban/cards/deltask/${id}`, body
+      );
+      // console.log(res.data)
+      dispatch({
+        type: CHANGE_CARD,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err.response.data);
+    }
+  }; 
 export const addTaskCard = (text,id,proj_id) => async dispatch  => {
     let body = {
         title:text,

@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState,Fragment } from "react";
+import { useEffect, useRef, useState,useCallback,Fragment  } from "react";
 import { useDispatch } from "react-redux";
 import {
   changeTaskCard,
+  DeleteTaskCard,
   userToTask,
 } from "../../../../../../redux/actions/kanban";
 import {
@@ -21,6 +22,7 @@ import TextareaAutosize from "react-autosize-textarea/lib";
 import { Path } from "../../../../../Layout/header";
 import { useClickOutside } from "../../hooks/hooks";
 
+
 //todo: handle no tasks state
 
 const TaskTable = ({ tasksArray, id, team, info, theme }) => {
@@ -39,14 +41,27 @@ const TaskTable = ({ tasksArray, id, team, info, theme }) => {
   const [timeout, updateTimeout] = useState(undefined);
   const [editField, setEditField] = useState(false);
   const [debounced, setDebouced] = useState("");
-  const [isDouble, setDouble] = useState(0);
-  const [double, setD] = useState(0);
 
   useEffect(() => {
     selectFocusRow(focusRow);
     setEditable("");
   }, [focusRow]);
 
+  const handleUserKeyPress = useCallback(event => {
+    const { key } = event;
+    if(focusRow !== '' && key === 'Delete'){
+        dispatch(DeleteTaskCard({ id, focusRow }));
+
+    }
+  
+ })
+  useEffect(() => {
+        window.addEventListener("keydown", handleUserKeyPress);
+        return () => {
+          window.removeEventListener("keydown", handleUserKeyPress);
+        };
+
+  })
   useEffect(() => {
     taskRef.current.scrollTo({
       top: taskRef.current.scrollHeight + 1000,
@@ -76,6 +91,7 @@ const TaskTable = ({ tasksArray, id, team, info, theme }) => {
     }
   }, [isEdit]);
   useEffect(() => {
+    
     taskScroll();
   }, [tasksArray]);
   //edit task
